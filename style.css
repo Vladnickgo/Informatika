@@ -1,0 +1,45 @@
+body{
+	background-color: seashell; /* Колір фона під текстом */
+}
+header{
+	background-color: maroon; /* Колір фона під текстом */
+    color: white; /* Колір текста */
+    border: 1px solid rgb(34, 34, 34);/* Рамка */
+    text-align: center;/* Вирівнювання */
+}
+#base{
+	display: flex;
+	padding: 10px;
+}
+nav, aside{
+	width: 15%;
+	text-align: center;/* Вирівнювання */	
+	padding: 15px;
+}
+main{
+	margin-top: 5px;
+	/*border: 1px solid rgb(34, 34, 34);/* Рамка */
+	width: 70%;
+	text-align: center;
+	padding: 10px;
+	background-color: linen;
+	box-shadow: 0 0 10px black;
+}
+footer{
+	margin-top: 20px;
+	box-shadow: 0 0 10px black;
+	text-align: center;/* Вирівнювання */
+	padding: 5px;
+
+}
+#formula{
+	text-align: center;
+	font-weight: bold;
+
+}
+p{
+	font-size: 14pt;
+	}
+hr{
+	width: 70%;
+}
