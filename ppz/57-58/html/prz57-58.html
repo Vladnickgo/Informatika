@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Практичне заняття № 16 — Команда повторення. Створення макросів в MS Excel</title>
+<style>
+/* ============ БАЗОВІ ЗМІННІ ============ */
+:root{
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --text:#1d1d1f;
+  --muted:#6e6e73;
+  --line:#e5e5ea;
+  --blue:#0071e3;
+  --blue-soft:#e8f2ff;
+  --green:#30b95a;
+  --green-soft:#e8f8ee;
+  --yellow:#d9a300;
+  --yellow-soft:#fff8e1;
+  --orange:#e07b00;
+  --orange-soft:#fff1e0;
+  --red:#e0322c;
+  --red-soft:#fdecea;
+  --radius:20px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 28px rgba(0,0,0,.05);
+  --mono:"SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ============ НАВІГАЦІЯ ============ */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(245,245,247,.72);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.nav-inner{
+  max-width:1080px; margin:0 auto; padding:10px 24px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.nav-title{ font-size:14px; font-weight:600; letter-spacing:-.01em; }
+.nav-links{ display:flex; gap:20px; flex-wrap:wrap; }
+.nav-links a{
+  font-size:13.5px; color:var(--muted); text-decoration:none; font-weight:500;
+  transition:color .2s ease;
+}
+.nav-links a:hover{ color:var(--blue); }
+
+/* ============ HERO ============ */
+.hero{
+  background:linear-gradient(160deg,#0b0b0f 0%, #1d1d1f 52%, #2b2b33 100%);
+  color:#fff;
+  padding:76px 24px 82px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute; inset:auto -10% -55% -10%; height:420px;
+  background:radial-gradient(ellipse at 50% 0%, rgba(0,113,227,.55), transparent 62%);
+  filter:blur(10px);
+  pointer-events:none;
+}
+.hero-inner{ max-width:1080px; margin:0 auto; position:relative; z-index:1; }
+.eyebrow{
+  margin:0 0 14px; font-size:13px; font-weight:600; letter-spacing:.09em;
+  text-transform:uppercase; color:#8fb8f0;
+}
+.hero h1{
+  margin:0 0 18px;
+  font-size:clamp(30px, 4.6vw, 52px);
+  line-height:1.08; letter-spacing:-.025em; font-weight:700;
+}
+.hero-sub{
+  margin:0 0 26px; max-width:760px;
+  font-size:clamp(16px,1.6vw,19px); line-height:1.55;
+  color:#c7c7cc; font-weight:400;
+}
+.chips{ display:flex; flex-wrap:wrap; gap:10px; }
+.chip{
+  display:inline-block; padding:7px 15px; border-radius:100px;
+  font-size:13px; font-weight:500; letter-spacing:-.005em;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.16);
+  color:#e8e8ed;
+}
+
+/* ============ КОНТЕЙНЕР ============ */
+main{ max-width:1080px; margin:0 auto; padding:44px 24px 60px; }
+
+section{ scroll-margin-top:80px; }
+
+/* ============ КАРТКИ ============ */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:34px 36px;
+  margin-bottom:26px;
+  border:1px solid rgba(0,0,0,.02);
+}
+.card > *:first-child{ margin-top:0; }
+.card > *:last-child{ margin-bottom:0; }
+
+h2{
+  font-size:clamp(23px,2.5vw,30px);
+  line-height:1.18; letter-spacing:-.021em; font-weight:700;
+  margin:0 0 8px;
+}
+h3{
+  font-size:19px; line-height:1.3; letter-spacing:-.012em; font-weight:600;
+  margin:34px 0 12px;
+}
+h4{
+  font-size:15.5px; font-weight:600; letter-spacing:-.008em;
+  margin:22px 0 8px; color:var(--text);
+}
+.kicker{
+  font-size:13px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--blue); margin:0 0 8px;
+}
+.lead{ color:var(--muted); font-size:16.5px; margin:0 0 20px; }
+p{ margin:0 0 14px; }
+ul, ol{ margin:0 0 16px; padding-left:22px; }
+li{ margin:0 0 8px; }
+li:last-child{ margin-bottom:0; }
+strong{ font-weight:600; }
+.muted{ color:var(--muted); }
+.small{ font-size:14.5px; }
+
+/* ============ ТАБЛИЦІ ============ */
+.table-wrap{
+  overflow-x:auto;
+  border-radius:14px;
+  border:1px solid var(--line);
+  margin:16px 0 22px;
+  background:#fff;
+}
+table{
+  width:100%; border-collapse:collapse;
+  font-size:15px; min-width:520px;
+}
+thead th{
+  background:#fbfbfd;
+  text-align:left; font-weight:600; font-size:13.5px;
+  letter-spacing:.01em; color:var(--muted);
+  padding:13px 18px; border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+tbody td{
+  padding:13px 18px; border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+tbody tr:last-child td{ border-bottom:none; }
+tbody tr:hover{ background:#fafafc; }
+td code, th code{
+  font-family:var(--mono); font-size:13.5px;
+  background:#f2f2f7; padding:2px 7px; border-radius:6px;
+  color:#3a3a3c; white-space:nowrap;
+}
+.dot{
+  display:inline-block; width:9px; height:9px; border-radius:50%;
+  margin-right:9px; vertical-align:middle;
+}
+.dot-blue{ background:var(--blue); }
+.dot-green{ background:var(--green); }
+.dot-yellow{ background:#f0c000; }
+.dot-orange{ background:var(--orange); }
+.dot-red{ background:var(--red); }
+
+/* ============ КОД ============ */
+pre{
+  background:#1d1d1f;
+  color:#e8e8ed;
+  border-radius:14px;
+  padding:20px 22px;
+  margin:16px 0 22px;
+  overflow-x:auto;
+  font-family:var(--mono);
+  font-size:13.5px;
+  line-height:1.62;
+  tab-size:4;
+  -webkit-overflow-scrolling:touch;
+}
+pre code{ font-family:inherit; white-space:pre; }
+code.inline{
+  font-family:var(--mono); font-size:14px;
+  background:#f2f2f7; color:#3a3a3c;
+  padding:2px 7px; border-radius:6px;
+}
+
+/* ============ ВИНОСКИ ============ */
+.note, .warn, .tip{
+  border-radius:14px;
+  padding:16px 20px;
+  margin:18px 0;
+  font-size:15.5px;
+  border-left:4px solid;
+}
+.note{ background:var(--blue-soft); border-color:var(--blue); }
+.warn{ background:var(--red-soft); border-color:var(--red); }
+.tip{ background:var(--green-soft); border-color:var(--green); }
+.note p:last-child, .warn p:last-child, .tip p:last-child{ margin-bottom:0; }
+.note-title{ font-weight:600; display:block; margin-bottom:6px; }
+
+/* ============ ФІГУРИ ============ */
+figure{
+  margin:24px 0;
+  background:#fbfbfd;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px 20px 16px;
+  text-align:center;
+}
+figure svg{ max-width:100%; height:auto; display:block; margin:0 auto; }
+figcaption{
+  margin-top:14px;
+  font-size:13.5px; color:var(--muted); line-height:1.5;
+}
+
+/* ============ СІТКИ ============ */
+.grid{
+  display:grid; gap:16px;
+  grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+  margin:18px 0 22px;
+}
+.mini{
+  background:#fbfbfd;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px 18px 16px;
+}
+.mini h4{ margin:0 0 6px; font-size:15px; }
+.mini p{ margin:0; font-size:14.5px; color:var(--muted); line-height:1.5; }
+.mini .num{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:26px; height:26px; border-radius:8px;
+  background:var(--blue); color:#fff;
+  font-size:13px; font-weight:600; margin-bottom:10px;
+}
+
+/* ============ ЗАВДАННЯ ============ */
+.task{
+  background:#fff;
+  border-radius:16px;
+  border:1px solid var(--line);
+  padding:24px 26px;
+  margin:20px 0;
+}
+.task-head{
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:14px;
+}
+.task-num{
+  flex:0 0 auto;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:38px; height:38px; padding:0 12px;
+  border-radius:12px;
+  background:linear-gradient(160deg,#0071e3,#0059b3);
+  color:#fff; font-size:14.5px; font-weight:600; letter-spacing:-.01em;
+}
+.task-title{
+  font-size:17px; font-weight:600; letter-spacing:-.012em; line-height:1.3;
+}
+.task-body > *:last-child{ margin-bottom:0; }
+
+/* ============ КРОКИ ============ */
+.steps{ counter-reset:step; list-style:none; padding:0; margin:14px 0 0; }
+.steps li{
+  counter-increment:step;
+  position:relative;
+  padding-left:38px;
+  margin-bottom:11px;
+  font-size:15.5px;
+}
+.steps li::before{
+  content:counter(step);
+  position:absolute; left:0; top:1px;
+  width:24px; height:24px; border-radius:50%;
+  background:var(--blue-soft); color:var(--blue);
+  font-size:12.5px; font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* ============ ШКАЛА ОЦІНЮВАННЯ ============ */
+.score-list{ list-style:none; padding:0; margin:16px 0 0; }
+.score-list li{
+  margin:0 0 12px;
+  padding:0;
+}
+.score-row{
+  display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+  font-size:15px; margin-bottom:5px;
+}
+.score-row .pts{ font-weight:600; color:var(--blue); white-space:nowrap; font-variant-numeric:tabular-nums; }
+.bar{
+  height:8px; border-radius:100px; background:#ececf1; overflow:hidden;
+}
+.bar span{
+  display:block; height:100%; border-radius:100px;
+  background:linear-gradient(90deg,#0071e3,#4aa3ff);
+}
+
+.scale{
+  display:grid; gap:10px;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  margin-top:20px;
+}
+.scale-item{
+  border-radius:14px; padding:16px 18px; border:1px solid var(--line);
+  background:#fbfbfd;
+}
+.scale-item .mark{ font-size:20px; font-weight:700; letter-spacing:-.02em; }
+.scale-item .range{ font-size:13.5px; color:var(--muted); margin-top:2px; }
+.scale-item.s5{ border-color:#bfe6cc; background:var(--green-soft); }
+.scale-item.s4{ border-color:#bfd9f7; background:var(--blue-soft); }
+.scale-item.s3{ border-color:#f2dca6; background:var(--yellow-soft); }
+.scale-item.s2{ border-color:#f3c4c1; background:var(--red-soft); }
+
+/* ============ ПИТАННЯ ============ */
+.qlist{ list-style:none; padding:0; margin:18px 0 0; counter-reset:q; }
+.qlist li{
+  counter-increment:q;
+  position:relative;
+  padding:14px 18px 14px 54px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  margin-bottom:10px;
+  background:#fbfbfd;
+  font-size:15.5px;
+  line-height:1.55;
+}
+.qlist li::before{
+  content:counter(q);
+  position:absolute; left:16px; top:14px;
+  width:26px; height:26px; border-radius:8px;
+  background:#fff; border:1px solid var(--line);
+  color:var(--blue); font-size:13px; font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* ============ ЛІТЕРАТУРА ============ */
+.refs{ list-style:none; padding:0; margin:14px 0 0; }
+.refs li{
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+  font-size:15px;
+  line-height:1.55;
+}
+.refs li:last-child{ border-bottom:none; }
+
+/* ============ ФУТЕР ============ */
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13.5px;
+  padding:10px 24px 56px;
+}
+
+/* ============ АДАПТИВ ============ */
+@media (max-width:700px){
+  .card{ padding:26px 20px; border-radius:16px; }
+  main{ padding:28px 14px 40px; }
+  .nav-links{ gap:14px; }
+  .nav-links a{ font-size:12.5px; }
+  .nav-title{ display:none; }
+  .task{ padding:20px 18px; }
+  pre{ font-size:12.5px; padding:16px; }
+}
+
+/* ============ ДРУК ============ */
+@media print{
+  @page{ size:A4; margin:14mm 12mm; }
+
+  html, body{
+    background:#fff !important;
+    color:#000;
+    font-size:11pt;
+    line-height:1.5;
+  }
+
+  .nav, .print-hide{ display:none !important; }
+
+  .hero{
+    background:#fff !important;
+    color:#000 !important;
+    padding:0 0 14px;
+    border-bottom:2px solid #000;
+    margin-bottom:16px;
+  }
+  .hero::after{ display:none !important; }
+  .hero h1{ font-size:22pt; color:#000 !important; }
+  .hero-sub{ color:#333 !important; font-size:11pt; }
+  .eyebrow{ color:#555 !important; }
+  .chip{
+    background:#f2f2f2 !important; color:#000 !important;
+    border:1px solid #ccc !important;
+  }
+
+  main{ max-width:none; padding:0; }
+
+  .card, .task, figure, .mini, .note, .warn, .tip,
+  table, pre, .table-wrap, .qlist li, .score-list li, .scale-item{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+
+  .card{
+    box-shadow:none !important;
+    border:1px solid #ccc !important;
+    border-radius:8px;
+    padding:16px 18px;
+    margin-bottom:14px;
+  }
+
+  h2{ font-size:15pt; break-after:avoid; page-break-after:avoid; }
+  h3{ font-size:12.5pt; break-after:avoid; page-break-after:avoid; margin-top:16px; }
+  h4{ font-size:11pt; break-after:avoid; page-break-after:avoid; }
+
+  pre{
+    background:#f7f7f7 !important;
+    color:#000 !important;
+    border:1px solid #ccc;
+    font-size:9pt;
+    line-height:1.45;
+    padding:10px 12px;
+    white-space:pre-wrap;
+    word-break:break-word;
+  }
+
+  table{ font-size:9.5pt; min-width:0; }
+  thead th{ background:#f0f0f0 !important; color:#000 !important; padding:7px 10px; }
+  tbody td{ padding:7px 10px; }
+
+  figure{ padding:12px; background:#fff !important; }
+  figcaption{ font-size:9pt; }
+
+  .bar span{ background:#555 !important; }
+  .task-num{ background:#333 !important; color:#fff !important; }
+
+  a{ color:#000 !important; text-decoration:none; }
+
+  *{
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= НАВІГАЦІЯ ================= -->
+<nav class="nav print-hide">
+  <div class="nav-inner">
+    <span class="nav-title">ПЗ №16 · Цикли та макроси</span>
+    <div class="nav-links">
+      <a href="#meta">Мета</a>
+      <a href="#theory">Теорія</a>
+      <a href="#practice">Практика</a>
+      <a href="#card">Картка</a>
+      <a href="#score">Оцінювання</a>
+      <a href="#quiz">Питання</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Практичне заняття № 16</p>
+    <h1>Команда повторення.<br>Створення макросів в MS&nbsp;Excel</h1>
+    <p class="hero-sub">
+      Використання циклів <strong>For…Next</strong>, <strong>Do While…Loop</strong>,
+      <strong>Do Until…Loop</strong>, <strong>For Each…Next</strong> для автоматизації
+      обчислень та обробки оцінок учнів у табличному процесорі.
+    </p>
+    <div class="chips">
+      <span class="chip">Excel VBA</span>
+      <span class="chip">Цикли</span>
+      <span class="chip">Макроси</span>
+      <span class="chip">Автоматизація</span>
+      <span class="chip">20 балів</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= МЕТА ================= -->
+<section class="card" id="meta">
+  <p class="kicker">Організаційна частина</p>
+  <h2>Мета, обладнання та література</h2>
+
+  <h3>Мета заняття</h3>
+  <ul>
+    <li>Навчитися використовувати цикли <code class="inline">For…Next</code> та <code class="inline">Do While…Loop</code> у середовищі VBA.</li>
+    <li>Створювати макроси в Excel для автоматизації обчислень та обробки табличних даних.</li>
+    <li>Розвивати алгоритмічне мислення, уміння оптимізувати повторювані операції, навички програмування.</li>
+    <li>Виховувати терпіння, вміння налагоджувати циклічні алгоритми та відповідальність за уникнення нескінченних циклів.</li>
+  </ul>
+
+  <h3>Обладнання</h3>
+  <p>Персональний комп'ютер з пакетом <strong>Microsoft Excel</strong> (з увімкненою вкладкою «Розробник»), інструкційні картки.</p>
+
+  <h3>Література</h3>
+  <ol class="refs">
+    <li>Буйницька О. П. Інформаційні технології та технічні засоби навчання : навч. посіб. Київ : Центр навчальної літератури, 2019. 240 с.</li>
+    <li>Буров Є. В. Комп'ютерні мережі. Львів : Магнолія 2006, 2024. 256 с.</li>
+    <li>Мирошниченко В. О. Використання сучасних інформаційних технологій: формування мультимедійної компетентності. Київ : Центр учбової літератури, 2022. 296 с.</li>
+  </ol>
+</section>
+
+<!-- ================= ПИТАННЯ ДЛЯ ОБГОВОРЕННЯ ================= -->
+<section class="card">
+  <p class="kicker">Актуалізація знань</p>
+  <h2>Питання для обговорення</h2>
+  <p class="lead">Поміркуйте над питаннями перед виконанням практичної частини — це допоможе свідомо обирати тип циклу.</p>
+
+  <ol class="qlist">
+    <li>Як ви вважаєте, чому в програмуванні потрібні цикли? Які завдання вчителя можна автоматизувати за допомогою циклів?</li>
+    <li>У чому різниця між циклом <code class="inline">For…Next</code> та <code class="inline">Do While…Loop</code>? У яких випадках який цикл краще використовувати?</li>
+    <li>Як уникнути створення нескінченного циклу?</li>
+    <li>Які переваги дає використання циклів для обробки великих масивів даних (наприклад, оцінок учнів)?</li>
+    <li>Чому важливо перевіряти межі циклу (початкове та кінцеве значення лічильника)?</li>
+  </ol>
+</section>
+
+<!-- ================= ТЕОРІЯ ================= -->
+<section class="card" id="theory">
+  <p class="kicker">Теоретичні відомості</p>
+  <h2>1. Поняття циклу</h2>
+
+  <p>
+    <strong>Цикл</strong> — це конструкція алгоритму, яка дозволяє багаторазово виконувати
+    одну й ту саму послідовність команд. Замість того, щоб десять разів писати один і той самий
+    рядок коду для десяти учнів, ми пишемо його <em>один раз</em> і «прокручуємо» у циклі.
+  </p>
+
+  <div class="grid">
+    <div class="mini">
+      <span class="num">1</span>
+      <h4>Менше коду</h4>
+      <p>Одна й та сама дія описується один раз, а не N разів.</p>
+    </div>
+    <div class="mini">
+      <span class="num">2</span>
+      <h4>Менше помилок</h4>
+      <p>Копіювання рядків вручну майже завжди призводить до друкарських помилок.</p>
+    </div>
+    <div class="mini">
+      <span class="num">3</span>
+      <h4>Масштабованість</h4>
+      <p>10 учнів чи 1000 — код залишається тим самим, змінюється лише межа циклу.</p>
+    </div>
+  </div>
+
+  <h3>Основні типи циклів у VBA</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Тип циклу</th>
+          <th>Опис</th>
+          <th>Коли використовувати</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="dot dot-blue"></span><code>For…Next</code></td>
+          <td>Цикл із лічильником</td>
+          <td>Коли відома кількість повторень</td>
+        </tr>
+        <tr>
+          <td><span class="dot dot-blue"></span><code>For Each…Next</code></td>
+          <td>Цикл по колекції об'єктів</td>
+          <td>Для перебору всіх елементів (клітинки, аркуші)</td>
+        </tr>
+        <tr>
+          <td><span class="dot dot-green"></span><code>Do While…Loop</code></td>
+          <td>Цикл з передумовою</td>
+          <td>Кількість повторень невідома, умова перевіряється на початку</td>
+        </tr>
+        <tr>
+          <td><span class="dot dot-green"></span><code>Do Until…Loop</code></td>
+          <td>Цикл з передумовою (до досягнення умови)</td>
+          <td>Виконується, поки умова хибна</td>
+        </tr>
+        <tr>
+          <td><span class="dot dot-orange"></span><code>Do…Loop While</code></td>
+          <td>Цикл з післяумовою</td>
+          <td>Виконується хоча б один раз</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= FOR NEXT ================= -->
+<section class="card">
+  <p class="kicker">Теорія · Цикл 1</p>
+  <h2>2. Цикл For…Next</h2>
+
+  <p>Цикл із лічильником. Використовується, коли <strong>наперед відома кількість повторень</strong>.</p>
+
+  <h4>Синтаксис</h4>
+<pre><code>For лічильник = початок To кінець [Step крок]
+    ' Тіло циклу (команди, що повторюються)
+Next [лічильник]</code></pre>
+
+  <figure>
+    <svg viewBox="0 0 460 440" width="50%" role="img" aria-label="Блок-схема циклу For…Next">
+      <defs>
+        <marker id="arr1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#8e8e93"/>
+        </marker>
+      </defs>
+
+      <!-- Початок -->
+      <rect x="160" y="10" width="100" height="34" rx="17" fill="#0071e3"/>
+      <text x="210" y="32" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Початок</text>
+      <line x1="210" y1="44" x2="210" y2="66" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr1)"/>
+
+      <!-- Ініціалізація -->
+      <rect x="145" y="68" width="130" height="38" rx="10" fill="#f5f5f7" stroke="#d2d2d7"/>
+      <text x="210" y="92" text-anchor="middle" font-size="12.5" fill="#1d1d1f">i = 1 To N</text>
+      <line x1="210" y1="106" x2="210" y2="132" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr1)"/>
+
+      <!-- Ромб -->
+      <polygon points="210,135 300,180 210,225 120,180" fill="#e8f2ff" stroke="#0071e3" stroke-width="1.6"/>
+      <text x="210" y="185" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0059b3">i &#8804; N ?</text>
+
+      <!-- Гілка Ні -->
+      <line x1="300" y1="180" x2="388" y2="180" stroke="#8e8e93" stroke-width="1.6"/>
+      <line x1="388" y1="180" x2="388" y2="386" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr1)"/>
+      <text x="322" y="172" font-size="12" fill="#6e6e73">Ні</text>
+      <rect x="333" y="388" width="110" height="34" rx="17" fill="#1d1d1f"/>
+      <text x="388" y="410" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Кінець</text>
+
+      <!-- Гілка Так -->
+      <line x1="210" y1="225" x2="210" y2="248" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr1)"/>
+      <text x="220" y="242" font-size="12" fill="#6e6e73">Так</text>
+      <rect x="145" y="250" width="130" height="42" rx="10" fill="#f5f5f7" stroke="#d2d2d7"/>
+      <text x="210" y="276" text-anchor="middle" font-size="12.5" fill="#1d1d1f">Тіло циклу</text>
+      <line x1="210" y1="292" x2="210" y2="314" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr1)"/>
+
+      <!-- Крок -->
+      <rect x="145" y="316" width="130" height="36" rx="10" fill="#fff8e1" stroke="#e6c34a"/>
+      <text x="210" y="339" text-anchor="middle" font-size="12.5" fill="#8a6d00">i = i + Step</text>
+
+      <!-- Повернення -->
+      <line x1="145" y1="334" x2="62" y2="334" stroke="#8e8e93" stroke-width="1.6"/>
+      <line x1="62" y1="334" x2="62" y2="180" stroke="#8e8e93" stroke-width="1.6"/>
+      <line x1="62" y1="180" x2="118" y2="180" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr1)"/>
+    </svg>
+    <figcaption>Блок-схема циклу <strong>For…Next</strong>: умова перевіряється <em>перед</em> кожним виконанням тіла циклу, лічильник автоматично змінюється на величину <code class="inline">Step</code>.</figcaption>
+  </figure>
+
+  <h4>Приклад 1. Простий цикл від 1 до 10</h4>
+<pre><code>' Простий цикл від 1 до 10
+For i = 1 To 10
+    Cells(i, 1).Value = i
+Next i</code></pre>
+
+  <h4>Приклад 2. Цикл з кроком 2 (парні числа)</h4>
+<pre><code>' Цикл з кроком 2 (парні числа)
+For i = 2 To 20 Step 2
+    Cells(i, 1).Value = i
+Next i</code></pre>
+
+  <h4>Приклад 3. Цикл у зворотному напрямку</h4>
+<pre><code>' Цикл у зворотному напрямку
+For i = 10 To 1 Step -1
+    Cells(i, 1).Value = i
+Next i</code></pre>
+
+  <div class="note">
+    <span class="note-title">Зверніть увагу</span>
+    <p>Якщо <code class="inline">Step</code> не вказано, за замовчуванням він дорівнює <strong>1</strong>.
+    Для зворотного напрямку обов'язково вказуйте від'ємний крок (<code class="inline">Step -1</code>), інакше цикл не виконається жодного разу.</p>
+  </div>
+</section>
+
+<!-- ================= DO WHILE ================= -->
+<section class="card">
+  <p class="kicker">Теорія · Цикл 2</p>
+  <h2>3. Цикл Do While…Loop</h2>
+
+  <p>Цикл із <strong>передумовою</strong>: тіло виконується доти, поки умова істинна. Кількість повторень заздалегідь невідома.</p>
+
+  <h4>Синтаксис</h4>
+<pre><code>Do While умова
+    ' Тіло циклу (виконується, поки умова істинна)
+Loop</code></pre>
+
+  <figure>
+    <svg viewBox="0 0 460 440" width="50%" role="img" aria-label="Блок-схема циклу Do While…Loop">
+      <defs>
+        <marker id="arr2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#8e8e93"/>
+        </marker>
+      </defs>
+
+      <rect x="160" y="10" width="100" height="34" rx="17" fill="#30b95a"/>
+      <text x="210" y="32" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Початок</text>
+      <line x1="210" y1="44" x2="210" y2="66" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr2)"/>
+
+      <rect x="145" y="68" width="130" height="38" rx="10" fill="#f5f5f7" stroke="#d2d2d7"/>
+      <text x="210" y="92" text-anchor="middle" font-size="12.5" fill="#1d1d1f">i = 1; сума = 0</text>
+      <line x1="210" y1="106" x2="210" y2="132" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr2)"/>
+
+      <polygon points="210,135 305,180 210,225 115,180" fill="#e8f8ee" stroke="#30b95a" stroke-width="1.6"/>
+      <text x="210" y="185" text-anchor="middle" font-size="12" font-weight="600" fill="#1e7a3c">умова ?</text>
+
+      <line x1="305" y1="180" x2="388" y2="180" stroke="#8e8e93" stroke-width="1.6"/>
+      <line x1="388" y1="180" x2="388" y2="386" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr2)"/>
+      <text x="322" y="172" font-size="12" fill="#6e6e73">Хибна</text>
+      <rect x="333" y="388" width="110" height="34" rx="17" fill="#1d1d1f"/>
+      <text x="388" y="410" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Кінець</text>
+
+      <line x1="210" y1="225" x2="210" y2="248" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr2)"/>
+      <text x="220" y="242" font-size="12" fill="#6e6e73">Істинна</text>
+      <rect x="145" y="250" width="130" height="42" rx="10" fill="#f5f5f7" stroke="#d2d2d7"/>
+      <text x="210" y="276" text-anchor="middle" font-size="12.5" fill="#1d1d1f">Тіло циклу</text>
+      <line x1="210" y1="292" x2="210" y2="314" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr2)"/>
+
+      <rect x="145" y="316" width="130" height="36" rx="10" fill="#fff8e1" stroke="#e6c34a"/>
+      <text x="210" y="339" text-anchor="middle" font-size="12.5" fill="#8a6d00">i = i + 1</text>
+
+      <line x1="145" y1="334" x2="62" y2="334" stroke="#8e8e93" stroke-width="1.6"/>
+      <line x1="62" y1="334" x2="62" y2="180" stroke="#8e8e93" stroke-width="1.6"/>
+      <line x1="62" y1="180" x2="113" y2="180" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr2)"/>
+    </svg>
+    <figcaption>Блок-схема циклу <strong>Do While…Loop</strong>: якщо умова хибна вже на початку, тіло циклу <em>не виконається жодного разу</em>.</figcaption>
+  </figure>
+
+  <h4>Приклад 1. Цикл, поки клітинка не порожня</h4>
+<pre><code>' Цикл, поки клітинка не порожня
+i = 1
+Do While Cells(i, 1).Value &lt;&gt; ""
+    i = i + 1
+Loop</code></pre>
+
+  <h4>Приклад 2. Накопичення суми</h4>
+<pre><code>' Цикл із заданою умовою
+сума = 0
+i = 1
+Do While i &lt;= 10
+    сума = сума + i
+    i = i + 1
+Loop</code></pre>
+</section>
+
+<!-- ================= DO UNTIL ================= -->
+<section class="card">
+  <p class="kicker">Теорія · Цикл 3</p>
+  <h2>4. Цикл Do Until…Loop</h2>
+
+  <p>Цикл із передумовою «до досягнення»: тіло виконується, <strong>поки умова хибна</strong>. Щойно умова стає істинною — цикл завершується.</p>
+
+  <h4>Синтаксис</h4>
+<pre><code>Do Until умова
+    ' Тіло циклу (виконується, поки умова хибна)
+Loop</code></pre>
+
+  <h4>Приклад</h4>
+<pre><code>i = 1
+Do Until i &gt; 10
+    Cells(i, 1).Value = i
+    i = i + 1
+Loop</code></pre>
+
+  <div class="tip">
+    <span class="tip-title">Do While чи Do Until?</span>
+    <p><code class="inline">Do While i &lt;= 10</code> та <code class="inline">Do Until i &gt; 10</code> — логічно еквівалентні.
+    Обирайте ту форму, яка <strong>природніше читається</strong> у контексті задачі: «працюємо, поки є дані» — <em>While</em>,
+    «працюємо, доки не знайдемо» — <em>Until</em>.</p>
+  </div>
+</section>
+
+<!-- ================= FOR EACH ================= -->
+<section class="card">
+  <p class="kicker">Теорія · Цикл 4</p>
+  <h2>5. Цикл For Each…Next</h2>
+
+  <p>Спеціальний цикл для перебору <strong>колекцій об'єктів</strong>: клітинок діапазону, аркушів книги, фігур тощо. Не потребує лічильника.</p>
+
+  <h4>Синтаксис</h4>
+<pre><code>For Each елемент In колекція
+    ' Дії з елементом
+Next елемент</code></pre>
+
+  <h4>Приклад 1. Перебір усіх клітинок виділеного діапазону</h4>
+<pre><code>' Перебір усіх клітинок виділеного діапазону
+For Each cell In Selection
+    If cell.Value &gt; 10 Then
+        cell.Interior.Color = vbGreen
+    End If
+Next cell</code></pre>
+
+  <h4>Приклад 2. Перебір усіх аркушів книги</h4>
+<pre><code>' Перебір усіх аркушів книги
+For Each ws In Worksheets
+    MsgBox ws.Name
+Next ws</code></pre>
+
+  <div class="note">
+    <span class="note-title">Перевага</span>
+    <p>Цикл <code class="inline">For Each…Next</code> не залежить від кількості елементів: додали новий аркуш або
+    розширили виділений діапазон — код працює без змін.</p>
+  </div>
+</section>
+
+<!-- ================= ВИБІР ЦИКЛУ ================= -->
+<section class="card">
+  <p class="kicker">Теорія · Практика вибору</p>
+  <h2>6. Як обрати тип циклу</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Ситуація</th><th>Рекомендований цикл</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Відома кількість повторень (наприклад, 5 учнів)</td><td><span class="dot dot-blue"></span><code>For…Next</code></td></tr>
+        <tr><td>Потрібно обробити всі клітинки в діапазоні</td><td><span class="dot dot-blue"></span><code>For Each…Next</code></td></tr>
+        <tr><td>Кількість повторень невідома, залежить від умови</td><td><span class="dot dot-green"></span><code>Do While…Loop</code></td></tr>
+        <tr><td>Цикл має виконатися хоча б один раз</td><td><span class="dot dot-orange"></span><code>Do…Loop While</code></td></tr>
+        <tr><td>Потрібно виконувати дії, поки клітинка не порожня</td><td><span class="dot dot-green"></span><code>Do While / Do Until</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 660 340" role="img" aria-label="Схема вибору типу циклу">
+      <defs>
+        <marker id="arr3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#8e8e93"/>
+        </marker>
+      </defs>
+
+      <!-- Q1 -->
+      <rect x="20" y="14" width="230" height="46" rx="12" fill="#f5f5f7" stroke="#d2d2d7"/>
+      <text x="135" y="42" text-anchor="middle" font-size="13" fill="#1d1d1f">Кількість повторень відома?</text>
+      <line x1="250" y1="37" x2="378" y2="37" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr3)"/>
+      <text x="300" y="29" font-size="11.5" fill="#6e6e73">Так</text>
+      <rect x="380" y="14" width="180" height="46" rx="12" fill="#e8f2ff" stroke="#0071e3"/>
+      <text x="470" y="42" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0059b3">For…Next</text>
+
+      <line x1="135" y1="60" x2="135" y2="94" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr3)"/>
+      <text x="145" y="82" font-size="11.5" fill="#6e6e73">Ні</text>
+
+      <!-- Q2 -->
+      <rect x="20" y="96" width="230" height="46" rx="12" fill="#f5f5f7" stroke="#d2d2d7"/>
+      <text x="135" y="124" text-anchor="middle" font-size="13" fill="#1d1d1f">Потрібен перебір об'єктів?</text>
+      <line x1="250" y1="119" x2="378" y2="119" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr3)"/>
+      <text x="300" y="111" font-size="11.5" fill="#6e6e73">Так</text>
+      <rect x="380" y="96" width="180" height="46" rx="12" fill="#e8f2ff" stroke="#0071e3"/>
+      <text x="470" y="124" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0059b3">For Each…Next</text>
+
+      <line x1="135" y1="142" x2="135" y2="176" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr3)"/>
+      <text x="145" y="164" font-size="11.5" fill="#6e6e73">Ні</text>
+
+      <!-- Q3 -->
+      <rect x="20" y="178" width="230" height="46" rx="12" fill="#f5f5f7" stroke="#d2d2d7"/>
+      <text x="135" y="206" text-anchor="middle" font-size="13" fill="#1d1d1f">Має виконатися хоча б раз?</text>
+      <line x1="250" y1="201" x2="378" y2="201" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr3)"/>
+      <text x="300" y="193" font-size="11.5" fill="#6e6e73">Так</text>
+      <rect x="380" y="178" width="180" height="46" rx="12" fill="#fff1e0" stroke="#e07b00"/>
+      <text x="470" y="206" text-anchor="middle" font-size="13.5" font-weight="600" fill="#a65a00">Do…Loop While</text>
+
+      <line x1="135" y1="224" x2="135" y2="258" stroke="#8e8e93" stroke-width="1.6" marker-end="url(#arr3)"/>
+      <text x="145" y="246" font-size="11.5" fill="#6e6e73">Ні</text>
+
+      <!-- A4 -->
+      <rect x="20" y="260" width="300" height="46" rx="12" fill="#e8f8ee" stroke="#30b95a"/>
+      <text x="170" y="288" text-anchor="middle" font-size="13.5" font-weight="600" fill="#1e7a3c">Do While…Loop / Do Until…Loop</text>
+    </svg>
+    <figcaption>Схема прийняття рішення: послідовно відповідайте на запитання зверху вниз, ідіть за стрілкою «Так» або «Ні».</figcaption>
+  </figure>
+</section>
+
+<!-- ================= НЕСКІНЧЕННІ ЦИКЛИ ================= -->
+<section class="card">
+  <p class="kicker">Теорія · Типові помилки</p>
+  <h2>7. Уникнення нескінченних циклів</h2>
+
+  <p><strong>Нескінченний цикл</strong> — це цикл, умова якого ніколи не стає хибною. Програма «зависає», Excel перестає реагувати на команди.</p>
+
+  <h3>Як уникнути</h3>
+  <ul>
+    <li>Завжди <strong>змінюйте змінну умови</strong> в тілі циклу.</li>
+    <li>Перевіряйте межі циклу <code class="inline">For</code> (початкове та кінцеве значення лічильника).</li>
+    <li>Використовуйте «запобіжник» для <code class="inline">Do While</code> — додатковий лічильник або перевірку <code class="inline">If i &gt; 1000 Then Exit Do</code>.</li>
+  </ul>
+
+  <h4>Приклад нескінченного циклу (помилка)</h4>
+<pre><code>' НЕПРАВИЛЬНО – нескінченний цикл
+i = 1
+Do While i &lt;= 10
+    Cells(i, 1).Value = i
+    ' Забули збільшити i!
+Loop</code></pre>
+
+  <h4>Правильний варіант</h4>
+<pre><code>i = 1
+Do While i &lt;= 10
+    Cells(i, 1).Value = i
+    i = i + 1   ' Збільшуємо лічильник — обов'язково!
+Loop</code></pre>
+
+  <div class="warn">
+    <span class="warn-title">⚠️ Небезпека на практиці</span>
+    <p>Якщо Excel все ж «завис» — натисніть <strong>Ctrl + Break</strong> (або <strong>Esc</strong>),
+    щоб перервати виконання макросу. У крайньому разі закрийте Excel через «Диспетчер завдань».</p>
+  </div>
+</section>
+
+<!-- ================= EXIT ================= -->
+<section class="card">
+  <p class="kicker">Теорія · Керування циклом</p>
+  <h2>8. Exit For та Exit Do</h2>
+
+  <p>Призначення — <strong>достроковий вихід</strong> із циклу при виконанні певної умови. Це економить час: далі шукати вже не потрібно.</p>
+
+  <h4>Вихід із циклу For</h4>
+<pre><code>' Вихід із циклу For при знаходженні першого значення &gt; 10
+For i = 1 To 100
+    If Cells(i, 1).Value &gt; 10 Then
+        MsgBox "Знайдено значення: " &amp; Cells(i, 1).Value
+        Exit For
+    End If
+Next i</code></pre>
+
+  <h4>Вихід із циклу Do While</h4>
+<pre><code>' Вихід із циклу Do While
+Do While True
+    значення = InputBox("Введіть число (0 для виходу)")
+    If значення = 0 Then Exit Do
+    Cells(i, 1).Value = значення
+    i = i + 1
+Loop</code></pre>
+
+  <div class="note">
+    <span class="note-title">Порада</span>
+    <p>Комбінація «цикл + <code class="inline">Exit</code>» — це фактично пошук. Саме так реалізується завдання
+    <em>«Знайти першого відмінника»</em> у практичній частині.</p>
+  </div>
+</section>
+
+<!-- ================= ПРАКТИКА ================= -->
+<section class="card" id="practice">
+  <p class="kicker">Практична частина</p>
+  <h2>Автоматизація обробки оцінок учнів за допомогою циклів в Excel VBA</h2>
+  <p class="lead">
+    Загальна умова: створіть електронну таблицю Excel із макросами, які використовують різні типи циклів
+    для обробки даних.
+  </p>
+
+  <!-- ЗАВДАННЯ 1 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">1</span>
+      <span class="task-title">Підготовка таблиці в Excel</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Запустіть Microsoft Excel.</li>
+        <li>Створіть нову книгу.</li>
+        <li>Збережіть файл як <code class="inline">Прізвище_ПЗ16_цикли.xlsm</code> (обов'язково формат із підтримкою макросів).</li>
+        <li>Створіть таблицю на аркуші «Аркуш1» за зразком нижче.</li>
+        <li>Введіть 10 записів.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>A · №</th><th>B · Прізвище</th><th>C · Оцінка</th><th>D · Підвищена оцінка</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Петренко</td><td>11</td><td></td></tr>
+            <tr><td>2</td><td>Іваненко</td><td>8</td><td></td></tr>
+            <tr><td>3</td><td>Сидоренко</td><td>5</td><td></td></tr>
+            <tr><td>4</td><td>Коваленко</td><td>12</td><td></td></tr>
+            <tr><td>5</td><td>Бондаренко</td><td>9</td><td></td></tr>
+            <tr><td>6</td><td>Ткаченко</td><td>7</td><td></td></tr>
+            <tr><td>7</td><td>Лисенко</td><td>10</td><td></td></tr>
+            <tr><td>8</td><td>Гончаренко</td><td>6</td><td></td></tr>
+            <tr><td>9</td><td>Романенко</td><td>4</td><td></td></tr>
+            <tr><td>10</td><td>Шевченко</td><td>11</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 2 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">2</span>
+      <span class="task-title">Цикл For…Next — сума та середнє</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Відкрийте вкладку <strong>Розробник → Макроси</strong> (або натисніть <strong>Alt + F8</strong>).</li>
+        <li>Введіть ім'я макроса <code class="inline">ОбчисленняСумаСереднє</code> → «Створити».</li>
+        <li>Вставте код нижче.</li>
+        <li>Виконайте макрос: <strong>Розробник → Макроси → «Виконати»</strong>.</li>
+      </ol>
+
+<pre><code>Sub ОбчисленняСумаСереднє()
+    Dim i As Integer
+    Dim сума As Double
+    Dim кількість As Integer
+    Dim середнє As Double
+
+    сума = 0
+    кількість = 0
+
+    ' Цикл For…Next для обчислення суми та кількості оцінок
+    For i = 2 To 11   ' Рядки 2-11 (оскільки 1-й рядок - заголовки)
+        If Cells(i, 3).Value &lt;&gt; "" Then
+            сума = сума + Cells(i, 3).Value
+            кількість = кількість + 1
+        End If
+    Next i
+
+    ' Обчислення середнього
+    If кількість &gt; 0 Then
+        середнє = сума / кількість
+    Else
+        середнє = 0
+    End If
+
+    ' Виведення результатів
+    Range("F2").Value = "Сума оцінок:"
+    Range("G2").Value = сума
+    Range("F3").Value = "Кількість учнів:"
+    Range("G3").Value = кількість
+    Range("F4").Value = "Середній бал:"
+    Range("G4").Value = Round(середнє, 2)
+
+    MsgBox "Обчислення завершено! Сума: " &amp; сума &amp; _
+           ", Середнє: " &amp; Round(середнє, 2)
+End Sub</code></pre>
+
+      <div class="tip">
+        <span class="tip-title">Що відбувається</span>
+        <p>Лічильник <code class="inline">i</code> пробігає значення 2…11. Для кожного рядка перевіряється, чи є оцінка,
+        і якщо є — вона додається до суми, а лічильник кількості збільшується на 1. Наприкінці обчислюється середнє.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 3 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">3</span>
+      <span class="task-title">Цикл For…Next з кроком — підвищення оцінок</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Створіть макрос <code class="inline">ПідвищенняОцінок</code>.</li>
+        <li>Вставте наведений код.</li>
+        <li>Виконайте макрос.</li>
+      </ol>
+
+<pre><code>Sub ПідвищенняОцінок()
+    Dim i As Integer
+    Dim оцінка As Integer
+    Dim новаОцінка As Integer
+
+    ' Цикл For…Next для підвищення оцінок на 1 бал (максимум 12)
+    For i = 2 To 11
+        оцінка = Cells(i, 3).Value
+
+        If оцінка &gt;= 1 And оцінка &lt;= 11 Then
+            новаОцінка = оцінка + 1
+        Else
+            новаОцінка = оцінка   ' 12 залишається 12
+        End If
+
+        Cells(i, 4).Value = новаОцінка
+    Next i
+
+    MsgBox "Оцінки підвищено!"
+End Sub</code></pre>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 4 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">4</span>
+      <span class="task-title">Цикл Do While…Loop — обробка до порожньої клітинки</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Створіть макрос <code class="inline">ОбробкаДоПустого</code>.</li>
+        <li>Вставте код.</li>
+        <li>Виконайте макрос.</li>
+      </ol>
+
+<pre><code>Sub ОбробкаДоПустого()
+    Dim i As Integer
+    Dim оцінка As Integer
+
+    i = 2   ' Починаємо з рядка 2
+
+    ' Цикл Do While…Loop – виконуємо, поки клітинка не порожня
+    Do While Cells(i, 2).Value &lt;&gt; ""
+        оцінка = Cells(i, 3).Value
+
+        ' Додаємо коментар залежно від оцінки
+        If оцінка &gt;= 10 Then
+            Cells(i, 5).Value = "Відмінно"
+        ElseIf оцінка &gt;= 7 Then
+            Cells(i, 5).Value = "Добре"
+        ElseIf оцінка &gt;= 4 Then
+            Cells(i, 5).Value = "Задовільно"
+        Else
+            Cells(i, 5).Value = "Потрібна допомога"
+        End If
+
+        i = i + 1   ' Важливо! Інакше буде нескінченний цикл
+    Loop
+
+    MsgBox "Оброблено " &amp; i - 2 &amp; " учнів"
+End Sub</code></pre>
+
+      <div class="warn">
+        <span class="warn-title">Ключовий момент</span>
+        <p>Рядок <code class="inline">i = i + 1</code> є обов'язковим. Без нього умова циклу ніколи не стане хибною,
+        і макрос зависне.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 5 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">5</span>
+      <span class="task-title">Цикл For Each…Next — форматування виділеного діапазону</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Створіть макрос <code class="inline">ФорматуванняДіапазону</code>.</li>
+        <li>Вставте код.</li>
+        <li>Виділіть стовпець B або C з оцінками та виконайте макрос.</li>
+      </ol>
+
+<pre><code>Sub ФорматуванняДіапазону()
+    Dim cell As Range
+
+    ' Перевірка, чи щось виділено
+    If Selection.Count = 1 And Selection.Value = "" Then
+        MsgBox "Будь ласка, виділіть діапазон з оцінками!"
+        Exit Sub
+    End If
+
+    ' Цикл For Each…Next для обробки кожної виділеної клітинки
+    For Each cell In Selection
+        If IsNumeric(cell.Value) And cell.Value &lt;&gt; "" Then
+            If cell.Value &gt;= 10 Then
+                cell.Interior.Color = RGB(0, 255, 0)      ' Зелений
+            ElseIf cell.Value &gt;= 7 Then
+                cell.Interior.Color = RGB(255, 255, 0)    ' Жовтий
+            ElseIf cell.Value &gt;= 4 Then
+                cell.Interior.Color = RGB(255, 165, 0)    ' Помаранчевий
+            Else
+                cell.Interior.Color = RGB(255, 0, 0)      ' Червоний
+            End If
+        End If
+    Next cell
+
+    MsgBox "Форматування завершено!"
+End Sub</code></pre>
+
+      <h4>Шкала кольорів</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Оцінка</th><th>Колір заливки</th><th>RGB</th><th>Якість</th></tr></thead>
+          <tbody>
+            <tr><td>10–12</td><td><span class="dot dot-green"></span>Зелений</td><td><code>RGB(0, 255, 0)</code></td><td>Відмінно</td></tr>
+            <tr><td>7–9</td><td><span class="dot dot-yellow"></span>Жовтий</td><td><code>RGB(255, 255, 0)</code></td><td>Добре</td></tr>
+            <tr><td>4–6</td><td><span class="dot dot-orange"></span>Помаранчевий</td><td><code>RGB(255, 165, 0)</code></td><td>Задовільно</td></tr>
+            <tr><td>1–3</td><td><span class="dot dot-red"></span>Червоний</td><td><code>RGB(255, 0, 0)</code></td><td>Потрібна допомога</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 6 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">6</span>
+      <span class="task-title">Цикл Do Until…Loop — пошук першого відмінника</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Створіть макрос <code class="inline">ПошукВідмінника</code>.</li>
+        <li>Вставте код та виконайте макрос.</li>
+      </ol>
+
+<pre><code>Sub ПошукВідмінника()
+    Dim i As Integer
+    Dim знайдено As Boolean
+
+    i = 2
+    знайдено = False
+
+    ' Цикл Do Until…Loop – виконуємо, поки не знайдемо оцінку 12
+    Do Until знайдено = True
+        If Cells(i, 3).Value = 12 Then
+            знайдено = True
+            MsgBox "Відмінник знайдений у рядку " &amp; i &amp; ": " &amp; Cells(i, 2).Value
+            Cells(i, 3).Select
+        Else
+            i = i + 1
+        End If
+
+        ' Якщо дійшли до кінця таблиці, виходимо
+        If i &gt; 100 Then Exit Do
+    Loop
+
+    If Not знайдено Then
+        MsgBox "Відмінників не знайдено!"
+    End If
+End Sub</code></pre>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 7 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">7</span>
+      <span class="task-title">Вкладені цикли — таблиця множення</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Створіть макрос <code class="inline">ТаблицяМноження</code>.</li>
+        <li>Вставте код та виконайте макрос.</li>
+      </ol>
+
+<pre><code>Sub ТаблицяМноження()
+    Dim i As Integer
+    Dim j As Integer
+
+    ' Очищаємо аркуш "Таблиця" або створюємо новий
+    On Error Resume Next
+    Application.DisplayAlerts = False
+    Sheets("Таблиця").Delete
+    Application.DisplayAlerts = True
+    On Error GoTo 0
+
+    Sheets.Add After:=Sheets(Sheets.Count)
+    ActiveSheet.Name = "Таблиця"
+
+    ' Заголовки рядків (1-10)
+    For i = 1 To 10
+        Cells(i + 1, 1).Value = i
+    Next i
+
+    ' Заголовки стовпців (1-10)
+    For j = 1 To 10
+        Cells(1, j + 1).Value = j
+    Next j
+
+    ' Вкладений цикл для заповнення таблиці множення
+    For i = 1 To 10
+        For j = 1 To 10
+            Cells(i + 1, j + 1).Value = i * j
+        Next j
+    Next i
+
+    ' Форматування заголовків
+    Range(Cells(1, 1), Cells(1, 11)).Font.Bold = True
+    Range(Cells(1, 1), Cells(11, 1)).Font.Bold = True
+
+    Cells(1, 1).Value = "×"
+    Columns("A:K").AutoFit
+
+    MsgBox "Таблиця множення створена на аркуші 'Таблиця'!"
+End Sub</code></pre>
+
+      <div class="note">
+        <span class="note-title">Вкладений цикл</span>
+        <p>Зовнішній цикл <code class="inline">i</code> відповідає за рядки, внутрішній <code class="inline">j</code> — за стовпці.
+        Для кожного значення <code class="inline">i</code> внутрішній цикл повністю проходить усі 10 значень <code class="inline">j</code>.
+        Разом — 10 × 10 = <strong>100</strong> клітинок.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 8 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">8</span>
+      <span class="task-title">Створення кнопок для виклику макросів</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Вкладка <strong>Розробник → Вставити → Кнопка</strong>.</li>
+        <li>Намалюйте кнопку, підпишіть: «Сума та середнє».</li>
+        <li>Прив'яжіть макрос <code class="inline">ОбчисленняСумаСереднє</code>.</li>
+        <li>Додайте ще кнопки: «Підвищити оцінки», «Форматування», «Таблиця множення».</li>
+        <li>Прив'яжіть відповідні макроси.</li>
+      </ol>
+
+      <div class="tip">
+        <span class="tip-title">Підказка</span>
+        <p>Щоб перейменувати кнопку — клацніть правою кнопкою миші → «Змінити текст».
+        Щоб прив'язати макрос — правою кнопкою → «Призначити макрос…».</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 9 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">9</span>
+      <span class="task-title">Додаткове — параметричний цикл</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Створіть макрос <code class="inline">ГнучкийЦикл</code>.</li>
+        <li>Вставте код та виконайте макрос — введіть початок, кінець і крок у діалогових вікнах.</li>
+      </ol>
+
+<pre><code>Sub ГнучкийЦикл()
+    Dim початок As Integer
+    Dim кінець As Integer
+    Dim крок As Integer
+    Dim i As Integer
+
+    ' Запитуємо параметри циклу
+    початок = InputBox("Введіть початкове значення:")
+    кінець = InputBox("Введіть кінцеве значення:")
+    крок = InputBox("Введіть крок:")
+
+    If початок = "" Or кінець = "" Or крок = "" Then
+        MsgBox "Операцію скасовано"
+        Exit Sub
+    End If
+
+    ' Цикл із введеними параметрами
+    For i = початок To кінець Step крок
+        Cells(i, 1).Value = i
+    Next i
+
+    MsgBox "Цикл виконано від " &amp; початок &amp; " до " &amp; кінець &amp; " з кроком " &amp; крок
+End Sub</code></pre>
+    </div>
+  </div>
+
+  <!-- ЗАВДАННЯ 10 -->
+  <div class="task">
+    <div class="task-head">
+      <span class="task-num">10</span>
+      <span class="task-title">Оформлення та завершення</span>
+    </div>
+    <div class="task-body">
+      <ol class="steps">
+        <li>Відформатуйте таблицю (рамки, заголовки — жирним).</li>
+        <li>Розташуйте кнопки зручно (наприклад, праворуч від таблиці).</li>
+        <li>Збережіть книгу.</li>
+        <li>Закрийте Excel.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ІНСТРУКЦІЙНА КАРТКА ================= -->
+<section class="card" id="card">
+  <p class="kicker">Інструкційна картка</p>
+  <h2>Покроковий алгоритм виконання роботи</h2>
+
+  <h3>Частина A. Підготовка</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:70px">Крок</th><th>Дія</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Запустіть Microsoft Excel</td></tr>
+        <tr><td>2</td><td>Створіть нову книгу</td></tr>
+        <tr><td>3</td><td>Збережіть як <code>Прізвище_ПЗ16_цикли.xlsm</code></td></tr>
+        <tr><td>4</td><td>Створіть таблицю (№, Прізвище, Оцінка, Підвищена оцінка)</td></tr>
+        <tr><td>5</td><td>Введіть 10 записів</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Частина B. Макрос «ОбчисленняСумаСереднє»</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:70px">Крок</th><th>Дія</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Alt + F8</strong> → <code>ОбчисленняСумаСереднє</code> → «Створити»</td></tr>
+        <tr><td>2</td><td>Вставити код з <code>For…Next</code></td></tr>
+        <tr><td>3</td><td>Виконати макрос</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Частина C. Макрос «ПідвищенняОцінок»</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:70px">Крок</th><th>Дія</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Створити макрос <code>ПідвищенняОцінок</code></td></tr>
+        <tr><td>2</td><td>Вставити код з <code>For…Next</code></td></tr>
+        <tr><td>3</td><td>Виконати макрос</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Частина D. Макрос «ОбробкаДоПустого»</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:70px">Крок</th><th>Дія</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Створити макрос <code>ОбробкаДоПустого</code></td></tr>
+        <tr><td>2</td><td>Вставити код з <code>Do While</code></td></tr>
+        <tr><td>3</td><td>Виконати макрос</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Частина E. Макрос «ФорматуванняДіапазону»</h3>
+  <ol class="steps">
+    <li>Створити макрос <code class="inline">ФорматуванняДіапазону</code>.</li>
+    <li>Вставити код з <code class="inline">For Each</code>.</li>
+    <li>Виділити оцінки → виконати макрос.</li>
+    <li>Розробник → Вставити → Кнопка (4 рази).</li>
+    <li>Підписати та прив'язати макроси.</li>
+    <li>Відформатувати таблицю.</li>
+    <li>Зберегти книгу.</li>
+  </ol>
+</section>
+
+<!-- ================= ОЦІНЮВАННЯ ================= -->
+<section class="card" id="score">
+  <p class="kicker">Критерії оцінювання</p>
+  <h2>Максимальна кількість балів: 20</h2>
+
+  <ul class="score-list">
+    <li>
+      <div class="score-row"><span>Файл збережено у форматі <code class="inline">.xlsm</code> з правильною назвою</span><span class="pts">1</span></div>
+      <div class="bar"><span style="width:5%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Таблицю з даними створено (мінімум 10 учнів)</span><span class="pts">2</span></div>
+      <div class="bar"><span style="width:10%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Макрос «ОбчисленняСумаСереднє» (For…Next) створено та працює</span><span class="pts">2</span></div>
+      <div class="bar"><span style="width:10%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Макрос «ПідвищенняОцінок» (For…Next з кроком) створено та працює</span><span class="pts">2</span></div>
+      <div class="bar"><span style="width:10%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Макрос «ОбробкаДоПустого» (Do While…Loop) створено та працює</span><span class="pts">2</span></div>
+      <div class="bar"><span style="width:10%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Макрос «ФорматуванняДіапазону» (For Each…Next) створено та працює</span><span class="pts">2</span></div>
+      <div class="bar"><span style="width:10%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Макрос «ПошукВідмінника» (Do Until…Loop) створено та працює</span><span class="pts">2</span></div>
+      <div class="bar"><span style="width:10%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Макрос «ТаблицяМноження» (вкладені цикли) створено та працює</span><span class="pts">2</span></div>
+      <div class="bar"><span style="width:10%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Кнопки для виклику макросів створено (мінімум 3)</span><span class="pts">2</span></div>
+      <div class="bar"><span style="width:10%"></span></div>
+    </li>
+    <li>
+      <div class="score-row"><span>Завдання виконано самостійно та акуратно</span><span class="pts">3</span></div>
+      <div class="bar"><span style="width:15%"></span></div>
+    </li>
+  </ul>
+
+  <h3>Шкала переведення</h3>
+  <div class="scale">
+    <div class="scale-item s5">
+      <div class="mark">«Відмінно»</div>
+      <div class="range">20–19 балів</div>
+    </div>
+    <div class="scale-item s4">
+      <div class="mark">«Добре»</div>
+      <div class="range">18–15 балів</div>
+    </div>
+    <div class="scale-item s3">
+      <div class="mark">«Задовільно»</div>
+      <div class="range">14–10 балів</div>
+    </div>
+    <div class="scale-item s2">
+      <div class="mark">«Незадовільно»</div>
+      <div class="range">9–0 балів</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= КОНТРОЛЬНІ ПИТАННЯ ================= -->
+<section class="card" id="quiz">
+  <p class="kicker">Самоперевірка</p>
+  <h2>Контрольні запитання</h2>
+
+  <ol class="qlist">
+    <li>Що таке цикл у програмуванні? Для чого він використовується?</li>
+    <li>Як записується цикл <code class="inline">For…Next</code> у VBA? Наведіть приклад.</li>
+    <li>Як записується цикл <code class="inline">Do While…Loop</code> у VBA? Наведіть приклад.</li>
+    <li>У чому різниця між <code class="inline">Do While…Loop</code> та <code class="inline">Do…Loop While</code>?</li>
+    <li>Як уникнути створення нескінченного циклу?</li>
+    <li>Для чого використовується <code class="inline">Step</code> у циклі <code class="inline">For…Next</code>?</li>
+    <li>Як записується цикл <code class="inline">For Each…Next</code>? Наведіть приклад.</li>
+    <li>Як достроково вийти з циклу в VBA?</li>
+    <li>Який цикл краще використовувати, коли відома кількість повторень?</li>
+    <li>Як перевірити межі циклу, щоб уникнути помилок?</li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  Практичне заняття № 16 · Команда повторення. Створення макросів в табличному процесорі MS Excel
+</footer>
+
+</body>
+</html>
