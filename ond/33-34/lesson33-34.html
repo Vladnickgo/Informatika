@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лекція: Методи науково-педагогічного дослідження</title>
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --accent: #2980b9;
+            --accent-light: #eaf4fc;
+            --accent-soft: #f4f9fd;
+            --success: #27ae60;
+            --warning: #e67e22;
+            --purple: #8e44ad;
+            --bg: #f5f7fa;
+            --card: #ffffff;
+            --text: #2d3436;
+            --muted: #636e72;
+            --border: #dce4ec;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== Шапка ===== */
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2980b9 100%);
+            color: #fff;
+            padding: 2.6rem 1.5rem 2.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -60%; left: -40%;
+            width: 180%; height: 180%;
+            background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 65%);
+            animation: pulse 9s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        header .lecture-num {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.9rem;
+            position: relative; z-index: 1;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.7rem;
+            position: relative; z-index: 1;
+            line-height: 1.35;
+            max-width: 800px;
+            margin-left: auto; margin-right: auto;
+        }
+
+        header .subtitle {
+            font-size: 0.98rem;
+            opacity: 0.92;
+            position: relative; z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* ===== Контейнер ===== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.8rem 1.2rem;
+        }
+
+        /* ===== Мета-картка ===== */
+        .meta-card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 1.8rem;
+            border-left: 5px solid var(--accent);
+        }
+
+        .meta-card h2 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .meta-list { list-style: none; }
+
+        .meta-list li {
+            padding: 0.4rem 0;
+            display: flex; align-items: flex-start; gap: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .meta-list li::before {
+            content: '▸';
+            color: var(--accent);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .meta-list .label {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 105px;
+            flex-shrink: 0;
+        }
+
+        /* ===== Секції ===== */
+        section {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid var(--accent-light);
+            display: flex; align-items: center; gap: 0.7rem;
+        }
+
+        section h2 .num {
+            display: inline-flex;
+            align-items: center; justify-content: center;
+            width: 34px; height: 34px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 9px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-size: 1.08rem;
+            color: var(--primary);
+            margin: 1.4rem 0 0.7rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        h3 .dot {
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        p { margin-bottom: 0.8rem; font-size: 0.97rem; }
+
+        /* ===== Визначення ===== */
+        .definition {
+            background: linear-gradient(135deg, #eaf4fc 0%, #f4f9fd 100%);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            padding: 1rem 1.3rem;
+            margin: 1rem 0;
+            font-size: 0.96rem;
+        }
+
+        .definition strong { color: var(--primary); }
+
+        /* ===== Таблиці ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead { background: var(--primary); color: #fff; }
+
+        th, td {
+            padding: 0.7rem 0.9rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            font-weight: 600;
+            font-size: 0.84rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        tbody tr:hover { background: var(--accent-soft); }
+        tbody tr:last-child td { border-bottom: none; }
+
+        /* ===== Діаграми ===== */
+        .diagram {
+            margin: 1.2rem 0;
+            padding: 1rem;
+            background: #fbfdff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .diagram svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .diagram-caption {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-top: 0.6rem;
+            text-align: center;
+        }
+
+        /* ===== Приклад ===== */
+        .example {
+            background: #fef9e7;
+            border-left: 4px solid var(--warning);
+            border-radius: 0 12px 12px 0;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .example::before {
+            content: 'Приклад';
+            display: inline-block;
+            background: var(--warning);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+        }
+
+        .example p { margin-bottom: 0; font-style: italic; color: #7e5109; font-size: 0.94rem; }
+
+        /* ===== Список завдань ===== */
+        .task-list {
+            list-style: none;
+            counter-reset: task;
+            margin: 0.8rem 0;
+        }
+
+        .task-list li {
+            counter-increment: task;
+            padding: 0.7rem 0.9rem 0.7rem 3rem;
+            position: relative;
+            background: #f8fafc;
+            border-radius: 9px;
+            margin-bottom: 0.5rem;
+            font-size: 0.94rem;
+            border-left: 3px solid var(--success);
+        }
+
+        .task-list li::before {
+            content: counter(task);
+            position: absolute;
+            left: 0.8rem; top: 50%;
+            transform: translateY(-50%);
+            width: 24px; height: 24px;
+            background: var(--success);
+            color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        /* ===== Контрольні питання ===== */
+        .questions { list-style: none; counter-reset: q; }
+
+        .questions li {
+            counter-increment: q;
+            padding: 0.9rem 1rem 0.9rem 3.2rem;
+            position: relative;
+            background: var(--accent-soft);
+            border-radius: 10px;
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .questions li::before {
+            content: 'Q' counter(q);
+            position: absolute;
+            left: 0.8rem; top: 0.95rem;
+            width: 30px; height: 30px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        /* ===== План заняття ===== */
+        .plan-list {
+            list-style: none;
+            counter-reset: plan;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.6rem;
+        }
+
+        .plan-list li {
+            counter-increment: plan;
+            padding: 0.7rem 0.9rem 0.7rem 2.8rem;
+            position: relative;
+            background: #f8fafc;
+            border-radius: 9px;
+            font-size: 0.92rem;
+            border-left: 3px solid var(--purple);
+        }
+
+        .plan-list li::before {
+            content: counter(plan);
+            position: absolute;
+            left: 0.7rem; top: 50%;
+            transform: translateY(-50%);
+            width: 24px; height: 24px;
+            background: var(--purple);
+            color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        /* ===== Література ===== */
+        .lit-list { list-style: none; counter-reset: lit; }
+
+        .lit-list li {
+            counter-increment: lit;
+            padding: 0.7rem 0.8rem 0.7rem 2.8rem;
+            position: relative;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .lit-list li:last-child { border-bottom: none; }
+
+        .lit-list li::before {
+            content: counter(lit);
+            position: absolute;
+            left: 0.6rem; top: 0.7rem;
+            width: 22px; height: 22px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        /* ===== Футер ===== */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 1rem;
+        }
+
+        /* ===== Адаптивність ===== */
+        @media (max-width: 640px) {
+            header h1 { font-size: 1.3rem; }
+            header .subtitle { font-size: 0.9rem; }
+            .container { padding: 1rem 0.7rem; }
+            section { padding: 1.2rem; }
+            .meta-list .label { min-width: 85px; font-size: 0.88rem; }
+            th, td { padding: 0.55rem 0.65rem; font-size: 0.83rem; }
+            section h2 { font-size: 1.1rem; }
+            .plan-list { grid-template-columns: 1fr; }
+        }
+
+        /* ===== Анімація появи ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(14px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== ПРАВИЛА ДРУКУ ===== */
+        @media print {
+            body {
+                background: #fff;
+                font-size: 11pt;
+                line-height: 1.5;
+            }
+
+            header {
+                background: #1e3a5f !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 1.2rem 1rem;
+            }
+
+            header::before { display: none; }
+
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .container { max-width: 100%; padding: 0.5rem 0; }
+
+            section, .meta-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin-bottom: 1rem;
+                padding: 1rem 1.1rem;
+            }
+
+            .table-wrap, .definition, .example, .diagram,
+            .task-list li, .questions li, .lit-list li, .plan-list li {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .page-break {
+                page-break-before: always;
+                break-before: page;
+            }
+
+            footer { border-top: none; padding: 0.5rem; font-size: 8pt; }
+            a { text-decoration: none; color: inherit; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="lecture-num">ЛЕКЦІЙНЕ ЗАНЯТТЯ</div>
+    <h1>Методи науково-педагогічного дослідження</h1>
+    <p class="subtitle">Основи науково-педагогічних досліджень · 4 курс · спеціальність «Початкова освіта»</p>
+</header>
+
+<div class="container">
+
+    <!-- Мета -->
+    <div class="meta-card fade-in">
+        <h2><span>🎯</span> Мета та завдання заняття</h2>
+        <ul class="meta-list">
+            <li><span class="label">Мета:</span> сформувати систему знань про методи науково-педагогічного дослідження, їх класифікацію та умови застосування в дослідженнях з початкової освіти.</li>
+            <li><span class="label">Завдання:</span> розкрити сутність теоретичних, емпіричних і математико-статистичних методів; розвивати вміння обирати методи відповідно до мети дослідження.</li>
+            <li><span class="label">Компетентності:</span> здатність планувати й організовувати педагогічне дослідження, критично оцінювати його результати.</li>
+            <li><span class="label">Обладнання:</span> мультимедійна презентація, інструкційні картки, зразки анкет і протоколів спостереження.</li>
+        </ul>
+    </div>
+
+    <!-- План -->
+    <section class="fade-in">
+        <h2><span class="num">📋</span> План заняття</h2>
+        <ol class="plan-list">
+            <li>Поняття методів науково-педагогічного дослідження</li>
+            <li>Класифікація методів дослідження</li>
+            <li>Теоретичні методи</li>
+            <li>Емпіричні методи</li>
+            <li>Математико-статистичні методи</li>
+            <li>Вибір методів дослідження</li>
+        </ol>
+    </section>
+
+    <!-- Література -->
+    <section class="fade-in">
+        <h2><span class="num">📚</span> Література</h2>
+        <ol class="lit-list">
+            <li>Лаппо В. В. Основи педагогічних досліджень. Івано-Франківськ: НАІР, 2016. 284 с.</li>
+            <li>Лимар Ю. М. Основи науково-педагогічних досліджень. Чернігів: ЧНПУ імені Т. Г. Шевченка, 2011. 56 с.</li>
+            <li>Пріма Р. М. Сучасна наукова стаття: технологія творчості. Науковий вісник. 2020. № 4 (408), с. 99–103.</li>
+            <li>Мартиненко С. М. Методологія науково-педагогічних досліджень. Київ: ВЦ «Академія», 2020. 232 с.</li>
+        </ol>
+    </section>
+
+    <!-- 1. Поняття -->
+    <section class="fade-in">
+        <h2><span class="num">1</span> Поняття методів науково-педагогічного дослідження</h2>
+
+        <div class="definition">
+            <strong>Методи науково-педагогічного дослідження</strong> — це система способів і прийомів пізнання педагогічних явищ і процесів, за допомогою яких дослідник отримує об'єктивну, достовірну та науково обґрунтовану інформацію про закономірності навчання, виховання й розвитку особистості.
+        </div>
+
+        <p>Методи дослідження виконують три ключові функції: <strong>пізнавальну</strong> (здобуття нових знань), <strong>діагностичну</strong> (оцінювання стану педагогічного явища) та <strong>перетворювальну</strong> (впровадження та перевірка ефективності методик).</p>
+
+        <h3><span class="dot"></span> Класифікація методів за рівнем пізнання</h3>
+
+        <div class="diagram">
+            <svg viewBox="0 0 800 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Дерево класифікації методів науково-педагогічного дослідження">
+                <!-- Корінь -->
+                <rect x="250" y="10" width="300" height="50" rx="10" fill="#1e3a5f"/>
+                <text x="400" y="32" text-anchor="middle" fill="#fff" font-size="15" font-weight="bold">Методи науково-педагогічного</text>
+		<text x="400" y="50" text-anchor="middle" fill="#fff" font-size="15" font-weight="bold">дослідження</text>
+
+                <!-- Лінії -->
+                <line x1="400" y1="60" x2="400" y2="82" stroke="#2980b9" stroke-width="2"/>
+                <line x1="140" y1="82" x2="660" y2="82" stroke="#2980b9" stroke-width="2"/>
+                <line x1="140" y1="82" x2="140" y2="105" stroke="#2980b9" stroke-width="2"/>
+                <line x1="400" y1="82" x2="400" y2="105" stroke="#2980b9" stroke-width="2"/>
+                <line x1="660" y1="82" x2="660" y2="105" stroke="#2980b9" stroke-width="2"/>
+
+                <!-- Категорії -->
+                <rect x="30" y="105" width="220" height="45" rx="8" fill="#3498db"/>
+                <text x="140" y="133" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Теоретичні</text>
+
+                <rect x="290" y="105" width="220" height="45" rx="8" fill="#27ae60"/>
+                <text x="400" y="133" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Емпіричні</text>
+
+                <rect x="550" y="105" width="220" height="45" rx="8" fill="#8e44ad"/>
+                <text x="660" y="133" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">Математико-статистичні</text>
+
+                <!-- Підсписки -->
+                <rect x="30" y="165" width="220" height="230" rx="8" fill="#ebf5fb" stroke="#3498db"/>
+                <text x="45" y="192" font-size="13" fill="#1e3a5f">• Аналіз і синтез</text>
+                <text x="45" y="217" font-size="13" fill="#1e3a5f">• Порівняння</text>
+                <text x="45" y="242" font-size="13" fill="#1e3a5f">• Абстрагування</text>
+                <text x="45" y="267" font-size="13" fill="#1e3a5f">• Узагальнення</text>
+                <text x="45" y="292" font-size="13" fill="#1e3a5f">• Моделювання</text>
+                <text x="45" y="317" font-size="13" fill="#1e3a5f">• Індукція / дедукція</text>
+                <text x="45" y="342" font-size="13" fill="#1e3a5f">• Історико-логічний</text>
+                <text x="45" y="367" font-size="13" fill="#1e3a5f">• Систематизація</text>
+
+                <rect x="290" y="165" width="220" height="230" rx="8" fill="#eafaf1" stroke="#27ae60"/>
+                <text x="305" y="192" font-size="13" fill="#1e5a3f">• Спостереження</text>
+                <text x="305" y="217" font-size="13" fill="#1e5a3f">• Опитування (бесіда, анкета)</text>
+                <text x="305" y="242" font-size="13" fill="#1e5a3f">• Тестування</text>
+                <text x="305" y="267" font-size="13" fill="#1e5a3f">• Педагогічний експеримент</text>
+                <text x="305" y="292" font-size="13" fill="#1e5a3f">• Соціометрія</text>
+                <text x="305" y="317" font-size="13" fill="#1e5a3f">• Рейтинг</text>
+                <text x="305" y="342" font-size="13" fill="#1e5a3f">• Вивчення документації</text>
+                <text x="305" y="367" font-size="13" fill="#1e5a3f">• Узагальнення досвіду</text>
+
+                <rect x="550" y="165" width="220" height="230" rx="8" fill="#f4ecf7" stroke="#8e44ad"/>
+                <text x="565" y="192" font-size="13" fill="#4a235a">• Реєстрація</text>
+                <text x="565" y="217" font-size="13" fill="#4a235a">• Ранжування</text>
+                <text x="565" y="242" font-size="13" fill="#4a235a">• Шкалування</text>
+                <text x="565" y="267" font-size="13" fill="#4a235a">• Статистична обробка</text>
+                <text x="565" y="292" font-size="13" fill="#4a235a">• t-критерій Стьюдента</text>
+                <text x="565" y="317" font-size="13" fill="#4a235a">• χ² (хі-квадрат)</text>
+                <text x="565" y="342" font-size="13" fill="#4a235a">• Кореляція Пірсона</text>
+                <text x="565" y="367" font-size="13" fill="#4a235a">• Дисперсійний аналіз</text>
+            </svg>
+            <p class="diagram-caption">Рис. 1. Класифікація методів науково-педагогічного дослідження</p>
+        </div>
+    </section>
+
+    <!-- 2. Теоретичні методи -->
+    <section class="fade-in">
+        <h2><span class="num">2</span> Теоретичні методи дослідження</h2>
+
+        <p>Теоретичні методи забезпечують осмислення зібраного матеріалу, виявлення суттєвих зв'язків і формулювання наукових понять, гіпотез і теорій. Вони є основою для побудови логічної структури дослідження.</p>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Метод</th>
+                        <th>Сутність</th>
+                        <th>Приклад застосування</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Аналіз і синтез</strong></td>
+                        <td>Розчленування цілого на частини та поєднання частин у ціле.</td>
+                        <td>Аналіз структури уроку інформатики; синтез моделі цифрової компетентності.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Порівняння</strong></td>
+                        <td>Встановлення схожості й відмінностей між педагогічними явищами.</td>
+                        <td>Порівняння підручників з інформатики для 2 і 3 класів.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Абстрагування</strong></td>
+                        <td>Відволікання від несуттєвих ознак і виділення головного.</td>
+                        <td>Виділення ключових компонентів цифрової компетентності.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Узагальнення</strong></td>
+                        <td>Перехід від одиничного до загального, формулювання висновків.</td>
+                        <td>Узагальнення результатів експерименту в педагогічній практиці.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Моделювання</strong></td>
+                        <td>Створення моделі об'єкта для вивчення його властивостей.</td>
+                        <td>Модель формування мотивації молодших школярів.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Індукція та дедукція</strong></td>
+                        <td>Рух думки від часткового до загального і навпаки.</td>
+                        <td>Узагальнення спостережень; перевірка гіпотези на конкретних фактах.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 3. Емпіричні методи -->
+    <section class="fade-in">
+        <h2><span class="num">3</span> Емпіричні методи дослідження</h2>
+
+        <p>Емпіричні методи забезпечують безпосередній контакт дослідника з педагогічною реальністю — збір фактів, їх опис і первинну систематизацію. Саме вони є джерелом фактичного матеріалу для подальшого теоретичного аналізу.</p>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Метод</th>
+                        <th>Сутність</th>
+                        <th>Переваги</th>
+                        <th>Обмеження</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Спостереження</strong></td>
+                        <td>Цілеспрямоване сприйняття педагогічних явищ у природних умовах.</td>
+                        <td>Природність, доступність, багатство фактів.</td>
+                        <td>Суб'єктивність, потребує тривалого часу.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Анкетування</strong></td>
+                        <td>Письмове опитування за стандартизованою формою.</td>
+                        <td>Масовість, швидка обробка результатів.</td>
+                        <td>Можлива нещирість; потребує ретельної розробки.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Бесіда</strong></td>
+                        <td>Усне опитування у формі діалогу за заздалегідь визначеним планом.</td>
+                        <td>Гнучкість, можливість уточнення, глибина.</td>
+                        <td>Потребує досвіду; складно стандартизувати.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Тестування</strong></td>
+                        <td>Стандартизована перевірка знань, умінь і навичок.</td>
+                        <td>Об'єктивність, порівнюваність результатів.</td>
+                        <td>Обмеженість типів завдань; можлива «натасканість».</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Педагогічний експеримент</strong></td>
+                        <td>Активне втручання дослідника в педагогічний процес із контрольованими умовами.</td>
+                        <td>Доказовість причинно-наслідкових зв'язків.</td>
+                        <td>Складність організації; етичні обмеження.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Соціометрія</strong></td>
+                        <td>Вивчення міжособистісних стосунків у колективі.</td>
+                        <td>Виявляє структуру класу, лідерів, ізольованих.</td>
+                        <td>Потребує конфіденційності; можливі спотворення.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3><span class="dot"></span> Етапи педагогічного експерименту</h3>
+
+        <div class="diagram">
+            <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Блок-схема етапів педагогічного експерименту">
+                <defs>
+                    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                        <path d="M0,0 L10,5 L0,10 z" fill="#2980b9"/>
+                    </marker>
+                    <marker id="arrGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                        <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+                    </marker>
+                </defs>
+
+                <!-- Блок 1 -->
+                <rect x="30" y="70" width="200" height="110" rx="12" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+                <text x="130" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e5a3f">Констатувальний</text>
+                <text x="130" y="128" text-anchor="middle" font-size="12" fill="#1e5a3f">визначення вихідного</text>
+                <text x="130" y="146" text-anchor="middle" font-size="12" fill="#1e5a3f">рівня досліджуваного</text>
+                <text x="130" y="164" text-anchor="middle" font-size="12" fill="#1e5a3f">явища</text>
+
+                <!-- Стрілка 1 -->
+                <line x1="232" y1="125" x2="296" y2="125" stroke="#2980b9" stroke-width="2.5" marker-end="url(#arrBlue)"/>
+
+                <!-- Блок 2 -->
+                <rect x="300" y="70" width="200" height="110" rx="12" fill="#ebf5fb" stroke="#2980b9" stroke-width="2"/>
+                <text x="400" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a5f">Формувальний</text>
+                <text x="400" y="128" text-anchor="middle" font-size="12" fill="#1e3a5f">впровадження</text>
+                <text x="400" y="146" text-anchor="middle" font-size="12" fill="#1e3a5f">авторської методики</text>
+                <text x="400" y="164" text-anchor="middle" font-size="12" fill="#1e3a5f">в освітній процес</text>
+
+                <!-- Стрілка 2 -->
+                <line x1="502" y1="125" x2="566" y2="125" stroke="#2980b9" stroke-width="2.5" marker-end="url(#arrBlue)"/>
+
+                <!-- Блок 3 -->
+                <rect x="570" y="70" width="200" height="110" rx="12" fill="#f4ecf7" stroke="#8e44ad" stroke-width="2"/>
+                <text x="670" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#4a235a">Контрольний</text>
+                <text x="670" y="128" text-anchor="middle" font-size="12" fill="#4a235a">порівняння результатів,</text>
+                <text x="670" y="146" text-anchor="middle" font-size="12" fill="#4a235a">статистична обробка,</text>
+                <text x="670" y="164" text-anchor="middle" font-size="12" fill="#4a235a">висновки</text>
+
+                <!-- Зворотний зв'язок -->
+                <path d="M670,182 C670,235 400,235 400,182" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrGray)"/>
+                <text x="535" y="252" text-anchor="middle" font-size="11" font-style="italic" fill="#64748b">коригування методики</text>
+            </svg>
+            <p class="diagram-caption">Рис. 2. Структура педагогічного експерименту</p>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Етап</th>
+                        <th>Мета</th>
+                        <th>Основний зміст</th>
+                        <th>Орієнтовна тривалість</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Констатувальний</strong></td>
+                        <td>Визначити вихідний рівень</td>
+                        <td>Діагностичні зрізи, аналіз документації, анкетування</td>
+                        <td>1–2 місяці</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Формувальний</strong></td>
+                        <td>Перевірити ефективність методики</td>
+                        <td>Впровадження програми, спостереження, проміжні зрізи</td>
+                        <td>1 семестр</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Контрольний</strong></td>
+                        <td>Порівняти результати</td>
+                        <td>Повторна діагностика, статистична обробка, висновки</td>
+                        <td>1 місяць</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 4. Математико-статистичні -->
+    <section class="fade-in">
+        <h2><span class="num">4</span> Математико-статистичні методи</h2>
+
+        <p>Ці методи забезпечують кількісний аналіз результатів дослідження, перевірку статистичної значущості відмінностей і встановлення кореляційних зв'язків між показниками.</p>
+
+        <div class="diagram">
+            <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стовпчикова діаграма частоти використання методів">
+                <text x="350" y="18" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a5f">Частота використання методів у педагогічних дослідженнях</text>
+
+                <!-- Сітка -->
+                <line x1="200" y1="30" x2="200" y2="345" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="312.5" y1="30" x2="312.5" y2="345" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="425" y1="30" x2="425" y2="345" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="537.5" y1="30" x2="537.5" y2="345" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="650" y1="30" x2="650" y2="345" stroke="#cbd5e1" stroke-width="1"/>
+
+                <!-- Підписи осі X -->
+                <text x="200" y="362" text-anchor="middle" font-size="11" fill="#64748b">0%</text>
+                <text x="312.5" y="362" text-anchor="middle" font-size="11" fill="#64748b">25%</text>
+                <text x="425" y="362" text-anchor="middle" font-size="11" fill="#64748b">50%</text>
+                <text x="537.5" y="362" text-anchor="middle" font-size="11" fill="#64748b">75%</text>
+                <text x="650" y="362" text-anchor="middle" font-size="11" fill="#64748b">100%</text>
+
+                <!-- Бар 1 -->
+                <text x="190" y="58" text-anchor="end" font-size="12.5" fill="#1e3a5f">Аналіз літератури</text>
+                <rect x="200" y="40" width="427.5" height="28" rx="4" fill="#1e5a8a"/>
+                <text x="636" y="59" font-size="11" fill="#1e3a5f" font-weight="bold">95%</text>
+
+                <!-- Бар 2 -->
+                <text x="190" y="103" text-anchor="end" font-size="12.5" fill="#1e3a5f">Анкетування</text>
+                <rect x="200" y="85" width="414" height="28" rx="4" fill="#2471a3"/>
+                <text x="623" y="104" font-size="11" fill="#1e3a5f" font-weight="bold">92%</text>
+
+                <!-- Бар 3 -->
+                <text x="190" y="148" text-anchor="end" font-size="12.5" fill="#1e3a5f">Спостереження</text>
+                <rect x="200" y="130" width="396" height="28" rx="4" fill="#2980b9"/>
+                <text x="605" y="149" font-size="11" fill="#1e3a5f" font-weight="bold">88%</text>
+
+                <!-- Бар 4 -->
+                <text x="190" y="193" text-anchor="end" font-size="12.5" fill="#1e3a5f">Бесіда</text>
+                <rect x="200" y="175" width="369" height="28" rx="4" fill="#3498db"/>
+                <text x="578" y="194" font-size="11" fill="#1e3a5f" font-weight="bold">82%</text>
+
+                <!-- Бар 5 -->
+                <text x="190" y="238" text-anchor="end" font-size="12.5" fill="#1e3a5f">Пед. експеримент</text>
+                <rect x="200" y="220" width="342" height="28" rx="4" fill="#5dade2"/>
+                <text x="551" y="239" font-size="11" fill="#1e3a5f" font-weight="bold">76%</text>
+
+                <!-- Бар 6 -->
+                <text x="190" y="283" text-anchor="end" font-size="12.5" fill="#1e3a5f">Тестування</text>
+                <rect x="200" y="265" width="306" height="28" rx="4" fill="#85c1e9"/>
+                <text x="515" y="284" font-size="11" fill="#1e3a5f" font-weight="bold">68%</text>
+
+                <!-- Бар 7 -->
+                <text x="190" y="328" text-anchor="end" font-size="12.5" fill="#1e3a5f">Статистичні методи</text>
+                <rect x="200" y="310" width="243" height="28" rx="4" fill="#aed6f1"/>
+                <text x="452" y="329" font-size="11" fill="#1e3a5f" font-weight="bold">54%</text>
+            </svg>
+            <p class="diagram-caption">Рис. 3. Узагальнені дані опитування дослідників (за матеріалами фахових публікацій)</p>
+        </div>
+
+        <h3><span class="dot"></span> Основні статистичні процедури</h3>
+        <ul class="task-list">
+            <li><strong>Описова статистика</strong> — середнє, медіана, мода, стандартне відхилення, дисперсія.</li>
+            <li><strong>t-критерій Стьюдента</strong> — порівняння середніх двох вибірок (наприклад, контрольної та експериментальної груп).</li>
+            <li><strong>χ² (хі-квадрат)</strong> — перевірка незалежності розподілу категоріальних ознак.</li>
+            <li><strong>Кореляційний аналіз (Пірсон, Спірмен)</strong> — встановлення зв'язку між показниками.</li>
+            <li><strong>Дисперсійний аналіз (ANOVA)</strong> — порівняння трьох і більше груп.</li>
+        </ul>
+    </section>
+
+    <!-- 5. Вибір методів -->
+    <section class="fade-in">
+        <h2><span class="num">5</span> Вибір методів дослідження</h2>
+
+        <p>Вибір методів зумовлений метою, завданнями, об'єктом і предметом дослідження, а також віковими особливостями учасників. У дослідженнях з початкової освіти перевага надається методам, які відповідають психофізіологічним можливостям молодших школярів.</p>
+
+        <div class="diagram">
+            <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Кругова діаграма розподілу груп методів">
+                <circle cx="140" cy="150" r="70" fill="none" stroke="#e2e8f0" stroke-width="40"/>
+                <g transform="rotate(-90 140 150)">
+                    <circle cx="140" cy="150" r="70" fill="none" stroke="#3498db" stroke-width="40"
+                            stroke-dasharray="131.95 439.82" stroke-dashoffset="0"/>
+                    <circle cx="140" cy="150" r="70" fill="none" stroke="#27ae60" stroke-width="40"
+                            stroke-dasharray="197.92 439.82" stroke-dashoffset="-131.95"/>
+                    <circle cx="140" cy="150" r="70" fill="none" stroke="#8e44ad" stroke-width="40"
+                            stroke-dasharray="109.96 439.82" stroke-dashoffset="-329.87"/>
+                </g>
+                <text x="140" y="148" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">Методи</text>
+                <text x="140" y="166" text-anchor="middle" font-size="11" fill="#64748b">дослідження</text>
+
+                <!-- Легенда -->
+                <rect x="270" y="95" width="18" height="18" rx="3" fill="#3498db"/>
+                <text x="298" y="109" font-size="13" fill="#1e3a5f">Теоретичні — 30%</text>
+
+                <rect x="270" y="135" width="18" height="18" rx="3" fill="#27ae60"/>
+                <text x="298" y="149" font-size="13" fill="#1e3a5f">Емпіричні — 45%</text>
+
+                <rect x="270" y="175" width="18" height="18" rx="3" fill="#8e44ad"/>
+                <text x="298" y="189" font-size="13" fill="#1e3a5f">Математико-статистичні — 25%</text>
+            </svg>
+            <p class="diagram-caption">Рис. 4. Орієнтовний розподіл груп методів у типовому педагогічному дослідженні</p>
+        </div>
+
+        <h3><span class="dot"></span> Правила вибору методів</h3>
+        <ul class="task-list">
+            <li>Відповідність меті та завданням дослідження.</li>
+            <li>Адекватність віковим особливостям молодших школярів (ігрові, наочні, короткі за тривалістю форми).</li>
+            <li>Комплексність — поєднання теоретичних, емпіричних і статистичних методів.</li>
+            <li>Дотримання етичних норм: добровільність, конфіденційність, згода батьків.</li>
+            <li>Достатність вибірки та валідність інструментарію.</li>
+            <li>Можливість повторного застосування для динаміки результатів.</li>
+        </ul>
+
+    </section>
+
+    <!-- Контрольні питання -->
+    <section class="fade-in page-break">
+        <h2><span class="num">❓</span> Контрольні запитання</h2>
+        <ol class="questions">
+            <li>Дайте визначення поняття «методи науково-педагогічного дослідження» та назвіть їхні основні функції.</li>
+            <li>За якими критеріями класифікують методи науково-педагогічного дослідження? Наведіть приклад кожної групи.</li>
+            <li>Які теоретичні методи дослідження ви знаєте? Охарактеризуйте метод моделювання та наведіть приклад його застосування в дослідженні з початкової освіти.</li>
+            <li>Порівняйте метод спостереження та анкетування: у чому їхні переваги й обмеження?</li>
+            <li>Охарактеризуйте етапи педагогічного експерименту. Яке значення має констатувальний етап для подальшого дослідження?</li>
+            <li>Для чого в педагогічному дослідженні використовують математико-статистичні методи? Наведіть приклади статистичних критеріїв.</li>
+            <li>Які етичні вимоги слід дотримуватися під час застосування емпіричних методів у роботі з молодшими школярами?</li>
+            <li>Сформулюйте правила вибору методів дослідження та поясніть, чому комплексність є важливою умовою якісного дослідження.</li>
+        </ol>
+    </section>
+
+</div>
+
+<footer>
+    Основи науково-педагогічних досліджень · Лекційне заняття · «Методи науково-педагогічного дослідження»
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('section, .meta-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.08 });
+
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(14px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+    });
+</script>
+
+</body>
+</html>

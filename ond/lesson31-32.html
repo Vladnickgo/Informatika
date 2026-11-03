@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лекція № 3: Формулювання проблеми дослідження</title>
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --accent: #2980b9;
+            --accent-light: #eaf4fc;
+            --accent-soft: #f4f9fd;
+            --success: #27ae60;
+            --warning: #e67e22;
+            --purple: #8e44ad;
+            --bg: #f5f7fa;
+            --card: #ffffff;
+            --text: #2d3436;
+            --muted: #636e72;
+            --border: #dce4ec;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2980b9 100%);
+            color: #fff;
+            padding: 2.6rem 1.5rem 2.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -40%;
+            width: 180%;
+            height: 180%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, transparent 65%);
+            animation: pulse 9s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        header .lecture-num {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.7rem;
+            position: relative;
+            z-index: 1;
+            line-height: 1.35;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.8rem 1.2rem;
+        }
+
+        /* Мета-картка */
+        .meta-card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1.8rem;
+            border-left: 5px solid var(--accent);
+        }
+
+        .meta-card h2 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-card h2 .icon {
+            font-size: 1.3rem;
+        }
+
+        .meta-list {
+            list-style: none;
+        }
+
+        .meta-list li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .meta-list li::before {
+            content: '▸';
+            color: var(--accent);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .meta-list .label {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 105px;
+            flex-shrink: 0;
+        }
+
+        /* Секції */
+        section {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        section h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid var(--accent-light);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        section h2 .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 9px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-size: 1.08rem;
+            color: var(--primary);
+            margin: 1.4rem 0 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h3 .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            font-size: 0.97rem;
+        }
+
+        /* Визначення */
+        .definition {
+            background: linear-gradient(135deg, #eaf4fc 0%, #f4f9fd 100%);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            padding: 1rem 1.3rem;
+            margin: 1rem 0;
+            font-size: 0.96rem;
+        }
+
+        .definition strong {
+            color: var(--primary);
+        }
+
+        /* Таблиці */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.93rem;
+        }
+
+        thead {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            font-weight: 600;
+            font-size: 0.87rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        tbody tr:hover {
+            background: var(--accent-soft);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Приклад */
+        .example {
+            background: #fef9e7;
+            border-left: 4px solid var(--warning);
+            border-radius: 0 12px 12px 0;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .example::before {
+            content: 'Приклад';
+            display: inline-block;
+            background: var(--warning);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+        }
+
+        .example p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: #7e5109;
+            font-size: 0.94rem;
+        }
+
+        /* Список завдань */
+        .task-list {
+            list-style: none;
+            counter-reset: task;
+            margin: 0.8rem 0;
+        }
+
+        .task-list li {
+            counter-increment: task;
+            padding: 0.7rem 0.9rem 0.7rem 3rem;
+            position: relative;
+            background: #f8fafc;
+            border-radius: 9px;
+            margin-bottom: 0.5rem;
+            font-size: 0.94rem;
+            border-left: 3px solid var(--success);
+        }
+
+        .task-list li::before {
+            content: counter(task);
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--success);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        /* Об'єкт / предмет */
+        .obj-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .obj-card {
+            border-radius: 12px;
+            padding: 1.1rem 1.2rem;
+            border: 1px solid var(--border);
+        }
+
+        .obj-card.object {
+            background: #eaf4fc;
+            border-color: #c5dff0;
+        }
+
+        .obj-card.subject {
+            background: #f4ecf7;
+            border-color: #dcc6e8;
+        }
+
+        .obj-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .obj-card.object h4 {
+            color: #1a5276;
+        }
+
+        .obj-card.subject h4 {
+            color: #6c3483;
+        }
+
+        .obj-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
+        /* Контрольні питання */
+        .questions {
+            list-style: none;
+            counter-reset: q;
+        }
+
+        .questions li {
+            counter-increment: q;
+            padding: 0.9rem 1rem 0.9rem 3.2rem;
+            position: relative;
+            background: var(--accent-soft);
+            border-radius: 10px;
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .questions li::before {
+            content: 'Q' counter(q);
+            position: absolute;
+            left: 0.8rem;
+            top: 0.95rem;
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        /* Література */
+        .lit-list {
+            list-style: none;
+            counter-reset: lit;
+        }
+
+        .lit-list li {
+            counter-increment: lit;
+            padding: 0.7rem 0.8rem 0.7rem 2.8rem;
+            position: relative;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .lit-list li:last-child {
+            border-bottom: none;
+        }
+
+        .lit-list li::before {
+            content: counter(lit);
+            position: absolute;
+            left: 0.6rem;
+            top: 0.7rem;
+            width: 22px;
+            height: 22px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 1rem;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 640px) {
+            header h1 {
+                font-size: 1.3rem;
+            }
+
+            header .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem 0.7rem;
+            }
+
+            section {
+                padding: 1.2rem;
+            }
+
+            .meta-list .label {
+                min-width: 85px;
+                font-size: 0.88rem;
+            }
+
+            .obj-grid {
+                grid-template-columns: 1fr;
+            }
+
+            th,
+            td {
+                padding: 0.55rem 0.65rem;
+                font-size: 0.84rem;
+            }
+
+            section h2 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Анімація появи */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(14px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.08s;
+        }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.16s;
+        }
+
+        .fade-in:nth-child(4) {
+            animation-delay: 0.24s;
+        }
+
+        /* ====== ПРАВИЛА ДРУКУ ====== */
+        @media print {
+            body {
+                background: #fff;
+                font-size: 11.5pt;
+                line-height: 1.5;
+            }
+
+            header {
+                background: #1e3a5f !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 1.2rem 1rem;
+            }
+
+            header::before {
+                display: none;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0.5rem 0;
+            }
+
+            section,
+            .meta-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin-bottom: 1rem;
+                padding: 1rem 1.1rem;
+            }
+
+            .table-wrap,
+            .definition,
+            .example,
+            .obj-grid,
+            .task-list li,
+            .questions li,
+            .lit-list li {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Примусові розриви сторінок */
+            .page-break {
+                page-break-before: always;
+                break-before: page;
+            }
+
+            footer {
+                border-top: none;
+                padding: 0.5rem;
+                font-size: 8pt;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="lecture-num">ЛЕКЦІЙНЕ ЗАНЯТТЯ № 3</div>
+        <h1>Формулювання проблеми дослідження. Вибір теми, визначення мети, завдань, об'єкта та предмета дослідження
+        </h1>
+        <p class="subtitle">Методи науково-педагогічного дослідження</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Мета -->
+        <div class="meta-card fade-in">
+            <h2><span class="icon">🎯</span> Мета заняття</h2>
+            <ul class="meta-list">
+                <li><span class="label">Навчальна:</span> Вчити формулювати проблему, визначати мету, завдання, об'єкт та
+                    предмет дослідження.</li>
+                <li><span class="label">Розвивальна:</span> Розвиток здатності до структурування та планування дослідження.
+                </li>
+                <li><span class="label">Виховна:</span> Виховання цілеспрямованості та організованості.</li>
+                <li><span class="label">Обладнання:</span> інструкційні картки.</li>
+            </ul>
+        </div>
+
+        <!-- Література -->
+        <section class="fade-in">
+            <h2><span class="num">📚</span> Література</h2>
+            <ol class="lit-list">
+                <li>Пріма Р. М. Сучасна наукова стаття: технологія творчості. Науковий вісник. 2020. № 4 (408), с.
+                    99–103.</li>
+                <li>Лаппо В. В. Основи педагогічних досліджень. Івано-Франківськ: НАІР, 2016. 284 с.</li>
+                <li>Лимар Ю. М. Основи науково-педагогічних досліджень. Чернігів: ЧНПУ імені Т. Г. Шевченка, 2011. 56 с.
+                </li>
+            </ol>
+        </section>
+
+        <!-- 1. Проблема дослідження -->
+        <section class="fade-in">
+            <h2><span class="num">1</span> Формулювання проблеми дослідження</h2>
+
+            <div class="definition" style="display: flex;">
+                <p><strong>Проблема дослідження</strong> — це суперечність між існуючим станом певного явища та бажаним
+                    результатом.<br> Це ключове питання, на яке має відповісти дослідження.</p>
+                    <p>
+                        <img src="img01.png" width="200px" style="border-radius: 15%; box-shadow: var(--border) 4px 3px;">
+                    </p>
+                
+            </div>
+
+            <h3><span class="dot"></span> Вимоги до формулювання проблеми</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Вимога</th>
+                            <th>Пояснення</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Чітке формулювання</strong></td>
+                            <td>Проблема повинна бути сформульована ясно, конкретно та лаконічно.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Актуальність</strong></td>
+                            <td>Проблема має бути актуальною для сучасної науки та практики.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Наукова новизна</strong></td>
+                            <td>Дослідження має передбачати отримання нових знань або уточнення вже існуючих.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="example">
+                <p>«Недостатня ефективність використання інтерактивних методів навчання у початковій школі та
+                    необхідність розробки нових підходів до підвищення мотивації учнів до навчання».</p>
+            </div>
+        </section>
+
+        <!-- 2. Тема дослідження -->
+        <section class="fade-in">
+            <h2><span class="num">2</span> Вибір теми дослідження</h2>
+
+            <div class="definition">
+                <strong>Тема дослідження</strong> — це коротке формулювання загальної спрямованості дослідження. Вона
+                має бути логічно пов'язана з проблемою дослідження.
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Вимога</th>
+                            <th>Пояснення</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Конкретність</strong></td>
+                            <td>Тема має бути конкретною і відображати основний напрямок дослідження.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Актуальність</strong></td>
+                            <td>Тема має бути актуальною для сучасної педагогічної науки.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="example">
+                <p>«Формування мотивації до навчання у молодших школярів засобами інтерактивних методів».</p>
+            </div>
+        </section>
+
+        <!-- 3. Мета дослідження -->
+        <section class="fade-in">
+            <h2><span class="num">3</span> Визначення мети дослідження</h2>
+
+            <div class="definition">
+                <strong>Мета дослідження</strong> — це кінцевий результат, якого дослідник прагне досягти. Вона визначає
+                загальний напрямок дослідження.
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Вимога</th>
+                            <th>Пояснення</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Конкретність</strong></td>
+                            <td>Мета має бути сформульована чітко та конкретно, що дозволяє визначити напрямок
+                                дослідження і сформулювати конкретні завдання.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Досяжність</strong></td>
+                            <td>Мета має бути реальною та досяжною в рамках дослідження, що гарантує успіх і корисність
+                                результатів.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p
+                style="font-size:0.93rem; color:var(--muted); background:#f8fafc; padding:0.8rem 1rem; border-radius:9px; border-left:3px solid var(--warning);">
+                ⚠️ Якщо мета дослідження буде розмитою або недосяжною, дослідник ризикує витратити час і ресурси
+                даремно.
+            </p>
+
+            <div class="example">
+                <p>«Розробити та експериментально перевірити ефективність авторської програми використання інтерактивних
+                    методів навчання для підвищення мотивації учнів початкової школи».</p>
+            </div>
+        </section>
+
+        <!-- 4. Завдання дослідження -->
+        <section class="fade-in">
+            <h2><span class="num">4</span> Завдання дослідження</h2>
+
+            <div class="definition">
+                <strong>Завдання дослідження</strong> — це конкретні кроки, які необхідно виконати для досягнення мети
+                дослідження. Вони деталізують мету і визначають структуру дослідження.
+            </div>
+
+            <h3><span class="dot"></span> Вимоги до завдань</h3>
+            <ul style="list-style:none; margin:0.6rem 0;">
+                <li
+                    style="padding:0.5rem 0.8rem; background:#f8fafc; border-radius:8px; margin-bottom:0.4rem; border-left:3px solid var(--accent); font-size:0.94rem;">
+                    <strong>Логічність:</strong> завдання мають бути логічно пов'язані між собою і підпорядковані меті
+                    дослідження.
+                </li>
+                <li
+                    style="padding:0.5rem 0.8rem; background:#f8fafc; border-radius:8px; border-left:3px solid var(--accent); font-size:0.94rem;">
+                    <strong>Конкретність:</strong> завдання мають бути сформульовані чітко і конкретно.
+                </li>
+            </ul>
+
+            <h3><span class="dot"></span> Приклад завдань</h3>
+            <ol class="task-list">
+                <li>Проаналізувати сучасні дослідження щодо використання інтерактивних методів навчання в початковій
+                    школі.</li>
+                <li>Розробити авторську програму використання інтерактивних методів навчання.</li>
+                <li>Провести експериментальне дослідження ефективності розробленої програми.</li>
+                <li>Проаналізувати отримані результати та зробити висновки.</li>
+            </ol>
+        </section>
+
+        <!-- 5. Об'єкт і предмет -->
+        <section class="fade-in">
+            <h2><span class="num">5</span> Об'єкт і предмет дослідження</h2>
+
+            <div class="obj-grid">
+                <div class="obj-card object">
+                    <h4>🔵 Об'єкт дослідження</h4>
+                    <p>Більш широке поняття — клас явищ, процесів або відносин, які існують об'єктивно і підлягають
+                        дослідженню.</p>
+                </div>
+                <div class="obj-card subject">
+                    <h4>🟣 Предмет дослідження</h4>
+                    <p>Конкретна частина об'єкта, яка безпосередньо вивчається в дослідженні.</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p><strong>Об'єкт:</strong> процес навчання учнів початкової школи.<br>
+                    <strong>Предмет:</strong> формування мотивації до навчання учнів початкової школи засобами
+                    інтерактивних методів.
+                </p>
+            </div>
+        </section>
+
+        <!-- Контрольні питання -->
+        <section class="fade-in page-break">
+            <h2><span class="num">❓</span> Контрольні питання</h2>
+            <ol class="questions">
+                <li>Яка основна відмінність між проблемою дослідження та темою дослідження?</li>
+                <li>Чому важливо, щоб мета дослідження була конкретною і досяжною?</li>
+                <li>Які основні критерії вибору методів дослідження?</li>
+                <li>Які етичні аспекти слід враховувати при проведенні наукового дослідження, особливо якщо воно
+                    стосується людей (наприклад, учнів)?</li>
+            </ol>
+        </section>
+
+    </div>
+
+    <footer>
+        Методика науково-педагогічних досліджень · Лекційне заняття № 3
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = document.querySelectorAll('section, .meta-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.08 });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(14px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

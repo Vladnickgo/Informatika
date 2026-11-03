@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Команди для роботи з текстовими файлами</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef3f7;
+            color: #16212c;
+            line-height: 1.7;
+            padding: 5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 45px;
+        }
+
+        /* ===== Шапка навчального закладу ===== */
+        .college-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #cfe3d8;
+        }
+
+        .college-header .institution {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1f8a5b;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .college-header .discipline {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #145239;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== Заголовки ===== */
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #0f3d2e;
+            border-bottom: 4px solid #1f8a5b;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 1.55rem;
+            font-weight: 600;
+            color: #145239;
+            margin-top: 40px;
+            margin-bottom: 18px;
+            padding-left: 12px;
+            border-left: 6px solid #1f8a5b;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a6b46;
+            margin-top: 28px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1a6b46;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        /* ===== Текст ===== */
+        p {
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+        .meta-info {
+            background: #e7f4ee;
+            border-radius: 16px;
+            padding: 18px 24px;
+            margin-bottom: 28px;
+            border-left: 6px solid #1f8a5b;
+        }
+
+        .meta-info p {
+            margin-bottom: 6px;
+        }
+
+        .meta-info strong {
+            color: #0f3d2e;
+        }
+
+        /* ===== Списки ===== */
+        ul,
+        ol {
+            margin-left: 28px;
+            margin-bottom: 18px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* ===== Код / команди ===== */
+        code,
+        .cmd {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #1e2b36;
+            color: #b8f0d2;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.92rem;
+            white-space: nowrap;
+        }
+
+        .cmd-block {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #1e2b36;
+            color: #d4f5e5;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 14px 0 20px;
+            overflow-x: auto;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-left: 5px solid #1f8a5b;
+            white-space: pre-wrap;
+        }
+
+        .cmd-block .comment {
+            color: #7fa896;
+            font-style: italic;
+        }
+
+        /* ===== Таблиця ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 25px 0 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            font-size: 0.95rem;
+            min-width: 600px;
+        }
+
+        thead {
+            background: #0f3d2e;
+            color: #ffffff;
+        }
+
+        th {
+            padding: 14px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #dce9e2;
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: #f2faf6;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ===== Блоки завдань ===== */
+        .task-box {
+            background: #f1faf5;
+            border: 2px dashed #1f8a5b;
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin: 30px 0 20px;
+        }
+
+        .task-box h3 {
+            margin-top: 0;
+            color: #0f3d2e;
+        }
+
+        .task-box ol {
+            margin-bottom: 0;
+        }
+
+        /* ===== Рівні складності ===== */
+        .level {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            border: 2px solid #cfe3d8;
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e7f4ee;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .level-badge.basic {
+            background: #1f8a5b;
+        }
+
+        .level-badge.medium {
+            background: #c98a1a;
+        }
+
+        .level-badge.advanced {
+            background: #b03a2e;
+        }
+
+        .level-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0f3d2e;
+        }
+
+        .level-time {
+            margin-left: auto;
+            font-size: 0.85rem;
+            color: #5a6f7e;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .level ol,
+        .level ul {
+            margin-bottom: 0;
+        }
+
+        /* ===== Контрольні запитання ===== */
+        .questions {
+            background: #fdf8ec;
+            border: 2px solid #e0b64a;
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin: 30px 0 20px;
+        }
+
+        .questions h3 {
+            margin-top: 0;
+            color: #8a6410;
+        }
+
+        .questions ol {
+            margin-bottom: 0;
+        }
+
+        /* ===== Виноски/виділення ===== */
+        .highlight {
+            background: #fdf8ec;
+            border-left: 4px solid #e0b64a;
+            padding: 14px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight p {
+            margin-bottom: 0;
+        }
+
+        .highlight-green {
+            background: #e7f4ee;
+            border-left: 4px solid #1f8a5b;
+            padding: 14px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-green p {
+            margin-bottom: 6px;
+        }
+
+        .highlight-green p:last-child {
+            margin-bottom: 0;
+        }
+
+        .note {
+            background: #e7f4ee;
+            border-left: 4px solid #1f8a5b;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        /* ===== Форма звіту ===== */
+        .report-form {
+            background: #f7fafc;
+            border: 2px solid #1f8a5b;
+            border-radius: 18px;
+            padding: 28px 30px;
+            margin: 30px 0 20px;
+        }
+
+        .report-form h3 {
+            margin-top: 0;
+            color: #0f3d2e;
+            border-bottom: 2px solid #cfe3d8;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #145239;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #cfe3d8;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: #16212c;
+            background: #ffffff;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1f8a5b;
+            box-shadow: 0 0 0 3px rgba(31, 138, 91, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1 1 200px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding-top: 4px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .radio-group input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1f8a5b;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            background: #1f8a5b;
+            color: #ffffff;
+            padding: 12px 34px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 8px;
+        }
+
+        .btn-submit:hover {
+            background: #166b46;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .form-hint {
+            font-size: 0.85rem;
+            color: #5a6f7e;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* ===== Адаптивність ===== */
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 24px 18px;
+                border-radius: 18px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .meta-info,
+            .task-box,
+            .questions,
+            .level,
+            .report-form {
+                padding: 16px 16px;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            td,
+            th {
+                padding: 8px 10px;
+            }
+
+            .cmd-block {
+                font-size: 0.85rem;
+                padding: 12px 14px;
+            }
+
+            .level-header {
+                flex-wrap: wrap;
+            }
+
+            .level-time {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        /* ===== Примусові розриви сторінок ===== */
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+
+        /* =================================================================
+           ОПТИМІЗАЦІЯ ДЛЯ ДРУКУ / ЗБЕРЕЖЕННЯ В PDF
+           Кольори збережено завдяки print-color-adjust: exact
+           ================================================================= */
+        @media print {
+
+            *,
+            *::before,
+            *::after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            body {
+                background: #eef3f7;
+                padding: 0;
+                font-size: 11pt;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 20px 24px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            h1 {
+                font-size: 18pt;
+                color: #0f3d2e;
+                border-bottom: 3px solid #1f8a5b;
+            }
+
+            h2 {
+                font-size: 14pt;
+                color: #145239;
+                border-left: 5px solid #1f8a5b;
+                margin-top: 20pt;
+            }
+
+            h3 {
+                font-size: 12pt;
+                color: #1a6b46;
+            }
+
+            h4 {
+                font-size: 11pt;
+                color: #1a6b46;
+            }
+
+            .college-header {
+                border-bottom: 2px solid #cfe3d8;
+            }
+
+            .college-header .institution {
+                color: #1f8a5b;
+            }
+
+            .college-header .discipline {
+                color: #145239;
+            }
+
+            .meta-info {
+                background: #e7f4ee !important;
+                border-left: 5px solid #1f8a5b !important;
+            }
+
+            .highlight {
+                background: #fdf8ec !important;
+                border-left: 4px solid #e0b64a !important;
+            }
+
+            .highlight-green {
+                background: #e7f4ee !important;
+                border-left: 4px solid #1f8a5b !important;
+            }
+
+            .note {
+                background: #e7f4ee !important;
+                border-left: 4px solid #1f8a5b !important;
+            }
+
+            .task-box {
+                background: #f1faf5 !important;
+                border: 2px dashed #1f8a5b !important;
+            }
+
+            .questions {
+                background: #fdf8ec !important;
+                border: 2px solid #e0b64a !important;
+            }
+
+            .questions h3 {
+                color: #8a6410;
+            }
+
+            .level {
+                background: #ffffff !important;
+                border: 2px solid #cfe3d8 !important;
+            }
+
+            .level-badge.basic {
+                background: #1f8a5b !important;
+            }
+
+            .level-badge.medium {
+                background: #c98a1a !important;
+            }
+
+            .level-badge.advanced {
+                background: #b03a2e !important;
+            }
+
+            .report-form {
+                background: #f7fafc !important;
+                border: 2px solid #1f8a5b !important;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                border: 1px solid #999;
+                background: #ffffff !important;
+            }
+
+            code,
+            .cmd {
+                background: #1e2b36 !important;
+                color: #b8f0d2 !important;
+            }
+
+            .cmd-block {
+                background: #1e2b36 !important;
+                color: #d4f5e5 !important;
+                border-left: 5px solid #1f8a5b !important;
+            }
+
+            table {
+                page-break-inside: avoid;
+                font-size: 10pt;
+            }
+
+            thead {
+                background: #0f3d2e !important;
+                color: #ffffff !important;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #dce9e2;
+                padding: 8px 10px;
+            }
+
+            tbody tr:hover {
+                background: transparent;
+            }
+
+            p,
+            li {
+                orphans: 3;
+                widows: 3;
+            }
+
+            ul,
+            ol {
+                page-break-inside: avoid;
+            }
+
+            .level,
+            .task-box,
+            .questions,
+            .report-form,
+            .meta-info,
+            .highlight,
+            .highlight-green,
+            .note {
+                page-break-inside: avoid;
+            }
+
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: #145239;
+                text-decoration: none;
+            }
+
+            .page-break {
+                page-break-before: always;
+                break-before: page;
+            }
+
+            .table-wrap {
+                box-shadow: none;
+            }
+
+            .btn-submit {
+                display: none;
+            }
+
+            .footer {
+                border-top: 1px solid #dce9e2;
+                color: #5a6f7e;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Шапка навчального закладу -->
+        <header class="college-header">
+            <p class="institution">📖 КЗ СОР «Путивльський педагогічний фаховий коледж імені С.В. Руднєва»</p>
+            <p class="discipline">Основи операційних систем</p>
+        </header>
+
+        <!-- Заголовок -->
+        <h1>Команди для роботи з текстовими файлами</h1>
+
+        <!-- Мета та обладнання -->
+        <div class="meta-info">
+            <p><strong>Тема:</strong> Команди для роботи з текстовими файлами. Вивчення команд для перегляду,
+                редагування та створення текстових файлів. Використання команди <code>find</code> для пошуку інформації
+                у текстових файлах.</p>
+            <p><strong>Мета:</strong> ознайомити з командами <code>type</code>, <code>more</code>, <code>find</code>,
+                <code>copy con</code>, <code>edit</code> для роботи з текстовими файлами в командному рядку. Розвивати
+                навички пошуку та фільтрації текстової інформації за допомогою команди <code>find</code> та шаблонів.
+                Виховувати інформаційну грамотність та вміння ефективно працювати з текстовими даними.</p>
+            <p><strong>Обладнання:</strong> інструкційні картки, персональні комп'ютери.</p>
+        </div>
+
+        <!-- Література -->
+        <h2>Література</h2>
+        <ul>
+            <li>Микитишин А. Г., Чихіра І. В. Операційні системи : консп. лекц. Тернопіль : ТНТУ імені Івана Пулюя,
+                2016.</li>
+            <li>Погребняк Б. І., Булаєнко М. В. Операційні системи : навч. посіб. Харків. нац. ун-т міськ. госп-ва
+                ім. О. М. Бекетова. Харків : ХНУМГ ім. О. М. Бекетова, 2018.</li>
+            <li>Сільвестр В., Гансен П. Основи операційних систем. Київ : Нова Книга, 2016.</li>
+        </ul>
+
+        <!-- Хід заняття -->
+        <h2 class="page-break">Хід заняття</h2>
+
+        <h3>Теоретичні відомості</h3>
+
+        <p>У командному рядку Windows (cmd) для роботи з текстовими файлами використовується низка вбудованих команд. Вони
+            дозволяють створювати, переглядати, редагувати та шукати інформацію у файлах без графічного інтерфейсу.</p>
+
+        <h4>Основні команди для роботи з текстовими файлами</h4>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Команда</th>
+                        <th>Призначення</th>
+                        <th>Приклад</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>type</code></td>
+                        <td>Виведення вмісту текстового файлу на екран</td>
+                        <td><code>type readme.txt</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>more</code></td>
+                        <td>Посторінковий перегляд вмісту файлу</td>
+                        <td><code>more readme.txt</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>find</code></td>
+                        <td>Пошук рядка (слова, фрази) у файлі</td>
+                        <td><code>find "звіт" data.txt</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>copy con</code></td>
+                        <td>Створення текстового файлу з клавіатури</td>
+                        <td><code>copy con note.txt</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>edit</code></td>
+                        <td>Вбудований текстовий редактор (за наявності)</td>
+                        <td><code>edit note.txt</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>del</code></td>
+                        <td>Видалення файлу</td>
+                        <td><code>del note.txt</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>ren</code></td>
+                        <td>Перейменування файлу</td>
+                        <td><code>ren note.txt note2.txt</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Команда type</h4>
+        <p>Виводить вміст текстового файлу на екран. Синтаксис:</p>
+        <div class="cmd-block">TYPE [шлях\]&lt;ім'я файла&gt;</div>
+        <p>Якщо файл великий, вміст «пролітає» дуже швидко. Для посторінкового перегляду використовують команду
+            <code>more</code>.</p>
+
+        <h4 class="page-break">Команда more</h4>
+        <p>Виводить вміст файлу посторінково — після заповнення екрана чекає натискання будь-якої клавіші.</p>
+        <div class="cmd-block">MORE [шлях\]&lt;ім'я файла&gt;</div>
+
+        <h4>Команда find</h4>
+        <p>Шукає заданий рядок у файлі або в потоці даних. Синтаксис:</p>
+        <div class="cmd-block">FIND [/V] [/C] [/N] [/I] "рядок" [шлях\]&lt;ім'я файла&gt;</div>
+        <p>Ключі:</p>
+        <ul>
+            <li><code>/V</code> — виводить рядки, які <strong>не</strong> містять заданий рядок;</li>
+            <li><code>/C</code> — виводить лише кількість рядків, що містять рядок;</li>
+            <li><code>/N</code> — виводить номери рядків разом із вмістом;</li>
+            <li><code>/I</code> — ігнорує регістр літер під час пошуку.</li>
+        </ul>
+
+        <div class="highlight">
+            <p><strong>Приклад:</strong> <code>find /N /I "звіт" data.txt</code> — знайде всі рядки, що містять слово
+                «звіт» (у будь-якому регістрі), і покаже їхні номери.</p>
+        </div>
+
+        <h4>Команда copy con</h4>
+        <p>Створює новий текстовий файл безпосередньо з клавіатури:</p>
+        <div class="cmd-block">COPY CON &lt;ім'я файла&gt;</div>
+        <p>Після введення команди набирають текст, а завершують введення натисканням <kbd>Ctrl</kbd>+<kbd>Z</kbd> та
+            <kbd>Enter</kbd>.</p>
+
+        <h4 class="page-break">Команда edit</h4>
+        <p>Вбудований текстовий редактор MS-DOS (у сучасних версіях Windows може бути відсутнім). Дозволяє створювати
+            та редагувати файли:</p>
+        <div class="cmd-block">EDIT [&lt;ім'я файла&gt;]</div>
+
+        <div class="note">
+            У сучасних Windows команда <code>edit</code> часто недоступна. Замість неї можна використовувати
+            <code>notepad &lt;ім'я файла&gt;</code>.
+        </div>
+
+        <h4>Команда findstr (розширений пошук)</h4>
+        <p>Сучасна альтернатива <code>find</code> з підтримкою регулярних виразів та шаблонів:</p>
+        <div class="cmd-block">FINDSTR [/I] [/N] "шаблон" &lt;ім'я файла&gt;</div>
+        <p>Наприклад, <code>findstr /I "звіт.*2024" data.txt</code> знайде рядки, що містять «звіт» та «2024».</p>
+
+        <!-- Практичні завдання -->
+        <h2 class="page-break">Практичні завдання</h2>
+
+        <p>Завдання поділені на три рівні складності. Загальний час виконання — до 30 хвилин. Виконуйте завдання
+            послідовно, починаючи з базового рівня.</p>
+
+        <!-- Базовий рівень -->
+        <div class="level">
+            <div class="level-header">
+                <span class="level-badge basic">Базовий</span>
+                <span class="level-title">Знайомство з командами перегляду та створення</span>
+                <span class="level-time">⏱ 10 хв</span>
+            </div>
+            <ol>
+                <li>Відкрийте командний рядок (<kbd>Win</kbd>+<kbd>R</kbd> → <code>cmd</code>).</li>
+                <li>Перейдіть у власну папку (наприклад, <code>cd %USERPROFILE%</code>).</li>
+                <li>Створіть новий текстовий файл <code>info.txt</code> за допомогою команди <code>copy con</code>.
+                    Введіть 3–4 рядки довільного тексту (наприклад, своє прізвище, ім'я, групу). Завершіть введення
+                    <kbd>Ctrl</kbd>+<kbd>Z</kbd> та <kbd>Enter</kbd>.</li>
+                <li>Перегляньте вміст файлу командою <code>type info.txt</code>.</li>
+                <li>Перегляньте вміст файлу посторінково командою <code>more info.txt</code>.</li>
+                <li>Скопіюйте файл у новий <code>info_backup.txt</code> командою <code>copy</code>.</li>
+                <li>Перейменуйте <code>info_backup.txt</code> у <code>backup.txt</code> командою <code>ren</code>.</li>
+            </ol>
+        </div>
+
+        <!-- Середній рівень -->
+        <div class="level">
+            <div class="level-header">
+                <span class="level-badge medium">Середній</span>
+                <span class="level-title">Пошук та фільтрація за допомогою find</span>
+                <span class="level-time">⏱ 10 хв</span>
+            </div>
+            <ol>
+                <li>Створіть файл <code>students.txt</code> командою <code>copy con</code> з таким вмістом (кожен рядок
+                    — окремий запис):
+                    <div class="cmd-block">Іваненко Іван, група 21
+Петренко Петро, група 21
+Сидоренко Оксана, група 22
+Коваленко Марія, група 21
+Шевченко Тарас, група 22</div>
+                </li>
+                <li>Знайдіть усі рядки, що містять «група 21», командою <code>find "група 21" students.txt</code>.</li>
+                <li>Знайдіть усі рядки, що містять «Петренко», із номерами рядків: <code>find /N "Петренко"
+                        students.txt</code>.</li>
+                <li>Порахуйте кількість рядків зі словом «група»: <code>find /C "група" students.txt</code>.</li>
+                <li>Знайдіть рядки, що <strong>не</strong> містять «група 22»: <code>find /V "група 22"
+                        students.txt</code>.</li>
+                <li>Виконайте пошук без урахування регістру: <code>find /I "іван" students.txt</code>.</li>
+            </ol>
+        </div>
+
+        <!-- Просунутий рівень -->
+        <div class="level">
+            <div class="level-header">
+                <span class="level-badge advanced">Просунутий</span>
+                <span class="level-title">Комбінування команд і шаблонів</span>
+                <span class="level-time">⏱ 10 хв</span>
+            </div>
+            <ol>
+                <li>Створіть файл <code>report.txt</code> з кількома рядками, що містять дати у форматі
+                    <code>2024-01-15</code>, <code>2024-02-20</code>, <code>2023-12-05</code> та довільний текст.</li>
+                <li>Знайдіть усі рядки, що містять «2024», командою <code>find "2024" report.txt</code>.</li>
+                <li>Скомбінуйте <code>find</code> із перенаправленням виводу у файл:
+                    <div class="cmd-block">find "2024" report.txt &gt; result.txt</div>
+                </li>
+                <li>Перегляньте <code>result.txt</code> командою <code>type</code>.</li>
+                <li>Використайте <code>findstr</code> для пошуку рядків, що починаються з «2024»:
+                    <code>findstr /B "2024" report.txt</code>.</li>
+                <li>Знайдіть рядки, що містять або «звіт», або «report» (без урахування регістру):
+                    <code>findstr /I "звіт report" report.txt</code>.</li>
+                <li>Створіть файл <code>final.txt</code>, об'єднавши <code>info.txt</code> та <code>students.txt</code>:
+                    <code>copy info.txt + students.txt final.txt</code>. Перегляньте результат.</li>
+                <li>Видаліть тимчасові файли <code>result.txt</code> та <code>backup.txt</code> командою
+                    <code>del</code>.</li>
+            </ol>
+        </div>
+
+        <div class="highlight-green">
+            <p><strong>Порада:</strong> якщо команда <code>find</code> не знаходить кириличні символи, спробуйте
+                <code>findstr</code> або змініть кодування консолі командою <code>chcp 65001</code> (UTF-8).</p>
+        </div>
+
+        <!-- Контрольні запитання -->
+        <div class="questions page-break">
+            <h3>Контрольні запитання</h3>
+            <ol>
+                <li>Яка різниця між командами <code>type</code> та <code>more</code>?</li>
+                <li>Як створити текстовий файл безпосередньо з командного рядка?</li>
+                <li>Яку комбінацію клавіш використовують для завершення введення під час <code>copy con</code>?</li>
+                <li>Що робить ключ <code>/N</code> у команді <code>find</code>?</li>
+                <li>Як знайти рядки, що <strong>не</strong> містять задане слово?</li>
+                <li>Як порахувати кількість рядків зі словом у файлі?</li>
+                <li>Чим відрізняється <code>findstr</code> від <code>find</code>?</li>
+                <li>Як перенаправити результат пошуку в окремий файл?</li>
+                <li>Як об'єднати вміст двох текстових файлів в один?</li>
+                <li>Чому команда <code>edit</code> може бути недоступною в сучасних Windows?</li>
+            </ol>
+        </div>
+
+        <!-- Форма звіту -->
+        <div class="report-form page-break">
+            <h3>📋 Форма звіту про виконання практичного заняття</h3>
+
+            <form action="#" method="post">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="student-name">Прізвище та ім'я студента *</label>
+                        <input type="text" id="student-name" name="student-name" placeholder="Наприклад: Іваненко Іван"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="group">Група *</label>
+                        <input type="text" id="group" name="group" placeholder="Наприклад: 4-А" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">Дата виконання *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="level">Виконаний рівень складності *</label>
+                        <select id="level" name="level" required>
+                            <option value="">— оберіть —</option>
+                            <option value="basic">Базовий</option>
+                            <option value="medium">Середній</option>
+                            <option value="advanced">Просунутий</option>
+                            <option value="all">Усі рівні</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Чи вдалося виконати всі завдання? *</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="success" value="yes" required> Так, повністю</label>
+                        <label><input type="radio" name="success" value="partly"> Частково</label>
+                        <label><input type="radio" name="success" value="no"> Ні</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="commands">Які команди використовували у роботі? *</label>
+                    <textarea id="commands" name="commands"
+                        placeholder="Наприклад: type, more, find, findstr, copy con, copy, ren, del... Приєднайте скріншоти виконаних завдань"
+                        required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="results">Отримані результати *</label>
+                    <textarea id="results" name="results"
+                        placeholder="Опишіть, що ви отримали в результаті виконання завдань: які файли створили, які результати пошуку, які труднощі виникли..."
+                        required></textarea>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="difficulties">Труднощі та запитання</label>
+                    <textarea id="difficulties" name="difficulties"
+                        placeholder="Якщо під час виконання виникли труднощі або залишилися запитання — опишіть їх тут..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="conclusions">Висновки *</label>
+                    <textarea id="conclusions" name="conclusions"
+                        placeholder="Які навички ви набули? Що нового дізналися про роботу з текстовими файлами в командному рядку?"
+                        required></textarea>
+                </div>
+
+             </form>
+        </div>
+
+        
+    </div>
+</body>
+
+</html>

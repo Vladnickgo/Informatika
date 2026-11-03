@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основи роботи з командним рядком Windows</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef3f7;
+            color: #16212c;
+            line-height: 1.7;
+            padding: 5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 45px;
+        }
+
+        /* ===== Шапка навчального закладу ===== */
+        .college-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #cfe3d8;
+        }
+
+        .college-header .institution {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1f8a5b;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .college-header .discipline {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #145239;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== Заголовки ===== */
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #0f3d2e;
+            border-bottom: 4px solid #1f8a5b;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 1.55rem;
+            font-weight: 600;
+            color: #145239;
+            margin-top: 40px;
+            margin-bottom: 18px;
+            padding-left: 12px;
+            border-left: 6px solid #1f8a5b;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a6b46;
+            margin-top: 28px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1a6b46;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        /* ===== Текст ===== */
+        p {
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+        .meta-info {
+            background: #e7f4ee;
+            border-radius: 16px;
+            padding: 18px 24px;
+            margin-bottom: 28px;
+            border-left: 6px solid #1f8a5b;
+        }
+
+        .meta-info p {
+            margin-bottom: 6px;
+        }
+
+        .meta-info strong {
+            color: #0f3d2e;
+        }
+
+        /* ===== Списки ===== */
+        ul,
+        ol {
+            margin-left: 28px;
+            margin-bottom: 18px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* ===== Код / команди ===== */
+        code,
+        .cmd {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #1e2b36;
+            color: #b8f0d2;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.92rem;
+            white-space: nowrap;
+        }
+
+        .cmd-block {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #1e2b36;
+            color: #d4f5e5;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 14px 0 20px;
+            overflow-x: auto;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-left: 5px solid #1f8a5b;
+            white-space: pre-wrap;
+        }
+
+        .cmd-block .comment {
+            color: #7fa896;
+            font-style: italic;
+        }
+
+        /* ===== Таблиця ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 25px 0 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            font-size: 0.95rem;
+            min-width: 600px;
+        }
+
+        thead {
+            background: #0f3d2e;
+            color: #ffffff;
+        }
+
+        th {
+            padding: 14px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #dce9e2;
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: #f2faf6;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ===== Блоки завдань ===== */
+        .task-box {
+            background: #f1faf5;
+            border: 2px dashed #1f8a5b;
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin: 30px 0 20px;
+        }
+
+        .task-box h3 {
+            margin-top: 0;
+            color: #0f3d2e;
+        }
+
+        .task-box ol {
+            margin-bottom: 0;
+        }
+
+        /* ===== Контрольні запитання ===== */
+        .questions {
+            background: #fdf8ec;
+            border: 2px solid #e0b64a;
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin: 30px 0 20px;
+        }
+
+        .questions h3 {
+            margin-top: 0;
+            color: #8a6410;
+        }
+
+        .questions ol {
+            margin-bottom: 0;
+        }
+
+        /* ===== Виноски/виділення ===== */
+        .highlight {
+            background: #fdf8ec;
+            border-left: 4px solid #e0b64a;
+            padding: 14px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight p {
+            margin-bottom: 0;
+        }
+
+        .highlight-green {
+            background: #e7f4ee;
+            border-left: 4px solid #1f8a5b;
+            padding: 14px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-green p {
+            margin-bottom: 6px;
+        }
+
+        .highlight-green p:last-child {
+            margin-bottom: 0;
+        }
+
+        .note {
+            background: #e7f4ee;
+            border-left: 4px solid #1f8a5b;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        /* ===== Рядок із зображенням і текстом ===== */
+        .img-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 18px;
+        }
+
+        .img-row .text-col {
+            flex: 1 1 55%;
+        }
+
+        .img-row .img-col {
+            flex: 1 1 45%;
+        }
+
+        .img-row img {
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            display: block;
+        }
+
+        /* ===== Адаптивність ===== */
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 24px 18px;
+                border-radius: 18px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .meta-info,
+            .task-box,
+            .questions {
+                padding: 16px 16px;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            td,
+            th {
+                padding: 8px 10px;
+            }
+
+            .cmd-block {
+                font-size: 0.85rem;
+                padding: 12px 14px;
+            }
+
+            .img-row {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .img-row .text-col,
+            .img-row .img-col {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* ===== Примусові розриви сторінок ===== */
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+
+        /* =================================================================
+           ОПТИМІЗАЦІЯ ДЛЯ ДРУКУ / ЗБЕРЕЖЕННЯ В PDF
+           Головне: НЕ перефарбовуємо елементи — зберігаємо кольори.
+           Додаємо print-color-adjust: exact для всіх кольорових блоків.
+           ================================================================= */
+        @media print {
+
+            /* Примусово зберігати кольори фону та тексту */
+            *,
+            *::before,
+            *::after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            body {
+                background: #eef3f7;
+                padding: 0;
+                font-size: 11pt;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 20px 24px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            /* Заголовки — зберігаємо кольори */
+            h1 {
+                font-size: 18pt;
+                color: #0f3d2e;
+                border-bottom: 3px solid #1f8a5b;
+            }
+
+            h2 {
+                font-size: 14pt;
+                color: #145239;
+                border-left: 5px solid #1f8a5b;
+                margin-top: 20pt;
+            }
+
+            h3 {
+                font-size: 12pt;
+                color: #1a6b46;
+            }
+
+            h4 {
+                font-size: 11pt;
+                color: #1a6b46;
+            }
+
+            /* Шапка коледжу */
+            .college-header {
+                border-bottom: 2px solid #cfe3d8;
+            }
+
+            .college-header .institution {
+                color: #1f8a5b;
+            }
+
+            .college-header .discipline {
+                color: #145239;
+            }
+
+            /* Кольорові блоки — зберігаємо кольори */
+            .meta-info {
+                background: #e7f4ee !important;
+                border-left: 5px solid #1f8a5b !important;
+            }
+
+            .highlight {
+                background: #fdf8ec !important;
+                border-left: 4px solid #e0b64a !important;
+            }
+
+            .highlight-green {
+                background: #e7f4ee !important;
+                border-left: 4px solid #1f8a5b !important;
+            }
+
+            .note {
+                background: #e7f4ee !important;
+                border-left: 4px solid #1f8a5b !important;
+            }
+
+            .task-box {
+                background: #f1faf5 !important;
+                border: 2px dashed #1f8a5b !important;
+            }
+
+            .questions {
+                background: #fdf8ec !important;
+                border: 2px solid #e0b64a !important;
+            }
+
+            .questions h3 {
+                color: #8a6410;
+            }
+
+            /* Кодові блоки — темний фон зберігаємо */
+            code,
+            .cmd {
+                background: #1e2b36 !important;
+                color: #b8f0d2 !important;
+            }
+
+            .cmd-block {
+                background: #1e2b36 !important;
+                color: #d4f5e5 !important;
+                border-left: 5px solid #1f8a5b !important;
+            }
+
+            /* Таблиця */
+            table {
+                page-break-inside: avoid;
+                font-size: 10pt;
+            }
+
+            thead {
+                background: #0f3d2e !important;
+                color: #ffffff !important;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #dce9e2;
+                padding: 8px 10px;
+            }
+
+            tbody tr:hover {
+                background: transparent;
+            }
+
+            /* Списки та текст */
+            p,
+            li {
+                orphans: 3;
+                widows: 3;
+            }
+
+            ul,
+            ol {
+                page-break-inside: avoid;
+            }
+
+            /* Зображення */
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+
+            /* Посилання */
+            a {
+                color: #145239;
+                text-decoration: none;
+            }
+
+            /* Розриви сторінок */
+            .page-break {
+                page-break-before: always;
+                break-before: page;
+            }
+
+            /* Прибираємо тіні, які при друку виглядають брудно */
+            .table-wrap {
+                box-shadow: none;
+            }
+
+            /* Підвал */
+            .footer {
+                border-top: 1px solid #dce9e2;
+                color: #5a6f7e;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Шапка навчального закладу -->
+        <header class="college-header">
+            <p class="institution">📖 КЗ СОР «Путивльський педагогічний фаховий коледж імені С.В. Руднєва»</p>
+            <p class="discipline">Основи операційних систем</p>
+        </header>
+
+        <!-- Заголовок -->
+        <h1>Основи роботи з командним рядком Windows</h1>
+
+        <!-- Мета та обладнання -->
+        <div class="meta-info">
+            <p><strong>Тема:</strong> Основи роботи з командним рядком Windows. Використання основних команд: cd, dir,
+                mkdir, rmdir.</p>
+            <p><strong>Мета:</strong> набуття практичних навичок створення, перегляду вмісту, копіювання та знищення
+                каталогів та файлів, пошуку файлів з допомогою команд MS DOS; розвивати вміння використовувати програмне
+                забезпечення в практичній діяльності вчителя; виховувати уважність, цілеспрямованість.</p>
+            <p><strong>Обладнання:</strong> інструкційні картки, персональні комп'ютери.</p>
+        </div>
+
+        <!-- Теоретичні відомості -->
+        <h2 class="page-break">Теоретичні відомості</h2>
+
+        <div class="img-row">
+            <div class="text-col">
+                <p><strong>Файлова система</strong> — сукупність папок і файлів, що зберігаються на зовнішніх носіях ПК.
+                </p>
+                <p>При такій деревоподібній файловій структурі треба вказувати повне ім'я файлу:</p>
+            </div>
+            <div class="img-col">
+                <img src="img02.jpg" alt="Деревоподібна файлова структура">
+            </div>
+        </div>
+
+        <div class="cmd-block">[&lt;диск&gt;:] [\&lt;шлях&gt;\] &lt;ім'я файла&gt;</div>
+
+        <p>де <em>шлях (маршрут)</em> — це ланцюжок підпорядкованих каталогів, роз'єднаних символом «\».</p>
+
+        <div class="highlight">
+            <p><strong>Дужки:</strong></p>
+            <ol>
+                <li>У кутові дужки <code>&lt; &gt;</code> беруть параметри, при написанні конкретних команд їх
+                    опускають.</li>
+                <li>У квадратні дужки <code>[ ]</code> беруть параметри, які можуть бути чи не бути у команді.</li>
+                <li>Фігурні дужки <code>{ }</code> використовують у разі, якщо використовується альтернативні параметри
+                    — або один, або інший.</li>
+            </ol>
+        </div>
+
+        <h3 class="page-break">Команди операційної системи MS-DOS</h3>
+
+        <div class="img-row">
+            <div class="img-col">
+                <img src="img03.jpg" alt="Вікно командного рядка">
+            </div>
+            <div class="text-col">
+                <p>Діалог користувача з ПК здійснюється з допомогою певних команд, які набираються у командному рядку.
+                </p>
+                <p>Після завантаження ПК операційна система на екрані видає запрошення, у якому міститься інформація
+                    про поточний диск, каталог і закінчується символом «&gt;».</p>
+                <div class="cmd-block">C:\Users\Documents&gt;_</div>
+            </div>
+        </div>
+
+        <h3>Дії з каталогами</h3>
+        <p>Усі дії з файлами та каталогами в операційній системі здійснюються за допомогою команд, які умовно можна
+            поділити на:</p>
+
+        <div class="highlight-green">
+            <p>1️⃣ Сервісні;</p>
+            <p>2️⃣ Команди для роботи з дисками;</p>
+            <p>3️⃣ Команди для роботи з каталогами (підкаталогами);</p>
+            <p>4️⃣ Команди роботи з файлами.</p>
+        </div>
+
+        <p>Команди можна набирати як великими, так і маленькими літерами.</p>
+        <p>Після команди перед параметрами ставиться пропуск.</p>
+        <p>Ввести команду — це набрати команду з параметрами у командному рядку та натиснути клавішу вводу
+            (Enter).</p>
+
+        <p>Про кожну команду можна отримати довідку:</p>
+        <div class="cmd-block">&lt;ім'я команди&gt; /?</div>
+
+        <!-- Сервісні команди -->
+        <h4 class="page-break">Сервісні команди</h4>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Призначення</th>
+                        <th>Команда</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Очищення екрану</td>
+                        <td><code>cls</code></td>
+                    </tr>
+                    <tr>
+                        <td>Виведення і зміна часу</td>
+                        <td><code>time [&lt;час&gt;]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Виведення і зміна дати</td>
+                        <td><code>date [&lt;дата&gt;]</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Команди для роботи з дисками -->
+        <h4>Команди для роботи з дисками</h4>
+        <p>Зміна логічного диска:</p>
+        <div class="cmd-block">&lt;ім'я диска&gt;:</div>
+
+        <p>Для отримання інформації про диск треба використовувати команду перегляду вмісту каталогів:</p>
+        <div class="cmd-block">DIR [шлях\][&lt;ім'я каталога або файла&gt;][/ключі]</div>
+
+        <p>де ключі:</p>
+        <ul>
+            <li><code>/P</code> — забезпечує посторінкове виведення каталогу на екран монітора, для переходу до іншої
+                сторінки потрібно натиснути будь-яку клавішу;</li>
+            <li><code>/W</code> — забезпечує виведення списку файлів у п'яти колонках по ширині екрана, в цьому випадку
+                на екран виводяться лише імена та розширення файлів;</li>
+            <li><code>/ON</code> — забезпечує виведення файлів за іменем по алфавіту;</li>
+            <li><code>/OS</code> — забезпечує виведення файлів за розміром, починаючи з меншого розміру;</li>
+            <li><code>/OD</code> — забезпечує виведення файлів за датою створення, починаючи з більш старих.</li>
+        </ul>
+
+        <h4 class="page-break">Форматування дисків</h4>
+        <p>Форматування здійснюється для того, щоб:</p>
+        <ul>
+            <li>підготувати дискету до роботи;</li>
+            <li>створити системний диск (з якого можна завантажувати операційну систему);</li>
+            <li>знищити з диска всю інформацію, знищити віруси.</li>
+        </ul>
+
+        <p>Можна форматувати гнучкі та жорсткі диски. Випадкове форматування жорсткого диска дуже небезпечне, оскільки
+            тоді можна втратити всю записану на ньому інформацію.</p>
+
+        <p>У MS DOS форматування дисків виконують за допомогою зовнішньої команди <code>format.com</code>:</p>
+        <div class="cmd-block">FORMAT &lt;ім'я диска&gt; [/&lt;ключі&gt;]</div>
+        <p>де можливі ключі <code>/s</code> — створення системної дискети.</p>
+
+        <div class="note">
+            Перед встановленням диска у дисковод треба впевнитись, що знято захист від запису.
+        </div>
+
+        <!-- Операції з каталогами -->
+        <h3>Операції з каталогами</h3>
+
+        <h4>Створення каталогів</h4>
+        <div class="cmd-block">MD [шлях\]&lt;ім'я каталога&gt;</div>
+
+        <h4>Знищення каталогів</h4>
+        <div class="cmd-block">RD [шлях\]&lt;ім'я каталога&gt;
+DELTREE [шлях\]&lt;ім'я каталога&gt;</div>
+
+        <div class="highlight">
+            <p><strong>Обмеження:</strong> не можна знищувати кореневий і поточний каталоги. Якщо використовується
+                команда <code>RD</code>, каталог, який знищується, має бути порожнім.</p>
+        </div>
+
+        <h4>Перегляд вмісту каталогів</h4>
+        <div class="cmd-block">DIR [шлях\][&lt;ім'я каталога або файла&gt;][/ключі]</div>
+        <p>Для поточного каталогу шлях та ім'я можна не зазначати.</p>
+
+        <h4>Зміна поточного каталогу</h4>
+        <div class="cmd-block">CD [шлях\] [&lt;ім'я каталога&gt;]</div>
+        <ul>
+            <li>Перехід до кореневого каталога — <code>CD\</code></li>
+            <li>Перехід до батьківського каталога — <code>CD..</code></li>
+        </ul>
+
+        <!-- Операції з файлами -->
+        <h3>Операції з файлами</h3>
+
+        <h4>Копіювання файлів</h4>
+        <div class="cmd-block">COPY &lt;джерело&gt; &lt;місце призначення&gt;</div>
+        <p>де <em>джерело</em> — ім'я файла чи шаблон імен, які копіюються; <em>місце призначення</em> — куди копіюються
+            файл чи група файлів, з тим самим іменем чи з іншим.</p>
+
+        <h4>Створення файлів</h4>
+        <p>За допомогою команди <code>COPY</code> можна створювати нові файли. У цьому випадку джерелом є клавіатура
+            (<code>CON</code>), місце призначення — ім'я нового файла:</p>
+        <div class="cmd-block">COPY CON &lt;ім'я файла&gt;</div>
+        <p>Далі треба ввести з клавіатури текст та натиснути клавіші <kbd>Ctrl</kbd>+<kbd>Z</kbd> та <kbd>Enter</kbd>.
+        </p>
+
+        <p>З допомогою вбудованого редактора <code>EDIT</code> можна створювати файли чи редагувати існуючі:</p>
+        <div class="cmd-block">EDIT [&lt;ім'я файла&gt;]</div>
+
+        <h4>Знищення файлів</h4>
+        <div class="cmd-block">DEL [шлях\] &lt;ім'я файла&gt; [/P]</div>
+        <p>де ключ <code>/P</code> — операційна система робить запит, щоб підтвердити знищення файла після введення
+            команди.</p>
+
+        <h4>Перейменування файлів</h4>
+        <div class="cmd-block">REN [шлях\]&lt;ім'я файла&gt;</div>
+
+        <h4>Перегляд вмісту файлів</h4>
+        <div class="cmd-block">TYPE [шлях\]&lt;ім'я файла&gt;</div>
+
+        <h4>Запуск програми</h4>
+        <p>Ім'я файла, який може бути завантажений (файл з розширенням <code>exe</code>, <code>com</code>,
+            <code>bat</code>), треба набрати у командному рядку та натиснути клавішу <kbd>Enter</kbd>.
+        </p>
+
+        <!-- Операції з групою файлів -->
+        <h3>Операції з групою файлів</h3>
+        <p>Операції над групою файлів виконуються командами <code>DIR</code>, <code>COPY</code>, <code>DEL</code>,
+            <code>REN</code>, де у параметрі ім'я файла використовують символи «*» та «?». Якщо в командах у назві файлу
+            є символ <code>?</code>, то він означає будь-який один допустимий символ алфавіту, а символ <code>*</code>
+            позначає будь-яку кількість допустимих символів.
+        </p>
+
+        <p>Наприклад, дія команди <code>del *.???</code> поширюється на всі файли, розширення назв яких мають три
+            символи. Такі імена називають <strong>шаблонами</strong>.</p>
+
+        <h4>Пошук файлів</h4>
+        <p>Для пошуку файлів та каталогів у MS-DOS використовується команда <code>DIR</code>:</p>
+        <div class="cmd-block">DIR [шлях\][&lt;ім'я файла&gt;][/ключі]</div>
+        <p>де ім'я файла — шаблон групи файлів з певною ознакою пошуку.</p>
+
+        <!-- Послідовність виконання роботи -->
+        <div class="task-box page-break">
+            <h3>Послідовність виконання роботи</h3>
+            <ol>
+                <li>Перейдіть у середовище MS DOS. (<kbd>Win</kbd>+<kbd>R</kbd> → <code>cmd</code>)</li>
+                <li>Перегляньте зміст кореневого каталогу посторінково. Як відрізнити інформацію про файл від інформації
+                    про каталог?</li>
+                <li>Знайдіть каталог з ім'ям <code>Documents</code>. Перейдіть у цей каталог і перегляньте його вміст
+                    посторінково. Що є в каталозі?</li>
+                <li>Перейдіть у власну папку. Створіть нову папку: <code>MyMSDOS</code>.</li>
+                <li>Створіть в папці особистий каталог <code>LAB1</code>. У ньому — каталог <code>LAB2</code>.</li>
+                <li>З Вашої папки скопіюйте всі файли з розширенням <code>doc</code> в каталог <code>LAB1</code>.
+                    Занотуйте у протокол точний шлях до каталогу <code>LAB1</code>.</li>
+                <li>Увійдіть у каталог <code>LAB1</code> і перегляньте його вміст.</li>
+                <li>Перейменуйте перший файл. Надайте йому своє ім'я.</li>
+                <li>Знайдіть файл з розширенням <code>txt</code>. Скопіюйте у підкаталог <code>LAB2</code>. Відредагуйте
+                    його так: на початку файлу напишіть своє прізвище.</li>
+                <li>У підкаталозі <code>LAB2</code> створіть новий текстовий файл. Назву дайте будь-яку. Зміст файлу                    такий: ваше ім'я та по батькові.</li>
+                <li>Перейдіть на диск <code>C</code>. Коротко опишіть вміст кореневого каталогу у протоколі.</li>
+            </ol>
+        </div>
+
+        <!-- Контрольні запитання -->
+        <div class="questions page-break">
+            <h3>Контрольні запитання</h3>
+            <ol>
+                <li>Як однією командою можна копіювати багато файлів?</li>
+                <li>Як може здійснюватися перегляд змісту файлів та їх перейменування?</li>
+                <li>Яку команду використовують для створення текстових файлів?</li>
+                <li>Яку команду використовують для створення каталогу?</li>
+                <li>Яку команду використовують для знищення файлу?</li>
+                <li>Як зробити копію файлу?</li>
+                <li>Як переглянути зміст каталогу?</li>
+                <li>Як повернутися в надкаталог?</li>
+                <li>Як активізувати кореневий каталог на поточному диску?</li>
+                <li>Чи можна вилучати непорожній каталог?</li>
+            </ol>
+        </div>
+
+        <p class="footer"
+            style="margin-top: 30px; font-size: 0.9rem; color: #5a6f7e; text-align: center; border-top: 1px solid #dce9e2; padding-top: 20px;">
+            Основи операційних систем<br>
+            📖 КЗ СОР «Путивльський педагогічний фаховий коледж імені С.В. Руднєва»
+        </p>
+    </div>
+</body>
+
+</html>

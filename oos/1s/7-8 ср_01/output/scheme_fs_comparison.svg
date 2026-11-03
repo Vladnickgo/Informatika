@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+      <style>
+        text { font-family: "DejaVu Sans", Arial, sans-serif; }
+        .title { fill: #1f4e79; font-size: 18px; font-weight: bold; text-anchor: middle; }
+        .footer { fill: #595959; font-size: 14px; font-style: italic; text-anchor: middle; }
+        
+        .header-text { fill: #ffffff; font-size: 20px; font-weight: bold; text-anchor: middle; }
+        .body-text { fill: #333333; font-size: 12.5px; }
+        .bold-text { font-weight: bold; }
+      </style>
+    
+      <!-- Заголовок -->
+      <text class="title" x="400" y="35">Схема 2. Порівняння файлових систем FAT32 / NTFS / ext4</text>
+    
+      <!-- ================= КАРТКА 1: FAT32 ================= -->
+      <g transform="translate(20, 60)">
+        <!-- Фон та рамка -->
+        <rect x="0" y="0" width="240" height="340" rx="8" fill="#fce4d6" stroke="#c65911" stroke-width="1.5"/>
+        <!-- Шапка -->
+        <path d="M 0 8 Q 0 0 8 0 L 232 0 Q 240 0 240 8 L 240 50 L 0 50 Z" fill="#c65911"/>
+        
+        <text class="header-text" x="120" y="33">FAT32</text>
+        
+        <!-- Текст -->
+        <g class="body-text">
+          <text x="15" y="85">• Макс. розмір файлу: 4 ГБ</text>
+          <text x="15" y="125">• Макс. розмір тому: 2 ТБ</text>
+          <text x="15" y="165">• Сумісність: усі ОС</text>
+          <text x="15" y="205">• Без журналювання</text>
+          
+          <text x="15" y="250" class="bold-text">Застосування:</text>
+          <text x="15" y="285">• флешки, зовнішні диски</text>
+        </g>
+      </g>
+    
+      <!-- ================= КАРТКА 2: NTFS ================= -->
+      <g transform="translate(280, 60)">
+        <!-- Фон та рамка -->
+        <rect x="0" y="0" width="240" height="340" rx="8" fill="#deeaf6" stroke="#2e75b6" stroke-width="1.5"/>
+        <!-- Шапка -->
+        <path d="M 0 8 Q 0 0 8 0 L 232 0 Q 240 0 240 8 L 240 50 L 0 50 Z" fill="#1f4e79"/>
+        
+        <text class="header-text" x="120" y="33">NTFS</text>
+        
+        <!-- Текст -->
+        <g class="body-text">
+          <text x="15" y="85">• Макс. розмір файлу: 16 ТБ</text>
+          <text x="15" y="125">• Макс. розмір тому: 256 ТБ</text>
+          <text x="15" y="165">• Сумісність: Windows, Linux</text>
+          <text x="15" y="205">• Журналювання, права доступу</text>
+          
+          <text x="15" y="250" class="bold-text">Застосування:</text>
+          <text x="15" y="285">• системний диск Windows</text>
+        </g>
+      </g>
+    
+      <!-- ================= КАРТКА 3: ext4 ================= -->
+      <g transform="translate(540, 60)">
+        <!-- Фон та рамка -->
+        <rect x="0" y="0" width="240" height="340" rx="8" fill="#eaf1dd" stroke="#548235" stroke-width="1.5"/>
+        <!-- Шапка -->
+        <path d="M 0 8 Q 0 0 8 0 L 232 0 Q 240 0 240 8 L 240 50 L 0 50 Z" fill="#548235"/>
+        
+        <text class="header-text" x="120" y="33">ext4</text>
+        
+        <!-- Текст -->
+        <g class="body-text">
+          <text x="15" y="85">• Макс. розмір файлу: 16 ТБ</text>
+          <text x="15" y="125">• Макс. розмір тому: 1 ЕБ</text>
+          <text x="15" y="165">• Сумісність: Linux</text>
+          <text x="15" y="205">• Журналювання, POSIX-права</text>
+          
+          <text x="15" y="250" class="bold-text">Застосування:</text>
+          <text x="15" y="285">• системний диск Linux</text>
+        </g>
+      </g>
+    
+      <!-- Підпис внизу -->
+      <text class="footer" x="400" y="455">FAT32 — найстаріша та найсумісніша; NTFS — стандарт Windows; ext4 — стандарт Linux</text>
+    </svg>

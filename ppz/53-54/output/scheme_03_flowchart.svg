@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="373.14pt" height="176.832pt" viewBox="0 0 373.14 176.832" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-29T21:41:30.206950</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 176.832 
+L 373.14 176.832 
+L 373.14 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 186.57 39.6288 
+Q 186.57 52.38 186.57 63.454149 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 188.97 58.654149 
+L 186.57 63.454149 
+L 184.17 58.654149 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 124.074 100.6128 
+Q 99.522 103.9392 76.631868 107.040444 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 81.710629 108.77428 
+L 76.631868 107.040444 
+L 81.066194 104.017737 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 249.066 100.6128 
+Q 273.618 103.9392 296.508132 107.040444 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 292.073806 104.017737 
+L 296.508132 107.040444 
+L 291.429371 108.77428 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 109.566 38.52 
+L 263.574 38.52 
+Q 270.27 38.52 270.27 31.8672 
+L 270.27 21.888 
+Q 270.27 15.2352 263.574 15.2352 
+L 109.566 15.2352 
+Q 102.87 15.2352 102.87 21.888 
+L 102.87 31.8672 
+Q 102.87 38.52 109.566 38.52 
+z
+" clip-path="url(#pe47b76465e)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 186.57 66.24 
+L 247.95 91.188 
+L 186.57 116.136 
+L 125.19 91.188 
+z
+" clip-path="url(#pe47b76465e)" style="fill: #f5f5f7; stroke: #0071e3; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 25.866 135.54 
+L 124.074 135.54 
+Q 130.77 135.54 130.77 128.8872 
+L 130.77 114.4728 
+Q 130.77 107.82 124.074 107.82 
+L 25.866 107.82 
+Q 19.17 107.82 19.17 114.4728 
+L 19.17 128.8872 
+Q 19.17 135.54 25.866 135.54 
+z
+" clip-path="url(#pe47b76465e)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 249.066 135.54 
+L 347.274 135.54 
+Q 353.97 135.54 353.97 128.8872 
+L 353.97 114.4728 
+Q 353.97 107.82 347.274 107.82 
+L 249.066 107.82 
+Q 242.37 107.82 242.37 114.4728 
+L 242.37 128.8872 
+Q 242.37 135.54 249.066 135.54 
+z
+" clip-path="url(#pe47b76465e)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="186.57" y="29.774944" transform="rotate(-0 186.57 29.774944)">Ввести число N</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="186.57" y="94.223312" transform="rotate(-0 186.57 94.223312)">N &gt; 0 ?</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="74.97" y="124.577344" transform="rotate(-0 74.97 124.577344)">ТАК: Додатне</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c4001d" x="298.17" y="124.577344" transform="rotate(-0 298.17 124.577344)">НІ: Від'ємне або 0</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe47b76465e">
+   <rect x="10.8" y="10.8" width="351.54" height="155.232"/>
+  </clipPath>
+ </defs>
+</svg>

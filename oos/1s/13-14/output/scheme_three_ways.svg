@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="332.064pt" viewBox="0 0 635.4 332.064" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-28T19:42:50.003038</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 332.064 
+L 635.4 332.064 
+L 635.4 -0 
+L 0 -0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 36.375 277.198142 
+L 200.055 277.198142 
+Q 211.308 277.198142 211.308 266.181677 
+L 211.308 90.919742 
+Q 211.308 79.903277 200.055 79.903277 
+L 36.375 79.903277 
+Q 25.122 79.903277 25.122 90.919742 
+L 25.122 266.181677 
+Q 25.122 277.198142 36.375 277.198142 
+z
+" clip-path="url(#p3925b6e6f7)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 117.192 141.996077 
+L 119.238 141.996077 
+Q 139.698 141.996077 139.698 121.966142 
+L 139.698 119.963148 
+Q 139.698 99.933213 119.238 99.933213 
+L 117.192 99.933213 
+Q 96.732 99.933213 96.732 119.963148 
+L 96.732 121.966142 
+Q 96.732 141.996077 117.192 141.996077 
+z
+" clip-path="url(#p3925b6e6f7)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 235.86 277.198142 
+L 399.54 277.198142 
+Q 410.793 277.198142 410.793 266.181677 
+L 410.793 90.919742 
+Q 410.793 79.903277 399.54 79.903277 
+L 235.86 79.903277 
+Q 224.607 79.903277 224.607 90.919742 
+L 224.607 266.181677 
+Q 224.607 277.198142 235.86 277.198142 
+z
+" clip-path="url(#p3925b6e6f7)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 316.677 141.996077 
+L 318.723 141.996077 
+Q 339.183 141.996077 339.183 121.966142 
+L 339.183 119.963148 
+Q 339.183 99.933213 318.723 99.933213 
+L 316.677 99.933213 
+Q 296.217 99.933213 296.217 119.963148 
+L 296.217 121.966142 
+Q 296.217 141.996077 316.677 141.996077 
+z
+" clip-path="url(#p3925b6e6f7)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 435.345 277.198142 
+L 599.025 277.198142 
+Q 610.278 277.198142 610.278 266.181677 
+L 610.278 90.919742 
+Q 610.278 79.903277 599.025 79.903277 
+L 435.345 79.903277 
+Q 424.092 79.903277 424.092 90.919742 
+L 424.092 266.181677 
+Q 424.092 277.198142 435.345 277.198142 
+z
+" clip-path="url(#p3925b6e6f7)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 516.162 141.996077 
+L 518.208 141.996077 
+Q 538.668 141.996077 538.668 121.966142 
+L 538.668 119.963148 
+Q 538.668 99.933213 518.208 99.933213 
+L 516.162 99.933213 
+Q 495.702 99.933213 495.702 119.963148 
+L 495.702 121.966142 
+Q 495.702 141.996077 516.162 141.996077 
+z
+" clip-path="url(#p3925b6e6f7)" style="fill: #c93400"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="37.370709" transform="rotate(-0 317.7 37.370709)">Три способи виконати одну операцію</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="118.215" y="125.103708" transform="rotate(-0 118.215 125.103708)">1</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="118.215" y="171.846992" transform="rotate(-0 118.215 171.846992)">Контекстне меню</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(67.340781 206.603886)">Права кнопка миші</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(74.113438 221.113574)">→ вибір команди</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="317.7" y="125.103708" transform="rotate(-0 317.7 125.103708)">2</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="171.846992" transform="rotate(-0 317.7 171.846992)">Гарячі клавіші</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(260.160156 206.740136)">Ctrl+C, Ctrl+X, Ctrl+V,</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(264.478125 220.977324)">F2, Delete, Alt+Enter</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="517.185" y="125.103708" transform="rotate(-0 517.185 125.103708)">3</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="517.185" y="171.753242" transform="rotate(-0 517.185 171.753242)">Перетягування</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(457.348281 206.603886)">Затиснути ліву кнопку</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(459.006094 221.113574)">та перемістити об'єкт</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p3925b6e6f7">
+   <rect x="10.8" y="10.8" width="613.8" height="310.464"/>
+  </clipPath>
+ </defs>
+</svg>

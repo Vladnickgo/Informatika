@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="387.504pt" viewBox="0 0 635.4 387.504" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-28T21:15:13.179022</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 387.504 
+L 635.4 387.504 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 33.463385 278.799957 
+L 304.479692 278.799957 
+Q 311.562 278.799957 311.562 271.382984 
+L 311.562 61.729881 
+Q 311.562 54.312908 304.479692 54.312908 
+L 33.463385 54.312908 
+Q 26.381077 54.312908 26.381077 61.729881 
+L 26.381077 271.382984 
+Q 26.381077 278.799957 33.463385 278.799957 
+z
+" clip-path="url(#p52cbe14682)" style="fill: #1c1c1e; stroke: #3a3a3c; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 27.325385 82.497405 
+L 310.617692 82.497405 
+L 310.617692 55.301838 
+L 27.325385 55.301838 
+z
+" clip-path="url(#p52cbe14682)" style="fill: #2c2c2e"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 330.920308 278.799957 
+L 601.936615 278.799957 
+Q 609.018923 278.799957 609.018923 271.382984 
+L 609.018923 61.729881 
+Q 609.018923 54.312908 601.936615 54.312908 
+L 330.920308 54.312908 
+Q 323.838 54.312908 323.838 61.729881 
+L 323.838 271.382984 
+Q 323.838 278.799957 330.920308 278.799957 
+z
+" clip-path="url(#p52cbe14682)" style="fill: #1c1c1e; stroke: #3a3a3c; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 324.782308 82.497405 
+L 608.074615 82.497405 
+L 608.074615 55.301838 
+L 324.782308 55.301838 
+z
+" clip-path="url(#p52cbe14682)" style="fill: #2c2c2e"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="34.659063" transform="rotate(-0 317.7 34.659063)">Діагностика: ping і tracert</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #30d158" x="36.768462" y="72.474354" transform="rotate(-0 36.768462 72.474354)">ping 8.8.8.8</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="36.768462" y="104.922641" transform="rotate(-0 36.768462 104.922641)">Обмін пакетами з 8.8.8.8:</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="36.768462" y="125.690165" transform="rotate(-0 36.768462 125.690165)">Відповідь від 8.8.8.8: байтів=32 час=15мс TTL=117</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="36.768462" y="146.457689" transform="rotate(-0 36.768462 146.457689)">Відповідь від 8.8.8.8: байтів=32 час=14мс TTL=117</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="36.768462" y="167.225214" transform="rotate(-0 36.768462 167.225214)">Відповідь від 8.8.8.8: байтів=32 час=15мс TTL=117</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="36.768462" y="187.992738" transform="rotate(-0 36.768462 187.992738)">Відповідь від 8.8.8.8: байтів=32 час=16мс TTL=117</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="36.768462" y="208.760262" transform="rotate(-0 36.768462 208.760262)">Статистика: відправлено=4, отримано=4, втрачено=0</text>
+   </g>
+   <g id="text_9">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(74.604429 305.667689)">Втрачено 0 — канал стабільний.</text>
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(57.300913 320.492767)">Втрачено 100% — вузол недоступний.</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #30d158" x="334.225385" y="72.182167" transform="rotate(-0 334.225385 72.182167)">tracert 8.8.8.8</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="334.225385" y="104.922641" transform="rotate(-0 334.225385 104.922641)">Трасування маршруту до 8.8.8.8:</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="334.225385" y="125.690165" transform="rotate(-0 334.225385 125.690165)">  1    &lt;1 мс   192.168.1.1</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="334.225385" y="146.457689" transform="rotate(-0 334.225385 146.457689)">  2     3 мс   10.0.0.1</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="334.225385" y="167.225214" transform="rotate(-0 334.225385 167.225214)">  3    12 мс   203.0.113.5</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="334.225385" y="187.992738" transform="rotate(-0 334.225385 187.992738)">  4    15 мс   8.8.8.8</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="334.225385" y="208.760262" transform="rotate(-0 334.225385 208.760262)">Трасування завершено.</text>
+   </g>
+   <g id="text_17">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(374.529477 305.574017)">Кожен рядок — окремий вузол.</text>
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(379.876508 320.399095)">«* * *» — вузол не відповідає.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p52cbe14682">
+   <rect x="10.8" y="10.8" width="613.8" height="365.904"/>
+  </clipPath>
+ </defs>
+</svg>

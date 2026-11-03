@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 850">
+      <defs>
+        <!-- Маркер для стрілок (напрямок вгору) -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" >
+          <path d="M 0 0 L 10 0 L 5 10 z" fill="#2e75b6" />
+        </marker>
+      </defs>
+    
+      <style>
+        text { font-family: "Segoe UI", Arial, sans-serif; }
+        .title { fill: #1f4e79; font-size: 20px; font-weight: bold; text-anchor: middle; }
+        .box { fill: #deeaf6; stroke: #2e75b6; stroke-width: 2; }
+        .step-text { fill: #1f4e79; font-size: 18px; font-weight: bold; dominant-baseline: middle; }
+        .flow-line { stroke: #2e75b6; stroke-width: 2; marker-end: url(#arrow); }
+      </style>
+    
+      <!-- Заголовок -->
+      <text class="title" x="400" y="45">Схема 4. Алгоритм створення папки та файлу</text>
+    
+      <!-- Блоки та текст -->
+      
+      <!-- Крок 1 -->
+      <rect class="box" x="70" y="80" width="660" height="60" rx="8"/>
+      <text class="step-text" x="90" y="110">1. Відкрити «Провідник»</text>
+    
+      <!-- Крок 2 -->
+      <rect class="box" x="70" y="180" width="660" height="60" rx="8"/>
+      <text class="step-text" x="90" y="210">2. Перейти до потрібної папки (диск → папки)</text>
+    
+      <!-- Крок 4 -->
+      <rect class="box" x="70" y="280" width="660" height="60" rx="8"/>
+      <text class="step-text" x="90" y="310">3. Правий клік миші → «Створити» → «Папку»/«Текстовий документ»</text>
+    
+      <!-- Крок 5 (з екрануванням символів &lt; та &gt;) -->
+      <rect class="box" x="70" y="380" width="660" height="60" rx="8"/>
+      <text class="step-text" x="90" y="410">4. Ввести ім'я без заборонених символів : * ? " &lt; &gt; |</text>
+    
+      <!-- Крок 6 -->
+      <rect class="box" x="70" y="480" width="660" height="60" rx="8"/>
+      <text class="step-text" x="90" y="510">5. Натиснути Enter (або клацнути поза полем)</text>
+    
+          
+      <!-- Стрілки (напрямок від 7-го кроку до 1-го) -->
+      <g class="flow-line">
+        <line x1="400" y1="440" x2="400" y2="480" />
+        <line x1="400" y1="340" x2="400" y2="380" />
+        <line x1="400" y1="240" x2="400" y2="280" />
+        <line x1="400" y1="140" x2="400" y2="180" />
+      </g>
+    </svg>

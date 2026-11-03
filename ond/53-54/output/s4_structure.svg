@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="579.6pt" height="354.24pt" viewBox="0 0 579.6 354.24" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-02T08:02:57.622211</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 354.24 
+L 579.6 354.24 
+L 579.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 87.804 103.9392 
+L 491.796 103.9392 
+Q 501.84 103.9392 501.84 97.95168 
+L 501.84 63.35712 
+Q 501.84 57.3696 491.796 57.3696 
+L 87.804 57.3696 
+Q 77.76 57.3696 77.76 63.35712 
+L 77.76 97.95168 
+Q 77.76 103.9392 87.804 103.9392 
+z
+" clip-path="url(#p093edd08a9)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 90.594 98.61696 
+L 91.71 98.61696 
+Q 95.616 98.61696 95.616 96.28848 
+L 95.616 65.02032 
+Q 95.616 62.69184 91.71 62.69184 
+L 90.594 62.69184 
+Q 86.688 62.69184 86.688 65.02032 
+L 86.688 96.28848 
+Q 86.688 98.61696 90.594 98.61696 
+z
+" clip-path="url(#p093edd08a9)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 87.804 162.1512 
+L 491.796 162.1512 
+Q 501.84 162.1512 501.84 156.16368 
+L 501.84 121.56912 
+Q 501.84 115.5816 491.796 115.5816 
+L 87.804 115.5816 
+Q 77.76 115.5816 77.76 121.56912 
+L 77.76 156.16368 
+Q 77.76 162.1512 87.804 162.1512 
+z
+" clip-path="url(#p093edd08a9)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 90.594 156.82896 
+L 91.71 156.82896 
+Q 95.616 156.82896 95.616 154.50048 
+L 95.616 123.23232 
+Q 95.616 120.90384 91.71 120.90384 
+L 90.594 120.90384 
+Q 86.688 120.90384 86.688 123.23232 
+L 86.688 154.50048 
+Q 86.688 156.82896 90.594 156.82896 
+z
+" clip-path="url(#p093edd08a9)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 87.804 220.3632 
+L 491.796 220.3632 
+Q 501.84 220.3632 501.84 214.37568 
+L 501.84 179.78112 
+Q 501.84 173.7936 491.796 173.7936 
+L 87.804 173.7936 
+Q 77.76 173.7936 77.76 179.78112 
+L 77.76 214.37568 
+Q 77.76 220.3632 87.804 220.3632 
+z
+" clip-path="url(#p093edd08a9)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 90.594 215.04096 
+L 91.71 215.04096 
+Q 95.616 215.04096 95.616 212.71248 
+L 95.616 181.44432 
+Q 95.616 179.11584 91.71 179.11584 
+L 90.594 179.11584 
+Q 86.688 179.11584 86.688 181.44432 
+L 86.688 212.71248 
+Q 86.688 215.04096 90.594 215.04096 
+z
+" clip-path="url(#p093edd08a9)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 87.804 278.5752 
+L 491.796 278.5752 
+Q 501.84 278.5752 501.84 272.58768 
+L 501.84 237.99312 
+Q 501.84 232.0056 491.796 232.0056 
+L 87.804 232.0056 
+Q 77.76 232.0056 77.76 237.99312 
+L 77.76 272.58768 
+Q 77.76 278.5752 87.804 278.5752 
+z
+" clip-path="url(#p093edd08a9)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 90.594 273.25296 
+L 91.71 273.25296 
+Q 95.616 273.25296 95.616 270.92448 
+L 95.616 239.65632 
+Q 95.616 237.32784 91.71 237.32784 
+L 90.594 237.32784 
+Q 86.688 237.32784 86.688 239.65632 
+L 86.688 270.92448 
+Q 86.688 273.25296 90.594 273.25296 
+z
+" clip-path="url(#p093edd08a9)" style="fill: #6e30a8"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="289.8" y="31.512469" transform="rotate(-0 289.8 31.512469)">Структура повідомлення</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="108.45" y="78.685735" transform="rotate(-0 108.45 78.685735)">Вступ</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #86868b" x="108.45" y="93.141601" transform="rotate(-0 108.45 93.141601)">актуальність теми, мета й завдання</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="108.45" y="137.003204" transform="rotate(-0 108.45 137.003204)">Теоретична частина</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #86868b" x="108.45" y="151.451531" transform="rotate(-0 108.45 151.451531)">етичні принципи, нормативна база</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="108.45" y="195.215204" transform="rotate(-0 108.45 195.215204)">Практичні приклади</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #86868b" x="108.45" y="209.565601" transform="rotate(-0 108.45 209.565601)">кейси з інклюзивної практики</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="108.45" y="253.427204" transform="rotate(-0 108.45 253.427204)">Висновки та джерела</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #86868b" x="108.45" y="267.777601" transform="rotate(-0 108.45 267.777601)">узагальнення, список літератури</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p093edd08a9">
+   <rect x="10.8" y="10.8" width="558" height="332.64"/>
+  </clipPath>
+ </defs>
+</svg>

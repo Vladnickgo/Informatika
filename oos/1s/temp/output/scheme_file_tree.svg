@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="550" height="347" viewBox="0 0 550 347">
+      <title>Схема 3. Ієрархія файлової системи</title>
+      <style>
+        .edge { stroke:#8faadc; stroke-width:1.5; fill:none; }
+        .box-root { fill:#1f4e79; stroke:#0d2a42; stroke-width:1.4; }
+        .box-level2 { fill:#deeaf6; stroke:#2e75b6; stroke-width:1.4; }
+        .box-leaf { fill:#eaf1dd; stroke:#548235; stroke-width:1.4; }
+        text { font-family: "DejaVu Sans", Arial, sans-serif; text-anchor:middle; }
+        .root { fill:#ffffff; font-size:13px; font-weight:bold; }
+        .level2 { fill:#1f4e79; font-size:10px; font-weight:bold; }
+        .leaf { fill:#375623; font-size:9px; font-weight:bold; }
+        .caption { fill:#1f4e79; font-size:11px; font-weight:bold; }
+      </style>
+    
+      <!-- Связи -->
+      <g class="edge">
+        <line x1="275" y1="63" x2="100" y2="118"/>
+        <line x1="275" y1="63" x2="275" y2="118"/>
+        <line x1="275" y1="63" x2="450" y2="118"/>
+    
+        <line x1="100" y1="154" x2="55"  y2="222"/>
+        <line x1="100" y1="154" x2="145" y2="222"/>
+    
+        <line x1="275" y1="154" x2="230" y2="222"/>
+        <line x1="275" y1="154" x2="320" y2="222"/>
+    
+        <line x1="450" y1="154" x2="405" y2="222"/>
+        <line x1="450" y1="154" x2="495" y2="222"/>
+      </g>
+    
+      <!-- Корень -->
+      <rect class="box-root" x="230" y="26" width="90" height="37" rx="5"/>
+      <text class="root" x="275" y="49">Диск C:</text>
+    
+      <!-- 2-й уровень -->
+      <rect class="box-level2" x="60"  y="118" width="80" height="36" rx="5"/>
+      <text class="level2" x="100" y="140">Навчання</text>
+    
+      <rect class="box-level2" x="235" y="118" width="80" height="36" rx="5"/>
+      <text class="level2" x="275" y="140">Фото</text>
+    
+      <rect class="box-level2" x="410" y="118" width="80" height="36" rx="5"/>
+      <text class="level2" x="450" y="140">Програми</text>
+    
+      <!-- Листья -->
+      <rect class="box-leaf" x="20"  y="222" width="70" height="36" rx="5"/>
+      <text class="leaf" x="55" y="244">Звіти</text>
+    
+      <rect class="box-leaf" x="110" y="222" width="70" height="36" rx="5"/>
+      <text class="leaf" x="145" y="244">Плани</text>
+    
+      <rect class="box-leaf" x="195" y="222" width="70" height="36" rx="5"/>
+      <text class="leaf" x="230" y="244">Родина</text>
+    
+      <rect class="box-leaf" x="285" y="222" width="70" height="36" rx="5"/>
+      <text class="leaf" x="320" y="244">Свято</text>
+    
+      <rect class="box-leaf" x="370" y="222" width="70" height="36" rx="5"/>
+      <text class="leaf" x="405" y="244">Офіс</text>
+    
+      <rect class="box-leaf" x="460" y="222" width="70" height="36" rx="5"/>
+      <text class="leaf" x="495" y="244">Ігри</text>
+    
+      <!-- Подпись -->
+      <text class="caption" x="275" y="315">
+        Схема 3. Ієрархія файлової системи: «шафа → полиця → папка»
+      </text>
+    </svg>

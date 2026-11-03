@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лекція №3 · Бази даних, СКБД, реляційна модель, ER-модель</title>
+  <style>
+    /* Загальні стилі */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f4f7fc;
+      margin: 0;
+      padding: 2rem 1.2rem;
+      color: #1e2b3a;
+      line-height: 1.6;
+    }
+
+    .lecture-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25);
+      padding: 2.2rem 2.5rem;
+      transition: all 0.2s;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem 0.6rem;
+      }
+      .lecture-container {
+        padding: 1.5rem 1.2rem;
+        border-radius: 20px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+
+    /* Заголовки */
+    h1 {
+      font-size: 2.2rem;
+      margin-top: 0;
+      margin-bottom: 0.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #0b2b4b;
+      border-left: 8px solid #3b82f6;
+      padding-left: 1.3rem;
+    }
+
+    .subhead {
+      font-size: 1.1rem;
+      color: #4a5c6e;
+      margin-top: 0.2rem;
+      margin-bottom: 2rem;
+      padding-left: 1.8rem;
+      font-weight: 400;
+      border-bottom: 2px solid #e2eaf3;
+      padding-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      margin-top: 2.2rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      color: #0b2b4b;
+      border-bottom: 2px solid #cbd9e9;
+      padding-bottom: 0.3rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      margin: 1.6rem 0 0.6rem;
+      font-weight: 600;
+      color: #1e3f60;
+    }
+
+    h4 {
+      font-size: 1.1rem;
+      margin: 1.2rem 0 0.4rem;
+      font-weight: 600;
+      color: #2c4b6b;
+    }
+
+    /* Таблиці */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.3rem 0;
+      font-size: 0.98rem;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    th {
+      background: #1e3f60;
+      color: white;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.9rem 1rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+    }
+
+    td {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #dee8f2;
+      background: white;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: #f0f6ff;
+    }
+
+    /* Списки */
+    ul,
+    ol {
+      padding-left: 1.6rem;
+      margin: 0.8rem 0;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Виділення */
+    .badge {
+      background: #e8f0fe;
+      color: #1e4b8a;
+      border-radius: 30px;
+      padding: 0.15rem 1rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+
+    .question-block {
+      background: #f9fcff;
+      border-left: 5px solid #3b82f6;
+      padding: 1.2rem 1.6rem;
+      border-radius: 12px;
+      margin: 1.6rem 0;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+    }
+
+    .question-block p {
+      margin: 0.4rem 0;
+      font-weight: 500;
+    }
+
+    .highlight {
+      background: #fff3cd;
+      padding: 0.1rem 0.3rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    code {
+      background: #eef2f7;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: #1f4975;
+    }
+
+    .diagram-note {
+      background: #f0f9ff;
+      padding: 0.8rem 1.3rem;
+      border-radius: 14px;
+      margin: 1rem 0;
+      border: 1px dashed #6ea8fe;
+      color: #1e3f60;
+      font-style: italic;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: #f9fcff;
+      border: 1px solid #d5e3f0;
+      border-radius: 18px;
+      padding: 1.3rem 1.4rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .card h4 {
+      margin-top: 0;
+      margin-bottom: 0.6rem;
+      color: #1e4b8a;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+    }
+
+    .footer-note {
+      margin-top: 2.5rem;
+      padding-top: 1.2rem;
+      border-top: 2px solid #e0eaf4;
+      font-size: 0.9rem;
+      color: #5b6f83;
+      text-align: center;
+    }
+
+    .btn-print {
+      background: #1e3f60;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.6rem;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.15s;
+      margin-bottom: 1rem;
+      display: inline-block;
+      border: 1px solid #0b2b4b;
+    }
+
+    .btn-print:hover {
+      background: #0b2b4b;
+      transform: translateY(-2px);
+    }
+.page-break {
+    page-break-before: always; /* старий, але досі підтримуваний */
+    break-before: page;         /* сучасний стандарт */
+}
+
+
+    @media print {
+      body {
+        background: white;
+        padding: 0.3in;
+      }
+      .lecture-container {
+        box-shadow: none;
+        padding: 0;
+      }
+      .btn-print {
+        display: none;
+      }
+      th {
+        background: #d0ddeb;
+        color: black;
+        border: 1px solid #aaa;
+      }
+      td {
+        border: 1px solid #ccc;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="lecture-container">
+  <button class="btn-print" onclick="window.print()">🖨️ Друкувати конспект</button>
+<h4>Прикладне програмне забезпечення</h4>
+
+  <h1>Лекція № 3</h1>
+  <div class="subhead">
+    Поняття моделі даних, бази даних. Призначення СКБД. Реляційна модель. Модель «сутність-зв’язок». Відношення, атрибут, ключ, зв'язок.
+  </div>
+
+  <!-- Мета та обладнання -->
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; background: #f2f7ff; border-radius: 18px; padding: 1.2rem 1.6rem; margin-bottom: 1.8rem;">
+    <div style="flex: 2; min-width: 260px;">
+      <p style="margin: 0.2rem 0;"><strong>🎯 Мета:</strong> Формувати поняття про бази даних, СКБД, реляційну модель, модель «сутність-зв'язок»; пояснювати сутність атрибутів, ключів, зв'язків. Розвивати абстрактне мислення, вміння моделювати реальні об'єкти у вигляді таблиць і зв'язків між ними. Виховувати структурованість мислення, розуміння важливості цілісності даних, відповідальність за проектування.</p>
+    </div>
+    <div style="flex: 1; min-width: 180px; border-left: 2px solid #b8d2f0; padding-left: 1.2rem;">
+      <p style="margin: 0.2rem 0;"><strong>🛠️ Обладнання:</strong> інструкційні картки</p>
+      <p style="margin: 0.2rem 0;"><strong>📚 Література:</strong> Холод О.М. (2019), Шумілова І.Ф. (2023), Юнчик В.Л. (2024)</p>
+    </div>
+  </div>
+
+  <!-- Питання для обговорення -->
+  <h2>💬 Питання для обговорення</h2>
+  <div class="question-block">
+    <p>1. Чи стикалися ви в школі з базами даних (електронний журнал, бібліотечний каталог)? Як вони організовані?</p>
+    <p>2. Чому для сучасної школи важливо використовувати бази даних, а не просто таблиці Excel?</p>
+    <p>3. Як ви вважаєте, які переваги має реляційна база даних перед хаотичним зберіганням інформації?</p>
+    <p>4. Наведіть приклади сутностей зі шкільного життя (учні, вчителі, класи, предмети). Як вони пов'язані між собою?</p>
+    <p>5. Чи може вчитель початкової школи самостійно створити базу даних для обліку учнів? Що для цього потрібно знати?</p>
+  </div>
+
+  <!-- Теоретичні відомості -->
+  <h2 class="page-break">📘 Теоретичні відомості</h2>
+
+  <!-- 1. Модель даних -->
+  <h3>1. Поняття моделі даних</h3>
+  <p><strong>Модель даних</strong> – це сукупність правил, структур даних та обмежень, які визначають організацію, зберігання та маніпулювання даними в базі даних.</p>
+<img src="img01.png">
+  <table>
+    <thead>
+      <tr><th>Модель</th><th>Опис</th><th>Приклад</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Ієрархічна</td><td>Дані у вигляді дерева (один батько – багато дітей)</td><td>Файлова система Windows</td></tr>
+      <tr><td>Мережева</td><td>Розширення ієрархічної (дитина може мати кількох батьків)</td><td>Телефонні мережі</td></tr>
+      <tr><td>Реляційна</td><td>Дані у вигляді двовимірних таблиць</td><td>MySQL, PostgreSQL, Access</td></tr>
+      <tr><td>Об'єктно-орієнтована</td><td>Дані та методи об'єднані в об'єкти</td><td>MongoDB</td></tr>
+      <tr><td>NoSQL</td><td>Не реляційні бази для великих даних</td><td>Cassandra, Redis</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 2. База даних -->
+  <h3 class="page-break">2. Поняття бази даних (БД)</h3>
+  <p><strong>База даних (Database, БД)</strong> – це організована сукупність структурованих даних, які зберігаються в електронному вигляді та призначені для багаторазового використання.</p>
+<img src="img02.png">
+  <p><strong>Основні властивості БД:</strong></p>
+  <ul>
+    <li><strong>Цілісність</strong> – дані є несуперечливими</li>
+    <li><strong>Незалежність</strong> – дані незалежні від програм</li>
+    <li><strong>Багатокористувацький доступ</strong> – кілька користувачів одночасно</li>
+    <li><strong>Безпека</strong> – захист від несанкціонованого доступу</li>
+    <li><strong>Мінімізація надлишковості</strong> – уникнення дублювання</li>
+  </ul>
+
+  <!-- 3. СКБД -->
+  <h3 class="page-break">3. Системи керування базами даних (СКБД)</h3>
+  <p><strong>СКБД (DBMS)</strong> – це комплекс програмних засобів для створення, ведення та використання баз даних.</p>
+  <table>
+    <thead>
+      <tr><th>Назва</th><th>Тип</th><th>Особливість</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Microsoft Access</td><td>Настільна/реляційна</td><td>Входить до Microsoft Office, проста</td></tr>
+      <tr><td>MySQL</td><td>Серверна/реляційна</td><td>Безкоштовна, для веб-сайтів</td></tr>
+      <tr><td>PostgreSQL</td><td>Серверна/реляційна</td><td>Потужна, безкоштовна</td></tr>
+      <tr><td>SQLite</td><td>Вбудована</td><td>Легка, не потребує сервера</td></tr>
+      <tr><td>MongoDB</td><td>NoSQL/документна</td><td>Для великих даних</td></tr>
+      <tr><td>Oracle</td><td>Серверна/реляційна</td><td>Комерційна, для підприємств</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 4. Реляційна модель -->
+  <h3 class="page-break">4. Реляційна модель даних</h3>
+  <p><strong>Реляційна модель</strong> – це модель даних, у якій всі дані представлені у вигляді двовимірних таблиць (відношень).</p>
+  <table>
+    <thead>
+      <tr><th>Термін</th><th>Визначення</th><th>Аналогія</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Відношення</td><td>Таблиця</td><td>Аркуш Excel</td></tr>
+      <tr><td>Кортеж</td><td>Рядок таблиці</td><td>Запис про одного учня</td></tr>
+      <tr><td>Атрибут</td><td>Стовпець таблиці</td><td>Поле «Прізвище»</td></tr>
+      <tr><td>Домен</td><td>Множина допустимих значень</td><td>Стать: чоловіча, жіноча</td></tr>
+      <tr><td>Первинний ключ</td><td>Унікальний ідентифікатор рядка</td><td>Код учня</td></tr>
+      <tr><td>Зовнішній ключ</td><td>Посилання на ключ іншої таблиці</td><td>Код класу в таблиці учнів</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 5. ER-модель -->
+  <h3 class="page-break">5. Модель «Сутність-Зв'язок» (ER-модель)</h3>
+  <p><strong>ER-модель (Entity-Relationship model)</strong> – це спосіб графічного подання структури бази даних.</p>
+  <table>
+    <thead>
+      <tr><th>Компонент</th><th>Позначення</th><th>Опис</th><th>Приклад</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Сутність</td><td>Прямокутник</td><td>Об'єкт реального світу</td><td>Учень, Вчитель</td></tr>
+      <tr><td>Атрибут</td><td>Еліпс</td><td>Властивість сутності</td><td>Прізвище, Дата народження</td></tr>
+      <tr><td>Зв'язок</td><td>Ромб</td><td>Відношення між сутностями</td><td>Навчається, Викладає</td></tr>
+      <tr><td>Ключ</td><td>Підкреслений атрибут</td><td>Унікальний ідентифікатор</td><td>Код учня</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Типи зв'язків:</strong> 1:1 (один до одного), 1:M (один до багатьох), M:M (багато до багатьох).</p>
+
+  <!-- 6. Нормалізація -->
+  <h3 class="page-break">6. Нормалізація баз даних</h3>
+  <p><strong>Нормалізація</strong> – це процес організації даних для усунення надлишковості та забезпечення цілісності.</p>
+  <table>
+    <thead>
+      <tr><th>Нормальна форма</th><th>Вимога</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1НФ</td><td>Усі атрибути є атомарними (неподільними)</td></tr>
+      <tr><td>2НФ</td><td>Усі неключові атрибути залежать від повного ключа</td></tr>
+      <tr><td>3НФ</td><td>Відсутні транзитивні залежності</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 7. Практичне застосування -->
+  <h3 class="page-break">7. Практичне застосування БД у школі</h3>
+  <p>Приклад структури БД «Шкільний журнал»:</p>
+  <table>
+    <thead>
+      <tr><th>Сутність</th><th>Атрибути</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Учні</td><td>Код_учня (ключ), Прізвище, Ім'я, Дата_народження, Код_класу</td></tr>
+      <tr><td>Класи</td><td>Код_класу (ключ), Назва, Рік_навчання, Код_класного_керівника</td></tr>
+      <tr><td>Вчителі</td><td>Код_вчителя (ключ), Прізвище, Ім'я, Посада</td></tr>
+      <tr><td>Предмети</td><td>Код_предмета (ключ), Назва, Кількість_годин</td></tr>
+      <tr><td>Оцінки</td><td>Код_оцінки (ключ), Код_учня, Код_предмета, Оцінка, Дата</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Практичне завдання -->
+  <h2 class="page-break">📝 Практичне завдання (для закріплення)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h4>Завдання 1</h4>
+      <p><strong>Визначення сутностей та атрибутів:</strong> для предметних областей (бібліотека, магазин, готель) виділіть сутності та атрибути.</p>
+    </div>
+    <div class="card">
+      <h4>Завдання 2</h4>
+      <p><strong>Проектування ER-діаграми:</strong> побудуйте ER-діаграму для шкільної системи (Учні, Вчителі, Предмети, Класи, Оцінки).</p>
+    </div>
+    <div class="card">
+      <h4>Завдання 3</h4>
+      <p><strong>Порівняння БД та Excel:</strong> заповніть порівняльну таблицю.</p>
+    </div>
+  </div>
+
+  <!-- Інструкційна картка -->
+  <h2 class="page-break">📋 Інструкційна картка для виконання практичного завдання</h2>
+
+  <h4>Частина A. Визначення сутностей</h4>
+  <ol>
+    <li>Оберіть одну предметну область (бібліотека / магазин / готель)</li>
+    <li>Визначте основні сутності (3–4)</li>
+    <li>Для кожної сутності визначте 4–5 атрибутів</li>
+    <li>Позначте первинний ключ кожної сутності</li>
+  </ol>
+
+  <h4>Частина B. Побудова ER-діаграми</h4>
+  <ol>
+    <li>Накресліть прямокутники для кожної сутності</li>
+    <li>Додайте еліпси для атрибутів (підкресліть ключі)</li>
+    <li>З'єднайте сутності ромбами, позначте тип зв'язку (1:1, 1:M, M:M)</li>
+  </ol>
+
+  <h4>Частина C. Порівняння</h4>
+  <ol>
+    <li>Заповніть таблицю порівняння Excel та БД</li>
+    <li>Додайте 2-3 приклади, коли краще використовувати Excel, а коли – БД</li>
+  </ol>
+
+  <!-- Контрольні запитання -->
+  <h2 class="page-break">❓ Контрольні запитання</h2>
+  <div style="background: #f7faff; border-radius: 18px; padding: 1.2rem 1.8rem; border: 1px solid #dae6f5;">
+    <ol style="margin: 0.4rem 0; columns: 1; column-gap: 2.5rem;">
+      <li>Що таке база даних? Наведіть приклади.</li>
+      <li>Для чого потрібна СКБД? Які функції вона виконує?</li>
+      <li>Які моделі даних ви знаєте? У чому особливість реляційної моделі?</li>
+      <li>Що таке сутність? Атрибут? Первинний ключ?</li>
+      <li>Які типи зв'язків існують між сутностями? Наведіть приклади.</li>
+      <li>Що таке ER-модель? Для чого вона використовується?</li>
+      <li>Чому важлива нормалізація бази даних?</li>
+      <li>Назвіть три популярні СКБД. Яка з них є найпростішою для вивчення?</li>
+      <li>У чому перевага використання БД перед Excel для шкільного журналу?</li>
+      <li>Що таке зовнішній ключ? Як він використовується для зв'язку таблиць?</li>
+    </ol>
+  </div>
+
+  <!-- Додаткове нагадування -->
+  <div class="footer-note">
+    <p>Лекція №3 · Бази даних, СКБД, реляційна модель, модель «сутність-зв'язок»</p>
+    <p style="font-size: 0.85rem; margin-top: 0.3rem;">КЗ СОР "Путивльський педагогічний фаховий коледж імені С.В. Руднєва"</p>
+  </div>
+</div>
+</body>
+</html>

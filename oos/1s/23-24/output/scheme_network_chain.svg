@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="354.24pt" viewBox="0 0 635.4 354.24" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-28T21:15:13.373988</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 354.24 
+L 635.4 354.24 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 37.240615 161.4384 
+L 135.448615 161.4384 
+Q 143.947385 161.4384 143.947385 152.8848 
+L 143.947385 113.4432 
+Q 143.947385 104.8896 135.448615 104.8896 
+L 37.240615 104.8896 
+Q 28.741846 104.8896 28.741846 113.4432 
+L 28.741846 152.8848 
+Q 28.741846 161.4384 37.240615 161.4384 
+z
+" clip-path="url(#pc55976c3bc)" style="fill: #e1f0fe; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 46.683692 91.3464 
+L 126.005538 91.3464 
+Q 139.225846 91.3464 139.225846 78.0408 
+L 139.225846 76.6152 
+Q 139.225846 63.3096 126.005538 63.3096 
+L 46.683692 63.3096 
+Q 33.463385 63.3096 33.463385 76.6152 
+L 33.463385 78.0408 
+Q 33.463385 91.3464 46.683692 91.3464 
+z
+" clip-path="url(#pc55976c3bc)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 193.051385 161.4384 
+L 291.259385 161.4384 
+Q 299.758154 161.4384 299.758154 152.8848 
+L 299.758154 113.4432 
+Q 299.758154 104.8896 291.259385 104.8896 
+L 193.051385 104.8896 
+Q 184.552615 104.8896 184.552615 113.4432 
+L 184.552615 152.8848 
+Q 184.552615 161.4384 193.051385 161.4384 
+z
+" clip-path="url(#pc55976c3bc)" style="fill: #e8f8ec; stroke: #248a3d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 202.494462 91.3464 
+L 281.816308 91.3464 
+Q 295.036615 91.3464 295.036615 78.0408 
+L 295.036615 76.6152 
+Q 295.036615 63.3096 281.816308 63.3096 
+L 202.494462 63.3096 
+Q 189.274154 63.3096 189.274154 76.6152 
+L 189.274154 78.0408 
+Q 189.274154 91.3464 202.494462 91.3464 
+z
+" clip-path="url(#pc55976c3bc)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 348.862154 161.4384 
+L 447.070154 161.4384 
+Q 455.568923 161.4384 455.568923 152.8848 
+L 455.568923 113.4432 
+Q 455.568923 104.8896 447.070154 104.8896 
+L 348.862154 104.8896 
+Q 340.363385 104.8896 340.363385 113.4432 
+L 340.363385 152.8848 
+Q 340.363385 161.4384 348.862154 161.4384 
+z
+" clip-path="url(#pc55976c3bc)" style="fill: #fff4e5; stroke: #c93400; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 358.305231 91.3464 
+L 437.627077 91.3464 
+Q 450.847385 91.3464 450.847385 78.0408 
+L 450.847385 76.6152 
+Q 450.847385 63.3096 437.627077 63.3096 
+L 358.305231 63.3096 
+Q 345.084923 63.3096 345.084923 76.6152 
+L 345.084923 78.0408 
+Q 345.084923 91.3464 358.305231 91.3464 
+z
+" clip-path="url(#pc55976c3bc)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 504.672923 161.4384 
+L 602.880923 161.4384 
+Q 611.379692 161.4384 611.379692 152.8848 
+L 611.379692 113.4432 
+Q 611.379692 104.8896 602.880923 104.8896 
+L 504.672923 104.8896 
+Q 496.174154 104.8896 496.174154 113.4432 
+L 496.174154 152.8848 
+Q 496.174154 161.4384 504.672923 161.4384 
+z
+" clip-path="url(#pc55976c3bc)" style="fill: #ffebea; stroke: #c4001d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 514.116 91.3464 
+L 593.437846 91.3464 
+Q 606.658154 91.3464 606.658154 78.0408 
+L 606.658154 76.6152 
+Q 606.658154 63.3096 593.437846 63.3096 
+L 514.116 63.3096 
+Q 500.895692 63.3096 500.895692 76.6152 
+L 500.895692 78.0408 
+Q 500.895692 91.3464 514.116 91.3464 
+z
+" clip-path="url(#pc55976c3bc)" style="fill: #c4001d"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="33.947063" transform="rotate(-0 317.7 33.947063)">Ланцюжок діагностики мережі</text>
+   </g>
+   <g id="patch_10">
+    <path d="M 145.002757 134.352 
+Q 164.248855 134.352 181.482492 134.352 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 175.882492 131.552 
+L 181.482492 134.352 
+L 175.882492 137.152 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 300.813526 134.352 
+Q 320.059624 134.352 337.293261 134.352 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 331.693261 131.552 
+L 337.293261 134.352 
+L 331.693261 137.152 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 456.624295 134.352 
+Q 475.870393 134.352 493.10403 134.352 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 487.50403 131.552 
+L 493.10403 134.352 
+L 487.50403 137.152 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="86.344615" y="136.850819" transform="rotate(-0 86.344615 136.850819)">Комп'ютер</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="86.344615" y="80.184328" transform="rotate(-0 86.344615 80.184328)">ipconfig</text>
+   </g>
+   <g id="patch_13">
+    <path d="M 86.344615 93.582369 
+Q 86.344615 97.521994 86.344615 99.896371 
+" style="fill: none; stroke: #0071e3; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 88.344615 95.896371 
+L 86.344615 99.896371 
+L 84.344615 95.896371 
+z
+" style="fill: #0071e3; stroke: #0071e3; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(43.4936 193.708859)">Чи є IP-адреса,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(43.015787 209.369766)">маска й шлюз?</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="242.155385" y="136.753163" transform="rotate(-0 242.155385 136.753163)">Маршрутизатор</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="242.155385" y="80.184328" transform="rotate(-0 242.155385 80.184328)">ping &lt;шлюз&gt;</text>
+   </g>
+   <g id="patch_14">
+    <path d="M 242.155385 93.582369 
+Q 242.155385 97.521994 242.155385 99.896371 
+" style="fill: none; stroke: #248a3d; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 244.155385 95.896371 
+L 242.155385 99.896371 
+L 240.155385 95.896371 
+z
+" style="fill: #248a3d; stroke: #248a3d; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(202.567416 193.708859)">Чи відповідає</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(197.489369 209.369766)">власний шлюз?</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="397.966154" y="136.850819" transform="rotate(-0 397.966154 136.850819)">Інтернет</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="397.966154" y="80.184328" transform="rotate(-0 397.966154 80.184328)">ping 8.8.8.8</text>
+   </g>
+   <g id="patch_15">
+    <path d="M 397.966154 93.582369 
+Q 397.966154 97.521994 397.966154 99.896371 
+" style="fill: none; stroke: #c93400; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 399.966154 95.896371 
+L 397.966154 99.896371 
+L 395.966154 95.896371 
+z
+" style="fill: #c93400; stroke: #c93400; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(342.990216 193.708859)">Чи виходить пакет</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(350.347326 209.369766)">за межі мережі?</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="553.776923" y="136.850819" transform="rotate(-0 553.776923 136.850819)">Сервер</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="553.776923" y="80.184328" transform="rotate(-0 553.776923 80.184328)">ping / tracert</text>
+   </g>
+   <g id="patch_16">
+    <path d="M 553.776923 93.582369 
+Q 553.776923 97.521994 553.776923 99.896371 
+" style="fill: none; stroke: #c4001d; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 555.776923 95.896371 
+L 553.776923 99.896371 
+L 551.776923 95.896371 
+z
+" style="fill: #c4001d; stroke: #c4001d; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(509.244111 193.708859)">Чи працює DNS</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(506.877392 209.369766)">і цільовий сайт?</text>
+   </g>
+   <g id="text_14">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(123.046406 265.082531)">Порядок зліва направо — від найближчого вузла до найдальшого.</text>
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(128.298906 280.743438)">Діагностика зупиняється на тому кроці, де з'являється помилка.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc55976c3bc">
+   <rect x="10.8" y="10.8" width="613.8" height="332.64"/>
+  </clipPath>
+ </defs>
+</svg>

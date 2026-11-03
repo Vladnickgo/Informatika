@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Поняття документу. Призначення та класифікація документів. Документообіг</title>
+<style>
+  :root{
+    --bg:#eef2f9;
+    --card:#ffffff;
+    --ink:#1b2333;
+    --muted:#5c6779;
+    --accent:#2f5bea;
+    --accent-2:#7c3aed;
+    --accent-soft:#e8eeff;
+    --line:#dde4f0;
+    --ok:#1f9d55;
+    --warn:#c2410c;
+    --radius:16px;
+    --shadow:0 6px 24px rgba(24,42,86,.08);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    font-size:17px;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---------- HEADER ---------- */
+  header.hero{
+    background:linear-gradient(135deg,#1e3a8a 0%,#2f5bea 45%,#7c3aed 100%);
+    color:#fff;
+    padding:52px 18px 44px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 88% 12%, rgba(255,255,255,.18) 0 90px, transparent 91px),
+      radial-gradient(circle at 6% 92%, rgba(255,255,255,.12) 0 130px, transparent 131px);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:1120px;margin:0 auto;position:relative;z-index:1}
+  .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35);
+    padding:5px 14px;
+    border-radius:999px;
+    font-size:13px;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  header.hero h1{
+    margin:0 0 12px;
+    font-size:clamp(24px,3.4vw,40px);
+    line-height:1.2;
+    font-weight:800;
+    letter-spacing:-.5px;
+  }
+  header.hero p.sub{margin:0;max-width:760px;color:#dbe4ff;font-size:17px}
+
+  /* ---------- NAV ---------- */
+  nav.toc{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 2px 12px rgba(24,42,86,.05);
+  }
+  nav.toc ul{
+    max-width:1120px;margin:0 auto;padding:10px 18px;
+    list-style:none;display:flex;flex-wrap:wrap;gap:6px;
+  }
+  nav.toc a{
+    display:block;padding:7px 13px;border-radius:999px;
+    color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;
+    transition:.2s;white-space:nowrap;
+  }
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent)}
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:30px 30px 34px;
+    margin-top:30px;
+    scroll-margin-top:70px;
+  }
+  h2{
+    font-size:clamp(20px,2.4vw,27px);
+    margin:0 0 6px;
+    display:flex;align-items:center;gap:12px;
+    letter-spacing:-.3px;
+  }
+  h2 .num{
+    flex:0 0 auto;
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff;font-size:16px;font-weight:800;
+    display:grid;place-items:center;
+    box-shadow:0 4px 12px rgba(47,91,234,.35);
+  }
+  h3{
+    font-size:19px;margin:28px 0 10px;color:#16233c;
+    padding-left:12px;border-left:4px solid var(--accent);line-height:1.35;
+  }
+  h4{font-size:16px;margin:20px 0 8px;color:var(--accent-2);text-transform:uppercase;letter-spacing:.5px}
+  p{margin:10px 0}
+  .lead{color:var(--muted);font-size:16px;margin-top:4px}
+
+  /* ---------- CARDS / GRIDS ---------- */
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:18px}
+  .tile{
+    background:var(--accent-soft);
+    border:1px solid #cfdcff;
+    border-radius:13px;
+    padding:18px 18px 16px;
+  }
+  .tile h5{margin:0 0 8px;font-size:15px;text-transform:uppercase;letter-spacing:.7px;color:var(--accent)}
+  .tile ul{margin:0;padding-left:18px;font-size:15px}
+  .tile li{margin:4px 0}
+
+  .note{
+    background:#fff8ec;border-left:5px solid #f0a020;
+    padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0;font-size:15.5px;
+  }
+  .note strong{color:#a15c00}
+  .tip{
+    background:#eefaf2;border-left:5px solid var(--ok);
+    padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0;font-size:15.5px;
+  }
+  .danger{
+    background:#fef2f2;border-left:5px solid #dc2626;
+    padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0;font-size:15.5px;
+  }
+
+  /* ---------- TABLES ---------- */
+  .table-scroll{overflow-x:auto;margin:18px 0;border-radius:12px;border:1px solid var(--line)}
+  table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px;background:#fff}
+  caption{
+    caption-side:top;text-align:left;padding:12px 16px;font-weight:700;
+    background:#f7f9fe;color:#16233c;font-size:15px;border-bottom:1px solid var(--line);
+  }
+  th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  thead th{
+    background:linear-gradient(135deg,#2f5bea,#4a6ff0);
+    color:#fff;font-weight:700;font-size:14px;letter-spacing:.3px;
+    position:sticky;top:0;
+  }
+  tbody tr:nth-child(even){background:#f7f9fe}
+  tbody tr:hover{background:#eaf0ff}
+  td code,th code{
+    background:#eef2fb;padding:2px 6px;border-radius:5px;
+    font-size:13.5px;font-family:"Consolas",monospace;color:#243a72;
+  }
+  .tag{
+    display:inline-block;padding:2px 9px;border-radius:999px;
+    font-size:12.5px;font-weight:700;white-space:nowrap;
+  }
+  .tag.gray{background:#e9edf6;color:#4a5468}
+  .tag.blue{background:#e0e9ff;color:#24409c}
+  .tag.green{background:#dff5e6;color:#12693a}
+  .tag.orange{background:#ffeeda;color:#9a4d05}
+
+  /* ---------- FIGURES ---------- */
+  figure{
+    margin:22px 0;padding:16px;background:#fbfcff;
+    border:1px solid var(--line);border-radius:14px;
+  }
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{
+    text-align:center;font-size:14px;color:var(--muted);
+    margin-top:12px;font-style:italic;
+  }
+
+  /* ---------- STRUCTURE LIST ---------- */
+  .structure{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+  .struct-item{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#f7f9fe;border:1px solid var(--line);
+    border-radius:12px;padding:12px 14px;
+    transition:.2s;
+  }
+  .struct-item:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(24,42,86,.09);border-color:#bfd0ff}
+  .struct-item .idx{
+    flex:0 0 30px;height:30px;border-radius:9px;
+    background:linear-gradient(135deg,#2f5bea,#7c3aed);color:#fff;
+    font-weight:800;font-size:14px;display:grid;place-items:center;
+  }
+  .struct-item span.txt{font-size:15px;font-weight:600;padding-top:3px}
+
+  /* ---------- ACCORDION ---------- */
+  details.q{
+    border:1px solid var(--line);border-radius:12px;
+    margin:10px 0;background:#fff;overflow:hidden;
+    transition:.2s;
+  }
+  details.q[open]{border-color:#b9caff;box-shadow:0 6px 18px rgba(47,91,234,.10)}
+  details.q summary{
+    cursor:pointer;padding:14px 18px;font-weight:600;font-size:15.5px;
+    display:flex;gap:12px;align-items:center;list-style:none;
+    background:#f7f9fe;transition:.2s;
+  }
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary::before{
+    content:"?";
+    flex:0 0 26px;height:26px;border-radius:8px;
+    background:var(--accent-soft);color:var(--accent);
+    font-weight:800;font-size:14px;display:grid;place-items:center;
+  }
+  details.q[open] summary{background:#eaf0ff;color:var(--accent)}
+  details.q[open] summary::before{background:var(--accent);color:#fff}
+  details.q .answer{padding:14px 18px 16px 56px;font-size:15.5px;color:#2b3448;border-top:1px solid var(--line)}
+
+  /* ---------- QUIZ ---------- */
+  .quiz{background:linear-gradient(135deg,#f4f7ff,#faf7ff);border:1px solid #d5dfff;border-radius:14px;padding:22px}
+  .quiz .q-item{margin-bottom:20px}
+  .quiz .q-item p.qtext{font-weight:700;margin:0 0 10px;font-size:15.5px}
+  .quiz label{
+    display:block;padding:9px 14px;margin:6px 0;border-radius:10px;
+    background:#fff;border:1px solid var(--line);cursor:pointer;
+    font-size:15px;transition:.15s;
+  }
+  .quiz label:hover{border-color:#a9bfff;background:#f4f7ff}
+  .quiz input{margin-right:9px;accent-color:var(--accent)}
+  .btn{
+    background:linear-gradient(135deg,#2f5bea,#7c3aed);color:#fff;border:none;
+    padding:12px 28px;border-radius:11px;font-size:15.5px;font-weight:700;
+    cursor:pointer;box-shadow:0 6px 16px rgba(47,91,234,.32);transition:.2s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(47,91,234,.4)}
+  .btn.ghost{background:#fff;color:var(--accent);border:1.5px solid #b9caff;box-shadow:none;margin-left:10px}
+  #quizResult{margin-top:16px;font-weight:700;font-size:16px}
+  .correct{color:var(--ok)}
+  .wrong{color:#dc2626}
+
+  /* ---------- KEYWORDS ---------- */
+  .kw{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .kw span{
+    background:#fff;border:1px dashed #b9caff;color:#26409b;
+    padding:6px 14px;border-radius:999px;font-size:14px;font-weight:600;
+  }
+
+  footer{
+    text-align:center;color:var(--muted);font-size:14px;
+    margin-top:36px;padding:22px;border-top:1px solid var(--line);
+  }
+
+  @media (max-width:640px){
+    section{padding:22px 18px 26px}
+    body{font-size:16px}
+    nav.toc ul{padding:8px 10px}
+    nav.toc a{font-size:13px;padding:6px 10px}
+  }
+  @media print{
+    nav.toc{display:none}
+    section{box-shadow:none;break-inside:avoid}
+    header.hero{background:#1e3a8a}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="badge">КЗ СОР "Путивльський педагогічний фаховий коледж імені С.В. Руднєва"</span>
+    <h1>Поняття документу. Призначення та класифікація документів. Документообіг</h1>
+    <p class="sub">Інформатика</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <ul>
+    <li><a href="#meta">Мета</a></li>
+    <li><a href="#ponyattya">1. Поняття документу</a></li>
+    <li><a href="#klasyfikaciya">2. Класифікація</a></li>
+    <li><a href="#obig">3. Документообіг</a></li>
+    <li><a href="#oformlennya">4. Оформлення</a></li>
+    <li><a href="#struktura">5. Структурні елементи</a></li>
+    <li><a href="#lystuvannya">6. Ділове листування</a></li>
+    <li><a href="#questions">Контрольні запитання</a></li>
+    <li><a href="#quiz">Тест</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+  <!-- ================= МЕТА ================= -->
+  <section id="meta">
+    <h2><span class="num">★</span> Мета заняття</h2>
+    <p class="lead">Після опрацювання матеріалу ви будете знати, розуміти й уміти застосовувати основні положення діловодства.</p>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h5>Вивчити</h5>
+        <ul>
+          <li>значення термінів «документ» і «документообіг»;</li>
+          <li>види документів;</li>
+          <li>особливості офіційно-ділового стилю;</li>
+          <li>види ділових листів;</li>
+          <li>логіку побудови ділового листа;</li>
+          <li>особливості електронного листа.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Вміти</h5>
+        <ul>
+          <li>створювати текст відповідно до структури ділового листа;</li>
+          <li>добирати доречні мовні звороти офіційно-ділового стилю;</li>
+          <li>правильно оформлювати реквізити документа.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Володіти</h5>
+        <ul>
+          <li>навичками використання офіційно-ділового стилю в листуванні;</li>
+          <li>навичками роботи з нормативно-методичною базою діловодства.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 1. ПОНЯТТЯ ================= -->
+  <section id="ponyattya">
+    <h2><span class="num">1</span> Документ як основна форма письмової комунікації</h2>
+
+    <p><strong>Документ</strong> — це інформаційне повідомлення, представлене в певній формі,
+    складене за конкретизованими правилами і завірене в установленому порядку.</p>
+
+    <p><strong>Документ</strong> — це зафіксована на матеріальному носії інформація з реквізитами,
+    що дозволяють її ідентифікувати.</p>
+
+    <div class="note">
+      <strong>Етимологія.</strong> Латинське слово <em>documentum</em> походить від
+      <em>doceo</em> — «вчу» або «сповіщаю» — і за змістом означало <em>свідоцтво, доказ</em>.
+    </div>
+
+    <p>Документи дозволяють <strong>зберегти інформацію</strong> та надати їй
+    <strong>офіційний характер</strong>. Діяльність щодо складання й оформлення документів
+    називається <strong>діловодством</strong>. Найчастіше використовуються текстові документи,
+    що мають паперову або електронну форму.</p>
+
+    <figure>
+      <svg viewBox="0 0 820 440" role="img" aria-label="Схема: складові поняття «документ»">
+        <defs>
+          <linearGradient id="gradCenter" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2f5bea"/>
+            <stop offset="1" stop-color="#7c3aed"/>
+          </linearGradient>
+        </defs>
+
+        <!-- connectors -->
+        <g stroke="#c3cde4" stroke-width="2" stroke-dasharray="7 6">
+          <line x1="400" y1="215" x2="160" y2="112"/>
+          <line x1="400" y1="215" x2="660" y2="112"/>
+          <line x1="400" y1="215" x2="160" y2="330"/>
+          <line x1="400" y1="215" x2="660" y2="330"/>
+        </g>
+
+        <!-- center -->
+        <ellipse cx="400" cy="215" rx="112" ry="56" fill="url(#gradCenter)"/>
+        <text x="400" y="210" text-anchor="middle" fill="#fff" font-size="21" font-weight="800" font-family="Segoe UI, sans-serif">ДОКУМЕНТ</text>
+        <text x="400" y="234" text-anchor="middle" fill="#d9e2ff" font-size="13" font-family="Segoe UI, sans-serif">інформаційне повідомлення</text>
+
+        <!-- boxes -->
+        <g font-family="Segoe UI, sans-serif">
+          <rect x="40" y="34" width="240" height="80" rx="14" fill="#ffffff" stroke="#b9caff" stroke-width="2"/>
+          <text x="160" y="68" text-anchor="middle" font-size="17" font-weight="700" fill="#24409c">Інформація</text>
+          <text x="160" y="92" text-anchor="middle" font-size="13.5" fill="#5c6779">зміст, відомості, дані</text>
+
+          <rect x="540" y="34" width="240" height="80" rx="14" fill="#ffffff" stroke="#b9caff" stroke-width="2"/>
+          <text x="660" y="68" text-anchor="middle" font-size="17" font-weight="700" fill="#24409c">Матеріальний носій</text>
+          <text x="660" y="92" text-anchor="middle" font-size="13.5" fill="#5c6779">папір або електронний файл</text>
+
+          <rect x="40" y="292" width="240" height="80" rx="14" fill="#ffffff" stroke="#b9caff" stroke-width="2"/>
+          <text x="160" y="326" text-anchor="middle" font-size="17" font-weight="700" fill="#24409c">Реквізити</text>
+          <text x="160" y="350" text-anchor="middle" font-size="13.5" fill="#5c6779">дозволяють ідентифікувати</text>
+
+          <rect x="540" y="292" width="240" height="80" rx="14" fill="#ffffff" stroke="#b9caff" stroke-width="2"/>
+          <text x="660" y="326" text-anchor="middle" font-size="17" font-weight="700" fill="#24409c">Установлений порядок</text>
+          <text x="660" y="350" text-anchor="middle" font-size="13.5" fill="#5c6779">оформлення і завірення</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 1. Чотири обов'язкові складники поняття «документ»</figcaption>
+    </figure>
+
+    <h3>Ключові терміни теми</h3>
+    <div class="kw">
+      <span>Документ</span>
+      <span>Реквізит</span>
+      <span>Діловодство</span>
+      <span>Документообіг</span>
+      <span>Уніфікація</span>
+      <span>Офіційно-діловий стиль</span>
+      <span>Діловий лист</span>
+    </div>
+  </section>
+
+  <!-- ================= 2. КЛАСИФІКАЦІЯ ================= -->
+  <section id="klasyfikaciya">
+    <h2><span class="num">2</span> Класифікація документів</h2>
+    <p class="lead">Документи класифікують за призначенням, змістом, періодичністю створення та формою.</p>
+
+    <h3>2.1. Класифікація за метою і призначенням</h3>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 1. Види документів за метою і призначенням</caption>
+        <thead>
+          <tr>
+            <th style="width:20%">Вид документа</th>
+            <th style="width:34%">Призначення</th>
+            <th style="width:28%">Приклади</th>
+            <th style="width:18%">Періодичність</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Організаційно-правові</strong></td>
+            <td>Встановлюють статус організації, структуру, штатну чисельність, права, обов'язки й відповідальність підрозділів та працівників</td>
+            <td>Статут організації, Положення про підрозділ, посадова інструкція</td>
+            <td><span class="tag gray">«до скасування»</span></td>
+          </tr>
+          <tr>
+            <td><strong>Розпорядчі</strong></td>
+            <td>Здійснюють поточну координацію і регулювання процесу управління</td>
+            <td>Накази, розпорядження керівників</td>
+            <td><span class="tag blue">у міру необхідності</span></td>
+          </tr>
+          <tr>
+            <td><strong>Планові</strong></td>
+            <td>Містять перелік, послідовність і терміни намічених до реалізації заходів</td>
+            <td>Різного роду плани, програми</td>
+            <td><span class="tag orange">строго встановлена</span></td>
+          </tr>
+          <tr>
+            <td><strong>Інформаційно-довідкові</strong></td>
+            <td>Призначені для використання в поточній роботі</td>
+            <td>Державні стандарти, технічні умови, інструкції вищестоящих організацій, методичні рекомендації міністерств і відомств, класифікатори</td>
+            <td><span class="tag blue">у міру необхідності</span></td>
+          </tr>
+          <tr>
+            <td><strong>Інформаційно-аналітичні</strong></td>
+            <td>Є результатом переробки внутрішньої первинної інформації про виробництво, продаж, наявність матеріалів або товарів на складі; необхідні для поточної роботи та прийняття рішень</td>
+            <td>Аналітичні огляди, зведення, довідки, акти, доповідні записки</td>
+            <td><span class="tag blue">у міру необхідності</span></td>
+          </tr>
+          <tr>
+            <td><strong>Звітні</strong></td>
+            <td>Містять відомості про результати діяльності за певний період; дозволяють зіставити результати з плановими показниками та подати інформацію у вищі організації й державні органи</td>
+            <td>Статистична та податкова звітність, звіти</td>
+            <td><span class="tag orange">строго встановлена</span></td>
+          </tr>
+          <tr>
+            <td><strong>Документи з особового складу</strong></td>
+            <td>Включають відомості щодо працівників організації; регулюють їх діяльність відповідно до трудового законодавства</td>
+            <td>Трудові договори, особові картки працівників, трудові книжки</td>
+            <td><span class="tag blue">у міру необхідності</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>2.2. Класифікація за змістом</h3>
+    <p>За змістом документи умовно поділяють на <strong>технічні</strong>,
+    <strong>технологічні</strong>, <strong>фінансові</strong>, <strong>комерційні</strong> тощо.</p>
+
+    <h3>2.3. Періодичність створення</h3>
+    <p>Періодичність створення документів визначається їх формою і призначенням:</p>
+    <ul>
+      <li><strong>організаційно-правові</strong> — приймаються «до скасування», тобто до моменту,
+      коли виникає необхідність внести зміни або скасувати їх дію зовсім;</li>
+      <li><strong>розпорядчі</strong> — створюються в міру необхідності;</li>
+      <li><strong>планові та особливо звітні</strong> — мають строгу встановлену періодичність
+      створення і подання у відповідні інстанції.</li>
+    </ul>
+
+    <figure>
+      <svg viewBox="0 0 900 370" role="img" aria-label="Схема класифікації документів">
+        <g font-family="Segoe UI, sans-serif">
+          <!-- root -->
+          <rect x="360" y="8" width="180" height="52" rx="13" fill="#2f5bea"/>
+          <text x="450" y="40" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">ДОКУМЕНТИ</text>
+
+          <!-- connectors -->
+          <g stroke="#c3cde4" stroke-width="2">
+            <path d="M450 60 V90 H120 V122" fill="none"/>
+            <path d="M450 60 V90 H340 V122" fill="none"/>
+            <path d="M450 60 V90 H560 V122" fill="none"/>
+            <path d="M450 60 V90 H780 V122" fill="none"/>
+          </g>
+
+          <!-- level 2 -->
+          <rect x="20" y="122" width="200" height="44" rx="11" fill="#e8eeff" stroke="#b9caff" stroke-width="2"/>
+          <text x="120" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#24409c">За призначенням</text>
+
+          <rect x="240" y="122" width="200" height="44" rx="11" fill="#e8eeff" stroke="#b9caff" stroke-width="2"/>
+          <text x="340" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#24409c">За змістом</text>
+
+          <rect x="460" y="122" width="200" height="44" rx="11" fill="#e8eeff" stroke="#b9caff" stroke-width="2"/>
+          <text x="560" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#24409c">За періодичністю</text>
+
+          <rect x="680" y="122" width="200" height="44" rx="11" fill="#e8eeff" stroke="#b9caff" stroke-width="2"/>
+          <text x="780" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#24409c">За формою</text>
+
+          <!-- level 3 -->
+          <g font-size="13.5" fill="#46506a">
+            <text x="30" y="192">• організаційно-правові</text>
+            <text x="30" y="214">• розпорядчі</text>
+            <text x="30" y="236">• планові</text>
+            <text x="30" y="258">• інформаційно-довідкові</text>
+            <text x="30" y="280">• інформаційно-аналітичні</text>
+            <text x="30" y="302">• звітні</text>
+            <text x="30" y="324">• з особового складу</text>
+
+            <text x="250" y="192">• технічні</text>
+            <text x="250" y="214">• технологічні</text>
+            <text x="250" y="236">• фінансові</text>
+            <text x="250" y="258">• комерційні</text>
+
+            <text x="470" y="192">• «до скасування»</text>
+            <text x="470" y="214">• у міру необхідності</text>
+            <text x="470" y="236">• строго встановлена</text>
+
+            <text x="690" y="192">• паперові</text>
+            <text x="690" y="214">• електронні</text>
+          </g>
+        </g>
+      </svg>
+      <figcaption>Рис. 2. Узагальнена схема класифікації документів</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 3. ДОКУМЕНТООБІГ ================= -->
+  <section id="obig">
+    <h2><span class="num">3</span> Документообіг</h2>
+
+    <p><strong>Документообіг</strong> — це система створення, інтерпретації, передачі,
+    прийому та архівування документів, а також контролю за їх виконанням
+    і захисту від несанкціонованого доступу.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 230" role="img" aria-label="Схема етапів документообігу">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#8fa4d6"/>
+          </marker>
+        </defs>
+        <g font-family="Segoe UI, sans-serif">
+          <rect x="15" y="30" width="150" height="76" rx="13" fill="#ffffff" stroke="#2f5bea" stroke-width="2"/>
+          <text x="90" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#24409c">Створення</text>
+          <text x="90" y="86" text-anchor="middle" font-size="12.5" fill="#5c6779">складання</text>
+
+          <line x1="168" y1="68" x2="192" y2="68" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <rect x="195" y="30" width="150" height="76" rx="13" fill="#ffffff" stroke="#2f5bea" stroke-width="2"/>
+          <text x="270" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#24409c">Інтерпретація</text>
+          <text x="270" y="86" text-anchor="middle" font-size="12.5" fill="#5c6779">опрацювання</text>
+
+          <line x1="348" y1="68" x2="372" y2="68" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <rect x="375" y="30" width="150" height="76" rx="13" fill="#ffffff" stroke="#2f5bea" stroke-width="2"/>
+          <text x="450" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#24409c">Передача</text>
+          <text x="450" y="86" text-anchor="middle" font-size="12.5" fill="#5c6779">надсилання</text>
+
+          <line x1="528" y1="68" x2="552" y2="68" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <rect x="555" y="30" width="150" height="76" rx="13" fill="#ffffff" stroke="#2f5bea" stroke-width="2"/>
+          <text x="630" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#24409c">Прийом</text>
+          <text x="630" y="86" text-anchor="middle" font-size="12.5" fill="#5c6779">реєстрація</text>
+
+          <line x1="708" y1="68" x2="732" y2="68" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <rect x="735" y="30" width="150" height="76" rx="13" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+          <text x="810" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#5b21b6">Архівування</text>
+          <text x="810" y="86" text-anchor="middle" font-size="12.5" fill="#5c6779">зберігання</text>
+
+          <!-- bottom band -->
+          <rect x="15" y="140" width="870" height="58" rx="13" fill="#f4f7ff" stroke="#c3cde4" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <text x="450" y="166" text-anchor="middle" font-size="14.5" font-weight="700" fill="#24409c">Контроль за виконанням документів</text>
+          <text x="450" y="187" text-anchor="middle" font-size="13" fill="#5c6779">Захист від несанкціонованого доступу — наскрізно на всіх етапах</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 3. Етапи документообігу та наскрізні функції контролю й захисту</figcaption>
+    </figure>
+
+    <h3>Нормативно-методична база діловодства</h3>
+    <p>Нормативно-методичну базу діловодства складають:</p>
+    <ul>
+      <li>законодавчі акти у сфері інформації та документації;</li>
+      <li>відповідні укази і розпорядження Президента та Уряду;</li>
+      <li>правові акти, які регламентують питання документаційного забезпечення;</li>
+      <li>правові акти нормативного та інструктивного характеру, методичні документи з діловодства підприємств та установ;</li>
+      <li>державні стандарти на документацію (ГОСТ);</li>
+      <li>уніфіковані системи документації (УСД).</li>
+    </ul>
+
+    <div class="tip">
+      <strong>Уніфікація</strong> — приведення до однаковості (лат. <em>unus</em> — один,
+      <em>facio</em> — роблю, тобто об'єднання). Для впорядкування роботи з документами
+      у сфері управління уніфікація застосовується широко.
+    </div>
+  </section>
+
+  <!-- ================= 4. ОФОРМЛЕННЯ ================= -->
+  <section id="oformlennya">
+    <h2><span class="num">4</span> Загальні правила оформлення документів</h2>
+
+    <h3>4.1. Формат і поля</h3>
+    <p>Документи виконують на аркушах друкарського паперу формату <strong>А4 (297×210 мм)</strong>.
+    При виконанні таблиць, ілюстрацій та додатків допускається використовувати формат
+    <strong>А3 (297×420 мм)</strong>. Аркуш формату А3 підшивається в документ по стороні 297 мм
+    та складається до формату А4.</p>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 2. Формати аркушів та розміри полів</caption>
+        <thead>
+          <tr>
+            <th style="width:22%">Параметр</th>
+            <th style="width:26%">Значення</th>
+            <th>Пояснення</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Основний формат</td>
+            <td><code>А4 — 297×210 мм</code></td>
+            <td>Для всіх текстових документів</td>
+          </tr>
+          <tr>
+            <td>Додатковий формат</td>
+            <td><code>А3 — 297×420 мм</code></td>
+            <td>Для таблиць, ілюстрацій і додатків; підшивається по стороні 297 мм і складається до А4</td>
+          </tr>
+          <tr>
+            <td>Ліве поле</td>
+            <td><code>не менше 20 мм</code></td>
+            <td>Поле для підшивання</td>
+          </tr>
+          <tr>
+            <td>Нижнє поле</td>
+            <td><code>не менше 20 мм</code></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Верхнє поле</td>
+            <td><code>не менше 20 мм</code></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Праве поле</td>
+            <td><code>не менше 10 мм</code></td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>4.2. Нумерація аркушів</h3>
+    <ul>
+      <li>Аркуші документа нумерують <strong>арабськими цифрами</strong>, проставляючи їх
+      у <strong>правому верхньому кутку</strong> аркуша без будь-яких знаків.</li>
+      <li>Нумерація аркушів повинна бути <strong>наскрізною</strong> для всього документа.</li>
+      <li>На <strong>титульному аркуші</strong> (ТА), що є першим аркушем документа,
+      номер <strong>не ставлять</strong>, але враховують його в загальній нумерації.</li>
+    </ul>
+
+    <h3>4.3. Параметри тексту</h3>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 3. Технічні параметри оформлення тексту</caption>
+        <thead>
+          <tr>
+            <th style="width:34%">Параметр</th>
+            <th style="width:30%">Вимога</th>
+            <th>Примітка</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Розміщення тексту</td>
+            <td>На одному боці аркуша</td>
+            <td>Двосторонній друк не допускається</td>
+          </tr>
+          <tr>
+            <td>Міжрядковий інтервал</td>
+            <td><code>1,5 інтервали</code></td>
+            <td>Машинний (комп'ютерний) спосіб</td>
+          </tr>
+          <tr>
+            <td>Кегль основного тексту</td>
+            <td><code>14 п.</code></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Кегль для елементів тексту</td>
+            <td><code>12 п.</code></td>
+            <td>Таблиці, примітки тощо</td>
+          </tr>
+          <tr>
+            <td>Рекомендований шрифт</td>
+            <td><code>Times New Roman</code></td>
+            <td>Гарнітура з засічками</td>
+          </tr>
+          <tr>
+            <td>Нумерація аркушів</td>
+            <td>Правий верхній куток</td>
+            <td>Арабські цифри, без знаків, наскрізна</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="danger">
+      <strong>У тексті забороняється застосовувати:</strong>
+      <ul style="margin:10px 0 0">
+        <li>різні науково-технічні терміни, близькі за смислом (синоніми), для одного й того ж поняття;</li>
+        <li>тавтологічні словосполучення (наприклад, <em>прейскурант цін</em>);</li>
+        <li>техніцизми та професіоналізми;</li>
+        <li>іноземні слова і терміни за наявності рівнозначних в українській мові
+            (<em>превалювати</em> → <em>переважати</em>, <em>лідирувати</em> → <em>очолювати</em>);</li>
+        <li>індекси (ГОСТ, ДСТУ, ТУ) усіх категорій стандартів, технічних умов та інших
+            нормативних документів <strong>без їх реєстраційного номера</strong>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 5. СТРУКТУРА ================= -->
+  <section id="struktura">
+    <h2><span class="num">5</span> Структура документа та вимоги до його елементів</h2>
+
+    <p>У загальному випадку документ містить такі структурні елементи:</p>
+
+    <div class="structure">
+      <div class="struct-item"><span class="idx">1</span><span class="txt">Титульний аркуш</span></div>
+      <div class="struct-item"><span class="idx">2</span><span class="txt">Реферат</span></div>
+      <div class="struct-item"><span class="idx">3</span><span class="txt">Зміст</span></div>
+      <div class="struct-item"><span class="idx">4</span><span class="txt">Перелік позначень та скорочень (за наявності)</span></div>
+      <div class="struct-item"><span class="idx">5</span><span class="txt">Вступ</span></div>
+      <div class="struct-item"><span class="idx">6</span><span class="txt">Основна частина</span></div>
+      <div class="struct-item"><span class="idx">7</span><span class="txt">Висновки</span></div>
+      <div class="struct-item"><span class="idx">8</span><span class="txt">Список джерел інформації</span></div>
+      <div class="struct-item"><span class="idx">9</span><span class="txt">Додатки (за наявності)</span></div>
+    </div>
+
+    <h3>5.1. Зміст</h3>
+    <ul>
+      <li>Найменування розділів, підрозділів та пунктів указують <strong>разом з їх порядковими номерами</strong>,
+      додатки — з їх позначенням та найменуванням.</li>
+      <li>Усі найменування записують <strong>малими літерами з першої великої</strong>.</li>
+      <li>Номери та найменування підрозділів (пунктів) приводять після абзацного відступу,
+      який дорівнює <strong>двом знакам (0,5 мм)</strong>, відносно номерів розділів (підрозділів).</li>
+      <li>При необхідності продовження запису найменування розділу, підрозділу, пункту на другий
+      (наступний) рядок його починають <strong>на рівні початку цього найменування на першому рядку</strong>.</li>
+    </ul>
+
+    <h3>5.2. Вступ</h3>
+    <ul>
+      <li>Необхідно подати стислу характеристику сучасного стану наукової (технічної) проблеми (питання),
+      якій присвячена робота.</li>
+      <li>Відзначити <strong>актуальність та новизну</strong> розроблюваної теми.</li>
+      <li>Історичні довідки, опис раніше надрукованих робіт та загальновідомі положення
+      у вступі <strong>не наводять</strong>.</li>
+      <li>Вступ не повинен займати <strong>більше двох сторінок</strong>.</li>
+      <li>Текст вступу <strong>на пункти не поділяють</strong>.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Пам'ятка.</strong> Якщо виникає сумнів щодо оформлення конкретного елемента —
+      перевіряйте вимоги відповідного стандарту (ДСТУ) та реєстраційний номер документа,
+      на який посилаєтесь.
+    </div>
+  </section>
+
+  <!-- ================= 6. ДІЛОВЕ ЛИСТУВАННЯ ================= -->
+  <section id="lystuvannya">
+    <h2><span class="num">6</span> Стиль ділового листування</h2>
+
+    <p><strong>Офіційно-діловий стиль</strong> — функціональний різновид літературної мови,
+    що обслуговує сферу офіційних відносин: законодавство, управління, діловодство,
+    міжнародні та комерційні стосунки.</p>
+
+    <h3>6.1. Основні ознаки офіційно-ділового стилю</h3>
+    <div class="grid-3">
+      <div class="tile">
+        <h5>Точність</h5>
+        <ul>
+          <li>однозначність формулювань;</li>
+          <li>використання термінів і стандартних зворотів;</li>
+          <li>конкретні дати, суми, назви.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Стандартизованість</h5>
+        <ul>
+          <li>усталена структура тексту;</li>
+          <li>готові мовні кліше;</li>
+          <li>єдині реквізити.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Нейтральність</h5>
+        <ul>
+          <li>відсутність емоційної лексики;</li>
+          <li>без розмовних і просторічних слів;</li>
+          <li>стриманий, ввічливий тон.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>6.2. Види ділових листів</h3>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 4. Основні види ділових листів</caption>
+        <thead>
+          <tr>
+            <th style="width:26%">Вид листа</th>
+            <th style="width:40%">Мета</th>
+            <th>Характерні звороти</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Лист-запит</strong></td>
+            <td>Отримати інформацію, документи, роз'яснення</td>
+            <td>«Просимо повідомити…», «Надайте, будь ласка, інформацію про…»</td>
+          </tr>
+          <tr>
+            <td><strong>Лист-відповідь</strong></td>
+            <td>Надати відповідь на запит</td>
+            <td>«У відповідь на Ваш лист від… повідомляємо…»</td>
+          </tr>
+          <tr>
+            <td><strong>Лист-пропозиція (оферта)</strong></td>
+            <td>Запропонувати товари, послуги, співпрацю</td>
+            <td>«Пропонуємо Вам розглянути можливість…»</td>
+          </tr>
+          <tr>
+            <td><strong>Лист-претензія</strong></td>
+            <td>Заявити про порушення умов договору</td>
+            <td>«Висуваємо претензію щодо…», «Змушені звернутися…»</td>
+          </tr>
+          <tr>
+            <td><strong>Лист-нагадування</strong></td>
+            <td>Нагадати про виконання зобов'язань</td>
+            <td>«Нагадуємо, що термін… спливає…»</td>
+          </tr>
+          <tr>
+            <td><strong>Лист-повідомлення</strong></td>
+            <td>Поінформувати про подію, зміни, рішення</td>
+            <td>«Повідомляємо, що…», «Інформуємо про…»</td>
+          </tr>
+          <tr>
+            <td><strong>Лист-запрошення</strong></td>
+            <td>Запросити на захід, зустріч, переговори</td>
+            <td>«Запрошуємо Вас взяти участь у…»</td>
+          </tr>
+          <tr>
+            <td><strong>Супровідний лист</strong></td>
+            <td>Пояснити мету надсилання документів</td>
+            <td>«Надсилаємо Вам…», «До листа додаємо…»</td>
+          </tr>
+          <tr>
+            <td><strong>Лист-подяка</strong></td>
+            <td>Висловити вдячність</td>
+            <td>«Висловлюємо щиру подяку за…»</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>6.3. Логіка побудови ділового листа</h3>
+
+    <figure>
+      <svg viewBox="0 0 900 300" role="img" aria-label="Структура ділового листа">
+        <g font-family="Segoe UI, sans-serif">
+          <rect x="30" y="20" width="840" height="46" rx="11" fill="#e8eeff" stroke="#b9caff" stroke-width="2"/>
+          <text x="52" y="49" font-size="15" font-weight="700" fill="#24409c">1. Звертання</text>
+          <text x="300" y="49" font-size="14" fill="#46506a">«Шановний Іване Петровичу!», «Шановні панове!»</text>
+
+          <rect x="30" y="78" width="840" height="46" rx="11" fill="#eef6ff" stroke="#b9caff" stroke-width="2"/>
+          <text x="52" y="107" font-size="15" font-weight="700" fill="#24409c">2. Вступ</text>
+          <text x="300" y="107" font-size="14" fill="#46506a">привід, причина звернення (посилання на документ, подію)</text>
+
+          <rect x="30" y="136" width="840" height="46" rx="11" fill="#f2f0ff" stroke="#c9baff" stroke-width="2"/>
+          <text x="52" y="165" font-size="15" font-weight="700" fill="#5b21b6">3. Основна частина</text>
+          <text x="300" y="165" font-size="14" fill="#46506a">виклад суті питання, аргументи, обґрунтування</text>
+
+          <rect x="30" y="194" width="840" height="46" rx="11" fill="#eefaf2" stroke="#a9e0bf" stroke-width="2"/>
+          <text x="52" y="223" font-size="15" font-weight="700" fill="#12693a">4. Висновок</text>
+          <text x="300" y="223" font-size="14" fill="#46506a">прохання, пропозиція, конкретна дія з боку адресата</text>
+
+          <rect x="30" y="252" width="840" height="40" rx="11" fill="#f7f9fe" stroke="#c3cde4" stroke-width="2"/>
+          <text x="52" y="278" font-size="15" font-weight="700" fill="#4a5468">5. Підпис, дата, реквізити виконавця</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 4. Логіко-структурна схема ділового листа</figcaption>
+    </figure>
+
+    <h3>6.4. Вимоги до оформлення ділового листа</h3>
+    <ul>
+      <li>Лист оформлюють на офіційному бланку або чистому аркуші А4 з дотриманням полів.</li>
+      <li>Обсяг листа — <strong>не більше однієї–двох сторінок</strong>; суть викладають у перших абзацах.</li>
+      <li>Кожне питання — окремий абзац; один лист — одне питання (за можливості).</li>
+      <li>Дата й номер листа проставляються обов'язково.</li>
+      <li>Додатки перелічують із зазначенням кількості аркушів.</li>
+      <li>Використовують стандартні мовні звороти, не вживають займенник «я» — пишуть від імені установи («просимо», «повідомляємо»).</li>
+      <li>Тон — ввічливий, стриманий, без емоцій та категоричних звинувачень.</li>
+    </ul>
+
+    <h3>6.5. Особливості стилю електронного ділового листа</h3>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h5>Обов'язково</h5>
+        <ul>
+          <li>заповнена тема листа (конкретна, змістовна);</li>
+          <li>звертання на початку;</li>
+          <li>стислий виклад суті (5–7 речень);</li>
+          <li>підпис: ім'я, посада, установа, контакти;</li>
+          <li>згадка про вкладення в тексті листа.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Рекомендовано</h5>
+        <ul>
+          <li>одне питання — один лист;</li>
+          <li>абзаци по 2–4 рядки;</li>
+          <li>використання списків для переліків;</li>
+          <li>перевірка орфографії перед надсиланням;</li>
+          <li>відповідь протягом 1–2 робочих днів.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Неприпустимо</h5>
+        <ul>
+          <li>порожня тема листа;</li>
+          <li>текст, набраний великими літерами;</li>
+          <li>сленг, скорочення, смайлики;</li>
+          <li>емоційні оцінки та іронія;</li>
+          <li>вкладення без пояснення в тексті.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>Практична порада.</strong> Перед надсиланням ділового листа прочитайте його
+      «очима адресата»: чи зрозуміло, <em>хто</em> пише, <em>що</em> просить і
+      <em>до якого терміну</em> потрібна відповідь.
+    </div>
+  </section>
+
+  <!-- ================= КОНТРОЛЬНІ ЗАПИТАННЯ ================= -->
+  <section id="questions">
+    <h2><span class="num">?</span> Контрольні запитання</h2>
+    <p class="lead">Дайте письмову або усну відповідь. Натисніть на запитання, щоб побачити підказку.</p>
+
+    <details class="q">
+      <summary>Що таке документ? Наведіть два формулювання.</summary>
+      <div class="answer">
+        1) Інформаційне повідомлення, представлене в певній формі, складене за конкретизованими
+        правилами і завірене в установленому порядку.<br>
+        2) Зафіксована на матеріальному носії інформація з реквізитами, що дозволяють її ідентифікувати.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Яке походження слова «документ»?</summary>
+      <div class="answer">
+        Від латинського <em>documentum</em>, що походить від <em>doceo</em> — «вчу», «сповіщаю»;
+        за змістом означало свідоцтво, доказ.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Що таке діловодство?</summary>
+      <div class="answer">
+        Діяльність щодо складання та оформлення документів.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>На які групи поділяють документи за метою і призначенням?</summary>
+      <div class="answer">
+        Організаційно-правові, розпорядчі, планові, інформаційно-довідкові,
+        інформаційно-аналітичні, звітні, документи з особового складу.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які документи належать до організаційно-правових? Наведіть приклади.</summary>
+      <div class="answer">
+        Ті, що встановлюють статус організації, структуру, штатну чисельність, права, обов'язки
+        й відповідальність підрозділів і працівників. Приклади: Статут організації,
+        Положення про підрозділ, посадова інструкція.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Як визначається періодичність створення документів?</summary>
+      <div class="answer">
+        Формою і призначенням документа: організаційно-правові — «до скасування»;
+        розпорядчі — у міру необхідності; планові та звітні — строго встановлена періодичність.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Дайте визначення документообігу.</summary>
+      <div class="answer">
+        Система створення, інтерпретації, передачі, прийому та архівування документів,
+        а також контролю за їх виконанням і захисту від несанкціонованого доступу.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Що складає нормативно-методичну базу діловодства?</summary>
+      <div class="answer">
+        Законодавчі акти у сфері інформації та документації; укази й розпорядження Президента
+        та Уряду; правові акти з документаційного забезпечення; правові акти нормативного
+        та інструктивного характеру й методичні документи; державні стандарти (ГОСТ);
+        уніфіковані системи документації (УСД).
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Що означає термін «уніфікація»?</summary>
+      <div class="answer">
+        Приведення до однаковості (лат. <em>unus</em> — один, <em>facio</em> — роблю).
+        Застосовується для впорядкування роботи з документами у сфері управління.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які формати аркушів використовують і які встановлені розміри полів?</summary>
+      <div class="answer">
+        Основний — А4 (297×210 мм); для таблиць, ілюстрацій та додатків — А3 (297×420 мм),
+        який підшивають по стороні 297 мм і складають до А4. Поля: ліве, нижнє, верхнє —
+        не менше 20 мм; праве — не менше 10 мм.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які вимоги до нумерації аркушів документа?</summary>
+      <div class="answer">
+        Арабськими цифрами у правому верхньому кутку без будь-яких знаків; нумерація наскрізна
+        для всього документа; на титульному аркуші номер не ставлять, але враховують
+        у загальній нумерації.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які параметри тексту встановлені для документів?</summary>
+      <div class="answer">
+        Текст на одному боці аркуша; міжрядковий інтервал — 1,5; кегль основного тексту — 14 п.,
+        для елементів тексту (таблиць, приміток) — 12 п.; рекомендований шрифт — Times New Roman.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Що забороняється застосовувати в тексті документа?</summary>
+      <div class="answer">
+        Синоніми для одного й того ж поняття; тавтологічні словосполучення (прейскурант цін);
+        техніцизми та професіоналізми; іноземні слова за наявності рівнозначних українських
+        (превалювати — переважати, лідирувати — очолювати); індекси стандартів (ГОСТ, ДСТУ, ТУ)
+        без реєстраційного номера.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які вимоги до вступу документа?</summary>
+      <div class="answer">
+        Стисла характеристика сучасного стану проблеми, актуальність і новизна теми;
+        без історичних довідок і загальновідомих положень; обсяг — не більше двох сторінок;
+        на пункти не поділяють.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які вимоги до оформлення змісту документа?</summary>
+      <div class="answer">
+        Найменування розділів, підрозділів і пунктів — з порядковими номерами, додатки —
+        з позначенням і найменуванням; усі найменування записують малими літерами з першої
+        великої; номери підрозділів — після абзацного відступу 0,5 мм; продовження рядка —
+        на рівні початку найменування.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Назвіть види ділових листів.</summary>
+      <div class="answer">
+        Лист-запит, лист-відповідь, лист-пропозиція (оферта), лист-претензія,
+        лист-нагадування, лист-повідомлення, лист-запрошення, супровідний лист, лист-подяка.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Яка логіка побудови ділового листа?</summary>
+      <div class="answer">
+        1) Звертання. 2) Вступ (привід, причина звернення). 3) Основна частина (виклад суті,
+        аргументи). 4) Висновок (прохання, пропозиція, конкретна дія). 5) Підпис, дата,
+        реквізити виконавця.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які особливості стилю електронного ділового листа?</summary>
+      <div class="answer">
+        Обов'язкова змістовна тема; наявність звертання; стислий виклад суті; підпис
+        з контактами; згадка про вкладення в тексті. Неприпустимі: порожня тема, текст
+        великими літерами, сленг і скорочення, смайлики, емоційні оцінки.
+      </div>
+    </details>
+  </section>
+
+  <!-- ================= ТЕСТ ================= -->
+  <section id="quiz">
+    <h2><span class="num">✓</span> Тест для самоперевірки</h2>
+    <p class="lead">Оберіть одну правильну відповідь у кожному запитанні та натисніть «Перевірити».</p>
+
+    <div class="quiz" id="quizBox">
+      <div class="q-item" data-answer="b">
+        <p class="qtext">1. Від якого латинського дієслова походить слово «documentum»?</p>
+        <label><input type="radio" name="q1" value="a"> docere — навчати</label>
+        <label><input type="radio" name="q1" value="b"> doceo — вчу, сповіщаю</label>
+        <label><input type="radio" name="q1" value="c"> ducere — вести</label>
+        <label><input type="radio" name="q1" value="d"> dicere — говорити</label>
+      </div>
+
+      <div class="q-item" data-answer="c">
+        <p class="qtext">2. Який документ належить до організаційно-правових?</p>
+        <label><input type="radio" name="q2" value="a"> Наказ керівника</label>
+        <label><input type="radio" name="q2" value="b"> Доповідна записка</label>
+        <label><input type="radio" name="q2" value="c"> Статут організації</label>
+        <label><input type="radio" name="q2" value="d"> Аналітичний огляд</label>
+      </div>
+
+      <div class="q-item" data-answer="a">
+        <p class="qtext">3. Який формат аркуша допускається для таблиць, ілюстрацій та додатків?</p>
+        <label><input type="radio" name="q3" value="a"> А3 (297×420 мм)</label>
+        <label><input type="radio" name="q3" value="b"> А5 (210×148 мм)</label>
+        <label><input type="radio" name="q3" value="c"> А4 (297×210 мм)</label>
+        <label><input type="radio" name="q3" value="d"> А2 (594×420 мм)</label>
+      </div>
+
+      <div class="q-item" data-answer="d">
+        <p class="qtext">4. Який мінімальний розмір правого поля аркуша?</p>
+        <label><input type="radio" name="q4" value="a"> 5 мм</label>
+        <label><input type="radio" name="q4" value="b"> 15 мм</label>
+        <label><input type="radio" name="q4" value="c"> 20 мм</label>
+        <label><input type="radio" name="q4" value="d"> 10 мм</label>
+      </div>
+
+      <div class="q-item" data-answer="b">
+        <p class="qtext">5. Який міжрядковий інтервал встановлено для тексту документа?</p>
+        <label><input type="radio" name="q5" value="a"> Одинарний</label>
+        <label><input type="radio" name="q5" value="b"> Півтора інтервали</label>
+        <label><input type="radio" name="q5" value="c"> Подвійний</label>
+        <label><input type="radio" name="q5" value="d"> Два з половиною інтервали</label>
+      </div>
+
+      <div class="q-item" data-answer="c">
+        <p class="qtext">6. Що таке документообіг?</p>
+        <label><input type="radio" name="q6" value="a"> Діяльність щодо складання та оформлення документів</label>
+        <label><input type="radio" name="q6" value="b"> Приведення документів до однаковості</label>
+        <label><input type="radio" name="q6" value="c"> Система створення, інтерпретації, передачі, прийому та архівування документів</label>
+        <label><input type="radio" name="q6" value="d"> Перелік нормативних актів з діловодства</label>
+      </div>
+
+      <div class="q-item" data-answer="a">
+        <p class="qtext">7. Де проставляють номер аркуша документа?</p>
+        <label><input type="radio" name="q7" value="a"> У правому верхньому кутку без будь-яких знаків</label>
+        <label><input type="radio" name="q7" value="b"> У лівому нижньому кутку</label>
+        <label><input type="radio" name="q7" value="c"> По центру верхнього поля</label>
+        <label><input type="radio" name="q7" value="d"> У правому нижньому кутку</label>
+      </div>
+
+      <div class="q-item" data-answer="d">
+        <p class="qtext">8. Який елемент НЕ належить до структури ділового листа?</p>
+        <label><input type="radio" name="q8" value="a"> Звертання</label>
+        <label><input type="radio" name="q8" value="b"> Основна частина</label>
+        <label><input type="radio" name="q8" value="c"> Висновок</label>
+        <label><input type="radio" name="q8" value="d"> Реферат</label>
+      </div>
+
+      <button class="btn" id="checkBtn" type="button">Перевірити</button>
+      <button class="btn ghost" id="resetBtn" type="button">Скинути</button>
+      <div id="quizResult"></div>
+    </div>
+  </section>
+
+  <footer>
+    Навчальний матеріал з теми «Поняття документу. Призначення та класифікація документів.
+    Документообіг. Загальні правила оформлення документів. Стиль ділового листування»
+  </footer>
+
+</div>
+
+<script>
+  /* ---------- QUIZ ---------- */
+  (function () {
+    var box = document.getElementById('quizBox');
+    var items = box.querySelectorAll('.q-item');
+    var resultEl = document.getElementById('quizResult');
+
+    document.getElementById('checkBtn').addEventListener('click', function () {
+      var score = 0;
+      var unanswered = 0;
+
+      items.forEach(function (item, i) {
+        var answer = item.getAttribute('data-answer');
+        var chosen = item.querySelector('input:checked');
+        var labels = item.querySelectorAll('label');
+
+        labels.forEach(function (l) {
+          l.style.background = '#fff';
+          l.style.borderColor = '#dde4f0';
+          l.style.fontWeight = 'normal';
+        });
+
+        if (!chosen) { unanswered++; return; }
+
+        labels.forEach(function (l) {
+          var input = l.querySelector('input');
+          if (input.value === answer) {
+            l.style.background = '#e7f8ee';
+            l.style.borderColor = '#1f9d55';
+            l.style.fontWeight = '600';
+          }
+          if (input.checked && input.value !== answer) {
+            l.style.background = '#fdecec';
+            l.style.borderColor = '#dc2626';
+          }
+        });
+
+        if (chosen.value === answer) score++;
+      });
+
+      var total = items.length;
+      var text = 'Результат: ' + score + ' з ' + total + ' правильних.';
+      if (unanswered > 0) text += ' Без відповіді: ' + unanswered + '.';
+
+      resultEl.textContent = text;
+      resultEl.className = score === total ? 'correct' : (score >= total / 2 ? '' : 'wrong');
+      resultEl.style.color = score === total ? '#1f9d55' : (score >= total / 2 ? '#c2410c' : '#dc2626');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      box.querySelectorAll('input[type=radio]').forEach(function (r) { r.checked = false; });
+      box.querySelectorAll('label').forEach(function (l) {
+        l.style.background = '#fff';
+        l.style.borderColor = '#dde4f0';
+        l.style.fontWeight = 'normal';
+      });
+      resultEl.textContent = '';
+    });
+  })();
+
+  /* ---------- ACTIVE NAV HIGHLIGHT ---------- */
+  (function () {
+    var links = document.querySelectorAll('nav.toc a');
+    var sections = Array.prototype.map.call(links, function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+
+    function onScroll() {
+      var pos = window.scrollY + 120;
+      var current = 0;
+      sections.forEach(function (s, i) {
+        if (s && s.offsetTop <= pos) current = i;
+      });
+      links.forEach(function (a, i) {
+        a.style.background = i === current ? '#e8eeff' : 'transparent';
+        a.style.color = i === current ? '#2f5bea' : '';
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>

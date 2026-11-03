@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття: Логічні елементи тексту. Шаблони та формуляр-зразки. Реквізити документа</title>
+<style>
+  :root{
+    --bg:#eef2f9;
+    --card:#ffffff;
+    --ink:#1b2333;
+    --muted:#5c6779;
+    --accent:#2f5bea;
+    --accent-2:#7c3aed;
+    --accent-soft:#e8eeff;
+    --line:#dde4f0;
+    --ok:#1f9d55;
+    --radius:16px;
+    --shadow:0 6px 24px rgba(24,42,86,.08);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    font-size:17px;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---------- HEADER ---------- */
+  header.hero{
+    background:linear-gradient(135deg,#0f2a6b 0%,#2f5bea 48%,#7c3aed 100%);
+    color:#fff;
+    padding:52px 18px 44px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(255,255,255,.16) 0 100px, transparent 101px),
+      radial-gradient(circle at 4% 94%, rgba(255,255,255,.11) 0 140px, transparent 141px);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:1120px;margin:0 auto;position:relative;z-index:1}
+  .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35);
+    padding:5px 14px;
+    border-radius:999px;
+    font-size:13px;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  header.hero h1{
+    margin:0 0 12px;
+    font-size:clamp(23px,3.2vw,38px);
+    line-height:1.22;
+    font-weight:800;
+    letter-spacing:-.5px;
+  }
+  header.hero p.sub{margin:0;max-width:820px;color:#dbe4ff;font-size:17px}
+
+  /* ---------- NAV ---------- */
+  nav.toc{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.93);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 2px 12px rgba(24,42,86,.05);
+  }
+  nav.toc ul{
+    max-width:1120px;margin:0 auto;padding:10px 18px;
+    list-style:none;display:flex;flex-wrap:wrap;gap:6px;
+  }
+  nav.toc a{
+    display:block;padding:7px 13px;border-radius:999px;
+    color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;
+    transition:.2s;white-space:nowrap;
+  }
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent)}
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:30px 30px 34px;
+    margin-top:30px;
+    scroll-margin-top:70px;
+  }
+  h2{
+    font-size:clamp(20px,2.4vw,27px);
+    margin:0 0 6px;
+    display:flex;align-items:center;gap:12px;
+    letter-spacing:-.3px;
+  }
+  h2 .num{
+    flex:0 0 auto;
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff;font-size:16px;font-weight:800;
+    display:grid;place-items:center;
+    box-shadow:0 4px 12px rgba(47,91,234,.35);
+  }
+  h3{
+    font-size:19px;margin:28px 0 10px;color:#16233c;
+    padding-left:12px;border-left:4px solid var(--accent);line-height:1.35;
+  }
+  p{margin:10px 0}
+  .lead{color:var(--muted);font-size:16px;margin-top:4px}
+  ul,ol{margin:10px 0;padding-left:24px}
+  li{margin:6px 0}
+
+  /* ---------- TILES ---------- */
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:18px}
+  .tile{
+    background:var(--accent-soft);
+    border:1px solid #cfdcff;
+    border-radius:13px;
+    padding:18px 18px 16px;
+  }
+  .tile h5{margin:0 0 8px;font-size:15px;text-transform:uppercase;letter-spacing:.7px;color:var(--accent)}
+  .tile ul{margin:0;padding-left:18px;font-size:15px}
+  .tile li{margin:4px 0}
+
+  .note{
+    background:#fff8ec;border-left:5px solid #f0a020;
+    padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0;font-size:15.5px;
+  }
+  .tip{
+    background:#eefaf2;border-left:5px solid var(--ok);
+    padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0;font-size:15.5px;
+  }
+  .danger{
+    background:#fef2f2;border-left:5px solid #dc2626;
+    padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0;font-size:15.5px;
+  }
+
+  /* ---------- TABLES ---------- */
+  .table-scroll{overflow-x:auto;margin:18px 0;border-radius:12px;border:1px solid var(--line)}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px;background:#fff}
+  caption{
+    caption-side:top;text-align:left;padding:12px 16px;font-weight:700;
+    background:#f7f9fe;color:#16233c;font-size:15px;border-bottom:1px solid var(--line);
+  }
+  th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  thead th{
+    background:linear-gradient(135deg,#2f5bea,#4a6ff0);
+    color:#fff;font-weight:700;font-size:14px;letter-spacing:.3px;
+  }
+  tbody tr:nth-child(even){background:#f7f9fe}
+  tbody tr:hover{background:#eaf0ff}
+  td code{
+    background:#eef2fb;padding:2px 6px;border-radius:5px;
+    font-size:13.5px;font-family:"Consolas",monospace;color:#243a72;
+  }
+  .tag{
+    display:inline-block;padding:2px 9px;border-radius:999px;
+    font-size:12.5px;font-weight:700;white-space:nowrap;
+  }
+  .tag.gray{background:#e9edf6;color:#4a5468}
+  .tag.blue{background:#e0e9ff;color:#24409c}
+  .tag.green{background:#dff5e6;color:#12693a}
+  .tag.orange{background:#ffeeda;color:#9a4d05}
+
+  /* ---------- FIGURES ---------- */
+  figure{
+    margin:22px 0;padding:16px;background:#fbfcff;
+    border:1px solid var(--line);border-radius:14px;
+  }
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{
+    text-align:center;font-size:14px;color:var(--muted);
+    margin-top:12px;font-style:italic;
+  }
+
+  /* ---------- LEGEND GRID (for doc layout) ---------- */
+  .legend{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:10px;margin-top:6px;
+  }
+  .legend .li{
+    display:flex;gap:11px;align-items:flex-start;
+    background:#f7f9fe;border:1px solid var(--line);
+    border-radius:11px;padding:10px 13px;font-size:14.5px;
+  }
+  .legend .li b{
+    flex:0 0 26px;height:26px;border-radius:8px;
+    background:linear-gradient(135deg,#2f5bea,#7c3aed);color:#fff;
+    font-size:13px;display:grid;place-items:center;
+  }
+
+  /* ---------- TASK CARDS ---------- */
+  .tasks{counter-reset:task;display:grid;gap:14px;margin-top:18px}
+  .task{
+    counter-increment:task;
+    background:#fff;border:1px solid var(--line);border-radius:13px;
+    padding:16px 18px 16px 62px;position:relative;
+    transition:.2s;
+  }
+  .task:hover{border-color:#bfd0ff;box-shadow:0 8px 20px rgba(24,42,86,.08)}
+  .task::before{
+    content:counter(task);
+    position:absolute;left:16px;top:16px;
+    width:32px;height:32px;border-radius:9px;
+    background:linear-gradient(135deg,#2f5bea,#7c3aed);color:#fff;
+    font-weight:800;font-size:15px;display:grid;place-items:center;
+  }
+  .task h6{margin:0 0 6px;font-size:16px;color:#16233c}
+  .task p{margin:4px 0;font-size:15px}
+
+  /* ---------- ACCORDION ---------- */
+  details.q{
+    border:1px solid var(--line);border-radius:12px;
+    margin:10px 0;background:#fff;overflow:hidden;
+    transition:.2s;
+  }
+  details.q[open]{border-color:#b9caff;box-shadow:0 6px 18px rgba(47,91,234,.10)}
+  details.q summary{
+    cursor:pointer;padding:14px 18px;font-weight:600;font-size:15.5px;
+    display:flex;gap:12px;align-items:center;list-style:none;
+    background:#f7f9fe;transition:.2s;
+  }
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary::before{
+    content:"?";
+    flex:0 0 26px;height:26px;border-radius:8px;
+    background:var(--accent-soft);color:var(--accent);
+    font-weight:800;font-size:14px;display:grid;place-items:center;
+  }
+  details.q[open] summary{background:#eaf0ff;color:var(--accent)}
+  details.q[open] summary::before{background:var(--accent);color:#fff}
+  details.q .answer{padding:14px 18px 16px 56px;font-size:15.5px;color:#2b3448;border-top:1px solid var(--line)}
+
+  /* ---------- QUIZ ---------- */
+  .quiz{background:linear-gradient(135deg,#f4f7ff,#faf7ff);border:1px solid #d5dfff;border-radius:14px;padding:22px}
+  .quiz .q-item{margin-bottom:20px}
+  .quiz .qtext{font-weight:700;margin:0 0 10px;font-size:15.5px}
+  .quiz label{
+    display:block;padding:9px 14px;margin:6px 0;border-radius:10px;
+    background:#fff;border:1px solid var(--line);cursor:pointer;
+    font-size:15px;transition:.15s;
+  }
+  .quiz label:hover{border-color:#a9bfff;background:#f4f7ff}
+  .quiz input{margin-right:9px;accent-color:var(--accent)}
+  .btn{
+    background:linear-gradient(135deg,#2f5bea,#7c3aed);color:#fff;border:none;
+    padding:12px 28px;border-radius:11px;font-size:15.5px;font-weight:700;
+    cursor:pointer;box-shadow:0 6px 16px rgba(47,91,234,.32);transition:.2s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(47,91,234,.4)}
+  .btn.ghost{background:#fff;color:var(--accent);border:1.5px solid #b9caff;box-shadow:none;margin-left:10px}
+  #quizResult{margin-top:16px;font-weight:700;font-size:16px}
+
+  footer{
+    text-align:center;color:var(--muted);font-size:14px;
+    margin-top:36px;padding:22px;border-top:1px solid var(--line);
+  }
+
+  @media (max-width:640px){
+    section{padding:22px 18px 26px}
+    body{font-size:16px}
+    nav.toc ul{padding:8px 10px}
+    nav.toc a{font-size:13px;padding:6px 10px}
+    .task{padding-left:56px}
+  }
+  @media print{
+    nav.toc{display:none}
+    section{box-shadow:none;break-inside:avoid}
+    header.hero{background:#1e3a8a}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="badge">Практичне заняття · Інформатика</span>
+    <h1>Логічні елементи тексту та порядок його викладення.<br>Шаблони та формуляр-зразки документа. Реквізити документа</h1>
+    <p class="sub"></p>
+  </div>
+</header>
+
+<nav class="toc">
+  <ul>
+    <li><a href="#logika">1. Логічні елементи тексту</a></li>
+    <li><a href="#poryadok">2. Порядок викладення</a></li>
+    <li><a href="#formulyar">3. Шаблони та формуляр-зразок</a></li>
+    <li><a href="#rekvizity">4. Реквізити документа</a></li>
+    <li><a href="#rozmishchennya">5. Розміщення на аркуші</a></li>
+    <li><a href="#zavdannya">6. Практичні завдання</a></li>
+    <li><a href="#questions">Контрольні запитання</a></li>
+    <li><a href="#quiz">Тест</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+  <!-- ================= МЕТА ================= -->
+  
+    <h2><span class="num">★</span> Мета та завдання практичного заняття</h2>
+    <p class="lead">Формувати практичні навички побудови тексту документа,
+    роботи з шаблонами та формуляр-зразками, правильного розміщення реквізитів.</p>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h5>Знати</h5>
+        <ul>
+          <li>логічні елементи тексту документа;</li>
+          <li>способи (порядок) викладення матеріалу;</li>
+          <li>що таке шаблон, бланк, формуляр-зразок;</li>
+          <li>перелік та призначення реквізитів документа;</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Вміти</h5>
+        <ul>
+          <li>виділяти логічні частини тексту;</li>
+          <li>обирати доцільний порядок викладення;</li>
+          <li>створювати шаблон у текстовому редакторі;</li>
+          <li>складати формуляр-зразок документа;</li>
+          <li>розміщувати реквізити на аркуші А4.</li>
+        </ul>
+      </div>
+    </div>
+<div class="tile">
+        <h5>Обладнання</h5>
+        <ul>
+          <li>ПК з текстовим редактором (MS Word / LibreOffice Writer);</li>
+          <li>зразки документів;</li>
+          <li>роздатковий матеріал.</li>
+        </ul>
+      </div>
+
+    
+  
+
+  <!-- ================= 1. ЛОГІЧНІ ЕЛЕМЕНТИ ================= -->
+  <section id="logika">
+<div class="note">
+      <strong>Актуалізація.</strong> Документ — це не лише «аркуш з текстом».
+      Це <em>структурована</em> система: зміст (логічні елементи) + форма (реквізити).
+      Якщо зміст викладено хаотично або реквізити розміщено неправильно — документ
+      втрачає юридичну силу та інформативність.
+    </div>
+    <h2><span class="num">1</span> Логічні елементи тексту документа</h2>
+
+    <p><strong>Логічні елементи тексту</strong> — це змістові частини документа,
+    розташовані в певній послідовності, кожна з яких виконує свою функцію.</p>
+
+    <figure>
+      <svg viewBox="0 0 990 190" role="img" aria-label="Схема логічних елементів тексту документа">
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill="#8fa4d6"/>
+          </marker>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2f5bea"/><stop offset="1" stop-color="#4a6ff0"/>
+          </linearGradient>
+        </defs>
+        <g font-family="Segoe UI, sans-serif">
+
+          <!-- 1 -->
+          <rect x="8" y="42" width="168" height="96" rx="14" fill="#eef3ff" stroke="#b9caff" stroke-width="2"/>
+          <circle cx="34" cy="68" r="13" fill="url(#g1)"/>
+          <text x="34" y="73" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">1</text>
+          <text x="56" y="73" font-size="15" font-weight="700" fill="#24409c">Заголовок</text>
+          <text x="24" y="100" font-size="13" fill="#5c6779">про що документ;</text>
+          <text x="24" y="120" font-size="13" fill="#5c6779">назва виду документа</text>
+
+          <line x1="180" y1="90" x2="202" y2="90" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#ar)"/>
+
+          <!-- 2 -->
+          <rect x="208" y="42" width="168" height="96" rx="14" fill="#eef6ff" stroke="#b9caff" stroke-width="2"/>
+          <circle cx="234" cy="68" r="13" fill="url(#g1)"/>
+          <text x="234" y="73" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">2</text>
+          <text x="256" y="73" font-size="15" font-weight="700" fill="#24409c">Вступ</text>
+          <text x="224" y="100" font-size="13" fill="#5c6779">привід, підстава,</text>
+          <text x="224" y="120" font-size="13" fill="#5c6779">посилання на документ</text>
+
+          <line x1="380" y1="90" x2="402" y2="90" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#ar)"/>
+
+          <!-- 3 -->
+          <rect x="408" y="42" width="168" height="96" rx="14" fill="#f2f0ff" stroke="#c9baff" stroke-width="2"/>
+          <circle cx="434" cy="68" r="13" fill="url(#g1)"/>
+          <text x="434" y="73" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">3</text>
+          <text x="456" y="73" font-size="15" font-weight="700" fill="#5b21b6">Основна частина</text>
+          <text x="424" y="100" font-size="13" fill="#5c6779">виклад суті, факти,</text>
+          <text x="424" y="120" font-size="13" fill="#5c6779">аргументи, розрахунки</text>
+
+          <line x1="580" y1="90" x2="602" y2="90" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#ar)"/>
+
+          <!-- 4 -->
+          <rect x="608" y="42" width="168" height="96" rx="14" fill="#eefaf2" stroke="#a9e0bf" stroke-width="2"/>
+          <circle cx="634" cy="68" r="13" fill="url(#g1)"/>
+          <text x="634" y="73" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">4</text>
+          <text x="656" y="73" font-size="15" font-weight="700" fill="#12693a">Висновки</text>
+          <text x="624" y="100" font-size="13" fill="#5c6779">рішення, прохання,</text>
+          <text x="624" y="120" font-size="13" fill="#5c6779">конкретна пропозиція</text>
+
+          <line x1="780" y1="90" x2="802" y2="90" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#ar)"/>
+
+          <!-- 5 -->
+          <rect x="808" y="42" width="172" height="96" rx="14" fill="#fff8ec" stroke="#f0c87a" stroke-width="2"/>
+          <circle cx="834" cy="68" r="13" fill="url(#g1)"/>
+          <text x="834" y="73" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">5</text>
+          <text x="856" y="73" font-size="15" font-weight="700" fill="#9a4d05">Підпис, дата</text>
+          <text x="824" y="100" font-size="13" fill="#5c6779">засвідчення документа,</text>
+          <text x="824" y="120" font-size="13" fill="#5c6779">реквізити виконавця</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 1. Логічна послідовність елементів тексту документа</figcaption>
+    </figure>
+</section>
+<section id="characteristic">
+    <h3>1.1. Характеристика логічних елементів</h3>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 1. Логічні елементи тексту та їхнє призначення</caption>
+        <thead>
+          <tr>
+            <th style="width:22%">Елемент</th>
+            <th style="width:44%">Функція</th>
+            <th style="width:34%">Типові мовні звороти</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Заголовок</strong> (назва)</td>
+            <td>Стисло й точно відображає зміст документа; складається з назви виду документа та заголовка до тексту</td>
+            <td>«Про затвердження…», «Щодо порядку…», «Про внесення змін…»</td>
+          </tr>
+          <tr>
+            <td><strong>Вступ</strong> (преамбула)</td>
+            <td>Указує на привід, підставу, мету створення документа; посилається на нормативні акти</td>
+            <td>«На підставі…», «Відповідно до…», «З метою…», «У зв'язку з…»</td>
+          </tr>
+          <tr>
+            <td><strong>Основна частина</strong></td>
+            <td>Розкриває суть питання: факти, обґрунтування, розрахунки, переліки, посилання</td>
+            <td>«Встановлено, що…», «Аналіз засвідчує…», «Водночас необхідно…»</td>
+          </tr>
+          <tr>
+            <td><strong>Висновки</strong> (заключна частина)</td>
+            <td>Містить рішення, розпорядження, прохання, пропозицію — те, заради чого створено документ</td>
+            <td>«Наказую…», «Просимо…», «Пропонуємо…», «Зобов'язую…»</td>
+          </tr>
+          <tr>
+            <td><strong>Підпис, дата</strong></td>
+            <td>Надає документові юридичної сили; засвідчує особу підписувача та час створення</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>Правило «перевернутої піраміди».</strong> У діловому тексті головне
+      повідомляють <em>спочатку</em>: спершу — суть і прохання, далі — обґрунтування.
+      Адресат має зрозуміти мету листа вже з першого абзацу.
+    </div>
+  </section>
+
+  <!-- ================= 2. ПОРЯДОК ВИКЛАДЕННЯ ================= -->
+  <section id="poryadok">
+    <h2><span class="num">2</span> Порядок викладення матеріалу</h2>
+
+    <p><strong>Порядок викладення</strong> — це логічна схема, за якою розгортається
+    зміст документа. Вибір схеми залежить від виду документа та мети повідомлення.</p>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h5>Дедуктивний</h5>
+        <ul>
+          <li>від <strong>загального</strong> до <strong>часткового</strong>;</li>
+          <li>спершу — теза, далі — аргументи;</li>
+          <li>типово для наказів, постанов, листів-відповідей.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Індуктивний</h5>
+        <ul>
+          <li>від <strong>часткового</strong> до <strong>загального</strong>;</li>
+          <li>спершу — факти, далі — узагальнення;</li>
+          <li>типово для звітів, довідок, доповідних записок.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Хронологічний</h5>
+        <ul>
+          <li>у послідовності <strong>подій у часі</strong>;</li>
+          <li>минуле → теперішнє → майбутнє;</li>
+          <li>типово для протоколів, історичних оглядів, звітів про роботу.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>2.1. Порівняння способів викладення</h3>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 2. Способи викладення матеріалу в документі</caption>
+        <thead>
+          <tr>
+            <th style="width:20%">Спосіб</th>
+            <th style="width:30%">Напрям руху думки</th>
+            <th style="width:28%">Де застосовують</th>
+            <th style="width:22%">Приклад початку</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Дедуктивний</strong></td>
+            <td>Загальне → часткове</td>
+            <td>Накази, постанови, розпорядження, листи-відповіді</td>
+            <td>«З метою впорядкування обліку… наказую:»</td>
+          </tr>
+          <tr>
+            <td><strong>Індуктивний</strong></td>
+            <td>Часткове → загальне</td>
+            <td>Звіти, довідки, доповідні та пояснювальні записки</td>
+            <td>«За звітний період опрацьовано 320 звернень… Отже, …»</td>
+          </tr>
+          <tr>
+            <td><strong>Хронологічний</strong></td>
+            <td>Подія → наступна подія</td>
+            <td>Протоколи, звіти про роботу, огляди</td>
+            <td>«12 березня відбулося… 18 березня було…»</td>
+          </tr>
+          <tr>
+            <td><strong>Причинно-наслідковий</strong></td>
+            <td>Причина → наслідок</td>
+            <td>Пояснювальні записки, аналітичні довідки</td>
+            <td>«Унаслідок затримки постачання виникла…»</td>
+          </tr>
+          <tr>
+            <td><strong>Порівняльний</strong></td>
+            <td>Об'єкт А ↔ об'єкт Б</td>
+            <td>Аналітичні огляди, звіти, пропозиції</td>
+            <td>«Порівняно з попереднім періодом показник зріс на…»</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="danger">
+      <strong>Типові помилки порядку викладення:</strong>
+      <ul style="margin:10px 0 0">
+        <li>прохання «заховане» в кінці довгого листа;</li>
+        <li>змішування кількох способів викладення в одному абзаці;</li>
+        <li>повторення тієї самої думки різними словами;</li>
+        <li>порушення хронології в протоколах і звітах;</li>
+        <li>висновки, що не випливають з основної частини.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 3. ШАБЛОНИ ТА ФОРМУЛЯР-ЗРАЗОК ================= -->
+  <section id="formulyar">
+    <h2><span class="num">3</span> Шаблони та формуляр-зразки документа</h2>
+
+    <h3>3.1. Ключові поняття</h3>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h5>Формуляр</h5>
+        <ul>
+          <li>сукупність реквізитів, розміщених у встановленій послідовності;</li>
+          <li>«скелет» документа без конкретного змісту.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Формуляр-зразок</h5>
+        <ul>
+          <li>типовий зразок документа, що встановлює склад і розміщення реквізитів;</li>
+          <li>слугує еталоном для створення однотипних документів.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Шаблон</h5>
+        <ul>
+          <li>електронний файл-заготовка з постійними елементами;</li>
+          <li>змінні поля заповнюються під час створення документа;</li>
+          <li>формат: <code>.dotx</code>, <code>.ott</code>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>3.2. Співвідношення понять</h3>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 3. Формуляр-зразок, бланк і шаблон: порівняння</caption>
+        <thead>
+          <tr>
+            <th style="width:20%">Поняття</th>
+            <th style="width:32%">Що це</th>
+            <th style="width:24%">Матеріальна форма</th>
+            <th style="width:24%">Основне призначення</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Формуляр-зразок</strong></td>
+            <td>Еталонна схема розміщення реквізитів</td>
+            <td>Паперовий або електронний зразок, схема</td>
+            <td>Навчання, контроль правильності оформлення</td>
+          </tr>
+          <tr>
+            <td><strong>Бланк</strong></td>
+            <td>Аркуш із надрукованими постійними реквізитами</td>
+            <td>Папір з типографським текстом або електронна форма</td>
+            <td>Безпосереднє створення документа</td>
+          </tr>
+          <tr>
+            <td><strong>Шаблон</strong></td>
+            <td>Файл-заготовка в текстовому редакторі</td>
+            <td>Електронний файл (<code>.dotx</code>, <code>.ott</code>)</td>
+            <td>Автоматизація створення однотипних документів</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure>
+      <svg viewBox="0 0 900 260" role="img" aria-label="Схема створення документа на основі формуляр-зразка і шаблону">
+        <defs>
+          <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill="#8fa4d6"/>
+          </marker>
+        </defs>
+        <g font-family="Segoe UI, sans-serif">
+          <!-- formulary -->
+          <rect x="20" y="70" width="190" height="110" rx="14" fill="#eef3ff" stroke="#b9caff" stroke-width="2"/>
+          <text x="115" y="100" text-anchor="middle" font-size="16" font-weight="800" fill="#24409c">Формуляр-зразок</text>
+          <text x="115" y="126" text-anchor="middle" font-size="13" fill="#5c6779">склад і схема</text>
+          <text x="115" y="146" text-anchor="middle" font-size="13" fill="#5c6779">розміщення реквізитів</text>
+
+          <line x1="214" y1="125" x2="256" y2="125" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#ar2)"/>
+
+          <!-- blank -->
+          <rect x="262" y="70" width="190" height="110" rx="14" fill="#f2f0ff" stroke="#c9baff" stroke-width="2"/>
+          <text x="357" y="100" text-anchor="middle" font-size="16" font-weight="800" fill="#5b21b6">Бланк</text>
+          <text x="357" y="126" text-anchor="middle" font-size="13" fill="#5c6779">постійні реквізити</text>
+          <text x="357" y="146" text-anchor="middle" font-size="13" fill="#5c6779">вже надруковані</text>
+
+          <line x1="456" y1="125" x2="498" y2="125" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#ar2)"/>
+
+          <!-- template -->
+          <rect x="504" y="70" width="170" height="110" rx="14" fill="#eefaf2" stroke="#a9e0bf" stroke-width="2"/>
+          <text x="589" y="100" text-anchor="middle" font-size="16" font-weight="800" fill="#12693a">Шаблон</text>
+          <text x="589" y="126" text-anchor="middle" font-size="13" fill="#5c6779">електронна</text>
+          <text x="589" y="146" text-anchor="middle" font-size="13" fill="#5c6779">заготовка</text>
+
+          <line x1="678" y1="125" x2="720" y2="125" stroke="#8fa4d6" stroke-width="2.5" marker-end="url(#ar2)"/>
+
+          <!-- ready doc -->
+          <rect x="726" y="70" width="158" height="110" rx="14" fill="#fff8ec" stroke="#f0c87a" stroke-width="2"/>
+          <text x="805" y="100" text-anchor="middle" font-size="16" font-weight="800" fill="#9a4d05">Готовий</text>
+          <text x="805" y="122" text-anchor="middle" font-size="16" font-weight="800" fill="#9a4d05">документ</text>
+          <text x="805" y="148" text-anchor="middle" font-size="13" fill="#5c6779">заповнені змінні</text>
+
+          <!-- bottom note -->
+          <rect x="20" y="204" width="864" height="40" rx="11" fill="#f7f9fe" stroke="#c3cde4" stroke-dasharray="5 4"/>
+          <text x="452" y="229" text-anchor="middle" font-size="14" fill="#46506a">
+            Послідовність: еталон → бланк → електронний шаблон → заповнений документ
+          </text>
+        </g>
+      </svg>
+      <figcaption>Рис. 2. Шлях від формуляр-зразка до готового документа</figcaption>
+    </figure>
+
+    <h3>3.3. Створення шаблону в текстовому редакторі</h3>
+    <ol>
+      <li>Відкрити новий документ, установити формат А4 і поля (ліве, нижнє, верхнє — 20 мм; праве — 10 мм).</li>
+      <li>Налаштувати шрифт <code>Times New Roman</code>, кегль 14 п., інтервал 1,5.</li>
+      <li>Внести <strong>постійні</strong> реквізити: найменування установи, довідкові дані, код ЄДРПОУ.</li>
+      <li>Розмістити табличні або рамкові блоки під <strong>змінні</strong> реквізити (дата, індекс, адресат).</li>
+      <li>Зберегти файл у форматі шаблону (<code>.dotx</code> у MS Word, <code>.ott</code> у LibreOffice).</li>
+      <li>Перевірити: створити новий документ на основі шаблону і заповнити змінні поля.</li>
+    </ol>
+
+    <div class="tip">
+      <strong>Порада.</strong> Для змінних полів зручно використовувати
+      <em>елементи керування вмістом</em> (Content Controls) або поля типу <code>{ DATE }</code> —
+      тоді дата й індекс проставлятимуться автоматично.
+    </div>
+  </section>
+
+  <!-- ================= 4. РЕКВІЗИТИ ================= -->
+  <section id="rekvizity">
+    <h2><span class="num">4</span> Реквізити документа</h2>
+
+    <p><strong>Реквізит</strong> — це обов'язковий елемент оформлення офіційного документа,
+    без якого документ не має юридичної сили (або втрачає частину інформативності).</p>
+
+    <div class="note">
+      <strong>Нормативна база.</strong> Вимоги до оформлення організаційно-розпорядчих
+      документів в Україні встановлює <strong>ДСТУ 4163:2020</strong>
+      «Уніфікована система організаційно-розпорядчої документації. Вимоги до оформлення документів».
+      Стандарт визначає 32 реквізити; нижче наведено основні з них, згруповані за призначенням.
+    </div>
+
+    <h3>4.1. Класифікація реквізитів</h3>
+
+    <figure>
+      <svg viewBox="0 0 880 300" role="img" aria-label="Схема поділу реквізитів на постійні та змінні">
+        <g font-family="Segoe UI, sans-serif">
+          <!-- root -->
+          <rect x="330" y="10" width="220" height="54" rx="13" fill="#2f5bea"/>
+          <text x="440" y="44" text-anchor="middle" fill="#fff" font-size="17" font-weight="800">РЕКВІЗИТИ</text>
+
+          <g stroke="#c3cde4" stroke-width="2">
+            <path d="M440 64 V92 H220 V126" fill="none"/>
+            <path d="M440 64 V92 H660 V126" fill="none"/>
+          </g>
+
+          <!-- left -->
+          <rect x="60" y="126" width="320" height="52" rx="12" fill="#eef3ff" stroke="#b9caff" stroke-width="2"/>
+          <text x="220" y="158" text-anchor="middle" font-size="16" font-weight="700" fill="#24409c">Постійні (бланкові)</text>
+
+          <rect x="60" y="192" width="320" height="96" rx="12" fill="#ffffff" stroke="#dde4f0" stroke-width="1.5"/>
+          <text x="78" y="218" font-size="14" fill="#46506a">• зображення Державного Герба</text>
+          <text x="78" y="240" font-size="14" fill="#46506a">• логотип (емблема)</text>
+          <text x="78" y="262" font-size="14" fill="#46506a">• найменування організації</text>
+          <text x="78" y="284" font-size="14" fill="#46506a">• код ЄДРПОУ, довідкові дані</text>
+
+          <!-- right -->
+          <rect x="500" y="126" width="320" height="52" rx="12" fill="#f2f0ff" stroke="#c9baff" stroke-width="2"/>
+          <text x="660" y="158" text-anchor="middle" font-size="16" font-weight="700" fill="#5b21b6">Змінні</text>
+
+          <rect x="500" y="192" width="320" height="96" rx="12" fill="#ffffff" stroke="#dde4f0" stroke-width="1.5"/>
+          <text x="518" y="218" font-size="14" fill="#46506a">• дата, реєстраційний індекс</text>
+          <text x="518" y="240" font-size="14" fill="#46506a">• адресат, заголовок до тексту</text>
+          <text x="518" y="262" font-size="14" fill="#46506a">• текст, додатки</text>
+          <text x="518" y="284" font-size="14" fill="#46506a">• підпис, візи, печатка</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 3. Постійні та змінні реквізити документа</figcaption>
+    </figure>
+
+    <h3>4.2. Основні реквізити за призначенням</h3>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 4. Групи реквізитів документа</caption>
+        <thead>
+          <tr>
+            <th style="width:24%">Група</th>
+            <th style="width:46%">Реквізити</th>
+            <th style="width:30%">Тип</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Реквізити бланка</strong></td>
+            <td>Зображення Державного Герба України, логотип (емблема), код організації за ЄДРПОУ, найменування організації, найменування структурного підрозділу, довідкові дані (адреса, телефони, e-mail, вебсайт)</td>
+            <td><span class="tag gray">постійні</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ідентифікаційні</strong></td>
+            <td>Назва виду документа, дата документа, реєстраційний індекс, посилання на реєстраційний індекс і дату іншого документа, місце складення, заголовок до тексту</td>
+            <td><span class="tag blue">змінні</span></td>
+          </tr>
+          <tr>
+            <td><strong>Адресування та затвердження</strong></td>
+            <td>Адресат, гриф затвердження, гриф погодження, візи</td>
+            <td><span class="tag blue">змінні</span></td>
+          </tr>
+          <tr>
+            <td><strong>Змістові</strong></td>
+            <td>Текст документа, відмітка про наявність додатків</td>
+            <td><span class="tag blue">змінні</span></td>
+          </tr>
+          <tr>
+            <td><strong>Посвідчувальні</strong></td>
+            <td>Підпис, відбиток печатки, відмітка про засвідчення копії, ідентифікатор електронного підпису</td>
+            <td><span class="tag blue">змінні</span></td>
+          </tr>
+          <tr>
+            <td><strong>Службові відмітки</strong></td>
+            <td>Резолюція, відмітка про контроль, відмітка про виконання і надсилання до справи, відмітка про надходження, прізвище виконавця та номер його телефону</td>
+            <td><span class="tag green">додаткові</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>Обов'язкові vs додаткові.</strong> <em>Обов'язкові</em> реквізити
+      забезпечують юридичну силу (найменування, дата, індекс, текст, підпис).
+      <em>Додаткові</em> реквізити залежать від виду документа: наприклад, резолюція
+      є лише на вхідних документах, а гриф затвердження — не на всіх видах.
+    </div>
+  </section>
+
+  <!-- ================= 5. РОЗМІЩЕННЯ ================= -->
+  <section id="rozmishchennya">
+    <h2><span class="num">5</span> Розміщення реквізитів на аркуші А4</h2>
+
+    <p>Формуляр-зразок визначає не лише <em>перелік</em> реквізитів, а й <em>місце</em>
+    кожного з них. На рисунку нижче показано типову схему розміщення основних реквізитів.</p>
+
+    <figure>
+      <svg viewBox="0 0 480 600" role="img" aria-label="Схема розміщення реквізитів на аркуші А4">
+        <defs>
+          <filter id="sh" x="-8%" y="-8%" width="116%" height="116%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#182a56" flood-opacity="0.12"/>
+          </filter>
+        </defs>
+        <g font-family="Segoe UI, sans-serif">
+          <text x="240" y="18" text-anchor="middle" font-size="12" fill="#8fa0c0">аркуш А4 (297 × 210 мм)</text>
+
+          <!-- page -->
+          <rect x="20" y="28" width="440" height="548" rx="8" fill="#ffffff" stroke="#c3cde4" stroke-width="2" filter="url(#sh)"/>
+
+          <!-- margins -->
+          <rect x="46" y="52" width="388" height="500" rx="3" fill="none" stroke="#e4eaf5" stroke-dasharray="5 4"/>
+
+          <!-- Z1 -->
+          <rect x="60" y="64" width="360" height="76" rx="8" fill="#eef3ff" stroke="#b9caff" stroke-width="1.6"/>
+          <circle cx="76" cy="80" r="10" fill="#2f5bea"/>
+          <text x="76" y="84.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">1</text>
+          <text x="94" y="84" font-size="13" font-weight="700" fill="#24409c">Шапка бланка</text>
+          <text x="76" y="106" font-size="11.5" fill="#5c6779">Герб, логотип, найменування організації,</text>
+          <text x="76" y="124" font-size="11.5" fill="#5c6779">код ЄДРПОУ, довідкові дані</text>
+
+          <!-- Z2 -->
+          <rect x="246" y="150" width="174" height="50" rx="8" fill="#f2f0ff" stroke="#c9baff" stroke-width="1.6"/>
+          <circle cx="262" cy="166" r="10" fill="#7c3aed"/>
+          <text x="262" y="170.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">2</text>
+          <text x="280" y="170" font-size="13" font-weight="700" fill="#5b21b6">Адресат / гриф</text>
+          <text x="262" y="190" font-size="11.5" fill="#5c6779">кому адресовано або</text>
+
+          <!-- Z3 -->
+          <rect x="60" y="150" width="176" height="50" rx="8" fill="#eef6ff" stroke="#b9caff" stroke-width="1.6"/>
+          <circle cx="76" cy="166" r="10" fill="#2f5bea"/>
+          <text x="76" y="170.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">3</text>
+          <text x="94" y="170" font-size="13" font-weight="700" fill="#24409c">Дата, індекс, місце</text>
+          <text x="76" y="190" font-size="11.5" fill="#5c6779">дата й реєстраційний номер</text>
+
+          <!-- Z4 -->
+          <rect x="60" y="210" width="360" height="34" rx="8" fill="#eef6ff" stroke="#b9caff" stroke-width="1.6"/>
+          <circle cx="76" cy="227" r="10" fill="#2f5bea"/>
+          <text x="76" y="231.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">4</text>
+          <text x="94" y="231" font-size="13" font-weight="700" fill="#24409c">Назва виду документа (НАКАЗ, ЛИСТ, АКТ)</text>
+
+          <!-- Z5 -->
+          <rect x="60" y="254" width="360" height="34" rx="8" fill="#eefaf2" stroke="#a9e0bf" stroke-width="1.6"/>
+          <circle cx="76" cy="271" r="10" fill="#1f9d55"/>
+          <text x="76" y="275.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">5</text>
+          <text x="94" y="275" font-size="13" font-weight="700" fill="#12693a">Заголовок до тексту</text>
+
+          <!-- Z6 -->
+          <rect x="60" y="298" width="360" height="128" rx="8" fill="#f7f9fe" stroke="#c3cde4" stroke-width="1.6"/>
+          <circle cx="76" cy="314" r="10" fill="#4a5468"/>
+          <text x="76" y="318.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">6</text>
+          <text x="94" y="318" font-size="13" font-weight="700" fill="#4a5468">Текст документа</text>
+          <!-- text lines -->
+          <g fill="#dde4f0">
+            <rect x="76" y="332" width="326" height="6" rx="3"/>
+            <rect x="76" y="346" width="326" height="6" rx="3"/>
+            <rect x="76" y="360" width="300" height="6" rx="3"/>
+            <rect x="76" y="374" width="326" height="6" rx="3"/>
+            <rect x="76" y="388" width="280" height="6" rx="3"/>
+            <rect x="76" y="402" width="326" height="6" rx="3"/>
+          </g>
+
+          <!-- Z7 -->
+          <rect x="60" y="436" width="360" height="30" rx="8" fill="#fff8ec" stroke="#f0c87a" stroke-width="1.6"/>
+          <circle cx="76" cy="451" r="10" fill="#c2740a"/>
+          <text x="76" y="455.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">7</text>
+          <text x="94" y="455" font-size="13" font-weight="700" fill="#9a4d05">Відмітка про наявність додатків</text>
+
+          <!-- Z8 -->
+          <rect x="240" y="476" width="180" height="42" rx="8" fill="#fef2f2" stroke="#f3b4b4" stroke-width="1.6"/>
+          <circle cx="256" cy="492" r="10" fill="#c0392b"/>
+          <text x="256" y="496.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">8</text>
+          <text x="274" y="496" font-size="13" font-weight="700" fill="#9b1c1c">Підпис</text>
+          <text x="256" y="511" font-size="11.5" fill="#5c6779">посада, ініціали, прізвище</text>
+
+          <!-- Z9 -->
+          <rect x="60" y="476" width="166" height="42" rx="8" fill="#f7f9fe" stroke="#c3cde4" stroke-width="1.6"/>
+          <circle cx="76" cy="492" r="10" fill="#4a5468"/>
+          <text x="76" y="496.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">9</text>
+          <text x="94" y="492" font-size="13" font-weight="700" fill="#4a5468">Візи, печатка</text>
+          <text x="76" y="510" font-size="11.5" fill="#5c6779">погодження</text>
+
+          <!-- Z10 -->
+          <rect x="60" y="526" width="360" height="28" rx="8" fill="#e9edf6" stroke="#c3cde4" stroke-width="1.6"/>
+          <circle cx="76" cy="540" r="10" fill="#4a5468"/>
+          <text x="76" y="544.5" text-anchor="middle" fill="#fff" font-size="11.5" font-weight="800">10</text>
+          <text x="94" y="544" font-size="12.5" font-weight="700" fill="#4a5468">Прізвище виконавця та номер телефону</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 4. Типова схема розміщення реквізитів на аркуші формату А4</figcaption>
+    </figure>
+
+    <h3>5.1. Пояснення до схеми</h3>
+    <div class="legend">
+      <div class="li"><b>1</b><span><strong>Шапка бланка</strong> — герб, логотип, повне й скорочене найменування організації, код ЄДРПОУ, довідкові дані. Розміщується у верхній частині аркуша.</span></div>
+      <div class="li"><b>2</b><span><strong>Адресат / гриф затвердження</strong> — у правій верхній частині, на рівні шапки або нижче.</span></div>
+      <div class="li"><b>3</b><span><strong>Дата, реєстраційний індекс, місце складення</strong> — ліворуч, під шапкою.</span></div>
+      <div class="li"><b>4</b><span><strong>Назва виду документа</strong> — по центру (НАКАЗ, ЛИСТ, АКТ, ПРОТОКОЛ).</span></div>
+      <div class="li"><b>5</b><span><strong>Заголовок до тексту</strong> — по центру, одним рядком, відповідає на питання «про що?».</span></div>
+      <div class="li"><b>6</b><span><strong>Текст документа</strong> — основна частина, поділена на абзаци або пункти.</span></div>
+      <div class="li"><b>7</b><span><strong>Відмітка про додатки</strong> — перелік додатків із зазначенням кількості аркушів.</span></div>
+      <div class="li"><b>8</b><span><strong>Підпис</strong> — праворуч: посада, особистий підпис, ініціали та прізвище.</span></div>
+      <div class="li"><b>9</b><span><strong>Візи, печатка</strong> — ліворуч від підпису; печатка частково перекриває підпис.</span></div>
+      <div class="li"><b>10</b><span><strong>Виконавець</strong> — у нижній частині аркуша: прізвище, ініціали, номер телефону.</span></div>
+    </div>
+
+    <div class="note">
+      <strong>Зверніть увагу.</strong> Ліве поле (не менше 20 мм) призначене для підшивання —
+      тому всі реквізити «притиснуті» до правого краю або центру, а не до лівого.
+    </div>
+  </section>
+
+  <!-- ================= 6. ПРАКТИЧНІ ЗАВДАННЯ ================= -->
+  <section id="zavdannya">
+    <h2><span class="num">6</span> Практичні завдання</h2>
+    <p class="lead">Виконуються на ПК у текстовому редакторі. Результат зберігається у папці заняття.</p>
+
+    <div class="tasks">
+
+      <div class="task">
+        <h6>Визначення логічних елементів</h6>
+        <p>Отримайте у викладача уривок ділового тексту. Розмітьте його: позначте заголовок,
+        вступ, основну частину, висновки. Складіть таблицю «Елемент → Речення з тексту».</p>
+      </div>
+
+      <div class="task">
+        <h6>Порядок викладення</h6>
+        <p>Визначте, який спосіб викладення (дедуктивний, індуктивний, хронологічний,
+        причинно-наслідковий, порівняльний) використано у трьох поданих документах.
+        Обґрунтуйте відповідь 1–2 реченнями.</p>
+      </div>
+
+      <div class="task">
+        <h6>Побудова формуляр-зразка</h6>
+        <p>Створіть у Word формуляр-зразок службового листа: аркуш А4, поля 20/20/20/10 мм,
+        шрифт Times New Roman 14 п., інтервал 1,5. Розмістіть рамки під реквізити 1–10
+        згідно зі схемою на рис. 4. Підпишіть кожну рамку.</p>
+      </div>
+
+      <div class="task">
+        <h6>Класифікація реквізитів</h6>
+        <p>Заповніть таблицю з трьома колонками: «Реквізит», «Постійний / змінний»,
+        «Обов'язковий / додатковий». Внесіть щонайменше 12 реквізитів.</p>
+      </div>
+
+      <div class="task">
+        <h6>Створення шаблону</h6>
+        <p>На основі формуляр-зразка створіть шаблон <code>.dotx</code> («Бланк листа»).
+        Внесіть постійні реквізити установи. Збережіть і перевірте: створіть новий документ
+        на основі шаблону.</p>
+      </div>
+
+      <div class="task">
+        <h6>Редагування тексту</h6>
+        <p>Отримайте текст із порушеним порядком викладення. Відредагуйте його:
+        поставте прохання на початок, приберіть повтори, відновіть логіку.
+        Порівняйте з початковим варіантом.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= КОНТРОЛЬНІ ЗАПИТАННЯ ================= -->
+  <section id="questions">
+    <h2><span class="num">?</span> Контрольні запитання</h2>
+    <p class="lead">Натисніть на запитання, щоб побачити підказку для відповіді.</p>
+
+    <details class="q">
+      <summary>Що таке логічні елементи тексту документа?</summary>
+      <div class="answer">
+        Змістові частини документа, розташовані в певній послідовності, кожна з яких
+        виконує свою функцію: заголовок, вступ (преамбула), основна частина, висновки,
+        підпис і дата.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які логічні елементи обов'язкові для ділового листа?</summary>
+      <div class="answer">
+        Заголовок (назва виду документа + заголовок до тексту), вступ із зазначенням
+        причини звернення, основна частина, висновки з конкретним проханням або пропозицією,
+        підпис і дата.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Що таке порядок викладення? Які його основні види?</summary>
+      <div class="answer">
+        Логічна схема розгортання змісту документа. Основні види: дедуктивний (від загального
+        до часткового), індуктивний (від часткового до загального), хронологічний
+        (у послідовності подій), причинно-наслідковий, порівняльний.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>У чому полягає правило «перевернутої піраміди»?</summary>
+      <div class="answer">
+        У діловому тексті головну інформацію (суть, прохання) подають на початку,
+        а обґрунтування — далі. Адресат має зрозуміти мету документа вже з першого абзацу.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Що таке формуляр?</summary>
+      <div class="answer">
+        Сукупність реквізитів, розміщених у встановленій послідовності. Це «скелет»
+        документа без конкретного змісту.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Що таке формуляр-зразок і для чого він потрібен?</summary>
+      <div class="answer">
+        Типовий зразок документа, що встановлює склад і розміщення реквізитів.
+        Слугує еталоном для створення однотипних документів, для навчання та контролю
+        правильності оформлення.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Чим шаблон відрізняється від бланка?</summary>
+      <div class="answer">
+        Бланк — це аркуш із надрукованими постійними реквізитами (паперовий або електронний),
+        який безпосередньо використовують для створення документа. Шаблон — це файл-заготовка
+        в текстовому редакторі (наприклад, <code>.dotx</code>), на основі якого створюють
+        нові документи з автоматично підставленими постійними елементами.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Що таке реквізит документа?</summary>
+      <div class="answer">
+        Обов'язковий елемент оформлення офіційного документа, без якого документ
+        не має юридичної сили або втрачає інформативність (наприклад, найменування
+        організації, дата, реєстраційний індекс, текст, підпис).
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Який нормативний документ встановлює вимоги до оформлення документів в Україні?</summary>
+      <div class="answer">
+        ДСТУ 4163:2020 «Уніфікована система організаційно-розпорядчої документації.
+        Вимоги до оформлення документів». Стандарт визначає перелік реквізитів
+        та вимоги до їхнього розміщення.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>На які групи поділяють реквізити?</summary>
+      <div class="answer">
+        Реквізити бланка (постійні), ідентифікаційні, адресування та затвердження,
+        змістові, посвідчувальні, службові відмітки. За іншим поділом — постійні
+        та змінні, обов'язкові та додаткові.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Де розміщують адресата і гриф затвердження?</summary>
+      <div class="answer">
+        У правій верхній частині аркуша — на рівні шапки бланка або безпосередньо під нею.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які вимоги до полів аркуша А4?</summary>
+      <div class="answer">
+        Ліве, нижнє та верхнє поля — не менше 20 мм; праве — не менше 10 мм.
+        Ліве поле збільшене для підшивання документа.
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Як створити шаблон у текстовому редакторі?</summary>
+      <div class="answer">
+        Налаштувати формат А4 і поля → установити шрифт Times New Roman 14 п., інтервал 1,5 →
+        внести постійні реквізити → розмітити блоки під змінні реквізити → зберегти
+        у форматі шаблону (<code>.dotx</code> у MS Word, <code>.ott</code> у LibreOffice).
+      </div>
+    </details>
+
+    <details class="q">
+      <summary>Які типові помилки трапляються в порядку викладення тексту?</summary>
+      <div class="answer">
+        Прохання «заховане» в кінці; змішування кількох способів викладення в одному абзаці;
+        повторення тієї самої думки; порушення хронології; висновки, що не випливають
+        з основної частини.
+      </div>
+    </details>
+  </section>
+
+  <!-- ================= ТЕСТ ================= -->
+  <section id="quiz">
+    <h2><span class="num">✓</span> Тест для самоперевірки</h2>
+    <p class="lead">Оберіть одну правильну відповідь у кожному запитанні та натисніть «Перевірити».</p>
+
+    <div class="quiz" id="quizBox">
+
+      <div class="q-item" data-answer="c">
+        <p class="qtext">1. Що таке реквізит документа?</p>
+        <label><input type="radio" name="q1" value="a"> Розділ документа з висновками</label>
+        <label><input type="radio" name="q1" value="b"> Спосіб викладення матеріалу</label>
+        <label><input type="radio" name="q1" value="c"> Обов'язковий елемент оформлення офіційного документа</label>
+        <label><input type="radio" name="q1" value="d"> Файл-заготовка в текстовому редакторі</label>
+      </div>
+
+      <div class="q-item" data-answer="b">
+        <p class="qtext">2. Який стандарт встановлює вимоги до оформлення організаційно-розпорядчих документів?</p>
+        <label><input type="radio" name="q2" value="a"> ДСТУ 3008:2015</label>
+        <label><input type="radio" name="q2" value="b"> ДСТУ 4163:2020</label>
+        <label><input type="radio" name="q2" value="c"> ДСТУ 8302:2015</label>
+        <label><input type="radio" name="q2" value="d"> ГОСТ 7.32-91</label>
+      </div>
+
+      <div class="q-item" data-answer="d">
+        <p class="qtext">3. Що таке формуляр-зразок?</p>
+        <label><input type="radio" name="q3" value="a"> Аркуш із надрукованими постійними реквізитами</label>
+        <label><input type="radio" name="q3" value="b"> Електронний файл-заготовка</label>
+        <label><input type="radio" name="q3" value="c"> Сукупність реквізитів без їхнього розміщення</label>
+        <label><input type="radio" name="q3" value="d"> Типовий зразок документа, що встановлює склад і розміщення реквізитів</label>
+      </div>
+
+      <div class="q-item" data-answer="a">
+        <p class="qtext">4. Який із реквізитів є змінним?</p>
+        <label><input type="radio" name="q4" value="a"> Дата документа</label>
+        <label><input type="radio" name="q4" value="b"> Найменування організації</label>
+        <label><input type="radio" name="q4" value="c"> Код ЄДРПОУ</label>
+        <label><input type="radio" name="q4" value="d"> Зображення логотипу</label>
+      </div>
+
+      <div class="q-item" data-answer="b">
+        <p class="qtext">5. Який логічний елемент містить привід і підставу створення документа?</p>
+        <label><input type="radio" name="q5" value="a"> Заголовок</label>
+        <label><input type="radio" name="q5" value="b"> Вступ (преамбула)</label>
+        <label><input type="radio" name="q5" value="c"> Основна частина</label>
+        <label><input type="radio" name="q5" value="d"> Висновки</label>
+      </div>
+
+      <div class="q-item" data-answer="c">
+        <p class="qtext">6. Який порядок викладення йде від часткового до загального?</p>
+        <label><input type="radio" name="q6" value="a"> Дедуктивний</label>
+        <label><input type="radio" name="q6" value="b"> Хронологічний</label>
+        <label><input type="radio" name="q6" value="c"> Індуктивний</label>
+        <label><input type="radio" name="q6" value="d"> Порівняльний</label>
+      </div>
+
+      <div class="q-item" data-answer="a">
+        <p class="qtext">7. Де розміщують адресата на аркуші?</p>
+        <label><input type="radio" name="q7" value="a"> У правій верхній частині</label>
+        <label><input type="radio" name="q7" value="b"> У лівому нижньому кутку</label>
+        <label><input type="radio" name="q7" value="c"> По центру під текстом</label>
+        <label><input type="radio" name="q7" value="d"> На звороті аркуша</label>
+      </div>
+
+      <div class="q-item" data-answer="d">
+        <p class="qtext">8. У якому форматі зберігають шаблон у MS Word?</p>
+        <label><input type="radio" name="q8" value="a"> .docx</label>
+        <label><input type="radio" name="q8" value="b"> .pdf</label>
+        <label><input type="radio" name="q8" value="c"> .rtf</label>
+        <label><input type="radio" name="q8" value="d"> .dotx</label>
+      </div>
+
+      <button class="btn" id="checkBtn" type="button">Перевірити</button>
+      <button class="btn ghost" id="resetBtn" type="button">Скинути</button>
+      <div id="quizResult"></div>
+    </div>
+  </section>
+
+  <footer>
+    Практичне заняття з інформатики · «Логічні елементи тексту та порядок його викладення.
+    Шаблони та формуляр-зразки документа. Реквізити документа»
+  </footer>
+
+</div>
+
+<script>
+  /* ---------- QUIZ ---------- */
+  (function () {
+    var box = document.getElementById('quizBox');
+    var items = box.querySelectorAll('.q-item');
+    var resultEl = document.getElementById('quizResult');
+
+    document.getElementById('checkBtn').addEventListener('click', function () {
+      var score = 0;
+      var unanswered = 0;
+
+      items.forEach(function (item) {
+        var answer = item.getAttribute('data-answer');
+        var chosen = item.querySelector('input:checked');
+        var labels = item.querySelectorAll('label');
+
+        labels.forEach(function (l) {
+          l.style.background = '#fff';
+          l.style.borderColor = '#dde4f0';
+          l.style.fontWeight = 'normal';
+        });
+
+        if (!chosen) { unanswered++; return; }
+
+        labels.forEach(function (l) {
+          var input = l.querySelector('input');
+          if (input.value === answer) {
+            l.style.background = '#e7f8ee';
+            l.style.borderColor = '#1f9d55';
+            l.style.fontWeight = '600';
+          }
+          if (input.checked && input.value !== answer) {
+            l.style.background = '#fdecec';
+            l.style.borderColor = '#dc2626';
+          }
+        });
+
+        if (chosen.value === answer) score++;
+      });
+
+      var total = items.length;
+      var text = 'Результат: ' + score + ' з ' + total + ' правильних.';
+      if (unanswered > 0) text += ' Без відповіді: ' + unanswered + '.';
+
+      resultEl.textContent = text;
+      resultEl.style.color = score === total ? '#1f9d55' : (score >= total / 2 ? '#c2410c' : '#dc2626');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      box.querySelectorAll('input[type=radio]').forEach(function (r) { r.checked = false; });
+      box.querySelectorAll('label').forEach(function (l) {
+        l.style.background = '#fff';
+        l.style.borderColor = '#dde4f0';
+        l.style.fontWeight = 'normal';
+      });
+      resultEl.textContent = '';
+    });
+  })();
+
+  /* ---------- ACTIVE NAV HIGHLIGHT ---------- */
+  (function () {
+    var links = document.querySelectorAll('nav.toc a');
+    var sections = Array.prototype.map.call(links, function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+
+    function onScroll() {
+      var pos = window.scrollY + 120;
+      var current = 0;
+      sections.forEach(function (s, i) {
+        if (s && s.offsetTop <= pos) current = i;
+      });
+      links.forEach(function (a, i) {
+        a.style.background = i === current ? '#e8eeff' : 'transparent';
+        a.style.color = i === current ? '#2f5bea' : '';
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>

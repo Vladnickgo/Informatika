@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття №7: Контури, трасування та художні ефекти в Inkscape</title>
+<style>
+  :root {
+    --back: #ffffff;
+    --bg: #0f111a;
+    --card: #181b26;
+    --card-alt: #1f2333;
+    --ink: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --accent-2: #ec4899;
+    --accent-3: #8b5cf6;
+    --line: #2d3348;
+    --ok: #10b981;
+    --warn: #f59e0b;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--back);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 17px;
+  }
+  .wrap { max-width: 1150px; margin: 0 auto; padding: 0 18px 80px; }
+
+  /* ---------- HEADER ---------- */
+  header.hero {
+    background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 50%, #db2777 100%);
+    color: #fff;
+    padding: 60px 18px 50px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  header.hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0 120px, transparent 121px),
+      radial-gradient(circle at 10% 80%, rgba(255,255,255,0.1) 0 160px, transparent 161px);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1150px; margin: 0 auto; position: relative; z-index: 1; }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  header.hero h1 {
+    margin: 0 0 12px;
+    font-size: clamp(24px, 3.5vw, 42px);
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  header.hero p.sub { margin: 0; max-width: 820px; color: #e0e7ff; font-size: 18px; }
+
+  /* ---------- NAV ---------- */
+  nav.toc {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(15, 17, 26, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  nav.toc ul {
+    max-width: 1150px; margin: 0 auto; padding: 12px 18px;
+    list-style: none; display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  nav.toc a {
+    display: block; padding: 8px 16px; border-radius: 999px;
+    color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  nav.toc a:hover { background: var(--card-alt); color: var(--accent); }
+  nav.toc a.active { background: var(--accent); color: #fff; box-shadow: 0 4px 12px var(--accent-glow); }
+
+  /* ---------- SECTIONS ---------- */
+  section {
+    background: var(--back);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 36px;
+    margin-top: 32px;
+    scroll-margin-top: 80px;
+color^
+  }
+  h2 {
+    font-size: clamp(22px, 2.5vw, 28px);
+    margin: 0 0 16px;
+    display: flex; align-items: center; gap: 14px;
+    letter-spacing: -0.3px;
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 16px;
+  }
+  h2 .num {
+    flex: 0 0 auto;
+    width: 40px; height: 40px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-3));
+    color: #fff; font-size: 18px; font-weight: 800;
+    display: grid; place-items: center;
+    box-shadow: 0 4px 15px var(--accent-glow);
+  }
+  h3 {
+    font-size: 20px; margin: 28px 0 12px; color: #f1f5f9;
+    padding-left: 14px; border-left: 4px solid var(--accent); line-height: 1.35;
+  }
+  p { margin: 12px 0; }
+  .lead { color: var(--muted); font-size: 16px; margin-top: -8px; margin-bottom: 20px; }
+
+  /* ---------- TILES / CARDS ---------- */
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; margin-top: 20px; }
+  .tile {
+    background: var(--card-alt);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .tile:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .tile h5 { margin: 0 0 10px; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
+  .tile ul { margin: 0; padding-left: 20px; font-size: 15px; color: var(--muted); }
+  .tile li { margin: 6px 0; }
+
+  .note {
+    background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--warn);
+    padding: 16px 20px; border-radius: 0 12px 12px 0; margin: 20px 0; font-size: 15.5px; color: #fcd34d;
+  }
+  .tip {
+    background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--ok);
+    padding: 16px 20px; border-radius: 0 12px 12px 0; margin: 20px 0; font-size: 15.5px; color: #6ee7b7;
+  }
+
+  /* ---------- TABLES ---------- */
+  .table-scroll { overflow-x: auto; margin: 20px 0; border-radius: 12px; border: 1px solid var(--line); }
+  table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 15px; background: var(--card); }
+  caption { caption-side: top; text-align: left; padding: 14px 18px; font-weight: 700; background: var(--card-alt); color: #fff; font-size: 16px; border-bottom: 1px solid var(--line); }
+  th, td { padding: 14px 18px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th { background: #2d3348; color: #fff; font-weight: 600; font-size: 14px; letter-spacing: 0.5px; }
+  tbody tr:hover { background: rgba(99, 102, 241, 0.05); }
+  td code { background: #2d3348; padding: 2px 8px; border-radius: 6px; font-size: 13.5px; font-family: "Consolas", monospace; color: #c4b5fd; }
+
+  /* ---------- FIGURES / SVG ---------- */
+  figure {
+    margin: 24px 0; padding: 20px; background: #131620;
+    border: 1px solid var(--line); border-radius: 14px;
+    text-align: center;
+  }
+  figure svg { display: block; width: 100%; height: auto; max-width: 100%; }
+  figcaption { text-align: center; font-size: 14px; color: var(--muted); margin-top: 14px; font-style: italic; }
+
+  /* ---------- LOGIC BLOCKS ---------- */
+  .logic-block {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: var(--card-alt); padding: 20px; border-radius: 12px; margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .logic-block svg { flex: 0 0 auto; }
+  .logic-arrow { color: var(--accent); font-size: 24px; font-weight: bold; }
+  .logic-text { font-size: 15px; color: var(--ink); }
+
+  /* ---------- ACCORDION ---------- */
+  details.q {
+    border: 1px solid var(--line); border-radius: 12px;
+    margin: 12px 0; background: var(--card-alt);
+    transition: all 0.3s;
+  }
+  details.q[open] { border-color: var(--accent); box-shadow: 0 0 20px rgba(99, 102, 241, 0.1); }
+  details.q summary {
+    cursor: pointer; padding: 16px 20px; font-weight: 600; font-size: 16px;
+    display: flex; gap: 14px; align-items: center; list-style: none;
+    color: #e2e8f0; transition: color 0.2s;
+  }
+  details.q summary::-webkit-details-marker { display: none; }
+  details.q summary::before {
+    content: "+"; flex: 0 0 28px; height: 28px; border-radius: 8px;
+    background: var(--accent); color: #fff; font-weight: 800; font-size: 18px;
+    display: grid; place-items: center; transition: transform 0.3s;
+  }
+  details.q[open] summary::before { content: "−"; transform: rotate(180deg); }
+  details.q[open] summary { color: var(--accent); }
+  details.q .answer { padding: 0 20px 20px 62px; font-size: 15.5px; color: var(--muted); }
+
+  /* ---------- TASKS ---------- */
+  .tasks { display: grid; gap: 16px; margin-top: 20px; }
+  .task {
+    background: var(--card-alt); border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px 20px 20px 70px; position: relative; transition: border-color 0.2s;
+  }
+  .task:hover { border-color: var(--accent); }
+  .task::before {
+    content: "→"; position: absolute; left: 20px; top: 20px;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff; font-weight: 800; font-size: 18px; display: grid; place-items: center;
+  }
+  .task h6 { margin: 0 0 8px; font-size: 17px; color: #fff; }
+  .task p { margin: 4px 0; font-size: 15px; color: var(--muted); }
+
+  /* ---------- QUIZ ---------- */
+  .quiz { background: var(--card-alt); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .q-item { margin-bottom: 24px; }
+  .qtext { font-weight: 700; margin: 0 0 12px; font-size: 16px; color: #f1f5f9; }
+  .quiz label {
+    display: block; padding: 12px 16px; margin: 8px 0; border-radius: 10px;
+    background: var(--card); border: 1px solid var(--line); cursor: pointer;
+    font-size: 15px; transition: all 0.2s;
+  }
+  .quiz label:hover { border-color: var(--accent); background: rgba(99, 102, 241, 0.05); }
+  .quiz input { margin-right: 10px; accent-color: var(--accent); }
+  .btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent-3));
+    color: #fff; border: none; padding: 14px 32px; border-radius: 12px;
+    font-size: 16px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 15px var(--accent-glow); transition: all 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-glow); }
+  .btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); box-shadow: none; margin-left: 10px; }
+  #quizResult { margin-top: 20px; font-weight: 700; font-size: 16px; }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 40px; padding: 24px; border-top: 1px solid var(--line); }
+
+  @media (max-width: 640px) {
+    section { padding: 24px 18px; }
+    body { font-size: 16px; }
+    nav.toc ul { padding: 8px 10px; }
+    nav.toc a { font-size: 13px; padding: 6px 10px; }
+    .task { padding-left: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="badge">Практичне заняття №7 · Векторна графіка</span>
+    <h1>«Живі» переходи. Спотворення і деформація. Заливка об'єктів. Градієнти. Прозорість. Художні ефекти. Робота з текстом.</h1>
+    <p class="sub">Поглиблене вивчення інструментів Inkscape: операції з контурами, трасування зображень, робота з градієнтною сіткою та художніми ефектами. Створення ділової графіки та макетів.</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <ul>
+    <li><a href="#meta" class="active">Мета</a></li>
+    <li><a href="#paths">1. Контури</a></li>
+    <li><a href="#operations">2. Операції</a></li>
+    <li><a href="#tracing">3. Трасування</a></li>
+    <li><a href="#practice">4. Практика</a></li>
+    <li><a href="#questions">Запитання</a></li>
+    <li><a href="#quiz">Тест</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+  <!-- ================= МЕТА ================= -->
+  <section id="meta">
+    <h2><span class="num">★</span> Мета та обладнання</h2>
+    <p class="lead">Ознайомитися з просунутими інструментами векторного редактора (градієнтна сітка, живі переходи, символи, художні ефекти).</p>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h5>Знати</h5>
+        <ul>
+          <li>призначення меню «Контури»;</li>
+          <li>логічні операції над фігурами;</li>
+          <li>суть та етапи трасування растрових зображень;</li>
+          <li>можливості градієнтної сітки та прозорості.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Вміти</h5>
+        <ul>
+          <li>застосовувати операції «Сума», «Різниця», «Перетин»;</li>
+          <li>виконувати трасування бітмап (Trace Bitmap);</li>
+          <li>створювати векторні логотипи з растрових зображень;</li>
+          <li>працювати з художніми ефектами та текстом.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h5>Обладнання</h5>
+        <ul>
+          <li>ПК з Inkscape (версія 1.0+);</li>
+          <li>інструкційні картки;</li>
+          <li>вихідні растрові зображення логотипів.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Література:</strong> Ривкінд Й.Я. та ін. Інформатика, 10(11) кл. — К.: Ґенеза, 2018/2023. Потієнко В.О. Графічний дизайн. — Х.: Ранок, 2020.
+    </div>
+  </section>
+
+  <!-- ================= 1. КОНТУРИ ================= -->
+  <section id="paths">
+    <h2><span class="num">1</span> Робота з контурами в Inkscape</h2>
+
+    <p>У векторному редакторі Inkscape всі об'єкти (кола, прямокутники, лінії) є <strong>контурами</strong> — математичними кривими Безьє, які описують форму. Меню <strong>«Контури» (Path)</strong> містить набір операцій для комбінування та зміни цих форм.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 220" role="img" aria-label="Схема меню Контури в Inkscape">
+        <defs>
+          <linearGradient id="menuGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/>
+          </linearGradient>
+        </defs>
+        <g font-family="Segoe UI, sans-serif">
+          <!-- Menu bar -->
+          <rect x="20" y="10" width="860" height="44" rx="8" fill="#2d3348"/>
+          <text x="40" y="38" font-size="15" fill="#e2e8f0">File</text>
+          <text x="100" y="38" font-size="15" fill="#e2e8f0">Edit</text>
+          <text x="160" y="38" font-size="15" fill="#e2e8f0">View</text>
+          <rect x="220" y="12" width="100" height="40" rx="6" fill="url(#menuGrad)"/>
+          <text x="235" y="38" font-size="15" font-weight="700" fill="#fff">Path</text>
+          <text x="340" y="38" font-size="15" fill="#94a3b8">Text</text>
+          <text x="400" y="38" font-size="15" fill="#94a3b8">Filters</text>
+          <text x="470" y="38" font-size="15" fill="#94a3b8">Extensions</text>
+          
+          <!-- Dropdown -->
+          <rect x="220" y="56" width="320" height="150" rx="8" fill="#181b26" stroke="#2d3348" stroke-width="2"/>
+          <text x="235" y="82" font-size="14" fill="#c4b5fd">Object to Path</text>
+          <text x="400" y="82" font-size="12" fill="#64748b">Shift+Ctrl+C</text>
+          
+          <text x="235" y="106" font-size="14" fill="#c4b5fd">Stroke to Path</text>
+          <text x="400" y="106" font-size="12" fill="#64748b">Ctrl+Alt+C</text>
+          
+          <line x1="230" y1="118" x2="530" y2="118" stroke="#2d3348" stroke-width="1"/>
+          
+          <text x="235" y="138" font-size="14" fill="#e2e8f0">Union</text>
+          <text x="400" y="138" font-size="12" fill="#64748b">Ctrl++</text>
+          
+          <text x="235" y="160" font-size="14" fill="#e2e8f0">Difference</text>
+          <text x="400" y="160" font-size="12" fill="#64748b">Ctrl+-</text>
+          
+          <text x="235" y="182" font-size="14" fill="#e2e8f0">Intersection</text>
+          <text x="400" y="182" font-size="12" fill="#64748b">Ctrl+*</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 1. Меню «Контури» (Path) та основні операції</figcaption>
+    </figure>
+
+    <h3>Ключові можливості меню «Контури»</h3>
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 1. Базові операції з контурами</caption>
+        <thead>
+          <tr>
+            <th>Операція</th>
+            <th>Гарячі клавіші</th>
+            <th>Результат</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Object to Path</strong></td>
+            <td><code>Shift+Ctrl+C</code></td>
+            <td>Перетворює фігуру (коло, прямокутник) на редагований контур</td>
+          </tr>
+          <tr>
+            <td><strong>Stroke to Path</strong></td>
+            <td><code>Ctrl+Alt+C</code></td>
+            <td>Перетворює обведення (лінію) на окремий контур із заливкою</td>
+          </tr>
+          <tr>
+            <td><strong>Trace Bitmap</strong></td>
+            <td><code>Shift+Alt+B</code></td>
+            <td>Відкриває діалог трасування растрового зображення</td>
+          </tr>
+          <tr>
+            <td><strong>Union (Сума)</strong></td>
+            <td><code>Ctrl++</code></td>
+            <td>Об'єднує два об'єкти в один</td>
+          </tr>
+          <tr>
+            <td><strong>Difference (Різниця)</strong></td>
+            <td><code>Ctrl+-</code></td>
+            <td>Віднімає верхній об'єкт від нижнього</td>
+          </tr>
+          <tr>
+            <td><strong>Intersection (Перетин)</strong></td>
+            <td><code>Ctrl+*</code></td>
+            <td>Залишає лише спільну область перекриття</td>
+          </tr>
+          <tr>
+            <td><strong>Exclusion (Виключення)</strong></td>
+            <td><code>Ctrl+^</code></td>
+            <td>Об'єднує об'єкти, видаляючи область перекриття</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= 2. ОПЕРАЦІЇ ================= -->
+  <section id="operations">
+    <h2><span class="num">2</span> Логічні операції над контурами</h2>
+    <p class="lead">Розглянемо кожну операцію наочно. Колір нової фігури успадковується від <strong>нижнього</strong> об'єкта.</p>
+
+    <h3>2.1. Сума (Union)</h3>
+    <div class="logic-block">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <circle cx="45" cy="60" r="35" fill="#ec4899" opacity="0.9"/>
+        <rect x="55" y="30" width="50" height="50" fill="#10b981" opacity="0.9"/>
+      </svg>
+      <span class="logic-arrow">→</span>
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <path d="M45,25 A35,35 0 0,0 45,95 L95,95 L95,45 L55,45 A35,35 0 0,1 45,25 Z" fill="#ec4899"/>
+      </svg>
+    </div>
+    <p><strong>Результат:</strong> об'єднання двох фігур в одну. Колір та обведення успадковуються від <em>нижнього</em> об'єкта. У прикладі — фіолетове коло та зелене коло (прямокутник) об'єдналися у фіолетову фігуру.</p>
+
+    <h3>2.2. Різниця (Difference)</h3>
+    <div class="logic-block">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <polygon points="60,10 15,100 105,100" fill="#ef4444"/>
+        <polygon points="60,90 20,10 100,10" fill="#3b82f6" opacity="0.8"/>
+      </svg>
+      <span class="logic-arrow">→</span>
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <path d="M15,100 L105,100 L60,50 L100,10 L20,10 L60,50 Z" fill="#ef4444"/>
+      </svg>
+    </div>
+    <p><strong>Результат:</strong> від <em>нижнього</em> об'єкта «відрізається» область перекриття з верхнім. Нова фігура отримує колір нижнього (червоного) трикутника.</p>
+
+    <h3>2.3. Перетин (Intersection)</h3>
+    <div class="logic-block">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <polygon points="60,10 15,100 105,100" fill="#ef4444"/>
+        <polygon points="60,90 20,10 100,10" fill="#3b82f6" opacity="0.6"/>
+      </svg>
+      <span class="logic-arrow">→</span>
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <polygon points="60,90 35,50 85,50" fill="#ef4444"/>
+      </svg>
+    </div>
+    <p><strong>Результат:</strong> залишається лише спільна область перекриття. У прикладі — ромб.</p>
+
+    <h3>2.4. Виключення (Exclusion)</h3>
+    <div class="logic-block">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="45" fill="#ef4444"/>
+        <polygon points="60,15 15,100 105,100" fill="#3b82f6" opacity="0.8"/>
+      </svg>
+      <span class="logic-arrow">→</span>
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <path d="M60,15 A45,45 0 0,1 105,60 L60,105 L15,60 A45,45 0 0,1 60,15 Z" fill="#ef4444" fill-rule="evenodd" opacity="0"/>
+        <circle cx="60" cy="60" r="45" fill="none" stroke="#ef4444" stroke-width="10"/>
+      </svg>
+    </div>
+    <p><strong>Результат:</strong> об'єкти об'єднуються, але спільна область (перекриття) <em>видаляється</em>, утворюючи «порожнечу».</p>
+
+    <div class="tip">
+      <strong>Важливо!</strong> При виконанні операцій <strong>завжди</strong> враховуйте порядок шарів. Верхня фігура впливає на нижню, а колір результату береться від нижньої. Якщо потрібно змінити результат — перемістіть фігуру на передній/задній план.
+    </div>
+  </section>
+
+  <!-- ================= 3. ТРАСУВАННЯ ================= -->
+  <section id="tracing">
+    <h2><span class="num">3</span> Трасування растрових зображень (Trace Bitmap)</h2>
+    <p>Трасування (векторизація) — процес перетворення растрового зображення (пікселів) на векторні контури (криві).</p>
+
+    <figure>
+      <svg viewBox="0 0 800 260" role="img" aria-label="Алгоритм трасування">
+        <g font-family="Segoe UI, sans-serif">
+          <rect x="20" y="40" width="160" height="80" rx="12" fill="#2d3348" stroke="#6366f1" stroke-width="2"/>
+          <text x="100" y="75" text-anchor="middle" font-size="15" font-weight="700" fill="#e2e8f0">1. Імпорт</text>
+          <text x="100" y="98" text-anchor="middle" font-size="13" fill="#94a3b8">растрового зображення</text>
+          
+          <line x1="185" y1="80" x2="215" y2="80" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+          
+          <rect x="220" y="40" width="160" height="80" rx="12" fill="#2d3348" stroke="#6366f1" stroke-width="2"/>
+          <text x="300" y="75" text-anchor="middle" font-size="15" font-weight="700" fill="#e2e8f0">2. Вибір</text>
+          <text x="300" y="98" text-anchor="middle" font-size="13" fill="#94a3b8">Trace Bitmap</text>
+          
+          <line x1="385" y1="80" x2="415" y2="80" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+          
+          <rect x="420" y="40" width="160" height="80" rx="12" fill="#2d3348" stroke="#6366f1" stroke-width="2"/>
+          <text x="500" y="75" text-anchor="middle" font-size="15" font-weight="700" fill="#e2e8f0">3. Налаштування</text>
+          <text x="500" y="98" text-anchor="middle" font-size="13" fill="#94a3b8">порогу (Threshold)</text>
+          
+          <line x1="585" y1="80" x2="615" y2="80" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+          
+          <rect x="620" y="40" width="160" height="80" rx="12" fill="#2d3348" stroke="#10b981" stroke-width="2"/>
+          <text x="700" y="75" text-anchor="middle" font-size="15" font-weight="700" fill="#10b981">4. Результат</text>
+          <text x="700" y="98" text-anchor="middle" font-size="13" fill="#94a3b8">векторний контур</text>
+
+          <!-- Bottom detail -->
+          <rect x="220" y="150" width="360" height="90" rx="10" fill="#181b26" stroke="#2d3348" stroke-width="2"/>
+          <text x="240" y="175" font-size="14" fill="#c4b5fd">Режими трасування:</text>
+          <text x="240" y="198" font-size="13" fill="#94a3b8">• Brightness cutoff (поріг яскравості)</text>
+          <text x="240" y="218" font-size="13" fill="#94a3b8">• Edge detection (виявлення країв)</text>
+          <text x="240" y="238" font-size="13" fill="#94a3b8">• Color quantization (квантування кольору)</text>
+        </g>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/>
+          </marker>
+        </defs>
+      </svg>
+      <figcaption>Рис. 2. Алгоритм трасування растрового зображення</figcaption>
+    </figure>
+
+    <h3>Основні режими Trace Bitmap</h3>
+    <div class="table-scroll">
+      <table>
+        <caption>Таблиця 2. Режими трасування</caption>
+        <thead>
+          <tr>
+            <th>Режим</th>
+            <th>Призначення</th>
+            <th>Коли використовувати</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Brightness cutoff</strong></td>
+            <td>Перетворює зображення в чорно-біле за порогом яскравості</td>
+            <td>Чорно-білі логотипи, силуети, іконки</td>
+          </tr>
+          <tr>
+            <td><strong>Edge detection</strong></td>
+            <td>Виявляє контури (краї) об'єктів</td>
+            <td>Зображення з чіткими межами, лінійна графіка</td>
+          </tr>
+          <tr>
+            <td><strong>Color quantization</strong></td>
+            <td>Зменшує кількість кольорів до заданої</td>
+            <td>Кольорові логотипи з обмеженою палітрою</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Порада:</strong> Для досягнення найкращого результату експериментуйте з параметром <code>Threshold</code> (поріг). Значення 0.450–0.650 дають оптимальний баланс деталізації та чистоти контуру.
+    </div>
+
+    <h3>Покрокова інструкція трасування</h3>
+    <div class="tasks">
+      <div class="task">
+        <h6>Крок 1: Імпорт</h6>
+        <p>Відкрийте Inkscape, перетягніть растрове зображення (логотип) на полотно або використайте <code>File → Import</code>.</p>
+      </div>
+      <div class="task">
+        <h6>Крок 2: Вибір інструменту</h6>
+        <p>Виділіть зображення, перейдіть у меню <code>Path → Trace Bitmap</code> (або <code>Shift+Alt+B</code>).</p>
+      </div>
+      <div class="task">
+        <h6>Крок 3: Налаштування</h6>
+        <p>Виберіть режим (Brightness cutoff для ч/б), налаштуйте <code>Threshold</code>, увімкніть <code>Live Preview</code> для попереднього перегляду.</p>
+      </div>
+      <div class="task">
+        <h6>Крок 4: Застосування</h6>
+        <p>Натисніть <code>Update</code>, потім <code>OK</code>. Векторний об'єкт з'явиться поверх оригіналу — перетягніть його вбік.</p>
+      </div>
+      <div class="task">
+        <h6>Крок 5: Редагування</h6>
+        <p>Видаліть оригінальне растрове зображення. Векторний контур можна редагувати інструментом <code>Node Editor</code> (N).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. ПРАКТИКА ================= -->
+  <section id="practice">
+    <h2><span class="num">4</span> Практичне завдання</h2>
+    
+    <div class="tile" style="background: rgba(99, 102, 241, 0.1); border-color: var(--accent); margin-bottom: 24px;">
+      <h5 style="color: var(--accent-2);">Завдання</h5>
+      <p style="margin: 0; color: #e2e8f0;">Створити векторне зображення логотипа з наданого растрового зразка (зображення орла/герба).</p>
+    </div>
+
+    <h3>Порядок виконання</h3>
+    <div class="tasks">
+      <div class="task">
+        <h6>Підготовка</h6>
+        <p>Завантажте зображення логотипа (надається викладачем). Перегляньте відеоінструкцію до виконання роботи.</p>
+      </div>
+      <div class="task">
+        <h6>Трасування</h6>
+        <p>Виконайте трасування зображення за допомогою <code>Path → Trace Bitmap</code>. Налаштуйте поріг для отримання чистого контуру.</p>
+      </div>
+      <div class="task">
+        <h6>Редагування контуру</h6>
+        <p>Видаліть зайві вузли, згладіть криві, приберіть артефакти трасування. Використовуйте <code>Node Editor (N)</code>.</p>
+      </div>
+      <div class="task">
+        <h6>Художнє оформлення</h6>
+        <p>Застосуйте градієнтну заливку, налаштуйте прозорість, додайте ефекти (наприклад, розмиття або тінь).</p>
+      </div>
+      <div class="task">
+        <h6>Збереження</h6>
+        <p>Збережіть файл у форматі <code>.svg</code> та <code>.png</code>. Надішліть роботу на перевірку.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Критерії оцінювання:</strong> точність передачі форми, чистота контуру (відсутність зайвих вузлів), художнє оформлення (градієнти, прозорість), завершеність роботи.
+    </div>
+  </section>
+
+  <!-- ================= КОНТРОЛЬНІ ЗАПИТАННЯ ================= -->
+  <section id="questions">
+    <h2><span class="num">?</span> Контрольні запитання</h2>
+    <p class="lead">Натисніть на запитання, щоб побачити відповідь.</p>
+
+    <details class="q">
+      <summary>Що таке контур у векторній графіці?</summary>
+      <div class="answer">Контур — це математично описана крива (зазвичай крива Безьє), яка визначає форму об'єкта. У Inkscape будь-яка фігура (коло, прямокутник) може бути перетворена на контур для подальшого редагування.</div>
+    </details>
+    <details class="q">
+      <summary>Яка різниця між операціями «Сума» та «Перетин»?</summary>
+      <div class="answer">«Сума» (Union) об'єднує два об'єкти в один, зберігаючи всі їхні частини. «Перетин» (Intersection) залишає лише спільну область перекриття двох фігур, відсікаючи все інше.</div>
+    </details>
+    <details class="q">
+      <summary>Як визначається колір нової фігури після застосування операції?</summary>
+      <div class="answer">Колір заливки та обведення успадковується від <strong>нижнього</strong> об'єкта (того, що знаходиться на задньому плані).</div>
+    </details>
+    <details class="q">
+      <summary>Що таке трасування (векторизація) і для чого воно потрібне?</summary>
+      <div class="answer">Трасування — це процес перетворення растрового зображення (пікселів) у векторні контури. Воно дозволяє масштабувати зображення без втрати якості, редагувати форму та зменшувати розмір файлу.</div>
+    </details>
+    <details class="q">
+      <summary>Який режим трасування найкраще підходить для чорно-білого логотипу?</summary>
+      <div class="answer">Режим <strong>Brightness cutoff</strong> (поріг яскравості) — він перетворює зображення на чорно-біле, залишаючи лише контури з яскравістю вище заданого порогу.</div>
+    </details>
+    <details class="q">
+      <summary>Які гарячі клавіші викликають діалог Trace Bitmap?</summary>
+      <div class="answer"><code>Shift+Alt+B</code></div>
+    </details>
+    <details class="q">
+      <summary>Як змінити порядок об'єктів для отримання потрібного результату операції?</summary>
+      <div class="answer">Використовуйте команди <code>Object → Raise</code> (Page Up) та <code>Object → Lower</code> (Page Down) або комбінації <code>Home</code>/<code>End</code> для переміщення на передній/задній план.</div>
+    </details>
+    <details class="q">
+      <summary>Що таке градієнтна сітка (Gradient Mesh)?</summary>
+      <div class="answer">Це інструмент, який дозволяє створювати плавні переходи кольорів у кількох напрямках одночасно, на відміну від лінійного чи радіального градієнта. Використовується для реалістичного затінення об'єктів.</div>
+    </details>
+  </section>
+
+  <!-- ================= ТЕСТ ================= -->
+  <section id="quiz">
+    <h2><span class="num">✓</span> Тест для самоперевірки</h2>
+    <div class="quiz" id="quizBox">
+      
+      <div class="q-item" data-answer="b">
+        <p class="qtext">1. Яка операція залишає лише спільну область двох фігур?</p>
+        <label><input type="radio" name="q1" value="a"> Сума (Union)</label>
+        <label><input type="radio" name="q1" value="b"> Перетин (Intersection)</label>
+        <label><input type="radio" name="q1" value="c"> Різниця (Difference)</label>
+        <label><input type="radio" name="q1" value="d"> Виключення (Exclusion)</label>
+      </div>
+
+      <div class="q-item" data-answer="c">
+        <p class="qtext">2. Від якого об'єкта успадковується колір після операції з контурами?</p>
+        <label><input type="radio" name="q2" value="a"> Від верхнього</label>
+        <label><input type="radio" name="q2" value="b"> Від того, що має більшу площу</label>
+        <label><input type="radio" name="q2" value="c"> Від нижнього (на задньому плані)</label>
+        <label><input type="radio" name="q2" value="d"> Від того, що виділено першим</label>
+      </div>
+
+      <div class="q-item" data-answer="a">
+        <p class="qtext">3. Яка гаряча клавіша відкриває діалог Trace Bitmap?</p>
+        <label><input type="radio" name="q3" value="a"> Shift+Alt+B</label>
+        <label><input type="radio" name="q3" value="b"> Ctrl+Shift+C</label>
+        <label><input type="radio" name="q3" value="c"> Ctrl+Alt+C</label>
+        <label><input type="radio" name="q3" value="d"> Shift+Ctrl+B</label>
+      </div>
+
+      <div class="q-item" data-answer="d">
+        <p class="qtext">4. Який режим трасування найкраще підходить для кольорового логотипу з обмеженою палітрою?</p>
+        <label><input type="radio" name="q4" value="a"> Brightness cutoff</label>
+        <label><input type="radio" name="q4" value="b"> Edge detection</label>
+        <label><input type="radio" name="q4" value="c"> Invert image</label>
+        <label><input type="radio" name="q4" value="d"> Color quantization</label>
+      </div>
+
+      <div class="q-item" data-answer="b">
+        <p class="qtext">5. Що відбувається при операції «Різниця» (Difference)?</p>
+        <label><input type="radio" name="q5" value="a"> Об'єкти об'єднуються в один</label>
+        <label><input type="radio" name="q5" value="b"> Від нижнього об'єкта віднімається область перекриття з верхнім</label>
+        <label><input type="radio" name="q5" value="c"> Залишається лише спільна область</label>
+        <label><input type="radio" name="q5" value="d"> Видаляється спільна область</label>
+      </div>
+
+      <button class="btn" id="checkBtn" type="button">Перевірити</button>
+      <button class="btn ghost" id="resetBtn" type="button">Скинути</button>
+      <div id="quizResult"></div>
+    </div>
+  </section>
+
+  <footer>
+    Практичне заняття №7 з інформатики · Векторна графіка в Inkscape · 2026
+  </footer>
+</div>
+
+<script>
+  // Quiz logic
+  (function () {
+    var box = document.getElementById('quizBox');
+    var items = box.querySelectorAll('.q-item');
+    var resultEl = document.getElementById('quizResult');
+
+    document.getElementById('checkBtn').addEventListener('click', function () {
+      var score = 0;
+      var unanswered = 0;
+
+      items.forEach(function (item) {
+        var answer = item.getAttribute('data-answer');
+        var chosen = item.querySelector('input:checked');
+        var labels = item.querySelectorAll('label');
+
+        labels.forEach(function (l) {
+          l.style.background = 'var(--card)';
+          l.style.borderColor = 'var(--line)';
+          l.style.color = '';
+        });
+
+        if (!chosen) { unanswered++; return; }
+
+        labels.forEach(function (l) {
+          var input = l.querySelector('input');
+          if (input.value === answer) {
+            l.style.background = 'rgba(16, 185, 129, 0.15)';
+            l.style.borderColor = 'var(--ok)';
+            l.style.color = 'var(--ok)';
+          }
+          if (input.checked && input.value !== answer) {
+            l.style.background = 'rgba(239, 68, 68, 0.15)';
+            l.style.borderColor = '#ef4444';
+            l.style.color = '#ef4444';
+          }
+        });
+
+        if (chosen.value === answer) score++;
+      });
+
+      var total = items.length;
+      var text = 'Результат: ' + score + ' з ' + total + ' правильних.';
+      if (unanswered > 0) text += ' Без відповіді: ' + unanswered + '.';
+
+      resultEl.textContent = text;
+      resultEl.style.color = score === total ? 'var(--ok)' : (score >= total / 2 ? 'var(--warn)' : '#ef4444');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      box.querySelectorAll('input[type=radio]').forEach(function (r) { r.checked = false; });
+      box.querySelectorAll('label').forEach(function (l) {
+        l.style.background = 'var(--card)';
+        l.style.borderColor = 'var(--line)';
+        l.style.color = '';
+      });
+      resultEl.textContent = '';
+    });
+  })();
+
+  // Active nav highlight
+  (function () {
+    var links = document.querySelectorAll('nav.toc a');
+    var sections = Array.prototype.map.call(links, function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+
+    function onScroll() {
+      var pos = window.scrollY + 140;
+      var current = 0;
+      sections.forEach(function (s, i) {
+        if (s && s.offsetTop <= pos) current = i;
+      });
+      links.forEach(function (a, i) {
+        a.classList.toggle('active', i === current);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>

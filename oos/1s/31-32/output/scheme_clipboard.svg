@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="365.328pt" viewBox="0 0 635.4 365.328" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-30T12:46:50.884218</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 365.328 
+L 635.4 365.328 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 37.240615 283.8728 
+L 206.271692 283.8728 
+Q 214.770462 283.8728 214.770462 275.2796 
+L 214.770462 70.9524 
+Q 214.770462 62.3592 206.271692 62.3592 
+L 37.240615 62.3592 
+Q 28.741846 62.3592 28.741846 70.9524 
+L 28.741846 275.2796 
+Q 28.741846 283.8728 37.240615 283.8728 
+z
+" clip-path="url(#p3b8be102c5)" style="fill: #e1f0fe; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 120.811846 109.6218 
+L 122.700462 109.6218 
+Q 139.225846 109.6218 139.225846 92.9128 
+L 139.225846 91.0032 
+Q 139.225846 74.2942 122.700462 74.2942 
+L 120.811846 74.2942 
+Q 104.286462 74.2942 104.286462 91.0032 
+L 104.286462 92.9128 
+Q 104.286462 109.6218 120.811846 109.6218 
+z
+" clip-path="url(#p3b8be102c5)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 263.874462 283.8728 
+L 371.525538 283.8728 
+Q 380.024308 283.8728 380.024308 275.2796 
+L 380.024308 70.9524 
+Q 380.024308 62.3592 371.525538 62.3592 
+L 263.874462 62.3592 
+Q 255.375692 62.3592 255.375692 70.9524 
+L 255.375692 275.2796 
+Q 255.375692 283.8728 263.874462 283.8728 
+z
+" clip-path="url(#p3b8be102c5)" style="fill: #f5f5f7; stroke: #86868b; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 429.128308 283.8728 
+L 598.159385 283.8728 
+Q 606.658154 283.8728 606.658154 275.2796 
+L 606.658154 70.9524 
+Q 606.658154 62.3592 598.159385 62.3592 
+L 429.128308 62.3592 
+Q 420.629538 62.3592 420.629538 70.9524 
+L 420.629538 275.2796 
+Q 420.629538 283.8728 429.128308 283.8728 
+z
+" clip-path="url(#p3b8be102c5)" style="fill: #e8f8ec; stroke: #248a3d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 512.699538 109.6218 
+L 514.588154 109.6218 
+Q 531.113538 109.6218 531.113538 92.9128 
+L 531.113538 91.0032 
+Q 531.113538 74.2942 514.588154 74.2942 
+L 512.699538 74.2942 
+Q 496.174154 74.2942 496.174154 91.0032 
+L 496.174154 92.9128 
+Q 496.174154 109.6218 512.699538 109.6218 
+z
+" clip-path="url(#p3b8be102c5)" style="fill: #248a3d"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="34.221391" transform="rotate(-0 317.7 34.221391)">Буфер обміну: три кроки</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="121.756154" y="96.373" transform="rotate(-0 121.756154 96.373)">1</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="121.756154" y="126.576188" transform="rotate(-0 121.756154 126.576188)">ВИДІЛИТИ</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(68.52131 137.383531)">об'єкт і натиснути</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(100.025138 153.044437)">Ctrl + C</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 24px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle" x="121.756154" y="237.0265" transform="rotate(-0 121.756154 237.0265)">📄→📋</text>
+   </g>
+   <g id="text_6">
+    <text style="font-style: italic; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(72.310177 259.509617)">об'єкт копіюється</text>
+    <text style="font-style: italic; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(99.583107 273.92907)">у буфер</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 225.272081 173.116 
+Q 235.073643 173.116 242.639137 173.116 
+" style="fill: none; stroke: #86868b; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 235.439137 169.516 
+L 242.639137 173.116 
+L 235.439137 176.716 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="95.26925" transform="rotate(-0 317.7 95.26925)">БУФЕР</text>
+   </g>
+   <g id="text_8">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="317.7" y="116.569984" transform="rotate(-0 317.7 116.569984)">обміну</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 40px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle" x="317.7" y="203.2495" transform="rotate(-0 317.7 203.2495)">📋</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(289.933594 237.885938)">тимчасово</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(281.258594 252.395625)">зберігає один</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(268.582031 266.632812)">об'єкт (або кілька)</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 395.244728 173.116 
+Q 442.820189 173.116 488.159582 173.116 
+" style="fill: none; stroke: #86868b; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 480.959582 169.516 
+L 488.159582 173.116 
+L 480.959582 176.716 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="513.643846" y="96.373" transform="rotate(-0 513.643846 96.373)">3</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="513.643846" y="126.576188" transform="rotate(-0 513.643846 126.576188)">ВСТАВИТИ</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(459.978456 137.383531)">у потрібному місці</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(459.846112 153.044437)">натиснути Ctrl + V</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 24px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle" x="513.643846" y="237.0265" transform="rotate(-0 513.643846 237.0265)">📋→📄</text>
+   </g>
+   <g id="text_15">
+    <text style="font-style: italic; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(462.891112 259.643738)">об'єкт з'являється</text>
+    <text style="font-style: italic; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(473.843104 273.794949)">у новому місці</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p3b8be102c5">
+   <rect x="10.8" y="10.8" width="613.8" height="343.728"/>
+  </clipPath>
+ </defs>
+</svg>

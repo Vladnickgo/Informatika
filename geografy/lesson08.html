@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Взаємозв’язок між національними та геополітичними інтересами держави</title>
+<style>
+  :root{
+    --navy:#0b1c31;
+    --navy-2:#123152;
+    --blue:#2c5f8a;
+    --blue-soft:#e8f0f8;
+    --accent:#c9a227;
+    --accent-soft:#fbf4dd;
+    --ink:#1c2733;
+    --muted:#5b6b7c;
+    --line:#dde5ee;
+    --bg:#eef2f7;
+    --card:#ffffff;
+    --danger:#b3392f;
+    --danger-soft:#fbeceb;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    overflow:hidden;
+    padding:64px 20px 72px;
+    color:#fff;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(201,162,39,.20), transparent 45%),
+      radial-gradient(circle at 88% 82%, rgba(86,160,220,.24), transparent 50%),
+      linear-gradient(135deg,#08182b 0%, #123152 55%, #08182b 100%);
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size:46px 46px;
+    pointer-events:none;
+    mask-image:radial-gradient(ellipse at center, #000 30%, transparent 78%);
+  }
+  .hero-inner{
+    position:relative;z-index:2;
+    max-width:1080px;margin:0 auto;
+    display:flex;gap:36px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  }
+  .hero-text{flex:1 1 520px;min-width:300px}
+  .eyebrow{
+    display:inline-block;
+    font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);
+    border:1px solid rgba(201,162,39,.5);
+    border-radius:999px;
+    padding:5px 14px;
+    margin-bottom:18px;
+  }
+  header.hero h1{
+    font-size:clamp(1.6rem, 3.4vw, 2.5rem);
+    line-height:1.22;
+    margin:0 0 16px;
+    font-weight:700;
+  }
+  header.hero p.lead{
+    margin:0;
+    color:#c6d6e6;
+    font-size:1.02rem;
+    max-width:62ch;
+  }
+  .hero-globe{flex:0 0 260px;display:flex;justify-content:center}
+  .hero-globe svg{width:230px;height:230px;max-width:60vw}
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 90px}
+  .sec{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:30px 32px 34px;
+    margin-top:26px;
+    box-shadow:0 2px 16px rgba(15,37,64,.07);
+  }
+  .sec > h2{
+    display:flex;align-items:center;gap:14px;
+    font-size:1.28rem;
+    margin:0 0 18px;
+    color:var(--navy);
+    line-height:1.35;
+  }
+  .sec > h2 .num{
+    flex:0 0 auto;
+    width:38px;height:38px;
+    display:grid;place-items:center;
+    border-radius:11px;
+    background:linear-gradient(135deg,var(--navy-2),var(--blue));
+    color:#fff;font-size:.98rem;font-weight:700;
+    box-shadow:0 4px 12px rgba(18,49,82,.28);
+  }
+  .sec h3{
+    font-size:1.02rem;
+    color:var(--navy-2);
+    margin:26px 0 10px;
+  }
+  .sec p{margin:0 0 14px}
+  .sec ul{margin:0 0 14px;padding-left:0;list-style:none}
+  .sec ul li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:9px;
+  }
+  .sec ul li::before{
+    content:"";
+    position:absolute;left:6px;top:.68em;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft);
+  }
+  .sec strong{color:var(--navy-2)}
+
+  /* ---------- CALLOUTS ---------- */
+  .callout{
+    border-left:4px solid var(--accent);
+    background:var(--accent-soft);
+    border-radius:0 12px 12px 0;
+    padding:16px 20px;
+    margin:20px 0;
+    font-size:.97rem;
+  }
+  .callout .label{
+    display:block;
+    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    color:#8a6d10;font-weight:700;margin-bottom:6px;
+  }
+  .callout p:last-child{margin-bottom:0}
+
+  .callout.danger{
+    border-left-color:var(--danger);
+    background:var(--danger-soft);
+  }
+  .callout.danger .label{color:#8e2b23}
+
+  /* ---------- DIAGRAM WRAPPER ---------- */
+  figure.diagram{
+    margin:24px 0 6px;
+    background:linear-gradient(160deg,#f7fafd,#eaf1f8);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 16px 10px;
+  }
+  figure.diagram svg{width:100%;height:auto;display:block}
+  figure.diagram figcaption{
+    text-align:center;
+    font-size:.83rem;
+    color:var(--muted);
+    margin-top:10px;
+    padding-bottom:6px;
+  }
+
+  /* ---------- COMPONENT CARDS ---------- */
+  .grid{display:grid;gap:16px}
+  .grid.g4{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+  .grid.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .grid.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+
+  .card{
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px 18px;
+    background:#fff;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(15,37,64,.10);
+    border-color:#c3d5e6;
+  }
+  .card .ico{
+    width:48px;height:48px;
+    border-radius:12px;
+    display:grid;place-items:center;
+    background:var(--blue-soft);
+    margin-bottom:12px;
+  }
+  .card .ico svg{width:26px;height:26px}
+  .card h4{
+    margin:0 0 8px;
+    font-size:1rem;
+    color:var(--navy);
+  }
+  .card p{
+    margin:0;
+    font-size:.92rem;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  /* ---------- CHAIN ---------- */
+  .chain{
+    display:flex;
+    align-items:stretch;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:22px 0 6px;
+  }
+  .chain-step{
+    flex:1 1 170px;
+    border-radius:14px;
+    padding:16px 16px 18px;
+    border:1px solid var(--line);
+    background:#f8fbfe;
+    position:relative;
+  }
+  .chain-step .step-num{
+    display:inline-grid;place-items:center;
+    width:26px;height:26px;border-radius:8px;
+    font-size:.8rem;font-weight:700;
+    background:var(--blue-soft);color:var(--blue);
+    margin-bottom:10px;
+  }
+  .chain-step h4{margin:0 0 6px;font-size:.95rem;color:var(--navy)}
+  .chain-step p{margin:0;font-size:.86rem;color:var(--muted);line-height:1.55}
+  .chain-step.bad{background:var(--danger-soft);border-color:#f0cfcc}
+  .chain-step.bad .step-num{background:#f2d3d0;color:var(--danger)}
+  .chain-step.bad h4{color:#8e2b23}
+  .chain-arrow{
+    display:flex;align-items:center;justify-content:center;
+    color:#a9bccf;font-size:1.4rem;font-weight:700;
+    flex:0 0 22px;
+  }
+
+  /* ---------- TABLE ---------- */
+  .table-wrap{overflow-x:auto;margin:18px 0 6px;border-radius:12px;border:1px solid var(--line)}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:.93rem;background:#fff}
+  thead th{
+    background:linear-gradient(135deg,var(--navy),var(--blue));
+    color:#fff;text-align:left;
+    padding:13px 16px;font-weight:600;font-size:.88rem;
+    letter-spacing:.03em;
+  }
+  tbody td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:top}
+  tbody tr:nth-child(even) td{background:#f8fbfe}
+  tbody td:first-child{font-weight:600;color:var(--navy-2);white-space:nowrap}
+  tbody tr:hover td{background:#eef6fd}
+
+  /* ---------- STRAIT MINI CARDS ---------- */
+  .strait{
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .strait svg{width:100%;height:auto;display:block}
+  .strait .cap{padding:12px 14px 14px}
+  .strait .cap h4{margin:0 0 4px;font-size:.93rem;color:var(--navy)}
+  .strait .cap p{margin:0;font-size:.83rem;color:var(--muted);line-height:1.5}
+
+  /* ---------- VISUAL MAP CARDS ---------- */
+  .mapcard{
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:#fff;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .mapcard svg{width:100%;height:auto;display:block;background:#0d2b47}
+  .mapcard .body{padding:16px 18px 18px;flex:1}
+  .mapcard h4{margin:0 0 10px;font-size:.97rem;color:var(--navy);line-height:1.4}
+  .mapcard dl{margin:0;font-size:.87rem}
+  .mapcard dt{
+    font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin-top:10px;
+  }
+  .mapcard dt:first-child{margin-top:0}
+  .mapcard dd{margin:3px 0 0;color:var(--muted);line-height:1.55}
+
+  /* ---------- QUESTIONS ---------- */
+  .questions{counter-reset:q;list-style:none;padding:0;margin:0}
+  .questions li{
+    counter-increment:q;
+    position:relative;
+    padding:16px 18px 16px 62px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    margin-bottom:12px;
+    background:#f8fbfe;
+    font-size:.95rem;
+    transition:background .18s ease, border-color .18s ease;
+  }
+  .questions li::before{
+    content:counter(q);
+    position:absolute;left:16px;top:15px;
+    width:32px;height:32px;
+    display:grid;place-items:center;
+    border-radius:10px;
+    background:linear-gradient(135deg,var(--navy-2),var(--blue));
+    color:#fff;font-weight:700;font-size:.9rem;
+  }
+  .questions li:hover{background:#fff;border-color:#c3d5e6}
+
+  /* ---------- FOOTER ---------- */
+  footer.page-foot{
+    text-align:center;
+    color:var(--muted);
+    font-size:.85rem;
+    padding:34px 20px 10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:720px){
+    .sec{padding:22px 18px 26px}
+    .sec > h2{font-size:1.12rem;gap:10px}
+    .sec > h2 .num{width:32px;height:32px;font-size:.85rem}
+    header.hero{padding:44px 18px 52px}
+    .hero-globe{display:none}
+    .chain-arrow{flex:0 0 100%;transform:rotate(90deg);height:14px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">Тема заняття</span>
+      <h1>Взаємозв’язок між національними та геополітичними інтересами держави</h1>
+      <p class="lead">
+        Сутність і взаємозв’язок національних та геополітичних інтересів держави,
+        механізми їх формування й реалізації, а також ризики, що виникають
+        через їхнє хибне тлумачення.
+      </p>
+    </div>
+
+    <div class="hero-globe" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <radialGradient id="gGrad" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#2f6da3"/>
+            <stop offset="100%" stop-color="#0d2b47"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="72" fill="url(#gGrad)" stroke="#c9a227" stroke-width="1.5" opacity=".95"/>
+        <g stroke="#8fc0e6" stroke-width="1" fill="none" opacity=".55">
+          <ellipse cx="100" cy="100" rx="72" ry="26"/>
+          <ellipse cx="100" cy="100" rx="72" ry="52"/>
+          <ellipse cx="100" cy="100" rx="26" ry="72"/>
+          <ellipse cx="100" cy="100" rx="52" ry="72"/>
+          <line x1="28" y1="100" x2="172" y2="100"/>
+          <line x1="100" y1="28" x2="100" y2="172"/>
+        </g>
+        <g fill="#c9a227">
+          <circle cx="66" cy="72" r="3.2"/>
+          <circle cx="118" cy="60" r="3.2"/>
+          <circle cx="140" cy="112" r="3.2"/>
+          <circle cx="78" cy="128" r="3.2"/>
+          <circle cx="104" cy="94" r="3.2"/>
+        </g>
+        <g stroke="#c9a227" stroke-width="1.2" fill="none" opacity=".8">
+          <path d="M66 72 Q96 52 118 60"/>
+          <path d="M118 60 Q140 80 140 112"/>
+          <path d="M78 128 Q100 118 104 94"/>
+          <path d="M104 94 Q126 92 140 112"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ================= 1 ================= -->
+  <section class="sec" id="s1">
+    <h2><span class="num">1</span> Вступ: Що таке національний інтерес?</h2>
+
+    <p>
+      <strong>Національний інтерес</strong> — це система ключових пріоритетів та цілей держави
+      на міжнародній арені, спрямованих на забезпечення її безпеки, суверенітету,
+      стабільності та процвітання. Це фундаментальне поняття, яке визначає, чого держава
+      прагне у зовнішній політиці та чому вона діє саме так.
+    </p>
+
+    <p>Формування національного інтересу відбувається під впливом двох ключових факторів:</p>
+
+    <ul>
+      <li>
+        <strong>Об’єктивні чинники («Карта світу»):</strong> географічне положення, наявність
+        ресурсів (енергетичних, водних, корисних копалин), економічний потенціал,
+        військова міць, демографічна ситуація.
+      </li>
+      <li>
+        <strong>Суб’єктивні чинники («Ціннісна система»):</strong> ідеологія, історичний досвід,
+        культурні та релігійні традиції, громадська думка, політичний курс правлячої еліти.
+      </li>
+    </ul>
+
+    <!-- ДІАГРАМА 1 -->
+    <figure class="diagram">
+      <svg viewBox="0 0 820 300" role="img" aria-label="Схема формування національного інтересу">
+        <defs>
+          <linearGradient id="boxObj" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e8f0f8"/><stop offset="100%" stop-color="#d3e3f2"/>
+          </linearGradient>
+          <linearGradient id="boxSub" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fbf4dd"/><stop offset="100%" stop-color="#f4e6bd"/>
+          </linearGradient>
+          <linearGradient id="circleG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#123152"/><stop offset="100%" stop-color="#2c5f8a"/>
+          </linearGradient>
+          <marker id="arrowHead" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#8ba7c0"/>
+          </marker>
+        </defs>
+
+        <!-- Об'єктивні -->
+        <rect x="18" y="26" width="266" height="96" rx="14" fill="url(#boxObj)" stroke="#b8d1e8"/>
+        <text x="151" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#123152">ОБ’ЄКТИВНІ ЧИННИКИ</text>
+        <text x="151" y="83" text-anchor="middle" font-size="14" fill="#3f5c78">«Карта світу»</text>
+        <text x="151" y="105" text-anchor="middle" font-size="12" fill="#6b8299">географія · ресурси · економіка · армія</text>
+
+        <!-- Суб'єктивні -->
+        <rect x="18" y="178" width="266" height="96" rx="14" fill="url(#boxSub)" stroke="#e6d59a"/>
+        <text x="151" y="212" text-anchor="middle" font-size="15" font-weight="700" fill="#7a5f0d">СУБ’ЄКТИВНІ ЧИННИКИ</text>
+        <text x="151" y="235" text-anchor="middle" font-size="14" fill="#8a7226">«Ціннісна система»</text>
+        <text x="151" y="257" text-anchor="middle" font-size="12" fill="#a08b45">ідеологія · історія · культура · еліта</text>
+
+        <!-- Стрілки до центру -->
+        <path d="M286,74 Q346,74 368,120" fill="none" stroke="#8ba7c0" stroke-width="2.2"
+              marker-end="url(#arrowHead)" stroke-dasharray="6 5"/>
+        <path d="M286,226 Q346,226 368,176" fill="none" stroke="#8ba7c0" stroke-width="2.2"
+              marker-end="url(#arrowHead)" stroke-dasharray="6 5"/>
+
+        <!-- Центр -->
+        <circle cx="450" cy="150" r="76" fill="url(#circleG)"/>
+        <circle cx="450" cy="150" r="76" fill="none" stroke="#c9a227" stroke-width="2"/>
+        <text x="450" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">НАЦІОНАЛЬНИЙ</text>
+        <text x="450" y="162" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">ІНТЕРЕС</text>
+        <text x="450" y="184" text-anchor="middle" font-size="11" fill="#c9a227">· безпека ·</text>
+<text x="450" y="198" text-anchor="middle" font-size="11" fill="#c9a227">· добробут ·</text>
+<text x="450" y="210" text-anchor="middle" font-size="11" fill="#c9a227">· розвиток ·</text>
+
+
+        <!-- Стрілка далі -->
+        <path d="M528,150 L586,150" fill="none" stroke="#8ba7c0" stroke-width="2.2" marker-end="url(#arrowHead)"/>
+
+        <!-- Результат -->
+        <rect x="592" y="96" width="210" height="108" rx="14" fill="#f2f7fc" stroke="#b8d1e8"/>
+        <text x="697" y="134" text-anchor="middle" font-size="14" font-weight="700" fill="#123152">ЗОВНІШНЯ</text>
+        <text x="697" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#123152">ПОЛІТИКА</text>
+        <text x="697" y="180" text-anchor="middle" font-size="12" fill="#6b8299">рішення та дії держави</text>
+      </svg>
+      <figcaption>Рис. 1. Двофакторна модель формування національного інтересу</figcaption>
+    </figure>
+
+    <div class="callout">
+      <span class="label">Аналогія</span>
+      <p>
+        Уявіть, що держава — це людина. Її «національний інтерес» — це мета в житті
+        (безпека, добробут, розвиток). «Карта світу» — це її фізичні можливості та навколишнє
+        середовище. А «ціннісна система» — це її моральні принципи та переконання, які
+        визначають, якими шляхами вона досягатиме своїх цілей.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 2 ================= -->
+  <section class="sec" id="s2">
+    <h2><span class="num">2</span> Ключові складові національного інтересу</h2>
+
+    <div class="grid g4">
+      <article class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2c5f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 L20 5 v7 c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/>
+            <path d="M9 12 l2 2 4-4"/>
+          </svg>
+        </div>
+        <h4>Самозбереження та безпека</h4>
+        <p>Найважливіший інтерес. Захист територіальної цілісності, суверенітету, конституційного ладу та населення від зовнішніх загроз.</p>
+      </article>
+
+      <article class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2c5f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 20 h18"/>
+            <rect x="4" y="12" width="3.6" height="8"/>
+            <rect x="10.2" y="8" width="3.6" height="12"/>
+            <rect x="16.4" y="4" width="3.6" height="16"/>
+          </svg>
+        </div>
+        <h4>Економічне благополуччя</h4>
+        <p>Економічне зростання, стабільність, конкурентоспроможність на світовому ринку, доступ до ресурсів і ринків збуту.</p>
+      </article>
+
+      <article class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2c5f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12 h18"/>
+            <path d="M12 3 c2.8 3 2.8 15 0 18 c-2.8-3-2.8-15 0-18z"/>
+          </svg>
+        </div>
+        <h4>Політичний вплив</h4>
+        <p>Збереження та посилення ролі держави в міжнародних відносинах, здатність впливати на прийняття рішень у світовій політиці.</p>
+      </article>
+
+      <article class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2c5f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/>
+          </svg>
+        </div>
+        <h4>Ціннісне лідерство</h4>
+        <p>Просування власної ідеологічної, культурної та політичної моделі (наприклад, демократії, прав людини) як прикладу для наслідування.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= 3 ================= -->
+  <section class="sec" id="s3">
+    <h2><span class="num">3</span> Геополітичний вимір національних інтересів</h2>
+
+    <p>
+      Геополітика вивчає, як просторові фактори впливають на політику держави. Таким чином,
+      <strong>геополітичні інтереси</strong> — це ті аспекти національних інтересів, що
+      безпосередньо випливають з географічного положення держави.
+    </p>
+
+    <h3>Приклади геополітичних інтересів</h3>
+    <ul>
+      <li>Контроль над важливими транспортними артеріями (протоки, канали, магістралі).</li>
+      <li>Забезпечення енергетичної безпеки (диверсифікація джерел постачання, контроль над родовищами).</li>
+      <li>Створення «буферних зон» або зон впливу навколо своїх кордонів.</li>
+      <li>Неприпущення домінування іншої держави в ключовому регіоні.</li>
+    </ul>
+
+    <h3>Ключові морські «вузькі місця» світу</h3>
+    <div class="grid g3">
+      <article class="strait">
+        <svg viewBox="0 0 220 130" role="img" aria-label="Ормузька протока">
+          <rect width="220" height="130" fill="#0d2b47"/>
+          <path d="M0 0 H78 Q92 42 76 84 Q66 108 0 130 Z" fill="#2c5f8a"/>
+          <path d="M220 0 H150 Q134 42 152 84 Q162 108 220 130 Z" fill="#2c5f8a"/>
+          <line x1="80" y1="64" x2="150" y2="64" stroke="#c9a227" stroke-width="2" stroke-dasharray="5 4"/>
+          <circle cx="115" cy="64" r="6" fill="#e0553f" opacity=".35"/>
+          <circle cx="115" cy="64" r="3.2" fill="#ff6b52"/>
+          <text x="115" y="98" text-anchor="middle" font-size="11" fill="#9dc2e0">Ормузька протока</text>
+        </svg>
+        <div class="cap">
+          <h4>Ормузька протока</h4>
+          <p>Вивід нафти з Перської затоки; стратегічний інтерес США та Ірану.</p>
+        </div>
+      </article>
+
+      <article class="strait">
+        <svg viewBox="0 0 220 130" role="img" aria-label="Малаккська протока">
+          <rect width="220" height="130" fill="#0d2b47"/>
+          <path d="M0 0 H120 Q96 40 60 66 Q30 88 0 96 Z" fill="#2c5f8a"/>
+          <path d="M220 130 H110 Q140 96 176 74 Q200 60 220 54 Z" fill="#2c5f8a"/>
+          <line x1="46" y1="86" x2="186" y2="46" stroke="#c9a227" stroke-width="2" stroke-dasharray="5 4"/>
+          <circle cx="116" cy="66" r="6" fill="#e0553f" opacity=".35"/>
+          <circle cx="116" cy="66" r="3.2" fill="#ff6b52"/>
+          <text x="118" y="112" text-anchor="middle" font-size="11" fill="#9dc2e0">Малаккська протока</text>
+        </svg>
+        <div class="cap">
+          <h4>Малаккська протока</h4>
+          <p>Головний морський коридор між Індійським та Тихим океанами.</p>
+        </div>
+      </article>
+
+      <article class="strait">
+        <svg viewBox="0 0 220 130" role="img" aria-label="Босфор">
+          <rect width="220" height="130" fill="#0d2b47"/>
+          <path d="M0 0 H92 Q100 34 92 65 Q86 100 0 130 Z" fill="#2c5f8a"/>
+          <path d="M220 0 H130 Q122 34 130 65 Q136 100 220 130 Z" fill="#2c5f8a"/>
+          <line x1="95" y1="65" x2="127" y2="65" stroke="#c9a227" stroke-width="2" stroke-dasharray="4 4"/>
+          <circle cx="111" cy="65" r="5.5" fill="#e0553f" opacity=".35"/>
+          <circle cx="111" cy="65" r="3" fill="#ff6b52"/>
+          <text x="111" y="100" text-anchor="middle" font-size="11" fill="#9dc2e0">Босфор</text>
+        </svg>
+        <div class="cap">
+          <h4>Босфор</h4>
+          <p>Єдиний вихід з Чорного моря до Середземного; вузол енергопостачання Європи.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="callout danger">
+      <span class="label">Історичний приклад</span>
+      <p>
+        Рішення СРСР ввести війська до Афганістану (1979) було спробою реалізації
+        геополітичного інтересу — послабити вплив США в регіоні та отримати вихід до
+        Індійського океану. Однак воно базувалося на хибній оцінці ризиків та призвело
+        до серйозних наслідків.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 4 ================= -->
+  <section class="sec" id="s4">
+    <h2><span class="num">4</span> Причини виникнення конфліктів</h2>
+
+    <p>
+      Війни часто виникають не через прямий конфлікт реальних інтересів, а через їхнє
+      <strong>хибне тлумачення</strong>. Цей механізм може перетворити навіть законну потребу
+      на руйнівний та агресивний акт, який не тільки не вирішує вихідну проблему, але й
+      зазвичай призводить до глибшої кризи.
+    </p>
+
+    <!-- ЛАНЦЮЖОК -->
+    <div class="chain">
+      <div class="chain-step">
+        <span class="step-num">1</span>
+        <h4>Реальний інтерес</h4>
+        <p>Енергетична безпека — раціональна, життєво важлива мета: стабільність економіки та добробут громадян.</p>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-step bad">
+        <span class="step-num">2</span>
+        <h4>Хибна інтерпретація</h4>
+        <p>Замість диверсифікації джерел чи дипломатії — «треба прямого військового контролю над сусідом-експортером».</p>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-step bad">
+        <span class="step-num">3</span>
+        <h4>Помилкове рішення</h4>
+        <p>Логіка «володій джерелом — володій енергією» штовхає до військової агресії.</p>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-step bad">
+        <span class="step-num">4</span>
+        <h4>Криза</h4>
+        <p>Санкції, зруйнована інфраструктура, гуманітарні катастрофи, довготривала ворожнеча.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:22px">
+      Розглянемо цей ланцюжок на конкретному прикладі. Реальним інтересом держави може бути,
+      скажімо, забезпечення енергетичної безпеки. Це цілком раціональна та життєво важлива
+      мета, що стосується стабільності економіки та добробуту громадян.
+    </p>
+
+    <p>
+      Проте саме на етапі інтерпретації цього інтересу часто відбувається фатальний збій.
+      Замість того, щоб бачити рішення в диверсифікації постачальників, розвитку власних
+      відновлюваних джерел енергії чи довгострокових дипломатичних угодах, правляча еліта
+      може хибно інтерпретувати цей інтерес як необхідність прямого військового контролю
+      над сусідньою країною-експортером. Така інтерпретація перетворює економічну та
+      стратегічну задачу на силову, спрощуючи складну проблему до логіки
+      «володій джерелом — володій енергією».
+    </p>
+
+    <p>
+      Ця хибна інтерпретація безпосередньо веде до помилкового рішення. Якщо проблема
+      бачиться у відсутності військового контролю, то рішенням, здається, має бути військова
+      агресія. Однак таке рішення є фундаментально вадливим. Воно не вирішує проблему
+      енергетичної безпеки, а лише загострює її, породжуючи нові, набагато гірші проблеми:
+      міжнародні санкції, руйнування інфраструктури, гуманітарні катастрофи та довготривалу
+      ворожнечу. Реальний інтерес — стабільні енергопостачання — гине під уламками
+      непропорційної та контрпродуктивної відповіді.
+    </p>
+
+    <div class="callout danger">
+      <span class="label">Головний висновок</span>
+      <p>
+        Джерелом найбільш руйнівних конфліктів часто є не сама реальність, а її спотворене
+        відображення в свідомості тих, хто приймає рішення. Боротьба за ресурс, безпеку чи
+        вплив — це лише симптом. Глибинною хворобою є нездатність правильно діагностувати
+        проблему та бачити ширший спектр її вирішення, що й призводить до трагічних та
+        нищівних наслідків для всіх сторін.
+      </p>
+    </div>
+
+    <h3>Сучасні приклади</h3>
+    <div class="grid g2">
+      <article class="card">
+        <h4>Війна в Іраку (2003)</h4>
+        <p>
+          Інтерес США у безпеці та контролю над ресурсами регіону був реалізований через
+          вторгнення під сумнівним приводом (наявність ЗМУ), що призвело до довготривалої
+          дестабілізації.
+        </p>
+      </article>
+      <article class="card">
+        <h4>Анексія Криму Росією (2014)</h4>
+        <p>
+          Подається як захист «національних інтересів» та російськомовного населення, але
+          з точки зору міжнародного права є порушенням суверенітету України.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= 5 ================= -->
+  <section class="sec" id="s5">
+    <h2><span class="num">5</span> Сучасні загрози національній безпеці</h2>
+
+    <p>
+      У ХХІ столітті поняття безпеки значно розширилося. Загрози вже не лише військові.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Категорія загроз</th>
+            <th>Приклади</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Військові</td>
+            <td>Агресія сусідньої держави, поширення зброї масового ураження.</td>
+          </tr>
+          <tr>
+            <td>Нетрадиційні</td>
+            <td>Тероризм, кіберзагрози, економічні кризи, глобальні пандемії.</td>
+          </tr>
+          <tr>
+            <td>Транснаціональні</td>
+            <td>Незаконна міграція, торгівля людьми, контрабанда, організована злочинність.</td>
+          </tr>
+          <tr>
+            <td>Екологічні</td>
+            <td>Деградація навколишнього середовища, зміна клімату, брак водних ресурсів.</td>
+          </tr>
+          <tr>
+            <td>Соціально-економічні</td>
+            <td>Нерівність, неефективна система освіти та охорони здоров’я, втрата конкурентоспроможності.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ДІАГРАМА: КОМПЛЕКСНА МОГУТНІСТЬ -->
+    <figure class="diagram">
+      <svg viewBox="0 0 760 300" role="img" aria-label="Складові комплексної могутності держави">
+        <defs>
+          <linearGradient id="coreG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#123152"/><stop offset="100%" stop-color="#2c5f8a"/>
+          </linearGradient>
+        </defs>
+
+        <circle cx="380" cy="150" r="66" fill="url(#coreG)"/>
+        <circle cx="380" cy="150" r="66" fill="none" stroke="#c9a227" stroke-width="2"/>
+        <text x="380" y="144" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">КОМПЛЕКСНА</text>
+        <text x="380" y="164" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">МОГУТНІСТЬ</text>
+
+        <g stroke="#b8cfe2" stroke-width="1.6" stroke-dasharray="5 5">
+          <line x1="380" y1="84" x2="380" y2="48"/>
+          <line x1="380" y1="216" x2="380" y2="252"/>
+          <line x1="314" y1="150" x2="170" y2="150"/>
+          <line x1="446" y1="150" x2="590" y2="150"/>
+          <line x1="333" y1="103" x2="228" y2="72"/>
+          <line x1="427" y1="103" x2="532" y2="72"/>
+          <line x1="333" y1="197" x2="228" y2="228"/>
+          <line x1="427" y1="197" x2="532" y2="228"/>
+        </g>
+
+        <g font-size="12.5" fill="#123152" font-weight="600">
+          <rect x="316" y="18" width="128" height="30" rx="15" fill="#e8f0f8" stroke="#b8d1e8"/>
+          <text x="380" y="38" text-anchor="middle">Економіка</text>
+
+          <rect x="316" y="252" width="128" height="30" rx="15" fill="#e8f0f8" stroke="#b8d1e8"/>
+          <text x="380" y="272" text-anchor="middle">Технології</text>
+
+          <rect x="42" y="135" width="128" height="30" rx="15" fill="#e8f0f8" stroke="#b8d1e8"/>
+          <text x="106" y="155" text-anchor="middle">Освіта</text>
+
+          <rect x="590" y="135" width="128" height="30" rx="15" fill="#e8f0f8" stroke="#b8d1e8"/>
+          <text x="654" y="155" text-anchor="middle">Армія</text>
+
+          <rect x="126" y="56" width="152" height="30" rx="15" fill="#fbf4dd" stroke="#e6d59a"/>
+          <text x="202" y="76" text-anchor="middle" fill="#7a5f0d">Соціальна згуртованість</text>
+
+          <rect x="482" y="56" width="152" height="30" rx="15" fill="#fbf4dd" stroke="#e6d59a"/>
+          <text x="558" y="76" text-anchor="middle" fill="#7a5f0d">Інформаційна стійкість</text>
+
+          <rect x="126" y="214" width="152" height="30" rx="15" fill="#fbf4dd" stroke="#e6d59a"/>
+          <text x="202" y="234" text-anchor="middle" fill="#7a5f0d">Екологічна безпека</text>
+
+          <rect x="482" y="214" width="152" height="30" rx="15" fill="#fbf4dd" stroke="#e6d59a"/>
+          <text x="558" y="234" text-anchor="middle" fill="#7a5f0d">Енергетика</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 2. Національна безпека сьогодні — це «комплексна могутність», а не лише армія</figcaption>
+    </figure>
+
+    <div class="callout">
+      <span class="label">Висновок</span>
+      <p>
+        Національна безпека сьогодні залежить від «комплексної могутності» держави,
+        що включає економіку, технології, освіту та соціальну згуртованість, а не лише від армії.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 6 ================= -->
+  <section class="sec" id="s6">
+    <h2><span class="num">6</span> Стратегії реалізації інтересів</h2>
+
+    <p>
+      У глобалізованому світі жодна, навіть найпотужніша держава, не може повністю
+      забезпечити свою безпеку поодинці.
+    </p>
+
+    <h3>Причини створення альянсів (НАТО, тощо)</h3>
+    <ul>
+      <li><strong>Колективна безпека:</strong> агресивні дії проти однієї країни-члена розглядаються як агресія проти всіх.</li>
+      <li><strong>Об’єднання ресурсів:</strong> спільні військові навчання, розподіл витрат на оборону, обмін розвідданими.</li>
+      <li><strong>Посилення переговорних позицій:</strong> об’єднаний блок має більшу політичну вагу, ніж окремі країни.</li>
+      <li><strong>Стабільність та упорядкування:</strong> альянси створюють передбачувані умови та правила гри в міжнародних відносинах.</li>
+    </ul>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 760 260" role="img" aria-label="Мережа колективної безпеки">
+        <defs>
+          <radialGradient id="nodeG" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#3f7fb5"/><stop offset="100%" stop-color="#123152"/>
+          </radialGradient>
+        </defs>
+
+        <g stroke="#b8cfe2" stroke-width="1.6" opacity=".9">
+          <line x1="380" y1="130" x2="130" y2="66"/>
+          <line x1="380" y1="130" x2="130" y2="196"/>
+          <line x1="380" y1="130" x2="250" y2="36"/>
+          <line x1="380" y1="130" x2="250" y2="226"/>
+          <line x1="380" y1="130" x2="630" y2="66"/>
+          <line x1="380" y1="130" x2="630" y2="196"/>
+          <line x1="380" y1="130" x2="510" y2="36"/>
+          <line x1="380" y1="130" x2="510" y2="226"/>
+          <line x1="130" y1="66" x2="250" y2="36"/>
+          <line x1="130" y1="196" x2="250" y2="226"/>
+          <line x1="630" y1="66" x2="510" y2="36"/>
+          <line x1="630" y1="196" x2="510" y2="226"/>
+        </g>
+
+        <circle cx="380" cy="130" r="46" fill="url(#nodeG)" stroke="#c9a227" stroke-width="2"/>
+        <text x="380" y="126" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">АЛЬЯНС</text>
+        <text x="380" y="144" text-anchor="middle" font-size="11" fill="#c9a227">колективна безпека</text>
+
+        <g fill="#2c5f8a" stroke="#ffffff" stroke-width="2">
+          <circle cx="130" cy="66" r="17"/>
+          <circle cx="130" cy="196" r="17"/>
+          <circle cx="250" cy="36" r="17"/>
+          <circle cx="250" cy="226" r="17"/>
+          <circle cx="630" cy="66" r="17"/>
+          <circle cx="630" cy="196" r="17"/>
+          <circle cx="510" cy="36" r="17"/>
+          <circle cx="510" cy="226" r="17"/>
+        </g>
+
+        <g font-size="11.5" fill="#5b6b7c" text-anchor="middle">
+          <text x="130" y="46">Держава A</text>
+          <text x="130" y="234">Держава B</text>
+          <text x="250" y="18">Держава C</text>
+          <text x="250" y="256">Держава D</text>
+          <text x="630" y="46">Держава E</text>
+          <text x="630" y="234">Держава F</text>
+          <text x="510" y="18">Держава G</text>
+          <text x="510" y="256">Держава H</text>
+        </g>
+      </svg>
+      <figcaption>Рис. 3. Альянс як мережа: спільні ресурси, спільні гарантії, спільна переговорна вага</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= ВІЗУАЛЬНІ МАТЕРІАЛИ ================= -->
+  <section class="sec" id="visual">
+    <h2><span class="num">★</span> Візуальні матеріали</h2>
+    <p>Для кращого розуміння теми рекомендується проаналізувати такі карти:</p>
+
+    <div class="grid g2" style="margin-top:20px">
+
+      <!-- Карта 1 -->
+      <article class="mapcard">
+        <svg viewBox="0 0 360 200" role="img" aria-label="Схема світових енергетичних потоків">
+          <rect width="360" height="200" fill="#0d2b47"/>
+          <path d="M0 52 Q46 34 84 54 Q112 70 96 100 Q76 128 34 122 L0 132 Z" fill="#1e4a75"/>
+          <path d="M150 22 Q206 4 264 26 Q318 46 360 32 L360 0 L150 0 Z" fill="#1e4a75"/>
+          <path d="M170 200 Q182 152 228 140 Q288 126 360 152 L360 200 Z" fill="#1e4a75"/>
+          <path d="M300 60 Q330 76 322 106 Q314 132 286 138 Q304 100 300 60 Z" fill="#1e4a75"/>
+
+          <g stroke="#c9a227" stroke-width="2" fill="none" stroke-dasharray="7 5">
+            <path d="M92 96 Q150 60 218 92"/>
+            <path d="M218 92 Q266 110 316 88"/>
+            <path d="M92 96 Q140 140 200 158"/>
+          </g>
+
+          <g fill="#ff6b52">
+            <circle cx="112" cy="82" r="4"/>
+            <circle cx="238" cy="98" r="4"/>
+            <circle cx="252" cy="146" r="4"/>
+          </g>
+          <g fill="#ff6b52" opacity=".28">
+            <circle cx="112" cy="82" r="9"/>
+            <circle cx="238" cy="98" r="9"/>
+            <circle cx="252" cy="146" r="9"/>
+          </g>
+
+          <g font-size="10.5" fill="#9dc2e0">
+            <text x="14" y="24">СВІТОВІ ЕНЕРГОПОТОКИ</text>
+            <text x="112" y="66" text-anchor="middle" fill="#ffd08a">Ормуз</text>
+            <text x="252" y="86" text-anchor="middle" fill="#ffd08a">Малакка</text>
+            <text x="266" y="164" text-anchor="middle" fill="#ffd08a">Босфор</text>
+          </g>
+        </svg>
+        <div class="body">
+          <h4>Світові енергетичні потоки та точки їх контролю</h4>
+          <dl>
+            <dt>Що показує</dt>
+            <dd>Маршрути нафто- та газопроводів, ключові морські протоки (Ормузька, Малаккська, Босфор).</dd>
+            <dt>Як допомагає</dt>
+            <dd>Наочно демонструє, чому контроль над цими артеріями є ключовим геополітичним інтересом для багатьох держав (наприклад, інтерес США та Ірану в Ормузькій протоці).</dd>
+          </dl>
+        </div>
+      </article>
+
+      <!-- Карта 2 -->
+      <article class="mapcard">
+        <svg viewBox="0 0 360 200" role="img" aria-label="Схема військово-політичних альянсів світу">
+          <rect width="360" height="200" fill="#0d2b47"/>
+          <path d="M0 40 Q60 20 116 44 Q150 60 140 96 Q126 134 70 140 L0 152 Z" fill="#1e4a75"/>
+          <path d="M196 30 Q260 8 320 34 Q360 52 360 40 L360 0 L196 0 Z" fill="#1e4a75"/>
+          <path d="M170 200 Q190 150 246 142 Q312 134 360 160 L360 200 Z" fill="#1e4a75"/>
+
+          <line x1="168" y1="0" x2="168" y2="200" stroke="#c9a227" stroke-width="1.6" stroke-dasharray="7 6" opacity=".8"/>
+
+          <g fill="#4f9fe0" stroke="#bfe0fb" stroke-width="1.6">
+            <circle cx="52" cy="72" r="10"/>
+            <circle cx="92" cy="52" r="10"/>
+            <circle cx="112" cy="92" r="10"/>
+            <circle cx="66" cy="112" r="10"/>
+          </g>
+          <g stroke="#bfe0fb" stroke-width="1.4" fill="none" opacity=".8">
+            <line x1="52" y1="72" x2="92" y2="52"/>
+            <line x1="92" y1="52" x2="112" y2="92"/>
+            <line x1="112" y1="92" x2="66" y2="112"/>
+            <line x1="66" y1="112" x2="52" y2="72"/>
+          </g>
+
+          <g fill="#e0553f" stroke="#f7c4bb" stroke-width="1.6">
+            <circle cx="242" cy="70" r="10"/>
+            <circle cx="288" cy="54" r="10"/>
+            <circle cx="300" cy="98" r="10"/>
+            <circle cx="252" cy="110" r="10"/>
+          </g>
+          <g stroke="#f7c4bb" stroke-width="1.4" fill="none" opacity=".8">
+            <line x1="242" y1="70" x2="288" y2="54"/>
+            <line x1="288" y1="54" x2="300" y2="98"/>
+            <line x1="300" y1="98" x2="252" y2="110"/>
+            <line x1="252" y1="110" x2="242" y2="70"/>
+          </g>
+
+          <g font-size="10.5">
+            <text x="12" y="24" fill="#9dc2e0">ВІЙСЬКОВО-ПОЛІТИЧНІ АЛЬЯНСИ</text>
+            <text x="80" y="152" text-anchor="middle" fill="#4f9fe0">НАТО</text>
+            <text x="272" y="140" text-anchor="middle" fill="#e0553f">ОДКБ</text>
+            <text x="168" y="192" text-anchor="middle" fill="#c9a227">лінія розподілу сфер впливу</text>
+          </g>
+        </svg>
+        <div class="body">
+          <h4>Військово-політичні альянси світу (НАТО, ОДКБ, тощо)</h4>
+          <dl>
+            <dt>Що показує</dt>
+            <dd>Країни-члени ключових блоків та їхнє географічне розташування.</dd>
+            <dt>Як допомагає</dt>
+            <dd>Ілюструє стратегію колективної безпеки, показує лінії розподілу сфер впливу та потенційні конфліктні точки (наприклад, кордони НАТО та Росії).</dd>
+          </dl>
+        </div>
+      </article>
+
+      <!-- Карта 3 -->
+      <article class="mapcard">
+        <svg viewBox="0 0 360 200" role="img" aria-label="Схема основних осередків міжнародних конфліктів">
+          <rect width="360" height="200" fill="#0d2b47"/>
+          <path d="M0 46 Q52 26 104 48 Q134 64 122 100 Q106 136 56 138 L0 148 Z" fill="#1e4a75"/>
+          <path d="M150 26 Q216 6 276 30 Q330 50 360 36 L360 0 L150 0 Z" fill="#1e4a75"/>
+          <path d="M160 200 Q184 152 240 142 Q304 132 360 158 L360 200 Z" fill="#1e4a75"/>
+          <path d="M286 66 Q322 78 316 112 Q310 142 278 148 Q296 108 286 66 Z" fill="#1e4a75"/>
+
+          <g>
+            <circle cx="96" cy="86" r="10" fill="#e0553f" opacity=".28"/>
+            <circle cx="96" cy="86" r="4.5" fill="#ff6b52"/>
+            <text x="96" y="72" text-anchor="middle" font-size="10" fill="#ffd08a">Україна</text>
+
+            <circle cx="196" cy="58" r="10" fill="#e0553f" opacity=".28"/>
+            <circle cx="196" cy="58" r="4.5" fill="#ff6b52"/>
+            <text x="196" y="44" text-anchor="middle" font-size="10" fill="#ffd08a">Сирія</text>
+
+            <circle cx="238" cy="96" r="10" fill="#e0553f" opacity=".28"/>
+            <circle cx="238" cy="96" r="4.5" fill="#ff6b52"/>
+            <text x="238" y="118" text-anchor="middle" font-size="10" fill="#ffd08a">Ірак</text>
+
+            <circle cx="284" cy="44" r="10" fill="#e0553f" opacity=".28"/>
+            <circle cx="284" cy="44" r="4.5" fill="#ff6b52"/>
+            <text x="284" y="30" text-anchor="middle" font-size="10" fill="#ffd08a">Афганістан</text>
+
+            <circle cx="316" cy="122" r="10" fill="#e0553f" opacity=".28"/>
+            <circle cx="316" cy="122" r="4.5" fill="#ff6b52"/>
+            <text x="300" y="146" text-anchor="middle" font-size="10" fill="#ffd08a">Пд.-Китайське море</text>
+          </g>
+
+          <text x="14" y="24" font-size="10.5" fill="#9dc2e0">ОСЕРЕДКИ КОНФЛІКТІВ XXI СТ.</text>
+        </svg>
+        <div class="body">
+          <h4>Основні осередки міжнародних конфліктів та криз XXI століття</h4>
+          <dl>
+            <dt>Що показує</dt>
+            <dd>Афганістан, Сирія, Ірак, Україна (Крим, Донбас), Південно-Китайське море.</dd>
+            <dt>Як допомагає</dt>
+            <dd>Дозволяє проаналізувати, які саме національні та геополітичні інтереси (ресурси, вихід до моря, буферна зона) перетинаються в цих регіонах.</dd>
+          </dl>
+        </div>
+      </article>
+
+      <!-- Карта 4 -->
+      <article class="mapcard">
+        <svg viewBox="0 0 360 200" role="img" aria-label="Схема маршрутів незаконної міграції">
+          <rect width="360" height="200" fill="#0d2b47"/>
+          <path d="M0 150 Q60 132 116 150 Q160 164 200 158 L200 200 L0 200 Z" fill="#1e4a75"/>
+          <path d="M150 20 Q220 4 280 26 Q330 44 360 32 L360 0 L150 0 Z" fill="#1e4a75"/>
+          <path d="M40 60 Q90 44 130 62 Q156 74 146 100 Q132 126 88 120 L0 128 L0 60 Z" fill="#1e4a75"/>
+
+          <g stroke="#c9a227" stroke-width="2" fill="none">
+            <path d="M110 138 Q150 100 158 70" marker-end="url(#migArrow)"/>
+            <path d="M212 150 Q244 112 238 74" marker-end="url(#migArrow)"/>
+            <path d="M300 152 Q312 116 286 88" marker-end="url(#migArrow)"/>
+          </g>
+          <defs>
+            <marker id="migArrow" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto">
+              <path d="M0,0 L9,4.5 L0,9 z" fill="#c9a227"/>
+            </marker>
+          </defs>
+
+          <g fill="#ff6b52">
+            <circle cx="110" cy="138" r="3.6"/>
+            <circle cx="212" cy="150" r="3.6"/>
+            <circle cx="300" cy="152" r="3.6"/>
+          </g>
+
+          <g font-size="10.5" fill="#9dc2e0">
+            <text x="14" y="22">МАРШРУТИ НЕЗАКОННОЇ МІГРАЦІЇ</text>
+            <text x="180" y="188" text-anchor="middle" fill="#ffd08a">Потоки з Близького Сходу та Африки → Європа</text>
+          </g>
+        </svg>
+        <div class="body">
+          <h4>Основні маршрути незаконної міграції та торгівлі людьми</h4>
+          <dl>
+            <dt>Що показує</dt>
+            <dd>Напрями потоків мігрантів з Близького Сходу та Африки до Європи.</dd>
+            <dt>Як допомагає</dt>
+            <dd>Наочно демонструє одну з ключових нетрадиційних загроз безпеці для ЄС та як вона формує його зовнішню політику.</dd>
+          </dl>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= ПИТАННЯ ================= -->
+  <section class="sec" id="questions">
+    <h2><span class="num">?</span> Контрольні запитання до теми</h2>
+
+    <ol class="questions">
+      <li>
+        Розкрийте сутність цього поняття та поясніть різницю між об’єктивними («карта світу»)
+        та суб’єктивними («ціннісна система») чинниками його формування.
+      </li>
+      <li>
+        Яка складова національного інтересу є базовою (пріоритетною) для будь-якої держави
+        і чому? Наведіть приклади, як ця складова взаємодіє з економічним благополуччям.
+      </li>
+      <li>
+        У чому полягає специфіка геополітичних інтересів порівняно з іншими національними
+        інтересами? Наведіть 2 конкретні приклади геополітичних цілей держави.
+      </li>
+      <li>
+        Як хибне тлумачення реального інтересу (наприклад, прагнення енергетичної безпеки)
+        може призвести до масштабної військово-політичної кризи? Опишіть цей ланцюжок.
+      </li>
+      <li>
+        Чому в XXI столітті поняття «національна безпека» більше не обмежується лише
+        військовою могутністю? Наведіть приклади нетрадиційних та транснаціональних загроз.
+      </li>
+    </ol>
+  </section>
+
+  <footer class="page-foot">
+    Навчальний матеріал · Тема: «Взаємозв’язок між національними та геополітичними інтересами держави»
+  </footer>
+
+</div>
+</body>
+</html>

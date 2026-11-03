@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="298.8pt" viewBox="0 0 635.4 298.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-02T08:02:57.374771</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 298.8 
+L 635.4 298.8 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 41.49 249.192 
+L 201.078 249.192 
+Q 213.354 249.192 213.354 243.648 
+L 213.354 93.96 
+Q 213.354 88.416 201.078 88.416 
+L 41.49 88.416 
+Q 29.214 88.416 29.214 93.96 
+L 29.214 243.648 
+Q 29.214 249.192 41.49 249.192 
+z
+" clip-path="url(#p66560b7063)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 57.1419 102.276 
+L 185.4261 102.276 
+Q 188.802 102.276 188.802 100.7514 
+L 188.802 100.7514 
+Q 188.802 99.2268 185.4261 99.2268 
+L 57.1419 99.2268 
+Q 53.766 99.2268 53.766 100.7514 
+L 53.766 100.7514 
+Q 53.766 102.276 57.1419 102.276 
+z
+" clip-path="url(#p66560b7063)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 237.906 249.192 
+L 397.494 249.192 
+Q 409.77 249.192 409.77 243.648 
+L 409.77 93.96 
+Q 409.77 88.416 397.494 88.416 
+L 237.906 88.416 
+Q 225.63 88.416 225.63 93.96 
+L 225.63 243.648 
+Q 225.63 249.192 237.906 249.192 
+z
+" clip-path="url(#p66560b7063)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 253.5579 102.276 
+L 381.8421 102.276 
+Q 385.218 102.276 385.218 100.7514 
+L 385.218 100.7514 
+Q 385.218 99.2268 381.8421 99.2268 
+L 253.5579 99.2268 
+Q 250.182 99.2268 250.182 100.7514 
+L 250.182 100.7514 
+Q 250.182 102.276 253.5579 102.276 
+z
+" clip-path="url(#p66560b7063)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 434.322 249.192 
+L 593.91 249.192 
+Q 606.186 249.192 606.186 243.648 
+L 606.186 93.96 
+Q 606.186 88.416 593.91 88.416 
+L 434.322 88.416 
+Q 422.046 88.416 422.046 93.96 
+L 422.046 243.648 
+Q 422.046 249.192 434.322 249.192 
+z
+" clip-path="url(#p66560b7063)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 449.9739 102.276 
+L 578.2581 102.276 
+Q 581.634 102.276 581.634 100.7514 
+L 581.634 100.7514 
+Q 581.634 99.2268 578.2581 99.2268 
+L 449.9739 99.2268 
+Q 446.598 99.2268 446.598 100.7514 
+L 446.598 100.7514 
+Q 446.598 102.276 449.9739 102.276 
+z
+" clip-path="url(#p66560b7063)" style="fill: #6e30a8"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="37.115063" transform="rotate(-0 317.7 37.115063)">Етика інклюзивного дослідження: три виміри</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="121.284" y="143.672757" transform="rotate(-0 121.284 143.672757)">Доступність</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(60.258375 193.196477)">матеріали й форми</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(57.888375 208.913383)">зрозумілі всім дітям</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="143.727445" transform="rotate(-0 317.7 143.727445)">Повага до різноманіття</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(245.938125 193.150493)">врахування особливих</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(268.694063 209.163743)">освітніх потреб</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="514.116" y="143.75807" transform="rotate(-0 514.116 143.75807)">Конфіденційність</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(446.360063 193.196477)">захист персональних</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(462.290063 208.913383)">даних учасників</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p66560b7063">
+   <rect x="10.8" y="10.8" width="613.8" height="277.2"/>
+  </clipPath>
+ </defs>
+</svg>

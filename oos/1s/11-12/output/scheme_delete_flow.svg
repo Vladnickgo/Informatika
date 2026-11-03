@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+      <defs>
+        <!-- Маркери для стрілок різних кольорів -->
+        <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e75b6" />
+        </marker>
+        <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c65911" />
+        </marker>
+        <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c00000" />
+        </marker>
+      </defs>
+    
+      <style>
+        text { font-family: "Segoe UI", Arial, sans-serif; text-anchor: middle; }
+        
+        /* Заголовки та підписи */
+        .title { fill: #1f4e79; font-size: 22px; font-weight: bold; }
+        .footer { fill: #595959; font-size: 15px; font-style: italic; text-anchor: end; }
+        
+        /* Стилі для блоків (фон, рамка) */
+        .box { stroke-width: 2; }
+        .box-yellow { fill: #fff2cc; stroke: #d6b656; }
+        .box-blue { fill: #deeaf6; stroke: #2e75b6; }
+        .box-green { fill: #eaf1dd; stroke: #548235; }
+        .box-orange { fill: #fce4d6; stroke: #c65911; }
+        .box-red { fill: #f8cbad; stroke: #c00000; }
+        
+        /* Стилі для тексту всередині блоків */
+        .text-main { font-size: 16px; font-weight: bold; }
+        .text-sub { font-size: 13px; font-style: italic; }
+        
+        .text-dark { fill: #333333; }
+        .text-blue { fill: #1f4e79; }
+        .text-green { fill: #375623; }
+        .text-orange { fill: #833c0b; }
+        .text-red { fill: #900000; }
+        
+        /* Підписи над стрілками */
+        .label { font-size: 14px; font-weight: bold; font-style: italic; }
+        .label-blue { fill: #2e75b6; }
+        .label-orange { fill: #c65911; }
+        .label-red { fill: #c00000; }
+      </style>
+    
+      <!-- Заголовок -->
+      <text class="title" x="450" y="40">Схема 2. Видалення файлів: Кошик чи остаточне</text>
+    
+      <!-- ================= БЛОКИ ================= -->
+      
+      <!-- Початковий файл -->
+      <rect class="box box-yellow" x="50" y="215" width="130" height="70" rx="8"/>
+      <text class="text-main text-dark" x="115" y="255">файл</text>
+    
+      <!-- Шлях 1: Кошик -->
+      <rect class="box box-blue" x="270" y="120" width="180" height="70" rx="8"/>
+      <text class="text-main text-blue" x="360" y="150">Кошик</text>
+      <text class="text-sub text-blue" x="360" y="172">(тимчасове зберігання)</text>
+    
+      <rect class="box box-green" x="560" y="120" width="200" height="70" rx="8"/>
+      <text class="text-main text-green" x="660" y="150">Файл відновлено</text>
+      <text class="text-sub text-green" x="660" y="172">можна продовжити роботу</text>
+    
+      <!-- Шлях 2: Остаточне видалення -->
+      <rect class="box box-orange" x="270" y="310" width="180" height="70" rx="8"/>
+      <text class="text-main text-orange" x="360" y="340">Остаточне</text>
+      <text class="text-main text-orange" x="360" y="362">видалення</text>
+    
+      <rect class="box box-red" x="560" y="310" width="200" height="70" rx="8"/>
+      <text class="text-main text-red" x="660" y="340">Дані втрачено</text>
+      <text class="text-sub text-red" x="660" y="362">відновлення ускладнене</text>
+    
+      <!-- ================= СТРІЛКИ ТА ПІДПИСИ ================= -->
+      
+      <!-- Стрілка до Кошика -->
+      <line x1="180" y1="230" x2="260" y2="165" stroke="#2e75b6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+      <text class="label label-blue" x="200" y="180">Delete</text>
+    
+      <!-- Стрілка від Кошика до Відновлення -->
+      <line x1="450" y1="155" x2="550" y2="155" stroke="#2e75b6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+      <text class="label label-blue" x="500" y="140">відновити</text>
+    
+      <!-- Стрілка до Остаточного видалення -->
+      <line x1="180" y1="270" x2="260" y2="335" stroke="#c65911" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+      <text class="label label-orange"  x="180" y="315">Shift+Delete</text>
+      <text class="label label-orange" x="185" y="335">або очистити</text>
+    
+      <!-- Стрілка від Остаточного видалення до Втрати даних -->
+      <line x1="450" y1="345" x2="550" y2="345" stroke="#c00000" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+      <text class="label label-red" x="505" y="330">безповоротно</text>
+    
+      <!-- Правило безпеки внизу -->
+      <text class="footer" x="800" y="460">Правило безпеки: перед видаленням переконайтеся, що обрано САМЕ той об'єкт</text>
+    </svg>

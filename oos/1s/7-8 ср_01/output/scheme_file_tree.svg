@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480">
+      <style>
+        .line { stroke: #8faadc; stroke-width: 1.5; fill: none; }
+        .box { stroke-width: 1.5; }
+        .root { fill: #1f4e79; stroke: #0d2a42; }
+        .blue { fill: #deeaf6; stroke: #2e75b6; }
+        .green { fill: #eaf1dd; stroke: #548235; }
+        .yellow { fill: #fff2cc; stroke: #d6b656; }
+        text { font-family: "DejaVu Sans", Arial, sans-serif; text-anchor: middle; dominant-baseline: middle; font-weight: bold; }
+        .t-title { fill: #1f4e79; font-size: 18px; }
+        .t-root { fill: #ffffff; font-size: 16px; }
+        .t-blue { fill: #1f4e79; font-size: 14px; }
+        .t-green { fill: #375623; font-size: 13px; }
+        .t-yellow { fill: #7f6000; font-size: 12px; }
+        .t-caption { fill: #595959; font-size: 14px; font-style: italic; }
+      </style>
+    
+      <!-- Заголовок -->
+      <text class="t-title" x="400" y="30">Схема 3. Ієрархічна структура файлової системи</text>
+    
+      <!-- Лінії зв'язку -->
+      <g class="line">
+        <!-- Від кореня до 1-го рівня -->
+        <line x1="400" y1="90" x2="200" y2="140" />
+        <line x1="400" y1="90" x2="400" y2="140" />
+        <line x1="400" y1="90" x2="600" y2="140" />
+        <!-- Від 1-го до 2-го рівня -->
+        <line x1="200" y1="180" x2="130" y2="230" />
+        <line x1="200" y1="180" x2="240" y2="230" />
+        <line x1="400" y1="180" x2="350" y2="230" />
+        <line x1="400" y1="180" x2="460" y2="230" />
+        <line x1="600" y1="180" x2="570" y2="230" />
+        <line x1="600" y1="180" x2="680" y2="230" />
+        <!-- Від 2-го до 3-го рівня -->
+        <line x1="130" y1="270" x2="130" y2="320" />
+        <line x1="240" y1="270" x2="240" y2="320" />
+      </g>
+    
+      <!-- Рівень 0: Корінь -->
+      <rect class="box root" x="340" y="50" width="120" height="40" rx="6"/>
+      <text class="t-root" x="400" y="70">Диск C:</text>
+    
+      <!-- Рівень 1: Папки -->
+      <rect class="box blue" x="135" y="140" width="130" height="40" rx="6"/>
+      <text class="t-blue" x="200" y="160">Навчання</text>
+    
+      <rect class="box blue" x="335" y="140" width="130" height="40" rx="6"/>
+      <text class="t-blue" x="400" y="160">Фото</text>
+    
+      <rect class="box blue" x="535" y="140" width="130" height="40" rx="6"/>
+      <text class="t-blue" x="600" y="160">Програми</text>
+    
+      <!-- Рівень 2: Підпапки -->
+      <rect class="box green" x="75" y="230" width="110" height="40" rx="6"/>
+      <text class="t-green" x="130" y="250">Звіти</text>
+    
+      <rect class="box green" x="185" y="230" width="110" height="40" rx="6"/>
+      <text class="t-green" x="240" y="250">Конспекти</text>
+    
+      <rect class="box green" x="295" y="230" width="110" height="40" rx="6"/>
+      <text class="t-green" x="350" y="250">Родина</text>
+    
+      <rect class="box green" x="405" y="230" width="110" height="40" rx="6"/>
+      <text class="t-green" x="460" y="250">Подорожі</text>
+    
+      <rect class="box green" x="515" y="230" width="110" height="40" rx="6"/>
+      <text class="t-green" x="570" y="250">Офіс</text>
+    
+      <rect class="box green" x="625" y="230" width="110" height="40" rx="6"/>
+      <text class="t-green" x="680" y="250">Ігри</text>
+    
+      <!-- Рівень 3: Файли -->
+      <rect class="box yellow" x="75" y="320" width="110" height="40" rx="6"/>
+      <text class="t-yellow" x="130" y="340">звіт_1.docx</text>
+    
+      <rect class="box yellow" x="185" y="320" width="110" height="40" rx="6"/>
+      <text class="t-yellow" x="240" y="340">лекція_3.docx</text>
+    
+      <!-- Підпис внизу -->
+      <text class="t-caption" x="400" y="420">Диск → папка → підпапка → файл: «шафа → полиця → коробка → зошит»</text>
+    </svg>

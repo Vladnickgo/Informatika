@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття №5 — Розгалуження у VBA (Excel)</title>
+
+<!-- Бібліотеки -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-visual-basic.min.js"></script>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#dbeafe',
+      primaryTextColor: '#0f172a',
+      primaryBorderColor: '#2563eb',
+      lineColor: '#64748b',
+      secondaryColor: '#ede9fe',
+      tertiaryColor: '#f8fafc',
+      fontFamily: "'Segoe UI', system-ui, sans-serif",
+      fontSize: '15px'
+    },
+    flowchart: { curve: 'basis', htmlLabels: true, padding: 12 }
+  });
+</script>
+
+<style>
+  :root{
+    --bg:#f1f5f9; --surface:#ffffff; --text:#0f172a; --muted:#475569;
+    --accent:#2563eb; --accent-2:#7c3aed; --accent-soft:#dbeafe;
+    --border:#e2e8f0; --green:#16a34a; --red:#dc2626; --amber:#d97706;
+    --radius:16px; --shadow:0 10px 30px -12px rgba(15,23,42,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.65;
+    -webkit-font-smoothing:antialiased; padding-bottom:3rem;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1rem}
+
+  /* ===== Навігація ===== */
+  .nav{position:sticky;top:0;z-index:60;background:rgba(248,250,252,.88);
+       backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-inner{max-width:1120px;margin:0 auto;padding:.55rem 1rem;display:flex;
+             gap:.35rem;overflow-x:auto;scrollbar-width:none}
+  .nav-inner::-webkit-scrollbar{display:none}
+  .nav a{flex:0 0 auto;font-size:.84rem;font-weight:600;color:var(--muted);
+         text-decoration:none;padding:.42rem .8rem;border-radius:999px;
+         transition:.2s;white-space:nowrap}
+  .nav a:hover{background:var(--accent-soft);color:var(--accent)}
+
+  /* ===== Hero ===== */
+  .hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;
+        padding:clamp(1.6rem,4vw,2.8rem);margin:1.5rem 0 2rem;
+        background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 55%,#7c3aed 100%);
+        box-shadow:0 24px 48px -24px rgba(37,99,235,.65)}
+  .hero::after{content:"";position:absolute;width:340px;height:340px;right:-90px;
+        top:-110px;border-radius:50%;background:rgba(255,255,255,.09)}
+  .hero::before{content:"";position:absolute;width:200px;height:200px;left:-60px;
+        bottom:-90px;border-radius:50%;background:rgba(255,255,255,.07)}
+  .badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;position:relative;z-index:1}
+  .badges span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+        padding:.25rem .75rem;border-radius:999px;font-size:.76rem;font-weight:600;
+        letter-spacing:.03em;backdrop-filter:blur(4px)}
+  .hero h1{font-size:clamp(1.5rem,3.8vw,2.4rem);line-height:1.18;
+        letter-spacing:-.02em;margin-bottom:.8rem;position:relative;z-index:1}
+  .hero h1 b{color:#bfdbfe}
+  .hero p{color:#e0e7ff;max-width:780px;font-size:clamp(.95rem,1.6vw,1.05rem);
+        position:relative;z-index:1}
+
+  /* ===== Картки ===== */
+  .card{background:var(--surface);border:1px solid var(--border);
+        border-radius:var(--radius);padding:clamp(1.2rem,3vw,1.9rem);
+        margin-bottom:1.4rem;box-shadow:var(--shadow)}
+  .section{scroll-margin-top:84px;margin-bottom:2.4rem}
+  .section-head{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;flex-wrap:wrap}
+  .section-head .num{width:42px;height:42px;flex:0 0 42px;border-radius:12px;
+        display:grid;place-items:center;font-weight:800;font-size:1.05rem;color:#fff;
+        background:linear-gradient(135deg,var(--accent),var(--accent-2));
+        box-shadow:0 8px 18px -8px rgba(37,99,235,.7)}
+  .section-head h2{font-size:clamp(1.2rem,2.6vw,1.55rem);letter-spacing:-.01em}
+  .card h3{font-size:1.08rem;margin:1.2rem 0 .6rem;color:var(--text)}
+  .card h3:first-child{margin-top:0}
+  .card p,.card li{color:var(--muted)}
+  .card p+p{margin-top:.6rem}
+  .card ul,.card ol{padding-left:1.25rem}
+  .card li{margin-bottom:.35rem}
+  .lead{color:var(--muted);margin-bottom:1rem}
+
+  .grid-2{display:grid;gap:1.1rem;grid-template-columns:1fr}
+  @media(min-width:880px){.grid-2{grid-template-columns:1fr 1fr}}
+
+  .callout{border-left:4px solid var(--accent);background:#eff6ff;
+           border-radius:0 12px 12px 0;padding:.9rem 1.1rem;margin:1rem 0;
+           color:#1e3a8a;font-size:.95rem}
+  .callout.warn{border-color:var(--amber);background:#fffbeb;color:#92400e}
+  .callout.ok{border-color:var(--green);background:#f0fdf4;color:#166534}
+/* ===== Примусові розриви сторінок ===== */
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+  /* ===== Таблиці ===== */
+  .table-wrap{overflow-x:auto;border:1px solid var(--border);
+              border-radius:12px;margin:.8rem 0}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:420px}
+  th,td{padding:.65rem .85rem;text-align:left;border-bottom:1px solid var(--border)}
+  th{background:#f8fafc;font-weight:700;color:#334155;font-size:.83rem;
+     text-transform:uppercase;letter-spacing:.04em}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#f8fafc}
+  code.inline{background:#eef2ff;color:#3730a3;padding:.12rem .42rem;
+     border-radius:6px;font-size:.88em;font-family:'Cascadia Code',Consolas,monospace}
+
+  /* ===== Блок-схеми ===== */
+  .flow{background:#fbfdff;border:1px dashed #cbd5e1;border-radius:12px;
+        padding:1rem;overflow-x:auto;display:flex;justify-content:center}
+  .flow .mermaid{min-width:300px}
+  .flow-caption{text-align:center;color:var(--muted);font-size:.86rem;
+        margin-top:.7rem;font-style:italic}
+
+  /* ===== Діаграми ===== */
+  .chart-box{position:relative;height:320px;margin-top:.5rem}
+  @media(max-width:520px){.chart-box{height:270px}}
+
+  /* ===== Код ===== */
+  .code{border-radius:12px;overflow:hidden;margin:.9rem 0;
+        border:1px solid #1e293b;background:#0f172a}
+  .code-head{display:flex;align-items:center;justify-content:space-between;
+        gap:1rem;padding:.55rem .9rem;background:#1e293b;color:#cbd5e1;
+        font-size:.78rem;font-weight:600;letter-spacing:.03em}
+  .code-head .dot{display:inline-block;width:9px;height:9px;border-radius:50%;
+        background:#38bdf8;margin-right:.45rem}
+  .copy{background:rgba(148,163,184,.18);color:#e2e8f0;border:1px solid rgba(148,163,184,.3);
+        padding:.25rem .7rem;border-radius:8px;font-size:.75rem;font-weight:600;
+        cursor:pointer;transition:.2s;font-family:inherit}
+  .copy:hover{background:rgba(148,163,184,.32)}
+  .code pre{margin:0!important;padding:1rem 1.1rem!important;overflow-x:auto;
+        background:#0f172a!important;font-size:.86rem!important;line-height:1.6!important}
+  .code code{font-family:'Cascadia Code','Fira Code',Consolas,monospace!important;
+        text-shadow:none!important}
+
+  /* ===== Details / питання ===== */
+  details{border:1px solid var(--border);border-radius:12px;background:#fff;
+          margin-bottom:.6rem;overflow:hidden}
+  details[open]{box-shadow:var(--shadow)}
+  summary{cursor:pointer;padding:.85rem 1.1rem;font-weight:600;color:#1e293b;
+          list-style:none;display:flex;align-items:center;gap:.6rem;
+          transition:background .2s;font-size:.95rem}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"+";flex:0 0 22px;height:22px;border-radius:6px;
+          background:var(--accent-soft);color:var(--accent);display:grid;
+          place-items:center;font-weight:800;font-size:.9rem;transition:.2s}
+  details[open] summary::before{content:"–";background:var(--accent);color:#fff}
+  summary:hover{background:#f8fafc}
+  .answer{padding:0 1.1rem 1rem 3rem;color:var(--muted);font-size:.93rem}
+  .answer ul{padding-left:1.1rem}
+
+  .level-tag{display:inline-block;font-size:.72rem;font-weight:700;
+        text-transform:uppercase;letter-spacing:.05em;padding:.18rem .6rem;
+        border-radius:999px;margin-bottom:.8rem}
+  .lvl1{background:#dcfce7;color:#166534}
+  .lvl2{background:#fef3c7;color:#92400e}
+  .lvl3{background:#ede9fe;color:#5b21b6}
+
+  footer{text-align:center;color:var(--muted);font-size:.86rem;
+         padding:2rem 1rem 0;border-top:1px solid var(--border);margin-top:2.5rem}
+
+@media print {
+  .nav, .copy { display: none !important; }
+  body { background: #fff; }
+  .card, .hero { box-shadow: none; border: 1px solid #ccc; }
+
+  /* Примусові розриви */
+  .page-break { page-break-before: always; break-before: page; }
+
+  /* Не рвати всередині */
+  .card,
+  .code,
+  .flow,
+  .chart-box,
+  details { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Не залишати заголовок сам наприкінці сторінки */
+  .section-head,
+  .card h3 { page-break-after: avoid; break-after: avoid; }
+
+  /* Не «відривати» hero від першої секції */
+  .hero { page-break-after: avoid; break-after: avoid; }
+
+  /* Уникнути «сиріт» і «вдів» у текстах */
+  p, li { orphans: 3; widows: 3; }
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- ================= НАВІГАЦІЯ ================= -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#theory">Теорія</a>
+    <a href="#syntax">Синтаксис VBA</a>
+    <a href="#flow">Блок-схеми</a>
+    <a href="#charts">Діаграми</a>
+    <a href="#vba">Приклади VBA</a>
+    <a href="#practice">Практика</a>
+    <a href="#testing">Тестування</a>
+    <a href="#questions">Питання</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="badges">
+	<span>Розділ · Алгоритмічні структури</span>      
+	<span>Практичне заняття №5</span>
+      
+    </div>
+    <h1>Складені команди. <b>Оператор розгалуження</b>.<br>Логічні вирази</h1>
+    <p>Оператори <code style="background:rgba(255,255,255,.18);padding:.1rem .4rem;border-radius:6px">If…Then…Else</code>,
+       логічні вирази, блок-схеми.</p>
+  </header>
+
+  <!-- ================= МЕТА ================= -->
+  <div class="card">
+    <h3>🎯 Мета заняття</h3>
+    <div class="grid-2">
+      <ul>
+        <li>Навчитися використовувати оператор розгалуження <b>If</b>.</li>
+        <li>Формувати поняття <b>логічного виразу</b> та його значень.</li>
+        <li>Навчитися тестувати програми на коректність різних умов.</li>
+      </ul>
+      <ul>
+        <li>Розвивати критичне мислення та вміння прогнозувати сценарії виконання.</li>
+        <li>Виховувати відповідальність за результат: програма має працювати правильно <b>для всіх</b> вхідних даних.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= ТЕОРІЯ ================= -->
+  <section id="theory" class="section page-break">
+    <div class="section-head ">
+      <div class="num">1</div>
+      <h2>Теоретичні відомості</h2>
+    </div>
+
+    <div class="card">
+      <h3>Що таке розгалуження?</h3>
+      <p><b>Складені команди (структури)</b> дозволяють змінювати порядок виконання програми залежно від певних умов. Найважливіша з них — <b>команда розгалуження</b>.</p>
+      <div class="callout">
+        <b>Розгалуження</b> — це алгоритмічна структура, у якій виконання однієї або іншої послідовності команд залежить від істинності певної умови.
+      </div>
+      <p><b>Логічний вираз</b> — це вираз, який набуває одне з двох значень: <b>істина</b> (<code class="inline">True</code>) або <b>хиба</b> (<code class="inline">False</code>).</p>
+
+      <h3>Оператори порівняння та логічні оператори</h3>
+      <div class="grid-2">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Порівняння</th><th>Python</th><th>VBA</th></tr></thead>
+            <tbody>
+              <tr><td>дорівнює</td><td><code class="inline">==</code></td><td><code class="inline">=</code></td></tr>
+              <tr><td>не дорівнює</td><td><code class="inline">!=</code></td><td><code class="inline">&lt;&gt;</code></td></tr>
+              <tr><td>менше</td><td><code class="inline">&lt;</code></td><td><code class="inline">&lt;</code></td></tr>
+              <tr><td>більше</td><td><code class="inline">&gt;</code></td><td><code class="inline">&gt;</code></td></tr>
+              <tr><td>менше або дорівнює</td><td><code class="inline">&lt;=</code></td><td><code class="inline">&lt;=</code></td></tr>
+              <tr><td>більше або дорівнює</td><td><code class="inline">&gt;=</code></td><td><code class="inline">&gt;=</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Логічна дія</th><th>Python</th><th>VBA</th></tr></thead>
+            <tbody>
+              <tr><td>логічне І</td><td><code class="inline">and</code></td><td><code class="inline">And</code></td></tr>
+              <tr><td>логічне АБО</td><td><code class="inline">or</code></td><td><code class="inline">Or</code></td></tr>
+              <tr><td>логічне НЕ</td><td><code class="inline">not</code></td><td><code class="inline">Not</code></td></tr>
+              <tr><td>остача від ділення</td><td><code class="inline">%</code></td><td><code class="inline">Mod</code></td></tr>
+              <tr><td>ціле ділення</td><td><code class="inline">//</code></td><td><code class="inline">\</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <b>Важливо для VBA:</b> на відміну від Python, у VBA <b>немає обов'язкових відступів</b> — блок команд закривається ключовим словом <code class="inline">End If</code>. Зате відступи роблять код читабельним, тому їх усе одно варто дотримуватись.
+      </div>
+
+      <h3>Пріоритет операцій</h3>
+      <p>Спочатку виконуються арифметичні дії, потім оператори порівняння, і лише потім — логічні оператори. Для надійності <b>завжди використовуйте дужки</b>:</p>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>Пріоритет — приклад</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">' Без дужок — важко читати й легко помилитись
+If a = b And b = c Then ...
+
+' З дужками — однозначно й надійно
+If (a = b) And (b = c) Then ...</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= СИНТАКСИС ================= -->
+  <section id="syntax" class="section">
+    <div class="section-head">
+      <div class="num">2</div>
+      <h2>Синтаксис розгалуження у VBA (Excel)</h2>
+    </div>
+
+    <div class="card">
+      <h3>Повна форма: If … Then … ElseIf … Else … End If</h3>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>Структура оператора</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">If умова1 Then
+    ' дії, якщо умова1 істинна
+ElseIf умова2 Then
+    ' дії, якщо умова1 хибна, а умова2 істинна
+ElseIf умова3 Then
+    ' дії, якщо умова1 та умова2 хибні, а умова3 істинна
+Else
+    ' дії, якщо всі умови хибні
+End If</code></pre>
+      </div>
+
+      <h3>Скорочена форма (без Else)</h3>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>If без альтернативи</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">If x &lt; 0 Then
+    MsgBox "Від'ємне число"
+End If</code></pre>
+      </div>
+
+      <h3>Однорядковий If</h3>
+      <p>Якщо в кожній гілці лише одна команда, запис можна скоротити:</p>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>Однорядковий запис</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">If x Mod 2 = 0 Then MsgBox "Парне" Else MsgBox "Непарне"</code></pre>
+      </div>
+
+      <h3>Багатоваріантний вибір: Select Case</h3>
+      <p>Коли перевіряється багато значень однієї змінної, зручніше використати <code class="inline">Select Case</code>:</p>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>Select Case</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">Select Case score
+    Case Is &gt;= 90
+        MsgBox "Відмінно"
+    Case Is &gt;= 75
+        MsgBox "Добре"
+    Case Is &gt;= 60
+        MsgBox "Задовільно"
+    Case Else
+        MsgBox "Незадовільно"
+End Select</code></pre>
+      </div>
+
+      <div class="callout ok">
+        <b>Як запустити код в Excel:</b>
+        <ol style="margin-top:.4rem">
+          <li>Натисніть <b>Alt + F11</b> — відкриється редактор VBA.</li>
+          <li>Меню <b>Insert → Module</b> — додайте новий модуль.</li>
+          <li>Вставте код у вікно модуля.</li>
+          <li>Натисніть <b>F5</b> — запуск процедури (або <b>F8</b> — покроково).</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= БЛОК-СХЕМИ ================= -->
+  <section id="flow" class="section">
+    <div class="section-head">
+      <div class="num">3</div>
+      <h2>Блок-схеми алгоритмів</h2>
+    </div>
+
+    <div class="grid-2">
+      <!-- Схема 1 -->
+      <div class="card">
+        <h3>Перевірка числа на парність</h3>
+        <div class="flow">
+          <div class="mermaid">
+flowchart TD
+    A([Початок]) --> B[/Ввести число x/]
+    B --> C{"x Mod 2 = 0 ?"}
+    C -->|Так| D[/Вивести «Парне»/]
+    C -->|Ні| E[/Вивести «Непарне»/]
+    D --> F([Кінець])
+    E --> F
+          </div>
+        </div>
+        <p class="flow-caption">Ромб — умова; прямокутник — дія; паралелограм — введення/виведення</p>
+      </div>
+
+      <!-- Схема 2 -->
+      <div class="card">
+        <h3>Загальна структура If…ElseIf…Else</h3>
+        <div class="flow">
+          <div class="mermaid">
+flowchart TD
+    A([Початок]) --> B{"Умова 1 ?"}
+    B -->|Так| C[/Блок команд 1/]
+    B -->|Ні| D{"Умова 2 ?"}
+    D -->|Так| E[/Блок команд 2/]
+    D -->|Ні| F[/Блок команд Else/]
+    C --> G([Кінець])
+    E --> G
+    F --> G
+          </div>
+        </div>
+        <p class="flow-caption">Ланцюжок умов перевіряється згори вниз, доки одна з них не стане істинною</p>
+      </div>
+    </div>
+
+ 
+
+    <!-- Схема 4 — максимум із трьох -->
+    <div class="card">
+      <h3>Найбільше з трьох чисел a, b, c</h3>
+      <div class="flow">
+        <div class="mermaid">
+flowchart TD
+    A([Початок]) --> B[/Ввести a, b, c/]
+    B --> C["m ← a"]
+    C --> D{"b &gt; m ?"}
+    D -->|Так| E["m ← b"]
+    D -->|Ні| F{"c &gt; m ?"}
+    E --> F
+    F -->|Так| G["m ← c"]
+    F -->|Ні| H[/Вивести m/]
+    G --> H
+    H --> I([Кінець])
+        </div>
+      </div>
+      <p class="flow-caption">Алгоритм «змагання»: початково беремо a, далі по черзі «перемагаємо» його</p>
+    </div>
+  </section>
+
+
+  <!-- ================= ПРИКЛАДИ VBA ================= -->
+  <section id="vba" class="section">
+    <div class="section-head">
+      <div class="num">4</div>
+      <h2>Приклади реалізації на VBA (Excel)</h2>
+    </div>
+
+    <!-- Приклад 1 -->
+    <div class="card">
+      <h3>Приклад 1. Парне / непарне число</h3>
+      <p>Найпростіше розгалуження з оператором <code class="inline">Mod</code> (остача від ділення).</p>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>EvenOdd.bas</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">Sub EvenOdd()
+    Dim x As Long
+    x = CLng(InputBox("Введіть ціле число:"))
+
+    If x Mod 2 = 0 Then
+        MsgBox "Число парне"
+    Else
+        MsgBox "Число непарне"
+    End If
+End Sub</code></pre>
+      </div>
+    </div>
+
+    <!-- Приклад 2 -->
+    <div class="card">
+      <h3>Приклад 2. Визначення типу трикутника ⭐ (основне завдання)</h3>
+      <p>Спочатку перевіряємо умову існування трикутника складеною умовою з <code class="inline">And</code>, потім — тип.</p>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>TriangleType.bas</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">Sub TriangleType()
+    Dim a As Double, b As Double, c As Double
+
+    a = CDbl(InputBox("Сторона a:"))
+    b = CDbl(InputBox("Сторона b:"))
+    c = CDbl(InputBox("Сторона c:"))
+
+    ' 1. Перевірка існування трикутника
+    If (a + b &gt; c) And (a + c &gt; b) And (b + c &gt; a) Then
+
+        ' 2. Визначення типу
+        If (a = b) And (b = c) Then
+            MsgBox "Рівносторонній трикутник"
+        ElseIf (a = b) Or (a = c) Or (b = c) Then
+            MsgBox "Рівнобедрений трикутник"
+        Else
+            MsgBox "Різносторонній трикутник"
+        End If
+
+    Else
+        MsgBox "Трикутник з такими сторонами не існує"
+    End If
+End Sub</code></pre>
+      </div>
+      <div class="callout warn">
+        <b>Зверніть увагу:</b> перевірку рівності сторін робимо <b>тільки всередині</b> гілки «трикутник існує» — інакше для набору (1, 2, 5) програма могла б помилково видати «Різносторонній».
+      </div>
+    </div>
+
+    <!-- Приклад 3 -->
+    <div class="card">
+      <h3>Приклад 3. Високосний рік</h3>
+      <p>Рік високосний, якщо ділиться на 4, але не на 100, <b>або</b> ділиться на 400.</p>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>LeapYear.bas</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">Function IsLeapYear(y As Integer) As Boolean
+    IsLeapYear = ((y Mod 4 = 0) And (y Mod 100 &lt;&gt; 0)) Or (y Mod 400 = 0)
+End Function
+
+Sub CheckLeapYear()
+    Dim y As Integer
+    y = CInt(InputBox("Введіть рік:"))
+
+    If IsLeapYear(y) Then
+        MsgBox y &amp; " — високосний рік"
+    Else
+        MsgBox y &amp; " — не високосний рік"
+    End If
+End Sub</code></pre>
+      </div>
+    </div>
+
+    <!-- Приклад 4 -->
+    <div class="card">
+      <h3>Приклад 4. Найбільше з трьох чисел</h3>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>MaxOfThree.bas</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">Sub MaxOfThree()
+    Dim a As Double, b As Double, c As Double, m As Double
+
+    a = CDbl(InputBox("a ="))
+    b = CDbl(InputBox("b ="))
+    c = CDbl(InputBox("c ="))
+
+    m = a
+    If b &gt; m Then m = b
+    If c &gt; m Then m = c
+
+    MsgBox "Найбільше число: " &amp; m
+End Sub</code></pre>
+      </div>
+    </div>
+
+    <!-- Приклад 5 -->
+    <div class="card">
+      <h3>Приклад 5. Автоматичне тестування таблиці наборів у Excel ⭐</h3>
+      <p>Найзручніший спосіб тестування в Excel: записати тестові набори в комірки <b>A2:C6</b>, а результати отримати в стовпці <b>D</b>.</p>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>TestAllTriangles.bas</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">' Функція повертає результат для однієї трійки сторін
+Function TriangleResult(a As Double, b As Double, c As Double) As String
+    If (a + b &gt; c) And (a + c &gt; b) And (b + c &gt; a) Then
+        If (a = b) And (b = c) Then
+            TriangleResult = "Рівносторонній"
+        ElseIf (a = b) Or (a = c) Or (b = c) Then
+            TriangleResult = "Рівнобедрений"
+        Else
+            TriangleResult = "Різносторонній"
+        End If
+    Else
+        TriangleResult = "Не трикутник"
+    End If
+End Function
+
+' Процедура проганяє всі тестові набори зі стовпців A, B, C
+Sub TestAllTriangles()
+    Dim ws As Worksheet
+    Dim i As Long, a As Double, b As Double, c As Double
+
+    Set ws = ActiveSheet
+    ws.Range("D1").Value = "Результат"
+
+    For i = 2 To 6
+        a = ws.Cells(i, 1).Value
+        b = ws.Cells(i, 2).Value
+        c = ws.Cells(i, 3).Value
+        ws.Cells(i, 4).Value = TriangleResult(a, b, c)
+    Next i
+
+    MsgBox "Тестування завершено!"
+End Sub</code></pre>
+      </div>
+      <div class="callout ok">
+        <b>Перевага:</b> один запуск — і ви одразу бачите результати для всіх наборів. Якщо якийсь рядок не збігається з очікуваним — шукайте помилку в умові.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПРАКТИКА ================= -->
+  <section id="practice" class="section">
+    <div class="section-head">
+      <div class="num">5</div>
+      <h2>Практичне завдання</h2>
+    </div>
+
+    <div class="card">
+      <h3>Завдання: програма «Визначення типу трикутника»</h3>
+      <p>Напишіть програму, яка за трьома введеними користувачем сторонами <b>a, b, c</b> виконує такі дії:</p>
+      <ol style="padding-left:1.2rem;color:var(--muted)">
+        <li>Перевіряє, чи можуть вони бути сторонами трикутника. <b>Умова існування:</b> сума будь-яких двох сторін повинна бути більшою за третю: <code class="inline">a+b&gt;c</code>, <code class="inline">a+c&gt;b</code>, <code class="inline">b+c&gt;a</code>.</li>
+        <li>Якщо трикутник існує — визначає його тип:
+          <ul style="padding-left:1.2rem;margin-top:.3rem">
+            <li><b>Рівносторонній</b> — усі сторони рівні;</li>
+            <li><b>Рівнобедрений</b> — дві сторони рівні;</li>
+            <li><b>Різносторонній</b> — усі сторони різні.</li>
+          </ul>
+        </li>
+        <li>Виводить відповідне повідомлення на екран.</li>
+      </ol>
+
+      <div class="callout">
+        <b>Підказки:</b>
+        <ul style="margin-top:.4rem">
+          <li>Для перевірки існування трикутника використовуйте складену умову з оператором <code class="inline">And</code>.</li>
+          <li>Для перевірки рівності сторін — оператор <code class="inline">=</code>. Обов'язково беріть умови в дужки.</li>
+          <li>Спочатку перевіряйте <b>існування</b> трикутника, і лише потім — його <b>тип</b>.</li>
+        </ul>
+      </div>
+
+      <h3>Тестові набори даних</h3>
+      <p>Обов'язково протестуйте програму на всіх наведених наборах:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>№</th><th>a</th><th>b</th><th>c</th><th>Очікуваний результат</th><th>Що перевіряємо</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>3</td><td>4</td><td>5</td><td>Різносторонній</td><td>Звичайний трикутник</td></tr>
+            <tr><td>2</td><td>5</td><td>5</td><td>5</td><td>Рівносторонній</td><td>Усі сторони рівні</td></tr>
+            <tr><td>3</td><td>5</td><td>5</td><td>8</td><td>Рівнобедрений</td><td>Дві сторони рівні</td></tr>
+            <tr><td>4</td><td>1</td><td>2</td><td>5</td><td>Не трикутник</td><td>Порушена нерівність</td></tr>
+            <tr><td>5</td><td>2</td><td>3</td><td>3</td><td>Рівнобедрений</td><td>Перевірка <code class="inline">a+c&gt;b</code></td></tr>
+            <tr><td>6</td><td>0</td><td>4</td><td>5</td><td>Не трикутник</td><td>Нульова сторона</td></tr>
+            <tr><td>7</td><td>−3</td><td>4</td><td>5</td><td>Не трикутник</td><td>Від'ємна сторона</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>План виконання</h3>
+      <ol style="padding-left:1.2rem;color:var(--muted)">
+        <li>Відкрийте Excel → <b>Alt+F11</b> → <b>Insert → Module</b>.</li>
+        <li>Скопіюйте код <b>TriangleType</b> (приклад 2) у модуль.</li>
+        <li>Запустіть <b>F5</b> і послідовно введіть значення з таблиці тестів.</li>
+        <li>Порівняйте отриманий результат з очікуваним.</li>
+        <li>Якщо є розбіжність — переходьте до розділу «Тестування та налагодження».</li>
+        <li>Додатково: реалізуйте варіант із таблицею (приклад 5) і перевірте всі 7 наборів одним запуском.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= ТЕСТУВАННЯ ================= -->
+  <section id="testing" class="section">
+    <div class="section-head">
+      <div class="num">7</div>
+      <h2>Тестування та налагодження</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Чому тестування критично важливе?</h3>
+        <p>Програма з розгалуженням має <b>кілька шляхів виконання</b>. Якщо протестувати лише «щасливий» сценарій, помилка в іншій гілці залишиться непоміченою.</p>
+        <ul>
+          <li>Перевіряйте <b>кожну гілку</b> (<i>branch coverage</i>).</li>
+          <li>Тестуйте <b>межові значення</b> (0, від'ємні, дуже великі).</li>
+          <li>Перевіряйте <b>некоректні дані</b> (текст замість числа, порожнє введення).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Інструменти налагодження у VBA</h3>
+        <ul>
+          <li><b>F8</b> — покрокове виконання (найкращий інструмент!).</li>
+          <li><b>F9</b> — точка зупину (breakpoint) на потрібному рядку.</li>
+          <li><b>Debug.Print</b> — виведення значень у вікно Immediate (<b>Ctrl+G</b>).</li>
+          <li><b>Watch</b> — спостереження за змінною під час виконання.</li>
+          <li><b>Ctrl+Shift+F8</b> — вихід із покрокового режиму.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Приклад: налагодження через Debug.Print</h3>
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>DebugPrint.bas</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">Sub DebugTriangle()
+    Dim a As Double, b As Double, c As Double
+    a = 1: b = 2: c = 5
+
+    ' Виводимо проміжні значення у вікно Immediate (Ctrl+G)
+    Debug.Print "a+b-c = " &amp; (a + b - c)
+    Debug.Print "a+c-b = " &amp; (a + c - b)
+    Debug.Print "b+c-a = " &amp; (b + c - a)
+
+    If (a + b &gt; c) And (a + c &gt; b) And (b + c &gt; a) Then
+        Debug.Print "Трикутник існує"
+    Else
+        Debug.Print "Трикутник НЕ існує"
+    End If
+End Sub</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПИТАННЯ ================= -->
+  <section id="questions" class="section">
+    <div class="section-head">
+      <div class="num">8</div>
+      <h2>Контрольні запитання та завдання</h2>
+    </div>
+
+    <div class="card">
+      <span class="level-tag lvl1">Рівень 1 · Базовий</span>
+
+      <details>
+        <summary>1. Що таке розгалуження в алгоритмі?</summary>
+        <div class="answer">Алгоритмічна структура, у якій виконання тієї чи іншої послідовності команд залежить від істинності певної умови.</div>
+      </details>
+
+      <details>
+        <summary>2. Які ключові слова використовуються для розгалуження у VBA?</summary>
+        <div class="answer"><code class="inline">If</code>, <code class="inline">Then</code>, <code class="inline">ElseIf</code>, <code class="inline">Else</code>, <code class="inline">End If</code>. Для багатоваріантного вибору — <code class="inline">Select Case</code>.</div>
+      </details>
+
+      <details>
+        <summary>3. Яке значення може мати логічний вираз?</summary>
+        <div class="answer">Одне з двох: <b>істина</b> (<code class="inline">True</code>) або <b>хиба</b> (<code class="inline">False</code>).</div>
+      </details>
+
+      <details>
+        <summary>4. Які оператори порівняння ви знаєте?</summary>
+        <div class="answer">У VBA: <code class="inline">=</code> (дорівнює), <code class="inline">&lt;&gt;</code> (не дорівнює), <code class="inline">&lt;</code>, <code class="inline">&gt;</code>, <code class="inline">&lt;=</code>, <code class="inline">&gt;=</code>.</div>
+      </details>
+
+      <details>
+        <summary>5. Як на блок-схемі позначається умова?</summary>
+        <div class="answer">Ромбом. З нього виходять дві стрілки з підписами «Так» і «Ні».</div>
+      </details>
+
+      <span class="level-tag lvl2" style="margin-top:1.2rem">Рівень 2 · Середній</span>
+
+      <details>
+        <summary>6. Поясніть різницю між If, ElseIf та Else.</summary>
+        <div class="answer">
+          <ul>
+            <li><b>If</b> — перша умова, яка перевіряється.</li>
+            <li><b>ElseIf</b> — додаткова умова, що перевіряється, лише якщо всі попередні хибні.</li>
+            <li><b>Else</b> — гілка, що виконується, коли <b>жодна</b> з умов не є істинною.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>7. Наведіть приклад складного логічного виразу з оператором And.</summary>
+        <div class="answer"><code class="inline">If (a + b &gt; c) And (a + c &gt; b) And (b + c &gt; a) Then</code> — умова існування трикутника.</div>
+      </details>
+
+      <details>
+        <summary>8. Що станеться, якщо в операторі If не використати відступи?</summary>
+        <div class="answer">У VBA відступи <b>не впливають</b> на логіку — блок визначається словами <code class="inline">Then … End If</code>. Проте без відступів код стає нечитабельним і його важко налагоджувати. (У Python, навпаки, відступи обов'язкові.)</div>
+      </details>
+
+      <details>
+        <summary>9. Як перевірити, що число знаходиться в межах від 10 до 20 включно?</summary>
+        <div class="answer"><code class="inline">If (x &gt;= 10) And (x &lt;= 20) Then …</code></div>
+      </details>
+
+      <details>
+        <summary>10. Поясніть, як працює блок-схема для перевірки трикутника.</summary>
+        <div class="answer">Спочатку перевіряється складена умова існування трикутника. Якщо вона хибна — виводиться «Не трикутник». Якщо істинна — перевіряється рівність усіх трьох сторін (рівносторонній), потім рівність хоча б двох (рівнобедрений), інакше — різносторонній.</div>
+      </details>
+
+      <span class="level-tag lvl3" style="margin-top:1.2rem">Рівень 3 · Достатній / Високий</span>
+
+      <details>
+        <summary>11. Напишіть фрагмент коду, який перевіряє, чи є рік високосним.</summary>
+        <div class="answer">
+          <code class="inline">If ((y Mod 4 = 0) And (y Mod 100 &lt;&gt; 0)) Or (y Mod 400 = 0) Then …</code>
+          <br>Рік ділиться на 4, але не на 100, <b>або</b> ділиться на 400.
+        </div>
+      </details>
+
+      <details>
+        <summary>12. Як за допомогою логічних операторів спростити вираз not (x &gt; 5 or y &lt; 10)?</summary>
+        <div class="answer">За законами де Моргана: <code class="inline">not (A or B) = (not A) and (not B)</code>.
+          Отже: <code class="inline">(x &lt;= 5) And (y &gt;= 10)</code>.</div>
+      </details>
+
+      <details>
+        <summary>13. Складіть блок-схему для визначення найбільшого з трьох чисел a, b, c.</summary>
+        <div class="answer">Див. блок-схему в розділі «Блок-схеми» → «Найбільше з трьох чисел». Ідея: <code class="inline">m ← a</code>, далі <code class="inline">If b &gt; m Then m = b</code>, потім <code class="inline">If c &gt; m Then m = c</code>.</div>
+      </details>
+
+      <details>
+        <summary>14. У чому важливість тестування програм з розгалуженням?</summary>
+        <div class="answer">
+          Програма має кілька шляхів виконання, і кожен треба перевірити. Для задачі про трикутник:
+          <ul>
+            <li>(3, 4, 5) — різносторонній;</li>
+            <li>(5, 5, 5) — рівносторонній;</li>
+            <li>(5, 5, 8) — рівнобедрений;</li>
+            <li>(1, 2, 5) — не трикутник;</li>
+            <li>(0, 4, 5) та (−3, 4, 5) — некоректні дані.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>15. Як налагоджувати програму, якщо вона дає неправильний результат?</summary>
+        <div class="answer">
+          <ul>
+            <li>Відтворити помилку на конкретних вхідних даних.</li>
+            <li>Поставити точку зупину (<b>F9</b>) і пройти код покроково (<b>F8</b>).</li>
+            <li>Вивести проміжні значення через <code class="inline">Debug.Print</code> у вікно Immediate (<b>Ctrl+G</b>).</li>
+            <li>Перевірити кожну умову окремо (можливо, потрібні дужки).</li>
+            <li>Перевірити межові випадки: 0, від'ємні числа, рівні сторони.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= ЛІТЕРАТУРА ================= -->
+  <div class="card">
+    <h3>📚 Література</h3>
+    <ul style="color:var(--muted)">
+      <li>Інформатика (рівень стандарт): підруч. для 10 кл. / Н. В. Морзе, В. П. Вембер. — Київ: Оріон, 2021.</li>
+      <li>Інформатика (рівень стандарт): підруч. для 10 кл. / Й. Я. Ривкінд, Т. І. Лисенко, Л. А. Чернікова, В. В. Шакотько. — Київ: Генеза, 2021.</li>
+      <li>Інформатика (рівень стандарт): підруч. для 10 кл. / В. Д. Руденко, Н. В. Речич, В. О. Потієнко. — Харків: Ранок, 2021.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Практичне заняття №5 · Складені команди. Оператор розгалуження. Логічні вирази · VBA (Excel)
+  </footer>
+</div>
+
+<!-- ================= СКРИПТИ ================= -->
+<script>
+  /* ---------- Копіювання коду ---------- */
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.code').querySelector('pre code').textContent;
+      var done = function () {
+        var old = btn.textContent;
+        btn.textContent = 'Скопійовано ✓';
+        setTimeout(function () { btn.textContent = old; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done).catch(done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        done();
+      }
+    });
+  });
+
+</script>
+</body>
+</html>

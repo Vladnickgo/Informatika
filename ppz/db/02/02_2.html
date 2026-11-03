@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практичне заняття № 10. Поняття таблиці, поля, запису. Основні етапи роботи з БД</title>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --primary-light: #14b8a6;
+      --accent: #f59e0b;
+      --dark: #0f172a;
+      --text: #1e293b;
+      --muted: #64748b;
+      --bg: #f0fdfa;
+      --card: #ffffff;
+      --border: #d1e7e3;
+      --code-bg: #0f172a;
+      --ok: #16a34a;
+      --warn: #d97706;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* ============ HEADER ============ */
+    header.hero {
+      background: linear-gradient(135deg, #115e59 0%, #0f766e 55%, #14b8a6 100%);
+      color: #fff;
+      padding: 48px 24px 44px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, .25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(255, 255, 255, .13), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, .18);
+      border: 1px solid rgba(255, 255, 255, .35);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: .85rem;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    header.hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    header.hero p.sub {
+      margin: 0;
+      opacity: .93;
+      max-width: 920px;
+      font-size: 1rem;
+    }
+
+    header.hero .chips {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    header.hero .chips span {
+      background: rgba(255, 255, 255, .16);
+      border: 1px solid rgba(255, 255, 255, .3);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: .82rem;
+    }
+
+    /* ============ LAYOUT ============ */
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 80px;
+    }
+
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 22px;
+      margin: 15px auto 32px;
+      max-width: 1100px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+    }
+
+    nav.toc h2 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    nav.toc ol {
+      margin: 0;
+      padding-left: 20px;
+      columns: 2;
+      column-gap: 36px;
+    }
+
+    nav.toc li {
+      margin: 4px 0;
+      break-inside: avoid;
+    }
+
+    nav.toc a {
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    nav.toc a:hover {
+      text-decoration: underline;
+    }
+
+    @media(max-width:700px) {
+      nav.toc ol {
+        columns: 1;
+      }
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, .05);
+    }
+
+    section>h2 {
+      margin: 0 0 18px;
+      font-size: 1.3rem;
+      color: var(--dark);
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--primary);
+      display: inline-block;
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      margin: 22px 0 10px;
+      color: var(--primary-dark);
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin: 16px 0 8px;
+      color: var(--dark);
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    /* ============ META ============ */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 8px 18px;
+    }
+
+    .meta-grid dt {
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .meta-grid dd {
+      margin: 0;
+    }
+
+    @media(max-width:620px) {
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-grid dt {
+        margin-top: 8px;
+      }
+    }
+
+    .refs {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+
+    .refs li {
+      margin: 6px 0;
+      font-size: .94rem;
+    }
+
+    /* ============ CARDS ============ */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #f8fffd, #ecfdf5);
+      border: 1px solid #b7e4dc;
+      border-left: 5px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .card h4 {
+      margin: 0 0 8px;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: .85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .card p {
+      margin: 6px 0 0;
+      font-size: .95rem;
+    }
+
+    /* ============ TABLES ============ */
+    .tbl-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    table.data {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 520px;
+      font-size: .94rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, .08);
+    }
+
+    table.data thead th {
+      background: var(--primary);
+      color: #fff;
+      text-align: left;
+      padding: 11px 14px;
+      font-weight: 600;
+      font-size: .92rem;
+    }
+
+    table.data td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    table.data tbody tr:nth-child(even) {
+      background: #f7fdfc;
+    }
+
+    table.data tbody tr:hover {
+      background: #effcf9;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    /* ============ CODE ============ */
+    code.inline {
+      background: #ccfbf1;
+      color: #134e4a;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-family: Consolas, monospace;
+      font-size: .88em;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: #e2e8f0;
+      padding: 16px 18px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: .88rem;
+      line-height: 1.6;
+      border: 1px solid #1e293b;
+      margin: 14px 0;
+    }
+
+    pre code {
+      font-family: "JetBrains Mono", "Fira Code", Consolas, "Courier New", monospace;
+    }
+
+    /* ============ FIGURES ============ */
+    figure {
+      margin: 22px 0;
+      text-align: center;
+    }
+
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, .10);
+      background: #fff;
+    }
+
+    figcaption {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .img-ph {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 2px dashed #5eead4;
+      border-radius: 12px;
+      background: #f0fdfa;
+      color: #115e59;
+      padding: 26px 18px;
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    .img-ph span {
+      font-size: 2rem;
+    }
+
+    .img-ph small {
+      color: #0d9488;
+      max-width: 520px;
+    }
+
+    .svg-box {
+      background: #f7fdfc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    .svg-box svg {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ============ CALLOUTS ============ */
+    .note,
+    .warn,
+    .tip {
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: .95rem;
+      border-left: 5px solid;
+    }
+
+    .note {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+
+    .warn {
+      background: #fffbeb;
+      border-color: #f59e0b;
+    }
+
+    .tip {
+      background: #ecfdf5;
+      border-color: #10b981;
+    }
+
+    .note strong,
+    .warn strong,
+    .tip strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ============ STEPS ============ */
+    ol.steps {
+      list-style: none;
+      counter-reset: step;
+      padding: 0;
+      margin: 18px 0;
+    }
+
+    ol.steps>li {
+      counter-increment: step;
+      position: relative;
+      padding: 0 0 22px 58px;
+      border-left: 2px dashed #99f6e4;
+      margin-left: 18px;
+    }
+
+    ol.steps>li:last-child {
+      border-left-color: transparent;
+      padding-bottom: 0;
+    }
+
+    ol.steps>li::before {
+      content: counter(step);
+      position: absolute;
+      left: -19px;
+      top: -2px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 4px #ccfbf1;
+    }
+
+    ol.steps>li>strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+
+    /* ============ QUESTION LIST ============ */
+    ol.discuss {
+      counter-reset: d;
+      list-style: none;
+      padding: 0;
+    }
+
+    ol.discuss>li {
+      counter-increment: d;
+      position: relative;
+      padding: 12px 16px 12px 54px;
+      margin: 10px 0;
+      background: #f7fdfc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    ol.discuss>li::before {
+      content: counter(d);
+      position: absolute;
+      left: 14px;
+      top: 12px;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: #fff;
+      font-weight: 700;
+      font-size: .9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ============ ACCORDION ============ */
+    details {
+      background: #f7fdfc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin: 10px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    details p {
+      margin: 10px 0 0;
+    }
+
+    /* ============ SCORE BADGE ============ */
+    .score-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 18px 0;
+      align-items: stretch;
+    }
+
+    .score-box .item {
+      flex: 1 1 160px;
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+      color: #fff;
+      border-radius: 14px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(15, 118, 110, .28);
+    }
+
+    .score-box .item b {
+      display: block;
+      font-size: 1.2rem;
+      line-height: 1.1;
+    }
+
+    .score-box .item small {
+      opacity: .85;
+      font-size: .95rem;
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .88rem;
+      padding: 20px 20px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+
+    /* ===== Примусові розриви сторінок ===== */
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+
+      <p class="sub">
+        Прикладне програмне забезпечення
+      </p>
+      <h1>Поняття таблиці, поля, запису.<br>Основні етапи роботи з базами даних у середовищі СКБД</h1>
+      <div class="badge">Практичне заняття № 10</div>
+      <!--  <div class="chips">
+      <span>📚 LibreOffice Base</span>
+      <span>🗂️ Таблиці · Поля · Записи</span>
+      <span>🔑 Первинний ключ</span>
+      <span>📊 Сортування та фільтрація</span>
+      <span>📝 Файл .odb</span>
+    </div>-->
+    </div>
+  </header>
+
+  <nav class="toc">
+    <h2>Зміст заняття</h2>
+    <ol>
+
+      <li><a href="#discuss">Питання для обговорення</a></li>
+      <li><a href="#concepts">Основні поняття БД</a></li>
+      <li><a href="#stages">Основні етапи роботи з БД</a></li>
+      <li><a href="#interface">LibreOffice Base — огляд інтерфейсу</a></li>
+      <li><a href="#create-table">Створення таблиці: способи</a></li>
+      <li><a href="#compare">LibreOffice Base vs Microsoft Access</a></li>
+      <li><a href="#practice">Практичне завдання «Контакти учнів та батьків»</a></li>
+      <li><a href="#criteria">Критерії оцінювання</a></li>
+      <li><a href="#questions">Контрольні запитання</a></li>
+    </ol>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- ============ META ============ -->
+    <section id="meta">
+      <h2>Мета, обладнання</h2>
+      <dl class="meta-grid">
+
+        <dt>Мета</dt>
+        <dd>Закріплювати поняття таблиці, поля, запису; ознайомлювати з основними етапами роботи
+          в конкретному середовищі СКБД (наприклад, <strong>LibreOffice Base</strong>). Розвивати навички
+          навігації в інтерфейсі СКБД, уміння створювати прості таблиці. Виховувати дбайливе ставлення
+          до чужих даних, дисципліну при роботі в багатокористувацькому режимі.</dd>
+
+        <dt>Обладнання</dt>
+        <dd>Інструкційні картки, персональний комп'ютер із встановленим <strong>LibreOffice Base</strong>.</dd>
+
+        <dt>Формат здачі</dt>
+        <dd>Файл бази даних <code class="inline">.odb</code> з назвою
+          <code class="inline">Прізвище_П310_контакти.odb</code>
+        </dd>
+      </dl>
+    </section>
+
+    <!-- ============ LITERATURE ============ -->
+    <section id="literature">
+      <h2>Література</h2>
+      <ol class="refs">
+        <li>Юнчик В. Л. Системне, прикладне програмне забезпечення та хмарні технології в освіті :
+          конспект лекцій для студентів спеціальності 014.09 Середня освіта (Інформатика)
+          першого (бакалаврського) рівня. Волин. нац. ун-т ім. Лесі Українки. Луцьк :
+          ВНУ імені Лесі Українки, 2024. 162 с.</li>
+        <li>Анісімов А. В., Кулябко П. П. Інформаційні системи та бази даних : навч. посіб. для студ.
+          ф-ту комп'ютер. наук та кібернетики. Київ, 2017. 110 с.</li>
+        <li>Буйницька О. П. Інформаційні технології та технічні засоби навчання : навч. посіб.
+          Київ : Центр навчальної літератури, 2019. 240 с.</li>
+      </ol>
+    </section>
+
+    <!-- ============ DISCUSSION ============ -->
+    <section id="discuss">
+      <h2>Питання для обговорення</h2>
+      <ol class="discuss">
+        <li>Чим відрізняється таблиця бази даних від таблиці Excel?</li>
+        <li>Чому в базі даних важливо правильно визначити типи полів?</li>
+        <li>Які переваги дає використання СКБД перед зберіганням даних у текстових файлах?</li>
+        <li>Чому первинний ключ не може бути порожнім?</li>
+        <li>У яких випадках зручно використовувати LibreOffice Base, а в яких — Microsoft Access?</li>
+      </ol>
+
+      <details>
+        <summary>💡 Підказки для обговорення</summary>
+        <p><strong>1.</strong> Таблиця БД має жорстко задану структуру (типи полів, ключі, обмеження),
+          підтримує зв'язки між таблицями й запити; аркуш Excel — вільна форма для обчислень.</p>
+        <p><strong>2.</strong> Неправильний тип призводить до помилок сортування, порівняння та обчислень
+          (наприклад, «10» &lt; «9» для тексту, але 10 &gt; 9 для числа).</p>
+        <p><strong>4.</strong> Первинний ключ однозначно ідентифікує запис; порожнє значення зруйнувало б
+          цю ідентифікацію й унеможливило б зв'язки.</p>
+      </details>
+    </section>
+
+    <!-- ============ CONCEPTS ============ -->
+    <section id="concepts">
+      <h2>1. Основні поняття БД: таблиця, поле, запис</h2>
+
+      <div class="cards">
+        <div class="card">
+          <h4><span class="num">1</span> Таблиця</h4>
+          <p>Основний об'єкт БД для зберігання даних. Складається з рядків і стовпців.</p>
+        </div>
+        <div class="card">
+          <h4><span class="num">2</span> Поле</h4>
+          <p>Стовпець таблиці, який містить однотипні дані. Має назву та тип.</p>
+        </div>
+        <div class="card">
+          <h4><span class="num">3</span> Запис</h4>
+          <p>Рядок таблиці, який містить дані про один об'єкт (екземпляр сутності).</p>
+        </div>
+      </div>
+
+      <div class="svg-box">
+        <svg viewBox="0 0 1000 340" role="img" aria-label="Будова таблиці бази даних: поля та записи">
+          <defs>
+            <marker id="arrT" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 z" fill="#0f766e" />
+            </marker>
+          </defs>
+
+          <text x="500" y="28" text-anchor="middle" font-family="Segoe UI" font-size="19" font-weight="700"
+            fill="#0f172a">
+            Будова таблиці бази даних
+          </text>
+
+          <!-- label: поле -->
+          <text x="170" y="64" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#0f766e"
+            font-weight="600">поле (стовпець)</text>
+          <line x1="170" y1="70" x2="170" y2="88" stroke="#0f766e" stroke-width="2" marker-end="url(#arrT)" />
+
+          <!-- label: запис -->
+          <text x="845" y="132" text-anchor="start" font-family="Segoe UI" font-size="13" fill="#b45309"
+            font-weight="600">запис (рядок)</text>
+          <line x1="838" y1="138" x2="800" y2="138" stroke="#b45309" stroke-width="2" marker-end="url(#arrT)" />
+
+          <!-- header -->
+          <rect x="80" y="92" width="720" height="46" fill="#0f766e" rx="5" />
+          <line x1="260" y1="92" x2="260" y2="138" stroke="#ffffff" stroke-opacity=".45" />
+          <line x1="440" y1="92" x2="440" y2="138" stroke="#ffffff" stroke-opacity=".45" />
+          <line x1="620" y1="92" x2="620" y2="138" stroke="#ffffff" stroke-opacity=".45" />
+          <text x="170" y="121" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#fff"
+            font-weight="700">Код_учня</text>
+          <text x="350" y="121" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#fff"
+            font-weight="700">Прізвище</text>
+          <text x="530" y="121" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#fff"
+            font-weight="700">Ім'я</text>
+          <text x="710" y="121" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#fff"
+            font-weight="700">Клас</text>
+
+          <!-- rows -->
+          <g font-family="Consolas, monospace" font-size="14" fill="#334155">
+            <rect x="80" y="138" width="720" height="42" fill="#f0fdfa" stroke="#cbd5e1" />
+            <line x1="260" y1="138" x2="260" y2="180" stroke="#cbd5e1" />
+            <line x1="440" y1="138" x2="440" y2="180" stroke="#cbd5e1" />
+            <line x1="620" y1="138" x2="620" y2="180" stroke="#cbd5e1" />
+            <text x="170" y="164" text-anchor="middle">1</text>
+            <text x="350" y="164" text-anchor="middle">Петренко</text>
+            <text x="530" y="164" text-anchor="middle">Олександр</text>
+            <text x="710" y="164" text-anchor="middle">10-А</text>
+
+            <rect x="80" y="180" width="720" height="42" fill="#ffffff" stroke="#cbd5e1" />
+            <line x1="260" y1="180" x2="260" y2="222" stroke="#cbd5e1" />
+            <line x1="440" y1="180" x2="440" y2="222" stroke="#cbd5e1" />
+            <line x1="620" y1="180" x2="620" y2="222" stroke="#cbd5e1" />
+            <text x="170" y="206" text-anchor="middle">2</text>
+            <text x="350" y="206" text-anchor="middle">Коваленко</text>
+            <text x="530" y="206" text-anchor="middle">Марія</text>
+            <text x="710" y="206" text-anchor="middle">10-Б</text>
+
+            <rect x="80" y="222" width="720" height="42" fill="#f0fdfa" stroke="#cbd5e1" />
+            <line x1="260" y1="222" x2="260" y2="264" stroke="#cbd5e1" />
+            <line x1="440" y1="222" x2="440" y2="264" stroke="#cbd5e1" />
+            <line x1="620" y1="222" x2="620" y2="264" stroke="#cbd5e1" />
+            <text x="170" y="248" text-anchor="middle">3</text>
+            <text x="350" y="248" text-anchor="middle">Шевченко</text>
+            <text x="530" y="248" text-anchor="middle">Андрій</text>
+            <text x="710" y="248" text-anchor="middle">10-А</text>
+          </g>
+
+          <rect x="80" y="92" width="720" height="172" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+
+          <!-- footnote -->
+          <rect x="200" y="292" width="480" height="34" rx="9" fill="#ccfbf1" stroke="#14b8a6" />
+          <text x="440" y="314" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#134e4a">
+            Перетин рядка та стовпця утворює комірку зі значенням одного поля
+          </text>
+        </svg>
+      </div>
+      <p style="text-align:center;color:#64748b;font-size:.88rem;font-style:italic;margin-top:-8px;">
+        Рис. 1. Поля (стовпці) та записи (рядки) у таблиці бази даних
+      </p>
+    </section>
+
+    <!-- ============ STAGES ============ -->
+    <section id="stages" class="page-break">
+      <h2>2. Основні етапи роботи з БД у СКБД</h2>
+
+      <p>Робота з базою даних у середовищі СКБД складається з послідовних етапів:</p>
+
+      <div class="svg-box">
+        <svg viewBox="0 0 1000 400" role="img" aria-label="Схема етапів роботи з базою даних у СКБД">
+          <defs>
+            <marker id="arrS" markerWidth="11" markerHeight="11" refX="7" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 z" fill="#0f766e" />
+            </marker>
+          </defs>
+
+          <text x="500" y="28" text-anchor="middle" font-family="Segoe UI" font-size="19" font-weight="700"
+            fill="#0f172a">
+            Етапи роботи з базою даних
+          </text>
+
+          <!-- Stage boxes -->
+          <g font-family="Segoe UI" font-size="13" font-weight="600" fill="#ffffff">
+            <!-- Row 1: 4 boxes -->
+            <rect x="30" y="70" width="200" height="70" rx="12" fill="#0f766e" />
+            <text x="130" y="100" text-anchor="middle">Проектування</text>
+            <text x="130" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="#d1fae5">модель,
+              структура</text>
+
+            <rect x="270" y="70" width="200" height="70" rx="12" fill="#0f766e" />
+            <text x="370" y="100" text-anchor="middle">Створення</text>
+            <text x="370" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="#d1fae5">таблиці, поля,
+              ключі</text>
+
+            <rect x="510" y="70" width="200" height="70" rx="12" fill="#0f766e" />
+            <text x="610" y="100" text-anchor="middle">Заповнення</text>
+            <text x="610" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="#d1fae5">введення
+              даних</text>
+
+            <rect x="750" y="70" width="220" height="70" rx="12" fill="#0f766e" />
+            <text x="860" y="100" text-anchor="middle">Редагування</text>
+            <text x="860" y="122" text-anchor="middle" font-size="11" font-weight="400" fill="#d1fae5">зміна
+              даних</text>
+
+            <!-- Arrows row 1 -->
+            <line x1="232" y1="105" x2="266" y2="105" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrS)" />
+            <line x1="472" y1="105" x2="506" y2="105" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrS)" />
+            <line x1="712" y1="105" x2="746" y2="105" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrS)" />
+
+            <!-- Row 2: 3 boxes -->
+            <rect x="30" y="220" width="280" height="70" rx="12" fill="#14b8a6" />
+            <text x="170" y="250" text-anchor="middle">Маніпулювання</text>
+            <text x="170" y="272" text-anchor="middle" font-size="11" font-weight="400" fill="#ecfdf5">запити,
+              сортування, фільтри</text>
+
+            <rect x="360" y="220" width="280" height="70" rx="12" fill="#14b8a6" />
+            <text x="500" y="250" text-anchor="middle">Використання</text>
+            <text x="500" y="272" text-anchor="middle" font-size="11" font-weight="400" fill="#ecfdf5">форми, звіти,
+              звіти-документи</text>
+
+            <rect x="690" y="220" width="280" height="70" rx="12" fill="#14b8a6" />
+            <text x="830" y="250" text-anchor="middle">Супроводження</text>
+            <text x="830" y="272" text-anchor="middle" font-size="11" font-weight="400" fill="#ecfdf5">резервні копії,
+              оптимізація</text>
+
+            <!-- Down arrow -->
+            <path d="M860 145 L860 190 L170 190 L170 216" fill="none" stroke="#0f766e" stroke-width="2.5"
+              marker-end="url(#arrS)" />
+            <!-- Arrows row 2 -->
+            <line x1="312" y1="255" x2="356" y2="255" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrS)" />
+            <line x1="642" y1="255" x2="686" y2="255" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrS)" />
+          </g>
+
+          <!-- Cycle note -->
+          <rect x="250" y="330" width="500" height="42" rx="10" fill="#fffbeb" stroke="#f59e0b" />
+          <text x="500" y="350" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#92400e"
+            font-weight="600">
+            Циклічний процес
+          </text>
+          <text x="500" y="366" text-anchor="middle" font-family="Segoe UI" font-size="11.5" fill="#92400e">
+            Етапи можуть повторюватися в міру розвитку бази даних
+          </text>
+        </svg>
+      </div>
+      <p style="text-align:center;color:#64748b;font-size:.88rem;font-style:italic;margin-top:-8px;">
+        Рис. 2. Схема основних етапів роботи з базою даних у СКБД
+      </p>
+
+      <div class="tbl-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>№</th>
+              <th>Етап</th>
+              <th>Що відбувається</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="center">1</td>
+              <td><strong>Проектування</strong></td>
+              <td>Визначення сутностей, атрибутів, зв'язків; побудова моделі «сутність-зв'язок».</td>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td><strong>Створення</strong></td>
+              <td>Створення таблиць, опис полів, типів даних, ключів та обмежень.</td>
+            </tr>
+            <tr>
+              <td class="center">3</td>
+              <td><strong>Заповнення</strong></td>
+              <td>Введення записів у таблиці.</td>
+            </tr>
+            <tr>
+              <td class="center">4</td>
+              <td><strong>Редагування</strong></td>
+              <td>Виправлення, оновлення чи видалення записів.</td>
+            </tr>
+            <tr>
+              <td class="center">5</td>
+              <td><strong>Маніпулювання</strong></td>
+              <td>Сортування, фільтрація, побудова запитів.</td>
+            </tr>
+            <tr>
+              <td class="center">6</td>
+              <td><strong>Використання</strong></td>
+              <td>Форми для введення, звіти для друку, експорт даних.</td>
+            </tr>
+            <tr>
+              <td class="center">7</td>
+              <td><strong>Супроводження</strong></td>
+              <td>Резервне копіювання, оптимізація, захист даних.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ INTERFACE ============ -->
+    <section id="interface" class="page-break">
+      <h2>3. LibreOffice Base — огляд інтерфейсу</h2>
+      <div style="display: flex;">
+        <div style="width: 65%;">
+          <p>У лівій частині вікна LibreOffice Base розташована панель <strong>«База даних»</strong> з основними
+            об'єктами. Це «серце» програми — саме тут обирається те, з чим ви будете працювати.</p>
+        </div>
+        <div style="width: 35%;">
+          <figure class="shot">
+            <img src="images/base-sidebar.png" alt="Панель База даних: Таблиці, Запити, Форми, Звіти" width="80px">
+            <figcaption>Рис. 3. Панель «База даних»: Таблиці, Запити, Форми, Звіти</figcaption>
+          </figure>
+        </div>
+      </div>
+
+
+
+
+      <div class="cards">
+        <div class="card">
+          <h4>🗂️ Таблиці</h4>
+          <p>Основне сховище даних. Саме тут створюються структури — таблиці з полями, типами даних і ключами.</p>
+        </div>
+        <div class="card">
+          <h4>🔎 Запити</h4>
+          <p>Вибірка, фільтрація та об'єднання даних із таблиць за допомогою SQL або конструктора.</p>
+        </div>
+        <div class="card">
+          <h4>📝 Форми</h4>
+          <p>Зручний графічний інтерфейс для введення та перегляду даних (наприклад, анкета учня).</p>
+        </div>
+        <div class="card">
+          <h4>🖨️ Звіти</h4>
+          <p>Документи для друку або експорту: списки, підсумки, статистика класу.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Навігація в СКБД</strong>
+        Вікно LibreOffice Base побудоване за принципом «розділ ліворуч — вміст праворуч». Перемикаючись між
+        розділами (Таблиці, Запити, Форми, Звіти), ви бачите перелік відповідних об'єктів і можете
+        створювати нові, відкривати існуючі чи змінювати їх.
+      </div>
+    </section>
+
+    <!-- ============ CREATE TABLE ============ -->
+    <section id="create-table" class="page-break">
+      <h2>4. Створення таблиці в LibreOffice Base</h2>
+
+      <p>Створити таблицю можна трьома способами:</p>
+
+      <div class="cards">
+        <div class="card">
+          <h4><span class="num">1</span> Режим конструктора</h4>
+          <p>Найточніший спосіб. Вручну вказуються назви полів, типи даних, властивості, ключі.
+            Дозволяє повністю контролювати структуру таблиці.</p>
+        </div>
+        <div class="card">
+          <h4><span class="num">2</span> Майстер (помічник)</h4>
+          <p>Покроковий діалог: обираєте типові поля (бізнес, особисті, навчальні), а система сама
+            підбирає типи даних. Найшвидший для початківців.</p>
+        </div>
+        <div class="card">
+          <h4><span class="num">3</span> Режим таблиці</h4>
+          <p>Дані вводяться одразу «як у таблиці», а Base автоматично визначає типи полів. Зручно
+            для дрібних експериментів, але менш контрольовано.</p>
+        </div>
+        <figure class="shot">
+          <img src="images/base-tables-icon.png" alt="Іконка розділу Таблиці в LibreOffice Base">
+          <figcaption>Рис. 4. Розділ «Таблиці» в середовищі LibreOffice Base</figcaption>
+        </figure>
+  
+      </div>
+
+      <div class="tip">
+        <strong>Порада</strong>
+        Для навчальних завдань з чіткою структурою (як у практичній роботі «Контакти учнів та батьків»)
+        завжди обирайте <strong>режим конструктора</strong> — так ви гарантовано задасте правильні типи
+        полів та первинний ключ.
+      </div>
+    </section>
+
+    <!-- ============ COMPARE ============ -->
+    <section id="compare" class="page-break">
+      <h2>5. LibreOffice Base vs Microsoft Access</h2>
+
+      <div class="tbl-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Критерій</th>
+              <th>Відмінність</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Вартість</strong></td>
+              <td><span style="color:#0f766e;font-weight:600;">LibreOffice Base</span> — безкоштовний,
+                <span style="color:#b45309;font-weight:600;">Microsoft Access</span> — платний (у складі Microsoft 365 /
+                Office)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Платформи</strong></td>
+              <td>Base — Windows / Linux / macOS; Access — тільки Windows</td>
+            </tr>
+            <tr>
+              <td><strong>Простота</strong></td>
+              <td>Access більш інтуїтивний для початківців (майстри, шаблони, підказки)</td>
+            </tr>
+            <tr>
+              <td><strong>Формат файлів</strong></td>
+              <td>Base — <code class="inline">.odb</code>; Access — <code class="inline">.accdb</code> / <code
+                  class="inline">.mdb</code></td>
+            </tr>
+            <tr>
+              <td><strong>Інтеграція</strong></td>
+              <td>Base добре інтегрується з LibreOffice (Writer, Calc);
+                Access — з Microsoft Office (Word, Excel)</td>
+            </tr>
+            <tr>
+              <td><strong>Використання</strong></td>
+              <td>Base — навчання, невеликі проєкти, Linux-середовище;
+                Access — офісна робота у Windows-середовищі</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="svg-box">
+        <svg viewBox="0 0 1000 240" role="img" aria-label="Порівняльна діаграма LibreOffice Base та Microsoft Access">
+          <text x="500" y="28" text-anchor="middle" font-family="Segoe UI" font-size="17" font-weight="700"
+            fill="#0f172a">
+            Порівняння за ключовими критеріями
+          </text>
+
+          <!-- Legend -->
+          <rect x="330" y="44" width="16" height="16" rx="3" fill="#0f766e" />
+          <text x="352" y="57" font-family="Segoe UI" font-size="12" fill="#334155">LibreOffice Base</text>
+          <rect x="500" y="44" width="16" height="16" rx="3" fill="#f59e0b" />
+          <text x="522" y="57" font-family="Segoe UI" font-size="12" fill="#334155">Microsoft Access</text>
+
+          <!-- axis labels -->
+          <g font-family="Segoe UI" font-size="12" fill="#64748b" text-anchor="end">
+            <text x="150" y="102">Вартість</text>
+            <text x="150" y="140">Платформи</text>
+            <text x="150" y="178">Простота</text>
+            <text x="150" y="216">Інтеграція</text>
+          </g>
+
+          <!-- bars -->
+          <!-- Вартість -->
+          <rect x="160" y="88" width="360" height="18" rx="9" fill="#0f766e" />
+          <text x="530" y="102" font-family="Segoe UI" font-size="12" fill="#0f766e"
+            font-weight="600">безкоштовно</text>
+          <rect x="160" y="88" width="0" height="0" fill="none" />
+          <rect x="600" y="88" width="0" height="0" />
+          <rect x="600" y="88" width="160" height="18" rx="9" fill="#f59e0b" />
+          <text x="770" y="102" font-family="Segoe UI" font-size="12" fill="#b45309" font-weight="600">платно</text>
+
+          <!-- Платформи -->
+          <rect x="160" y="126" width="420" height="18" rx="9" fill="#0f766e" />
+          <text x="590" y="140" font-family="Segoe UI" font-size="12" fill="#0f766e" font-weight="600">Win · Linux ·
+            macOS</text>
+          <rect x="600" y="126" width="180" height="18" rx="9" fill="#f59e0b" />
+          <text x="790" y="140" font-family="Segoe UI" font-size="12" fill="#b45309" font-weight="600">лише
+            Windows</text>
+
+          <!-- Простота -->
+          <rect x="160" y="164" width="280" height="18" rx="9" fill="#0f766e" />
+          <text x="450" y="178" font-family="Segoe UI" font-size="12" fill="#0f766e" font-weight="600">середня</text>
+          <rect x="600" y="164" width="320" height="18" rx="9" fill="#f59e0b" />
+          <text x="600" y="200" font-family="Segoe UI" font-size="12" fill="#b45309" font-weight="600">висока (для
+            початківців)</text>
+
+          <!-- Інтеграція -->
+          <rect x="160" y="202" width="340" height="18" rx="9" fill="#0f766e" />
+          <text x="510" y="216" font-family="Segoe UI" font-size="12" fill="#0f766e"
+            font-weight="600">LibreOffice</text>
+          <rect x="600" y="202" width="340" height="18" rx="9" fill="#f59e0b" />
+          <text x="600" y="238" font-family="Segoe UI" font-size="12" fill="#b45309" font-weight="600">Microsoft
+            Office</text>
+        </svg>
+      </div>
+      <p style="text-align:center;color:#64748b;font-size:.88rem;font-style:italic;margin-top:-8px;">
+        Рис. 5. Порівняльна діаграма LibreOffice Base і Microsoft Access
+      </p>
+    </section>
+
+    <!-- ============ PRACTICE ============ -->
+    <section id="practice" class="page-break">
+      <h2>6. Практичне завдання «Контакти учнів та батьків»</h2>
+
+      <div class="note">
+        <strong>Тема БД</strong>
+        «Контакти учнів та батьків» — для роботи класного керівника.
+        <br><strong>Загальна умова:</strong> створіть базу даних для обліку контактної інформації учнів
+        та їхніх батьків.
+      </div>
+
+      <h3>Перелік завдань</h3>
+      <div class="tbl-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>№</th>
+              <th>Завдання</th>
+              <th>Результат</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="center">1</td>
+              <td>Створення бази даних</td>
+              <td>Файл <code class="inline">Прізвище_П310_контакти.odb</code></td>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td>Створення таблиці «Учні» в режимі конструктора</td>
+              <td>Таблиця з 7 полями + ключ</td>
+            </tr>
+            <tr>
+              <td class="center">3</td>
+              <td>Створення таблиці «Батьки» в режимі конструктора</td>
+              <td>Таблиця з 6 полями + ключ</td>
+            </tr>
+            <tr>
+              <td class="center">4</td>
+              <td>Введення даних у таблиці</td>
+              <td>3–5 записів у кожній</td>
+            </tr>
+            <tr>
+              <td class="center">5</td>
+              <td>Встановлення зв'язків між таблицями</td>
+              <td>Зв'язок 1:N через поле «Код_учня»</td>
+            </tr>
+            <tr>
+              <td class="center">6</td>
+              <td>Сортування даних</td>
+              <td>За прізвищем</td>
+            </tr>
+            <tr>
+              <td class="center">7</td>
+              <td>Фільтрація даних</td>
+              <td>За класом 3-А</td>
+            </tr>
+            <tr>
+              <td class="center">8</td>
+              <td>Створення запиту</td>
+              <td>Запит на вибірку даних</td>
+            </tr>
+            <tr>
+              <td class="center">9</td>
+              <td>Формування та завершення</td>
+              <td>Збереження файлу <code class="inline">.odb</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="page-break">Структура таблиць</h3>
+
+      <h4>Таблиця «Учні»</h4>
+      <div class="tbl-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Поле</th>
+              <th>Тип даних</th>
+              <th>Властивості</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Код_учня</strong></td>
+              <td>INTEGER</td>
+              <td>🔑 Первинний ключ, Автозначення (AutoValue)</td>
+            </tr>
+            <tr>
+              <td>Прізвище</td>
+              <td>VARCHAR(50)</td>
+              <td>Обов'язкове (NOT NULL)</td>
+            </tr>
+            <tr>
+              <td>Ім'я</td>
+              <td>VARCHAR(50)</td>
+              <td>Обов'язкове (NOT NULL)</td>
+            </tr>
+            <tr>
+              <td>Клас</td>
+              <td>VARCHAR(10)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Дата_народження</td>
+              <td>DATE</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Телефон</td>
+              <td>VARCHAR(20)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>VARCHAR(60)</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Таблиця «Батьки»</h4>
+      <div class="tbl-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Поле</th>
+              <th>Тип даних</th>
+              <th>Властивості</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Код_батька</strong></td>
+              <td>INTEGER</td>
+              <td>🔑 Первинний ключ, Автозначення (AutoValue)</td>
+            </tr>
+            <tr>
+              <td>Код_учня</td>
+              <td>INTEGER</td>
+              <td>🔗 Зовнішній ключ → «Учні.Код_учня»</td>
+            </tr>
+            <tr>
+              <td>Прізвище_батька</td>
+              <td>VARCHAR(50)</td>
+              <td>Обов'язкове</td>
+            </tr>
+            <tr>
+              <td>Ім'я_батька</td>
+              <td>VARCHAR(50)</td>
+              <td>Обов'язкове</td>
+            </tr>
+            <tr>
+              <td>Телефон_батька</td>
+              <td>VARCHAR(20)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Ступінь_споріднення</td>
+              <td>VARCHAR(20)</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="page-break">Схема зв'язку таблиць</h3>
+
+      <div class="svg-box">
+        <svg viewBox="0 0 1000 360" role="img" aria-label="Схема зв'язку таблиць Учні та Батьки (1:N)">
+          <defs>
+            <marker id="crowP" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+              <path d="M0,0 L10,6 L0,12" fill="none" stroke="#0d9488" stroke-width="1.6" />
+            </marker>
+          </defs>
+
+          <text x="500" y="28" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700"
+            fill="#0f172a">
+            Схема зв'язку «Учні» ↔ «Батьки» (зв'язок 1 : N)
+          </text>
+
+          <!-- STUDENTS table -->
+          <rect x="60" y="70" width="320" height="44" rx="6" fill="#0f766e" />
+          <text x="220" y="98" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700"
+            fill="#fff">Учні</text>
+
+          <rect x="60" y="114" width="320" height="200" fill="#ffffff" stroke="#cbd5e1" />
+          <line x1="60" y1="154" x2="380" y2="154" stroke="#e2e8f0" />
+          <line x1="60" y1="194" x2="380" y2="194" stroke="#e2e8f0" />
+          <line x1="60" y1="234" x2="380" y2="234" stroke="#e2e8f0" />
+          <line x1="60" y1="274" x2="380" y2="274" stroke="#e2e8f0" />
+
+          <text x="76" y="140" font-family="Consolas, monospace" font-size="13.5" fill="#b45309" font-weight="700">🔑
+            Код_учня</text>
+          <text x="364" y="140" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">INTEGER
+            (PK)</text>
+          <text x="76" y="180" font-family="Consolas, monospace" font-size="13.5" fill="#334155">Прізвище</text>
+          <text x="364" y="180" text-anchor="end" font-family="Segoe UI" font-size="11"
+            fill="#94a3b8">VARCHAR(50)</text>
+          <text x="76" y="220" font-family="Consolas, monospace" font-size="13.5" fill="#334155">Ім'я</text>
+          <text x="364" y="220" text-anchor="end" font-family="Segoe UI" font-size="11"
+            fill="#94a3b8">VARCHAR(50)</text>
+          <text x="76" y="260" font-family="Consolas, monospace" font-size="13.5" fill="#334155">Клас</text>
+          <text x="364" y="260" text-anchor="end" font-family="Segoe UI" font-size="11"
+            fill="#94a3b8">VARCHAR(10)</text>
+          <text x="76" y="300" font-family="Consolas, monospace" font-size="13.5" fill="#334155">Телефон</text>
+          <text x="364" y="300" text-anchor="end" font-family="Segoe UI" font-size="11"
+            fill="#94a3b8">VARCHAR(20)</text>
+
+          <rect x="60" y="70" width="320" height="244" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+
+          <!-- PARENTS table -->
+          <rect x="620" y="70" width="320" height="44" rx="6" fill="#14b8a6" />
+          <text x="780" y="98" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700"
+            fill="#fff">Батьки</text>
+
+          <rect x="620" y="114" width="320" height="200" fill="#ffffff" stroke="#cbd5e1" />
+          <line x1="620" y1="154" x2="940" y2="154" stroke="#e2e8f0" />
+          <line x1="620" y1="194" x2="940" y2="194" stroke="#e2e8f0" />
+          <line x1="620" y1="234" x2="940" y2="234" stroke="#e2e8f0" />
+          <line x1="620" y1="274" x2="940" y2="274" stroke="#e2e8f0" />
+
+          <text x="636" y="140" font-family="Consolas, monospace" font-size="13.5" fill="#b45309" font-weight="700">🔑
+            Код_батька</text>
+          <text x="924" y="140" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">INTEGER
+            (PK)</text>
+          <text x="636" y="180" font-family="Consolas, monospace" font-size="13.5" fill="#0d9488" font-weight="700">🔗
+            Код_учня</text>
+          <text x="924" y="180" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">INTEGER
+            (FK)</text>
+          <text x="636" y="220" font-family="Consolas, monospace" font-size="13.5" fill="#334155">Прізвище_батька</text>
+          <text x="924" y="220" text-anchor="end" font-family="Segoe UI" font-size="11"
+            fill="#94a3b8">VARCHAR(50)</text>
+          <text x="636" y="260" font-family="Consolas, monospace" font-size="13.5" fill="#334155">Ім'я_батька</text>
+          <text x="924" y="260" text-anchor="end" font-family="Segoe UI" font-size="11"
+            fill="#94a3b8">VARCHAR(50)</text>
+          <text x="636" y="300" font-family="Consolas, monospace" font-size="13.5"
+            fill="#334155">Ступінь_споріднення</text>
+          <text x="924" y="300" text-anchor="end" font-family="Segoe UI" font-size="11"
+            fill="#94a3b8">VARCHAR(20)</text>
+
+          <rect x="620" y="70" width="320" height="244" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+
+          <!-- relation line -->
+          <line x1="380" y1="180" x2="620" y2="180" stroke="#0d9488" stroke-width="2.4" />
+          <line x1="412" y1="168" x2="412" y2="192" stroke="#0d9488" stroke-width="2.4" />
+          <text x="400" y="160" text-anchor="middle" font-family="Segoe UI" font-size="15" font-weight="700"
+            fill="#0d9488">1</text>
+
+          <line x1="588" y1="168" x2="588" y2="192" stroke="#0d9488" stroke-width="2.4" />
+          <line x1="588" y1="180" x2="612" y2="166" stroke="#0d9488" stroke-width="2" />
+          <line x1="588" y1="180" x2="612" y2="194" stroke="#0d9488" stroke-width="2" />
+          <text x="600" y="160" text-anchor="middle" font-family="Segoe UI" font-size="15" font-weight="700"
+            fill="#0d9488">N</text>
+
+          <rect x="330" y="196" width="340" height="28" rx="9" fill="#ccfbf1" stroke="#5eead4" />
+          <text x="500" y="215" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#115e59">
+            одному учневі — один або кілька батьків
+          </text>
+
+          <!-- bottom note -->
+          <rect x="200" y="326" width="600" height="30" rx="9" fill="#f0fdfa" stroke="#5eead4" />
+          <text x="500" y="345" text-anchor="middle" font-family="Segoe UI" font-size="12.5" fill="#115e59">
+            Зв'язок реалізовано через поле «Код_учня» (зовнішній ключ у таблиці «Батьки»)
+          </text>
+        </svg>
+      </div>
+      <p style="text-align:center;color:#64748b;font-size:.88rem;font-style:italic;margin-top:-8px;">
+        Рис. 6. Схема зв'язку між таблицями «Учні» та «Батьки»
+      </p>
+
+      <h3 class="page-break">Інструкційна картка</h3>
+
+      <ol class="steps">
+        <li>
+          <strong>Частина А. Створення бази даних</strong>
+          Запустіть <em>LibreOffice Base</em> → «Створіть нову базу даних» → «Далі» → «Готово».
+          Збережіть файл як <code class="inline">Прізвище_П310_контакти.odb</code>.
+        </li>
+
+        <li>
+          <strong>Частина В. Таблиця «Учні»</strong>
+          У розділі <em>Таблиці</em> → «Створити таблицю в режимі конструктора».
+          <br>Введіть поля:
+          <code class="inline">Код_учня</code>, <code class="inline">Прізвище</code>, <code class="inline">Ім'я</code>,
+          <code class="inline">Клас</code>, <code class="inline">Дата_народження</code>,
+          <code class="inline">Телефон</code>, <code class="inline">Email</code>.<br>
+          Для поля <code class="inline">Код_учня</code> оберіть тип <b>INTEGER</b>,
+          у властивостях увімкніть «Автозначення» та призначте <b>первинний ключ</b>.
+          Збережіть таблицю як <b>«Учні»</b>.
+        </li>
+
+        <li>
+          <strong>Частина С. Таблиця «Батьки»</strong>
+          Створіть ще одну таблицю в режимі конструктора.<br> Введіть поля:<br>
+          <code class="inline">Код_батька</code>, <code class="inline">Код_учня</code>,
+          <code class="inline">Прізвище_батька</code>, <code class="inline">Ім'я_батька</code>,
+          <code class="inline">Телефон_батька</code>, <code class="inline">Ступінь_споріднення</code>.<br>
+          <code class="inline">Код_батька</code> зробіть первинним ключем (тип INTEGER, Автозначення).<br>
+          Збережіть таблицю як <b>«Батьки»</b>.
+        </li>
+
+        <li>
+          <strong>Частина D. Введення даних</strong>
+          Відкрийте таблицю «Учні» та введіть <b>3–5 записів</b>. Потім відкрийте
+          таблицю «Батьки» та введіть <b>3–5 записів</b> (у полі «Код_учня» вкажіть
+          код відповідного учня).
+        </li>
+
+        <li>
+          <strong>Частина Е. Сортування та фільтрація</strong>
+          Відсортуйте «Учні» за прізвищем (зростання або спадання) та відфільтруйте записи
+          за класом <b>3-А</b>.
+        </li>
+
+        <li>
+          <strong>Частина F. Завершення</strong>
+          Збережіть базу даних та закрийте <em>LibreOffice Base</em>. Переконайтеся, що файл
+          має правильну назву та розширення <code class="inline">.odb</code>.
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ CRITERIA ============ -->
+    <section id="criteria">
+      <h2>7. Критерії оцінювання</h2>
+
+      <div class="tbl-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>№</th>
+              <th>Критерій</th>
+              <th class="center">Бали</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="center">1</td>
+              <td>Базу даних створено з правильною назвою</td>
+              <td class="center">1</td>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td>Таблицю «Учні» створено з усіма полями</td>
+              <td class="center">2</td>
+            </tr>
+            <tr>
+              <td class="center">3</td>
+              <td>Таблицю «Батьки» створено з усіма полями</td>
+              <td class="center">2</td>
+            </tr>
+            <tr>
+              <td class="center">4</td>
+              <td>Встановлено первинний ключ у обох таблицях</td>
+              <td class="center">2</td>
+            </tr>
+            <tr>
+              <td class="center">5</td>
+              <td>Введено мінімум 3 записи в кожну таблицю</td>
+              <td class="center">4</td>
+            </tr>
+            <tr>
+              <td class="center">6</td>
+              <td>Виконано сортування даних</td>
+              <td class="center">2</td>
+            </tr>
+            <tr>
+              <td class="center">7</td>
+              <td>Виконано фільтрацію даних</td>
+              <td class="center">2</td>
+            </tr>
+            <tr>
+              <td class="center">8</td>
+              <td>Встановлено зв'язок між таблицями</td>
+              <td class="center">2</td>
+            </tr>
+            <tr>
+              <td class="center">9</td>
+              <td>Завдання виконано самостійно та акуратно</td>
+              <td class="center">3</td>
+            </tr>
+            <tr style="background:#ccfbf1;font-weight:700;">
+              <td colspan="2" class="center">Максимальна кількість балів</td>
+              <td class="center">20</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Шкала переведення балів</h3>
+      <div class="score-box">
+        <div class="item"><b>19–20</b><small>«відмінно»</small></div>
+        <div class="item"><b>15–18</b><small>«добре»</small></div>
+        <div class="item"><b>10–14</b><small>«задовільно»</small></div>
+        <div class="item"><b>0–9</b><small>«незадовільно»</small></div>
+      </div>
+    </section>
+
+    <!-- ============ QUESTIONS ============ -->
+    <section id="questions" class="page-break">
+      <h2>8. Контрольні запитання</h2>
+
+      <ol class="discuss">
+        <li>Що таке таблиця, поле, запис у контексті бази даних?</li>
+        <li>Які основні етапи роботи з базою даних у СКБД?</li>
+        <li>Як створити нову базу даних у LibreOffice Base?</li>
+        <li>Як створити таблицю в режимі конструктора?</li>
+        <li>Що таке первинний ключ? Як його встановити?</li>
+        <li>Які типи полів використовуються в LibreOffice Base?</li>
+        <li>Як встановити зв'язок між двома таблицями?</li>
+        <li>Чим відрізняється LibreOffice Base від Microsoft Access?</li>
+        <li>Як виконати сортування даних у таблиці?</li>
+        <li>Як виконати фільтрацію даних у таблиці?</li>
+      </ol>
+
+      <details>
+        <summary>📖 Короткі відповіді для самоперевірки</summary>
+        <p><strong>1.</strong> Таблиця — основний об'єкт БД для зберігання даних; поле — стовпець
+          з однотипними даними; запис — рядок, що містить дані про один об'єкт.</p>
+        <p><strong>2.</strong> Проектування → Створення → Заповнення → Редагування → Маніпулювання →
+          Використання → Супроводження.</p>
+        <p><strong>5.</strong> Первинний ключ — унікальний ідентифікатор запису. Встановлюється
+          у режимі конструктора: виділити поле → правий клік → «Первинний ключ».</p>
+        <p><strong>7.</strong> У меню <em>Засоби → Зв'язки</em> додати обидві таблиці та протягнути
+          зв'язок між полем <code class="inline">Код_учня</code> головної таблиці та відповідним
+          полем дочірньої.</p>
+        <p><strong>9.</strong> У таблиці виділити стовпець → кнопка «Сортувати за зростанням/спаданням»
+          на панелі інструментів.</p>
+        <p><strong>10.</strong> Скористатися кнопкою «Фільтр за виділеним» або «Автофільтр»
+          на панелі інструментів.</p>
+      </details>
+    </section>
+
+  </div>
+
+  <footer>
+    Практичне заняття № 10 · Поняття таблиці, поля, запису. Основні етапи роботи з базами даних у середовищі СКБД  ·
+    Прикладне програмне забезпечення<br>
+    📖 КЗ СОР "Путивльський педагогічний фаховий коледж імені С.В. Руднєва"
+  </footer>
+
+  <script>
+    /* Якщо зображення недоступне — показуємо акуратну заглушку */
+    document.querySelectorAll('figure.shot img').forEach(function (img) {
+      img.addEventListener('error', function () {
+        var ph = document.createElement('div');
+        ph.className = 'img-ph';
+        ph.innerHTML = '<span>🖼️</span><small>' + (img.getAttribute('alt') || 'Зображення') +
+          '<br><em>Додайте файл: ' + img.getAttribute('src') + '</em></small>';
+        img.replaceWith(ph);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

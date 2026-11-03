@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="442.944pt" viewBox="0 0 635.4 442.944" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-28T20:54:01.530768</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 442.944 
+L 635.4 442.944 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 37.240615 189.63712 
+L 206.271692 189.63712 
+Q 214.770462 189.63712 214.770462 181.21024 
+L 214.770462 69.78816 
+Q 214.770462 61.36128 206.271692 61.36128 
+L 37.240615 61.36128 
+Q 28.741846 61.36128 28.741846 69.78816 
+L 28.741846 181.21024 
+Q 28.741846 189.63712 37.240615 189.63712 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #e1f0fe; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 84.456 101.85712 
+L 159.056308 101.85712 
+Q 172.276615 101.85712 172.276615 88.74864 
+L 172.276615 87.34416 
+Q 172.276615 74.23568 159.056308 74.23568 
+L 84.456 74.23568 
+Q 71.235692 74.23568 71.235692 87.34416 
+L 71.235692 88.74864 
+Q 71.235692 101.85712 84.456 101.85712 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 233.184462 189.63712 
+L 402.215538 189.63712 
+Q 410.714308 189.63712 410.714308 181.21024 
+L 410.714308 69.78816 
+Q 410.714308 61.36128 402.215538 61.36128 
+L 233.184462 61.36128 
+Q 224.685692 61.36128 224.685692 69.78816 
+L 224.685692 181.21024 
+Q 224.685692 189.63712 233.184462 189.63712 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #e8f8ec; stroke: #248a3d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 280.399846 101.85712 
+L 355.000154 101.85712 
+Q 368.220462 101.85712 368.220462 88.74864 
+L 368.220462 87.34416 
+Q 368.220462 74.23568 355.000154 74.23568 
+L 280.399846 74.23568 
+Q 267.179538 74.23568 267.179538 87.34416 
+L 267.179538 88.74864 
+Q 267.179538 101.85712 280.399846 101.85712 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 429.128308 189.63712 
+L 598.159385 189.63712 
+Q 606.658154 189.63712 606.658154 181.21024 
+L 606.658154 69.78816 
+Q 606.658154 61.36128 598.159385 61.36128 
+L 429.128308 61.36128 
+Q 420.629538 61.36128 420.629538 69.78816 
+L 420.629538 181.21024 
+Q 420.629538 189.63712 429.128308 189.63712 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #efe6f7; stroke: #6e30a8; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 476.343692 101.85712 
+L 550.944 101.85712 
+Q 564.164308 101.85712 564.164308 88.74864 
+L 564.164308 87.34416 
+Q 564.164308 74.23568 550.944 74.23568 
+L 476.343692 74.23568 
+Q 463.123385 74.23568 463.123385 87.34416 
+L 463.123385 88.74864 
+Q 463.123385 101.85712 476.343692 101.85712 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #6e30a8"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 37.240615 330.08512 
+L 206.271692 330.08512 
+Q 214.770462 330.08512 214.770462 321.65824 
+L 214.770462 210.23616 
+Q 214.770462 201.80928 206.271692 201.80928 
+L 37.240615 201.80928 
+Q 28.741846 201.80928 28.741846 210.23616 
+L 28.741846 321.65824 
+Q 28.741846 330.08512 37.240615 330.08512 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #fff4e5; stroke: #c93400; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 84.456 242.30512 
+L 159.056308 242.30512 
+Q 172.276615 242.30512 172.276615 229.19664 
+L 172.276615 227.79216 
+Q 172.276615 214.68368 159.056308 214.68368 
+L 84.456 214.68368 
+Q 71.235692 214.68368 71.235692 227.79216 
+L 71.235692 229.19664 
+Q 71.235692 242.30512 84.456 242.30512 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 233.184462 330.08512 
+L 402.215538 330.08512 
+Q 410.714308 330.08512 410.714308 321.65824 
+L 410.714308 210.23616 
+Q 410.714308 201.80928 402.215538 201.80928 
+L 233.184462 201.80928 
+Q 224.685692 201.80928 224.685692 210.23616 
+L 224.685692 321.65824 
+Q 224.685692 330.08512 233.184462 330.08512 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #efe6f7; stroke: #6e30a8; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 280.399846 242.30512 
+L 355.000154 242.30512 
+Q 368.220462 242.30512 368.220462 229.19664 
+L 368.220462 227.79216 
+Q 368.220462 214.68368 355.000154 214.68368 
+L 280.399846 214.68368 
+Q 267.179538 214.68368 267.179538 227.79216 
+L 267.179538 229.19664 
+Q 267.179538 242.30512 280.399846 242.30512 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #6e30a8"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 429.128308 330.08512 
+L 598.159385 330.08512 
+Q 606.658154 330.08512 606.658154 321.65824 
+L 606.658154 210.23616 
+Q 606.658154 201.80928 598.159385 201.80928 
+L 429.128308 201.80928 
+Q 420.629538 201.80928 420.629538 210.23616 
+L 420.629538 321.65824 
+Q 420.629538 330.08512 429.128308 330.08512 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #ffebea; stroke: #c4001d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 476.343692 242.30512 
+L 550.944 242.30512 
+Q 564.164308 242.30512 564.164308 229.19664 
+L 564.164308 227.79216 
+Q 564.164308 214.68368 550.944 214.68368 
+L 476.343692 214.68368 
+Q 463.123385 214.68368 463.123385 227.79216 
+L 463.123385 229.19664 
+Q 463.123385 242.30512 476.343692 242.30512 
+z
+" clip-path="url(#pe952e3a50b)" style="fill: #c4001d"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="36.039075" transform="rotate(-0 317.7 36.039075)">Основні команди для текстових файлів</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="121.756154" y="91.666088" transform="rotate(-0 121.756154 91.666088)">type</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: middle; fill: #86868b" x="121.756154" y="123.703538" transform="rotate(-0 121.756154 123.703538)">type &lt;файл&gt;</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(59.190216 144.321016)">Виводить увесь вміст</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(75.711701 159.564009)">файлу на екран</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="317.7" y="91.771556" transform="rotate(-0 317.7 91.771556)">more</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: middle; fill: #86868b" x="317.7" y="123.703538" transform="rotate(-0 317.7 123.703538)">more &lt;файл&gt;</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(274.912578 144.321016)">Посторінковий</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(270.177422 159.564009)">перегляд вмісту</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="513.643846" y="91.771556" transform="rotate(-0 513.643846 91.771556)">find</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: middle; fill: #86868b" x="513.643846" y="123.703538" transform="rotate(-0 513.643846 123.703538)">find "текст" &lt;файл&gt;</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(469.347362 144.321016)">Шукає рядки зі</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(460.695174 159.564009)">вказаним текстом</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="121.756154" y="232.114087" transform="rotate(-0 121.756154 232.114087)">copy con</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: middle; fill: #86868b" x="121.756154" y="264.151538" transform="rotate(-0 121.756154 264.151538)">copy con &lt;файл&gt;</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(61.871466 284.769016)">Створює файл через</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(55.908263 300.012009)">введення з клавіатури</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="317.7" y="232.219556" transform="rotate(-0 317.7 232.219556)">findstr</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: middle; fill: #86868b" x="317.7" y="264.151538" transform="rotate(-0 317.7 264.151538)">findstr "текст" &lt;файл&gt;</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(261.548438 284.769016)">Розширений пошук</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(286.539922 300.012009)">із масками</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="513.643846" y="232.219556" transform="rotate(-0 513.643846 232.219556)">echo</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: middle; fill: #86868b" x="513.643846" y="264.151538" transform="rotate(-0 513.643846 264.151538)">echo текст &gt; файл</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(458.478846 284.769016)">Швидке створення</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(447.130799 300.012009)">файлу з одним рядком</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe952e3a50b">
+   <rect x="10.8" y="10.8" width="613.8" height="421.344"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття №8 — Висновки, узагальнення, рекомендації</title>
+<style>
+  :root{
+    --bg: #fbfbfd;
+    --card: #ffffff;
+    --text: #1d1d1f;
+    --muted: #6e6e73;
+    --line: #e8e8ed;
+    --orange: #ff9500;
+    --green: #34c759;
+    --blue: #0071e3;
+    --indigo: #1d3a5f;
+    --purple: #af52de;
+    --red: #ff3b30;
+    --radius: 22px;
+    --shadow: 0 4px 24px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-0.01em;
+  }
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    background:rgba(251,251,253,.78);
+    border-bottom:1px solid var(--line);
+  }
+  nav .inner{
+    max-width:1080px;margin:0 auto;padding:12px 24px;
+    display:flex;align-items:center;gap:22px;overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav .inner::-webkit-scrollbar{display:none;}
+  nav a{
+    color:var(--muted);text-decoration:none;font-size:14px;
+    font-weight:500;white-space:nowrap;transition:color .2s;
+  }
+  nav a:hover{color:var(--text);}
+  nav .brand{
+    font-weight:600;color:var(--text);font-size:15px;margin-right:auto;
+  }
+  /* HERO */
+  header.hero{
+    max-width:1080px;margin:0 auto;padding:80px 24px 40px;
+  }
+  .eyebrow{
+    display:inline-block;font-size:13px;font-weight:600;
+    color:var(--blue);letter-spacing:.02em;margin-bottom:14px;
+    text-transform:uppercase;
+  }
+  header.hero h1{
+    font-size:clamp(32px,4.5vw,52px);
+    font-weight:700;letter-spacing:-0.03em;line-height:1.08;
+    margin-bottom:20px;
+  }
+  header.hero .lead{
+    font-size:19px;color:var(--muted);max-width:760px;
+    letter-spacing:-0.005em;
+  }
+  /* MAIN */
+  main{max-width:1080px;margin:0 auto;padding:0 24px 100px;}
+  section{
+    margin-top:56px;
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:44px;
+  }
+  section.plain{
+    background:transparent;box-shadow:none;padding:0;
+  }
+  h2{
+    font-size:28px;font-weight:700;letter-spacing:-0.02em;
+    margin-bottom:8px;display:flex;align-items:center;gap:14px;
+  }
+  h2 .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;border-radius:12px;
+    background:linear-gradient(135deg,#0071e3,#4a9eff);
+    color:#fff;font-size:16px;font-weight:600;
+    box-shadow:0 4px 12px rgba(0,113,227,.25);
+    flex-shrink:0;
+  }
+  h3{
+    font-size:19px;font-weight:600;letter-spacing:-0.01em;
+    margin:32px 0 14px;
+  }
+  h4{
+    font-size:16px;font-weight:600;margin:20px 0 10px;
+  }
+  p{color:#333;font-size:16px;margin-bottom:14px;}
+  p.muted{color:var(--muted);}
+  ul.styled{list-style:none;margin:14px 0;}
+  ul.styled li{
+    position:relative;padding-left:28px;margin-bottom:10px;
+    font-size:15.5px;color:#333;
+  }
+  ul.styled li::before{
+    content:"";position:absolute;left:6px;top:9px;
+    width:8px;height:8px;border-radius:50%;
+    background:linear-gradient(135deg,#0071e3,#4a9eff);
+  }
+  ul.checks li::before{
+    content:"✓";background:none;color:var(--green);
+    font-weight:700;font-size:14px;left:4px;top:0;
+    width:auto;height:auto;
+  }
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:22px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px;}
+  @media (max-width:860px){
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+    section{padding:28px 20px;}
+  }
+  /* CARD */
+  .info-card{
+    background:#f5f5f7;border-radius:16px;padding:22px;
+    border:1px solid var(--line);
+  }
+  .info-card h4{font-size:15px;margin-bottom:6px;}
+  .info-card p{font-size:14px;color:var(--muted);margin:0;}
+  /* FORMULA CARDS */
+  .formula-card{
+    border-radius:18px;padding:22px;color:#fff;
+    position:relative;overflow:hidden;
+  }
+  .formula-card .num{
+    font-size:12px;font-weight:700;opacity:.85;
+    letter-spacing:.06em;text-transform:uppercase;
+  }
+  .formula-card h4{font-size:16px;margin:8px 0 6px;color:#fff;}
+  .formula-card p{font-size:13.5px;opacity:.9;color:#fff;margin:0;line-height:1.5;}
+  .formula-card .quote{
+    font-size:12.5px;font-style:italic;opacity:.85;
+    margin-top:10px;display:block;
+  }
+  /* HIGHLIGHT BOX */
+  .highlight{
+    background:linear-gradient(135deg,#eaf3ff,#f5f9ff);
+    border-left:4px solid var(--blue);
+    border-radius:12px;padding:20px 22px;margin:18px 0;
+  }
+  .highlight .label{
+    font-size:11.5px;font-weight:700;color:var(--blue);
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;
+  }
+  .highlight p{margin:0;font-size:15px;color:#1a3559;}
+  .example{
+    background:#fff9ec;border-left:4px solid var(--orange);
+    border-radius:12px;padding:20px 22px;margin:16px 0;
+  }
+  .example .label{
+    font-size:11.5px;font-weight:700;color:#c47a00;
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;
+  }
+  .example p{margin:0 0 8px;font-size:14.5px;}
+  .example p:last-child{margin-bottom:0;}
+  .danger{
+    background:#fff0f0;border-left:4px solid var(--red);
+    border-radius:12px;padding:20px 22px;margin:16px 0;
+  }
+  .danger .label{
+    font-size:11.5px;font-weight:700;color:#c1272d;
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;
+  }
+  .danger p{margin:0;font-size:14.5px;}
+  /* TABLE */
+  table{
+    width:100%;border-collapse:separate;border-spacing:0;
+    margin:18px 0;font-size:14.5px;border-radius:14px;
+    overflow:hidden;border:1px solid var(--line);
+  }
+  thead th{
+    background:#f5f5f7;text-align:left;padding:14px 16px;
+    font-weight:600;font-size:13px;color:var(--muted);
+    letter-spacing:.02em;text-transform:uppercase;
+  }
+  tbody td{padding:14px 16px;border-top:1px solid var(--line);vertical-align:top;}
+  tbody tr:nth-child(even){background:#fafafc;}
+  /* SVG figure */
+  figure{margin:26px 0;text-align:center;}
+  figure svg{max-width:100%;height:auto;}
+  figcaption{
+    font-size:13px;color:var(--muted);margin-top:12px;
+    font-style:italic;
+  }
+  /* Slide structure grid */
+  .slides-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:12px;
+    margin-top:22px;
+  }
+  .slide-card{
+    border-radius:14px;padding:16px 12px;color:#fff;
+    min-height:92px;display:flex;flex-direction:column;
+    justify-content:space-between;
+  }
+  .slide-card .sn{font-size:11px;font-weight:700;opacity:.8;}
+  .slide-card .st{font-size:13px;font-weight:600;line-height:1.25;}
+  .slide-card .sd{font-size:10.5px;opacity:.75;margin-top:4px;}
+  @media (max-width:860px){
+    .slides-grid{grid-template-columns:repeat(2,1fr);}
+    .slide-card.c11{grid-column:1/3 !important;}
+    .slide-card.c12{grid-column:1/3 !important;}
+  }
+  /* sample slide */
+  .sample-slide{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:0;overflow:hidden;margin-top:20px;box-shadow:var(--shadow);
+  }
+  .sample-slide .ss-head{
+    background:var(--indigo);color:#fff;padding:14px 22px;
+    font-size:14px;font-weight:600;letter-spacing:-0.005em;
+  }
+  .sample-slide .ss-body{
+    display:grid;grid-template-columns:1.4fr 1fr;gap:20px;padding:22px;
+  }
+  @media (max-width:700px){ .sample-slide .ss-body{grid-template-columns:1fr;} }
+  .ss-concl{
+    background:#fff9ec;border:1px solid #ffe2b0;border-radius:12px;padding:16px;
+  }
+  .ss-concl h5{
+    font-size:12px;font-weight:700;color:#c47a00;
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;
+  }
+  .ss-concl ul{list-style:none;}
+  .ss-concl li{
+    font-size:13px;margin-bottom:8px;padding-left:18px;position:relative;
+    color:#333;
+  }
+  .ss-concl li::before{
+    content:"□";position:absolute;left:0;top:0;color:#c47a00;
+  }
+  .ss-concl .src{
+    font-size:12px;color:var(--muted);font-style:italic;
+    margin-top:10px;border-top:1px dashed #ffe2b0;padding-top:8px;
+  }
+  /* Algorithm steps */
+  .steps{counter-reset:step;margin:20px 0;}
+  .step{
+    position:relative;padding:14px 20px 14px 60px;
+    background:#f5f5f7;border-radius:14px;margin-bottom:10px;
+    font-size:15px;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    width:30px;height:30px;border-radius:50%;
+    background:var(--blue);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:14px;
+  }
+  /* Criteria bars */
+  .crit{display:flex;align-items:center;gap:16px;margin:12px 0;}
+  .crit .name{font-size:14.5px;min-width:170px;font-weight:500;}
+  .crit .bar{flex:1;height:10px;background:#e8e8ed;border-radius:5px;overflow:hidden;}
+  .crit .fill{height:100%;border-radius:5px;}
+  .crit .val{font-size:13px;color:var(--muted);min-width:40px;text-align:right;font-weight:600;}
+  /* Question list */
+  .qlist{counter-reset:q;list-style:none;margin-top:16px;}
+  .qlist li{
+    counter-increment:q;position:relative;padding:14px 16px 14px 54px;
+    background:#f5f5f7;border-radius:12px;margin-bottom:10px;
+    font-size:15px;
+  }
+  .qlist li::before{
+    content:counter(q,decimal-leading-zero);
+    position:absolute;left:16px;top:14px;
+    font-size:13px;font-weight:700;color:var(--blue);
+  }
+  /* Animate */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.on{opacity:1;transform:none;}
+  /* Footer */
+  footer{
+    max-width:1080px;margin:0 auto;padding:40px 24px 80px;
+    color:var(--muted);font-size:13px;text-align:center;
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="brand">ПЗ №8</span>
+    <a href="#meta">Мета</a>
+    <a href="#theory">Теорія</a>
+    <a href="#structure">Структура</a>
+    <a href="#types">Типи</a>
+    <a href="#recom">Рекомендації</a>
+    <a href="#present">Презентація</a>
+    <a href="#tasks">Завдання</a>
+    <a href="#criteria">Оцінювання</a>
+    <a href="#questions">Запитання</a>
+  </div>
+</nav>
+
+<header class="hero reveal">
+  <div class="eyebrow">Практичне заняття № 8</div>
+  <h1>Формулювання висновків.<br>Узагальнення результатів,<br>розробка рекомендацій</h1>
+  <p class="lead">Від емпіричних фактів — через узагальнення — до обґрунтованих висновків і конкретних адресних порад. Опануємо формулу наукового висновку, типи висновків, алгоритм розробки рекомендацій та створимо підсумкову презентацію дослідження.</p>
+</header>
+
+<main>
+
+<!-- META -->
+<section id="meta" class="reveal">
+  <h2><span class="num">i</span> Мета, обладнання, література</h2>
+  <div class="grid-2">
+    <div class="info-card">
+      <h4>🎯 Мета</h4>
+      <p>Формувати вміння формулювати висновки, узагальнювати результати та розробляти рекомендації; розвивати вміння узагальнювати й практично застосовувати результати дослідження; виховувати відповідальність за практичне значення результатів.</p>
+    </div>
+    <div class="info-card">
+      <h4>🧰 Обладнання</h4>
+      <p>Інструкційні картки, комп'ютер, PowerPoint / Canva, проєктор.</p>
+    </div>
+  </div>
+  <h3>Література</h3>
+  <ul class="styled">
+    <li>Дубасенюк О. А. Методологія та методи науково-педагогічного дослідження. Житомир: Полісся, 2016. 256 с.</li>
+    <li>Оліяр М. П., Русин Г. А., Червінька І. Б. Основи науково-педагогічних досліджень (модульно-рейтинговий підхід). Івано-Франківськ: «Наїр», 2013. 214 с.</li>
+  </ul>
+</section>
+
+<!-- THEORY -->
+<section id="theory" class="reveal">
+  <h2><span class="num">1</span> Теоретична частина: «піраміда» узагальнення</h2>
+  <p>Завершальний етап дослідження — перетворення емпіричних даних на узагальнені висновки та практичні рекомендації. Це своєрідна «піраміда»: від конкретних фактів — через узагальнення — до обґрунтованих висновків і конкретних порад.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Піраміда узагальнення результатів дослідження">
+      <defs>
+        <linearGradient id="gOr" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#f59300"/>
+        </linearGradient>
+        <linearGradient id="gGr" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#4dd67a"/><stop offset="1" stop-color="#2fa84f"/>
+        </linearGradient>
+        <linearGradient id="gBl" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3f9dff"/><stop offset="1" stop-color="#0071e3"/>
+        </linearGradient>
+        <linearGradient id="gIn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2d4d76"/><stop offset="1" stop-color="#132a45"/>
+        </linearGradient>
+      </defs>
+
+      <text x="350" y="20" text-anchor="middle" font-size="15" font-weight="700" fill="#1d1d1f">Піраміда узагальнення результатів дослідження</text>
+
+      <!-- Bottom tier: RESULTS -->
+      <polygon points="30,420 670,420 590,320 110,320" fill="url(#gOr)"/>
+      <text x="350" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">РЕЗУЛЬТАТИ ДОСЛІДЖЕННЯ</text>
+      <text x="350" y="382" text-anchor="middle" font-size="12.5" fill="#fff" opacity=".9">емпіричні дані, факти</text>
+
+      <!-- Tier 3: GENERALIZATION -->
+      <polygon points="110,320 590,320 510,220 190,220" fill="url(#gGr)"/>
+      <text x="350" y="262" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">УЗАГАЛЬНЕННЯ</text>
+      <text x="350" y="284" text-anchor="middle" font-size="12.5" fill="#fff" opacity=".9">закономірності, тенденції</text>
+
+      <!-- Tier 2: CONCLUSIONS -->
+      <polygon points="190,220 510,220 430,120 270,120" fill="url(#gBl)"/>
+      <text x="350" y="162" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">ВИСНОВКИ</text>
+      <text x="350" y="184" text-anchor="middle" font-size="12.5" fill="#fff" opacity=".9">узагальнені положення</text>
+
+      <!-- Top: RECOMMENDATIONS -->
+      <polygon points="270,120 430,120 350,20" fill="url(#gIn)"/>
+      <text x="350" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">РЕКОМЕНДАЦІЇ</text>
+      <text x="350" y="88" text-anchor="middle" font-size="11" fill="#fff" opacity=".9">для практики</text>
+
+      <!-- arrows on the left -->
+      <line x1="18" y1="410" x2="18" y2="40" stroke="#c7c7cc" stroke-width="2" stroke-dasharray="5 5"/>
+      <polygon points="18,32 12,46 24,46" fill="#c7c7cc"/>
+      <text x="10" y="230" text-anchor="middle" font-size="11" fill="#8e8e93" transform="rotate(-90 10 230)">рівень узагальнення ↑</text>
+    </svg>
+    <figcaption>Рис. 1. Піраміда узагальнення результатів дослідження</figcaption>
+  </figure>
+
+  <div class="highlight">
+    <div class="label">Ключова ідея</div>
+    <p>Кожен рівень піраміди <strong>спирається на попередній</strong>: рекомендації без висновків — це поради «зі стелі», висновки без узагальнень — це перелік фактів, а узагальнення без даних — це декларація. Рух завжди знизу вгору.</p>
+  </div>
+
+  <div class="example">
+    <div class="label">Розширений приклад «піраміди»</div>
+    <p><strong>Факт (результат):</strong> у контрольній групі середній бал за тестом — 6,8; в експериментальній — 8,4.</p>
+    <p><strong>Узагальнення:</strong> різниця між групами статистично значуща (p &lt; 0,05), тобто спостерігається стійка тенденція переваги експериментальної методики.</p>
+    <p><strong>Висновок:</strong> встановлено, що застосування системи дидактичних ігор підвищує рівень засвоєння матеріалу на 24 % порівняно з традиційним навчанням.</p>
+    <p><strong>Рекомендація:</strong> вчителям початкових класів доцільно включати 2–3 дидактичні ігри на тиждень у структуру уроків математики.</p>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section id="structure" class="reveal">
+  <h2><span class="num">2</span> Структура наукового висновку</h2>
+  <p>Науковий висновок — це не просто констатація факту, а <strong>логічно побудоване твердження</strong>, яке містить чотири обов'язкові компоненти.</p>
+
+  <div class="grid-4">
+    <div class="formula-card" style="background:linear-gradient(135deg,#3f9dff,#0071e3);">
+      <div class="num">01</div>
+      <h4>ТВЕРДЖЕННЯ</h4>
+      <p>що саме встановлено</p>
+      <span class="quote">«Встановлено, що …»</span>
+    </div>
+    <div class="formula-card" style="background:linear-gradient(135deg,#4dd67a,#2fa84f);">
+      <div class="num">02</div>
+      <h4>ОБҐРУНТУВАННЯ</h4>
+      <p>на основі яких даних</p>
+      <span class="quote">«… на основі …»</span>
+    </div>
+    <div class="formula-card" style="background:linear-gradient(135deg,#ffb347,#f59300);">
+      <div class="num">03</div>
+      <h4>ПОЯСНЕННЯ</h4>
+      <p>чому саме так (причини)</p>
+      <span class="quote">«… що пояснюється …»</span>
+    </div>
+    <div class="formula-card" style="background:linear-gradient(135deg,#c77dff,#af52de);">
+      <div class="num">04</div>
+      <h4>ЗНАЧЕННЯ</h4>
+      <p>для теорії та практики</p>
+      <span class="quote">«… має значення для …»</span>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:26px;">
+    <div class="label">Еталонний приклад із методички</div>
+    <p>«Встановлено, що систематичне використання дидактичних ігор підвищує пізнавальний інтерес молодших школярів на 25 % (на основі порівняння констатувального й контрольного зрізів), що має значення для методики…»</p>
+  </div>
+
+  <h3>2.1. Вимоги до висновків</h3>
+  <ul class="styled checks">
+    <li><strong>Відповідність поставленим завданням</strong> — кожне завдання має хоча б один висновок.</li>
+    <li><strong>Лаконічність</strong> — 1–3 речення на один висновок.</li>
+    <li><strong>Опора на отримані дані</strong> — без «води» та загальних фраз.</li>
+    <li><strong>Однозначність формулювань</strong> — без подвійного тлумачення.</li>
+    <li><strong>Коректність щодо гіпотези:</strong> підтверджено / частково підтверджено / спростовано.</li>
+    <li><strong>Відсутність нових фактів</strong>, яких не було в дослідженні.</li>
+  </ul>
+
+  <div class="example">
+    <div class="label">Приклад розбору: правильний vs неправильний висновок</div>
+    <p><strong>❌ Погано:</strong> «Ми проводили дослідження, і діти стали краще вчитися, адже ігри — це цікаво і корисно для всіх.» — немає даних, немає конкретики, є узагальнення «для всіх».</p>
+    <p><strong>✅ Добре:</strong> «Встановлено, що після 12 тижнів систематичного використання дидактичних ігор рівень високих досягнень з математики зріс із 20 % до 45 % (n = 28), що засвідчує доцільність включення ігрових технологій у методику початкового навчання.» — є твердження, дані, кількісний показник, значення.</p>
+  </div>
+</section>
+
+<!-- TYPES -->
+<section id="types" class="reveal">
+  <h2><span class="num">3</span> Типи висновків у науково-педагогічному дослідженні</h2>
+
+  <div class="grid-3">
+    <div class="info-card" style="border-top:4px solid var(--blue);">
+      <h4 style="color:var(--blue);">Теоретичні</h4>
+      <p>Узагальнення наукових положень, уточнення понять. Стосуються <strong>теорії</strong>.</p>
+    </div>
+    <div class="info-card" style="border-top:4px solid var(--green);">
+      <h4 style="color:var(--green);">Емпіричні</h4>
+      <p>Узагальнення отриманих даних, виявлені тенденції. Стосуються <strong>фактів</strong>.</p>
+    </div>
+    <div class="info-card" style="border-top:4px solid var(--orange);">
+      <h4 style="color:#c47a00;">Практичні</h4>
+      <p>Рекомендації для вчителів, учнів, батьків. Стосуються <strong>дій</strong>.</p>
+    </div>
+  </div>
+
+  <h3>3.1. Порівняльна таблиця типів висновків</h3>
+  <table>
+    <thead>
+      <tr><th>Тип</th><th>На що спирається</th><th>Приклад початку</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Теоретичний</strong></td>
+        <td>Аналіз джерел, уточнення понять</td>
+        <td><em>«Уточнено зміст поняття … як …»</em></td>
+      </tr>
+      <tr>
+        <td><strong>Емпіричний</strong></td>
+        <td>Отримані дані, вимірювання</td>
+        <td><em>«Встановлено, що рівень … зріс на … %»</em></td>
+      </tr>
+      <tr>
+        <td><strong>Практичний</strong></td>
+        <td>Потреби освітньої практики</td>
+        <td><em>«Доцільно використовувати … для …»</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.2. Загальна структура розділу «Висновки»</h3>
+  <div class="steps">
+    <div class="step">Загальний підсумок дослідження.</div>
+    <div class="step">Конкретні результати за кожним завданням.</div>
+    <div class="step">Підтвердження / спростування гіпотези.</div>
+  </div>
+
+  <div class="example">
+    <div class="label">Розширений приклад трьох типів висновків (тема: «Дидактична гра на уроках математики в 2 класі»)</div>
+    <p><strong>Теоретичний:</strong> уточнено зміст поняття «дидактична гра» як форми навчальної взаємодії, що поєднує ігрову мету з освітнім результатом.</p>
+    <p><strong>Емпіричний:</strong> встановлено, що рівень пізнавального інтересу в експериментальній групі зріс із 32 % до 71 %, тоді як у контрольній — із 30 % до 41 % (p &lt; 0,05).</p>
+    <p><strong>Практичний:</strong> доцільно рекомендувати вчителям 2-х класів включати 2–3 дидактичні ігри на тиждень у структуру уроків математики.</p>
+  </div>
+
+  <div class="danger">
+    <div class="label">Типова помилка</div>
+    <p>Змішування типів в одному висновку. Наприклад: «Уточнено поняття гри, і діти стали краще вчитися, тож рекомендуємо всім вчителям.» — це три різні типи, які потрібно розділити на три окремі висновки.</p>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section id="recom" class="reveal">
+  <h2><span class="num">4</span> Розробка рекомендацій</h2>
+  <p>Рекомендації — це <strong>конкретні поради</strong> щодо практичного застосування результатів дослідження. Вони мають бути <strong>адресними, конкретними та реалістичними</strong>.</p>
+
+  <figure>
+    <svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Адресати рекомендацій">
+      <defs>
+        <radialGradient id="gCenter" cx="30%" cy="30%" r="80%">
+          <stop offset="0" stop-color="#2d4d76"/><stop offset="1" stop-color="#0f2338"/>
+        </radialGradient>
+      </defs>
+
+      <!-- connector lines -->
+      <g stroke="#c7c7cc" stroke-width="2" fill="none">
+        <line x1="400" y1="185" x2="400" y2="72"/>
+        <line x1="475" y1="215" x2="640" y2="130"/>
+        <line x1="475" y1="285" x2="640" y2="375"/>
+        <line x1="400" y1="315" x2="400" y2="455"/>
+        <line x1="325" y1="285" x2="160" y2="375"/>
+        <line x1="325" y1="215" x2="160" y2="130"/>
+      </g>
+
+      <!-- center -->
+      <circle cx="400" cy="250" r="82" fill="url(#gCenter)"/>
+      <text x="400" y="245" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">РЕКОМЕНДАЦІЇ</text>
+      <text x="400" y="266" text-anchor="middle" font-size="11.5" fill="#fff" opacity=".75">за результатами</text>
+
+      <!-- satellites -->
+      <g font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="600" text-anchor="middle">
+        <!-- top -->
+        <rect x="250" y="20" width="300" height="52" rx="14" fill="#eaf3ff" stroke="#b6d6ff"/>
+        <text x="400" y="51" fill="#1a3559">Вчителям початкових класів</text>
+
+        <!-- top-right -->
+        <rect x="620" y="100" width="172" height="60" rx="14" fill="#eafaf0" stroke="#b6e7c4"/>
+        <text x="706" y="126" fill="#1e5c33">Учням</text>
+        <text x="706" y="144" fill="#1e5c33">початкової школи</text>
+
+        <!-- bottom-right -->
+        <rect x="612" y="345" width="182" height="60" rx="14" fill="#fff6e5" stroke="#ffd79a"/>
+        <text x="703" y="371" fill="#7a4b00">Батькам молодших</text>
+        <text x="703" y="389" fill="#7a4b00">школярів</text>
+
+        <!-- bottom -->
+        <rect x="250" y="430" width="300" height="52" rx="14" fill="#f3eaff" stroke="#d9bdf5"/>
+        <text x="400" y="461" fill="#4a1f7a">Адміністрації школи</text>
+
+        <!-- bottom-left -->
+        <rect x="8" y="345" width="182" height="60" rx="14" fill="#fdecec" stroke="#f5b8b8"/>
+        <text x="99" y="371" fill="#7a1f1f">Методичним</text>
+        <text x="99" y="389" fill="#7a1f1f">об'єднанням</text>
+
+        <!-- top-left -->
+        <rect x="8" y="100" width="182" height="60" rx="14" fill="#e9f7f2" stroke="#a7e3cd"/>
+        <text x="99" y="126" fill="#0e5041">Авторам програм</text>
+        <text x="99" y="144" fill="#0e5041">і підручників</text>
+      </g>
+    </svg>
+    <figcaption>Рис. 4. Адресати рекомендацій за результатами дослідження</figcaption>
+  </figure>
+
+  <h3>4.1. Алгоритм розробки рекомендацій</h3>
+  <div class="steps">
+    <div class="step"><strong>Визначте адресата:</strong> для кого саме призначена порада.</div>
+    <div class="step"><strong>Сформулюйте конкретну дію,</strong> яку потрібно виконати.</div>
+    <div class="step"><strong>Обґрунтуйте її</strong> результатами власного дослідження.</div>
+    <div class="step"><strong>Вкажіть очікуваний ефект</strong> від впровадження.</div>
+    <div class="step"><strong>Перевірте реалістичність:</strong> чи можна це зробити в умовах початкової школи.</div>
+  </div>
+
+  <h3>4.2. Приклади рекомендацій (за методичкою)</h3>
+  <div class="grid-2">
+    <div class="info-card">
+      <h4>👩‍🏫 Для вчителів</h4>
+      <p>«Вчителям початкових класів доцільно систематично (2–3 рази на тиждень) використовувати дидактичні ігри з елементами змагання на уроках математики, оскільки це, за нашими даними, підвищує пізнавальний інтерес учнів на 25 %».</p>
+    </div>
+    <div class="info-card">
+      <h4>👨‍👩‍👧 Для батьків</h4>
+      <p>«Батькам рекомендується підтримувати пізнавальну активність дитини вдома, заохочуючи самостійні спостереження та експерименти».</p>
+    </div>
+    <div class="info-card">
+      <h4>🏫 Для адміністрації</h4>
+      <p>«Адміністрації школи варто передбачити в плані методичної роботи семінар-практикум з питань використання ігрових технологій».</p>
+    </div>
+    <div class="info-card" style="background:#fff9ec;border-color:#ffe2b0;">
+      <h4 style="color:#c47a00;">📌 Розширений приклад</h4>
+      <p>«Методичним об'єднанням учителів початкових класів доцільно створити банк дидактичних ігор з математики для 2–3 класів (не менше 40 карток) із зазначенням мети, тривалості та очікуваного результату — це дозволить уніфікувати підходи та зменшити час підготовки вчителя до уроку».</p>
+    </div>
+  </div>
+
+  <div class="danger">
+    <div class="label">Перевірка якості рекомендації</div>
+    <p>Якщо у пораді немає <strong>адресата</strong>, <strong>конкретної дії</strong> й <strong>очікуваного ефекту</strong> — це не рекомендація, а побажання. Формула: <em>Кому → Що робити → Спираючись на що → З яким ефектом</em>.</p>
+  </div>
+</section>
+
+<!-- PRESENTATION -->
+<section id="present" class="reveal">
+  <h2><span class="num">5</span> Створення презентації результатів дослідження</h2>
+  <p>Підсумковий результат практичної роботи — презентація дослідження. Вона має містити <strong>10–12 слайдів</strong> і тривати <strong>7–10 хвилин</strong>. Головний принцип — <em>мінімум тексту, максимум наочності та аргументації</em>.</p>
+
+  <h3>5.1. Структура презентації результатів дослідження</h3>
+  <div class="slides-grid">
+    <div class="slide-card" style="background:linear-gradient(135deg,#2d4d76,#132a45);">
+      <div class="sn">01</div>
+      <div><div class="st">Титульний</div><div class="sd">тема, автор</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#3f9dff,#0071e3);">
+      <div class="sn">02</div>
+      <div><div class="st">Актуальність</div><div class="sd">проблема, мета</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#3f9dff,#0071e3);">
+      <div class="sn">03</div>
+      <div><div class="st">Об'єкт, предмет</div><div class="sd">науковий апарат</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#4dd67a,#2fa84f);">
+      <div class="sn">04</div>
+      <div><div class="st">Методи</div><div class="sd">теоретичні, емпіричні</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#4dd67a,#2fa84f);">
+      <div class="sn">05</div>
+      <div><div class="st">Гіпотеза</div><div class="sd">припущення</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#ffb347,#f59300);">
+      <div class="sn">06</div>
+      <div><div class="st">Огляд джерел</div><div class="sd">1–2 слайди</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#ffb347,#f59300);">
+      <div class="sn">07</div>
+      <div><div class="st">Методика</div><div class="sd">критерії, рівні</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#c77dff,#af52de);">
+      <div class="sn">08</div>
+      <div><div class="st">Результати</div><div class="sd">таблиці, діаграми</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#c77dff,#af52de);">
+      <div class="sn">09</div>
+      <div><div class="st">Інтерпретація</div><div class="sd">порівняння з теорією</div></div>
+    </div>
+    <div class="slide-card" style="background:linear-gradient(135deg,#ff6b6b,#d63333);">
+      <div class="sn">10</div>
+      <div><div class="st">Висновки</div><div class="sd">узагальнення</div></div>
+    </div>
+    <div class="slide-card c11" style="grid-column:2/4;background:linear-gradient(135deg,#8e2a2a,#5c1414);">
+      <div class="sn">11</div>
+      <div><div class="st">Рекомендації</div><div class="sd">за адресатами</div></div>
+    </div>
+    <div class="slide-card c12" style="grid-column:4/6;background:linear-gradient(135deg,#2d4d76,#132a45);">
+      <div class="sn">12</div>
+      <div><div class="st">Дякую за увагу</div><div class="sd">контакти, запитання</div></div>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:18px;font-size:14px;">
+    ⏱ <strong>Орієнтовний час:</strong> 7–10 хвилин · 1 слайд = 40–60 секунд усного виступу · На кожному слайді — не більше 6 рядків тексту та 1 візуальний об'єкт · Головний принцип: <strong>мінімум тексту — максимум наочності й аргументації</strong>.
+  </p>
+
+  <h3>5.2. Вимоги до окремого слайда</h3>
+  <div class="grid-2">
+    <div>
+      <ul class="styled checks">
+        <li>один слайд — одна думка;</li>
+        <li>не більше 6 рядків тексту;</li>
+        <li>один візуальний об'єкт (таблиця, діаграма, схема) на слайді;</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="styled checks">
+        <li>шрифт не менше 20 pt;</li>
+        <li>єдиний стиль оформлення всіх слайдів;</li>
+        <li>обов'язковий висновок під кожною діаграмою.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>5.3. Шаблон слайда з результатами</h3>
+  <div class="sample-slide">
+    <div class="ss-head">Динаміка рівнів сформованості за результатами дослідження</div>
+    <div class="ss-body">
+      <div>
+        <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Діаграма динаміки рівнів">
+          <!-- axes -->
+          <line x1="40" y1="220" x2="400" y2="220" stroke="#d2d2d7" stroke-width="1"/>
+          <line x1="40" y1="20" x2="40" y2="220" stroke="#d2d2d7" stroke-width="1"/>
+          <!-- gridlines -->
+          <g stroke="#f0f0f3" stroke-width="1">
+            <line x1="40" y1="60" x2="400" y2="60"/>
+            <line x1="40" y1="100" x2="400" y2="100"/>
+            <line x1="40" y1="140" x2="400" y2="140"/>
+            <line x1="40" y1="180" x2="400" y2="180"/>
+          </g>
+          <!-- labels -->
+          <g font-size="11" fill="#8e8e93" text-anchor="middle" font-family="-apple-system,sans-serif">
+            <text x="95" y="238">Високий</text>
+            <text x="215" y="238">Середній</text>
+            <text x="335" y="238">Низький</text>
+            <text x="20" y="224" text-anchor="end">0%</text>
+            <text x="20" y="64" text-anchor="end">60%</text>
+          </g>
+          <!-- High: before 20, after 45 -->
+          <rect x="65" y="156" width="26" height="64" fill="#c1272d" rx="3"/>
+          <rect x="97" y="94" width="26" height="126" fill="#2fa84f" rx="3"/>
+          <text x="78" y="148" font-size="11" font-weight="700" fill="#c1272d" text-anchor="middle" font-family="-apple-system,sans-serif">20%</text>
+          <text x="110" y="86" font-size="11" font-weight="700" fill="#2fa84f" text-anchor="middle" font-family="-apple-system,sans-serif">45%</text>
+          <!-- Medium: before 45, after 40 -->
+          <rect x="185" y="94" width="26" height="126" fill="#c1272d" rx="3"/>
+          <rect x="217" y="106" width="26" height="114" fill="#2fa84f" rx="3"/>
+          <text x="198" y="86" font-size="11" font-weight="700" fill="#c1272d" text-anchor="middle" font-family="-apple-system,sans-serif">45%</text>
+          <text x="230" y="98" font-size="11" font-weight="700" fill="#2fa84f" text-anchor="middle" font-family="-apple-system,sans-serif">40%</text>
+          <!-- Low: before 35, after 15 -->
+          <rect x="305" y="122" width="26" height="98" fill="#c1272d" rx="3"/>
+          <rect x="337" y="178" width="26" height="42" fill="#2fa84f" rx="3"/>
+          <text x="318" y="114" font-size="11" font-weight="700" fill="#c1272d" text-anchor="middle" font-family="-apple-system,sans-serif">35%</text>
+          <text x="350" y="170" font-size="11" font-weight="700" fill="#2fa84f" text-anchor="middle" font-family="-apple-system,sans-serif">15%</text>
+          <!-- legend -->
+          <rect x="290" y="20" width="10" height="10" fill="#c1272d" rx="2"/>
+          <text x="306" y="29" font-size="10" fill="#6e6e73" font-family="-apple-system,sans-serif">до</text>
+          <rect x="330" y="20" width="10" height="10" fill="#2fa84f" rx="2"/>
+          <text x="346" y="29" font-size="10" fill="#6e6e73" font-family="-apple-system,sans-serif">після</text>
+        </svg>
+      </div>
+      <div class="ss-concl">
+        <h5>Висновок за слайдом</h5>
+        <ul>
+          <li>Високий рівень зріс: 20% → 45%</li>
+          <li>Низький рівень знизився: 35% → 15%</li>
+          <li>Відмінності статистично значущі (p &lt; 0,05)</li>
+        </ul>
+        <div class="src">Порівняння з теорією: узгоджується з працями (Автор, рік)</div>
+      </div>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:12px;font-size:13.5px;">
+    Рис. 6. Шаблон слайда з результатами: діаграма + 3–5 тез + висновок під діаграмою.
+  </p>
+</section>
+
+<!-- TASKS -->
+<section id="tasks" class="reveal">
+  <h2><span class="num">6</span> Завдання для практичного виконання</h2>
+  <div class="steps">
+    <div class="step">Сформулюйте <strong>3–4 висновки</strong> за результатами власного дослідження (або навчального прикладу). Кожен висновок має містити всі 4 компоненти формули.</div>
+    <div class="step">Розробіть <strong>3 рекомендації</strong> для різних адресатів (учитель, батьки, адміністрація) на основі отриманих висновків.</div>
+    <div class="step">Створіть <strong>презентацію</strong> (10–12 слайдів) за темою власного дослідження у PowerPoint або Canva, дотримуючись структури з Рис. 5.</div>
+    <div class="step">На слайді з результатами використайте <strong>шаблон з Рис. 6</strong>: діаграма + 3–5 тез + висновок під діаграмою.</div>
+    <div class="step">Підготуйте <strong>усний виступ на 7 хвилин,</strong> що супроводжує презентацію (тези — не читати зі слайдів, а розкривати їх).</div>
+    <div class="step">Проведіть <strong>самооцінку</strong> презентації за критеріями нижче.</div>
+  </div>
+
+  <h3>Вимоги до звіту</h3>
+  <ul class="styled">
+    <li>файл презентації у форматі <code>.pptx</code> або <code>.pdf</code>;</li>
+    <li>окремий текст виступу (1–1,5 сторінки, шрифт Times New Roman 14 pt, інтервал 1,25);</li>
+    <li>висновки оформлені окремим розділом;</li>
+    <li>рекомендації — за адресатами;</li>
+    <li>назва файлу: <code>Прізвище_Ім'я_П38_Презентація</code>.</li>
+  </ul>
+</section>
+
+<!-- CRITERIA -->
+<section id="criteria" class="reveal">
+  <h2><span class="num">7</span> Критерії оцінювання презентації</h2>
+  <p>Максимум — <strong>10 балів</strong>.</p>
+
+  <div style="margin-top:20px;">
+    <div class="crit">
+      <span class="name">Змістовність</span>
+      <div class="bar"><div class="fill" style="width:100%;background:linear-gradient(90deg,#0071e3,#4a9eff);"></div></div>
+      <span class="val">4 б.</span>
+    </div>
+    <div class="crit">
+      <span class="name">Структура</span>
+      <div class="bar"><div class="fill" style="width:50%;background:linear-gradient(90deg,#34c759,#5fdd7d);"></div></div>
+      <span class="val">2 б.</span>
+    </div>
+    <div class="crit">
+      <span class="name">Візуалізація</span>
+      <div class="bar"><div class="fill" style="width:50%;background:linear-gradient(90deg,#ff9500,#ffb347);"></div></div>
+      <span class="val">2 б.</span>
+    </div>
+    <div class="crit">
+      <span class="name">Усний виступ</span>
+      <div class="bar"><div class="fill" style="width:25%;background:linear-gradient(90deg,#af52de,#c77dff);"></div></div>
+      <span class="val">1 б.</span>
+    </div>
+    <div class="crit">
+      <span class="name">Рекомендації</span>
+      <div class="bar"><div class="fill" style="width:25%;background:linear-gradient(90deg,#ff3b30,#ff6b6b);"></div></div>
+      <span class="val">1 б.</span>
+    </div>
+  </div>
+
+  <table style="margin-top:24px;">
+    <thead>
+      <tr><th>Критерій</th><th>Показники</th><th>Бали</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Змістовність</strong></td><td>Повнота розкриття теми, логічність, обґрунтованість висновків</td><td>4</td></tr>
+      <tr><td><strong>Структура</strong></td><td>Дотримання структури (12 слайдів), логіка викладу</td><td>2</td></tr>
+      <tr><td><strong>Візуалізація</strong></td><td>Доречність діаграм і таблиць, єдність стилю, читабельність</td><td>2</td></tr>
+      <tr><td><strong>Усний виступ</strong></td><td>Вільне володіння матеріалом, дотримання часу, відповіді на запитання</td><td>1</td></tr>
+      <tr><td><strong>Рекомендації</strong></td><td>Адресність, конкретність, реалістичність</td><td>1</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- QUESTIONS -->
+<section id="questions" class="reveal">
+  <h2><span class="num">?</span> Контрольні запитання</h2>
+  <ol class="qlist">
+    <li>Що таке науковий висновок і які його обов'язкові компоненти?</li>
+    <li>Чим відрізняються теоретичні, емпіричні та практичні висновки?</li>
+    <li>Які вимоги висувають до формулювання висновків у курсовій роботі?</li>
+    <li>Що таке рекомендації та кому вони можуть адресуватися?</li>
+    <li>Назвіть алгоритм розробки практичних рекомендацій.</li>
+    <li>Якою має бути структура презентації результатів дослідження?</li>
+    <li>Скільки слайдів доцільно мати в підсумковій презентації та чому?</li>
+    <li>Які вимоги висувають до окремого слайда (текст, візуалізація, шрифт)?</li>
+    <li>Чому не можна просто прочитати текст слайда під час виступу?</li>
+    <li>Як пов'язані висновки, рекомендації та гіпотеза дослідження?</li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  КЗ СОР "Путивльський педагогічний фаховий коледж імені С.В. Руднєва"
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('on');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

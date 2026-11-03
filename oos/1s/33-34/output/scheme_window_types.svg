@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="398.592pt" viewBox="0 0 635.4 398.592" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-30T13:13:49.742893</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 398.592 
+L 635.4 398.592 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 41.962154 350.0928 
+L 210.993231 350.0928 
+Q 219.492 350.0928 219.492 341.392985 
+L 219.492 47.532554 
+Q 219.492 38.832738 210.993231 38.832738 
+L 41.962154 38.832738 
+Q 33.463385 38.832738 33.463385 47.532554 
+L 33.463385 341.392985 
+Q 33.463385 350.0928 41.962154 350.0928 
+z
+" clip-path="url(#p1962c8e3d0)" style="fill: #e1f0fe; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 78.318 81.848492 
+L 174.637385 81.848492 
+Q 188.802 81.848492 188.802 67.3488 
+L 188.802 65.415508 
+Q 188.802 50.915815 174.637385 50.915815 
+L 78.318 50.915815 
+Q 64.153385 50.915815 64.153385 65.415508 
+L 64.153385 67.3488 
+Q 64.153385 81.848492 78.318 81.848492 
+z
+" clip-path="url(#p1962c8e3d0)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 242.627538 350.0928 
+L 411.658615 350.0928 
+Q 420.157385 350.0928 420.157385 341.392985 
+L 420.157385 47.532554 
+Q 420.157385 38.832738 411.658615 38.832738 
+L 242.627538 38.832738 
+Q 234.128769 38.832738 234.128769 47.532554 
+L 234.128769 341.392985 
+Q 234.128769 350.0928 242.627538 350.0928 
+z
+" clip-path="url(#p1962c8e3d0)" style="fill: #fff4e5; stroke: #c93400; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 278.983385 81.848492 
+L 375.302769 81.848492 
+Q 389.467385 81.848492 389.467385 67.3488 
+L 389.467385 65.415508 
+Q 389.467385 50.915815 375.302769 50.915815 
+L 278.983385 50.915815 
+Q 264.818769 50.915815 264.818769 65.415508 
+L 264.818769 67.3488 
+Q 264.818769 81.848492 278.983385 81.848492 
+z
+" clip-path="url(#p1962c8e3d0)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 443.292923 350.0928 
+L 612.324 350.0928 
+Q 620.822769 350.0928 620.822769 341.392985 
+L 620.822769 47.532554 
+Q 620.822769 38.832738 612.324 38.832738 
+L 443.292923 38.832738 
+Q 434.794154 38.832738 434.794154 47.532554 
+L 434.794154 341.392985 
+Q 434.794154 350.0928 443.292923 350.0928 
+z
+" clip-path="url(#p1962c8e3d0)" style="fill: #e8f8ec; stroke: #248a3d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 479.648769 81.848492 
+L 575.968154 81.848492 
+Q 590.132769 81.848492 590.132769 67.3488 
+L 590.132769 65.415508 
+Q 590.132769 50.915815 575.968154 50.915815 
+L 479.648769 50.915815 
+Q 465.484154 50.915815 465.484154 65.415508 
+L 465.484154 67.3488 
+Q 465.484154 81.848492 479.648769 81.848492 
+z
+" clip-path="url(#p1962c8e3d0)" style="fill: #248a3d"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="36.688601" transform="rotate(-0 317.7 36.688601)">Три типи вікон Windows</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="126.477692" y="69.969341" transform="rotate(-0 126.477692 69.969341)">Програмне</text>
+   </g>
+   <g id="text_3">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="126.477692" y="103.250082" transform="rotate(-0 126.477692 103.250082)">Вікно програми</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(68.427458 163.297728)">Містить рядок меню,</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(69.504528 179.044611)">панелі інструментів,</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(81.87402 195.095502)">робочу область.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(57.086638 210.842384)">Можна змінювати розмір</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(88.405349 226.589267)">і переміщати.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="126.477692" y="303.69119" transform="rotate(-0 126.477692 303.69119)">Приклади:</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(105.628161 312.361314)">Блокнот</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(98.932145 325.164791)">Проводник</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(114.724411 337.968267)">Paint</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="327.143077" y="69.969341" transform="rotate(-0 327.143077 69.969341)">Діалогове</text>
+   </g>
+   <g id="text_8">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="327.143077" y="103.250082" transform="rotate(-0 327.143077 103.250082)">Вікно запиту</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(264.750928 163.297728)">Використовується для</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(267.838585 179.044611)">введення параметрів</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(263.07421 195.095502)">або підтвердження дії.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(258.82171 210.842384)">Часто НЕ можна змінити</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(262.2096 226.589267)">розмір; чекає відповіді.</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c93400" x="327.143077" y="303.69119" transform="rotate(-0 327.143077 303.69119)">Приклади:</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(296.721553 312.442213)">Зберегти як</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(299.358546 325.245689)">Параметри</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(287.908077 338.049166)">Підтвердження</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="527.808462" y="69.867779" transform="rotate(-0 527.808462 69.867779)">Документа</text>
+   </g>
+   <g id="text_13">
+    <text style="font-style: italic; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="527.808462" y="103.250082" transform="rotate(-0 527.808462 103.250082)">Вікно файлу</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(458.423149 155.576291)">Відкривається усередині</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(474.235493 171.323173)">програмного вікна.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(490.184829 187.070056)">Містить вміст</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(459.227876 202.816939)">конкретного документа.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(465.073422 218.563822)">У деяких програмах —</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(489.964985 234.310705)">окреме вікно.</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="527.808462" y="303.69119" transform="rotate(-0 527.808462 303.69119)">Приклади:</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(485.736821 312.361314)">Текст у Блокноті</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(488.451001 325.164791)">Таблиця в Excel</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(480.194165 337.968267)">Слайд у PowerPoint</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p1962c8e3d0">
+   <rect x="10.8" y="10.8" width="613.8" height="376.992"/>
+  </clipPath>
+ </defs>
+</svg>

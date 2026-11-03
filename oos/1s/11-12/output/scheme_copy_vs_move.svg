@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+      <defs>
+        <!-- Маркери для стрілок -->
+        <marker id="arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#548235" />
+        </marker>
+        <marker id="arrow-orange" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c65911" />
+        </marker>
+      </defs>
+    
+      <style>
+        text { font-family: "Segoe UI", Arial, sans-serif; }
+        .main-title { fill: #1f4e79; font-size: 22px; font-weight: bold; text-anchor: middle; }
+        
+        /* Загальні контейнери */
+        .panel { fill: #f8f9fa; stroke: #e0e0e0; stroke-width: 2; }
+        
+        /* Заголовки колонок */
+        .header-copy { fill: #548235; font-size: 18px; font-weight: bold; text-anchor: middle; }
+        .header-move { fill: #c65911; font-size: 18px; font-weight: bold; text-anchor: middle; }
+        
+        /* Папки та файли */
+        .folder { fill: #deeaf6; stroke: #2e75b6; stroke-width: 2; }
+        .file { fill: #fff2cc; stroke: #d6b656; stroke-width: 1.5; }
+        .file-text { fill: #7f6000; font-size: 14px; font-weight: bold; text-anchor: middle; }
+        .folder-text { fill: #1f4e79; font-size: 15px; font-weight: bold; }
+        
+        /* Підписи та коментарі */
+        .label { fill: #333333; font-size: 14px; font-style: italic; text-anchor: middle; }
+        .result-text { fill: #333333; font-size: 15px; text-anchor: middle; font-weight: 500; }
+        
+        /* Стрілки */
+        .arrow-copy { stroke: #548235; stroke-width: 3; marker-end: url(#arrow-green); }
+        .arrow-move { stroke: #c65911; stroke-width: 3; marker-end: url(#arrow-orange); }
+      </style>
+    
+      <!-- Головний заголовок -->
+      <text class="main-title" x="450" y="40">Схема 1. Копіювання та переміщення: у чому різниця</text>
+    
+      <!-- ================= ЛІВА ПАНЕЛЬ (КОПІЮВАННЯ) ================= -->
+      <rect class="panel" x="30" y="70" width="400" height="400" rx="10"/>
+      <text class="header-copy" x="230" y="105">КОПІЮВАННЯ (Ctrl+C → Ctrl+V)</text>
+    
+      <!-- Папка А (Верхня) -->
+      <rect class="folder" x="100" y="140" width="180" height="70" rx="6"/>
+      <text class="folder-text" x="115" y="165">Папка А</text>
+      <rect class="file" x="120" y="175" width="110" height="25" rx="4"/>
+      <text class="file-text" x="175" y="193">звіт.docx</text>
+    
+      <!-- Позначка "Оригінал залишається" -->
+      <text class="label" x="310" y="180" fill="#548235">Оригінал</text>
+      <text class="label" x="310" y="200" fill="#548235">залишається</text>
+    
+      <!-- Стрілка вниз -->
+      <line class="arrow-copy" x1="190" y1="210" x2="190" y2="300"/>
+      <text class="label" x="215" y="255">копія</text>
+    
+      <!-- Папка Б (Нижня) -->
+      <rect class="folder" x="100" y="320" width="180" height="70" rx="6"/>
+      <text class="folder-text" x="115" y="345">Папка Б</text>
+      <rect class="file" x="120" y="355" width="110" height="25" rx="4"/>
+      <text class="file-text" x="175" y="373">звіт.docx</text>
+    
+      <!-- Результат -->
+      <text class="result-text" x="230" y="430">Результат: файл існує у ДВОХ папках;</text>
+      <text class="result-text" x="230" y="452">вміст папки А не змінюється</text>
+    
+      <!-- ================= ПРАВА ПАНЕЛЬ (ПЕРЕМІЩЕННЯ) ================= -->
+      <rect class="panel" x="470" y="70" width="400" height="400" rx="10"/>
+      <text class="header-move" x="670" y="105">ПЕРЕМІЩЕННЯ (Ctrl+X → Ctrl+V)</text>
+    
+      <!-- Папка А (Верхня) -->
+      <rect class="folder" x="540" y="140" width="180" height="70" rx="6"/>
+      <text class="folder-text" x="555" y="165">Папка А</text>
+      
+      <!-- "Зникаючий" файл (пунктирна рамка, напівпрозорий) -->
+      <rect class="file" x="560" y="175" width="110" height="25" rx="4" stroke-dasharray="4,4" opacity="0.4"/>
+      <text class="file-text" x="615" y="193" opacity="0.4">звіт.docx</text>
+    
+      <!-- Позначка "Оригінал зникає" -->
+      <text class="label" x="750" y="180" fill="#c65911">Оригінал</text>
+      <text class="label" x="750" y="200" fill="#c65911">зникає з А</text>
+    
+      <!-- Стрілка вниз -->
+      <line class="arrow-move" x1="630" y1="210" x2="630" y2="300"/>
+      <text class="label" x="655" y="255">файл</text>
+    
+      <!-- Папка Б (Нижня) -->
+      <rect class="folder" x="540" y="320" width="180" height="70" rx="6"/>
+      <text class="folder-text" x="555" y="345">Папка Б</text>
+      <rect class="file" x="560" y="355" width="110" height="25" rx="4"/>
+      <text class="file-text" x="615" y="373">звіт.docx</text>
+    
+      <!-- Результат -->
+      <text class="result-text" x="670" y="430">Результат: файл існує лише у папці Б;</text>
+      <text class="result-text" x="670" y="452">у папці А його вже НЕМАЄ</text>
+    
+    </svg>

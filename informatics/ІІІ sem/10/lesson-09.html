@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття №9: Цифрове мистецтво. Дизайн та код</title>
+<style>
+  :root {
+    /* Apple-inspired Light Theme Colors */
+    --bg-body: #f5f5f7;
+    --bg-card: #ffffff;
+    --text-main: #1d1d1f;
+    --text-muted: #86868b;
+    --accent: #0071e3;
+    --accent-hover: #0077ed;
+    --border: #d2d2d7;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.08);
+    --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: var(--font-stack);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.5;
+    font-size: 17px;
+  }
+
+  /* Typography */
+  h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+  h2 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 24px; color: var(--text-main); }
+  h3 { font-size: 21px; font-weight: 600; margin-bottom: 12px; }
+  p { margin-bottom: 16px; color: var(--text-main); }
+  .text-muted { color: var(--text-muted); }
+
+  /* Links */
+  .apple-link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity 0.2s, text-decoration 0.2s;
+    font-weight: 500;
+  }
+  .apple-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  /* Layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 80px 0; }
+  .section-alt { background-color: #ffffff; }
+
+  /* Header / Hero */
+  .hero {
+    background-color: #ffffff;
+    padding: 100px 20px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero .badge {
+    display: inline-block;
+    background: #e8f2fc;
+    color: var(--accent);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .hero p { font-size: 21px; color: var(--text-muted); max-width: 800px; margin: 0 auto; }
+
+  /* Nav */
+  nav.sticky-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav ul {
+    display: flex; list-style: none; max-width: 1100px; margin: 0 auto;
+    padding: 0 20px; overflow-x: auto; white-space: nowrap;
+  }
+  nav a {
+    display: block; padding: 16px 18px; color: var(--text-muted);
+    text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s;
+  }
+  nav a:hover { color: var(--text-main); }
+  nav a.active { color: var(--accent); }
+
+  /* Cards */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Specific Design Elements */
+  .icon-box {
+    width: 56px; height: 56px; border-radius: 16px;
+    background: #f5f5f7; display: grid; place-items: center;
+    margin-bottom: 20px; font-size: 24px;
+  }
+  .example-list { list-style: none; margin-top: 16px; }
+  .example-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 12px; font-size: 15px; color: var(--text-muted);
+  }
+  .example-list li::before {
+    content: "•"; color: var(--accent); font-weight: bold; font-size: 20px; line-height: 1;
+  }
+
+  /* Highlight Box */
+  .highlight-box {
+    background: linear-gradient(135deg, #e8f2fc 0%, #f5f5f7 100%);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    border: 1px solid #dbe9f5;
+    margin: 40px 0;
+  }
+  .highlight-box h3 { color: var(--accent); }
+
+  /* Tables / Grid for OOP */
+  .oop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  @media (max-width: 768px) {
+    .oop-grid { grid-template-columns: 1fr; }
+  }
+  .oop-item {
+    background: var(--bg-body);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    border: 1px solid var(--border);
+  }
+  .oop-item code {
+    background: #e8e8ed; padding: 2px 8px; border-radius: 6px;
+    font-family: "SF Mono", Consolas, monospace; font-size: 14px; color: #d10a53;
+  }
+
+  /* Accordion / Questions */
+  details {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  details summary {
+    padding: 24px; font-size: 18px; font-weight: 600; cursor: pointer;
+    list-style: none; display: flex; justify-content: space-between; align-items: center;
+    color: var(--text-main); transition: background 0.2s;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after {
+    content: "+"; font-size: 24px; font-weight: 300; color: var(--accent);
+    transition: transform 0.3s ease;
+  }
+  details[open] summary { background: #fafafa; border-bottom: 1px solid var(--border); }
+  details[open] summary::after { content: "−"; transform: rotate(180deg); }
+  details .content { padding: 24px; color: var(--text-muted); font-size: 16px; }
+
+  /* Footer */
+  footer {
+    text-align: center; padding: 40px 20px; color: var(--text-muted);
+    font-size: 14px; border-top: 1px solid var(--border); background: #fff;
+  }
+
+  /* SVG Visuals */
+  .svg-container { text-align: center; margin: 40px 0; }
+  .svg-container svg { max-width: 100%; height: auto; }
+
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <span class="badge">Практичне заняття №9</span>
+    <h1>Цифрове мистецтво.<br>Дизайн та код.</h1>
+    <p>Генеративне мистецтво, програмування як творче середовище, структура проєкту та основи об'єктно-орієнтованого програмування.</p>
+  </div>
+</header>
+
+<nav class="sticky-nav">
+  <ul>
+    <li><a href="#meta" class="active">Мета</a></li>
+    <li><a href="#digital-art">Цифрове мистецтво</a></li>
+    <li><a href="#design">Дизайн</a></li>
+    <li><a href="#directions">Напрями дизайну</a></li>
+    <li><a href="#generative">Генеративний дизайн</a></li>
+    <li><a href="#oop">Основи ООП</a></li>
+    <li><a href="#questions">Запитання</a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- МЕТА -->
+  <section id="meta" class="section container">
+    <h2>Мета заняття</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon-box">🎯</div>
+        <h3>Знати та розуміти</h3>
+        <p class="text-muted">Сутність цифрового та генеративного мистецтва. Основні напрями дизайну. Базові поняття ООП (клас, об'єкт, властивість, метод) та події.</p>
+      </div>
+      <div class="card">
+        <div class="icon-box">💻</div>
+        <h3>Вміти</h3>
+        <p class="text-muted">Створювати генеративні композиції за допомогою коду. Описувати класи, створювати об'єкти, обробляти події (клік, рух миші).</p>
+      </div>
+      <div class="card">
+        <div class="icon-box">📚</div>
+        <h3>Література</h3>
+        <p class="text-muted" style="font-size: 15px;">Ривкінд Й.Я. та ін. Інформатика, 10(11) кл. (2018).<br>Руденко В.Д. Вивчаємо Java у школі. Ч.2.<br>Руденко В.Д. Основи алгоритмізації і програмування мовою Python.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЦИФРОВЕ МИСТЕЦТВО -->
+  <section id="digital-art" class="section section-alt">
+    <div class="container">
+      <h2>1. Поняття цифрового мистецтва</h2>
+      <p>Цифрове мистецтво — це сучасний напрям у медіамистецтві, твори якого створюються та презентуються за допомогою інформаційно-комунікаційних технологій. Воно існує на стику двох сфер: <strong>мистецтва</strong> (композиція, колір, ритм, світло) та <strong>технологій</strong> (інструменти для реалізації ідей).</p>
+      
+      <div class="card-grid" style="margin-top: 40px;">
+        <div class="card" style="border-top: 4px solid var(--accent);">
+          <h3>Інтерактивні твори</h3>
+          <p class="text-muted">Глядач може взаємодіяти з твором, змінюючи його.</p>
+          <ul class="example-list">
+            <li>Веб-ресурси та мультимедійні підручники</li>
+            <li>Комп'ютерні ігри</li>
+            <li>Інтерактивні галереї (наприклад, <a href="https://www.teamlab.art/e/borderless-azabudai/" target="_blank" class="apple-link">Mori Building Digital Art Museum</a> у Токіо)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Неінтерактивні твори</h3>
+          <p class="text-muted">Глядач є пасивним спостерігачем.</p>
+          <ul class="example-list">
+            <li>Рекламні ролики та соціальні відео</li>
+            <li>Мультимедійні інсталяції</li>
+            <li>Анімаційні проекції</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Історія мультимедіа</h3>
+        <p>Термін "мультимедіа" (від <em>multi</em> — множинний, <em>media</em> — середовище) з'явився в кінці XX століття. Його історія почалася ще в 1965 році з шоу <a href="https://en.wikipedia.org/wiki/Exploding_Plastic_Inevitable" target="_blank" class="apple-link">"Exploding Plastic Inevitable"</a>, яке поєднувало рок-музику, кіно та світлові ефекти.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДИЗАЙН -->
+  <section id="design" class="section container">
+    <h2>2. Дизайн як основа творчості</h2>
+    <p><strong>Дизайн</strong> (від англ. <em>design</em> — проектувати, креслити, задумувати) — це творча діяльність з проектування естетичних та функціональних властивостей предметного середовища людини.</p>
+    
+    <div class="svg-container">
+      <svg viewBox="0 0 800 150" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style>
+            .elem-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 16px; fill: #1d1d1f; font-weight: 600; }
+            .elem-line { stroke: #d2d2d7; stroke-width: 2; stroke-dasharray: 4 4; }
+          </style>
+        </defs>
+        <!-- Elements -->
+        <circle cx="80" cy="50" r="8" fill="#0071e3" />
+        <text x="80" y="90" text-anchor="middle" class="elem-text">Крапка</text>
+        
+        <line x1="160" y1="50" x2="240" y2="50" stroke="#0071e3" stroke-width="4" stroke-linecap="round"/>
+        <text x="200" y="90" text-anchor="middle" class="elem-text">Лінія</text>
+        
+        <rect x="280" y="30" width="40" height="40" fill="none" stroke="#0071e3" stroke-width="3" rx="4"/>
+        <text x="300" y="90" text-anchor="middle" class="elem-text">Форма</text>
+        
+        <circle cx="400" cy="50" r="20" fill="url(#gradColor)"/>
+        <defs>
+          <linearGradient id="gradColor" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff007f"/>
+            <stop offset="100%" stop-color="#0071e3"/>
+          </linearGradient>
+        </defs>
+        <text x="400" y="90" text-anchor="middle" class="elem-text">Колір</text>
+        
+        <rect x="480" y="30" width="40" height="40" fill="#f5f5f7" stroke="#0071e3" stroke-width="2" rx="4"/>
+        <circle cx="490" cy="40" r="2" fill="#0071e3"/>
+        <circle cx="500" cy="45" r="2" fill="#0071e3"/>
+        <circle cx="510" cy="38" r="2" fill="#0071e3"/>
+        <text x="500" y="90" text-anchor="middle" class="elem-text">Текстура</text>
+        
+        <path d="M580 50 L620 50 M600 30 L600 70" stroke="#0071e3" stroke-width="2" />
+        <text x="600" y="90" text-anchor="middle" class="elem-text">Простір</text>
+        
+        <text x="710" y="55" font-family="serif" font-size="32" font-weight="bold" fill="#0071e3" text-anchor="middle">Aa</text>
+        <text x="710" y="90" text-anchor="middle" class="elem-text">Шрифт</text>
+      </svg>
+    </div>
+    <p class="text-muted" style="text-align: center; font-size: 15px;">Основні елементи дизайну: крапка, лінія, форма, колір, текстура, простір і шрифт.</p>
+  </section>
+
+  <!-- НАПРЯМИ ДИЗАЙНУ -->
+  <section id="directions" class="section section-alt">
+    <div class="container">
+      <h2>3. Основні напрями дизайну</h2>
+      <p>Дизайн охоплює широкий спектр напрямів, від промислових об'єктів до цифрових інтерфейсів.</p>
+
+      <div class="card-grid" style="margin-top: 32px;">
+        <!-- Industrial -->
+        <div class="card">
+          <div class="icon-box">🪑</div>
+          <h3>Промисловий дизайн</h3>
+          <p class="text-muted">Проектування предметів, вироблених промисловим способом. Поєднує естетику, ергономіку та функціональність.</p>
+          <div style="margin-top: 16px; background: #f5f5f7; padding: 12px; border-radius: 8px; font-size: 14px;">
+            <strong>Яскраві приклади:</strong><br>
+            • Стілець <a href="https://www.youtube.com/watch?v=BOqREJ2seug" target="_blank" class="apple-link"><em>Herman Miller Aeron</em></a> (ікона ергономіки)<br>
+            • Електрокар <a href="https://www.tesla.com/models" target="_blank" class="apple-link"><em>Tesla Model S</em></a> (мінімалізм)<br>
+            • Крісло <a href="https://www.ikea.com/global/en/products/poaeng-armchair-birch-veneer-knisa-light-beige-s69240872/" target="_blank" class="apple-link"><em>IKEA POÄNG</em></a> (доступність)
+          </div>
+        </div>
+
+        <!-- Interior -->
+        <div class="card">
+          <div class="icon-box">🛋️</div>
+          <h3>Дизайн інтер'єру</h3>
+          <p class="text-muted">Створення зручного та естетичного внутрішнього простору приміщень.</p>
+          <div style="margin-top: 16px; background: #f5f5f7; padding: 12px; border-radius: 8px; font-size: 14px;">
+            <strong>Стилі:</strong><br>
+            • <em>Хай-тек:</em> метал, скло, відкриті комунікації (<a href="https://www.archdaily.com/search/projects?q=Keats+Soriano" target="_blank" class="apple-link">Будинок Кітса Соріано</a>)<br>
+            • <em>Модерн:</em> чисті лінії, природні матеріали (<a href="https://normcph.com/" target="_blank" class="apple-link">Студія Norm Architects</a>)
+          </div>
+        </div>
+
+        <!-- Lighting -->
+        <div class="card">
+          <div class="icon-box">💡</div>
+          <h3>Світловий дизайн</h3>
+          <p class="text-muted">Художнє проектування освітлення, що підкреслює архітектуру та створює атмосферу.</p>
+          <div style="margin-top: 16px; background: #f5f5f7; padding: 12px; border-radius: 8px; font-size: 14px;">
+            <strong>Приклади:</strong><br>
+            • Підсвічування <a href="https://www.lichtkunstlicht.com/" target="_blank" class="apple-link">собору Святого Стефана у Відні</a><br>
+            • Інсталяція <a href="http://rodencrater.com/" target="_blank" class="apple-link"><em>Roden Crater</em> Джеймса Террелла</a>
+          </div>
+        </div>
+
+        <!-- Biodesign -->
+        <div class="card">
+          <div class="icon-box">🌿</div>
+          <h3>Біодизайн</h3>
+          <p class="text-muted">Інтеграція живої природи в дизайн середовища, створення біологічних композицій.</p>
+          <div style="margin-top: 16px; background: #f5f5f7; padding: 12px; border-radius: 8px; font-size: 14px;">
+            <strong>Приклади:</strong><br>
+            • Вертикальні сади <a href="https://www.patrickblanc.com/" target="_blank" class="apple-link">Патріка Бланка</a> (Музей на набережній Бранлі)<br>
+            • Біо-стіна в офісі <a href="https://www.amazon.com/spheres" target="_blank" class="apple-link">Amazon "The Spheres"</a>
+          </div>
+        </div>
+
+        <!-- Graphic -->
+        <div class="card">
+          <div class="icon-box">🎨</div>
+          <h3>Графічний дизайн</h3>
+          <p class="text-muted">Створення візуальної комунікації: логотипи, поліграфія, реклама, цифрові інтерфейси.</p>
+        </div>
+
+        <!-- Landscape -->
+        <div class="card">
+          <div class="icon-box">🏞️</div>
+          <h3>Ландшафтний дизайн</h3>
+          <p class="text-muted">Проектування та озеленення територій, парків, садів. Поєднання архітектури та природи.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ГЕНЕРАТИВНИЙ ДИЗАЙН -->
+  <section id="generative" class="section container">
+    <h2>4. Генеративний (алгоритмічний) дизайн</h2>
+    <div class="highlight-box" style="background: linear-gradient(135deg, #1d1d1f 0%, #434344 100%); color: #fff; border: none;">
+      <h3 style="color: #0071e3;">Мистецтво, створене кодом</h3>
+      <p style="color: #d2d2d7; font-size: 18px; margin-bottom: 24px;">Суть генеративного дизайну полягає в тому, що комп'ютер самостійно, на основі заданих алгоритмів і параметрів, генерує об'єкти — зображення, 3D-моделі, анімації чи архітектурні ескізи.</p>
+      <p style="color: #d2d2d7;">Перевага: здатність швидко створювати мільйони унікальних варіантів, неможливих для ручного проектування.</p>
+      
+      <div style="background: rgba(255,255,255,0.1); padding: 16px; border-radius: 12px; margin-top: 24px; display: flex; align-items: center; gap: 16px;">
+        <div style="font-size: 32px;">🍫</div>
+        <div>
+          <strong style="color: #fff;">Кейс Nutella:</strong> Алгоритм створив 7 мільйонів унікальних дизайнів баночок для <a href="https://www.ogilvy.com/work/nutella-unica" target="_blank" class="apple-link" style="color: #5ab5ff;">Nutella</a>.
+        </div>
+      </div>
+      <p style="color: #86868b; font-size: 14px; margin-top: 16px; margin-bottom: 0;">Митці: <a href="https://quayola.com/" target="_blank" class="apple-link" style="color: #5ab5ff;">Quayola</a>, <a href="https://deskriptiv.com/" target="_blank" class="apple-link" style="color: #5ab5ff;">Deskriptiv</a>, <a href="https://theverymany.com/" target="_blank" class="apple-link" style="color: #5ab5ff;">Theverymany</a>.</p>
+    </div>
+
+    <h3 style="margin-top: 48px; text-align: center;">5. Музеї цифрового мистецтва</h3>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 32px auto;">Свідченням визнання цифрового мистецтва є спеціалізовані музеї, такі як <a href="https://www.teamlab.art/e/borderless-azabudai/" target="_blank" class="apple-link"><strong>Mori Building Digital Art Museum</strong></a> у Токіо. Відвідувачі можуть буквально занурюватися в твори мистецтва за допомогою високотехнологічних проекторів.</p>
+  </section>
+
+  <!-- ОСНОВИ ООП -->
+  <section id="oop" class="section section-alt">
+    <div class="container">
+      <h2>6. Основи ООП у креативному програмуванні</h2>
+      <p>У середовищах на кшталт p5.js (JavaScript) або Processing (Java) об'єктно-орієнтоване програмування дозволяє створювати складні системи з безліччю об'єктів (наприклад, частинок, фігур, кольорів).</p>
+
+      <div class="oop-grid">
+        <div class="oop-item">
+          <h3>Клас (Class)</h3>
+          <p class="text-muted">Це «креслення» або шаблон для створення об'єктів. Він описує, які дані та дії будуть у майбутніх об'єктів.</p>
+          <p style="margin-top: 12px; font-size: 15px;"><strong>Аналогія:</strong> Креслення автомобіля.</p>
+        </div>
+        <div class="oop-item">
+          <h3>Об'єкт (Object)</h3>
+          <p class="text-muted">Конкретний екземпляр класу, створений у пам'яті комп'ютера.</p>
+          <p style="margin-top: 12px; font-size: 15px;"><strong>Аналогія:</strong> Конкретний автомобіль, що зійшов з конвеєра (наприклад, червона Tesla).</p>
+        </div>
+        <div class="oop-item">
+          <h3>Властивість (Property)</h3>
+          <p class="text-muted">Характеристика об'єкта (змінна).</p>
+          <p style="margin-top: 12px; font-size: 15px;"><strong>Аналогія:</strong> Колір кузова, швидкість, вага.</p>
+        </div>
+        <div class="oop-item">
+          <h3>Метод (Method)</h3>
+          <p class="text-muted">Дія, яку може виконувати об'єкт (функція).</p>
+          <p style="margin-top: 12px; font-size: 15px;"><strong>Аналогія:</strong> Їхати, гальмувати, сигналити.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 32px;">
+        <h3>Події та обробники подій</h3>
+        <p><strong>Подія</strong> — це дія в системі (клік мишею, натискання клавіші). <strong>Обробник подій</strong> — це функція, яка автоматично викликається, коли відбувається ця подія.</p>
+        <p style="margin-top: 12px;"><strong>Приклад:</strong> Подія <code>mousePressed()</code> (клік миші) може викликати обробник, який змінить колір усіх об'єктів на полотні.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОНТРОЛЬНІ ЗАПИТАННЯ -->
+  <section id="questions" class="section container">
+    <h2>Контрольні запитання</h2>
+    <p class="text-muted" style="margin-bottom: 32px;">Натисніть на запитання, щоб переглянути підказку до відповіді.</p>
+
+    <details>
+      <summary>1. Як ви розумієте сутність цифрового мистецтва та його місце на стику мистецтва і технологій? Наведіть приклади.</summary>
+      <div class="content">
+        Цифрове мистецтво — це поєднання художньої виразності (композиція, колір, форма) з можливостями ІКТ (інтерактивність, алгоритмічність, мультимедійність).<br><br>
+        <strong>Інтерактивні:</strong> комп'ютерні ігри, інтерактивні інсталяції (Mori Building Digital Art Museum).<br>
+        <strong>Неінтерактивні:</strong> рекламні ролики, анімаційні проекції.
+      </div>
+    </details>
+
+    <details>
+      <summary>2. Поясніть основну ідею генеративного дизайну. Яку перевагу він дає і наведіть приклад.</summary>
+      <div class="content">
+        Ідея полягає в тому, що дизайнер пише алгоритм (код) та задає параметри, а комп'ютер самостійно генерує об'єкти.<br><br>
+        <strong>Перевага:</strong> швидке створення мільйонів унікальних варіацій, які неможливо зробити вручну.<br>
+        <strong>Приклад:</strong> генерація 7 мільйонів унікальних дизайнів баночок для Nutella.
+      </div>
+    </details>
+
+    <details>
+      <summary>3. Які ключові компоненти складають структуру програмного проекту в контексті креативного програмування?</summary>
+      <div class="content">
+        <ul style="margin-left: 20px; margin-top: 8px;">
+          <li><strong>Головний файл:</strong> точка входу (наприклад, index.html).</li>
+          <li><strong>Бібліотеки:</strong> інструменти для малювання (p5.js).</li>
+          <li><strong>Класи та об'єкти:</strong> опис елементів (частинок, фігур).</li>
+          <li><strong>Події:</strong> реакція на дії користувача.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>4. Дайте визначення поняттям ООП (Клас, Об'єкт, Властивість, Метод), використовуючи побутові аналогії.</summary>
+      <div class="content">
+        • <strong>Клас:</strong> Креслення будинку.<br>
+        • <strong>Об'єкт:</strong> Конкретний будинок, збудований за цим кресленням.<br>
+        • <strong>Властивість:</strong> Колір даху, кількість поверхів, площа.<br>
+        • <strong>Метод:</strong> Відчинити двері, увімкнути світло.
+      </div>
+    </details>
+
+    <details>
+      <summary>5. Яку роль у створенні інтерактивного цифрового мистецтва відіграють події та обробники подій?</summary>
+      <div class="content">
+        Події дозволяють твору реагувати на дії глядача, роблячи його співавтором. <br><br>
+        <strong>Приклад:</strong> Подія <code>mouseMoved()</code> (рух миші) викликає обробник, який змінює траєкторію частинок або колір фону залежно від координат курсора.
+      </div>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  Практичне заняття №9 з інформатики · Цифрове мистецтво. Дизайн та код · 2026
+</footer>
+
+<script>
+  // Smooth active navigation highlight
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

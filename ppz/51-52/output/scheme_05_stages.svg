@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="373.14pt" height="115.848pt" viewBox="0 0 373.14 115.848" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-29T21:25:22.326866</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 115.848 
+L 373.14 115.848 
+L 373.14 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 92.826 62.082 
+Q 98.685 62.082 102.866949 62.082 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 98.066949 59.682 
+L 102.866949 62.082 
+L 98.066949 64.482 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 182.106 62.082 
+Q 187.965 62.082 192.146949 62.082 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 187.346949 59.682 
+L 192.146949 62.082 
+L 187.346949 64.482 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 271.386 62.082 
+Q 277.245 62.082 281.426949 62.082 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 276.626949 59.682 
+L 281.426949 62.082 
+L 276.626949 64.482 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 21.96 96.732 
+L 86.13 96.732 
+Q 91.71 96.732 91.71 91.188 
+L 91.71 32.976 
+Q 91.71 27.432 86.13 27.432 
+L 21.96 27.432 
+Q 16.38 27.432 16.38 32.976 
+L 16.38 91.188 
+Q 16.38 96.732 21.96 96.732 
+z
+" clip-path="url(#p366c32f2df)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 111.24 96.732 
+L 175.41 96.732 
+Q 180.99 96.732 180.99 91.188 
+L 180.99 32.976 
+Q 180.99 27.432 175.41 27.432 
+L 111.24 27.432 
+Q 105.66 27.432 105.66 32.976 
+L 105.66 91.188 
+Q 105.66 96.732 111.24 96.732 
+z
+" clip-path="url(#p366c32f2df)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 200.52 96.732 
+L 264.69 96.732 
+Q 270.27 96.732 270.27 91.188 
+L 270.27 32.976 
+Q 270.27 27.432 264.69 27.432 
+L 200.52 27.432 
+Q 194.94 27.432 194.94 32.976 
+L 194.94 91.188 
+Q 194.94 96.732 200.52 96.732 
+z
+" clip-path="url(#p366c32f2df)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 289.8 96.732 
+L 353.97 96.732 
+Q 359.55 96.732 359.55 91.188 
+L 359.55 32.976 
+Q 359.55 27.432 353.97 27.432 
+L 289.8 27.432 
+Q 284.22 27.432 284.22 32.976 
+L 284.22 91.188 
+Q 284.22 96.732 289.8 96.732 
+z
+" clip-path="url(#p366c32f2df)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="54.045" y="41.141406" transform="rotate(-0 54.045 41.141406)">1</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="54.045" y="64.979344" transform="rotate(-0 54.045 64.979344)">Опрацювати</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="54.045" y="88.265406" transform="rotate(-0 54.045 88.265406)">теорію</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="143.325" y="41.141406" transform="rotate(-0 143.325 41.141406)">2</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="143.325" y="64.979344" transform="rotate(-0 143.325 64.979344)">Виконати</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="143.325" y="88.265406" transform="rotate(-0 143.325 88.265406)">практику</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="232.605" y="41.141406" transform="rotate(-0 232.605 41.141406)">3</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="232.605" y="64.979344" transform="rotate(-0 232.605 64.979344)">Оформити</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="232.605" y="88.265406" transform="rotate(-0 232.605 88.265406)">звіт</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="321.885" y="41.141406" transform="rotate(-0 321.885 41.141406)">4</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="321.885" y="64.979344" transform="rotate(-0 321.885 64.979344)">Подати</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="321.885" y="88.265406" transform="rotate(-0 321.885 88.265406)">на перевірку</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p366c32f2df">
+   <rect x="10.8" y="10.8" width="351.54" height="94.248"/>
+  </clipPath>
+ </defs>
+</svg>

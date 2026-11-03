@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Математичний довідник з графіками</title>
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 5px;
+            background-color: #f8f9fa;
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+        }
+
+        .page-break {
+            page-break-after: always;
+            border-bottom: 2px dashed #ccc;
+            margin: 40px 0;
+        }
+
+        .graph-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        canvas {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+<section>
+    <img src="C:\Users\Computer\Desktop\temp\Optima\logo.png" width=150 alt="альтернативний текст">
+    <div>
+        <h1 style="text-align: center;">Рівняння</h1>
+    </div>
+
+</section>
+    <section>
+        <section>
+            <h1>1. Лінійне рівняння</h1>
+            <p><strong>Лінійне рівняння з однією змінною</strong> — це рівняння виду:</p>
+            $$ ax = b $$
+            <p>Де \( a \) та \( b \) — коефіцієнти (числа), а \( x \) — змінна.</p>
+
+            <h3>Графік та точки перетину з осями</h3>
+            <p>Графіком лінійної функції \( y = kx + b \) є <strong>пряма лінія</strong>.</p>
+
+            <div
+                style="background: #f1f5f9; padding: 15px; border-radius: 6px; margin-bottom: 15px; max-width: 400px; margin: 0 auto 15px auto;">
+                <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <label for="kSlider">Коефіцієнт <strong>k</strong> (нахил): <span id="kVal"
+                            style="font-weight:bold; color:#3b82f6;">1</span></label>
+                    <input type="range" id="kSlider" min="-5" max="5" step="0.25" value="1" style="width: 150px;">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label for="bSlider">Коефіцієнт <strong>b</strong> (зсув): <span id="bVal"
+                            style="font-weight:bold; color:#3b82f6;">0</span></label>
+                    <input type="range" id="bSlider" min="-5" max="5" step="0.25" value="0" style="width: 150px;">
+                </div>
+            </div>
+
+            <div class="graph-container">
+                <canvas id="linearCanvas" width="400" height="300"></canvas>
+                <p><small>Графік функції: <span id="dynamicEq" style="font-style: italic; font-weight: bold;">y = 1x +
+                            0</span></small></p>
+            </div>
+
+            <ul>
+                <li><strong>Коефіцієнт \( k \)</strong> відповідає за нахил прямої до осі \( Ox \).</li>
+                <li><strong>Коефіцієнт \( b \)</strong> — це ордината точки перетину з віссю \( Oy \).</li>
+            </ul>
+        </section>
+        <div class="page-break"></div>
+        <section>
+            <h2>2. Система лінійних рівнянь</h2>
+            <p>Система двох лінійних рівнянь із двома змінними має вигляд:</p>
+            $$ \begin{cases} a_1x + b_1y = c_1 \\ a_2x + b_2y = c_2 \end{cases} $$
+
+            <h3>Графічне розв'язання системи</h3>
+            <p>Розв'язком системи є точка перетину двох прямих.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div
+                    style="background: #f1f5f9; padding: 15px; border-radius: 6px; margin-bottom: 15px; max-width: 500px; margin: 0 auto 15px auto;">
+                    <h4 style="margin-top: 0; color: #3b82f6;">Перше рівняння: \( a_1x + b_1y = c_1 \)</h4>
+                    <div
+                        style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <label for="a1Slider">Коефіцієнт <strong>a₁</strong>: <span id="a1Val"
+                                style="font-weight:bold; color:#3b82f6;">1</span></label>
+                        <input type="range" id="a1Slider" min="-5" max="5" step="0.5" value="1" style="width: 150px;">
+                    </div>
+                    <div
+                        style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <label for="b1Slider">Коефіцієнт <strong>b₁</strong>: <span id="b1Val"
+                                style="font-weight:bold; color:#3b82f6;">1</span></label>
+                        <input type="range" id="b1Slider" min="-5" max="5" step="0.5" value="1" style="width: 150px;">
+                    </div>
+                    <div
+                        style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <label for="c1Slider">Коефіцієнт <strong>c₁</strong>: <span id="c1Val"
+                                style="font-weight:bold; color:#3b82f6;">2</span></label>
+                        <input type="range" id="c1Slider" min="-5" max="5" step="0.5" value="2" style="width: 150px;">
+                    </div>
+
+                    <h4 style="margin-top: 20px; color: #ef4444;">Друге рівняння: \( a_2x + b_2y = c_2 \)</h4>
+                    <div
+                        style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <label for="a2Slider">Коефіцієнт <strong>a₂</strong>: <span id="a2Val"
+                                style="font-weight:bold; color:#ef4444;">1</span></label>
+                        <input type="range" id="a2Slider" min="-5" max="5" step="0.5" value="1" style="width: 150px;">
+                    </div>
+                    <div
+                        style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <label for="b2Slider">Коефіцієнт <strong>b₂</strong>: <span id="b2Val"
+                                style="font-weight:bold; color:#ef4444;">-1</span></label>
+                        <input type="range" id="b2Slider" min="-5" max="5" step="0.5" value="-1" style="width: 150px;">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <label for="c2Slider">Коефіцієнт <strong>c₂</strong>: <span id="c2Val"
+                                style="font-weight:bold; color:#ef4444;">0</span></label>
+                        <input type="range" id="c2Slider" min="-5" max="5" step="0.5" value="0" style="width: 150px;">
+                    </div>
+                </div>
+
+                <div class="graph-container">
+                    <canvas id="systemCanvas" width="400" height="300"></canvas>
+                    <p>
+                        <small>Графічне розв'язання:
+                            <span id="dynamicEqSys" style="font-style: italic; font-weight: bold;">
+                            </span>
+                        </small>
+                    </p>
+                    <p id="intersectionPoint" style="font-weight: bold; color: #10b981; margin-top: 10px;"></p>
+                </div>
+            </div>
+            <ul>
+                <li><strong>Один розв'язок</strong> — прямі перетинаються в одній точці.</li>
+                <li><strong>Без розв'язків</strong> — прямі паралельні (не перетинаються).</li>
+                <li><strong>Безліч розв'язків</strong> — прямі збігаються.</li>
+            </ul>
+        </section>
+
+        <div class="page-break"></div>
+
+        <section>
+            <h2>3. Квадратне рівняння</h2>
+            <p><strong>Квадратне рівняння</strong> — це рівняння виду:</p>
+            $$ ax^2 + bx + c = 0 $$
+
+            <h3>Графік квадратичної функції</h3>
+            <p>Графіком функції \( y = ax^2 + bx + c \) є <strong>парабола</strong>.</p>
+            <div
+                style="background: #f1f5f9; padding: 15px; border-radius: 6px; margin-bottom: 15px; max-width: 400px; margin: 0 auto 15px auto;">
+                <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <label for="aSlider">Коефіцієнт <strong>a</strong>: <span id="aVal"
+                            style="font-weight:bold; color:#ef4444;">1</span></label>
+                    <input type="range" id="aSlider" min="-4" max="4" step="0.5" value="1" style="width: 150px;">
+                </div>
+                <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <label for="bQuadSlider">Коефіцієнт <strong>b</strong>: <span id="bQuadVal"
+                            style="font-weight:bold; color:#ef4444;">-2</span></label>
+                    <input type="range" id="bQuadSlider" min="-5" max="5" step="0.5" value="-2" style="width: 150px;">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label for="cSlider">Коефіцієнт <strong>c</strong>: <span id="cVal"
+                            style="font-weight:bold; color:#ef4444;">-3</span></label>
+                    <input type="range" id="cSlider" min="-5" max="5" step="0.5" value="-3" style="width: 150px;">
+                </div>
+            </div>
+
+            <div class="graph-container">
+                <canvas id="quadraticCanvas" width="400" height="300"></canvas>
+                <p><small>Графік функції: <span id="dynamicQuadEq" style="font-style: italic; font-weight: bold;">y = x²
+                            - 2x - 3</span></small></p>
+            </div>
+
+            <h3>Дискримінант</h3>
+            <p>Для визначення кількості коренів обчислюють <strong>дискримінант (\( D \))</strong>:</p>
+            $$ D = b^2 - 4ac $$
+        </section>
+
+        <script>
+            /**
+             * ========================================
+             * ГЛОБАЛЬНІ КОНСТАНТИ
+             * ========================================
+             */
+            const SCALE = 30; // Масштаб: 1 одиниця = 30 пікселів
+
+            /**
+             * ========================================
+             * ДОПОМІЖНІ ФУНКЦІЇ ДЛЯ МАЛЮВАННЯ
+             * ========================================
+             */
+
+            /**
+             * Малює координатну сітку та осі на canvas
+             * @param {CanvasRenderingContext2D} ctx - Контекст canvas
+             * @param {number} width - Ширина canvas
+             * @param {number} height - Висота canvas
+             * @param {number} scale - Масштаб (пікселі на одиницю)
+             */
+            function drawGrid(ctx, width, height, scale) {
+                const originX = width / 2;
+                const originY = height / 2;
+
+                // Очищення canvas
+                ctx.clearRect(0, 0, width, height);
+
+                // Малювання сітки
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1;
+
+                // Вертикальні лінії сітки
+                for (let x = originX % scale; x < width; x += scale) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                    ctx.stroke();
+                }
+
+                // Горизонтальні лінії сітки
+                for (let y = originY % scale; y < height; y += scale) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(width, y);
+                    ctx.stroke();
+                }
+
+                // Малювання осей координат
+                ctx.strokeStyle = '#334155';
+                ctx.lineWidth = 2;
+
+                // Вісь X
+                ctx.beginPath();
+                ctx.moveTo(0, originY);
+                ctx.lineTo(width, originY);
+                ctx.stroke();
+
+                // Вісь Y
+                ctx.beginPath();
+                ctx.moveTo(originX, 0);
+                ctx.lineTo(originX, height);
+                ctx.stroke();
+
+                // Підписи осей
+                ctx.fillStyle = '#334155';
+                ctx.font = '12px Arial';
+                ctx.fillText('X', width - 15, originY - 5);
+                ctx.fillText('Y', originX + 5, 15);
+                ctx.fillText('0', originX - 12, originY + 15);
+            }
+
+            /**
+             * Форматує коефіцієнт для відображення в рівнянні
+             * @param {number} coeff - Коефіцієнт
+             * @param {string} variable - Змінна (наприклад, 'x' або 'x²')
+             * @param {boolean} isFirst - Чи це перший доданок
+             * @returns {string} Відформатований рядок
+             */
+            function formatCoefficient(coeff, variable, isFirst = false) {
+                if (coeff === 0) return '';
+
+                let result = '';
+
+                // Обробка знаку
+                if (isFirst) {
+                    if (coeff < 0) result += '-';
+                } else {
+                    result += coeff > 0 ? ' + ' : ' - ';
+                }
+
+                // Обробка абсолютного значення
+                const absCoeff = Math.abs(coeff);
+                if (absCoeff === 1 && variable) {
+                    result += variable;
+                } else {
+                    result += absCoeff + variable;
+                }
+
+                return result;
+            }
+
+            /**
+             * ========================================
+             * ЛІНІЙНА ФУНКЦІЯ: y = kx + b
+             * ========================================
+             */
+
+            // Отримання елементів DOM
+            const linearCanvas = document.getElementById('linearCanvas');
+            const linearCtx = linearCanvas.getContext('2d');
+            const kSlider = document.getElementById('kSlider');
+            const bSlider = document.getElementById('bSlider');
+            const kValueDisplay = document.getElementById('kVal');
+            const bValueDisplay = document.getElementById('bVal');
+            const linearEquationDisplay = document.getElementById('dynamicEq');
+
+            /**
+             * Оновлює графік лінійної функції та відображення рівняння
+             */
+            function updateLinearGraph() {
+                // Отримання значень з повзунків
+                const k = parseFloat(kSlider.value);
+                const b = parseFloat(bSlider.value);
+
+                // Оновлення відображення значень
+                kValueDisplay.textContent = k;
+                bValueDisplay.textContent = b;
+
+                // Формування тексту рівняння
+                let equation = 'y = ';
+
+                // Доданок з x
+                if (k !== 0) {
+                    equation += (k === 1) ? 'x' : (k === -1) ? '-x' : `${k}x`;
+                }
+
+                // Вільний член
+                if (b !== 0) {
+                    if (k !== 0) {
+                        equation += b > 0 ? ` + ${b}` : ` - ${Math.abs(b)}`;
+                    } else {
+                        equation += b;
+                    }
+                }
+
+                // Якщо все нулі
+                if (k === 0 && b === 0) {
+                    equation += '0';
+                }
+
+                linearEquationDisplay.textContent = equation;
+
+                // Малювання сітки
+                drawGrid(linearCtx, linearCanvas.width, linearCanvas.height, SCALE);
+
+                // Малювання графіка функції
+                linearCtx.strokeStyle = '#3b82f6';
+                linearCtx.lineWidth = 3;
+                linearCtx.beginPath();
+
+                for (let pixelX = 0; pixelX < linearCanvas.width; pixelX++) {
+                    const x = (pixelX - linearCanvas.width / 2) / SCALE;
+                    const y = k * x + b;
+                    const pixelY = linearCanvas.height / 2 - (y * SCALE);
+
+                    if (pixelX === 0) {
+                        linearCtx.moveTo(pixelX, pixelY);
+                    } else {
+                        linearCtx.lineTo(pixelX, pixelY);
+                    }
+                }
+
+                linearCtx.stroke();
+            }
+
+            // Реєстрація обробників подій для лінійної функції
+            kSlider.addEventListener('input', updateLinearGraph);
+            bSlider.addEventListener('input', updateLinearGraph);
+
+            // Початкове малювання
+            updateLinearGraph();
+
+            /**
+             * ========================================
+             * СИСТЕМА ЛІНІЙНИХ РІВНЯНЬ
+             * ========================================
+             */
+
+            // Отримання елементів DOM
+            const systemCanvas = document.getElementById('systemCanvas');
+            const systemCtx = systemCanvas.getContext('2d');
+            const a1Slider = document.getElementById('a1Slider');
+            const b1Slider = document.getElementById('b1Slider');
+            const c1Slider = document.getElementById('c1Slider');
+            const a2Slider = document.getElementById('a2Slider');
+            const b2Slider = document.getElementById('b2Slider');
+            const c2Slider = document.getElementById('c2Slider');
+            const a1ValueDisplay = document.getElementById('a1Val');
+            const b1ValueDisplay = document.getElementById('b1Val');
+            const c1ValueDisplay = document.getElementById('c1Val');
+            const a2ValueDisplay = document.getElementById('a2Val');
+            const b2ValueDisplay = document.getElementById('b2Val');
+            const c2ValueDisplay = document.getElementById('c2Val');
+            const dynamicEqSys = document.getElementById('dynamicEqSys');
+            const intersectionPointDisplay = document.getElementById('intersectionPoint');
+
+            /**
+             * Малює пряму лінію на canvas для системи рівнянь
+             * @param {CanvasRenderingContext2D} ctx - Контекст canvas
+             * @param {number} a - Коефіцієнт при x
+             * @param {number} b - Коефіцієнт при y
+             * @param {number} c - Вільний член
+             * @param {string} color - Колір лінії
+             * @param {number} canvasWidth - Ширина canvas
+             * @param {number} canvasHeight - Висота canvas
+             */
+            function drawLine(ctx, a, b, c, color, canvasWidth, canvasHeight) {
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+
+                // Якщо b = 0, це вертикальна пряма x = c/a
+                if (b === 0) {
+                    if (a !== 0) {
+                        const x = c / a;
+                        const pixelX = canvasWidth / 2 + (x * SCALE);
+                        ctx.moveTo(pixelX, 0);
+                        ctx.lineTo(pixelX, canvasHeight);
+                    }
+                } else {
+                    // Інакше y = (c - ax) / b
+                    for (let pixelX = 0; pixelX < canvasWidth; pixelX++) {
+                        const x = (pixelX - canvasWidth / 2) / SCALE;
+                        const y = (c - a * x) / b;
+                        const pixelY = canvasHeight / 2 - (y * SCALE);
+
+                        if (pixelX === 0) {
+                            ctx.moveTo(pixelX, pixelY);
+                        } else {
+                            ctx.lineTo(pixelX, pixelY);
+                        }
+                    }
+                }
+
+                ctx.stroke();
+            }
+
+            /**
+             * Знаходить точку перетину двох прямих
+             * @param {number} a1 - Коефіцієнт при x першого рівняння
+             * @param {number} b1 - Коефіцієнт при y першого рівняння
+             * @param {number} c1 - Вільний член першого рівняння
+             * @param {number} a2 - Коефіцієнт при x другого рівняння
+             * @param {number} b2 - Коефіцієнт при y другого рівняння
+             * @param {number} c2 - Вільний член другого рівняння
+             * @returns {Object|null} Об'єкт {x, y} або null
+             */
+            function findIntersection(a1, b1, c1, a2, b2, c2) {
+                // Визначник системи
+                const det = a1 * b2 - a2 * b1;
+
+                // Якщо визначник = 0, прямі паралельні або збігаються
+                if (Math.abs(det) < 0.0001) {
+                    return null;
+                }
+
+                // Розв'язок за формулою Крамера
+                const x = (c1 * b2 - c2 * b1) / det;
+                const y = (a1 * c2 - a2 * c1) / det;
+
+                return { x, y };
+            }
+
+            /**
+             * Форматує рівняння системи для відображення
+             */
+            function formatSystemEquation(a1, b1, c1, a2, b2, c2) {
+                let eq1 = '';
+                let eq2 = '';
+
+                // Перше рівняння
+                if (a1 !== 0) eq1 += (a1 === 1 ? 'x' : (a1 === -1 ? '-x' : `${a1}x`));
+                if (b1 !== 0) {
+                    if (eq1) eq1 += b1 > 0 ? ` + ${b1 === 1 ? '' : b1}y` : ` - ${Math.abs(b1) === 1 ? '' : Math.abs(b1)}y`;
+                    else eq1 += (b1 === 1 ? 'y' : (b1 === -1 ? '-y' : `${b1}y`));
+                }
+                if (a1 === 0 && b1 === 0) eq1 = '0';
+                eq1 += ` = ${c1}`;
+
+                // Друге рівняння
+                if (a2 !== 0) eq2 += (a2 === 1 ? 'x' : (a2 === -1 ? '-x' : `${a2}x`));
+                if (b2 !== 0) {
+                    if (eq2) eq2 += b2 > 0 ? ` + ${b2 === 1 ? '' : b2}y` : ` - ${Math.abs(b2) === 1 ? '' : Math.abs(b2)}y`;
+                    else eq2 += (b2 === 1 ? 'y' : (b2 === -1 ? '-y' : `${b2}y`));
+                }
+                if (a2 === 0 && b2 === 0) eq2 = '0';
+                eq2 += ` = ${c2}`;
+
+                // Повертаємо систему в форматі LaTeX
+                return `$$\\begin{cases} ${eq1} \\\\ ${eq2} \\end{cases}$$`;
+            }
+
+            /**
+             * Оновлює графік системи лінійних рівнянь
+             */
+            function updateSystemGraph() {
+                // Отримання значень з повзунків
+                const a1 = parseFloat(a1Slider.value);
+                const b1 = parseFloat(b1Slider.value);
+                const c1 = parseFloat(c1Slider.value);
+                const a2 = parseFloat(a2Slider.value);
+                const b2 = parseFloat(b2Slider.value);
+                const c2 = parseFloat(c2Slider.value);
+
+                // Оновлення відображення значень
+                a1ValueDisplay.textContent = a1;
+                b1ValueDisplay.textContent = b1;
+                c1ValueDisplay.textContent = c1;
+                a2ValueDisplay.textContent = a2;
+                b2ValueDisplay.textContent = b2;
+                c2ValueDisplay.textContent = c2;
+
+                // Оновлення тексту рівняння з LaTeX-форматуванням
+                dynamicEqSys.innerHTML = formatSystemEquation(a1, b1, c1, a2, b2, c2);
+
+                // Перерендеринг MathJax для відображення системи
+                if (window.MathJax) {
+                    MathJax.typesetPromise([dynamicEqSys]).catch((err) => console.log('MathJax error:', err));
+                }
+
+                // Малювання сітки
+                drawGrid(systemCtx, systemCanvas.width, systemCanvas.height, SCALE);
+
+                // Малювання першої прямої (синя)
+                drawLine(systemCtx, a1, b1, c1, '#3b82f6', systemCanvas.width, systemCanvas.height);
+
+                // Малювання другої прямої (червона)
+                drawLine(systemCtx, a2, b2, c2, '#ef4444', systemCanvas.width, systemCanvas.height);
+
+                // Знаходження точки перетину
+                const intersection = findIntersection(a1, b1, c1, a2, b2, c2);
+
+                if (intersection) {
+                    // Малювання точки перетину
+                    const pixelX = systemCanvas.width / 2 + (intersection.x * SCALE);
+                    const pixelY = systemCanvas.height / 2 - (intersection.y * SCALE);
+
+                    systemCtx.fillStyle = '#10b981';
+                    systemCtx.beginPath();
+                    systemCtx.arc(pixelX, pixelY, 6, 0, 2 * Math.PI);
+                    systemCtx.fill();
+
+                    // Відображення координат точки
+                    intersectionPointDisplay.textContent = `Точка перетину: (${intersection.x.toFixed(2)}, ${intersection.y.toFixed(2)})`;
+                    intersectionPointDisplay.style.color = '#10b981';
+                } else {
+                    // Прямі паралельні або збігаються
+                    const det = a1 * b2 - a2 * b1;
+                    if (Math.abs(det) < 0.0001) {
+                        // Перевірка, чи прямі збігаються
+                        const ratio1 = b1 !== 0 ? c1 / b1 : c1;
+                        const ratio2 = b2 !== 0 ? c2 / b2 : c2;
+
+                        if (Math.abs(ratio1 - ratio2) < 0.0001) {
+                            intersectionPointDisplay.textContent = 'Прямі збігаються — безліч розв\'язків';
+                            intersectionPointDisplay.style.color = '#f59e0b';
+                        } else {
+                            intersectionPointDisplay.textContent = 'Прямі паралельні — немає розв\'язків';
+                            intersectionPointDisplay.style.color = '#ef4444';
+                        }
+                    }
+                }
+            }
+
+            // Реєстрація обробників подій для системи
+            a1Slider.addEventListener('input', updateSystemGraph);
+            b1Slider.addEventListener('input', updateSystemGraph);
+            c1Slider.addEventListener('input', updateSystemGraph);
+            a2Slider.addEventListener('input', updateSystemGraph);
+            b2Slider.addEventListener('input', updateSystemGraph);
+            c2Slider.addEventListener('input', updateSystemGraph);
+
+            // Початкове малювання системи
+            updateSystemGraph();
+
+            /**
+             * ========================================
+             * КВАДРАТИЧНА ФУНКЦІЯ: y = ax² + bx + c
+             * ========================================
+             */
+
+            // Отримання елементів DOM
+            const quadraticCanvas = document.getElementById('quadraticCanvas');
+            const quadraticCtx = quadraticCanvas.getContext('2d');
+            const aSlider = document.getElementById('aSlider');
+            const bQuadSlider = document.getElementById('bQuadSlider');
+            const cSlider = document.getElementById('cSlider');
+            const aValueDisplay = document.getElementById('aVal');
+            const bQuadValueDisplay = document.getElementById('bQuadVal');
+            const cValueDisplay = document.getElementById('cVal');
+            const quadraticEquationDisplay = document.getElementById('dynamicQuadEq');
+
+            /**
+             * Оновлює графік квадратичної функції та відображення рівняння
+             */
+            function updateQuadraticGraph() {
+                // Отримання значень з повзунків
+                const a = parseFloat(aSlider.value);
+                const b = parseFloat(bQuadSlider.value);
+                const c = parseFloat(cSlider.value);
+
+                // Оновлення відображення значень
+                aValueDisplay.textContent = a;
+                bQuadValueDisplay.textContent = b;
+                cValueDisplay.textContent = c;
+
+                // Формування тексту рівняння
+                let equation = 'y = ';
+                let hasTerms = false;
+
+                // Доданок x²
+                if (a !== 0) {
+                    equation += formatCoefficient(a, 'x²', true);
+                    hasTerms = true;
+                }
+
+                // Доданок x
+                if (b !== 0) {
+                    equation += formatCoefficient(b, 'x', !hasTerms);
+                    hasTerms = true;
+                }
+
+                // Вільний член
+                if (c !== 0) {
+                    equation += formatCoefficient(c, '', !hasTerms);
+                    hasTerms = true;
+                }
+
+                // Якщо всі коефіцієнти нульові
+                if (!hasTerms) {
+                    equation += '0';
+                }
+
+                quadraticEquationDisplay.textContent = equation;
+
+                // Малювання сітки
+                drawGrid(quadraticCtx, quadraticCanvas.width, quadraticCanvas.height, SCALE);
+
+                // Особливий випадок: всі коефіцієнти нульові
+                if (a === 0 && b === 0 && c === 0) {
+                    quadraticCtx.fillStyle = '#ef4444';
+                    quadraticCtx.beginPath();
+                    quadraticCtx.arc(quadraticCanvas.width / 2, quadraticCanvas.height / 2, 4, 0, 2 * Math.PI);
+                    quadraticCtx.fill();
+                    return;
+                }
+
+                // Малювання графіка функції
+                quadraticCtx.strokeStyle = '#ef4444';
+                quadraticCtx.lineWidth = 3;
+                quadraticCtx.beginPath();
+
+                for (let pixelX = 0; pixelX < quadraticCanvas.width; pixelX++) {
+                    const x = (pixelX - quadraticCanvas.width / 2) / SCALE;
+                    const y = a * x * x + b * x + c;
+                    const pixelY = quadraticCanvas.height / 2 - (y * SCALE);
+
+                    if (pixelX === 0) {
+                        quadraticCtx.moveTo(pixelX, pixelY);
+                    } else {
+                        quadraticCtx.lineTo(pixelX, pixelY);
+                    }
+                }
+
+                quadraticCtx.stroke();
+            }
+
+            // Реєстрація обробників подій для квадратичної функції
+            aSlider.addEventListener('input', updateQuadraticGraph);
+            bQuadSlider.addEventListener('input', updateQuadraticGraph);
+            cSlider.addEventListener('input', updateQuadraticGraph);
+
+            // Початкове малювання
+            updateQuadraticGraph();
+        </script>
+
+</body>
+
+</html>

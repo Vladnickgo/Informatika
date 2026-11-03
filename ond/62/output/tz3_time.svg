@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="210.096pt" viewBox="0 0 635.4 210.096" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-02T08:31:18.126416</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 210.096 
+L 635.4 210.096 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 53.766 142.7472 
+L 182.664 142.7472 
+Q 194.94 142.7472 194.94 138.97728 
+L 194.94 71.11872 
+Q 194.94 67.3488 182.664 67.3488 
+L 53.766 67.3488 
+Q 41.49 67.3488 41.49 71.11872 
+L 41.49 138.97728 
+Q 41.49 142.7472 53.766 142.7472 
+z
+" clip-path="url(#pea6f4f45c3)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 59.5971 138.223296 
+L 176.8329 138.223296 
+Q 180.2088 138.223296 180.2088 137.186568 
+L 180.2088 136.998072 
+Q 180.2088 135.961344 176.8329 135.961344 
+L 59.5971 135.961344 
+Q 56.2212 135.961344 56.2212 136.998072 
+L 56.2212 137.186568 
+Q 56.2212 138.223296 59.5971 138.223296 
+z
+" clip-path="url(#pea6f4f45c3)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 207.216 142.7472 
+L 366.804 142.7472 
+Q 379.08 142.7472 379.08 138.97728 
+L 379.08 71.11872 
+Q 379.08 67.3488 366.804 67.3488 
+L 207.216 67.3488 
+Q 194.94 67.3488 194.94 71.11872 
+L 194.94 138.97728 
+Q 194.94 142.7472 207.216 142.7472 
+z
+" clip-path="url(#pea6f4f45c3)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 213.0471 138.223296 
+L 360.9729 138.223296 
+Q 364.3488 138.223296 364.3488 137.186568 
+L 364.3488 136.998072 
+Q 364.3488 135.961344 360.9729 135.961344 
+L 213.0471 135.961344 
+Q 209.6712 135.961344 209.6712 136.998072 
+L 209.6712 137.186568 
+Q 209.6712 138.223296 213.0471 138.223296 
+z
+" clip-path="url(#pea6f4f45c3)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 391.356 142.7472 
+L 520.254 142.7472 
+Q 532.53 142.7472 532.53 138.97728 
+L 532.53 71.11872 
+Q 532.53 67.3488 520.254 67.3488 
+L 391.356 67.3488 
+Q 379.08 67.3488 379.08 71.11872 
+L 379.08 138.97728 
+Q 379.08 142.7472 391.356 142.7472 
+z
+" clip-path="url(#pea6f4f45c3)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 397.1871 138.223296 
+L 514.4229 138.223296 
+Q 517.7988 138.223296 517.7988 137.186568 
+L 517.7988 136.998072 
+Q 517.7988 135.961344 514.4229 135.961344 
+L 397.1871 135.961344 
+Q 393.8112 135.961344 393.8112 136.998072 
+L 393.8112 137.186568 
+Q 393.8112 138.223296 397.1871 138.223296 
+z
+" clip-path="url(#pea6f4f45c3)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 544.806 142.7472 
+L 581.634 142.7472 
+Q 593.91 142.7472 593.91 138.97728 
+L 593.91 71.11872 
+Q 593.91 67.3488 581.634 67.3488 
+L 544.806 67.3488 
+Q 532.53 67.3488 532.53 71.11872 
+L 532.53 138.97728 
+Q 532.53 142.7472 544.806 142.7472 
+z
+" clip-path="url(#pea6f4f45c3)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 550.6371 138.223296 
+L 575.8029 138.223296 
+Q 579.1788 138.223296 579.1788 137.186568 
+L 579.1788 136.998072 
+Q 579.1788 135.961344 575.8029 135.961344 
+L 550.6371 135.961344 
+Q 547.2612 135.961344 547.2612 136.998072 
+L 547.2612 137.186568 
+Q 547.2612 138.223296 550.6371 138.223296 
+z
+" clip-path="url(#pea6f4f45c3)" style="fill: #6e30a8"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="29.992961" transform="rotate(-0 317.7 29.992961)">Орієнтовний розподіл часу (90 хв)</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="118.215" y="99.173473" transform="rotate(-0 118.215 99.173473)">Рівень 1</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="118.215" y="123.714867" transform="rotate(-0 118.215 123.714867)">25 хв</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="287.01" y="99.173473" transform="rotate(-0 287.01 99.173473)">Рівень 2</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="287.01" y="123.714867" transform="rotate(-0 287.01 123.714867)">30 хв</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="455.805" y="99.173473" transform="rotate(-0 455.805 99.173473)">Рівень 3</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c93400" x="455.805" y="123.714867" transform="rotate(-0 455.805 123.714867)">25 хв</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="563.22" y="99.173473" transform="rotate(-0 563.22 99.173473)">Самоперевірка</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6e30a8" x="563.22" y="123.714867" transform="rotate(-0 563.22 123.714867)">10 хв</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pea6f4f45c3">
+   <rect x="10.8" y="10.8" width="613.8" height="188.496"/>
+  </clipPath>
+ </defs>
+</svg>

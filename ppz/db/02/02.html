@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття. Основні об'єкти БД — LibreOffice Base (HSQLDB)</title>
+<style>
+  :root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --accent:#0ea5e9;
+    --dark:#0f172a;
+    --text:#1e293b;
+    --muted:#64748b;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --border:#e2e8f0;
+    --code-bg:#0f172a;
+    --ok:#16a34a;
+    --warn:#d97706;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.65;
+    font-size:16px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header.hero{
+    background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 55%,#0ea5e9 100%);
+    color:#fff;
+    padding:48px 24px 40px;
+    box-shadow:0 10px 30px rgba(15,23,42,.25);
+  }
+  .hero-inner{max-width:1100px;margin:0 auto;}
+  .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.35);
+    padding:4px 14px;
+    border-radius:999px;
+    font-size:.85rem;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  header.hero h1{
+    margin:0 0 12px;
+    font-size:clamp(1.4rem,3.2vw,2.1rem);
+    line-height:1.3;
+    font-weight:700;
+  }
+  header.hero p.sub{margin:0;opacity:.92;max-width:900px;font-size:1rem;}
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
+
+  nav.toc{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px 22px;
+    margin:-32px auto 32px;
+    max-width:1100px;
+    box-shadow:0 8px 24px rgba(15,23,42,.08);
+  }
+  nav.toc h2{margin:0 0 10px;font-size:1rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;}
+  nav.toc ol{margin:0;padding-left:20px;columns:2;column-gap:36px;}
+  nav.toc li{margin:4px 0;break-inside:avoid;}
+  nav.toc a{color:var(--primary-dark);text-decoration:none;}
+  nav.toc a:hover{text-decoration:underline;}
+  @media(max-width:700px){nav.toc ol{columns:1;}}
+
+  section{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:26px 28px;
+    margin-bottom:26px;
+    box-shadow:0 4px 14px rgba(15,23,42,.05);
+  }
+  section > h2{
+    margin:0 0 18px;
+    font-size:1.35rem;
+    color:var(--dark);
+    padding-bottom:10px;
+    border-bottom:3px solid var(--primary);
+    display:inline-block;
+  }
+  h3{font-size:1.08rem;margin:22px 0 10px;color:var(--primary-dark);}
+  h4{font-size:1rem;margin:16px 0 8px;color:var(--dark);}
+  p{margin:10px 0;}
+
+  /* ---------- META ---------- */
+  .meta-grid{display:grid;grid-template-columns:160px 1fr;gap:8px 18px;}
+  .meta-grid dt{font-weight:700;color:var(--muted);}
+  .meta-grid dd{margin:0;}
+  @media(max-width:620px){.meta-grid{grid-template-columns:1fr;} .meta-grid dt{margin-top:8px;}}
+
+  /* ---------- CARDS ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:18px 0;}
+  .card{
+    background:linear-gradient(180deg,#f8fafc,#eef4ff);
+    border:1px solid #dbeafe;
+    border-left:5px solid var(--primary);
+    border-radius:12px;
+    padding:16px 18px;
+  }
+  .card h4{margin:0 0 8px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;}
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:50%;
+    background:var(--primary);color:#fff;font-size:.85rem;font-weight:700;
+  }
+  .card p{margin:6px 0 0;font-size:.95rem;}
+
+  /* ---------- CODE ---------- */
+  pre{
+    background:var(--code-bg);
+    color:#e2e8f0;
+    padding:16px 18px;
+    border-radius:12px;
+    overflow-x:auto;
+    font-size:.88rem;
+    line-height:1.6;
+    border:1px solid #1e293b;
+    margin:14px 0;
+  }
+  pre code{font-family:"JetBrains Mono","Fira Code",Consolas,"Courier New",monospace;}
+  .kw{color:#7dd3fc;font-weight:600;}
+  .str{color:#86efac;}
+  .cm{color:#94a3b8;font-style:italic;}
+  .num-sql{color:#fca5a5;}
+  code.inline{
+    background:#e0e7ff;color:#3730a3;
+    padding:2px 7px;border-radius:6px;
+    font-family:Consolas,monospace;font-size:.88em;
+  }
+
+  /* ---------- TABLES ---------- */
+  .tbl-wrap{overflow-x:auto;margin:16px 0;}
+  table.data{
+    border-collapse:collapse;width:100%;min-width:520px;font-size:.94rem;
+    border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.08);
+  }
+  table.data thead th{
+    background:var(--primary);color:#fff;text-align:left;
+    padding:11px 14px;font-weight:600;font-size:.92rem;
+  }
+  table.data td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+  table.data tbody tr:nth-child(even){background:#f8fafc;}
+  table.data tbody tr:hover{background:#eff6ff;}
+  .pk{color:#b45309;font-weight:700;}
+  .fk{color:#0e7490;font-weight:700;}
+
+  /* ---------- FIGURES ---------- */
+  figure{margin:22px 0;text-align:center;}
+  figure img{
+    max-width:100%;height:auto;border:1px solid var(--border);
+    border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,.10);background:#fff;
+  }
+  figcaption{font-size:.88rem;color:var(--muted);margin-top:10px;font-style:italic;}
+  .img-ph{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    border:2px dashed #93c5fd;border-radius:12px;background:#f0f7ff;
+    color:#1e40af;padding:26px 18px;font-size:.9rem;text-align:center;
+  }
+  .img-ph span{font-size:2rem;}
+  .img-ph small{color:#3b82f6;max-width:520px;}
+
+  .svg-box{
+    background:#f8fafc;border:1px solid var(--border);border-radius:14px;
+    padding:14px;margin:20px 0;overflow-x:auto;
+  }
+  .svg-box svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+
+  /* ---------- CALLOUTS ---------- */
+  .note,.warn,.tip{
+    border-radius:12px;padding:14px 18px;margin:16px 0;font-size:.95rem;
+    border-left:5px solid;
+  }
+  .note{background:#eff6ff;border-color:#3b82f6;}
+  .warn{background:#fffbeb;border-color:#f59e0b;}
+  .tip{background:#ecfdf5;border-color:#10b981;}
+  .note strong,.warn strong,.tip strong{display:block;margin-bottom:4px;}
+
+  /* ---------- STEPS ---------- */
+  ol.steps{list-style:none;counter-reset:step;padding:0;margin:18px 0;}
+  ol.steps > li{
+    counter-increment:step;position:relative;
+    padding:0 0 22px 58px;border-left:2px dashed #cbd5e1;margin-left:18px;
+  }
+  ol.steps > li:last-child{border-left-color:transparent;padding-bottom:0;}
+  ol.steps > li::before{
+    content:counter(step);position:absolute;left:-19px;top:-2px;
+    width:36px;height:36px;border-radius:50%;
+    background:var(--primary);color:#fff;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 4px #dbeafe;
+  }
+  ol.steps > li > strong{display:block;margin-bottom:6px;color:var(--dark);}
+
+  /* ---------- QUIZ ---------- */
+  .quiz li{margin:8px 0;}
+  details{
+    background:#f8fafc;border:1px solid var(--border);border-radius:10px;
+    padding:10px 16px;margin:10px 0;
+  }
+  summary{cursor:pointer;font-weight:600;color:var(--primary-dark);}
+  details p{margin:10px 0 0;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;color:var(--muted);font-size:.88rem;
+    padding:26px 20px;border-top:1px solid var(--border);background:#fff;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="badge">Практичне заняття · Бази даних</div>
+    <h1>Основні об'єкти бази даних. Поняття таблиці, поля, запису.<br>
+        Створення таблиць, означення полів і ключів у середовищі СУБД</h1>
+    <p class="sub">
+      Властивості полів, типи даних. Відображення моделі «сутність-зв'язок» на базу даних.
+      Підтримка обмежень цілісності. Відображення моделі явища (сутності) структурою запису
+      (рядка таблиці). Середовище: <strong>LibreOffice Base + HSQLDB</strong>.
+    </p>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>Зміст заняття</h2>
+  <ol>
+    <li><a href="#meta">Мета та обладнання</a></li>
+    <li><a href="#objects">Основні об'єкти бази даних</a></li>
+    <li><a href="#create">Створення таблиць, означення полів і ключів</a></li>
+    <li><a href="#types">Властивості полів та типи даних</a></li>
+    <li><a href="#er">Відображення моделі «сутність-зв'язок»</a></li>
+    <li><a href="#integrity">Обмеження цілісності</a></li>
+    <li><a href="#record">Сутність → таблиця, атрибут → поле, екземпляр → запис</a></li>
+    <li><a href="#practice">Практичне завдання в LibreOffice Base</a></li>
+    <li><a href="#queries">Запити для перевірки цілісності</a></li>
+    <li><a href="#quiz">Питання для самоконтролю</a></li>
+  </ol>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============ META ============ -->
+  <section id="meta">
+    <h2>Мета та обладнання</h2>
+    <dl class="meta-grid">
+      <dt>Тема</dt>
+      <dd>Основні об'єкти БД. Поняття таблиці, поля, запису. Створення таблиць, означення полів і ключів у середовищі СУБД.</dd>
+
+      <dt>Мета</dt>
+      <dd>Навчитися створювати таблиці в середовищі LibreOffice Base (HSQLDB); визначати поля, типи даних,
+          властивості та ключі; відображати модель «сутність-зв'язок» на структуру реляційної бази даних;
+          забезпечувати обмеження цілісності даних.</dd>
+
+      <dt>Обладнання</dt>
+      <dd>Інструкційні картки, тестові завдання, персональний комп'ютер із встановленим
+          <strong>LibreOffice Base</strong> (вбудована СКБД <strong>HSQLDB — HyperSQL Database</strong>).</dd>
+
+      <dt>Результат</dt>
+      <dd>Файл бази даних <code class="inline">School.odb</code> з двома пов'язаними таблицями
+          <code class="inline">Students</code> та <code class="inline">Grades</code>, заповненими даними
+          та перевіреними запитами.</dd>
+    </dl>
+
+    <div class="note">
+      <strong>Довідково</strong>
+      У LibreOffice Base використовується вбудована СКБД <strong>HSQLDB (HyperSQL Database)</strong> —
+      реляційна система керування базами даних, яка підтримує стандарт SQL, первинні та зовнішні ключі,
+      обмеження цілісності, транзакції та механізм <code class="inline">IDENTITY</code> для автоінкрементних полів.
+    </div>
+  </section>
+
+  <!-- ============ OBJECTS ============ -->
+  <section id="objects">
+    <h2>1. Основні об'єкти бази даних</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h4><span class="num">1</span> Таблиця</h4>
+        <p>Основний структурний елемент БД, що представляє <strong>сутність</strong>
+           (наприклад, «Студенти», «Викладачі», «Предмети»).</p>
+        <p>Складається з рядків (<em>записів</em>) і стовпців (<em>полів</em>). Назва таблиці має
+           відображати її зміст, наприклад <code class="inline">Students</code>.</p>
+      </div>
+
+      <div class="card">
+        <h4><span class="num">2</span> Поле</h4>
+        <p>Стовпець таблиці, який визначає <strong>атрибут сутності</strong>
+           (наприклад, «Ім'я», «Прізвище», «Вік»).</p>
+        <p>Кожне поле має унікальну назву, тип даних (<code class="inline">TEXT</code>,
+           <code class="inline">INTEGER</code>, <code class="inline">DATE</code> тощо) та додаткові
+           властивості (обов'язковість заповнення, значення за замовчуванням).</p>
+      </div>
+
+      <div class="card">
+        <h4><span class="num">3</span> Запис</h4>
+        <p>Рядок таблиці, який містить конкретні дані про <strong>один екземпляр сутності</strong>.</p>
+        <p>Наприклад, у таблиці <code class="inline">Students</code> запис може містити дані:
+           <code class="inline">1, «Іван», «Петров», 20</code>.</p>
+      </div>
+    </div>
+
+    <div class="svg-box">
+      <svg viewBox="0 0 1000 330" role="img" aria-label="Структура таблиці: стовпці-поля та рядки-записи">
+        <defs>
+          <marker id="arrA" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 z" fill="#2563eb"/>
+          </marker>
+        </defs>
+
+        <text x="500" y="26" text-anchor="middle" font-family="Segoe UI" font-size="19" font-weight="700" fill="#0f172a">
+          Таблиця «Students»
+        </text>
+
+        <!-- arrows / labels -->
+        <text x="177" y="62" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#2563eb" font-weight="600">поле (стовпець)</text>
+        <line x1="177" y1="68" x2="177" y2="86" stroke="#2563eb" stroke-width="2" marker-end="url(#arrA)"/>
+
+        <text x="836" y="130" text-anchor="start" font-family="Segoe UI" font-size="13" fill="#16a34a" font-weight="600">запис (рядок)</text>
+        <line x1="828" y1="136" x2="798" y2="136" stroke="#16a34a" stroke-width="2" marker-end="url(#arrA)" transform="translate(0,0)"/>
+
+        <!-- header -->
+        <rect x="90" y="90" width="700" height="46" fill="#2563eb" rx="4"/>
+        <line x1="265" y1="90" x2="265" y2="136" stroke="#ffffff" stroke-opacity=".45"/>
+        <line x1="440" y1="90" x2="440" y2="136" stroke="#ffffff" stroke-opacity=".45"/>
+        <line x1="615" y1="90" x2="615" y2="136" stroke="#ffffff" stroke-opacity=".45"/>
+        <text x="177" y="119" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="#fff" font-weight="700">ID</text>
+        <text x="352" y="119" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="#fff" font-weight="700">FirstName</text>
+        <text x="527" y="119" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="#fff" font-weight="700">LastName</text>
+        <text x="702" y="119" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="#fff" font-weight="700">Age</text>
+
+        <!-- row 1 -->
+        <rect x="90" y="136" width="700" height="44" fill="#eff6ff" stroke="#cbd5e1"/>
+        <line x1="265" y1="136" x2="265" y2="180" stroke="#cbd5e1"/>
+        <line x1="440" y1="136" x2="440" y2="180" stroke="#cbd5e1"/>
+        <line x1="615" y1="136" x2="615" y2="180" stroke="#cbd5e1"/>
+        <text x="177" y="164" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">1</text>
+        <text x="352" y="164" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">Олександр</text>
+        <text x="527" y="164" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">Петренко</text>
+        <text x="702" y="164" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">15</text>
+
+        <!-- row 2 -->
+        <rect x="90" y="180" width="700" height="44" fill="#ffffff" stroke="#cbd5e1"/>
+        <line x1="265" y1="180" x2="265" y2="224" stroke="#cbd5e1"/>
+        <line x1="440" y1="180" x2="440" y2="224" stroke="#cbd5e1"/>
+        <line x1="615" y1="180" x2="615" y2="224" stroke="#cbd5e1"/>
+        <text x="177" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">2</text>
+        <text x="352" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">Марія</text>
+        <text x="527" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">Коваленко</text>
+        <text x="702" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">16</text>
+
+        <!-- row 3 -->
+        <rect x="90" y="224" width="700" height="44" fill="#eff6ff" stroke="#cbd5e1"/>
+        <line x1="265" y1="224" x2="265" y2="268" stroke="#cbd5e1"/>
+        <line x1="440" y1="224" x2="440" y2="268" stroke="#cbd5e1"/>
+        <line x1="615" y1="224" x2="615" y2="268" stroke="#cbd5e1"/>
+        <text x="177" y="252" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">3</text>
+        <text x="352" y="252" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">Андрій</text>
+        <text x="527" y="252" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">Шевченко</text>
+        <text x="702" y="252" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#334155">15</text>
+
+        <!-- bottom border -->
+        <rect x="90" y="90" width="700" height="178" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+
+        <!-- note -->
+        <rect x="200" y="292" width="480" height="30" rx="8" fill="#ecfdf5" stroke="#10b981"/>
+        <text x="440" y="312" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#065f46">
+          Перетин рядка і стовпця = комірка (значення одного поля одного запису)
+        </text>
+      </svg>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:.88rem;font-style:italic;margin-top:-8px;">
+      Рис. Д.1. Структура таблиці: поля (стовпці) та записи (рядки)
+    </p>
+  </section>
+
+  <!-- ============ CREATE ============ -->
+  <section id="create">
+    <h2>2. Створення таблиць, означення полів і ключів</h2>
+
+    <p>У LibreOffice Base таблиці можна створювати двома способами:</p>
+    <ul>
+      <li>через <strong>графічний інтерфейс</strong> (режим «Створити таблицю в режимі дизайну» / «Майстер таблиць»);</li>
+      <li>за допомогою <strong>SQL-запитів</strong> (меню <em>Засоби → SQL…</em>).</li>
+    </ul>
+
+    <h3>2.1. Приклад створення таблиці «Students»</h3>
+    <pre><code><span class="kw">CREATE TABLE</span> Students (
+    ID        <span class="kw">INTEGER PRIMARY KEY</span>,
+    FirstName <span class="kw">VARCHAR</span>(<span class="num-sql">50</span>) <span class="kw">NOT NULL</span>,
+    LastName  <span class="kw">VARCHAR</span>(<span class="num-sql">50</span>) <span class="kw">NOT NULL</span>,
+    Age       <span class="kw">INTEGER</span>
+);</code></pre>
+
+    <p>Варіант із автоматичним генеруванням значення первинного ключа (саме його використовує HSQLDB
+       у LibreOffice Base):</p>
+
+    <pre><code><span class="kw">CREATE TABLE</span> <span class="str">"Students"</span> (
+    <span class="str">"ID"</span>        <span class="kw">INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY</span>,
+    <span class="str">"FirstName"</span> <span class="kw">VARCHAR</span>(<span class="num-sql">50</span>) <span class="kw">NOT NULL</span>,
+    <span class="str">"LastName"</span>  <span class="kw">VARCHAR</span>(<span class="num-sql">50</span>) <span class="kw">NOT NULL</span>,
+    <span class="str">"Age"</span>       <span class="kw">INTEGER</span>
+);</code></pre>
+
+    <h3>2.2. Означення полів</h3>
+    <p>Кожне поле має <strong>назву</strong>, <strong>тип даних</strong> та <strong>додаткові властивості</strong>. Наприклад:</p>
+    <ul>
+      <li><code class="inline">ID INTEGER PRIMARY KEY</code> — поле «ID» є первинним ключем;</li>
+      <li><code class="inline">FirstName VARCHAR(50) NOT NULL</code> — поле «FirstName» має текстовий тип
+          і є обов'язковим для заповнення.</li>
+    </ul>
+
+    <h3>2.3. Ключі</h3>
+    <div class="cards">
+      <div class="card">
+        <h4>🔑 Первинний ключ (Primary Key)</h4>
+        <p>Унікальний ідентифікатор запису. Наприклад, поле <code class="inline">ID</code> у таблиці
+           <code class="inline">Students</code>. Не може бути порожнім і не може повторюватися.</p>
+      </div>
+      <div class="card">
+        <h4>🔗 Зовнішній ключ (Foreign Key)</h4>
+        <p>Поле, яке посилається на первинний ключ іншої таблиці. Використовується для зв'язку таблиць
+           та підтримки цілісності даних.</p>
+      </div>
+    </div>
+
+    <h3>2.4. Приклад визначення зовнішнього ключа</h3>
+    <pre><code><span class="kw">CREATE TABLE</span> <span class="str">"Grades"</span> (
+    <span class="str">"GradeID"</span>   <span class="kw">INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY</span>,
+    <span class="str">"StudentID"</span> <span class="kw">INTEGER NOT NULL</span>,
+    <span class="str">"Grade"</span>     <span class="kw">VARCHAR</span>(<span class="num-sql">2</span>),
+    <span class="kw">CONSTRAINT</span> <span class="str">"FK_StudentID"</span>
+        <span class="kw">FOREIGN KEY</span> (<span class="str">"StudentID"</span>)
+        <span class="kw">REFERENCES</span> <span class="str">"Students"</span>(<span class="str">"ID"</span>)
+        <span class="kw">ON DELETE CASCADE</span>
+        <span class="kw">ON UPDATE CASCADE</span>
+);</code></pre>
+
+    <div class="warn">
+      <strong>Зверніть увагу!</strong>
+      У наведеному вище прикладі таблиця <code class="inline">Grades</code> має <em>складену</em> структуру
+      означення: спочатку перелічуються поля, потім — обмеження <code class="inline">CONSTRAINT … FOREIGN KEY</code>.
+      Після останнього обмеження <strong>крапка з комою не ставиться</strong>, вона завершує всю інструкцію
+      <code class="inline">CREATE TABLE</code>.
+    </div>
+  </section>
+
+  <!-- ============ TYPES ============ -->
+  <section id="types">
+    <h2>3. Властивості полів та типи даних</h2>
+
+    <h3>3.1. Типи даних у HSQLDB</h3>
+    <div class="tbl-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Тип даних</th><th>Призначення</th><th>Приклад значення</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code class="inline">INTEGER</code></td><td>ціле число</td><td>15, 2024, −7</td></tr>
+          <tr><td><code class="inline">VARCHAR(N)</code></td><td>текстовий рядок довжиною до N символів</td><td>'Петренко'</td></tr>
+          <tr><td><code class="inline">DATE</code></td><td>дата</td><td>2026-10-16</td></tr>
+          <tr><td><code class="inline">BOOLEAN</code></td><td>логічне значення</td><td>TRUE / FALSE</td></tr>
+          <tr><td><code class="inline">DECIMAL(p, s)</code></td><td>число з фіксованою точністю</td><td>4.75</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>3.2. Властивості полів</h3>
+    <div class="tbl-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Властивість</th><th>Опис</th><th>Приклад у SQL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>NOT NULL</strong></td><td>поле обов'язкове для заповнення</td><td><code class="inline">LastName VARCHAR(50) NOT NULL</code></td></tr>
+          <tr><td><strong>UNIQUE</strong></td><td>значення поля має бути унікальним</td><td><code class="inline">Email VARCHAR(60) UNIQUE</code></td></tr>
+          <tr><td><strong>DEFAULT</strong></td><td>значення за замовчуванням</td><td><code class="inline">Age INTEGER DEFAULT 15</code></td></tr>
+          <tr><td><strong>AUTOINCREMENT / IDENTITY</strong></td><td>автоматичне збільшення значення (для первинних ключів)</td><td><code class="inline">ID INTEGER GENERATED BY DEFAULT AS IDENTITY</code></td></tr>
+          <tr><td><strong>PRIMARY KEY</strong></td><td>унікальний ідентифікатор запису</td><td><code class="inline">ID INTEGER PRIMARY KEY</code></td></tr>
+          <tr><td><strong>CHECK</strong></td><td>перевірка значення за умовою</td><td><code class="inline">CHECK (Age BETWEEN 6 AND 100)</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ ER ============ -->
+  <section id="er">
+    <h2>4. Відображення моделі «сутність-зв'язок» на базу даних</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h4>Сутність → Таблиця</h4>
+        <p>Сутність «Студент» відображається у вигляді таблиці <code class="inline">Students</code>.</p>
+      </div>
+      <div class="card">
+        <h4>Атрибут → Поле</h4>
+        <p>Атрибути «Ім'я», «Прізвище», «Вік» стають полями <code class="inline">FirstName</code>,
+           <code class="inline">LastName</code>, <code class="inline">Age</code>.</p>
+      </div>
+      <div class="card">
+        <h4>Зв'язок → Зовнішній ключ</h4>
+        <p>Зв'язок між «Студент» і «Оцінка» реалізується полем <code class="inline">StudentID</code>
+           у таблиці <code class="inline">Grades</code>, що посилається на <code class="inline">ID</code>
+           у таблиці <code class="inline">Students</code>.</p>
+      </div>
+    </div>
+
+    <div class="svg-box">
+      <svg viewBox="0 0 1000 380" role="img" aria-label="ER-діаграма зв'язку Students — Grades (1:N)">
+        <defs>
+          <marker id="crow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+            <path d="M0,0 L10,6 L0,12" fill="none" stroke="#0e7490" stroke-width="1.6"/>
+          </marker>
+        </defs>
+
+        <text x="500" y="30" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#0f172a">
+          ER-діаграма: сутності «Студент» і «Оцінка» (зв'язок 1 : N)
+        </text>
+
+        <!-- STUDENTS -->
+        <rect x="60" y="80" width="300" height="44" rx="6" fill="#2563eb"/>
+        <text x="210" y="108" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#fff">Students</text>
+
+        <rect x="60" y="124" width="300" height="180" rx="0" fill="#ffffff" stroke="#cbd5e1"/>
+        <line x1="60" y1="169" x2="360" y2="169" stroke="#e2e8f0"/>
+        <line x1="60" y1="214" x2="360" y2="214" stroke="#e2e8f0"/>
+        <line x1="60" y1="259" x2="360" y2="259" stroke="#e2e8f0"/>
+
+        <text x="76" y="152" font-family="Consolas, monospace" font-size="14" fill="#b45309" font-weight="700">🔑 ID</text>
+        <text x="330" y="152" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">INTEGER (PK)</text>
+
+        <text x="76" y="197" font-family="Consolas, monospace" font-size="14" fill="#334155">FirstName</text>
+        <text x="330" y="197" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">VARCHAR(50)</text>
+
+        <text x="76" y="242" font-family="Consolas, monospace" font-size="14" fill="#334155">LastName</text>
+        <text x="330" y="242" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">VARCHAR(50)</text>
+
+        <text x="76" y="287" font-family="Consolas, monospace" font-size="14" fill="#334155">Age</text>
+        <text x="330" y="287" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">INTEGER</text>
+
+        <rect x="60" y="80" width="300" height="224" rx="6" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+
+        <!-- GRADES -->
+        <rect x="640" y="80" width="300" height="44" rx="6" fill="#0e7490"/>
+        <text x="790" y="108" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#fff">Grades</text>
+
+        <rect x="640" y="124" width="300" height="136" fill="#ffffff" stroke="#cbd5e1"/>
+        <line x1="640" y1="169" x2="940" y2="169" stroke="#e2e8f0"/>
+        <line x1="640" y1="214" x2="940" y2="214" stroke="#e2e8f0"/>
+
+        <text x="656" y="152" font-family="Consolas, monospace" font-size="14" fill="#b45309" font-weight="700">🔑 GradeID</text>
+        <text x="910" y="152" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">INTEGER (PK)</text>
+
+        <text x="656" y="197" font-family="Consolas, monospace" font-size="14" fill="#0e7490" font-weight="700">🔗 StudentID</text>
+        <text x="910" y="197" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">INTEGER (FK)</text>
+
+        <text x="656" y="242" font-family="Consolas, monospace" font-size="14" fill="#334155">Grade</text>
+        <text x="910" y="242" text-anchor="end" font-family="Segoe UI" font-size="11" fill="#94a3b8">VARCHAR(2)</text>
+
+        <rect x="640" y="80" width="300" height="180" rx="6" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+
+        <!-- RELATION LINE -->
+        <line x1="360" y1="196" x2="640" y2="196" stroke="#0e7490" stroke-width="2.4"/>
+        <!-- "1" side -->
+        <line x1="392" y1="184" x2="392" y2="208" stroke="#0e7490" stroke-width="2.4"/>
+        <text x="380" y="176" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#0e7490">1</text>
+        <!-- "N" side -->
+        <line x1="600" y1="184" x2="600" y2="208" stroke="#0e7490" stroke-width="2.4"/>
+        <line x1="600" y1="196" x2="628" y2="180" stroke="#0e7490" stroke-width="2"/>
+        <line x1="600" y1="196" x2="628" y2="212" stroke="#0e7490" stroke-width="2"/>
+        <text x="614" y="176" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#0e7490">N</text>
+
+        <!-- relationship label -->
+        <rect x="392" y="216" width="216" height="28" rx="8" fill="#ecfeff" stroke="#67e8f9"/>
+        <text x="500" y="235" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#155e75">
+          «один студент — багато оцінок»
+        </text>
+
+        <!-- FK note -->
+        <rect x="200" y="322" width="600" height="42" rx="10" fill="#f0f9ff" stroke="#7dd3fc"/>
+        <text x="500" y="340" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#0c4a6e">
+          StudentID (FK у Grades) → ID (PK у Students)
+        </text>
+        <text x="500" y="357" text-anchor="middle" font-family="Segoe UI" font-size="12" fill="#0c4a6e">
+          ON DELETE CASCADE · ON UPDATE CASCADE — цілісність посилань
+        </text>
+      </svg>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:.88rem;font-style:italic;margin-top:-8px;">
+      Рис. Д.2. ER-діаграма зв'язку «Students — Grades» та його відображення на таблиці БД
+    </p>
+
+    <h3>4.3. Типи зв'язків</h3>
+    <div class="svg-box">
+      <svg viewBox="0 0 1000 250" role="img" aria-label="Типи зв'язків: 1:1, 1:N, N:M">
+        <!-- PANEL 1 -->
+        <rect x="20" y="20" width="300" height="200" rx="12" fill="#ffffff" stroke="#dbeafe"/>
+        <text x="170" y="52" text-anchor="middle" font-family="Segoe UI" font-size="14" font-weight="700" fill="#1d4ed8">Один до одного (1:1)</text>
+        <rect x="55" y="105" width="70" height="50" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+        <text x="90" y="136" text-anchor="middle" font-family="Segoe UI" font-size="15" fill="#1e3a8a" font-weight="700">A</text>
+        <rect x="215" y="105" width="70" height="50" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+        <text x="250" y="136" text-anchor="middle" font-family="Segoe UI" font-size="15" fill="#1e3a8a" font-weight="700">B</text>
+        <line x1="125" y1="130" x2="215" y2="130" stroke="#2563eb" stroke-width="2"/>
+        <text x="152" y="122" text-anchor="middle" font-family="Segoe UI" font-size="14" font-weight="700" fill="#2563eb">1</text>
+        <text x="190" y="122" text-anchor="middle" font-family="Segoe UI" font-size="14" font-weight="700" fill="#2563eb">1</text>
+        <text x="170" y="195" text-anchor="middle" font-family="Segoe UI" font-size="11" fill="#64748b">кожному запису A — один запис B</text>
+
+        <!-- PANEL 2 -->
+        <rect x="350" y="20" width="300" height="200" rx="12" fill="#ffffff" stroke="#dbeafe"/>
+        <text x="500" y="52" text-anchor="middle" font-family="Segoe UI" font-size="14" font-weight="700" fill="#1d4ed8">Один до багатьох (1:N)</text>
+        <rect x="385" y="105" width="70" height="50" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+        <text x="420" y="136" text-anchor="middle" font-family="Segoe UI" font-size="15" fill="#1e3a8a" font-weight="700">A</text>
+        <rect x="545" y="105" width="70" height="50" rx="8" fill="#cffafe" stroke="#0e7490"/>
+        <text x="580" y="136" text-anchor="middle" font-family="Segoe UI" font-size="15" fill="#155e75" font-weight="700">B</text>
+        <line x1="455" y1="130" x2="545" y2="130" stroke="#0e7490" stroke-width="2"/>
+        <text x="482" y="122" text-anchor="middle" font-family="Segoe UI" font-size="14" font-weight="700" fill="#0e7490">1</text>
+        <line x1="513" y1="118" x2="540" y2="130" stroke="#0e7490" stroke-width="1.6"/>
+        <line x1="513" y1="142" x2="540" y2="130" stroke="#0e7490" stroke-width="1.6"/>
+        <text x="527" y="112" text-anchor="middle" font-family="Segoe UI" font-size="14" font-weight="700" fill="#0e7490">N</text>
+        <text x="500" y="195" text-anchor="middle" font-family="Segoe UI" font-size="11" fill="#64748b">одному запису A — багато записів B</text>
+
+        <!-- PANEL 3 -->
+        <rect x="680" y="20" width="300" height="200" rx="12" fill="#ffffff" stroke="#dbeafe"/>
+        <text x="830" y="52" text-anchor="middle" font-family="Segoe UI" font-size="14" font-weight="700" fill="#1d4ed8">Багато до багатьох (N:M)</text>
+        <rect x="696" y="105" width="58" height="50" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+        <text x="725" y="136" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#1e3a8a" font-weight="700">A</text>
+        <rect x="800" y="105" width="58" height="50" rx="8" fill="#fef3c7" stroke="#d97706"/>
+        <text x="829" y="132" text-anchor="middle" font-family="Segoe UI" font-size="12" fill="#92400e" font-weight="700">AB</text>
+        <text x="829" y="147" text-anchor="middle" font-family="Segoe UI" font-size="9" fill="#92400e">проміжна</text>
+        <rect x="904" y="105" width="58" height="50" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+        <text x="933" y="136" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#1e3a8a" font-weight="700">B</text>
+        <line x1="754" y1="130" x2="800" y2="130" stroke="#2563eb" stroke-width="2"/>
+        <line x1="858" y1="130" x2="904" y2="130" stroke="#2563eb" stroke-width="2"/>
+        <text x="770" y="122" text-anchor="middle" font-family="Segoe UI" font-size="12" font-weight="700" fill="#2563eb">1</text>
+        <text x="790" y="122" text-anchor="middle" font-family="Segoe UI" font-size="12" font-weight="700" fill="#2563eb">N</text>
+        <text x="875" y="122" text-anchor="middle" font-family="Segoe UI" font-size="12" font-weight="700" fill="#2563eb">M</text>
+        <text x="888" y="122" text-anchor="middle" font-family="Segoe UI" font-size="12" font-weight="700" fill="#2563eb">1</text>
+        <text x="830" y="195" text-anchor="middle" font-family="Segoe UI" font-size="11" fill="#64748b">реалізується через проміжну таблицю</text>
+      </svg>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:.88rem;font-style:italic;margin-top:-8px;">
+      Рис. Д.3. Типи зв'язків між сутностями
+    </p>
+  </section>
+
+  <!-- ============ INTEGRITY ============ -->
+  <section id="integrity">
+    <h2>5. Підтримка обмежень цілісності в БД</h2>
+
+    <p><strong>Обмеження цілісності</strong> — це правила, які забезпечують коректність даних у базі.
+       Наприклад, зовнішній ключ гарантує, що значення в одній таблиці відповідають значенням в іншій.</p>
+
+    <div class="tbl-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Обмеження</th><th>Що гарантує</th><th>Приклад</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>PRIMARY KEY</strong></td>
+            <td>унікальність та обов'язковість заповнення</td>
+            <td><code class="inline">ID INTEGER PRIMARY KEY</code></td>
+          </tr>
+          <tr>
+            <td><strong>FOREIGN KEY</strong></td>
+            <td>посилання на існуючий запис в іншій таблиці</td>
+            <td><code class="inline">FOREIGN KEY (StudentID) REFERENCES Students(ID)</code></td>
+          </tr>
+          <tr>
+            <td><strong>NOT NULL</strong></td>
+            <td>поле не може бути порожнім</td>
+            <td><code class="inline">LastName VARCHAR(50) NOT NULL</code></td>
+          </tr>
+          <tr>
+            <td><strong>UNIQUE</strong></td>
+            <td>значення не повторюється в межах таблиці</td>
+            <td><code class="inline">Email VARCHAR(60) UNIQUE</code></td>
+          </tr>
+          <tr>
+            <td><strong>CHECK</strong></td>
+            <td>перевірка значення за певними умовами</td>
+            <td><code class="inline">CHECK (Age &gt;= 6)</code></td>
+          </tr>
+          <tr>
+            <td><strong>ON DELETE / ON UPDATE CASCADE</strong></td>
+            <td>автоматичне узгодження пов'язаних записів</td>
+            <td><code class="inline">ON DELETE CASCADE</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>Практичний сенс</strong>
+      Завдяки зовнішньому ключу неможливо додати оцінку студентові, якого не існує в таблиці
+      <code class="inline">Students</code>. HSQLDB поверне помилку порушення цілісності — і це правильно,
+      адже база даних залишається узгодженою.
+    </div>
+  </section>
+
+  <!-- ============ RECORD ============ -->
+  <section id="record">
+    <h2>6. Відображення моделі явища (сутності) структурою запису</h2>
+
+    <div class="tbl-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Елемент моделі «сутність-зв'язок»</th><th>Елемент реляційної БД</th><th>Приклад</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Сутність (явище)</td><td>Таблиця</td><td>«Студент» → <code class="inline">Students</code></td></tr>
+          <tr><td>Атрибут сутності</td><td>Поле (стовпець)</td><td>«Ім'я» → <code class="inline">FirstName</code></td></tr>
+          <tr><td>Екземпляр сутності</td><td>Запис (рядок)</td><td>студент «Іван Петров»</td></tr>
+          <tr><td>Зв'язок між сутностями</td><td>Зовнішній ключ</td><td><code class="inline">Grades.StudentID</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ol>
+      <li><strong>Сутність як таблиця.</strong> Кожна сутність (наприклад, «Студент») відображається
+          у вигляді таблиці.</li>
+      <li><strong>Атрибути сутності як поля.</strong> Атрибути «Ім'я», «Прізвище», «Вік» стають полями
+          таблиці.</li>
+      <li><strong>Запис як екземпляр сутності.</strong> Кожен запис у таблиці представляє конкретний
+          екземпляр сутності (наприклад, студент «Іван Петров»).</li>
+    </ol>
+  </section>
+
+  <!-- ============ PRACTICE ============ -->
+  <section id="practice">
+    <h2>7. Практичне завдання. Реалізація в LibreOffice Base (HSQLDB)</h2>
+
+    <ol class="steps">
+
+      <li>
+        <strong>Створіть нову базу даних.</strong>
+        Відкрийте <em>LibreOffice Base</em> → виберіть «Створити нову базу даних» → «Далі» →
+        залиште параметр «Так, зареєструвати базу даних» → «Готово».
+        <figure class="shot">
+          <img src="images/base-01-save.png" alt="Вікно збереження файлу бази даних School.odb">
+          <figcaption>Рис. 7.1. Збереження бази даних під назвою <strong>School.odb</strong></figcaption>
+        </figure>
+      </li>
+
+      <li>
+        <strong>Збережіть файл як <code class="inline">School.odb</code></strong>
+        у власній робочій папці (наприклад, <em>Робочий стіл → DB → Практика 6</em>).
+      </li>
+
+      <li>
+        <strong>Перейдіть до розділу «Таблиці»</strong> та створіть нову таблицю.
+        Для роботи з SQL відкрийте меню <em>Засоби → SQL…</em>
+        <figure class="shot">
+          <img src="images/base-02-sql-menu.png" alt="Меню Засоби → SQL у LibreOffice Base">
+          <figcaption>Рис. 7.2. Вікно виконання SQL-команди (<em>Засоби → SQL…</em>)</figcaption>
+        </figure>
+      </li>
+
+      <li>
+        <strong>Визначте поля, типи даних та ключі таблиці «Students».</strong>
+        Введіть і виконайте команду:
+        <figure class="shot">
+          <img src="images/base-03-create-students.png" alt="Виконання SQL-команди CREATE TABLE Students">
+          <figcaption>Рис. 7.3. Створення таблиці <code class="inline">Students</code></figcaption>
+        </figure>
+        <pre><code><span class="kw">CREATE TABLE</span> <span class="str">"Students"</span> (
+    <span class="str">"ID"</span>        <span class="kw">INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY</span>,
+    <span class="str">"FirstName"</span> <span class="kw">VARCHAR</span>(<span class="num-sql">50</span>) <span class="kw">NOT NULL</span>,
+    <span class="str">"LastName"</span>  <span class="kw">VARCHAR</span>(<span class="num-sql">50</span>) <span class="kw">NOT NULL</span>,
+    <span class="str">"Age"</span>       <span class="kw">INTEGER</span>
+);</code></pre>
+      </li>
+
+      <li>
+        <strong>Створіть таблицю «Grades» зі зовнішнім ключем.</strong>
+        <figure class="shot">
+          <img src="images/base-04-create-grades.png" alt="Виконання SQL-команди CREATE TABLE Grades із зовнішнім ключем">
+          <figcaption>Рис. 7.4. Створення таблиці <code class="inline">Grades</code> із зовнішнім ключем
+            <code class="inline">FK_StudentID</code></figcaption>
+        </figure>
+        <pre><code><span class="kw">CREATE TABLE</span> <span class="str">"Grades"</span> (
+    <span class="str">"GradeID"</span>   <span class="kw">INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY</span>,
+    <span class="str">"StudentID"</span> <span class="kw">INTEGER NOT NULL</span>,
+    <span class="str">"Grade"</span>     <span class="kw">VARCHAR</span>(<span class="num-sql">2</span>),
+    <span class="kw">CONSTRAINT</span> <span class="str">"FK_StudentID"</span>
+        <span class="kw">FOREIGN KEY</span> (<span class="str">"StudentID"</span>)
+        <span class="kw">REFERENCES</span> <span class="str">"Students"</span>(<span class="str">"ID"</span>)
+        <span class="kw">ON DELETE CASCADE</span>
+        <span class="kw">ON UPDATE CASCADE</span>
+);</code></pre>
+      </li>
+
+      <li>
+        <strong>Заповніть таблиці даними.</strong>
+        Спочатку — студенти:
+        <pre><code><span class="kw">INSERT INTO</span> <span class="str">"Students"</span> (<span class="str">"FirstName"</span>, <span class="str">"LastName"</span>, <span class="str">"Age"</span>) <span class="kw">VALUES</span> (<span class="str">'Олександр'</span>, <span class="str">'Петренко'</span>, <span class="num-sql">15</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Students"</span> (<span class="str">"FirstName"</span>, <span class="str">"LastName"</span>, <span class="str">"Age"</span>) <span class="kw">VALUES</span> (<span class="str">'Марія'</span>,     <span class="str">'Коваленко'</span>, <span class="num-sql">16</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Students"</span> (<span class="str">"FirstName"</span>, <span class="str">"LastName"</span>, <span class="str">"Age"</span>) <span class="kw">VALUES</span> (<span class="str">'Андрій'</span>,   <span class="str">'Шевченко'</span>, <span class="num-sql">15</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Students"</span> (<span class="str">"FirstName"</span>, <span class="str">"LastName"</span>, <span class="str">"Age"</span>) <span class="kw">VALUES</span> (<span class="str">'Катерина'</span>, <span class="str">'Бондаренко'</span>, <span class="num-sql">17</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Students"</span> (<span class="str">"FirstName"</span>, <span class="str">"LastName"</span>, <span class="str">"Age"</span>) <span class="kw">VALUES</span> (<span class="str">'Максим'</span>,   <span class="str">'Лисенко'</span>,  <span class="num-sql">16</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Students"</span> (<span class="str">"FirstName"</span>, <span class="str">"LastName"</span>, <span class="str">"Age"</span>) <span class="kw">VALUES</span> (<span class="str">'Софія'</span>,    <span class="str">'Ткаченко'</span>, <span class="num-sql">15</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Students"</span> (<span class="str">"FirstName"</span>, <span class="str">"LastName"</span>, <span class="str">"Age"</span>) <span class="kw">VALUES</span> (<span class="str">'Дмитро'</span>,   <span class="str">'Мельник'</span>,  <span class="num-sql">17</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Students"</span> (<span class="str">"FirstName"</span>, <span class="str">"LastName"</span>, <span class="str">"Age"</span>) <span class="kw">VALUES</span> (<span class="str">'Анна'</span>,     <span class="str">'Гриценко'</span>, <span class="num-sql">16</span>);</code></pre>
+
+        Потім — оцінки (значення <code class="inline">StudentID</code> від 1 до 8):
+        <pre><code><span class="cm">-- Вставка оцінок</span>
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">1</span>, <span class="str">'A'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">1</span>, <span class="str">'B'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">2</span>, <span class="str">'A'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">2</span>, <span class="str">'A'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">3</span>, <span class="str">'C'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">3</span>, <span class="str">'B'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">4</span>, <span class="str">'A'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">5</span>, <span class="str">'B'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">5</span>, <span class="str">'B'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">6</span>, <span class="str">'A'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">7</span>, <span class="str">'C'</span>);
+<span class="kw">INSERT INTO</span> <span class="str">"Grades"</span> (<span class="str">"StudentID"</span>, <span class="str">"Grade"</span>) <span class="kw">VALUES</span> (<span class="num-sql">8</span>, <span class="str">'B'</span>);</code></pre>
+      </li>
+
+      <li>
+        <strong>Перевірте цілісність бази даних</strong> за допомогою запитів (див. наступний розділ).
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- ============ QUERIES ============ -->
+  <section id="queries">
+    <h2>8. Запити для перевірки цілісності бази даних</h2>
+
+    <h3>8.1. Перевірка зв'язку (INNER JOIN)</h3>
+    <p>Показує, які оцінки отримав кожен студент. Записи без пари не виводяться.</p>
+    <pre><code><span class="kw">SELECT</span>
+    s.<span class="str">"FirstName"</span>,
+    s.<span class="str">"LastName"</span>,
+    g.<span class="str">"Grade"</span>
+<span class="kw">FROM</span> <span class="str">"Students"</span> s
+<span class="kw">INNER JOIN</span> <span class="str">"Grades"</span> g <span class="kw">ON</span> s.<span class="str">"ID"</span> = g.<span class="str">"StudentID"</span>
+<span class="kw">ORDER BY</span> s.<span class="str">"LastName"</span>, g.<span class="str">"Grade"</span>;</code></pre>
+
+    <h3>8.2. Кількість оцінок кожного студента (LEFT JOIN + GROUP BY)</h3>
+    <pre><code><span class="kw">SELECT</span>
+    s.<span class="str">"FirstName"</span>,
+    s.<span class="str">"LastName"</span>,
+    <span class="kw">COUNT</span>(g.<span class="str">"GradeID"</span>) <span class="kw">AS</span> <span class="str">"Кількість оцінок"</span>
+<span class="kw">FROM</span> <span class="str">"Students"</span> s
+<span class="kw">LEFT JOIN</span> <span class="str">"Grades"</span> g <span class="kw">ON</span> s.<span class="str">"ID"</span> = g.<span class="str">"StudentID"</span>
+<span class="kw">GROUP BY</span> s.<span class="str">"ID"</span>, s.<span class="str">"FirstName"</span>, s.<span class="str">"LastName"</span>;</code></pre>
+
+    <div class="note">
+      <strong>Пояснення</strong>
+      <code class="inline">INNER JOIN</code> повертає лише ті рядки, для яких існує відповідність в обох
+      таблицях, а <code class="inline">LEFT JOIN</code> — усі рядки лівої таблиці
+      (<code class="inline">Students</code>) навіть тоді, коли в <code class="inline">Grades</code>
+      немає жодної оцінки (тоді <code class="inline">COUNT</code> дорівнює 0).
+    </div>
+
+    <h3>8.3. Очікуваний результат запиту 8.2</h3>
+    <div class="tbl-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>FirstName</th><th>LastName</th><th>Кількість оцінок</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Олександр</td><td>Петренко</td><td>2</td></tr>
+          <tr><td>Марія</td><td>Коваленко</td><td>2</td></tr>
+          <tr><td>Андрій</td><td>Шевченко</td><td>2</td></tr>
+          <tr><td>Катерина</td><td>Бондаренко</td><td>1</td></tr>
+          <tr><td>Максим</td><td>Лисенко</td><td>2</td></tr>
+          <tr><td>Софія</td><td>Ткаченко</td><td>1</td></tr>
+          <tr><td>Дмитро</td><td>Мельник</td><td>1</td></tr>
+          <tr><td>Анна</td><td>Гриценко</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz">
+    <h2>9. Питання для самоконтролю</h2>
+
+    <ol class="quiz">
+      <li>Що таке таблиця, поле та запис? Як вони співвідносяться між собою?</li>
+      <li>Які типи даних підтримує HSQLDB? Наведіть приклади використання кожного з них.</li>
+      <li>Чим відрізняється первинний ключ від зовнішнього?</li>
+      <li>Які властивості може мати поле? Що означає <code class="inline">NOT NULL</code> та
+          <code class="inline">UNIQUE</code>?</li>
+      <li>Як модель «сутність-зв'язок» відображається на структуру реляційної бази даних?</li>
+      <li>Які типи зв'язків існують між сутностями? Як реалізується зв'язок N:M?</li>
+      <li>Що таке обмеження цілісності? Наведіть приклади.</li>
+      <li>Для чого використовують <code class="inline">ON DELETE CASCADE</code>?</li>
+    </ol>
+
+    <details>
+      <summary>Показати короткі відповіді</summary>
+      <p><strong>1.</strong> Таблиця — сутність; поле — стовпець (атрибут); запис — рядок (екземпляр сутності).</p>
+      <p><strong>3.</strong> Первинний ключ унікально ідентифікує запис у власній таблиці, зовнішній —
+          посилається на первинний ключ іншої таблиці й реалізує зв'язок.</p>
+      <p><strong>6.</strong> 1:1, 1:N та N:M. Зв'язок N:M реалізується через проміжну (зв'язкову) таблицю
+          з двома зовнішніми ключами.</p>
+      <p><strong>8.</strong> <code class="inline">ON DELETE CASCADE</code> автоматично видаляє пов'язані
+          записи дочірньої таблиці при видаленні батьківського запису, зберігаючи цілісність даних.</p>
+    </details>
+  </section>
+
+</div>
+
+<footer>
+  Практичне заняття з баз даних · LibreOffice Base + HSQLDB · Матеріал підготовлено для використання
+  на уроці та для самостійної роботи
+</footer>
+
+<script>
+  /* Якщо зображення недоступне — показуємо акуратну заглушку замість «битої» картинки */
+  document.querySelectorAll('figure.shot img').forEach(function (img) {
+    img.addEventListener('error', function () {
+      var ph = document.createElement('div');
+      ph.className = 'img-ph';
+      ph.innerHTML = '<span>🖼️</span><small>' + (img.getAttribute('alt') || 'Зображення') +
+                     '<br><em>Додайте файл: ' + img.getAttribute('src') + '</em></small>';
+      img.replaceWith(ph);
+    });
+  });
+</script>
+
+</body>
+</html>

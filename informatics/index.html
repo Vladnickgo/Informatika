@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математика: График функции</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 { color: #2c3e50; }
+        .tikz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            min-height: 200px; /* Чтобы блок не схлопывался, пока грузится график */
+        }
+        .note {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+
+    <!-- 1. Подключаем MathJax для формул в тексте -->
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <!-- 2. Подключаем TikZJax для графиков -->
+    <script src="https://tikzjax.com/v1/tikzjax.js"></script>
+</head>
+<body>
+
+    <h1>Тема: Квадратичная функция</h1>
+    <p>Рассмотрим график функции <strong>\(y = x^2\)</strong>. Это классическая парабола с вершиной в начале координат.</p>
+
+    <div class="canvas-container" style="display: flex; justify-content: center; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <canvas id="parabolaCanvas" width="400" height="300"></canvas>
+    </div>
+    
+    <script>
+        // Ждем загрузки страницы
+        window.onload = function() {
+            const canvas = document.getElementById('parabolaCanvas');
+            const ctx = canvas.getContext('2d');
+    
+            // Настройки масштаба и центра
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height - 50; // Ось X чуть ниже низа
+            const scale = 40; // 1 единица = 40 пикселей
+    
+            // Очистка фона
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+            // --- 1. Рисуем оси координат ---
+            ctx.beginPath();
+            ctx.strokeStyle = "#333";
+            ctx.lineWidth = 2;
+            // Ось X
+            ctx.moveTo(10, centerY);
+            ctx.lineTo(canvas.width - 10, centerY);
+            // Ось Y
+            ctx.moveTo(centerX, canvas.height - 10);
+            ctx.lineTo(centerX, 10);
+            ctx.stroke();
+    
+            // Стрелки на осях
+            // Стрелка X
+            ctx.beginPath();
+            ctx.moveTo(canvas.width - 10, centerY);
+            ctx.lineTo(canvas.width - 20, centerY - 5);
+            ctx.lineTo(canvas.width - 20, centerY + 5);
+            ctx.fillStyle = "#333";
+            ctx.fill();
+            // Стрелка Y
+            ctx.beginPath();
+            ctx.moveTo(centerX, 10);
+            ctx.lineTo(centerX - 5, 20);
+            ctx.lineTo(centerX + 5, 20);
+            ctx.fill();
+    
+            // Подписи осей
+            ctx.fillStyle = "#333";
+            ctx.font = "italic 16px Arial";
+            ctx.fillText("x", canvas.width - 25, centerY + 20);
+            ctx.fillText("y", centerX + 10, 20);
+    
+            // --- 2. Рисуем деления (сетку) и цифры ---
+            ctx.font = "14px Arial";
+            ctx.textAlign = "center";
+            
+            // Деления по X от -3 до 3
+            for (let i = -3; i <= 3; i++) {
+                if (i === 0) continue; // Пропускаем ноль, он в центре
+                let x = centerX + i * scale;
+                // Черточка
+                ctx.beginPath();
+                ctx.moveTo(x, centerY - 5);
+                ctx.lineTo(x, centerY + 5);
+                ctx.stroke();
+                // Цифра
+                ctx.fillText(i, x, centerY + 20);
+            }
+    
+            // --- 3. Рисуем саму параболу y = x^2 ---
+            ctx.beginPath();
+            ctx.strokeStyle = "#0055cc"; // Синий цвет
+            ctx.lineWidth = 3;
+            
+            // Проходимся по X от -2.5 до 2.5 с маленьким шагом
+            for (let x = -2.5; x <= 2.5; x += 0.05) {
+                let y = x * x;
+                // Перевод математических координат в экранные
+                let screenX = centerX + x * scale;
+                let screenY = centerY - y * scale;
+    
+                if (x === -2.5) {
+                    ctx.moveTo(screenX, screenY); // Начало линии
+                } else {
+                    ctx.lineTo(screenX, screenY); // Продолжение
+                }
+            }
+            ctx.stroke();
+    
+            // --- 4. Подписи и точки ---
+            // Точка на вершине (0,0)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = "#333";
+            ctx.fill();
+    
+            // Подпись функции
+            ctx.fillStyle = "#0055cc";
+            ctx.font = "bold 16px Arial";
+            ctx.textAlign = "left";
+            ctx.fillText("y = x²", centerX + 1.5 * scale, centerY - 1.5 * scale);
+        };
+    </script>
+    <div class="note">
+        <p><strong>Примечание для студентов:</strong> Ветви параболы направлены вверх, так как коэффициент при \(x^2\) положителен. Чем больше \(|x|\), тем быстрее растет \(y\).</p>
+    </div>
+
+</body>
+</html>

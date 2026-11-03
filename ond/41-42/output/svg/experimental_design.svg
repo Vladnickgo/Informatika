@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" width="900" height="470">
+  <style>text { font-family: Arial, DejaVu Sans, sans-serif; }</style>
+  <rect width="900" height="470" fill="#FFFFFF"/>
+  <text x="450" y="35" text-anchor="middle" font-size="20" font-weight="bold" fill="#1F3864">Дизайн формувального експерименту</text>
+
+  <text x="270" y="92" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">До (констат.)</text>
+  <text x="480" y="92" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Вплив (форм.)</text>
+  <text x="700" y="92" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Після (контр.)</text>
+
+  <!-- ЕГ row -->
+  <rect x="40" y="115" width="90" height="130" rx="10" fill="#FCE4D6" stroke="#ED7D31" stroke-width="2.5"/>
+  <text x="85" y="165" text-anchor="middle" font-size="22" font-weight="bold" fill="#1F3864">ЕГ</text>
+  <text x="85" y="192" text-anchor="middle" font-size="11" fill="#404040">експерим.</text>
+  <text x="85" y="208" text-anchor="middle" font-size="11" fill="#404040">група</text>
+
+  <rect x="160" y="115" width="220" height="130" rx="10" fill="#DEEBF7" stroke="#4472C4" stroke-width="2"/>
+  <text x="270" y="170" text-anchor="middle" font-size="14" fill="#1F3864">Вимірювання</text>
+  <text x="270" y="192" text-anchor="middle" font-size="14" fill="#1F3864">вихідного рівня</text>
+
+  <rect x="405" y="115" width="150" height="130" rx="10" fill="#FCE4D6" stroke="#ED7D31" stroke-width="3"/>
+  <text x="480" y="165" text-anchor="middle" font-size="14" font-weight="bold" fill="#C00000">МЕТОДИКА</text>
+  <text x="480" y="188" text-anchor="middle" font-size="12" fill="#C00000">(впровадження)</text>
+
+  <rect x="580" y="115" width="220" height="130" rx="10" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/>
+  <text x="690" y="170" text-anchor="middle" font-size="14" fill="#1F3864">Повторне</text>
+  <text x="690" y="192" text-anchor="middle" font-size="14" fill="#1F3864">вимірювання</text>
+
+  <line x1="382" y1="180" x2="402" y2="180" stroke="#1F3864" stroke-width="2"/>
+  <polygon points="402,175 410,180 402,185" fill="#1F3864"/>
+  <line x1="557" y1="180" x2="577" y2="180" stroke="#1F3864" stroke-width="2"/>
+  <polygon points="577,175 585,180 577,185" fill="#1F3864"/>
+
+  <!-- КГ row -->
+  <rect x="40" y="285" width="90" height="130" rx="10" fill="#E2EFDA" stroke="#70AD47" stroke-width="2.5"/>
+  <text x="85" y="335" text-anchor="middle" font-size="22" font-weight="bold" fill="#1F3864">КГ</text>
+  <text x="85" y="362" text-anchor="middle" font-size="11" fill="#404040">контр.</text>
+  <text x="85" y="378" text-anchor="middle" font-size="11" fill="#404040">група</text>
+
+  <rect x="160" y="285" width="220" height="130" rx="10" fill="#DEEBF7" stroke="#4472C4" stroke-width="2"/>
+  <text x="270" y="340" text-anchor="middle" font-size="14" fill="#1F3864">Вимірювання</text>
+  <text x="270" y="362" text-anchor="middle" font-size="14" fill="#1F3864">вихідного рівня</text>
+
+  <rect x="405" y="285" width="150" height="130" rx="10" fill="#F2F2F2" stroke="#A5A5A5" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="480" y="335" text-anchor="middle" font-size="13" fill="#666666">Традиційне</text>
+  <text x="480" y="355" text-anchor="middle" font-size="13" fill="#666666">навчання</text>
+  <text x="480" y="378" text-anchor="middle" font-size="11" fill="#666666">(без змін)</text>
+
+  <rect x="580" y="285" width="220" height="130" rx="10" fill="#E2EFDA" stroke="#70AD47" stroke-width="2"/>
+  <text x="690" y="340" text-anchor="middle" font-size="14" fill="#1F3864">Повторне</text>
+  <text x="690" y="362" text-anchor="middle" font-size="14" fill="#1F3864">вимірювання</text>
+
+  <line x1="382" y1="350" x2="402" y2="350" stroke="#1F3864" stroke-width="2"/>
+  <polygon points="402,345 410,350 402,355" fill="#1F3864"/>
+  <line x1="557" y1="350" x2="577" y2="350" stroke="#1F3864" stroke-width="2"/>
+  <polygon points="577,345 585,350 577,355" fill="#1F3864"/>
+
+  <text x="450" y="455" text-anchor="middle" font-size="12" font-style="italic" fill="#404040">Порівняння приросту показників ЕГ і КГ доводить ефективність методики</text>
+</svg>

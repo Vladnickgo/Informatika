@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Гурток інформатики · Вступне заняття</title>
+  <style>
+    :root {
+      --ink: #0d233a;
+      --ink-soft: #34526f;
+      --blue: #2563eb;
+      --blue-deep: #1e40af;
+      --sky: #dbeafe;
+      --mint: #dcfce7;
+      --amber: #fef3c7;
+      --rose: #ffe4e6;
+      --violet: #ede9fe;
+      --line: #d3e3f3;
+      --card: #ffffff;
+      --bg1: #f2f7fd;
+      --bg2: #e6eefb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Roboto, system-ui, -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #dbeafe 0%, transparent 60%),
+        radial-gradient(1000px 500px at 100% 10%, #ede9fe 0%, transparent 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      color: var(--ink);
+      line-height: 1.65;
+      padding: 2rem 1.2rem 4rem;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #ffffff 0%, #f3f8ff 100%);
+      border-radius: 36px;
+      padding: 2.6rem 2.4rem;
+      box-shadow: 0 30px 60px -30px rgba(13, 52, 110, .35), 0 2px 0 #ffffff inset;
+      border: 1px solid rgba(255, 255, 255, .9);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #bfdbfe, transparent 70%);
+      z-index: 0;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--sky);
+      color: var(--blue-deep);
+      font-weight: 700;
+      font-size: .85rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .45rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: .7rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--blue), #7c3aed);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--ink-soft);
+      font-size: 1.08rem;
+      max-width: 52ch;
+    }
+
+    .hero-svg {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-svg svg {
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+      filter: drop-shadow(0 20px 30px rgba(37, 99, 235, .22));
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section {
+      margin-top: 3.2rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: .6rem;
+    }
+
+    .section-icon {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e0ecff, #f3f8ff);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 18px -10px rgba(37, 99, 235, .4);
+    }
+
+    .section-icon svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      letter-spacing: -.01em;
+      color: var(--ink);
+    }
+
+    .section-sub {
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      margin-bottom: 1.4rem;
+      max-width: 75ch;
+    }
+
+    .panel {
+      background: var(--card);
+      border-radius: 26px;
+      padding: 1.8rem 1.9rem;
+      box-shadow: 0 18px 40px -28px rgba(13, 52, 110, .35);
+      border: 1px solid #eaf1fa;
+    }
+
+    /* ---------- GRIDS ---------- */
+    .grid-3 {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 1.2rem;
+    }
+
+    .tile {
+      background: #fff;
+      border-radius: 22px;
+      padding: 1.4rem 1.3rem;
+      border: 1px solid #eaf1fa;
+      box-shadow: 0 12px 26px -22px rgba(13, 52, 110, .4);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-4px);
+      border-color: #c7dcf4;
+      box-shadow: 0 22px 40px -22px rgba(37, 99, 235, .35);
+    }
+
+    .tile .ico {
+      width: 46px;
+      height: 46px;
+      margin-bottom: .8rem;
+    }
+
+    .tile h4 {
+      font-size: 1.12rem;
+      margin-bottom: .35rem;
+      color: var(--ink);
+    }
+
+    .tile p {
+      color: var(--ink-soft);
+      font-size: .97rem;
+    }
+
+    .tile .tag {
+      display: inline-block;
+      margin-top: .8rem;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: .28rem .8rem;
+      border-radius: 999px;
+      background: var(--sky);
+      color: var(--blue-deep);
+    }
+
+    /* ---------- CALLOUTS ---------- */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: linear-gradient(135deg, #fffbeb, #fff7e0);
+      border: 1px solid #fde68a;
+      border-left: 6px solid #f59e0b;
+      border-radius: 20px;
+      padding: 1.2rem 1.4rem;
+      margin: 1.4rem 0;
+    }
+
+    .callout svg {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      margin-top: 2px;
+    }
+
+    .callout p {
+      color: #5c4212;
+      font-size: 1rem;
+    }
+
+    .callout.info {
+      background: linear-gradient(135deg, #eff6ff, #e0edff);
+      border-color: #bfdbfe;
+      border-left-color: var(--blue);
+    }
+
+    .callout.info p {
+      color: #1e3a8a;
+    }
+
+    /* ---------- FILE STRIP ---------- */
+    .file-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    .file-chip {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .7rem 1.1rem .7rem .8rem;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid #eaf1fa;
+      box-shadow: 0 10px 20px -18px rgba(13, 52, 110, .5);
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: .92rem;
+      font-weight: 600;
+    }
+
+    .file-chip .dot {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", sans-serif;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .c-html {
+      background: #e34f26;
+    }
+
+    .c-css {
+      background: #2965f1;
+    }
+
+    .c-js {
+      background: #f7df1e;
+      color: #1a1a1a !important;
+    }
+
+    .c-pdf {
+      background: #dc2626;
+    }
+
+    .c-img {
+      background: #16a34a;
+    }
+
+    .c-json {
+      background: #7c3aed;
+    }
+
+    /* ---------- FLOW ---------- */
+    .flow {
+      display: flex;
+      justify-content: center;
+      margin: 1.2rem 0 .4rem;
+      overflow-x: auto;
+    }
+
+    .flow svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ---------- CODE ---------- */
+    .code {
+      background: #0b1a2b;
+      border-radius: 22px;
+      overflow: hidden;
+      margin: 1.2rem 0;
+      box-shadow: 0 22px 44px -30px #0a1a2e, 0 0 0 1px #1c3a56 inset;
+    }
+
+    .code-bar {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.1rem;
+      background: #0e2238;
+      border-bottom: 1px solid #16324c;
+    }
+
+    .code-bar .d {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .code-bar .d1 {
+      background: #ff5f57;
+    }
+
+    .code-bar .d2 {
+      background: #febc2e;
+    }
+
+    .code-bar .d3 {
+      background: #28c840;
+    }
+
+    .code-bar .fname {
+      margin-left: .6rem;
+      color: #7fa8c9;
+      font-family: "JetBrains Mono", monospace;
+      font-size: .82rem;
+    }
+
+    pre {
+      padding: 1.3rem 1.5rem;
+      color: #d4e6ff;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: .94rem;
+      line-height: 1.75;
+      overflow-x: auto;
+    }
+
+    .k {
+      color: #7dd3fc;
+    }
+
+    /* tag */
+    .a {
+      color: #fbbf24;
+    }
+
+    /* attr */
+    .v {
+      color: #86efac;
+    }
+
+    /* value */
+    .cm {
+      color: #64748b;
+      font-style: italic;
+    }
+
+    /* comment */
+    .p {
+      color: #e2e8f0;
+    }
+
+    /* punctuation */
+
+    /* ---------- DEMO ---------- */
+    .demo-grid {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 1.2rem;
+    }
+
+    @media (max-width:820px) {
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .demo-label {
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--blue-deep);
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .demo-label .pin {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .preview {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      height: 100%;
+      min-height: 200px;
+    }
+
+    .preview iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+
+    /* ---------- STEPS ---------- */
+    .steps {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      margin-top: 1.2rem;
+    }
+
+    .step {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.2rem;
+      border: 1px solid #eaf1fa;
+      box-shadow: 0 10px 22px -20px rgba(13, 52, 110, .5);
+    }
+
+    .step .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--blue), #6366f1);
+      color: #fff;
+      font-weight: 800;
+      font-size: .95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: .7rem;
+    }
+
+    .step b {
+      color: var(--ink);
+      display: block;
+      margin-bottom: .2rem;
+    }
+
+    .step p {
+      color: var(--ink-soft);
+      font-size: .94rem;
+    }
+
+    .kb {
+      display: inline-block;
+      background: #0e2238;
+      color: #d4e6ff;
+      font-family: "JetBrains Mono", monospace;
+      font-size: .82rem;
+      font-weight: 600;
+      padding: .18rem .55rem;
+      border-radius: 8px;
+      border-bottom: 2px solid #06121f;
+      margin: 0 .1rem;
+    }
+
+    /* ---------- QUIZ ---------- */
+    .quiz-grid {
+      display: grid;
+      gap: 1.1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 1.4rem;
+    }
+
+    .quiz {
+      background: #fff;
+      border-radius: 22px;
+      padding: 1.4rem 1.4rem 1.2rem;
+      border: 1px solid #eaf1fa;
+      box-shadow: 0 14px 30px -24px rgba(13, 52, 110, .5);
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--blue), #7c3aed);
+      opacity: .9;
+    }
+
+    .quiz:hover {
+      transform: translateY(-3px);
+      border-color: #c7dcf4;
+      box-shadow: 0 22px 36px -24px rgba(37, 99, 235, .4);
+    }
+
+    .quiz .q {
+      display: flex;
+      gap: .7rem;
+      align-items: flex-start;
+      font-weight: 600;
+      font-size: 1.02rem;
+      color: var(--ink);
+      margin-bottom: .6rem;
+    }
+
+    .quiz .q .badge {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--sky);
+      color: var(--blue-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 800;
+    }
+
+    .quiz .hint {
+      font-size: .88rem;
+      color: #94a3b8;
+      transition: opacity .2s;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .quiz .answer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, opacity .3s ease, margin-top .3s ease;
+      color: #166534;
+      background: var(--mint);
+      border-radius: 12px;
+      padding: 0 1rem;
+      font-size: .95rem;
+      font-weight: 600;
+    }
+
+    .quiz.open .answer {
+      max-height: 120px;
+      opacity: 1;
+      padding: .7rem 1rem;
+      margin-top: .7rem;
+    }
+
+    .quiz.open .hint {
+      opacity: 0;
+      height: 0;
+      margin: 0;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      margin-top: 3.5rem;
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: .92rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+    }
+
+    footer svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width:820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.6rem;
+        text-align: left;
+      }
+
+      .hero-svg {
+        order: -1;
+      }
+
+      .hero-svg svg {
+        max-width: 220px;
+      }
+
+      body {
+        padding: 1.2rem .8rem 3rem;
+      }
+
+      .panel {
+        padding: 1.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div class="hero-text">
+        <span class="kicker">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 2" />
+          </svg>
+          Вступне заняття · Гурток інформатики
+        </span>
+        <h1>Програмне забезпечення, <span>браузер</span> і твій перший <span>HTML</span></h1>
+        <p>Крок за кроком розберемось, як комп'ютер «розуміє» веб-сторінки, які файли відкриває браузер, і створимо
+          власну сторінку з нуля — прямо на занятті.</p>
+      </div>
+      <div class="hero-svg">
+        <!-- Велика SVG-ілюстрація браузера -->
+        <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gWin" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffffff" />
+              <stop offset="1" stop-color="#eef5ff" />
+            </linearGradient>
+            <linearGradient id="gBar" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#2563eb" />
+              <stop offset="1" stop-color="#7c3aed" />
+            </linearGradient>
+            <filter id="fSh" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#2563eb" flood-opacity="0.22" />
+            </filter>
+          </defs>
+          <!-- Вікно -->
+          <rect x="30" y="50" width="340" height="230" rx="16" fill="url(#gWin)" stroke="#c7dcf4" stroke-width="2"
+            filter="url(#fSh)" />
+          <!-- Топ-бар -->
+          <path d="M30 66 a16 16 0 0 1 16 -16 h308 a16 16 0 0 1 16 16 v28 h-340 z" fill="url(#gBar)" />
+          <circle cx="52" cy="72" r="5" fill="#ff5f57" />
+          <circle cx="68" cy="72" r="5" fill="#febc2e" />
+          <circle cx="84" cy="72" r="5" fill="#28c840" />
+          <!-- Адресний рядок -->
+          <rect x="106" y="62" width="248" height="22" rx="11" fill="#ffffff" fill-opacity=".9" />
+          <circle cx="120" cy="73" r="4" fill="#94a3b8" />
+          <rect x="132" y="69" width="120" height="7" rx="3.5" fill="#cbd5e1" />
+          <!-- Контент сторінки -->
+          <rect x="52" y="110" width="180" height="14" rx="7" fill="#1e40af" opacity=".85" />
+          <rect x="52" y="132" width="290" height="8" rx="4" fill="#cbd5e1" />
+          <rect x="52" y="146" width="260" height="8" rx="4" fill="#cbd5e1" />
+          <rect x="52" y="160" width="220" height="8" rx="4" fill="#cbd5e1" />
+          <!-- Блоки-картки -->
+          <rect x="52" y="184" width="86" height="70" rx="10" fill="#dbeafe" />
+          <rect x="148" y="184" width="86" height="70" rx="10" fill="#dcfce7" />
+          <rect x="244" y="184" width="98" height="70" rx="10" fill="#ede9fe" />
+          <circle cx="95" cy="210" r="12" fill="#2563eb" opacity=".7" />
+          <circle cx="191" cy="210" r="12" fill="#16a34a" opacity=".7" />
+          <circle cx="293" cy="210" r="12" fill="#7c3aed" opacity=".7" />
+          <rect x="68" y="232" width="54" height="6" rx="3" fill="#93c5fd" />
+          <rect x="164" y="232" width="54" height="6" rx="3" fill="#86efac" />
+          <rect x="266" y="232" width="54" height="6" rx="3" fill="#c4b5fd" />
+          <!-- Код-бейдж -->
+          <g transform="translate(272,10)">
+            <rect width="108" height="46" rx="12" fill="#0b1a2b" />
+            <text x="14" y="20" fill="#7dd3fc" font-family="monospace" font-size="11">&lt;html&gt;</text>
+            <text x="14" y="36" fill="#86efac" font-family="monospace" font-size="11">&lt;/html&gt;</text>
+          </g>
+        </svg>
+      </div>
+    </header>
+
+    <!-- ============ 1. ПРОГРАМНЕ ЗАБЕЗПЕЧЕННЯ ============ -->
+    <section>
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.9" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="14" rx="2" />
+            <path d="M8 20h8M12 16v4" />
+          </svg>
+        </div>
+        <h2>Що таке програмне забезпечення?</h2>
+      </div>
+      <p class="section-sub">Програмне забезпечення (ПЗ) — це всі програми, які «оживляють» комп'ютер. Без них залізо —
+        просто набір мікросхем. Усе ПЗ поділяють на три великі родини.</p>
+
+      <div class="grid-3">
+        <div class="tile">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 3v18M3 12h18" />
+          </svg>
+          <h4>Системне ПЗ</h4>
+          <p>«Фундамент» комп'ютера: операційна система, драйвери, службові утиліти. Керує залізом і запускає інші
+            програми.</p>
+          <span class="tag">Windows · Linux · macOS</span>
+        </div>
+        <div class="tile">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M7 9h10M7 13h6" />
+          </svg>
+          <h4>Прикладне ПЗ</h4>
+          <p>Програми «для людей»: браузери, текстові редактори, ігри, плеєри, месенджери. Саме з ними ми працюємо
+            щодня.</p>
+          <span class="tag">Chrome · Word · Zoom</span>
+        </div>
+        <div class="tile">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M8 17l-5-5 5-5M16 7l5 5-5 5M14 3l-4 18" />
+          </svg>
+          <h4>Інструментальне ПЗ</h4>
+          <p>Середовища, у яких програмісти створюють інші програми: редактори коду, компілятори, відлагоджувачі.</p>
+          <span class="tag">VS Code · DevTools</span>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 8v.01M11 12h1v4h1" />
+        </svg>
+        <p><strong>Браузер</strong> — це прикладне ПЗ, яке перетворює «сирий» код на красиву сторінку. Він — наше вікно
+          в інтернет і головний робочий інструмент сучасного вчителя.</p>
+      </div>
+    </section>
+
+    <!-- ============ 2. БРАУЗЕР ============ -->
+    <section>
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.9" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+          </svg>
+        </div>
+        <h2>Навіщо потрібен браузер?</h2>
+      </div>
+      <p class="section-sub">Браузер — це «перекладач» між людиною та веб-сервером. Ви вводите адресу — браузер надсилає
+        запит, отримує код сторінки, читає його та малює на екрані те, що ви бачите.</p>
+
+      <div class="flow">
+        <!-- Схема: клієнт -> запит -> сервер -> відповідь -> рендер -->
+        <svg viewBox="0 0 780 190" width="780" height="190">
+          <defs>
+            <marker id="ar1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0 0 L10 5 L0 10 z" fill="#2563eb" />
+            </marker>
+            <marker id="ar2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0 0 L10 5 L0 10 z" fill="#16a34a" />
+            </marker>
+            <linearGradient id="gClient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#eff6ff" />
+              <stop offset="1" stop-color="#dbeafe" />
+            </linearGradient>
+            <linearGradient id="gServer" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f0fdf4" />
+              <stop offset="1" stop-color="#dcfce7" />
+            </linearGradient>
+          </defs>
+
+          <!-- Клієнт -->
+          <rect x="20" y="55" width="140" height="80" rx="16" fill="url(#gClient)" stroke="#2563eb" stroke-width="2" />
+          <rect x="58" y="70" width="64" height="6" rx="3" fill="#2563eb" />
+          <circle cx="90" cy="100" r="14" fill="none" stroke="#2563eb" stroke-width="2" />
+          <circle cx="90" cy="100" r="5" fill="#2563eb" />
+          <text x="90" y="150" text-anchor="middle" font-size="13" fill="#1e40af" font-weight="700">Браузер</text>
+
+          <!-- Стрілка запиту -->
+          <path d="M170 80 Q 250 45 330 80" stroke="#2563eb" stroke-width="2" fill="none" stroke-dasharray="6 6"
+            marker-end="url(#ar1)" />
+          <text x="250" y="40" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="700">HTTP-запит</text>
+
+          <!-- Сервер -->
+          <rect x="340" y="55" width="140" height="80" rx="16" fill="url(#gServer)" stroke="#16a34a" stroke-width="2" />
+          <rect x="370" y="70" width="80" height="10" rx="3" fill="#16a34a" />
+          <rect x="370" y="86" width="80" height="10" rx="3" fill="#16a34a" opacity=".7" />
+          <rect x="370" y="102" width="56" height="10" rx="3" fill="#16a34a" opacity=".5" />
+          <text x="410" y="150" text-anchor="middle" font-size="13" fill="#166534" font-weight="700">Сервер</text>
+
+          <!-- Стрілка відповіді -->
+          <path d="M490 110 Q 570 145 650 110" stroke="#16a34a" stroke-width="2" fill="none" stroke-dasharray="6 6"
+            marker-end="url(#ar2)" />
+          <text x="575" y="165" text-anchor="middle" font-size="11" fill="#16a34a" font-weight="700">HTML, CSS, JS,
+            картинки</text>
+
+          <!-- Рендер -->
+          <rect x="660" y="55" width="100" height="80" rx="16" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" />
+          <rect x="678" y="72" width="64" height="8" rx="4" fill="#7c3aed" />
+          <rect x="678" y="88" width="50" height="6" rx="3" fill="#a78bfa" />
+          <rect x="678" y="102" width="42" height="6" rx="3" fill="#c4b5fd" />
+          <text x="710" y="150" text-anchor="middle" font-size="12" fill="#5b21b6" font-weight="700">Сторінка</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============ 3. ТИПИ ФАЙЛІВ ============ -->
+    <section>
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.9" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6M9 13h6M9 17h6" />
+          </svg>
+        </div>
+        <h2>Які файли вміє відкривати браузер?</h2>
+      </div>
+      <p class="section-sub">Сучасний браузер — це універсальна «читалка» форматів. Він розуміє не лише сайти, а й
+        багато локальних файлів.</p>
+
+      <div class="file-strip">
+        <div class="file-chip"><span class="dot c-html">HTML</span> .html / .htm</div>
+        <div class="file-chip"><span class="dot c-css">CSS</span> .css</div>
+        <div class="file-chip"><span class="dot c-js">JS</span> .js</div>
+        <div class="file-chip"><span class="dot c-pdf">PDF</span> .pdf</div>
+        <div class="file-chip"><span class="dot c-img">IMG</span> .png / .jpg / .svg</div>
+        <div class="file-chip"><span class="dot c-json">JSON</span> .json</div>
+      </div>
+
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 8v5M12 16h.01" />
+        </svg>
+        <p><strong>Цікаво:</strong> браузер не «малює» HTML сам по собі — він будує дерево елементів (DOM) і за стилями
+          CSS вирішує, як кожен блок виглядатиме. Саме тому одна й та ж сторінка може виглядати по-різному в різних
+          браузерах.</p>
+      </div>
+    </section>
+
+    <!-- ============ 4. ПРАКТИКА ============ -->
+    <section>
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.9" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M8 17l-5-5 5-5M16 7l5 5-5 5" />
+          </svg>
+        </div>
+        <h2>Практика: створюємо перший HTML</h2>
+      </div>
+      <p class="section-sub">Створимо файл <code
+          style="background:#eef3f8;padding:.15rem .55rem;border-radius:8px;font-family:monospace">index.html</code> і
+        подивимось, як браузер його читає. Праворуч — живе прев'ю, яке оновлюється автоматично.</p>
+
+      <div class="demo-grid">
+        <div>
+          <div class="demo-label"><span class="pin"></span>index.html — код</div>
+          <div class="code">
+            <div class="code-bar">
+              <span class="d d1"></span><span class="d d2"></span><span class="d d3"></span>
+              <span class="fname">index.html</span>
+            </div>
+            <pre id="codeEditor" contenteditable="true" spellcheck="false"><span class="cm">&lt;!-- Мій перший HTML-документ --&gt;</span>
+<span class="p">&lt;</span><span class="k">!DOCTYPE html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="k">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="k">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="k">meta</span> <span class="a">charset</span>=<span class="v">"UTF-8"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="k">title</span><span class="p">&gt;</span>Моя сторінка<span class="p">&lt;/</span><span class="k">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="k">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="k">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="k">h1</span> <span class="a">style</span>=<span class="v">"color:#2563eb;"</span><span class="p">&gt;</span>Привіт, гурток!<span class="p">&lt;/</span><span class="k">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="k">p</span><span class="p">&gt;</span>Це мій перший абзац на HTML.<span class="p">&lt;/</span><span class="k">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="k">img</span> <span class="a">src</span>=<span class="v">""</span> <span class="a">alt</span>=<span class="v">"Кошеня"</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="k">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="k">html</span><span class="p">&gt;</span></pre>
+          </div>
+        </div>
+
+        <div>
+          <div class="demo-label"><span class="pin"></span>Живий результат</div>
+          <div class="preview">
+            <iframe id="previewFrame"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem;font-size:1.25rem;color:#1e40af;">Як це влаштовано?</h3>
+      <div class="grid-3">
+        <div class="tile">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M4 7V4h16v3M9 20h6M12 4v16" />
+          </svg>
+          <h4>Теги</h4>
+          <p><code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;img&gt;</code> — «команди» для браузера. Вони
+            кажуть, <em>що це за елемент</em>: заголовок, абзац, зображення.</p>
+        </div>
+        <div class="tile">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" />
+          </svg>
+          <h4>Атрибути</h4>
+          <p><code>src</code> — шлях до файлу, <code>alt</code> — текстова альтернатива, <code>style</code> — «швидкі»
+            стилі прямо в тезі.</p>
+        </div>
+        <div class="tile">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+          </svg>
+          <h4>Структура</h4>
+          <p><code>&lt;head&gt;</code> — «мозок» сторінки (заголовок вкладки, кодування), <code>&lt;body&gt;</code> —
+            усе, що бачить користувач.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path
+            d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
+        </svg>
+        <p><strong>Спробуйте змінити властивості:</strong> у коді праворуч додайте до <code>&lt;h1&gt;</code> атрибут
+          <code>style="color:#e11d48; text-align:center;"</code> — заголовок стане рожевим і по центру. Прев'ю оновиться
+          автоматично.</p>
+      </div>
+    </section>
+
+    <!-- ============ 5. МЕНЮ РОЗРОБНИКА ============ -->
+    <section>
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.9" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="M6 8l3 3-3 3M11 14h6" />
+          </svg>
+        </div>
+        <h2>Меню розробника (DevTools)</h2>
+      </div>
+      <p class="section-sub">Це «рентген» для будь-якої веб-сторінки. Відкрити можна клавішею <span
+          class="kb">F12</span> або <span class="kb">Ctrl</span>+<span class="kb">Shift</span>+<span class="kb">I</span>
+        (Mac: <span class="kb">⌘</span>+<span class="kb">Option</span>+<span class="kb">I</span>), або правим кліком →
+        «Переглянути код».</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <b>Elements</b>
+          <p>HTML-структура у вигляді дерева. Можна змінювати текст, атрибути й стилі прямо в браузері.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <b>Console</b>
+          <p>Повідомлення, помилки JavaScript, результати виконання команд.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <b>Network</b>
+          <p>Список усіх файлів і запитів, які завантажує сторінка. Звідси видно, чи все «доїхало».</p>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <b>Sources / Styles</b>
+          <p>Підключені CSS та JS-файли. Тут можна ставити точки зупинки й аналізувати код.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 8v5M12 16h.01" />
+        </svg>
+        <p><strong>На що звертати увагу:</strong> <strong>червоні</strong> рядки в Console — помилки;
+          <strong>жовті</strong> трикутники — попередження; статус <strong>404</strong> у Network означає, що файл не
+          знайдено; <strong>500</strong> — проблема на сервері.</p>
+      </div>
+    </section>
+
+    <!-- ============ 6. QUIZ ============ -->
+    <section>
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.9" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4" />
+            <circle cx="12" cy="17.5" r=".8" fill="#2563eb" stroke="none" />
+          </svg>
+        </div>
+        <h2>Перевірте себе</h2>
+      </div>
+      <p class="section-sub">Натисніть на картку, щоб побачити відповідь. Спробуйте спочатку відповісти самі — так краще
+        запам'ятовується!</p>
+
+      <div class="quiz-grid">
+        <div class="quiz" tabindex="0">
+          <div class="q"><span class="badge">1</span>Який тип ПЗ відповідає за перегляд веб-сторінок?</div>
+          <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+          <div class="answer">Прикладне ПЗ — браузер (Chrome, Firefox, Edge, Safari).</div>
+        </div>
+
+        <div class="quiz" tabindex="0">
+          <div class="q"><span class="badge">2</span>Що саме робить браузер, коли ви вводите адресу?</div>
+          <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+          <div class="answer">Надсилає HTTP-запит на сервер, отримує HTML + ресурси й рендерить сторінку.</div>
+        </div>
+
+        <div class="quiz" tabindex="0">
+          <div class="q"><span class="badge">3</span>Який тег містить видимий вміст сторінки?</div>
+          <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+          <div class="answer">&lt;body&gt; — усе, що користувач бачить на екрані.</div>
+        </div>
+
+        <div class="quiz" tabindex="0">
+          <div class="q"><span class="badge">4</span>Як швидко змінити колір заголовка &lt;h1&gt;?</div>
+          <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+          <div class="answer">Додати атрибут style="color:#e11d48;" прямо в тег &lt;h1&gt;.</div>
+        </div>
+
+        <div class="quiz" tabindex="0">
+          <div class="q"><span class="badge">5</span>Якою клавішею відкрити DevTools?</div>
+          <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+          <div class="answer">F12 або Ctrl+Shift+I (на Mac — ⌘+Option+I).</div>
+        </div>
+
+        <div class="quiz" tabindex="0">
+          <div class="q"><span class="badge">6</span>Що означає помилка 404 у вкладці Network?</div>
+          <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+          <div class="answer">Файл або сторінку не знайдено на сервері — перевірте шлях або назву файлу.</div>
+        </div>
+
+        <div class="quiz" tabindex="0">
+          <div class="q"><span class="badge">7</span>Які формати файлів «розуміє» браузер без додаткових програм?</div>
+          <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+          <div class="answer">HTML, CSS, JS, SVG, PNG, JPG, PDF, JSON та інші сучасні формати.</div>
+        </div>
+
+        <div class="quiz" tabindex="0">
+          <div class="q"><span class="badge">8</span>Навіщо вчителю початкових класів знати HTML?</div>
+          <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+          <div class="answer">Щоб створювати власні навчальні матеріали, розуміти, як працюють сайти, та вчити дітей
+            цифрової грамотності.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#4b6f91" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 7v5l3 2" />
+      </svg>
+      Гурток інформатики · Педагогічний коледж · 1 курс · Вступне заняття
+    </footer>
+
+  </div>
+
+  <script>
+    // ---- 1. Живий прев'ю для практики ----
+    const editor = document.getElementById('codeEditor');
+    const frame = document.getElementById('previewFrame');
+
+    function render() {
+      // Беремо текст без HTML-підсвітки, оскільки contenteditable повертає текст
+      const html = editor.innerText;
+      const doc = frame.contentDocument || frame.contentWindow.document;
+      doc.open();
+      doc.write(html);
+      doc.close();
+    }
+
+    // Початковий рендер
+    render();
+
+    // Оновлення на кожне введення
+    let debounce;
+    editor.addEventListener('input', () => {
+      clearTimeout(debounce);
+      debounce = setTimeout(render, 250);
+    });
+
+    // ---- 2. Інтерактивні картки квізу ----
+    document.querySelectorAll('.quiz').forEach(card => {
+      const toggle = () => card.classList.toggle('open');
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+  </script>
+</body>
+
+</html>

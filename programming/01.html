@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Приклад PlantUML в HTML</title>
+
+    <!-- 1. Підключаємо JS-кодувальник PlantUML -->
+    <script src="https://cdn.jsdelivr.net/npm/plantuml-encoder@1.4.0/dist/plantuml-encoder.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f9f9f9;
+        }
+        .diagram-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        img.plantuml-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Приклади діаграм PlantUML</h1>
+
+    <div class="diagram-container">
+        <h2>1. Повне розгалуження (if-else)</h2>
+        <!-- Перша діаграма -->
+        <pre class="plantuml">
+        @startuml
+        
+        if (Умова) then (Так)
+          :Дія 1;<<#palegreen>>
+        else (Ні)
+          :Дія 2;<<#pink>>
+        endif
+
+        @enduml
+        </pre>
+    </div>
+<div class="diagram-container">
+        <h2>2. Неповне розгалуження (if-else)</h2>
+        <!-- Перша діаграма -->
+        <pre class="plantuml">
+        @startuml
+        
+        if (Умова) then (Так)
+          :Дія 1;<<#palegreen>>
+        else (Ні)
+         label sp_lab0 
+        endif
+
+        @enduml
+        </pre>
+    </div>
+<div class="diagram-container">
+        <h2>2. Неповне розгалуження (if-else)</h2>
+        <!-- Перша діаграма -->
+        <pre class="plantuml">
+        @startuml
+        
+        if (Температура < 0) then (Так)
+          :На вулиці мороз! Одягнись тепліше.;<<#palegreen>>
+        else (Ні)
+         label sp_lab0 
+        endif
+
+        @enduml
+        </pre>
+    </div>
+<div class="diagram-container">
+        <h2>2. Неповне розгалуження (if-else)</h2>
+        <!-- Перша діаграма -->
+        <pre class="plantuml">
+        @startuml
+	:Початок;
+	:Введіть x; <<input>>
+        if (Температура < 0) then (Так)
+          :На вулиці мороз! Одягнись тепліше.;<<#palegreen>>
+        else (Ні)
+         label sp_lab0 
+        endif
+
+        @enduml
+        </pre>
+    </div>
+
+
+   
+    <!-- 2. Скрипт для рендерингу -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Знаходимо всі елементи з класом plantuml
+            const plantumlBlocks = document.querySelectorAll('pre.plantuml');
+
+            plantumlBlocks.forEach(block => {
+                // Отримуємо код діаграми
+                const rawCode = block.textContent.trim();
+                
+                // Кодуємо код у формат PlantUML URL
+                const encodedCode = plantumlEncoder.encode(rawCode);
+
+                // Створюємо елемент img
+                const img = document.createElement('img');
+                img.src = `https://www.plantuml.com/plantuml/svg/${encodedCode}`;
+                img.className = 'plantuml-img';
+                img.alt = 'PlantUML Diagram';
+
+                // Замінюємо <pre> на <img>
+                block.parentNode.replaceChild(img, block);
+            });
+        });
+    </script>
+
+</body>
+</html>

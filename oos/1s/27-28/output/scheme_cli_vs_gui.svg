@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="398.592pt" viewBox="0 0 635.4 398.592" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-29T16:33:41.066673</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 398.592 
+L 635.4 398.592 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 35.824154 292.094031 
+L 306.840462 292.094031 
+Q 313.922769 292.094031 313.922769 284.844185 
+L 313.922769 70.248738 
+Q 313.922769 62.998892 306.840462 62.998892 
+L 35.824154 62.998892 
+Q 28.741846 62.998892 28.741846 70.248738 
+L 28.741846 284.844185 
+Q 28.741846 292.094031 35.824154 292.094031 
+z
+" clip-path="url(#p65e557df3c)" style="fill: #1c1c1e; stroke: #3a3a3c; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 330.920308 292.094031 
+L 601.936615 292.094031 
+Q 609.018923 292.094031 609.018923 284.844185 
+L 609.018923 70.248738 
+Q 609.018923 62.998892 601.936615 62.998892 
+L 330.920308 62.998892 
+Q 323.838 62.998892 323.838 70.248738 
+L 323.838 284.844185 
+Q 323.838 292.094031 330.920308 292.094031 
+z
+" clip-path="url(#p65e557df3c)" style="fill: #ffffff; stroke: #404040; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 324.782308 90.548308 
+L 608.074615 90.548308 
+L 608.074615 63.965538 
+L 324.782308 63.965538 
+z
+" clip-path="url(#p65e557df3c)" style="fill: #1f4e79"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 346.973538 168.846646 
+L 448.958769 168.846646 
+Q 455.568923 168.846646 455.568923 162.080123 
+L 455.568923 106.014646 
+Q 455.568923 99.248123 448.958769 99.248123 
+L 346.973538 99.248123 
+Q 340.363385 99.248123 340.363385 106.014646 
+L 340.363385 162.080123 
+Q 340.363385 168.846646 346.973538 168.846646 
+z
+" clip-path="url(#p65e557df3c)" style="fill: #f5f5f7; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 476.815846 168.846646 
+L 578.801077 168.846646 
+Q 585.411231 168.846646 585.411231 162.080123 
+L 585.411231 106.014646 
+Q 585.411231 99.248123 578.801077 99.248123 
+L 476.815846 99.248123 
+Q 470.205692 99.248123 470.205692 106.014646 
+L 470.205692 162.080123 
+Q 470.205692 168.846646 476.815846 168.846646 
+z
+" clip-path="url(#p65e557df3c)" style="fill: #f5f5f7; stroke: #248a3d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 346.973538 253.428185 
+L 448.958769 253.428185 
+Q 455.568923 253.428185 455.568923 246.661662 
+L 455.568923 190.596185 
+Q 455.568923 183.829662 448.958769 183.829662 
+L 346.973538 183.829662 
+Q 340.363385 183.829662 340.363385 190.596185 
+L 340.363385 246.661662 
+Q 340.363385 253.428185 346.973538 253.428185 
+z
+" clip-path="url(#p65e557df3c)" style="fill: #f5f5f7; stroke: #c93400; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 476.815846 253.428185 
+L 578.801077 253.428185 
+Q 585.411231 253.428185 585.411231 246.661662 
+L 585.411231 190.596185 
+Q 585.411231 183.829662 578.801077 183.829662 
+L 476.815846 183.829662 
+Q 470.205692 183.829662 470.205692 190.596185 
+L 470.205692 246.661662 
+Q 470.205692 253.428185 476.815846 253.428185 
+z
+" clip-path="url(#p65e557df3c)" style="fill: #f5f5f7; stroke: #6e30a8; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="36.721413" transform="rotate(-0 317.7 36.721413)">Текстовий інтерфейс (CLI) та графічний (GUI)</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="171.332308" y="86.914087" transform="rotate(-0 171.332308 86.914087)">CLI — командний рядок</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #30d158" x="41.49" y="119.752483" transform="rotate(-0 41.49 119.752483)">C:\Users\Student&gt;</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="143.003077" y="119.777718" transform="rotate(-0 143.003077 119.777718)">dir</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="41.49" y="140.077287" transform="rotate(-0 41.49 140.077287)"> Документи</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="41.49" y="160.376856" transform="rotate(-0 41.49 160.376856)"> Завантаження</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="41.49" y="180.676425" transform="rotate(-0 41.49 180.676425)"> звіт.docx</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #30d158" x="41.49" y="200.95076" transform="rotate(-0 41.49 200.95076)">C:\Users\Student&gt;</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="143.003077" y="200.975994" transform="rotate(-0 143.003077 200.975994)">copy звіт.docx D:\Архів</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="41.49" y="221.370564" transform="rotate(-0 41.49 221.370564)"> 1 файл скопійовано.</text>
+   </g>
+   <g id="text_11">
+    <text style="font-style: italic; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #a1a1a6" x="171.332308" y="274.691805" transform="rotate(-0 171.332308 274.691805)">Клавіатура · тексти · команди</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="466.428462" y="81.298038" transform="rotate(-0 466.428462 81.298038)">GUI — робочий стіл</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle" x="397.966154" y="124.514567" transform="rotate(-0 397.966154 124.514567)">📁</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="397.966154" y="153.723067" transform="rotate(-0 397.966154 153.723067)">Документи</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle" x="527.808462" y="124.514567" transform="rotate(-0 527.808462 124.514567)">📁</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="527.808462" y="153.723067" transform="rotate(-0 527.808462 153.723067)">Завантаження</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle" x="397.966154" y="209.096106" transform="rotate(-0 397.966154 209.096106)">📄</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="397.966154" y="238.304606" transform="rotate(-0 397.966154 238.304606)">звіт.docx</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 18px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle" x="527.808462" y="209.096106" transform="rotate(-0 527.808462 209.096106)">🖼</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="527.808462" y="238.304606" transform="rotate(-0 527.808462 238.304606)">фото.png</text>
+   </g>
+   <g id="text_21">
+    <text style="font-style: italic; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="466.428462" y="274.691805" transform="rotate(-0 466.428462 274.691805)">Миша · значки · меню · вікна</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p65e557df3c">
+   <rect x="10.8" y="10.8" width="613.8" height="376.992"/>
+  </clipPath>
+ </defs>
+</svg>

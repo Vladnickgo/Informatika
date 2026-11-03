@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Робочий зошит. Раціональні числа</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f3f6fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .notebook {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            padding: 48px 56px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.12);
+            line-height: 1.6;
+            color: #1a2634;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0b2b44;
+            letter-spacing: -0.02em;
+            border-bottom: 4px solid #d0e0ff;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            margin-top: 40px;
+            margin-bottom: 18px;
+            padding-left: 6px;
+            border-left: 6px solid #2d7aff;
+            padding-left: 18px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f3a5f;
+            margin-top: 28px;
+            margin-bottom: 12px;
+        }
+
+        .block-theory {
+            background: #f8faff;
+            border-radius: 24px;
+            padding: 24px 28px;
+            margin-top: 12px;
+            border: 1px solid #e2edff;
+        }
+
+        .block-theory p {
+            margin-bottom: 10px;
+        }
+
+        .block-theory strong {
+            color: #0b2b44;
+        }
+
+        .def {
+            background: #eaf2fd;
+            padding: 18px 22px;
+            border-radius: 18px;
+            font-size: 1.1rem;
+            margin: 18px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 24px;
+            margin: 16px 0;
+        }
+
+        .grid-2 .item {
+            background: white;
+            border-radius: 14px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e9eff6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.98rem;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 20, 40, 0.04);
+        }
+
+        th {
+            background: #1f3a5f;
+            color: white;
+            font-weight: 600;
+            padding: 14px 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2edff;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .example-box {
+            background: #f2f8ff;
+            border-radius: 20px;
+            padding: 20px 24px;
+            margin: 18px 0;
+            border-left: 5px solid #2d7aff;
+        }
+
+        .task {
+            background: white;
+            border-radius: 18px;
+            padding: 18px 22px;
+            margin: 14px 0;
+            border: 1px solid #dce7f5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .task-list {
+            list-style: none;
+            padding-left: 4px;
+        }
+
+        .task-list li {
+            margin-bottom: 10px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .task-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #2d7aff;
+            font-weight: 600;
+        }
+
+        .subtask {
+            margin: 8px 0 8px 20px;
+            font-family: 'Courier New', monospace;
+            background: #f8faff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .answer-block {
+            background: #ebf7e9;
+            border-radius: 20px;
+            padding: 24px 28px;
+            margin-top: 40px;
+            border: 1px solid #b8d9b0;
+        }
+
+        .answer-block h2 {
+            border-left-color: #2b7a3b;
+            margin-top: 0;
+        }
+
+        .hr-divider {
+            height: 2px;
+            background: linear-gradient(90deg, #d0e0ff, transparent);
+            margin: 40px 0 20px 0;
+        }
+
+        .badge {
+            background: #1f3a5f;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            letter-spacing: 0.3px;
+        }
+
+        .badge.green {
+            background: #1e7e34;
+        }
+
+        .badge.orange {
+            background: #b8681a;
+        }
+
+        .badge.purple {
+            background: #6b3f9b;
+        }
+
+        @media (max-width: 700px) {
+            .notebook {
+                padding: 24px 18px;
+            }
+
+            h1 {
+                font-size: 1.9rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            table,
+            td,
+            th {
+                font-size: 0.9rem;
+                padding: 10px 8px;
+            }
+
+            .page-break {
+                page-break-after: always;
+                border-bottom: 2px dashed #ccc;
+                margin: 40px 0;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="notebook">
+        <h1>📘 Раціональні числа та дії з ними · НМТ</h1>
+
+        <!-- Блок 1. Теорія -->
+        <h2>📐 Теоретичні відомості</h2>
+        <div class="block-theory">
+            <div class="def">
+                <span style="background:#d4e2fc; padding:2px 12px; border-radius:30px;">\(\mathbb{Q}\)</span><br>
+                <strong>Раціональне число</strong> — число, яке можна подати у вигляді звичайного дробу \(\frac{m}{n}\),<br>
+                де \(m \in \mathbb{Z}\) (ціле число), \(n \in \mathbb{N}\) (натуральне число, \(n \neq 0\)).
+
+            </div>
+
+            <h3 style="margin-top:6px;">Основні типи</h3>
+            <div class="grid-2">
+                <div class="item">🧮 <strong>Звичайні дроби:</strong> <br>\(\frac{1}{2}, \frac{5}{8}, \frac{12}{5}\)</div>
+                <div class="item">🔢 <strong>Мішані числа:</strong> <br>\(1\frac{2}{3} = \frac{5}{3}\)</div>
+                <div class="item">🔹 <strong>Десяткові:</strong> скінченні <br>\(0.75 = \frac{3}{4}\); <br>періодичні
+                    \(0.(3)=\frac{1}{3}\)</div>
+                <div class="item">➖ <strong>Цілі / Натуральні:</strong> <br>\(5 = \frac{5}{1}\), <br>\(-3 = \frac{-3}{1}\), \(7
+                    = \frac{7}{1}\)</div>
+            </div>
+
+            <h3>Основна властивість дробу</h3>
+            <p>\(\frac{a}{b} = \frac{a \cdot k}{b \cdot k}\) або \(\frac{a}{b} = \frac{a : k}{b : k}\) &nbsp;(\(k \neq
+                0\))</p>
+            <div class="page-break"></div>
+            <h3>Арифметичні дії (алгоритми)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Дія</th>
+                        <th>Правило</th>
+                        <th>Приклад</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>➕ Додавання / Віднімання</strong></td>
+                        <td>Звести до спільного знаменника. Скласти/відняти чисельники.</td>
+                        <td>\(\frac{1}{6} + \frac{3}{8} = \frac{4}{24} + \frac{9}{24} = \frac{13}{24}\)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>✖️ Множення</strong></td>
+                        <td>\(\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}\) (скорочуємо навхрест)</td>
+                        <td>\(\frac{3}{8} \cdot \frac{16}{9} = \frac{2}{3}\)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>➗ Ділення</strong></td>
+                        <td>\(\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}\)</td>
+                        <td>\(\frac{5}{7} : \frac{15}{14} = \frac{2}{3}\)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Десяткові дроби</h3>
+            <ul style="margin-left:20px; margin-bottom:12px;">
+                <li><strong>Додавання/віднімання:</strong> «кома під комою».</li>
+                <li><strong>Множення:</strong> множимо як цілі, у добутку відокремлюємо суму цифр після коми.</li>
+                <li><strong>Ділення:</strong> позбавляємося коми в дільнику.</li>
+            </ul>
+            <p><strong>Порівняння:</strong> на числовій осі. Для додатних \(\frac{a}{b} > \frac{c}{d} \iff ad > bc\).
+                Від'ємне менше за додатне; з двох від'ємних більше те, в якого модуль менший.</p>
+        </div>
+        <div class="page-break"></div>
+        <!-- Блок 2. Приклади -->
+        <h2>📝 Блок 2. Приклади розв'язання</h2>
+        <div class="example-box">
+            <p><strong>Приклад 1 (переведення періодичного).</strong> \(1,2(18) \to\) звичайний дріб.</p>
+            <p style="font-family: monospace; background: white; padding: 8px 14px; border-radius: 14px;">\(x =
+                1.21818...\) · \(10x = 12.1818...\) · \(1000x = 1218.1818...\)<br>\(990x = 1206 \implies x =
+                \frac{1206}{990} = \frac{67}{55}\)</p>
+        </div>
+        <div class="example-box">
+            <p><strong>Приклад 2 (ланцюжок).</strong> \((3\frac{1}{4} - 4\frac{5}{6}) \cdot \frac{12}{19} + 1.5\)</p>
+            <p style="font-family: monospace; background: white; padding: 8px 14px; border-radius: 14px;">
+                1) \(\frac{13}{4} - \frac{29}{6} = -\frac{19}{12}\) → <br>
+                2) \(-\frac{19}{12} \cdot \frac{12}{19} = -1\) → \(-1 +
+                1.5 = 0.5\)</p>
+            <p style="font-family: monospace; background: white; padding: 8px 14px; border-radius: 14px;">\(
+                \frac{13}{4} - \frac{29}{6} = -\frac{19}{12}\) → \(-\frac{19}{12} \cdot \frac{12}{19} = -1\) → \(-1 +
+                1.5 = 0.5\)</p>
+            <p><strong>Відповідь:</strong> 0,5</p>
+        </div>
+
+        <!-- Блок 3. Завдання -->
+        <h2>✏️ Блок 3. Завдання для тренування</h2>
+
+        <!-- Рівень 1 -->
+        <h3><span class="badge green">Рівень 1</span> Базовий</h3>
+        <div class="task">
+            <p><strong>1. Перетворення:</strong></p>
+            <ul class="task-list">
+                <li>а) Подайте мішане число \(5\frac{3}{11}\) у вигляді неправильного дробу.</li>
+                <li>б) Подайте дріб \(\frac{17}{4}\) у вигляді мішаного числа.</li>
+                <li>в) Запишіть число \(-8\) у вигляді дробу зі знаменником 1.</li>
+                <li>г) Переведіть 0,36 у звичайний нескоротний дріб.</li>
+            </ul>
+        </div>
+        <div class="task">
+            <p><strong>2. Обчислення (по діях):</strong></p>
+            <ul class="task-list">
+                <li>а) \(\frac{3}{10} + \frac{2}{5}\)</li>
+                <li>б) \(\frac{7}{9} - \frac{1}{6}\)</li>
+                <li>в) \(\frac{2}{3} \cdot \frac{5}{8}\)</li>
+                <li>г) \(\frac{4}{15} : \frac{2}{25}\)</li>
+            </ul>
+        </div>
+        <div class="task">
+            <p><strong>3. Порівняння (>, <,=):< /strong>
+            </p>
+            <ul class="task-list">
+                <li>а) \(-\frac{1}{4}\) і \(-\frac{1}{5}\)</li>
+                <li>б) 0.75 і \(\frac{4}{5}\)</li>
+                <li>в) \(-\frac{22}{7}\) і \(-3.14\)</li>
+            </ul>
+        </div>
+
+        <!-- Рівень 2 -->
+        <h3><span class="badge orange">Рівень 2</span> Середній</h3>
+        <div class="task">
+            <p><strong>4. Знайдіть значення:</strong></p>
+            <ul class="task-list">
+                <li>а) \((-\frac{18}{25}) \cdot (-\frac{5}{12})\)</li>
+                <li>б) \(\frac{3}{4} : (-\frac{9}{16})\)</li>
+            </ul>
+        </div>
+        <div class="task">
+            <p><strong>5. Комбіновані обчислення:</strong></p>
+            <ul class="task-list">
+                <li>а) \(\frac{7}{20} + 0.65\)</li>
+                <li>б) \(1\frac{1}{4} - 0.2\)</li>
+                <li>в) \(2\frac{3}{5} \cdot 0.15\)</li>
+            </ul>
+        </div>
+        <div class="task">
+            <p><strong>6. Ланцюжок:</strong></p>
+            <ul class="task-list">
+                <li>а) \(1\frac{7}{8} \cdot (3.24 - 1.74)\)</li>
+                <li>б) \((2\frac{2}{3} + 1\frac{5}{6}) : (-1\frac{1}{2})\)</li>
+            </ul>
+        </div>
+        <div class="task">
+            <p><strong>7. Рівняння:</strong></p>
+            <ul class="task-list">
+                <li>а) \(x - \frac{2}{3} = \frac{1}{4}\)</li>
+                <li>б) \(1.2 : x = \frac{3}{5}\)</li>
+                <li>в) \(-\frac{5}{8} \cdot y = 0.625\)</li>
+            </ul>
+        </div>
+
+        <!-- Рівень 3 -->
+        <h3><span class="badge purple">Рівень 3</span> Просунутий (формат НМТ)</h3>
+        <div class="task">
+            <p><strong>8.</strong> Розташуйте в порядку зростання: \(x = \frac{5}{9}\), \(y = 0.56\), \(z =
+                \frac{3}{5}\).<br>
+                <span style="background:#eef5ff; padding:2px 12px; border-radius:20px;">Відповідь запишіть літерами
+                    (xyz) без пробілів.</span>
+            </p>
+        </div>
+        <div class="task">
+            <p><strong>9.</strong> Обчисліть: \(\frac{1.8 \cdot 0.5}{0.6^2} - \left( \frac{7}{12} - \frac{8}{15} \right)
+                \cdot \frac{20}{9}\)</p>
+        </div>
+        <div class="task">
+            <p><strong>10.</strong> \(1.(6) + 0.(3) - 1\frac{2}{3}\)</p>
+        </div>
+        <div class="task">
+            <p><strong>11. Задача.</strong> У першому ящику було в 3 рази більше кг цукерок, ніж у другому. Після того
+                як з першого продали 5.2 кг, а з другого — 1.4 кг, у першому стало на 3.2 кг більше, ніж у другому.
+                Скільки кг було в другому ящику спочатку?</p>
+            <p style="color:#2d4b6e; background:#f0f6ff; padding:6px 14px; border-radius:30px; display:inline-block;">
+                Відповідь: число або десятковий дріб</p>
+        </div>
+        <div class="task">
+            <p><strong>12.</strong> Знайдіть значення виразу (на всі дії):</p>
+            <p>\(\frac{ \left( 2\frac{1}{3} - 1\frac{5}{18} \right) \cdot 2.4 + 5\frac{1}{3} }{ -0.(3) }\)</p>
+        </div>
+
+        <!-- Відповіді -->
+        <div class="hr-divider"></div>
+        <div class="answer-block">
+            <h2>✅ Блок 4. Відповіді та розв'язання</h2>
+            <p><strong>Рівень 1:</strong></p>
+            <ul style="margin-left:20px; columns:2 240px;">
+                <li>1. а) \(\frac{58}{11}\)</li>
+                <li>б) \(4\frac{1}{4}\)</li>
+                <li>в) \(\frac{-8}{1}\)</li>
+                <li>г) \(\frac{9}{25}\)</li>
+                <li>2. а) \(\frac{7}{10}\)</li>
+                <li>б) \(\frac{11}{18}\)</li>
+                <li>в) \(\frac{5}{12}\)</li>
+                <li>г) \(\frac{10}{3}=3\frac{1}{3}\)</li>
+                <li>3. а) \(<\), б) \(<\), в) \(< \quad (-\frac{22}{7}\approx -3.1428 < -3.14)\)</li>
+            </ul>
+            <p><strong>Рівень 2:</strong></p>
+            <ul style="margin-left:20px; columns:2 240px;">
+                <li>4. а) \(\frac{3}{10}=0.3\)</li>
+                <li>б) \(-\frac{4}{3}=-1\frac{1}{3}\)</li>
+                <li>5. а) 1</li>
+                <li>б) 1.05</li>
+                <li>в) 0.39</li>
+                <li>6. а) \(\frac{45}{16}=2\frac{13}{16}\)</li>
+                <li>б) \(-\frac{23}{9}=-2\frac{5}{9}\)</li>
+                <li>7. а) \(\frac{11}{12}\), б) 2, в) -1</li>
+            </ul>
+            <p><strong>Рівень 3:</strong></p>
+            <ul style="margin-left:20px;">
+                <li><strong>8.</strong> \(x \approx 0.555...\), \(y=0.56\), \(z=0.6\) → <strong>xyz</strong></li>
+                <li><strong>9.</strong> \(2.5 - \frac{1}{9} = 2\frac{7}{18}\)</li>
+                <li><strong>10.</strong> \(1\frac{2}{3} + \frac{1}{3} - 1\frac{2}{3} = \frac{1}{3}\)</li>
+                <li><strong>11.</strong> \(3x-5.2 - (x-1.4) = 3.2 \Rightarrow x=3.5\)</li>
+                <li><strong>12.</strong> Чисельник: \(\frac{19}{18}\cdot\frac{12}{5} + \frac{16}{3} = \frac{118}{15}\).
+                    Знаменник: \(-\frac{1}{3}\). Результат: \(-\frac{118}{5} = -23.6\)</li>
+            </ul>
+
+        </div>
+        <div
+            style="margin-top: 40px; font-size:0.95rem; color:#3e5e7a; border-top:1px solid #dce7f5; padding-top:20px; text-align:center;">
+            🧠 Підготовка до НМТ · Раціональні числа
+        </div>
+    </div>
+</body>
+
+</html>

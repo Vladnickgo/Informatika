@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Математичний довідник з графіками</title>
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 10px;
+            background-color: #f8f9fa;
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+        }
+
+        .page-break {
+            page-break-after: always;
+            border-bottom: 2px dashed #ccc;
+            margin: 40px 0;
+        }
+
+        /* Стилі для контейнера з графіком */
+        .graph-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        canvas {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <section>
+            <h1>1. Лінійне рівняння</h1>
+            <p><strong>Лінійне рівняння з однією змінною</strong> — це рівняння виду:</p>
+            $$ ax = b $$
+            <p>Де \( a \) та \( b \) — коефіцієнти (числа), а \( x \) — змінна.</p>
+
+            <h3>Графік та точки перетину з осями</h3>
+            <p>Графіком лінійної функції \( y = kx + b \) є <strong>пряма лінія</strong>.</p>
+
+            <div
+                style="background: #f1f5f9; padding: 15px; border-radius: 6px; margin-bottom: 15px; max-width: 400px; margin: 0 auto 15px auto;">
+                <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <label for="kSlider">Коефіцієнт <strong>k</strong> (нахил): <span id="kVal"
+                            style="font-weight:bold; color:#3b82f6;">1</span></label>
+                    <input type="range" id="kSlider" min="-5" max="5" step="0.25" value="1" style="width: 150px;">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label for="bSlider">Коефіцієнт <strong>b</strong> (зсув): <span id="bVal"
+                            style="font-weight:bold; color:#3b82f6;">0</span></label>
+                    <input type="range" id="bSlider" min="-5" max="5" step="0.25" value="0" style="width: 150px;">
+                </div>
+            </div>
+
+            <div class="graph-container">
+                <canvas id="linearCanvas" width="400" height="300"></canvas>
+                <p><small>Графік функції: <span id="dynamicEq" style="font-style: italic; font-weight: bold;">y = 1x +
+                            0</span></small></p>
+            </div>
+
+            <ul>
+                <li><strong>Коефіцієнт \( k \)</strong> відповідає за нахил прямої до осі \( Ox \).</li>
+                <li><strong>Коефіцієнт \( b \)</strong> — це ордината точки перетину з віссю \( Oy \).</li>
+            </ul>
+        </section>
+        <div class="page-break"></div>
+        <section>
+            <h2>2. Система лінійних рівнянь</h2>
+            <p>Система двох лінійних рівнянь із двома змінними має вигляд:</p>
+            $$ \begin{cases} a_1x + b_1y = c_1 \\ a_2x + b_2y = c_2 \end{cases} $$
+        </section>
+
+        <div class="page-break"></div>
+
+        <section>
+            <h2>3. Квадратне рівняння</h2>
+            <p><strong>Квадратне рівняння</strong> — це рівняння виду:</p>
+            $$ ax^2 + bx + c = 0 $$
+
+            <h3>Графік квадратичної функції</h3>
+            <p>Графіком функції \( y = ax^2 + bx + c \) є <strong>парабола</strong>.</p>
+            <div
+                style="background: #f1f5f9; padding: 15px; border-radius: 6px; margin-bottom: 15px; max-width: 400px; margin: 0 auto 15px auto;">
+                <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <label for="aSlider">Коефіцієнт <strong>a</strong>: <span id="aVal"
+                            style="font-weight:bold; color:#ef4444;">1</span></label>
+                    <input type="range" id="aSlider" min="-4" max="4" step="0.5" value="1" style="width: 150px;">
+                </div>
+                <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <label for="bQuadSlider">Коефіцієнт <strong>b</strong>: <span id="bQuadVal"
+                            style="font-weight:bold; color:#ef4444;">-2</span></label>
+                    <input type="range" id="bQuadSlider" min="-5" max="5" step="0.5" value="-2" style="width: 150px;">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label for="cSlider">Коефіцієнт <strong>c</strong>: <span id="cVal"
+                            style="font-weight:bold; color:#ef4444;">-3</span></label>
+                    <input type="range" id="cSlider" min="-5" max="5" step="0.5" value="-3" style="width: 150px;">
+                </div>
+            </div>
+
+            <div class="graph-container">
+                <canvas id="quadraticCanvas" width="400" height="300"></canvas>
+                <p><small>Графік функції: <span id="dynamicQuadEq" style="font-style: italic; font-weight: bold;">y = x²
+                            - 2x - 3</span></small></p>
+            </div>
+
+            <h3>Дискримінант</h3>
+            <p>Для визначення кількості коренів обчислюють <strong>дискримінант (\( D \))</strong>:</p>
+            $$ D = b^2 - 4ac $$
+        </section>
+
+        <script>
+            const scale = 30; // 1 одиниця = 30 пікселів
+
+            function drawGrid(ctx, width, height, scale) {
+                const originX = width / 2;
+                const originY = height / 2;
+
+                ctx.clearRect(0, 0, width, height); // Очищення canvas перед малюванням
+
+                // Сітка
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1;
+                for (let x = originX % scale; x < width; x += scale) {
+                    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+                }
+                for (let y = originY % scale; y < height; y += scale) {
+                    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+                }
+
+                // Осі
+                ctx.strokeStyle = '#334155';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(0, originY); ctx.lineTo(width, originY); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(originX, 0); ctx.lineTo(originX, height); ctx.stroke();
+
+                // Підписи
+                ctx.fillStyle = '#334155';
+                ctx.font = '12px Arial';
+                ctx.fillText('X', width - 15, originY - 5);
+                ctx.fillText('Y', originX + 5, 15);
+                ctx.fillText('0', originX - 12, originY + 15);
+            }
+
+            // Елементи керування лінійною функцією
+            const linCanvas = document.getElementById('linearCanvas');
+            const linCtx = linCanvas.getContext('2d');
+            const kSlider = document.getElementById('kSlider');
+            const bSlider = document.getElementById('bSlider');
+            const kVal = document.getElementById('kVal');
+            const bVal = document.getElementById('bVal');
+            const dynamicEq = document.getElementById('dynamicEq');
+
+            function updateLinearGraph() {
+                const k = parseFloat(kSlider.value);
+                const b = parseFloat(bSlider.value);
+
+                // Оновлюємо цифри та текст рівняння на екрані
+                kVal.textContent = k;
+                bVal.textContent = b;
+                let kText = Math.abs(k) != 1 ? `${k}` : '';
+                // Красиве відображення знаку плюс/мінус для b
+                let bText = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+                if (b === 0) bText = '';
+                dynamicEq.textContent = `y = ${kText}x ${bText}`;
+
+                // Малюємо сітку та осі
+                drawGrid(linCtx, linCanvas.width, linCanvas.height, scale);
+
+                // Малюємо саму пряму функцію y = kx + b
+                linCtx.strokeStyle = '#3b82f6';
+                linCtx.lineWidth = 3;
+                linCtx.beginPath();
+
+                for (let pixelX = 0; pixelX < linCanvas.width; pixelX++) {
+                    let x = (pixelX - linCanvas.width / 2) / scale;
+                    let y = k * x + b; // Наша динамічна функція
+                    let pixelY = linCanvas.height / 2 - (y * scale);
+
+                    if (pixelX === 0) linCtx.moveTo(pixelX, pixelY);
+                    else linCtx.lineTo(pixelX, pixelY);
+                }
+                linCtx.stroke();
+            }
+
+            // Слідкуємо за змінами повзунків
+            kSlider.addEventListener('input', updateLinearGraph);
+            bSlider.addEventListener('input', updateLinearGraph);
+
+            // Перший запуск малювання при завантаженні сторінки
+            updateLinearGraph();
+
+            // 2. Малювання квадратичної функції
+            // Елементи керування квадратичною функцією
+            const quadCanvas = document.getElementById('quadraticCanvas');
+            const quadCtx = quadCanvas.getContext('2d');
+            const aSlider = document.getElementById('aSlider');
+            const bQuadSlider = document.getElementById('bQuadSlider');
+            const cSlider = document.getElementById('cSlider');
+            const aVal = document.getElementById('aVal');
+            const bQuadVal = document.getElementById('bQuadVal');
+            const cVal = document.getElementById('cVal');
+            const dynamicQuadEq = document.getElementById('dynamicQuadEq');
+
+            function updateQuadraticGraph() {
+                const a = parseFloat(aSlider.value);
+                const b = parseFloat(bQuadSlider.value);
+                const c = parseFloat(cSlider.value);
+
+                // Оновлюємо цифри у блоці керування
+                aVal.textContent = a;
+                bQuadVal.textContent = b;
+                cVal.textContent = c;
+
+                // Якщо а === 0, функція перестає бути квадратичною (стає лінійною)
+                // Шкільна програма вимагає a != 0, тому за бажанням повзунок "а" можна обмежити, щоб він не брав 0,
+                // але ми закладемо коректне відображення для будь-яких умов.
+
+                // 1. Формуємо доданок з x² (коефіцієнт a)
+                let aText = '';
+                if (a === 1) aText = 'x²';
+                else if (a === -1) aText = '-x²';
+                else if (a === 0) aText = '';
+                else aText = `${a}x²`;
+
+                // 2. Формуємо доданок з x (коефіцієнт b)
+                let bText = '';
+                if (b > 0) {
+                    bText = (a === 0) ? (b === 1 ? 'x' : `${b}x`) : (b === 1 ? ' + x' : ` + ${b}x`);
+                } else if (b < 0) {
+                    bText = (a === 0) ? (b === -1 ? '-x' : `${b}x`) : (b === -1 ? ' - x' : ` - ${Math.abs(b)}x`);
+                } else {
+                    bText = ''; // Якщо b === 0, доданок ховаємо
+                }
+
+                // 3. Формуємо вільний член (коефіцієнт c)
+                let cText = '';
+                const hasPreviousTerms = (a !== 0 || b !== 0);
+
+                if (c > 0) {
+                    cText = hasPreviousTerms ? ` + ${c}` : `${c}`;
+                } else if (c < 0) {
+                    cText = hasPreviousTerms ? ` - ${Math.abs(c)}` : `${c}`;
+                } else {
+                    cText = hasPreviousTerms ? '' : '0'; // Якщо все нулі, виведемо просто 0
+                }
+
+                // Зшиваємо рівняння докупи
+                dynamicQuadEq.textContent = `y = ${aText}${bText}${cText}`;
+
+                // Малюємо сітку та осі (використовуємо вашу спільну функцію drawGrid)
+                drawGrid(quadCtx, quadCanvas.width, quadCanvas.height, scale);
+
+                // Якщо графік перетворився на нуль, не малюємо лінію, щоб не було помилок
+                if (a === 0 && b === 0 && c === 0) {
+                    // Малюємо просто точку в нулі
+                    quadCtx.fillStyle = '#ef4444';
+                    quadCtx.beginPath();
+                    quadCtx.arc(quadCanvas.width / 2, quadCanvas.height / 2, 4, 0, 2 * Math.PI);
+                    quadCtx.fill();
+                    return;
+                }
+
+                // Малюємо параболу
+                quadCtx.strokeStyle = '#ef4444'; // Червона лінія для параболи
+                quadCtx.lineWidth = 3;
+                quadCtx.beginPath();
+
+                for (let pixelX = 0; pixelX < quadCanvas.width; pixelX++) {
+                    let x = (pixelX - quadCanvas.width / 2) / scale;
+                    let y = a * x * x + b * x + c; // Квадратична функція
+                    let pixelY = quadCanvas.height / 2 - (y * scale);
+
+                    // Перевірка, щоб графік не виходив за межі canvas по вертикалі (запобігає візуальним багам)
+                    if (pixelX === 0) quadCtx.moveTo(pixelX, pixelY);
+                    else quadCtx.lineTo(pixelX, pixelY);
+                }
+                quadCtx.stroke();
+            }
+
+            // Слухачі подій для квадратичних повзунків
+            aSlider.addEventListener('input', updateQuadraticGraph);
+            bQuadSlider.addEventListener('input', updateQuadraticGraph);
+            cSlider.addEventListener('input', updateQuadraticGraph);
+
+            // Обов'язково викликаємо функцію один раз при старті, щоб графік з'явився відразу
+            updateQuadraticGraph();
+            quadCtx.stroke();
+        </script>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-200 -300 800 30">
+	<path d="M-30 0 31 0 28-1 29 0 28 1 31 0" stroke="#000000" stroke-width="0.2" fill="none"/>
+<circle cx="0" cy="0" r="1" stroke="#000000" stroke-width="0.2" fill="none"/>
+<text x="0" y="8" text-anchor="middle" font-size="5" fill="#1e293b">0</text>
+<path d="M-30 -5 -10 -5 C-10 -5 -2 -5 -0.5 -1" stroke="#000000" stroke-width="0.2" fill="none"/>
+<path d="M 0.5 -1 C0.5 -1 2 -5 10 -5 L30 -5" stroke="#000000" stroke-width="0.2" fill="none"/>
+	<path d="M-50-100Q-70-150-150-150L-200-150 Q-280-150 -300 -100 -280 -50 -200 -50 L -150 -50 Q-80 -50 -50 -100" stroke="#000000" stroke-width="0.4" fill="none"/>
+</svg>
+
+</body>
+
+</html>

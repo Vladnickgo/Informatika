@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>НМТ · Тема 3: Види виразів та їхні перетворення</title>
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <style>
+        :root {
+            --primary: #1a3a5c;
+            --primary-light: #2c5a82;
+            --accent: #c0392b;
+            --bg: #f4f6f9;
+            --card: #ffffff;
+            --border: #e1e5ea;
+            --text: #1f2933;
+            --muted: #6b7280;
+            --green: #1e7e34;
+            --blue-bg: #eef4fb;
+            --blue-border: #b8d4fe;
+            --yellow-bg: #fffbe6;
+            --yellow-border: #f0c72c;
+            --pink-bg: #fdf2f8;
+            --pink-border: #f5a3c7;
+            --green-bg: #f0f9f3;
+            --green-border: #86c79a;
+            --shadow: 0 2px 10px rgba(26, 58, 92, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 20px;
+            font-size: 16px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        /* ---------- HEADER ---------- */
+        header {
+            text-align: center;
+            padding: 40px 24px;
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5a82 100%);
+            color: #fff;
+            border-radius: 14px 14px 0 0;
+        }
+        header h1 { font-size: 1.9em; margin-bottom: 8px; font-weight: 700; }
+        header p { opacity: 0.9; font-size: 1.05em; }
+
+        /* ---------- NAV / TOC ---------- */
+        .toc {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-top: none;
+            padding: 24px 30px;
+            border-radius: 0 0 14px 14px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+        .toc h2 {
+            font-size: 1.05em;
+            margin-bottom: 14px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            padding: 0;
+        }
+        .toc ul { list-style: none; padding: 0; columns: 2; column-gap: 24px; }
+        @media (max-width: 640px) { .toc ul { columns: 1; } }
+        .toc li { margin: 8px 0; break-inside: avoid; }
+        .toc a {
+            color: var(--primary);
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            transition: all 0.15s;
+            font-weight: 500;
+        }
+        .toc a:hover { background: var(--blue-bg); color: var(--accent); }
+
+        /* ---------- SECTION ---------- */
+        section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px 34px;
+            margin-bottom: 26px;
+            box-shadow: var(--shadow);
+        }
+        @media (max-width: 600px) { section { padding: 22px 18px; } }
+        h2.section-title {
+            font-size: 1.45em;
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h2.section-title .num {
+            background: var(--primary);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+        h3 {
+            font-size: 1.12em;
+            color: var(--primary);
+            margin: 24px 0 12px;
+        }
+        p { margin-bottom: 10px; }
+        ul, ol { padding-left: 24px; margin-bottom: 12px; }
+        li { margin-bottom: 6px; }
+        strong { color: var(--primary); }
+
+        /* ---------- BOXES ---------- */
+        .formula-box {
+            background: var(--blue-bg);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 10px 10px 0;
+            overflow-x: auto;
+        }
+        .formula-box .title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .formula-box p { margin-bottom: 8px; }
+        .formula-box p:last-child { margin-bottom: 0; }
+
+        .example {
+            background: var(--green-bg);
+            border: 1px solid var(--green-border);
+            border-radius: 10px;
+            padding: 20px 22px;
+            margin: 20px 0;
+        }
+        .example .label {
+            display: inline-block;
+            background: var(--green);
+            color: #fff;
+            font-size: 0.78em;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .solution {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--green-border);
+        }
+        .solution strong { color: var(--green); }
+
+        .warning {
+            background: var(--yellow-bg);
+            border: 1px solid var(--yellow-border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.97em;
+        }
+        .warning .title {
+            font-weight: 700;
+            color: #8a6d00;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .tip {
+            background: var(--pink-bg);
+            border: 1px solid var(--pink-border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.97em;
+        }
+        .tip .title {
+            font-weight: 700;
+            color: #a02565;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        /* ---------- TABLE ---------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.94em;
+            background: #fff;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th { background: var(--primary); color: #fff; font-weight: 600; }
+        tr:nth-child(even) td { background: #f8f9fa; }
+
+        /* ---------- GRID ---------- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 14px 0;
+        }
+        @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        /* ---------- BACK TOP ---------- */
+        .back-top {
+            text-align: right;
+            font-size: 0.85em;
+            margin-top: 16px;
+        }
+        .back-top a {
+            color: var(--muted);
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .back-top a:hover { background: var(--blue-bg); color: var(--primary); }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.88em;
+            padding: 30px 20px;
+        }
+        footer a { color: var(--primary); }
+
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- ==================== HEADER ==================== -->
+<header>
+    <h1>Види виразів та їхні перетворення</h1>
+    <p>Підготовка до НМТ · Тема 3 · Повний огляд усіх типів виразів</p>
+</header>
+
+<!-- ==================== TOC ==================== -->
+<nav class="toc">
+    <h2>Зміст</h2>
+    <ul>
+        <li><a href="#algebraic">1. Алгебраїчні вирази</a></li>
+        <li><a href="#polynomials">2. Многочлени</a></li>
+        <li><a href="#rational">3. Раціональні вирази</a></li>
+        <li><a href="#fractional">4. Дробово-раціональні вирази</a></li>
+        <li><a href="#exponential">5. Показникові вирази</a></li>
+        <li><a href="#logarithmic">6. Логарифмічні вирази</a></li>
+        <li><a href="#irrational">7. Ірраціональні вирази</a></li>
+        <li><a href="#summary">8. Зведена таблиця та пастки</a></li>
+    </ul>
+</nav>
+
+<!-- ==================== 1. АЛГЕБРАЇЧНІ ==================== -->
+<section id="algebraic">
+    <h2 class="section-title"><span class="num">1</span> Алгебраїчні вирази</h2>
+
+    <p><strong>Алгебраїчний вираз</strong> — це запис, що складається з чисел, змінних, знаків арифметичних дій та дужок. Наприклад: $3x^2 - 2x + 1$, $\dfrac{a+b}{a-b}$, $\sqrt{x+1}$, $\log_2 x$, $2^x$.</p>
+
+    <h3>Класифікація виразів</h3>
+    <ul>
+        <li><strong>Цілі</strong> — не містять ділення на вираз зі змінною та коренів зі змінної: $5x^3 - 2x$.</li>
+        <li><strong>Дробові</strong> — містять змінну в знаменнику: $\dfrac{x}{x-2}$.</li>
+        <li><strong>Ірраціональні</strong> — містять змінну під знаком кореня: $\sqrt{x^2+1}$.</li>
+        <li><strong>Показникові</strong> — змінна в показнику степеня: $3^{x+1}$.</li>
+        <li><strong>Логарифмічні</strong> — змінна під знаком логарифма: $\log_2(x-1)$.</li>
+    </ul>
+
+    <div class="formula-box">
+        <div class="title">Область допустимих значень (ОДЗ)</div>
+        <p>Множина всіх значень змінних, за яких вираз <em>має зміст</em>.</p>
+        <p>• Знаменник ≠ 0: $\dfrac{A}{B}$ — умова $B \neq 0$.</p>
+        <p>• Підкореневий вираз парного кореня ≥ 0: $\sqrt[2k]{A}$ — умова $A \geq 0$.</p>
+        <p>• Аргумент логарифма > 0, основа > 0 і ≠ 1: $\log_a B$ — умови $B > 0$, $a > 0$, $a \neq 1$.</p>
+        <p>• Основа степеня з дробовим показником > 0: $a^{m/n}$ — умова $a > 0$.</p>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад</span>
+        <p>Знайдіть ОДЗ виразу $\dfrac{\sqrt{x-3}}{x - 5} + \log_2(8 - x)$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Маємо три обмеження:</p>
+            <p>1) $x - 3 \geq 0 \Rightarrow x \geq 3$;</p>
+            <p>2) $x - 5 \neq 0 \Rightarrow x \neq 5$;</p>
+            <p>3) $8 - x > 0 \Rightarrow x < 8$.</p>
+            <p>Перетин: $x \in [3; 5) \cup (5; 8)$.</p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <span class="title">💡 Порада для НМТ</span>
+        У завданнях на тотожність спочатку визначте <em>тип</em> виразу — від цього залежить, які формули застосовувати. Не починайте перетворення, не побачивши «підказки» в структурі виразу.
+    </div>
+
+    <div class="back-top"><a href="#top">↑ до змісту</a></div>
+</section>
+
+<!-- ==================== 2. МНОГОЧЛЕНИ ==================== -->
+<section id="polynomials">
+    <h2 class="section-title"><span class="num">2</span> Многочлени</h2>
+
+    <p><strong>Одночлен</strong> — добуток чисел і змінних у натуральних степенях: $7a^2b^3$.</p>
+    <p><strong>Многочлен</strong> — сума одночленів: $3x^3 - 2x^2 + 5x - 7$.</p>
+    <p><strong>Степінь многочлена</strong> — найбільший зі степенів його членів у стандартному вигляді.</p>
+
+    <h3>Основні дії з многочленами</h3>
+    <div class="formula-box">
+        <div class="title">Додавання та віднімання</div>
+        <p>$(A \pm B) \pm C = A \pm B \pm C$ — розкриваємо дужки й зводимо подібні доданки.</p>
+    </div>
+    <div class="formula-box">
+        <div class="title">Множення</div>
+        <p>Одночлен на многочлен: $a(b+c) = ab + ac$</p>
+        <p>Многочлен на многочлен: $(a+b)(c+d) = ac + ad + bc + bd$</p>
+    </div>
+
+    <h3>Формули скороченого множення (обов’язково знати назубок)</h3>
+    <div class="grid-2">
+        <div class="formula-box">
+            <p>$(a \pm b)^2 = a^2 \pm 2ab + b^2$</p>
+            <p>$a^2 - b^2 = (a-b)(a+b)$</p>
+            <p>$(a \pm b)^3 = a^3 \pm 3a^2b + 3ab^2 \pm b^3$</p>
+        </div>
+        <div class="formula-box">
+            <p>$a^3 + b^3 = (a+b)(a^2 - ab + b^2)$</p>
+            <p>$a^3 - b^3 = (a-b)(a^2 + ab + b^2)$</p>
+            <p>$a^n - b^n = (a-b)(a^{n-1} + a^{n-2}b + \dots + b^{n-1})$</p>
+        </div>
+    </div>
+
+    <h3>Розкладання квадратного тричлена на множники</h3>
+    <div class="formula-box">
+        <p>Якщо $x_1, x_2$ — корені $ax^2 + bx + c = 0$, то</p>
+        <p>$$ax^2 + bx + c = a(x - x_1)(x - x_2)$$</p>
+        <p><strong>Теорема Вієта</strong> (для $x^2 + px + q = 0$): $x_1 + x_2 = -p$, $x_1 x_2 = q$.</p>
+    </div>
+
+    <h3>Методи розкладання на множники</h3>
+    <ol>
+        <li><strong>Винесення спільного множника:</strong> $6a^2b - 9ab^2 = 3ab(2a - 3b)$.</li>
+        <li><strong>Групування:</strong> $ax + ay + bx + by = (a+b)(x+y)$.</li>
+        <li><strong>Формули скороченого множення.</strong></li>
+        <li><strong>Розкладання квадратного тричлена.</strong></li>
+        <li><strong>Комбінація методів</strong> — найчастіший випадок на НМТ.</li>
+    </ol>
+
+    <div class="example">
+        <span class="label">Приклад 1</span>
+        <p>Розкладіть на множники: $x^3 - 4x^2 - x + 4$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Групуємо: $(x^3 - 4x^2) - (x - 4) = x^2(x - 4) - (x - 4)$.</p>
+            <p>Виносимо спільний множник $(x-4)$: $(x - 4)(x^2 - 1) = (x - 4)(x-1)(x+1)$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 2</span>
+        <p>Скоротіть: $\dfrac{x^2 - 5x + 6}{x^2 - 9}$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Чисельник: $x^2 - 5x + 6 = (x-2)(x-3)$ (корені 2 і 3).</p>
+            <p>Знаменник: $x^2 - 9 = (x-3)(x+3)$.</p>
+            <p>$\dfrac{(x-2)(x-3)}{(x-3)(x+3)} = \dfrac{x-2}{x+3}$ при $x \neq 3$, $x \neq -3$.</p>
+        </div>
+    </div>
+
+    <div class="warning">
+        <span class="title">⚠️ Пастка НМТ</span>
+        При скороченні дробу обов’язково фіксуйте виключені значення змінної. Якщо серед варіантів відповіді є два однакові за виглядом, але різні за ОДЗ — обирайте той, що зберігає початкові обмеження.
+    </div>
+
+    <div class="back-top"><a href="#top">↑ до змісту</a></div>
+</section>
+
+<!-- ==================== 3. РАЦІОНАЛЬНІ ==================== -->
+<section id="rational">
+    <h2 class="section-title"><span class="num">3</span> Раціональні вирази</h2>
+
+    <p><strong>Раціональний вираз</strong> — вираз, що містить лише дії додавання, віднімання, множення, ділення та піднесення до цілого степеня (без коренів і логарифмів зі змінною). Раціональні вирази бувають <em>цілими</em> (многочлени) і <em>дробовими</em> (дробово-раціональні).</p>
+
+    <p>Тут розглянемо <strong>цілі раціональні вирази</strong> — многочлени та їх комбінації. Основна навичка — <em>тотожні перетворення</em>: розкриття дужок, зведення подібних, використання формул.</p>
+
+    <h3>Ключові тотожності для спрощення</h3>
+    <div class="formula-box">
+        <p>$(a+b)^2 + (a-b)^2 = 2(a^2 + b^2)$</p>
+        <p>$(a+b)^2 - (a-b)^2 = 4ab$</p>
+        <p>$a^2 + b^2 = (a+b)^2 - 2ab = (a-b)^2 + 2ab$</p>
+        <p>$a^3 + b^3 = (a+b)^3 - 3ab(a+b)$</p>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 1</span>
+        <p>Спростіть: $(a+b)^2 - (a-b)^2 + (a+b)(a-b)$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Розкриваємо кожну дужку:</p>
+            <p>$(a^2 + 2ab + b^2) - (a^2 - 2ab + b^2) + (a^2 - b^2)$</p>
+            <p>$= a^2 + 2ab + b^2 - a^2 + 2ab - b^2 + a^2 - b^2 = a^2 + 4ab - b^2$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 2</span>
+        <p>Відомо, що $a + b = 7$, $ab = 10$. Знайдіть $a^2 + b^2$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Використовуємо тотожність:</p>
+            <p>$a^2 + b^2 = (a+b)^2 - 2ab = 49 - 20 = 29$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 3 · Доведення тотожності</span>
+        <p>Доведіть, що $(a^2 + b^2)(c^2 + d^2) = (ac - bd)^2 + (ad + bc)^2$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Розкриємо праву частину:</p>
+            <p>$(a^2c^2 - 2abcd + b^2d^2) + (a^2d^2 + 2abcd + b^2c^2)$</p>
+            <p>$= a^2c^2 + b^2d^2 + a^2d^2 + b^2c^2$.</p>
+            <p>Ліва частина: $a^2c^2 + a^2d^2 + b^2c^2 + b^2d^2$. Отримали те саме — тотожність доведено.</p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <span class="title">💡 Порада для НМТ</span>
+        У завданнях «знайти значення виразу, якщо відомо…» майже завжди потрібно <em>виразити шукане через суму та добуток</em> змінних, а не розв’язувати систему.
+    </div>
+
+    <div class="back-top"><a href="#top">↑ до змісту</a></div>
+</section>
+
+<!-- ==================== 4. ДРОБОВО-РАЦІОНАЛЬНІ ==================== -->
+<section id="fractional">
+    <h2 class="section-title"><span class="num">4</span> Дробово-раціональні вирази</h2>
+
+    <p><strong>Дробово-раціональний вираз</strong> — відношення двох многочленів: $\dfrac{P(x)}{Q(x)}$, де $Q(x) \neq 0$.</p>
+
+    <h3>Основна властивість дробу</h3>
+    <div class="formula-box">
+        <p>$\dfrac{A}{B} = \dfrac{A \cdot C}{B \cdot C}$ при $B \neq 0$, $C \neq 0$.</p>
+        <p><strong>Дії з дробами:</strong></p>
+        <p>$\dfrac{a}{c} \pm \dfrac{b}{c} = \dfrac{a \pm b}{c}$; &nbsp; $\dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{ac}{bd}$; &nbsp; $\dfrac{a}{b} : \dfrac{c}{d} = \dfrac{a}{b} \cdot \dfrac{d}{c} = \dfrac{ad}{bc}$</p>
+    </div>
+
+    <h3>Алгоритм спрощення дробово-раціонального виразу</h3>
+    <ol>
+        <li>Визначити ОДЗ (усі знаменники ≠ 0).</li>
+        <li>Розкласти чисельники та знаменники на множники.</li>
+        <li>Звести до спільного знаменника (при додаванні/відніманні).</li>
+        <li>Скоротити спільні множники.</li>
+        <li>Записати відповідь із зазначенням обмежень.</li>
+    </ol>
+
+    <div class="example">
+        <span class="label">Приклад 1 · Додавання</span>
+        <p>Спростіть: $\dfrac{m^2 + 5m}{m^2 - 3m} + \dfrac{7}{m^2 - 3m} - \dfrac{11m - 2}{m^2 - 3m}$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Знаменники однакові — об’єднуємо чисельники:</p>
+            <p>$\dfrac{m^2 + 5m + 7 - (11m - 2)}{m^2 - 3m} = \dfrac{m^2 - 6m + 9}{m^2 - 3m}$.</p>
+            <p>Розкладаємо: $\dfrac{(m-3)^2}{m(m-3)} = \dfrac{m-3}{m}$ при $m \neq 0$, $m \neq 3$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 2 · Множення</span>
+        <p>Спростіть: $\dfrac{x^2 - 4}{x^2 + 4x + 4} \cdot \dfrac{x+2}{x-2}$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Розкладаємо чисельник першого дробу та знаменник:</p>
+            <p>$x^2 - 4 = (x-2)(x+2)$; &nbsp; $x^2 + 4x + 4 = (x+2)^2$.</p>
+            <p>$\dfrac{(x-2)(x+2)}{(x+2)^2} \cdot \dfrac{x+2}{x-2} = \dfrac{(x-2)(x+2)(x+2)}{(x+2)^2(x-2)} = 1$.</p>
+            <p>при $x \neq \pm 2$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 3 · «Багатоповерховий» дріб</span>
+        <p>Спростіть: $\dfrac{1 + \dfrac{1}{x}}{1 - \dfrac{1}{x^2}}$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Зводимо чисельник і знаменник:</p>
+            <p>Чисельник: $1 + \dfrac{1}{x} = \dfrac{x+1}{x}$. Знаменник: $1 - \dfrac{1}{x^2} = \dfrac{x^2-1}{x^2} = \dfrac{(x-1)(x+1)}{x^2}$.</p>
+            <p>Ділення: $\dfrac{(x+1)/x}{(x-1)(x+1)/x^2} = \dfrac{x+1}{x} \cdot \dfrac{x^2}{(x-1)(x+1)} = \dfrac{x}{x-1}$.</p>
+            <p>при $x \neq 0, \pm 1$.</p>
+        </div>
+    </div>
+
+    <div class="warning">
+        <span class="title">⚠️ Пастка НМТ</span>
+        Не можна скорочувати доданки! $\dfrac{x+3}{x+5} \neq \dfrac{3}{5}$ — «скорочувати» можна <strong>тільки множники</strong>, а не доданки чисельника й знаменника. Це найпоширеніша помилка.
+    </div>
+
+    <div class="back-top"><a href="#top">↑ до змісту</a></div>
+</section>
+
+<!-- ==================== 5. ПОКАЗНИКОВІ ==================== -->
+<section id="exponential">
+    <h2 class="section-title"><span class="num">5</span> Показникові вирази</h2>
+
+    <p><strong>Показниковий вираз</strong> містить змінну в показнику степеня: $3^{2x-1}$, $a^{x+1}$, $e^{-x}$.</p>
+
+    <div class="formula-box">
+        <div class="title">Властивості степенів ($a > 0$, $b > 0$)</div>
+        <p>$a^x \cdot a^y = a^{x+y}$; &nbsp; $\dfrac{a^x}{a^y} = a^{x-y}$; &nbsp; $(a^x)^y = a^{xy}$</p>
+        <p>$(ab)^x = a^x b^x$; &nbsp; $\left(\dfrac{a}{b}\right)^x = \dfrac{a^x}{b^x}$</p>
+        <p>$a^0 = 1$ ($a \neq 0$); &nbsp; $a^{-x} = \dfrac{1}{a^x}$</p>
+        <p>$a^{m/n} = \sqrt[n]{a^m}$ &nbsp; (для $a > 0$)</p>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 1 · Зведення до однієї основи</span>
+        <p>Спростіть: $\dfrac{2^{x+3} \cdot 4^{x-1}}{8^{x-2}}$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Зводимо всі основи до 2:</p>
+            <p>$4^{x-1} = 2^{2(x-1)} = 2^{2x-2}$; &nbsp; $8^{x-2} = 2^{3(x-2)} = 2^{3x-6}$.</p>
+            <p>$\dfrac{2^{x+3} \cdot 2^{2x-2}}{2^{3x-6}} = 2^{(x+3)+(2x-2)-(3x-6)} = 2^{7} = 128$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 2 · Раціональний показник</span>
+        <p>Подайте у вигляді степеня: $\sqrt[3]{a^2} \cdot \sqrt{a}$ ($a > 0$).</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> $\sqrt[3]{a^2} = a^{2/3}$, $\sqrt{a} = a^{1/2}$.</p>
+            <p>$a^{2/3} \cdot a^{1/2} = a^{2/3 + 1/2} = a^{7/6}$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 3 · «Винесення спільного» </span>
+        <p>Спростіть: $\dfrac{3^{n+1} + 3^{n-1}}{3^{n-1}}$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> У чисельнику виносимо $3^{n-1}$:</p>
+            <p>$3^{n+1} + 3^{n-1} = 3^{n-1}(3^2 + 1) = 10 \cdot 3^{n-1}$.</p>
+            <p>Тоді $\dfrac{10 \cdot 3^{n-1}}{3^{n-1}} = 10$.</p>
+        </div>
+    </div>
+
+    <div class="warning">
+        <span class="title">⚠️ Пастка НМТ</span>
+        $(-8)^{1/3} = -2$ має зміст, але $(-8)^{2/6}$ — уже ні (бо це парний корінь з від’ємного). Якщо бачите степінь із раціональним показником — перевіряйте умову $a > 0$ або парність/непарність знаменника.
+    </div>
+
+    <div class="back-top"><a href="#top">↑ до змісту</a></div>
+</section>
+
+<!-- ==================== 6. ЛОГАРИФМІЧНІ ==================== -->
+<section id="logarithmic">
+    <h2 class="section-title"><span class="num">6</span> Логарифмічні вирази</h2>
+
+    <p><strong>Означення:</strong> $\log_a b = c \iff a^c = b$, де $a > 0$, $a \neq 1$, $b > 0$.</p>
+
+    <div class="formula-box">
+        <div class="title">Властивості логарифмів</div>
+        <p>$\log_a (bc) = \log_a b + \log_a c$</p>
+        <p>$\log_a \dfrac{b}{c} = \log_a b - \log_a c$</p>
+        <p>$\log_a b^n = n \log_a b$</p>
+        <p>$\log_{a^n} b = \dfrac{1}{n} \log_a b$</p>
+        <p>$a^{\log_a b} = b$; &nbsp; $\log_a a = 1$; &nbsp; $\log_a 1 = 0$</p>
+        <p><strong>Перехід до нової основи:</strong> $\log_a b = \dfrac{\log_c b}{\log_c a}$; &nbsp; $\log_a b = \dfrac{1}{\log_b a}$</p>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 1 · Спрощення</span>
+        <p>Спростіть: $\log_5 25x^2 - 2\log_5 x$ ($x > 0$).</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> $\log_5 25x^2 = \log_5 25 + \log_5 x^2 = 2 + 2\log_5 x$.</p>
+            <p>Тоді $2 + 2\log_5 x - 2\log_5 x = 2$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 2 · Потенціювання</span>
+        <p>Знайдіть $x$, якщо $\lg x = 5\lg c - \dfrac{1}{3}\lg a$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> За властивостями логарифмів:</p>
+            <p>$\lg x = \lg c^5 - \lg a^{1/3} = \lg \dfrac{c^5}{\sqrt[3]{a}}$.</p>
+            <p>Отже, $x = \dfrac{c^5}{\sqrt[3]{a}}$ (за умови $c > 0$, $a > 0$).</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 3 · Перехід до нової основи</span>
+        <p>Обчисліть $\log_4 8 \cdot \log_8 16$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Переходимо до основи 2:</p>
+            <p>$\log_4 8 = \dfrac{\log_2 8}{\log_2 4} = \dfrac{3}{2}$; &nbsp; $\log_8 16 = \dfrac{\log_2 16}{\log_2 8} = \dfrac{4}{3}$.</p>
+            <p>Добуток: $\dfrac{3}{2} \cdot \dfrac{4}{3} = 2$.</p>
+        </div>
+    </div>
+
+    <div class="warning">
+        <span class="title">⚠️ Пастка НМТ</span>
+        Формула $\log_a b^n = n\log_a b$ беззастережно працює лише за $b > 0$. Якщо $b$ може бути від’ємним, правильний запис: $\log_a b^2 = 2\log_a |b|$. У тестах часто пропонують саме «уточнений» варіант як правильний.
+    </div>
+
+    <div class="back-top"><a href="#top">↑ до змісту</a></div>
+</section>
+
+<!-- ==================== 7. ІРРАЦІОНАЛЬНІ ==================== -->
+<section id="irrational">
+    <h2 class="section-title"><span class="num">7</span> Ірраціональні вирази</h2>
+
+    <p><strong>Ірраціональний вираз</strong> містить змінну під знаком кореня (радикала): $\sqrt{x+1}$, $\sqrt[3]{x^2-1}$.</p>
+
+    <div class="formula-box">
+        <div class="title">Властивості арифметичного кореня</div>
+        <p>$\sqrt[n]{a^n} = |a|$ для парного $n$; &nbsp; $\sqrt[n]{a^n} = a$ для непарного $n$</p>
+        <p>$\sqrt[n]{ab} = \sqrt[n]{a} \cdot \sqrt[n]{b}$; &nbsp; $\sqrt[n]{\dfrac{a}{b}} = \dfrac{\sqrt[n]{a}}{\sqrt[n]{b}}$ ($b \neq 0$)</p>
+        <p>$\sqrt[n]{a^m} = a^{m/n}$ (для $a \geq 0$, парного $n$)</p>
+        <p>$\left(\sqrt[n]{a}\right)^n = a$; &nbsp; $\sqrt[n]{\sqrt[m]{a}} = \sqrt[nm]{a}$</p>
+    </div>
+
+    <h3>Позбавлення від ірраціональності в знаменнику</h3>
+    <div class="formula-box">
+        <p>$\dfrac{1}{\sqrt{a}} = \dfrac{\sqrt{a}}{a}$</p>
+        <p>$\dfrac{1}{\sqrt{a} \pm \sqrt{b}} = \dfrac{\sqrt{a} \mp \sqrt{b}}{a - b}$</p>
+        <p>$\dfrac{1}{\sqrt[3]{a} \pm \sqrt[3]{b}} = \dfrac{\sqrt[3]{a^2} \mp \sqrt[3]{ab} + \sqrt[3]{b^2}}{a \pm b}$</p>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 1 · Спрощення кореня</span>
+        <p>Спростіть: $\sqrt{(a^2 - 4)^2 + 16a^2}$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Розкриваємо внутрішній квадрат:</p>
+            <p>$(a^2 - 4)^2 + 16a^2 = a^4 - 8a^2 + 16 + 16a^2 = a^4 + 8a^2 + 16$.</p>
+            <p>Помічаємо повний квадрат: $a^4 + 8a^2 + 16 = (a^2 + 4)^2$.</p>
+            <p>Отже, $\sqrt{(a^2 + 4)^2} = |a^2 + 4| = a^2 + 4$ (бо $a^2 + 4 > 0$).</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 2 · Позбавлення ірраціональності</span>
+        <p>Звільніться від ірраціональності: $\dfrac{1}{\sqrt{2} + \sqrt{3} + 1}$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> Групуємо: $(\sqrt{2} + 1) + \sqrt{3}$. Множимо на спряжений $(\sqrt{2} + 1) - \sqrt{3}$:</p>
+            <p>$\dfrac{\sqrt{2} + 1 - \sqrt{3}}{(\sqrt{2}+1)^2 - 3} = \dfrac{\sqrt{2} + 1 - \sqrt{3}}{3 + 2\sqrt{2} - 3} = \dfrac{\sqrt{2} + 1 - \sqrt{3}}{2\sqrt{2}}$.</p>
+            <p>Домножуємо на $\sqrt{2}$:</p>
+            <p>$\dfrac{(\sqrt{2} + 1 - \sqrt{3})\sqrt{2}}{2\sqrt{2}\cdot\sqrt{2}} = \dfrac{2 + \sqrt{2} - \sqrt{6}}{4}$.</p>
+        </div>
+    </div>
+
+    <div class="example">
+        <span class="label">Приклад 3 · Формула «різниця квадратів»</span>
+        <p>Обчисліть: $(\sqrt{5} - \sqrt{3})(\sqrt{5} + \sqrt{3})$.</p>
+        <div class="solution">
+            <p><strong>Розв’язання.</strong> За формулою $a^2 - b^2$:</p>
+            <p>$(\sqrt{5})^2 - (\sqrt{3})^2 = 5 - 3 = 2$.</p>
+        </div>
+    </div>
+
+    <div class="warning">
+        <span class="title">⚠️ Пастка НМТ</span>
+        $\sqrt{x^2} = |x|$, а не $x$. Якщо серед варіантів є «$x$» без модуля — він майже завжди хибний, якщо в умові не вказано $x \geq 0$. Також: $\sqrt{a} + \sqrt{b} \neq \sqrt{a+b}$ — додавати корені «під один корінь» не можна.
+    </div>
+
+    <div class="back-top"><a href="#top">↑ до змісту</a></div>
+</section>
+
+<!-- ==================== 8. ЗВЕДЕНА ТАБЛИЦЯ ==================== -->
+<section id="summary">
+    <h2 class="section-title"><span class="num">8</span> Зведена таблиця та типові пастки</h2>
+
+    <h3>Усі типи виразів — коротко</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Тип виразу</th>
+                <th>Що містить</th>
+                <th>Ключові формули / методи</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Алгебраїчний (загально)</td>
+                <td>Числа, змінні, дії, дужки</td>
+                <td>Класифікація, ОДЗ</td>
+            </tr>
+            <tr>
+                <td>Многочлен</td>
+                <td>Сума одночленів</td>
+                <td>Формули скороченого множення, групування, Вієт</td>
+            </tr>
+            <tr>
+                <td>Раціональний (цілий)</td>
+                <td>Многочлени, дії з ними</td>
+                <td>Тотожні перетворення, $a^2+b^2=(a+b)^2-2ab$</td>
+            </tr>
+            <tr>
+                <td>Дробово-раціональний</td>
+                <td>Змінна в знаменнику</td>
+                <td>Факторизація, ОДЗ, спільний знаменник</td>
+            </tr>
+            <tr>
+                <td>Показниковий</td>
+                <td>Змінна в показнику</td>
+                <td>Властивості степенів, зведення до однієї основи</td>
+            </tr>
+            <tr>
+                <td>Логарифмічний</td>
+                <td>Логарифм зі змінною</td>
+                <td>Властивості логарифмів, перехід до нової основи</td>
+            </tr>
+            <tr>
+                <td>Ірраціональний</td>
+                <td>Змінна під коренем</td>
+                <td>Властивості коренів, спряжений вираз, $|x|$</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Топ-7 пасток на НМТ</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ситуація</th>
+                <th>Правильно</th>
+                <th>Неправильно (пастка)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Корінь парного степеня</td>
+                <td>$\sqrt{x^2} = |x|$</td>
+                <td>$\sqrt{x^2} = x$</td>
+            </tr>
+            <tr>
+                <td>Логарифм квадрата</td>
+                <td>$\log_a x^2 = 2\log_a |x|$</td>
+                <td>$\log_a x^2 = 2\log_a x$ без умови $x>0$</td>
+            </tr>
+            <tr>
+                <td>Скорочення дробу</td>
+                <td>Скорочувати лише множники + врахувати ОДЗ</td>
+                <td>Скорочувати доданки: $\dfrac{x+3}{x+5} = \dfrac{3}{5}$</td>
+            </tr>
+            <tr>
+                <td>Додавання коренів</td>
+                <td>$\sqrt{a} + \sqrt{b}$ не спрощується</td>
+                <td>$\sqrt{a} + \sqrt{b} = \sqrt{a+b}$</td>
+            </tr>
+            <tr>
+                <td>Степінь із дробовим показником</td>
+                <td>Коректно для $a > 0$</td>
+                <td>Застосовувати до від’ємних $a$ без перевірки</td>
+            </tr>
+            <tr>
+                <td>Добуток степенів з різними основами</td>
+                <td>$2^x \cdot 3^x = 6^x$</td>
+                <td>$2^x \cdot 3^y = 6^{xy}$</td>
+            </tr>
+            <tr>
+                <td>Логарифм суми</td>
+                <td>$\log_a(b+c)$ не спрощується</td>
+                <td>$\log_a(b+c) = \log_a b + \log_a c$</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="tip">
+        <span class="title">🎯 Стратегія на НМТ</span>
+        <ol>
+            <li><strong>Класифікуйте вираз</strong> — до якого типу він належить?</li>
+            <li><strong>Згадайте 1–2 ключові формули</strong> саме для цього типу.</li>
+            <li><strong>Перевірте ОДЗ</strong> до початку перетворень.</li>
+            <li><strong>Розбийте на кроки</strong> — не намагайтеся «розв’язати все одразу».</li>
+            <li><strong>Підставте число</strong> з варіантів відповіді для перевірки, якщо є сумніви.</li>
+        </ol>
+    </div>
+
+    <div class="back-top"><a href="#top">↑ до змісту</a></div>
+</section>
+
+<footer>
+    <p>Матеріал укладено відповідно до чинної програми НМТ з математики · Тема 3 «Всі види виразів та їхні перетворення»</p>
+</footer>
+
+</div>
+</body>
+</html>

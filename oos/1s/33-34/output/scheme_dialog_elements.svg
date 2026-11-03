@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+   <style>
+     text { font-family: "Segoe UI", Arial, sans-serif; }
+     
+     /* Заголовок */
+     .main-title { fill: #222222; font-size: 24px; font-weight: bold; text-anchor: middle; }
+     
+     /* Базові стилі карток */
+     .card { stroke-width: 2; rx: 10; }
+     
+     /* Кольори фону та рамок */
+     .bg-blue { fill: #f0f6ff; stroke: #2e75b6; }
+     .bg-green { fill: #f2f9f1; stroke: #548235; }
+     .bg-orange { fill: #fff6f0; stroke: #c65911; }
+     .bg-purple { fill: #f9f2ff; stroke: #7030a0; }
+     .bg-cyan { fill: #eff8ff; stroke: #0070c0; }
+     .bg-red { fill: #fff0f0; stroke: #c00000; }
+     
+     /* Кольори заголовків карток */
+     .title-blue { fill: #2e75b6; font-size: 18px; font-weight: bold; }
+     .title-green { fill: #375623; font-size: 18px; font-weight: bold; }
+     .title-orange { fill: #c65911; font-size: 18px; font-weight: bold; }
+     .title-purple { fill: #7030a0; font-size: 18px; font-weight: bold; }
+     .title-cyan { fill: #0070c0; font-size: 18px; font-weight: bold; }
+     .title-red { fill: #c00000; font-size: 18px; font-weight: bold; }
+     
+     /* Описовий текст */
+     .desc-text { fill: #444444; font-size: 15px; }
+     
+     /* Макети (білі вікна) */
+     .mockup-box { fill: #ffffff; stroke: #a0a0a0; stroke-width: 1.5; rx: 6; }
+     .mockup-text { fill: #333333; font-size: 14px; dominant-baseline: middle; }
+     .mockup-text-second { fill: #333333; font-size: 11px; dominant-baseline: middle; }
+   </style>
+ 
+   <!-- Головний заголовок -->
+   <text class="main-title" x="450" y="45">Основні елементи діалогових вікон</text>
+ 
+   <!-- ================= РЯДОК 1 ================= -->
+   
+   <!-- 1. Поле введення -->
+   <g transform="translate(40, 80)">
+     <rect class="card bg-blue" x="0" y="0" width="390" height="150"/>
+     <text class="title-blue" x="20" y="35">Поле введення</text>
+     
+     <text class="desc-text" x="20" y="75">
+       <tspan x="20" dy="0">Однорядкове поле</tspan>
+       <tspan x="20" dy="22">для тексту чи числа</tspan>
+     </text>
+     
+     <!-- Макет -->
+     <rect class="mockup-box" x="210" y="45" width="160" height="80"/>
+     <text class="mockup-text" x="225" y="85">Звіт.txt</text>
+   </g>
+ 
+   <!-- 2. Поле зі списком -->
+   <g transform="translate(470, 80)">
+     <rect class="card bg-green" x="0" y="0" width="390" height="150"/>
+     <text class="title-green" x="20" y="35">Поле зі списком</text>
+     
+     <text class="desc-text" x="20" y="75">
+       <tspan x="20" dy="0">Розкривний список</tspan>
+       <tspan x="20" dy="22">готових варіантів</tspan>
+     </text>
+     
+     <!-- Макет -->
+     <rect class="mockup-box" x="210" y="45" width="160" height="80"/>
+     <text class="mockup-text" x="225" y="85">Тип файлу ▼</text>
+   </g>
+ 
+ 
+   <!-- ================= РЯДОК 2 ================= -->
+   
+   <!-- 3. Перемикач (radio) -->
+   <g transform="translate(40, 250)">
+     <rect class="card bg-orange" x="0" y="0" width="390" height="150"/>
+     <text class="title-orange" x="20" y="35">Перемикач (radio)</text>
+     
+     <text class="desc-text" x="20" y="75">
+       <tspan x="20" dy="0">Один варіант із кількох.</tspan>
+       <tspan x="20" dy="22">Лише один активний</tspan>
+     </text>
+     
+     <!-- Макет -->
+     <rect class="mockup-box" x="210" y="45" width="160" height="80"/>
+     <!-- Радіокнопка 1 (активна) -->
+     <circle cx="230" cy="75" r="7" fill="none" stroke="#c65911" stroke-width="2"/>
+     <circle cx="230" cy="75" r="3" fill="#c65911"/>
+     <text class="mockup-text" x="245" y="76">Так</text>
+     <!-- Радіокнопка 2 -->
+     <circle cx="230" cy="100" r="7" fill="none" stroke="#a0a0a0" stroke-width="2"/>
+     <text class="mockup-text" x="245" y="101">Ні</text>
+   </g>
+ 
+   <!-- 4. Прапорець (check) -->
+   <g transform="translate(470, 250)">
+     <rect class="card bg-purple" x="0" y="0" width="390" height="150"/>
+     <text class="title-purple" x="20" y="35">Прапорець (check)</text>
+     
+     <text class="desc-text" x="20" y="75">
+       <tspan x="20" dy="0">Так/ні для кожного</tspan>
+       <tspan x="20" dy="22">пункту незалежно</tspan>
+     </text>
+     
+     <!-- Макет -->
+     <rect class="mockup-box" x="210" y="45" width="160" height="80"/>
+     <!-- Чекбокс 1 (активний) -->
+     <rect x="222" y="68" width="14" height="14" fill="#7030a0" rx="2"/>
+     <path d="M 225 75 L 228 78 L 233 71" fill="none" stroke="#ffffff" stroke-width="2"/>
+     <text class="mockup-text" x="245" y="76">Тільки читання</text>
+     <!-- Чекбокс 2 -->
+     <rect x="222" y="93" width="14" height="14" fill="none" stroke="#a0a0a0" stroke-width="2" rx="2"/>
+     <text class="mockup-text" x="245" y="101">Прихований</text>
+   </g>
+ 
+ 
+   <!-- ================= РЯДОК 3 ================= -->
+   
+   <!-- 5. Кнопка -->
+   <g transform="translate(40, 420)">
+     <rect class="card bg-cyan" x="0" y="0" width="390" height="150"/>
+     <text class="title-cyan" x="20" y="35">Кнопка</text>
+     
+     <text class="desc-text" x="20" y="75">
+       <tspan x="20" dy="0">Виконує дію</tspan>
+       <tspan x="20" dy="22">одразу після натискання</tspan>
+     </text>
+     
+     <!-- Макет -->
+     <rect class="mockup-box" x="210" y="45" width="160" height="80"/>
+     <!-- Кнопка 1 -->
+     <rect x="225" y="52" width="80" height="30" fill="#e0e0e0" stroke="#a0a0a0" rx="4"/>
+     <text class="mockup-text" x="265" y="68" text-anchor="middle" font-weight="bold">Зберегти</text>
+     <!-- Кнопка 2 -->
+     <rect x="225" y="88" width="80" height="30" fill="#f0f0f0" stroke="#a0a0a0" rx="4"/>
+     <text class="mockup-text" x="265" y="105" text-anchor="middle">Скасувати</text>
+   </g>
+ 
+   <!-- 6. Вкладка -->
+   <g transform="translate(470, 420)">
+     <rect class="card bg-red" x="0" y="0" width="390" height="150"/>
+     <text class="title-red" x="20" y="35">Вкладка</text>
+     
+     <text class="desc-text" x="20" y="75">
+       <tspan x="20" dy="0">Група налаштувань</tspan>
+       <tspan x="20" dy="22">у межах одного вікна</tspan>
+     </text>
+     
+     <!-- Макет -->
+     <rect class="mockup-box" x="210" y="45" width="160" height="80"/>
+     <!-- Смуга вкладок -->
+     <rect x="215" y="60" width="150" height="25" fill="#f0f0f0" stroke="#a0a0a0" rx="4"/>
+     
+     <!-- Активна вкладка "Загальні" -->
+     <rect x="215" y="55" width="50" height="30" fill="#ffffff" stroke="#a0a0a0" rx="4"/>
+     <text class="mockup-text-second" x="240" y="71" text-anchor="middle" font-weight="bold" fill="#c00000">Загальні</text>
+     
+     <!-- Неактивні вкладки -->
+     <text class="mockup-text-second" x="292" y="73" text-anchor="middle">Вигляд</text>
+     <text class="mockup-text-second" x="340" y="73" text-anchor="middle">Безпека</text>
+     
+     <!-- Лінія відділення контенту вкладки -->
+     <line x1="215" y1="85" x2="365" y2="85" stroke="#a0a0a0" stroke-width="1"/>
+   </g>
+ 
+ </svg>

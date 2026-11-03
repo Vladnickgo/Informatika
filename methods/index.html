@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практичне заняття: Засоби навчання інформатики</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --accent-light: #ebf5fb;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #2d3436;
+            --muted: #636e72;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: #fff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        header h1 {
+            font-size: 1.9rem;
+            margin-bottom: 0.6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header .subtitle {
+            font-size: 1.05rem;
+            opacity: 0.92;
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.8rem 1.2rem;
+        }
+
+        /* Мета-картка */
+        .meta-card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 1.8rem;
+            border-left: 5px solid var(--accent);
+        }
+
+        .meta-card h2 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-card h2 .icon {
+            font-size: 1.3rem;
+        }
+
+        .meta-list {
+            list-style: none;
+        }
+
+        .meta-list li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .meta-list li::before {
+            content: '▸';
+            color: var(--accent);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .meta-list .label {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 110px;
+        }
+
+        /* Секції */
+        section {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        section h2 {
+            font-size: 1.35rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid var(--accent-light);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        section h2 .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin: 1.4rem 0 0.7rem;
+        }
+
+        /* Картки засобів */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tool-card {
+            background: var(--accent-light);
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 1px solid #d4e6f1;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(52,152,219,0.15);
+        }
+
+        .tool-card .tool-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card h4 {
+            font-size: 0.98rem;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .tool-card p {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* Список вимог */
+        .req-list {
+            list-style: none;
+            margin: 0.8rem 0;
+        }
+
+        .req-list li {
+            padding: 0.55rem 0.8rem;
+            margin-bottom: 0.4rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .req-list li .check {
+            color: var(--success);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Таблиця ПЗ */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        thead {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        th, td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .badge-blue { background: #d6eaf8; color: #2471a3; }
+        .badge-green { background: #d5f5e3; color: #1e8449; }
+        .badge-orange { background: #fdebd0; color: #b9770e; }
+        .badge-purple { background: #e8daef; color: #6c3483; }
+
+        /* Завдання */
+        .task-block {
+            background: linear-gradient(135deg, #fefefe 0%, #f4f9ff 100%);
+            border: 1px solid #d4e6f1;
+            border-radius: 12px;
+            padding: 1.4rem;
+            margin: 1.2rem 0;
+            position: relative;
+        }
+
+        .task-block::before {
+            content: attr(data-task);
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.15rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .task-block h4 {
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+            font-size: 1.02rem;
+            padding-top: 0.3rem;
+        }
+
+        .task-block ul, .task-block ol {
+            margin-left: 1.2rem;
+            margin-top: 0.4rem;
+        }
+
+        .task-block li {
+            margin-bottom: 0.35rem;
+            font-size: 0.93rem;
+        }
+
+        .result-box {
+            background: #eafaf1;
+            border-left: 4px solid var(--success);
+            padding: 0.8rem 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 0.9rem;
+            font-size: 0.92rem;
+        }
+
+        .result-box strong {
+            color: var(--success);
+        }
+
+        /* Питання для обговорення */
+        .discussion {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .discussion-item {
+            background: #fff8e7;
+            border-left: 4px solid var(--warning);
+            padding: 0.9rem 1.1rem;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.95rem;
+            display: flex;
+            gap: 0.7rem;
+            align-items: flex-start;
+        }
+
+        .discussion-item .q-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Самостійна робота */
+        .self-work {
+            background: #f4ecf7;
+            border-left: 4px solid #8e44ad;
+            padding: 1.1rem 1.3rem;
+            border-radius: 0 12px 12px 0;
+            margin-top: 1rem;
+        }
+
+        .self-work h4 {
+            color: #6c3483;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Література */
+        .lit-list {
+            list-style: none;
+            counter-reset: lit;
+        }
+
+        .lit-list li {
+            counter-increment: lit;
+            padding: 0.7rem 0.8rem 0.7rem 2.8rem;
+            position: relative;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .lit-list li:last-child {
+            border-bottom: none;
+        }
+
+        .lit-list li::before {
+            content: counter(lit);
+            position: absolute;
+            left: 0.6rem;
+            top: 0.7rem;
+            width: 22px;
+            height: 22px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 1rem;
+        }
+.page-break {
+    page-break-before: always; /* старий, але досі підтримуваний */
+    break-before: page;         /* сучасний стандарт */
+}
+
+        /* Адаптивність */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.4rem; }
+            header .subtitle { font-size: 0.95rem; }
+            .container { padding: 1rem 0.7rem; }
+            section { padding: 1.2rem; }
+            .meta-list .label { min-width: 90px; font-size: 0.9rem; }
+            th, td { padding: 0.6rem 0.7rem; font-size: 0.85rem; }
+            .tools-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Плавна поява */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in:nth-child(2) { animation-delay: 0.1s; }
+        .fade-in:nth-child(3) { animation-delay: 0.2s; }
+        .fade-in:nth-child(4) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+
+<header>
+<p class="subtitle">Практичне заняття · Методика навчання інформатичної освітньої галузі</p>    
+<h1>💻 Засоби навчання. Підручники і посібники. Програмне забезпечення початкового курсу інформатики</h1>
+    
+</header>
+
+<div class="container">
+
+    <!-- Мета -->
+    <div class="meta-card fade-in">
+        <h2><span class="icon">🎯</span> Мета заняття</h2>
+        <ul class="meta-list">
+            <li><span class="label"></span> Ознайомитись з різноманіттям засобів навчання (апаратних, програмних, навчально-методичних) та вимогами до них.</li>
+<!--            <li><span class="label">Розвиток:</span> Розвивати вміння критично аналізувати та обирати ефективні засоби навчання для досягнення певних цілей уроку.</li>
+            <li><span class="label">Виховання:</span> Виховувати інформаційну культуру, культуру використання цифрових ресурсів.</li>-->
+            <li><span class="label">Обладнання:</span> інструкційні картки.</li>
+        </ul>
+    </div>
+
+    <!-- Література -->
+    <section class="fade-in">
+        <h2><span class="num">📚</span> Література</h2>
+        <ol class="lit-list">
+            <li>Викладання інформатики в початкових класах: навчально-методичний посібник / І. В. Ковальчук, І. В. Зеленська, О. М. Єресько та ін. — Київ: Педагогічна думка, 2019.</li>
+            <li>Антонова О. Нова українська школа: використання інформаційно-комунікаційних технологій у 1-2 класах загальної середньої освіти: навч.-метод. посіб. — К.: Ґенеза, 2019. — 96 с.</li>
+            <li>Методика навчання інформатики в початковій школі: Навчально-методичний посібник. — Кіровоград: ПП «Центр оперативної поліграфії» Авангард», 2016. — 106 с.</li>
+        </ol>
+    </section>
+
+    <!-- Теоретичний блок -->
+    <section class="fade-in page-break">
+        <h2><span class="num">1</span> Класифікація засобів навчання інформатики</h2>
+        <p style="margin-bottom:1rem; color:var(--muted); font-size:0.95rem;">
+            <strong>Засоби навчання</strong> — об'єкти, що використовуються як джерело інформації та інструмент діяльності для досягнення цілей навчання.
+        </p>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h4>Друковані</h4>
+                <p>Підручники, робочі зошити, посібники, дидактичні матеріали.</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">🖥️</div>
+                <h4>Технічні (апаратні)</h4>
+                <p>Комп'ютер, інтерактивна дошка, планшети, проектор.</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">⚙️</div>
+                <h4>Програмні</h4>
+                <p>Операційні системи, прикладне ПЗ, навчальні програми, тренажери, симулятори.</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">🎬</div>
+                <h4>Аудіовізуальні</h4>
+                <p>Відеоуроки, інтерактивні презентації, освітні платформи.</p>
+            </div>
+        </div>
+
+        <h3>Вимоги до сучасного підручника з інформатики</h3>
+        <ul class="req-list">
+            <li><span class="check">✔</span> Відповідність Державному стандарту та навчальній програмі.</li>
+            <li><span class="check">✔</span> Наскрізна лінія формування цифрової компетентності.</li>
+            <li><span class="check">✔</span> Інтеграція з іншими предметами (математика, українська мова, мистецтво).</li>
+            <li><span class="check">✔</span> Наявність різнорівневих завдань, проектів, ігрових моментів.</li>
+            <li><span class="check">✔</span> Доступність та логічність викладу матеріалу для молодших школярів.</li>
+            <li><span class="check">✔</span> Наявність QR-кодів для переходу до онлайн-ресурсів та ПЗ.</li>
+        </ul>
+    </section>
+
+    <!-- Програмне забезпечення -->
+    <section class="fade-in">
+        <h2><span class="num">2</span> Система програмного забезпечення</h2>
+        <p style="margin-bottom:1rem; color:var(--muted); font-size:0.95rem;">
+            У початковому курсі інформатики використовується чотири основні категорії ПЗ за дидактичною метою.
+        </p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Тип ПЗ</th>
+                        <th>Дидактична мета</th>
+                        <th>Приклади</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-blue">Навчальне</span></td>
+                        <td>Формування конкретних знань і вмінь, передбачених програмою; системне засвоєння матеріалу.</td>
+                        <td>«Розумники», «Навчальний супутник»</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-green">Ігрове</span></td>
+                        <td>Підвищення мотивації; розвиток логічного та алгоритмічного мислення в ігровій формі.</td>
+                        <td>«Сходинки до інформатики», «Весела математика»</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-orange">Творче</span></td>
+                        <td>Розкриття творчого потенціалу; формування вмінь працювати з цифровими об'єктами.</td>
+                        <td>Tux Paint, Paint.NET, засоби анімації</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-purple">Інструментальне</span></td>
+                        <td>Навчити застосовувати комп'ютер як універсальний інструмент для навчальних і життєвих завдань.</td>
+                        <td>Текстові редактори, презентації, електронні таблиці</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Практична робота -->
+    <section class="fade-in page-break">
+        <h2><span class="num">3</span> Практична робота</h2>
+
+        <div class="task-block" data-task="ЗАВДАННЯ 1">
+            <h4>Аналіз підручників з інформатики для 2-го та 3-го класів</h4>
+            <p style="font-size:0.93rem; margin-bottom:0.5rem;">
+                Проаналізуйте запропоновані підручники (напр., авторів Н. В. Морзе, О. В. Корнієнко та ін.).
+            </p>
+            <p style="font-weight:600; font-size:0.9rem; margin-top:0.6rem;">Критерії аналізу:</p>
+            <ul>
+                <li>Структура та оформлення (зручність, яскравість, відповідність віку).</li>
+                <li>Наявність практико-орієнтованих завдань.</li>
+                <li>Інтеграція з життям та іншими предметами.</li>
+                <li>Наскрізні лінії (безпека в інтернеті, алгоритмізація).</li>
+                <li>Наявність посилань на програмне забезпечення.</li>
+            </ul>
+            <div class="result-box">
+                <strong>Результат:</strong> міні-презентація «Ідеальний підручник з інформатики для початкової школи: 5 ключових характеристик».
+            </div>
+        </div>
+
+        <div class="task-block" data-task="ЗАВДАННЯ 2">
+            <h4>Розробка фрагменту уроку для 3-го класу</h4>
+            <p style="font-size:0.93rem; margin-bottom:0.5rem;">
+                Тема: <strong>«Створення цифрової історії в програмі-презентації»</strong>.
+            </p>
+            <p style="font-weight:600; font-size:0.9rem; margin-top:0.6rem;">Вимоги:</p>
+            <ul>
+                <li>Визначте мету та завдання уроку.</li>
+                <li>Підберіть конкретне ПЗ (напр., Canva для дітей, PowerPoint Online).</li>
+                <li>Розробіть покрокову інструкцію для учнів.</li>
+                <li>Продумайте критерії оцінювання готової роботи учня.</li>
+            </ul>
+            <div class="result-box">
+                <strong>Результат:</strong> презентація фрагменту уроку (мета, інструкція, приклад роботи).
+            </div>
+        </div>
+    </section>
+
+    <!-- Обговорення -->
+    <section class="fade-in page-break">
+        <h2><span class="num">4</span> Презентація результатів та колективне обговорення</h2>
+        <div class="discussion">
+            <div class="discussion-item">
+                <span class="q-icon">❓</span>
+                <span>Чи є універсальне ПЗ для початкової школи?</span>
+            </div>
+            <div class="discussion-item">
+                <span class="q-icon">❓</span>
+                <span>Як врахувати індивідуальні особливості учнів при виборі засобів навчання?</span>
+            </div>
+            <div class="discussion-item">
+                <span class="q-icon">❓</span>
+                <span>Які «підводні камені» можуть виникнути при роботі з цифровими підручниками та ПЗ?</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Самостійна робота -->
+    <section class="fade-in">
+        <h2><span class="num">5</span> Завдання для самостійної роботи</h2>
+        <div class="self-work">
+            <h4>📌 Завдання 1</h4>
+            <p style="font-size:0.93rem;">
+                Підібрати та проаналізувати <strong>3 онлайн-ресурси або платформи</strong> для вивчення основ програмування учнями початкової школи (наприклад, Code.org, Lightbot). Оформити аналіз у вигляді <strong>порівняльної таблиці</strong>.
+            </p>
+        </div>
+        <div class="self-work" style="margin-top:0.8rem;">
+            <h4>📌 Завдання 2</h4>
+            <p style="font-size:0.93rem;">
+                Розробити <strong>конспект фрагменту уроку (10 хв.)</strong> з використанням інтерактивної дошки на будь-яку тему з курсу інформатики для <strong>4-го класу</strong>.
+            </p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    Методика навчання інформатичної освітньої галузі  · Практичне заняття
+</footer>
+
+<script>
+    // Плавна поява секцій при скролі
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('section, .meta-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(15px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+    });
+</script>
+
+</body>
+</html>

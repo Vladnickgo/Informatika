@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Самостійна робота №5 — Повне та неповне розгалуження</title>
+
+<!-- Prism для підсвічування коду -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+<!-- pako — потрібен для кодування PlantUML -->
+<script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+
+<style>
+:root{
+  --bg:#f1f5f9; --surface:#ffffff; --text:#0f172a; --muted:#475569;
+  --accent:#2563eb; --accent-2:#7c3aed; --accent-soft:#dbeafe;
+  --border:#e2e8f0; --green:#16a34a; --red:#dc2626; --amber:#d97706;
+  --radius:16px; --shadow:0 10px 30px -12px rgba(15,23,42,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.65;
+  -webkit-font-smoothing:antialiased; padding-bottom:3rem;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1rem}
+
+/* ===== Навігація ===== */
+.nav{position:sticky;top:0;z-index:60;background:rgba(248,250,252,.88);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1120px;margin:0 auto;padding:.55rem 1rem;display:flex;
+           gap:.35rem;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav a{flex:0 0 auto;font-size:.84rem;font-weight:600;color:var(--muted);
+       text-decoration:none;padding:.42rem .8rem;border-radius:999px;
+       transition:.2s;white-space:nowrap}
+.nav a:hover{background:var(--accent-soft);color:var(--accent)}
+
+/* ===== Hero ===== */
+.hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;
+      padding:clamp(1.6rem,4vw,2.8rem);margin:1.5rem 0 2rem;
+      background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 55%,#7c3aed 100%);
+      box-shadow:0 24px 48px -24px rgba(37,99,235,.65)}
+.hero::after{content:"";position:absolute;width:340px;height:340px;right:-90px;
+      top:-110px;border-radius:50%;background:rgba(255,255,255,.09)}
+.hero::before{content:"";position:absolute;width:200px;height:200px;left:-60px;
+      bottom:-90px;border-radius:50%;background:rgba(255,255,255,.07)}
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;position:relative;z-index:1}
+.badges span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+      padding:.25rem .75rem;border-radius:999px;font-size:.76rem;font-weight:600;
+      letter-spacing:.03em;backdrop-filter:blur(4px)}
+.hero h1{font-size:clamp(1.5rem,3.8vw,2.4rem);line-height:1.18;
+      letter-spacing:-.02em;margin-bottom:.8rem;position:relative;z-index:1}
+.hero h1 b{color:#bfdbfe}
+.hero p{color:#e0e7ff;max-width:780px;font-size:clamp(.95rem,1.6vw,1.05rem);
+      position:relative;z-index:1}
+
+/* ===== Картки ===== */
+.card{background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);padding:clamp(1.2rem,3vw,1.9rem);
+      margin-bottom:1.4rem;box-shadow:var(--shadow)}
+.section{scroll-margin-top:84px;margin-bottom:2.4rem}
+.section-head{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.section-head .num{width:42px;height:42px;flex:0 0 42px;border-radius:12px;
+      display:grid;place-items:center;font-weight:800;font-size:1.05rem;color:#fff;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      box-shadow:0 8px 18px -8px rgba(37,99,235,.7)}
+.section-head h2{font-size:clamp(1.2rem,2.6vw,1.55rem);letter-spacing:-.01em}
+.card h3{font-size:1.08rem;margin:1.2rem 0 .6rem;color:var(--text)}
+.card h3:first-child{margin-top:0}
+.card p,.card li{color:var(--muted)}
+.card p+p{margin-top:.6rem}
+.card ul,.card ol{padding-left:1.25rem}
+.card li{margin-bottom:.35rem}
+.lead{color:var(--muted);margin-bottom:1rem}
+
+.grid-2{display:grid;gap:1.1rem;grid-template-columns:1fr}
+@media(min-width:880px){.grid-2{grid-template-columns:1fr 1fr}}
+
+.callout{border-left:4px solid var(--accent);background:#eff6ff;
+         border-radius:0 12px 12px 0;padding:.9rem 1.1rem;margin:1rem 0;
+         color:#1e3a8a;font-size:.95rem}
+.callout.warn{border-color:var(--amber);background:#fffbeb;color:#92400e}
+.callout.ok{border-color:var(--green);background:#f0fdf4;color:#166534}
+
+/* ===== Таблиці ===== */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);
+            border-radius:12px;margin:.8rem 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:400px}
+th,td{padding:.65rem .85rem;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:#f8fafc;font-weight:700;color:#334155;font-size:.83rem;
+   text-transform:uppercase;letter-spacing:.04em}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f8fafc}
+code.inline{background:#eef2ff;color:#3730a3;padding:.12rem .42rem;
+   border-radius:6px;font-size:.88em;font-family:'Cascadia Code',Consolas,monospace}
+
+/* Комірки, які учень заповнює */
+.fillable{background:#fffbeb;min-width:120px;cursor:text;transition:.2s}
+.fillable:hover{background:#fef3c7}
+.fillable:empty::before{content:"клікніть…";color:#cbd5e1;font-style:italic;font-size:.85em}
+.fillable:focus{outline:2px solid var(--accent);outline-offset:-2px;background:#fff}
+
+/* ===== Діаграми PlantUML ===== */
+.diagram{display:flex;justify-content:center;align-items:center;
+         margin:1rem 0;padding:1rem;background:#fbfdff;
+         border:1px dashed #cbd5e1;border-radius:12px;overflow-x:auto;
+         min-height:80px}
+.diagram img{max-width:100%;height:auto;border-radius:8px;display:block}
+.diagram-caption{text-align:center;color:var(--muted);font-size:.86rem;
+   margin-top:.5rem;font-style:italic}
+.puml-loading{color:var(--muted);font-size:.88rem;font-style:italic}
+.puml-fallback{background:#0f172a;color:#e2e8f0;padding:1rem;border-radius:8px;
+   font-family:'Cascadia Code',Consolas,monospace;font-size:.82rem;
+   overflow-x:auto;white-space:pre;max-width:100%}
+
+/* ===== Код ===== */
+.code{border-radius:12px;overflow:hidden;margin:.9rem 0;
+      border:1px solid #1e293b;background:#0f172a}
+.code-head{display:flex;align-items:center;justify-content:space-between;
+      gap:1rem;padding:.55rem .9rem;background:#1e293b;color:#cbd5e1;
+      font-size:.78rem;font-weight:600;letter-spacing:.03em}
+.code-head .dot{display:inline-block;width:9px;height:9px;border-radius:50%;
+      background:#38bdf8;margin-right:.45rem}
+.copy{background:rgba(148,163,184,.18);color:#e2e8f0;
+      border:1px solid rgba(148,163,184,.3);padding:.25rem .7rem;
+      border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;
+      transition:.2s;font-family:inherit}
+.copy:hover{background:rgba(148,163,184,.32)}
+.code pre{margin:0!important;padding:1rem 1.1rem!important;overflow-x:auto;
+      background:#0f172a!important;font-size:.86rem!important;line-height:1.6!important}
+.code code{font-family:'Cascadia Code','Fira Code',Consolas,monospace!important;
+      text-shadow:none!important}
+
+/* ===== Details ===== */
+details{border:1px solid var(--border);border-radius:12px;background:#fff;
+        margin-bottom:.6rem;overflow:hidden}
+details[open]{box-shadow:var(--shadow)}
+summary{cursor:pointer;padding:.85rem 1.1rem;font-weight:600;color:#1e293b;
+        list-style:none;display:flex;align-items:center;gap:.6rem;
+        transition:background .2s;font-size:.95rem}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";flex:0 0 22px;height:22px;border-radius:6px;
+        background:var(--accent-soft);color:var(--accent);display:grid;
+        place-items:center;font-weight:800;font-size:.9rem;transition:.2s}
+details[open] summary::before{content:"–";background:var(--accent);color:#fff}
+summary:hover{background:#f8fafc}
+.answer{padding:0 1.1rem 1rem 3rem;color:var(--muted);font-size:.93rem}
+.answer ul{padding-left:1.1rem}
+
+.level-tag{display:inline-block;font-size:.72rem;font-weight:700;
+   text-transform:uppercase;letter-spacing:.05em;padding:.18rem .6rem;
+   border-radius:999px;margin-bottom:.8rem}
+.lvl1{background:#dcfce7;color:#166534}
+.lvl2{background:#fef3c7;color:#92400e}
+.lvl3{background:#ede9fe;color:#5b21b6}
+
+.task-badge{display:inline-block;background:var(--accent-soft);color:var(--accent);
+   padding:.15rem .6rem;border-radius:999px;font-size:.72rem;font-weight:700;
+   letter-spacing:.04em;text-transform:uppercase;margin-left:.5rem;vertical-align:middle}
+
+/* ===== Друк ===== */
+@media print{
+  .nav,.copy{display:none!important}
+  body{background:#fff}
+  .card,.hero{box-shadow:none;border:1px solid #ccc}
+  .page-break{page-break-before:always;break-before:page}
+  .card,.code,.diagram,details{page-break-inside:avoid;break-inside:avoid}
+  .section-head,.card h3{page-break-after:avoid;break-after:avoid}
+  .hero{page-break-after:avoid;break-after:avoid}
+  p,li{orphans:3;widows:3}
+  details>summary{pointer-events:none}
+  details:not([open])>:not(summary){display:block!important}
+}
+
+footer{text-align:center;color:var(--muted);font-size:.86rem;
+       padding:2rem 1rem 0;border-top:1px solid var(--border);margin-top:2.5rem}
+</style>
+</head>
+<body>
+
+<!-- ================= НАВІГАЦІЯ ================= -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#meta">Мета</a>
+    <a href="#discussion">Обговорення</a>
+    <a href="#theory">Теорія</a>
+    <a href="#flow">Блок-схеми</a>
+    <a href="#examples">Приклади</a>
+    <a href="#mistakes">Помилки</a>
+    <a href="#tasks">Завдання</a>
+    <a href="#evaluation">Оцінювання</a>
+    <a href="#questions">Запитання</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="badges">
+      <span>Самостійна робота №5</span>
+      <span>Інформатика · 10 клас</span>
+      <span>Повне та неповне розгалуження</span>
+    </div>
+    <h1>Повне та неповне <b>розгалуження</b></h1>
+    <p>Закріплення знань про повне та неповне розгалуження. Аналіз прикладів
+       застосування кожного типу в реальних задачах, вміння обирати оптимальний
+       тип для конкретної ситуації. Блок-схеми на PlantUML і приклади
+       на Java, Python та VBA (Excel).</p>
+  </header>
+
+  <!-- ================= МЕТА ================= -->
+  <section id="meta" class="section">
+    <div class="section-head">
+      <div class="num">◎</div>
+      <h2>Мета, обладнання, література</h2>
+    </div>
+    <div class="card">
+      <div class="grid-2">
+        <div>
+          <h3>🎯 Мета</h3>
+          <ul>
+            <li>Закріпити знання про повне та неповне розгалуження.</li>
+            <li>Проаналізувати приклади застосування кожного типу в реальних задачах.</li>
+            <li>Розвивати вміння обирати оптимальний тип розгалуження для ситуації.</li>
+            <li>Розвивати логічне мислення через аналіз умов.</li>
+            <li>Виховувати гнучкість мислення, здатність знаходити різні шляхи вирішення однієї проблеми.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>🛠️ Обладнання</h3>
+          <p>Інструкційні картки.</p>
+          <h3>📚 Література</h3>
+          <ul>
+            <li>Васильєв О. <i>Алгоритми</i>. Київ: Навчальна книга – Богдан, 2022. 424 с.</li>
+            <li>Васильєв О. <i>Програмування мовою Java</i>. Київ: Навчальна книга – Богдан, 2020. 696 с.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ОБГОВОРЕННЯ ================= -->
+  <section id="discussion" class="section">
+    <div class="section-head">
+      <div class="num">?</div>
+      <h2>Питання для обговорення</h2>
+    </div>
+    <div class="card">
+      <details>
+        <summary>1. У чому відмінність між повним та неповним розгалуженням?</summary>
+        <div class="answer">Повне розгалуження має <b>дві гілки</b>: дії виконуються і при істинній, і при хибній умові (обов'язковий <code class="inline">else</code>). Неповне — лише <b>одну гілку</b>: дії виконуються тільки при істинній умові, а при хибній алгоритм просто «обходить» цей блок і йде далі.</div>
+      </details>
+      <details>
+        <summary>2. Наведіть приклад із життя, де використовується повне розгалуження.</summary>
+        <div class="answer">«Якщо на вулиці дощ — візьми парасольку, <b>інакше</b> — залиш її вдома». Або: «Якщо оцінка ≥ 12 — похвалити, <b>інакше</b> — дати пораду, як покращити».</div>
+      </details>
+      <details>
+        <summary>3. Наведіть приклад із життя, де використовується неповне розгалуження.</summary>
+        <div class="answer">«Якщо на світлофорі червоне світло — зупинись». Якщо зелене — нічого особливого не робимо, просто йдемо далі. Також: «Якщо температура нижче 0 — надінь шапку».</div>
+      </details>
+      <details>
+        <summary>4. Як вибрати, який тип розгалуження краще використати для певної задачі?</summary>
+        <div class="answer">
+          Поставте собі запитання: <b>«Чи потрібно виконувати дію і тоді, коли умова хибна?»</b>
+          <ul>
+            <li>Якщо <b>так</b> — потрібне повне розгалуження (<code class="inline">if…else</code>).</li>
+            <li>Якщо <b>ні</b> — достатньо неповного (<code class="inline">if</code>). Зайве <code class="inline">else</code> лише ускладнює код.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>5. Чому неповне розгалуження називають ще «обхідним»?</summary>
+        <div class="answer">Тому що при хибній умові алгоритм «обходить» блок дій — переходить одразу до наступної команди, не виконуючи жодних альтернативних дій. Це як об'їзд перешкоди: коли її немає — просто їдете далі.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= ТЕОРІЯ ================= -->
+  <section id="theory" class="section">
+    <div class="section-head">
+      <div class="num">1</div>
+      <h2>Теоретичні відомості</h2>
+    </div>
+
+    <div class="card">
+      <h3>Що таке розгалуження?</h3>
+      <div class="callout">
+        <b>Розгалуження</b> — це алгоритмічна структура, яка передбачає вибір однієї з кількох можливих дій залежно від виконання певної умови.
+      </div>
+
+      <h3>Повне розгалуження</h3>
+      <p><b>Повне розгалуження</b> — це конструкція, у якій передбачені дії як для випадку, коли умова <b>істинна</b>, так і для випадку, коли вона <b>хибна</b>.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Мова</th><th>Синтаксис</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Java</td><td><code class="inline">if (умова) { дія1; } else { дія2; }</code></td></tr>
+            <tr><td>Python</td><td><code class="inline">if умова: дія1<br>else: дія2</code></td></tr>
+            <tr><td>VBA (Excel)</td><td><code class="inline">If умова Then дія1 Else дія2</code></td></tr>
+            <tr><td>Scratch</td><td><code class="inline">якщо &lt;умова&gt; тоді дія1 інакше дія2</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>Приклад: перевірка парності (Java)</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-java">if (число % 2 == 0) {
+    System.out.println("Число парне");
+} else {
+    System.out.println("Число непарне");
+}</code></pre>
+      </div>
+
+      <div class="callout ok">
+        <b>Приклад із життя:</b> «Якщо на вулиці дощ, то візьми парасольку, <b>інакше</b> — залиш парасольку вдома».
+      </div>
+
+      <h3>Неповне розгалуження</h3>
+      <p><b>Неповне розгалуження</b> — це конструкція, у якій дія передбачена <b>тільки для випадку, коли умова істинна</b>. Якщо умова хибна, виконання алгоритму продовжується без додаткових дій (обхід).</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Мова</th><th>Синтаксис</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Java</td><td><code class="inline">if (умова) { дія1; }</code></td></tr>
+            <tr><td>Python</td><td><code class="inline">if умова: дія1</code></td></tr>
+            <tr><td>VBA (Excel)</td><td><code class="inline">If умова Then дія1</code></td></tr>
+            <tr><td>Scratch</td><td><code class="inline">якщо &lt;умова&gt; тоді дія1</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>Приклад: дія тільки при істинній умові (Java)</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-java">if (температура &lt; 0) {
+    System.out.println("На вулиці мороз! Одягнись тепліше.");
+}</code></pre>
+      </div>
+
+      <div class="callout ok">
+        <b>Приклад із життя:</b> «Якщо на світлофорі червоне світло — зупинись».
+      </div>
+
+      <h3>Порівняння</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Ознака</th><th>Повне розгалуження</th><th>Неповне розгалуження</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Кількість гілок</td><td>2</td><td>1</td></tr>
+            <tr><td>Наявність <code class="inline">else</code></td><td>Так</td><td>Ні</td></tr>
+            <tr><td>Обхід дії</td><td>Ні</td><td>Так</td></tr>
+            <tr><td>Коли використовувати</td><td>Коли потрібно виконати дію в обох випадках</td><td>Коли дія потрібна тільки при виконанні умови</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= БЛОК-СХЕМИ ================= -->
+  <section id="flow" class="section">
+    <div class="section-head">
+      <div class="num">2</div>
+      <h2>Блок-схеми розгалужень (PlantUML)</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Повне розгалуження</h3>
+        <div class="diagram">
+          <script type="text/plain" class="plantuml">
+@startuml
+skinparam style strictuml
+skinparam activity {
+  BackgroundColor #DBEAFE
+  BorderColor #2563EB
+  DiamondBackgroundColor #EDE9FE
+  DiamondBorderColor #7C3AED
+}
+start
+:Ввести число x;
+if (x > 0?) then (Так)
+  :Вивести "Додатне";
+else (Ні)
+  :Вивести "Не додатне";
+endif
+stop
+@enduml
+          </script>
+        </div>
+        <p class="diagram-caption">Дві гілки: дії є і для «Так», і для «Ні»</p>
+      </div>
+
+      <div class="card">
+        <h3>Неповне розгалуження</h3>
+        <div class="diagram">
+          <script type="text/plain" class="plantuml">
+@startuml
+skinparam style strictuml
+skinparam activity {
+  BackgroundColor #DBEAFE
+  BorderColor #2563EB
+  DiamondBackgroundColor #EDE9FE
+  DiamondBorderColor #7C3AED
+}
+start
+:Ввести число x;
+if (x > 0?) then (Так)
+  :Вивести "Додатне";
+endif
+stop
+@enduml
+          </script>
+        </div>
+        <p class="diagram-caption">Одна гілка: дія є тільки для «Так»</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПРИКЛАДИ ================= -->
+  <section id="examples" class="section">
+    <div class="section-head">
+      <div class="num">3</div>
+      <h2>Приклади для початкової школи (Scratch)</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Приклад 1 — неповне розгалуження</h3>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>Scratch (неповне)</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-vb">якщо &lt;(відповідь) = (10)&gt; тоді
+    сказати [Правильно!]</code></pre>
+        </div>
+        <p>Якщо відповідь правильна — хвалимо. Якщо ні — нічого не робимо (гра продовжується).</p>
+      </div>
+
+      <div class="card">
+        <h3>Приклад 2 — повне розгалуження</h3>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>Scratch (повне)</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-vb">якщо &lt;(відповідь) = (10)&gt; тоді
+    сказати [Правильно!]
+інакше
+    сказати [Неправильно! Спробуй ще раз]</code></pre>
+        </div>
+        <p>Гра дає зворотний зв'язок в обох випадках — дитині зрозуміло, що сталося.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПОМИЛКИ ================= -->
+  <section id="mistakes" class="section">
+    <div class="section-head">
+      <div class="num">4</div>
+      <h2>Типові помилки</h2>
+    </div>
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Помилка</th><th>Опис</th><th>Виправлення</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Зайве else</b></td>
+              <td>Використання <code class="inline">else</code>, коли дія в гілці «ні» не потрібна</td>
+              <td>Замінити на неповне розгалуження</td>
+            </tr>
+            <tr>
+              <td><b>Пропущене else</b></td>
+              <td>Коли потрібна дія в обох випадках</td>
+              <td>Додати <code class="inline">else</code></td>
+            </tr>
+            <tr>
+              <td><b>Зайві фігурні дужки</b> (Java)</td>
+              <td>Неправильне групування дій</td>
+              <td>Правильно розставити дужки</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПРАКТИЧНІ ЗАВДАННЯ ================= -->
+  <section id="tasks" class="section">
+    <div class="section-head">
+      <div class="num">5</div>
+      <h2>Практичні завдання</h2>
+    </div>
+
+    <!-- ========== Завдання 1 ========== -->
+    <div class="card">
+      <h3>Завдання 1. Визначення типу розгалуження <span class="task-badge">8 балів</span></h3>
+      <p>Визначте, який тип розгалуження (повне чи неповне) використано в наведених прикладах. Заповніть таблицю — клікніть на порожню комірку та введіть відповідь.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>№</th><th>Приклад</th><th>Тип</th><th>Чому?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Якщо на вулиці дощ, то візьми парасольку</td><td contenteditable="true" class="fillable"></td><td contenteditable="true" class="fillable"></td></tr>
+            <tr><td>2</td><td>Якщо на вулиці дощ, то візьми парасольку, інакше — залиш вдома</td><td contenteditable="true" class="fillable"></td><td contenteditable="true" class="fillable"></td></tr>
+            <tr><td>3</td><td>Якщо оцінка ≥ 12, то «Відмінно», інакше — «Добре»</td><td contenteditable="true" class="fillable"></td><td contenteditable="true" class="fillable"></td></tr>
+            <tr><td>4</td><td>Якщо число додатне, то збільшити його на 1</td><td contenteditable="true" class="fillable"></td><td contenteditable="true" class="fillable"></td></tr>
+            <tr><td>5</td><td>Якщо клієнт купив більше ніж на 1000 грн, то надати знижку 10%</td><td contenteditable="true" class="fillable"></td><td contenteditable="true" class="fillable"></td></tr>
+            <tr><td>6</td><td>Якщо температура повітря нижче 0, то надіти шапку</td><td contenteditable="true" class="fillable"></td><td contenteditable="true" class="fillable"></td></tr>
+            <tr><td>7</td><td>Якщо дитина хворіє, то залишити її вдома, інакше — відвести до школи</td><td contenteditable="true" class="fillable"></td><td contenteditable="true" class="fillable"></td></tr>
+            <tr><td>8</td><td>Якщо число дорівнює 0, то вивести «Число нульове»</td><td contenteditable="true" class="fillable"></td><td contenteditable="true" class="fillable"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <details>
+        <summary>Показати відповіді</summary>
+        <div class="answer">
+          <ol>
+            <li><b>Неповне</b> — дія є лише при істинній умові.</li>
+            <li><b>Повне</b> — дві дії («взяти» або «залишити»).</li>
+            <li><b>Повне</b> — дві альтернативні оцінки.</li>
+            <li><b>Неповне</b> — «збільшити» тільки при додатному числі.</li>
+            <li><b>Неповне</b> — знижка лише при перевищенні суми.</li>
+            <li><b>Неповне</b> — шапка лише при морозі.</li>
+            <li><b>Повне</b> — два взаємовиключні варіанти.</li>
+            <li><b>Неповне</b> — повідомлення лише для нуля.</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+
+    <!-- ========== Завдання 2 ========== -->
+    <div class="card">
+      <h3>Завдання 2. Перетворення між формами <span class="task-badge">6 балів</span></h3>
+
+      <h3>2.1. Неповне → повне</h3>
+      <p><b>Неповне:</b> «Якщо пароль введено правильно, то надати доступ».</p>
+      <p><b>Повне:</b> «Якщо пароль введено правильно, то надати доступ, інакше
+        <span contenteditable="true" class="fillable" style="display:inline-block;min-width:200px;padding:.1rem .4rem;border-radius:6px;border:1px solid var(--border)"></span>».</p>
+
+      <h3>2.2. Повне → неповне</h3>
+      <p><b>Повне:</b> «Якщо значення &gt; 100, то «Дуже велике», інакше — «Допустиме»».</p>
+      <p><b>Неповне:</b> «Якщо значення &gt; 100, то <span contenteditable="true" class="fillable" style="display:inline-block;min-width:200px;padding:.1rem .4rem;border-radius:6px;border:1px solid var(--border)"></span>».</p>
+      <div class="callout warn">
+        ⚠️ Зауважте: ці два розгалуження <b>не еквівалентні</b>. Неповна форма втрачає повідомлення «Допустиме» — програма нічого не скаже, якщо число ≤ 100. Інколи це прийнятно, інколи — ні.
+      </div>
+
+      <h3>2.3. Текстовий опис → код</h3>
+      <p><b>Умова:</b> «Якщо вік людини ≥ 18 — вивести «Повнолітній», інакше — «Неповнолітній»».</p>
+
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>Java</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-java">if (вік &gt;= 18) {
+    System.out.println("Повнолітній");
+} else {
+    System.out.println("Неповнолітній");
+}</code></pre>
+      </div>
+
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>Python</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-python">if вік &gt;= 18:
+    print("Повнолітній")
+else:
+    print("Неповнолітній")</code></pre>
+      </div>
+
+      <div class="code">
+        <div class="code-head"><span><span class="dot"></span>VBA (Excel)</span><button class="copy" type="button">Копіювати</button></div>
+        <pre><code class="language-vb">If вік &gt;= 18 Then
+    MsgBox "Повнолітній"
+Else
+    MsgBox "Неповнолітній"
+End If</code></pre>
+      </div>
+    </div>
+
+    <!-- ========== Завдання 3 ========== -->
+    <div class="card page-break">
+      <h3>Завдання 3. Складання блок-схем <span class="task-badge">10 балів</span></h3>
+      <p>Спочатку спробуйте намалювати блок-схеми самостійно, потім перевірте себе.</p>
+
+      <h3>1. Якщо x &gt; 0, то вивести «Додатне» <span class="task-badge">3 бали</span></h3>
+      <details>
+        <summary>Показати блок-схему</summary>
+        <div class="diagram">
+          <script type="text/plain" class="plantuml">
+@startuml
+skinparam style strictuml
+skinparam activity {
+  BackgroundColor #F0FDF4
+  BorderColor #16A34A
+  DiamondBackgroundColor #DCFCE7
+  DiamondBorderColor #16A34A
+}
+start
+:Ввести x;
+if (x > 0?) then (Так)
+  :Вивести "Додатне";
+endif
+stop
+@enduml
+          </script>
+        </div>
+        <p class="diagram-caption">Неповне розгалуження — гілка лише «Так»</p>
+      </details>
+
+      <h3>2. Якщо x &gt; 0, то «Додатне», інакше — «Не додатне» <span class="task-badge">3 бали</span></h3>
+      <details>
+        <summary>Показати блок-схему</summary>
+        <div class="diagram">
+          <script type="text/plain" class="plantuml">
+@startuml
+skinparam style strictuml
+skinparam activity {
+  BackgroundColor #F0FDF4
+  BorderColor #16A34A
+  DiamondBackgroundColor #DCFCE7
+  DiamondBorderColor #16A34A
+}
+start
+:Ввести x;
+if (x > 0?) then (Так)
+  :Вивести "Додатне";
+else (Ні)
+  :Вивести "Не додатне";
+endif
+stop
+@enduml
+          </script>
+        </div>
+        <p class="diagram-caption">Повне розгалуження — обидві гілки</p>
+      </details>
+
+      <h3>3. Якщо a &gt; b, то «a більше», інакше — «b більше або рівне» <span class="task-badge">4 бали</span></h3>
+      <details>
+        <summary>Показати блок-схему</summary>
+        <div class="diagram">
+          <script type="text/plain" class="plantuml">
+@startuml
+skinparam style strictuml
+skinparam activity {
+  BackgroundColor #F0FDF4
+  BorderColor #16A34A
+  DiamondBackgroundColor #DCFCE7
+  DiamondBorderColor #16A34A
+}
+start
+:Ввести a, b;
+if (a > b?) then (Так)
+  :Вивести "a більше";
+else (Ні)
+  :Вивести "b більше або рівне";
+endif
+stop
+@enduml
+          </script>
+        </div>
+        <p class="diagram-caption">Повне розгалуження з порівнянням двох чисел</p>
+      </details>
+    </div>
+
+    <!-- ========== Завдання 4 ========== -->
+    <div class="card page-break">
+      <h3>Завдання 4. Написання програмного коду <span class="task-badge">12 балів</span></h3>
+
+      <h3>1. Визначити, чи є число додатним <span class="task-badge">3 бали</span></h3>
+      <details>
+        <summary>Показати розв'язок (VBA / Python / Java)</summary>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>VBA (Excel)</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-vb">Sub CheckPositive()
+    Dim x As Double
+    x = CDbl(InputBox("Введіть число:"))
+
+    If x &gt; 0 Then
+        MsgBox "Число додатне"
+    End If
+End Sub</code></pre>
+        </div>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>Python</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-python">x = float(input("Введіть число: "))
+if x &gt; 0:
+    print("Число додатне")</code></pre>
+        </div>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>Java</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-java">if (x &gt; 0) {
+    System.out.println("Число додатне");
+}</code></pre>
+        </div>
+      </details>
+
+      <h3>2. Визначити, чи є число парним <span class="task-badge">4 бали</span></h3>
+      <details>
+        <summary>Показати розв'язок (VBA / Python / Java)</summary>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>VBA (Excel)</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-vb">Sub CheckEven()
+    Dim x As Long
+    x = CLng(InputBox("Введіть ціле число:"))
+
+    If x Mod 2 = 0 Then
+        MsgBox "Число парне"
+    Else
+        MsgBox "Число непарне"
+    End If
+End Sub</code></pre>
+        </div>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>Python</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-python">x = int(input("Введіть ціле число: "))
+if x % 2 == 0:
+    print("Число парне")
+else:
+    print("Число непарне")</code></pre>
+        </div>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>Java</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-java">if (x % 2 == 0) {
+    System.out.println("Число парне");
+} else {
+    System.out.println("Число непарне");
+}</code></pre>
+        </div>
+      </details>
+
+      <h3>3. Ввести два числа. Вивести більше з них <span class="task-badge">5 балів</span></h3>
+      <details>
+        <summary>Показати розв'язок (VBA / Python / Java)</summary>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>VBA (Excel)</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-vb">Sub MaxOfTwo()
+    Dim a As Double, b As Double
+    a = CDbl(InputBox("a ="))
+    b = CDbl(InputBox("b ="))
+
+    If a &gt; b Then
+        MsgBox "Більше: " &amp; a
+    Else
+        MsgBox "Більше: " &amp; b
+    End If
+End Sub</code></pre>
+        </div>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>Python</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-python">a = float(input("a = "))
+b = float(input("b = "))
+if a &gt; b:
+    print("Більше:", a)
+else:
+    print("Більше:", b)</code></pre>
+        </div>
+        <div class="code">
+          <div class="code-head"><span><span class="dot"></span>Java</span><button class="copy" type="button">Копіювати</button></div>
+          <pre><code class="language-java">if (a &gt; b) {
+    System.out.println("Більше: " + a);
+} else {
+    System.out.println("Більше: " + b);
+}</code></pre>
+        </div>
+      </details>
+
+      <div class="callout ok">
+        <b>Як запустити VBA:</b> у Excel натисніть <b>Alt + F11</b> → <b>Insert → Module</b>, вставте код, натисніть <b>F5</b>.
+      </div>
+    </div>
+
+    <!-- ========== Завдання 5 ========== -->
+    <div class="card page-break">
+      <h3>Завдання 5. Аналіз педагогічних ситуацій <span class="task-badge">8 балів</span></h3>
+      <p>Для кожної ситуації визначте, який тип розгалуження потрібно використати, та поясніть чому.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>№</th><th>Ситуація</th><th>Тип</th><th>Пояснення</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Вчитель перевіряє відповідь учня. Якщо правильно — «+», якщо ні — «−».</td>
+              <td contenteditable="true" class="fillable"></td>
+              <td contenteditable="true" class="fillable"></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Вчитель перевіряє, чи є домашнє завдання. Якщо є — ставить оцінку, якщо немає — не ставить.</td>
+              <td contenteditable="true" class="fillable"></td>
+              <td contenteditable="true" class="fillable"></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>У грі: якщо гравець набрав &gt; 10 очок — переходить на наступний рівень, інакше — залишається.</td>
+              <td contenteditable="true" class="fillable"></td>
+              <td contenteditable="true" class="fillable"></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Програма перевіряє пароль. Якщо неправильний — просить ще раз, якщо правильний — надає доступ.</td>
+              <td contenteditable="true" class="fillable"></td>
+              <td contenteditable="true" class="fillable"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <details>
+        <summary>Показати відповіді</summary>
+        <div class="answer">
+          <ol>
+            <li><b>Повне</b> — два взаємовиключні результати («+» / «−»), обидва важливі.</li>
+            <li><b>Неповне</b> — оцінка ставиться лише за наявності роботи; якщо її немає — просто нічого не робимо.</li>
+            <li><b>Повне</b> — дві різні дії: перехід або залишення на рівні.</li>
+            <li><b>Неповне</b> (у комбінації з циклом) — повторний запит пароля виконується лише при помилці; при успіху — просто доступ.</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+
+    <!-- ========== Завдання 6 ========== -->
+    <div class="card">
+      <h3>Завдання 6. Створення власних прикладів <span class="task-badge">+6 балів</span></h3>
+      <p>Складіть по 2 приклади з життя молодшого школяра.</p>
+
+      <h3>Повне розгалуження — 2 приклади</h3>
+      <ol style="padding-left:1.2rem">
+        <li contenteditable="true" class="fillable" style="padding:.4rem .6rem;border-radius:8px;border:1px dashed var(--border);margin-bottom:.4rem"></li>
+        <li contenteditable="true" class="fillable" style="padding:.4rem .6rem;border-radius:8px;border:1px dashed var(--border);margin-bottom:.4rem"></li>
+      </ol>
+
+      <h3>Неповне розгалуження — 2 приклади</h3>
+      <ol style="padding-left:1.2rem">
+        <li contenteditable="true" class="fillable" style="padding:.4rem .6rem;border-radius:8px;border:1px dashed var(--border);margin-bottom:.4rem"></li>
+        <li contenteditable="true" class="fillable" style="padding:.4rem .6rem;border-radius:8px;border:1px dashed var(--border);margin-bottom:.4rem"></li>
+      </ol>
+
+      <details>
+        <summary>Приклади для натхнення</summary>
+        <div class="answer">
+          <p><b>Повне:</b></p>
+          <ul>
+            <li>«Якщо сьогодні середа — уроки до 14:00, інакше — до 13:00».</li>
+            <li>«Якщо в магазині є улюблене морозиво — купуємо, інакше — беремо сік».</li>
+          </ul>
+          <p><b>Неповне:</b></p>
+          <ul>
+            <li>«Якщо на вулиці сніг — одягни чоботи».</li>
+            <li>«Якщо ти запізнився — вибачся перед учителем».</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <!-- ========== Завдання 7 ========== -->
+    <div class="card">
+      <h3>Завдання 7. Рефлексія <span class="task-badge">5 балів</span></h3>
+      <p>Напишіть короткий текст (5–7 речень) на тему:</p>
+      <ul>
+        <li>У чому різниця між повним та неповним розгалуженням?</li>
+        <li>Коли доцільно використовувати кожен тип?</li>
+        <li>Які труднощі можуть виникнути в учнів початкової школи при вивченні розгалужень?</li>
+      </ul>
+      <div contenteditable="true" class="fillable" style="min-height:140px;padding:.8rem 1rem;border-radius:12px;border:1px dashed var(--border);margin-top:.6rem"></div>
+    </div>
+  </section>
+
+  <!-- ================= ОЦІНЮВАННЯ ================= -->
+  <section id="evaluation" class="section page-break">
+    <div class="section-head">
+      <div class="num">6</div>
+      <h2>Критерії оцінювання</h2>
+    </div>
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Критерій</th><th>Бали</th></tr></thead>
+          <tbody>
+            <tr><td>Визначення типу розгалуження (завдання 1)</td><td>8</td></tr>
+            <tr><td>Перетворення між формами (завдання 2)</td><td>6</td></tr>
+            <tr><td>Блок-схеми (завдання 3)</td><td>10</td></tr>
+            <tr><td>Написання програмного коду (завдання 4)</td><td>12</td></tr>
+            <tr><td>Аналіз педагогічних ситуацій (завдання 5)</td><td>8</td></tr>
+            <tr><td>(додаткове) Власні приклади (завдання 6)</td><td>+6</td></tr>
+            <tr><td>Рефлексія (завдання 7)</td><td>5</td></tr>
+            <tr><td><b>Максимум</b></td><td><b>49 (+6 додаткових)</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= КОНТРОЛЬНІ ЗАПИТАННЯ ================= -->
+  <section id="questions" class="section">
+    <div class="section-head">
+      <div class="num">7</div>
+      <h2>Контрольні запитання</h2>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary>1. Що таке повне розгалуження? Наведіть приклад.</summary>
+        <div class="answer">Конструкція, у якій дії передбачені і для істинної, і для хибної умови. Приклад: <code class="inline">if (x &gt; 0) "додатне"; else "не додатне";</code>.</div>
+      </details>
+      <details>
+        <summary>2. Що таке неповне розгалуження? Наведіть приклад.</summary>
+        <div class="answer">Конструкція, у якій дія виконується лише при істинній умові. Приклад: <code class="inline">if (дощ) взяти_парасольку;</code> — якщо дощу немає, просто йдемо далі.</div>
+      </details>
+      <details>
+        <summary>3. Як розпізнати повне розгалуження на блок-схемі?</summary>
+        <div class="answer">Від ромба (умови) виходять <b>дві стрілки</b> — «Так» і «Ні», і кожна веде до свого блоку дій. Обидві гілки зрештою сходяться перед «Кінець».</div>
+      </details>
+      <details>
+        <summary>4. Як розпізнати неповне розгалуження на блок-схемі?</summary>
+        <div class="answer">Від ромба виходить <b>лише одна стрілка</b> з підписом «Так» — до блоку дій. Друга стрілка (без підпису або з «Ні») йде одразу далі, повз блок дій.</div>
+      </details>
+      <details>
+        <summary>5. У яких випадках використовують if-else, а в яких лише if?</summary>
+        <div class="answer">
+          <ul>
+            <li><b>if-else</b> — коли для обох випадків (істина/хиба) потрібні різні дії.</li>
+            <li><b>лише if</b> — коли дія потрібна тільки при істинній умові, а при хибній — нічого не робимо.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>6. Чи можна замінити повне розгалуження неповним? Якщо так, то як?</summary>
+        <div class="answer">Технічно — можна, але з втратою функціональності: гілка <code class="inline">else</code> просто зникне, і дія в ній не виконуватиметься. Еквівалентна заміна можлива лише тоді, коли гілка <code class="inline">else</code> містить порожній блок (нічого не робить).</div>
+      </details>
+      <details>
+        <summary>7. Чи можна замінити неповне розгалуження повним? Якщо так, то як?</summary>
+        <div class="answer">Так — додавши порожній блок <code class="inline">else</code> (наприклад, <code class="inline">else { /* нічого */ }</code>). Результат той самий, але код стає зайво громіздким. Тому на практиці неповне розгалуження залишають як є.</div>
+      </details>
+      <details>
+        <summary>8. Як вибрати тип розгалуження для конкретної задачі?</summary>
+        <div class="answer">Запитайте себе: <b>«Чи потрібна альтернативна дія, якщо умова хибна?»</b> Так → повне; ні → неповне.</div>
+      </details>
+      <details>
+        <summary>9. Що станеться, якщо в повному розгалуженні забути написати else?</summary>
+        <div class="answer">Програма перетвориться на <b>неповне</b> розгалуження: при хибній умові жодна дія не виконається, і виконання піде далі. Якщо ця дія була потрібна — це логічна помилка.</div>
+      </details>
+      <details>
+        <summary>10. Наведіть приклад неповного розгалуження в навчальному процесі початкової школи.</summary>
+        <div class="answer">«Якщо учень підняв руку — учитель запитує його». Якщо ні — урок іде далі без змін. Або: «Якщо залишився час — встигнемо пограти».</div>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    Самостійна робота №5 · Повне та неповне розгалуження · Блок-схеми на PlantUML
+  </footer>
+</div>
+
+<!-- ================= СКРИПТИ ================= -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-visual-basic.min.js"></script>
+
+<script>
+/* ============ PlantUML: кодування у формат сервера ============ */
+function encodePlantUML(text) {
+  // 1. UTF-8 → bytes
+  var bytes = new TextEncoder().encode(text);
+
+  // 2. Deflate (raw, без zlib-заголовка)
+  var compressed = pako.deflateRaw(bytes, { level: 9 });
+
+  // 3. Custom base64 (PlantUML charset)
+  function encode6bit(b) {
+    if (b < 10) return String.fromCharCode(48 + b);
+    b -= 10;
+    if (b < 26) return String.fromCharCode(65 + b);
+    b -= 26;
+    if (b < 26) return String.fromCharCode(97 + b);
+    b -= 26;
+    if (b === 0) return '-';
+    if (b === 1) return '_';
+    return '?';
+  }
+
+  function append3bytes(b1, b2, b3) {
+    var c1 = b1 >> 2;
+    var c2 = ((b1 & 0x3) << 4) | (b2 >> 4);
+    var c3 = ((b2 & 0xF) << 2) | (b3 >> 6);
+    var c4 = b3 & 0x3F;
+    return encode6bit(c1 & 0x3F) +
+           encode6bit(c2 & 0x3F) +
+           encode6bit(c3 & 0x3F) +
+           encode6bit(c4 & 0x3F);
+  }
+
+  var result = '';
+  for (var i = 0; i < compressed.length; i += 3) {
+    if (i + 2 === compressed.length) {
+      result += append3bytes(compressed[i], compressed[i + 1], 0);
+    } else if (i + 1 === compressed.length) {
+      result += append3bytes(compressed[i], 0, 0);
+    } else {
+      result += append3bytes(compressed[i], compressed[i + 1], compressed[i + 2]);
+    }
+  }
+  return result;
+}
+
+/* ============ Рендер усіх PlantUML-діаграм ============ */
+document.querySelectorAll('script.plantuml').forEach(function (el) {
+  var source = el.textContent.trim();
+  var container = el.parentNode;
+  var encoded = encodePlantUML(source);
+  var url = 'https://www.plantuml.com/plantuml/svg/' + encoded;
+
+  var img = document.createElement('img');
+  img.alt = 'Блок-схема PlantUML';
+  img.loading = 'lazy';
+
+  img.onerror = function () {
+    // Fallback: показати джерело діаграми
+    var pre = document.createElement('pre');
+    pre.className = 'puml-fallback';
+    pre.textContent = source;
+    container.replaceChild(pre, img);
+  };
+
+  img.src = url;
+  container.replaceChild(img, el);
+});
+
+/* ============ Копіювання коду ============ */
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var code = btn.closest('.code').querySelector('pre code').textContent;
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = 'Скопійовано ✓';
+      setTimeout(function () { btn.textContent = old; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(done).catch(done);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  });
+});
+
+/* ============ Скидання editable-полів при Ctrl+Enter ============ */
+document.querySelectorAll('[contenteditable="true"]').forEach(function (el) {
+  el.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey && el.tagName !== 'DIV') {
+      // для коротких комірок Enter завершує редагування
+      e.preventDefault();
+      el.blur();
+    }
+  });
+});
+</script>
+</body>
+</html>
