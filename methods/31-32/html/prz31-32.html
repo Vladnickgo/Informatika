@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Практичне заняття · Контроль і оцінювання з інформатики в початковій школі</title>
+<style>
+  :root{
+    --bg:#f5f5f7;
+    --card:#ffffff;
+    --ink:#1d1d1f;
+    --ink2:#6e6e73;
+    --ink3:#86868b;
+    --blue:#0071e3;
+    --blue-soft:#e9f2fd;
+    --purple:#7d5cf5;
+    --purple-soft:#f0ecfe;
+    --green:#2fb36a;
+    --green-soft:#e6f7ee;
+    --orange:#ff9500;
+    --orange-soft:#fff4e0;
+    --red:#ff3b30;
+    --red-soft:#ffedeb;
+    --line:#e5e5ea;
+    --radius:24px;
+    --shadow:0 6px 28px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  .page{max-width:1060px;margin:0 auto;padding:36px 20px 90px;}
+
+  /* ---------- TYPOGRAPHY ---------- */
+  h1{
+    font-size:clamp(28px,4.2vw,44px);
+    line-height:1.1;
+    letter-spacing:-.025em;
+    font-weight:700;
+    margin:14px 0 16px;
+  }
+  h2{
+    font-size:clamp(22px,2.8vw,30px);
+    line-height:1.15;
+    letter-spacing:-.02em;
+    font-weight:700;
+    margin:6px 0 14px;
+  }
+  h3{
+    font-size:19px;
+    line-height:1.25;
+    letter-spacing:-.01em;
+    font-weight:600;
+    margin:0 0 8px;
+  }
+  p{margin:0 0 12px;}
+  p:last-child{margin-bottom:0;}
+  ul{margin:0;padding-left:20px;}
+  li{margin-bottom:7px;}
+  li:last-child{margin-bottom:0;}
+  strong{font-weight:600;}
+
+  .lead{font-size:clamp(17px,2vw,20px);color:var(--ink2);line-height:1.5;max-width:760px;}
+
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:2px;
+  }
+
+  .sec-head{margin-bottom:20px;}
+
+  section{margin-bottom:34px;}
+
+  /* ---------- PILLS ---------- */
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:13.5px;
+    font-weight:600;
+    background:#fff;
+    color:var(--ink2);
+    border:1px solid var(--line);
+  }
+  .pill-blue{background:var(--blue-soft);color:#0057b8;border-color:transparent;}
+  .pill-green{background:var(--green-soft);color:#1e7d4b;border-color:transparent;}
+  .pill-purple{background:var(--purple-soft);color:#5b3ec9;border-color:transparent;}
+
+  /* ---------- CARDS ---------- */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:28px 30px;
+    box-shadow:var(--shadow);
+  }
+  .card.tight{padding:22px 24px;}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .grid-4{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(900px 420px at 88% -12%, rgba(125,92,245,.16), transparent 62%),
+      radial-gradient(760px 380px at 4% -22%, rgba(0,113,227,.15), transparent 60%),
+      #ffffff;
+    border-radius:32px;
+    padding:38px 36px 34px;
+    box-shadow:var(--shadow);
+    margin-bottom:34px;
+  }
+  .hero-top{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:26px;}
+  .mini-card{
+    background:rgba(255,255,255,.78);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:20px 22px;
+    backdrop-filter:blur(10px);
+  }
+  .mini-card h3{
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:.07em;
+    color:var(--ink3);
+    margin-bottom:8px;
+  }
+  .mini-card p{font-size:15.5px;color:var(--ink);}
+
+  /* ---------- KEY STATEMENT ---------- */
+  .key-card{
+    background:linear-gradient(135deg,#1d1d1f 0%,#2c2c33 55%,#3a2f6b 100%);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:32px 34px;
+    box-shadow:0 12px 40px rgba(28,28,45,.22);
+  }
+  .key-card h2{color:#fff;margin-top:4px;}
+  .key-card p{color:rgba(255,255,255,.82);}
+  .key-card .eyebrow{color:#8ab8ff;}
+  .key-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:16px;
+    padding:12px 18px;
+    font-size:15.5px;
+    font-weight:600;
+    margin-top:6px;
+  }
+  .key-badge svg{flex:0 0 auto;}
+
+  /* ---------- COMPARE STRIP ---------- */
+  .cmp{display:grid;grid-template-columns:1fr 46px 1fr;gap:14px;align-items:center;margin-top:24px;}
+  .cmp-box{
+    border-radius:18px;
+    padding:18px 20px;
+    font-size:15.5px;
+    line-height:1.45;
+  }
+  .cmp-no{
+    background:rgba(255,255,255,.07);
+    border:1px dashed rgba(255,255,255,.28);
+    color:rgba(255,255,255,.62);
+  }
+  .cmp-no b{color:rgba(255,255,255,.72);}
+  .cmp-yes{
+    background:rgba(47,179,106,.16);
+    border:1px solid rgba(47,179,106,.42);
+    color:#d8f7e6;
+  }
+  .cmp-yes b{color:#fff;}
+  .cmp-arrow{text-align:center;color:rgba(255,255,255,.5);}
+
+  /* ---------- OBJECT CARDS ---------- */
+  .obj{
+    background:#fff;border-radius:22px;padding:24px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;
+    border-top:4px solid transparent;
+  }
+  .obj .ic{
+    width:48px;height:48px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:14px;
+  }
+  .obj p{font-size:15.5px;color:var(--ink2);}
+  .example{
+    margin-top:14px;
+    background:#f7f7fa;
+    border-radius:14px;
+    padding:12px 14px;
+    font-size:14px;
+    color:var(--ink2);
+    line-height:1.45;
+  }
+  .example b{color:var(--ink);font-weight:600;}
+  .example .ex-label{
+    display:block;
+    font-size:11.5px;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+    color:var(--ink3);
+    margin-bottom:4px;
+  }
+  .obj-1{border-top-color:var(--blue);}
+  .obj-1 .ic{background:var(--blue-soft);color:var(--blue);}
+  .obj-2{border-top-color:var(--purple);}
+  .obj-2 .ic{background:var(--purple-soft);color:var(--purple);}
+  .obj-3{border-top-color:var(--green);}
+  .obj-3 .ic{background:var(--green-soft);color:var(--green);}
+  .obj-4{border-top-color:var(--orange);}
+  .obj-4 .ic{background:var(--orange-soft);color:var(--orange);}
+
+  /* ---------- FORMS / DONUT ---------- */
+  .forms-wrap{
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:30px;
+    align-items:center;
+  }
+  .forms-list{display:grid;gap:14px;}
+  .form-item{
+    display:flex;gap:14px;align-items:flex-start;
+    background:#f7f7fa;border-radius:16px;padding:16px 18px;
+  }
+  .dot{width:12px;height:12px;border-radius:50%;flex:0 0 auto;margin-top:6px;}
+  .form-item h3{font-size:16.5px;margin-bottom:3px;}
+  .form-item p{font-size:14.5px;color:var(--ink2);margin:0;}
+
+  /* ---------- ROW CARDS (поточне/підсумкове) ---------- */
+  .phase{
+    background:#fff;border-radius:22px;padding:26px;box-shadow:var(--shadow);
+    position:relative;overflow:hidden;
+  }
+  .phase::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:5px;
+  }
+  .phase-a::before{background:linear-gradient(180deg,#0071e3,#7d5cf5);}
+  .phase-b::before{background:linear-gradient(180deg,#2fb36a,#00c7a5);}
+  .phase .tag{
+    display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink3);margin-bottom:6px;
+  }
+  .phase ul{margin-top:10px;}
+  .phase li{font-size:15.5px;color:var(--ink2);}
+
+  /* ---------- RADAR ---------- */
+  .radar-wrap{
+    display:grid;grid-template-columns:280px 1fr;gap:34px;align-items:center;
+  }
+  .crit-list{display:grid;gap:12px;}
+  .crit{
+    display:flex;gap:12px;align-items:flex-start;
+    font-size:15.5px;line-height:1.45;
+  }
+  .crit .num{
+    flex:0 0 auto;
+    width:26px;height:26px;border-radius:9px;
+    background:var(--blue-soft);color:#0057b8;
+    font-size:13.5px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .crit span small{display:block;color:var(--ink3);font-size:13.5px;}
+
+  /* ---------- QUESTIONS / ANSWERS ---------- */
+  .qa{
+    background:#fff;border-radius:20px;padding:22px 24px;box-shadow:var(--shadow);
+  }
+  .q{
+    display:flex;gap:12px;font-weight:600;font-size:17px;line-height:1.35;
+    margin-bottom:12px;color:var(--ink);
+  }
+  .q .qn{
+    flex:0 0 auto;width:28px;height:28px;border-radius:9px;
+    background:linear-gradient(135deg,#0071e3,#7d5cf5);
+    color:#fff;font-size:14px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:1px;
+  }
+  .answer{
+    background:var(--blue-soft);
+    border-radius:14px;
+    padding:16px 18px;
+    font-size:15.5px;
+    line-height:1.55;
+    color:#123a63;
+  }
+  .answer b{color:#0b2a49;}
+  .answer ul{padding-left:18px;margin-top:6px;}
+  .answer li{margin-bottom:6px;}
+
+  /* ---------- STEPS ---------- */
+  .steps{display:grid;gap:0;counter-reset:step;}
+  .step{
+    display:flex;gap:18px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .step:last-child{border-bottom:none;padding-bottom:0;}
+  .step:first-child{padding-top:0;}
+  .step .sn{
+    flex:0 0 auto;width:40px;height:40px;border-radius:13px;
+    background:linear-gradient(135deg,#0071e3,#00c7a5);
+    color:#fff;font-weight:700;font-size:17px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step h3{font-size:16.5px;margin-bottom:4px;}
+  .step p{font-size:15px;color:var(--ink2);margin:0;}
+
+  /* ---------- PHRASES ---------- */
+  .phrase{
+    background:var(--green-soft);
+    border-left:4px solid var(--green);
+    border-radius:0 16px 16px 0;
+    padding:16px 20px;
+    font-size:15.5px;
+    line-height:1.55;
+    color:#14432b;
+    margin-bottom:12px;
+  }
+  .phrase:last-child{margin-bottom:0;}
+  .phrase .who{
+    display:block;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;
+    color:#2b8a58;font-weight:700;margin-bottom:5px;
+  }
+
+  /* ---------- TABLE ---------- */
+  .table-wrap{
+    background:#fff;border-radius:22px;box-shadow:var(--shadow);overflow:hidden;
+  }
+  table{width:100%;border-collapse:collapse;font-size:15px;}
+  thead th{
+    background:#f5f5f7;
+    text-align:left;
+    padding:14px 20px;
+    font-size:12.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink3);
+    font-weight:700;
+    border-bottom:1px solid var(--line);
+  }
+  tbody td{
+    padding:15px 20px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+    line-height:1.5;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.bad{color:#a1352d;background:#fff8f7;width:44%;}
+  td.good{color:#14603c;background:#f6fdf9;}
+
+  /* ---------- CALLOUT ---------- */
+  .callout{
+    border-radius:20px;
+    padding:22px 24px;
+    display:flex;gap:16px;align-items:flex-start;
+    font-size:15.5px;line-height:1.55;
+  }
+  .callout .ci{flex:0 0 auto;}
+  .callout-info{background:var(--blue-soft);color:#123a63;}
+  .callout-warn{background:var(--orange-soft);color:#6b4400;}
+  .callout b{font-weight:700;}
+
+  /* ---------- META / SOURCES ---------- */
+  .src{
+    background:#fff;border-radius:22px;padding:24px 28px;box-shadow:var(--shadow);
+  }
+  .src ol{margin:0;padding-left:22px;}
+  .src li{font-size:15px;color:var(--ink2);margin-bottom:10px;line-height:1.5;}
+  .src a{color:var(--blue);text-decoration:none;word-break:break-all;}
+  .src a:hover{text-decoration:underline;}
+
+  /* ---------- PRINT BUTTON ---------- */
+  .print-btn{
+    position:fixed;right:22px;bottom:22px;z-index:50;
+    display:inline-flex;align-items:center;gap:9px;
+    background:rgba(29,29,31,.9);
+    color:#fff;border:none;cursor:pointer;
+    padding:13px 20px;border-radius:999px;
+    font-size:15px;font-weight:600;
+    font-family:inherit;
+    box-shadow:0 8px 26px rgba(0,0,0,.24);
+    backdrop-filter:blur(12px);
+    transition:transform .18s ease, background .18s ease;
+  }
+  .print-btn:hover{transform:translateY(-2px);background:#000;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:880px){
+    .hero-grid,.grid-2,.grid-3,.grid-4,.forms-wrap,.radar-wrap{grid-template-columns:1fr;}
+    .cmp{grid-template-columns:1fr;}
+    .cmp-arrow{transform:rotate(90deg);padding:6px 0;}
+    .hero{padding:28px 22px;}
+    .page{padding:20px 14px 70px;}
+    .card{padding:22px 20px;}
+    .radar-wrap{justify-items:center;text-align:left;}
+  }
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    @page{size:A4;margin:12mm;}
+
+    html,body{background:#fff !important;font-size:10.4pt;line-height:1.45;}
+    .page{max-width:none;padding:0;}
+    .no-print{display:none !important;}
+
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+
+    section{margin-bottom:9mm;}
+    .hero{margin-bottom:9mm;padding:20px 22px;border-radius:18px;}
+    .card,.obj,.phase,.qa,.src,.mini-card,.key-card{
+      box-shadow:none !important;
+      border:1px solid #d8d8de !important;
+    }
+    .key-card{border-color:#2c2c33 !important;}
+    .table-wrap{box-shadow:none !important;border:1px solid #d8d8de !important;}
+
+    /* Нерозривні блоки */
+    .card,.obj,.phase,.qa,.src,.mini-card,.key-card,.phrase,.answer,
+    .step,.form-item,.crit,.callout,figure,.table-wrap,tr,
+    .grid-2 > *,.grid-3 > *,.grid-4 > *,.forms-wrap > *,.radar-wrap > *,.cmp > *{
+      break-inside:avoid !important;
+      page-break-inside:avoid !important;
+    }
+    h1,h2,h3,.eyebrow,.sec-head{
+      break-after:avoid !important;
+      page-break-after:avoid !important;
+    }
+    .q{break-inside:avoid;}
+    a{color:inherit;text-decoration:none;}
+
+    svg{max-width:100%;height:auto;}
+    .radar-wrap{grid-template-columns:250px 1fr;gap:18px;}
+    .forms-wrap{grid-template-columns:250px 1fr;gap:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="hero-top">
+      <span class="pill pill-blue">Практичне заняття</span>
+      <span class="pill">Початкова школа · Інформатика</span>
+      <span class="pill pill-purple">Наказ МОН України № 1009 від 19.08.2016</span>
+    </div>
+
+    <h1>Вимоги до контролю та оцінювання навчальних досягнень з інформатики учнів початкової школи</h1>
+    <p class="lead">
+      Система контролю з інформатики в 1–4 класах — це не про бали, а про якісний,
+      мотивуючий словесний відгук, що допомагає дитині побачити власний прогрес.
+    </p>
+
+    <div class="hero-grid">
+      <div class="mini-card">
+        <h3>Мета заняття</h3>
+        <p>
+          Ознайомити з вимогами до системи контролю та оцінювання результатів навчання
+          інформатики в початковій школі. Розвивати вміння складати завдання для поточного
+          й тематичного контролю, що відповідають критеріям оцінювання. Виховувати
+          об'єктивність, тактовність і доброзичливість під час оцінювання досягнень учнів.
+        </p>
+      </div>
+      <div class="mini-card">
+        <h3>Обладнання</h3>
+        <p>Інструкційні картки.</p>
+        <h3 style="margin-top:16px;">Формат результату</h3>
+        <p>Сценарій фрагмента уроку з практичною роботою учнів і критеріями вербального оцінювання.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= 01. КЛЮЧОВА ВИМОГА ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">01 · Ключова вимога</span>
+      <h2>Оцінювання здійснюється вербально</h2>
+      <p class="lead">
+        Згідно з орієнтовними вимогами до контролю та оцінювання навчальних досягнень учнів
+        початкової школи, затвердженими наказом МОН України від 19.08.2016 № 1009,
+        оцінювання з інформатики у 1–4 класах здійснюється <strong>вербально</strong>.
+      </p>
+    </div>
+
+    <div class="key-card">
+      <span class="eyebrow">Головне</span>
+      <h2>Замість балів — словесна характеристика</h2>
+      <p>
+        Учитель не виставляє оцінку за 12-бальною шкалою, а дає словесну характеристику
+        знань, умінь і навичок учня. Такий підхід дозволяє зосередитись на якісному
+        оцінюванні процесу навчання, враховуючи особливості вікового розвитку дітей.
+      </p>
+
+      <div class="cmp">
+        <div class="cmp-box cmp-no">
+          <b>12-бальна шкала</b><br>
+          Бал фіксує лише результат і часто демотивує дитину, яка доклала зусиль,
+          але ще не досягла високого рівня.
+        </div>
+        <div class="cmp-arrow">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </div>
+        <div class="cmp-box cmp-yes">
+          <b>Вербальне оцінювання</b><br>
+          Словесний відгук описує, що вже виходить, що зростає і який наступний крок
+          допоможе дитині рухатися далі.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02. ОБ'ЄКТИ КОНТРОЛЮ ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">02 · Об'єкти контролю</span>
+      <h2>Що саме перевіряє вчитель</h2>
+      <p class="lead">
+        Основні об'єкти контролю з інформатики в початковій школі охоплюють не лише
+        знання, а й практичні вміння, творчий досвід та ціннісне ставлення до технологій.
+      </p>
+    </div>
+
+    <div class="grid-4">
+
+      <div class="obj obj-1">
+        <div class="ic">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19a1 1 0 0 1 1 1v13.5"/>
+            <path d="M4 5.5V19a2 2 0 0 0 2 2h14"/>
+            <path d="M8 8h8M8 12h5"/>
+          </svg>
+        </div>
+        <h3>Знання</h3>
+        <p>Основи інформатики, комп'ютерна грамотність, безпека в Інтернеті.</p>
+        <div class="example">
+          <span class="ex-label">Приклад завдання</span>
+          Назви три правила безпечної роботи в мережі та поясни, чому пароль
+          не можна нікому повідомляти.
+        </div>
+      </div>
+
+      <div class="obj obj-2">
+        <div class="ic">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="4" width="19" height="12.5" rx="2"/>
+            <path d="M8 20.5h8M12 16.5v4"/>
+          </svg>
+        </div>
+        <h3>Уміння</h3>
+        <p>Працювати з комп'ютером, виконувати прості алгоритми, користуватися програмним забезпеченням.</p>
+        <div class="example">
+          <span class="ex-label">Приклад завдання</span>
+          Запусти графічний редактор, намалюй будиночок із трьох фігур
+          та збережи файл у власній папці.
+        </div>
+      </div>
+
+      <div class="obj obj-3">
+        <div class="ic">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l2.3 4.9 5.4.7-4 3.7 1 5.3L12 15.1 7.3 17.6l1-5.3-4-3.7 5.4-.7z"/>
+          </svg>
+        </div>
+        <h3>Досвід творчої діяльності</h3>
+        <p>Створення цифрових проєктів, робота з графікою, анімацією тощо.</p>
+        <div class="example">
+          <span class="ex-label">Приклад завдання</span>
+          Створи листівку до свята у графічному редакторі, додай власний малюнок
+          і коротке привітання.
+        </div>
+      </div>
+
+      <div class="obj obj-4">
+        <div class="ic">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.8 8.6a5 5 0 0 0-8.8-3.2A5 5 0 0 0 3.2 8.6c0 5 8.8 10.4 8.8 10.4s8.8-5.4 8.8-10.4z"/>
+          </svg>
+        </div>
+        <h3>Ціннісне ставлення</h3>
+        <p>Розуміння ролі технологій у сучасному світі, етичне та відповідальне використання.</p>
+        <div class="example">
+          <span class="ex-label">Приклад завдання</span>
+          Поясни, чому під час використання чужого малюнка з Інтернету
+          варто вказати автора.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 03. ФОРМИ ПЕРЕВІРКИ ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">03 · Форми перевірки</span>
+      <h2>Три рівноцінні канали спостереження</h2>
+      <p class="lead">
+        Форми перевірки можуть бути різноманітними — важливо, щоб дитина мала
+        можливість показати свої досягнення у зручний для неї спосіб.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="forms-wrap">
+
+        <!-- Donut -->
+        <svg viewBox="0 0 200 200" role="img" aria-label="Схема: три форми перевірки">
+          <g transform="rotate(-90 100 100)">
+            <circle cx="100" cy="100" r="64" fill="none" stroke="#eef1f6" stroke-width="22"/>
+            <circle cx="100" cy="100" r="64" fill="none" stroke="#0071e3" stroke-width="22"
+                    stroke-dasharray="128 402.12" stroke-dashoffset="0" stroke-linecap="round"/>
+            <circle cx="100" cy="100" r="64" fill="none" stroke="#7d5cf5" stroke-width="22"
+                    stroke-dasharray="128 402.12" stroke-dashoffset="-134.04" stroke-linecap="round"/>
+            <circle cx="100" cy="100" r="64" fill="none" stroke="#2fb36a" stroke-width="22"
+                    stroke-dasharray="128 402.12" stroke-dashoffset="-268.08" stroke-linecap="round"/>
+          </g>
+          <text x="100" y="94" text-anchor="middle" font-size="34" font-weight="700"
+                fill="#1d1d1f" font-family="-apple-system, Helvetica, Arial, sans-serif">3</text>
+          <text x="100" y="118" text-anchor="middle" font-size="12.5" font-weight="600"
+                fill="#86868b" letter-spacing="0.06em"
+                font-family="-apple-system, Helvetica, Arial, sans-serif">ФОРМИ</text>
+        </svg>
+
+        <div class="forms-list">
+
+          <div class="form-item">
+            <span class="dot" style="background:#0071e3;"></span>
+            <div>
+              <h3>Усна</h3>
+              <p>Бесіда, опитування, презентація роботи. <em>Наприклад:</em> учень усно
+                розповідає, як діяв алгоритм, і демонструє створений слайд.</p>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <span class="dot" style="background:#7d5cf5;"></span>
+            <div>
+              <h3>Письмова</h3>
+              <p>Виконання завдань у зошитах, тести. <em>Наприклад:</em> короткий тест
+                із 5 завдань на вибір правильної відповіді про безпечну роботу в мережі.</p>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <span class="dot" style="background:#2fb36a;"></span>
+            <div>
+              <h3>Практична</h3>
+              <p>Завдання на комп'ютері, створення проєктів, робота з програмами,
+                ведення цифрового портфоліо. <em>Наприклад:</em> створення презентації
+                з 2–3 слайдів на власну тему.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04. ПОТОЧНЕ ТА ПІДСУМКОВЕ ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">04 · Види оцінювання</span>
+      <h2>Поточне оцінювання та підсумкова перевірка</h2>
+    </div>
+
+    <div class="grid-2">
+
+      <div class="phase phase-a">
+        <span class="tag">Поточне оцінювання</span>
+        <h3>Супровід у процесі вивчення теми</h3>
+        <p>
+          Здійснюється в процесі вивчення кожної теми та ґрунтується на вербальних
+          оцінних судженнях.
+        </p>
+        <ul>
+          <li>Оцінюється не лише результат, а й зусилля учня, його залученість.</li>
+          <li>Враховується творчий підхід та вміння працювати в групі.</li>
+          <li>Оцінка має бути <strong>мотивуючою</strong>: акцент на досягненнях,
+              а не на недоліках.</li>
+        </ul>
+        <div class="example" style="margin-top:16px;">
+          <span class="ex-label">Як це виглядає на уроці</span>
+          Учитель спостерігає, як учень уперше самостійно зберіг файл, і каже:
+          «Сьогодні ти зробив це сам — це твій справжній крок уперед».
+        </div>
+      </div>
+
+      <div class="phase phase-b">
+        <span class="tag">Підсумкова перевірка</span>
+        <h3>Без тематичних контрольних робіт</h3>
+        <p>
+          Підсумкова перевірка у вигляді тематичних контрольних робіт для інформатики
+          не передбачена.
+        </p>
+        <ul>
+          <li>Наприкінці теми або семестру — узагальнюючі практичні роботи.</li>
+          <li>Творчі завдання та презентації проєктів.</li>
+          <li>Результат — демонстрація того, що дитина вже вміє робити практично.</li>
+        </ul>
+        <div class="example" style="margin-top:16px;">
+          <span class="ex-label">Як це виглядає на уроці</span>
+          Замість контрольної — «виставка проєктів»: кожен учень показує свою
+          мініпрезентацію та розповідає, що було найцікавішим у роботі.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 05. КРИТЕРІЇ ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">05 · Критерії оцінювання</span>
+      <h2>П'ять рівнозначних орієнтирів</h2>
+      <p class="lead">
+        Критерії допомагають учителеві сформулювати точний, об'єктивний і водночас
+        доброзичливий словесний відгук.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="radar-wrap">
+
+        <!-- Radar chart -->
+        <svg viewBox="0 0 260 240" role="img" aria-label="Схема п'яти критеріїв оцінювання">
+          <!-- осі -->
+          <g stroke="#e5e5ea" stroke-width="1">
+            <line x1="130" y1="120" x2="130" y2="40"/>
+            <line x1="130" y1="120" x2="206.1" y2="95.3"/>
+            <line x1="130" y1="120" x2="177.0" y2="184.7"/>
+            <line x1="130" y1="120" x2="83.0" y2="184.7"/>
+            <line x1="130" y1="120" x2="53.9" y2="95.3"/>
+          </g>
+
+          <!-- сітка -->
+          <g fill="none" stroke="#e5e5ea" stroke-width="1.2">
+            <polygon points="130,40 206.1,95.3 177.0,184.7 83.0,184.7 53.9,95.3"/>
+            <polygon points="130,40 206.1,95.3 177.0,184.7 83.0,184.7 53.9,95.3"
+                     transform="translate(130,120) scale(0.72) translate(-130,-120)"/>
+            <polygon points="130,40 206.1,95.3 177.0,184.7 83.0,184.7 53.9,95.3"
+                     transform="translate(130,120) scale(0.44) translate(-130,-120)"/>
+          </g>
+
+          <!-- дані -->
+          <polygon points="130,62.4 184.8,102.2 163.9,166.6 96.1,166.6 75.2,102.2"
+                   fill="rgba(0,113,227,.18)" stroke="#0071e3" stroke-width="2.2"
+                   stroke-linejoin="round"/>
+
+          <!-- точки -->
+          <g fill="#0071e3">
+            <circle cx="130" cy="62.4" r="4.5"/>
+            <circle cx="184.8" cy="102.2" r="4.5"/>
+            <circle cx="163.9" cy="166.6" r="4.5"/>
+            <circle cx="96.1" cy="166.6" r="4.5"/>
+            <circle cx="75.2" cy="102.2" r="4.5"/>
+          </g>
+          <g fill="#ffffff" font-size="8.5" font-weight="700" text-anchor="middle"
+             font-family="-apple-system, Helvetica, Arial, sans-serif">
+            <text x="130" y="65.4">1</text>
+            <text x="184.8" y="105.2">2</text>
+            <text x="163.9" y="169.6">3</text>
+            <text x="96.1" y="169.6">4</text>
+            <text x="75.2" y="105.2">5</text>
+          </g>
+        </svg>
+
+        <div class="crit-list">
+          <div class="crit"><span class="num">1</span>
+            <span>Якість засвоєння знань <small>повнота, усвідомленість, міцність</small></span>
+          </div>
+          <div class="crit"><span class="num">2</span>
+            <span>Сформованість умінь і навичок роботи з ІКТ <small>упевнене володіння інструментами</small></span>
+          </div>
+          <div class="crit"><span class="num">3</span>
+            <span>Здатність застосовувати знання в практичних ситуаціях <small>перенесення в нову задачу</small></span>
+          </div>
+          <div class="crit"><span class="num">4</span>
+            <span>Творчий підхід до виконання завдань <small>власна ідея, оригінальне рішення</small></span>
+          </div>
+          <div class="crit"><span class="num">5</span>
+            <span>Культура безпечного та етичного використання технологій <small>відповідальна поведінка в цифровому середовищі</small></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 06. ФІКСАЦІЯ РЕЗУЛЬТАТІВ ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">06 · Фіксація результатів</span>
+      <h2>Словесний відгук замість бала</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="callout callout-info">
+        <span class="ci">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-4.1A8.4 8.4 0 1 1 21 11.5z"/>
+          </svg>
+        </span>
+        <div>
+          <b>Оцінка з інформатики не виставляється в балах</b> — вона фіксується
+          у вигляді словесного відгуку, який відображає індивідуальний прогрес учня.
+        </div>
+      </div>
+
+      <div class="callout callout-warn">
+        <span class="ci">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="10.5" width="16" height="10.5" rx="2.4"/>
+            <path d="M8 10.5V7a4 4 0 1 1 8 0v3.5"/>
+          </svg>
+        </span>
+        <div>
+          <b>Конфіденційність.</b> Результати оцінювання є конфіденційною інформацією,
+          доступною лише для учня та його батьків.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-info" style="margin-top:18px;background:#eef7f1;color:#14432b;">
+      <span class="ci">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2fb36a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6.5L9.5 17 4 11.5"/>
+        </svg>
+      </span>
+      <div>
+        <b>Висновок.</b> Контроль і оцінювання з інформатики в початковій школі спрямовані
+        на формування у дітей інтересу до предмета, розвиток логічного мислення,
+        творчих здібностей та відповідального ставлення до використання сучасних технологій.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 07. ЗАВДАННЯ 1 ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">07 · Практичне завдання 1</span>
+      <h2>Контрольні запитання та орієнтовні відповіді</h2>
+    </div>
+
+    <div class="grid-2" style="gap:18px;">
+
+      <div class="qa">
+        <div class="q"><span class="qn">1</span>
+          Яка форма оцінювання є обов'язковою для інформатики в 1–4 класах?
+        </div>
+        <div class="answer">
+          <b>Вербальна (словесна).</b> Бали за 12-бальною шкалою не виставляються:
+          учитель дає словесну характеристику знань, умінь і навичок учня, орієнтуючись
+          на його індивідуальний прогрес.
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="q"><span class="qn">2</span>
+          Назвіть основні об'єкти контролю, які мають бути притаманні й для уроків інформатики.
+        </div>
+        <div class="answer">
+          <ul>
+            <li>Знання про основи інформатики, комп'ютерну грамотність, безпеку в Інтернеті.</li>
+            <li>Вміння працювати з комп'ютером, виконувати прості алгоритми, користуватися ПЗ.</li>
+            <li>Досвід творчої діяльності (цифрові проєкти, графіка, анімація).</li>
+            <li>Ціннісне ставлення до використання технологій та розуміння їхньої ролі у світі.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="q"><span class="qn">3</span>
+          Які форми та методи перевірки знань рекомендуються для використання?
+        </div>
+        <div class="answer">
+          <b>Усна</b> — бесіда, опитування, презентація роботи.<br>
+          <b>Письмова</b> — виконання завдань у зошитах, тести.<br>
+          <b>Практична</b> — завдання на комп'ютері, створення проєктів, робота з програмами,
+          ведення цифрового портфоліо.
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="q"><span class="qn">4</span>
+          Який ключовий принцип оцінювання в початковій школі зазначено у документі?
+        </div>
+        <div class="answer">
+          Оцінювання має бути <b>мотивуючим</b>: акцент робиться на досягненнях,
+          а не на недоліках. Важливе якісне оцінювання процесу навчання з урахуванням
+          вікових особливостей дітей, а також конфіденційність результатів.
+        </div>
+      </div>
+
+      <div class="qa" style="grid-column:1 / -1;">
+        <div class="q"><span class="qn">5</span>
+          Які переваги та можливі складнощі для вчителя у вербальному оцінюванні
+          порівняно з бальною системою?
+        </div>
+        <div class="answer">
+          <b>Переваги:</b>
+          <ul>
+            <li>цілісне бачення розвитку дитини, а не лише «зріз» результату;</li>
+            <li>оцінювання зусиль, залученості, творчого підходу та роботи в групі;</li>
+            <li>зниження стресу й тривожності в учнів, підтримка внутрішньої мотивації;</li>
+            <li>урахування вікових особливостей молодших школярів.</li>
+          </ul>
+          <b>Можливі складнощі:</b>
+          <ul>
+            <li>більші витрати часу на підготовку точних і змістовних формулювань;</li>
+            <li>потреба в чітких, зрозумілих критеріях, щоб уникнути суб'єктивності;</li>
+            <li>складність фіксації динаміки прогресу без балів;</li>
+            <li>необхідність пояснювати батькам, які звикли орієнтуватися на оцінку-бал.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 08. ЗАВДАННЯ 2 ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">08 · Практичне завдання 2</span>
+      <h2>Сценарій фрагмента уроку «Створення простої презентації з 2–3 слайдами»</h2>
+      <p class="lead">
+        Головний елемент уроку — практична робота учнів. Оцінювання — вербальне,
+        за визначеними критеріями.
+      </p>
+    </div>
+
+    <div class="grid-2" style="align-items:start;">
+
+      <div class="card">
+        <span class="pill pill-blue" style="margin-bottom:14px;">Мета завдання</span>
+        <h3>Що має зробити учень</h3>
+        <p style="font-size:15.5px;color:var(--ink2);">
+          Навчитися самостійно створювати просту презентацію з 2–3 слайдів:
+          додавати текст і зображення, оформлювати слайди та зберігати файл
+          у власній папці. Учень має відчути, що створює власний цифровий продукт,
+          а не просто виконує вправу.
+        </p>
+        <div class="example" style="margin-top:16px;">
+          <span class="ex-label">Тема для прикладу</span>
+          «Моя улюблена тварина» — слайд 1: назва й ім'я автора; слайд 2: коротка
+          розповідь про тварину; слайд 3 (за бажанням): цікавий факт або малюнок.
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="pill pill-green" style="margin-bottom:14px;">Алгоритм дій учня</span>
+        <div class="steps">
+          <div class="step">
+            <span class="sn">1</span>
+            <div>
+              <h3>Створи файл</h3>
+              <p>Відкрий програму для презентацій (PowerPoint, Google Презентації)
+                і створи новий файл.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="sn">2</span>
+            <div>
+              <h3>Оформи перший слайд</h3>
+              <p>Напиши назву своєї теми та своє ім'я, додай один малюнок.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="sn">3</span>
+            <div>
+              <h3>Додай 1–2 слайди</h3>
+              <p>На кожному — короткий текст (2–3 речення) та зображення,
+                яке підходить до теми.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="sn">4</span>
+            <div>
+              <h3>Перевір і збережи</h3>
+              <p>Переконайся, що текст не перекривається, збережи файл у власній
+                папці та покажи вчителю.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Критерії -->
+    <div class="card" style="margin-top:18px;">
+      <span class="pill pill-purple" style="margin-bottom:14px;">Критерії для вербального оцінювання</span>
+      <div class="grid-4" style="gap:14px;">
+        <div class="callout callout-info">
+          <div><b>Якість знань.</b> Презентація містить 2–3 слайди, текст відповідає темі,
+            зображення доречні.</div>
+        </div>
+        <div class="callout callout-info" style="background:var(--purple-soft);color:#3f2d8f;">
+          <div><b>Сформованість умінь.</b> Учень самостійно створює слайди, додає текст
+            і малюнок, зберігає файл.</div>
+        </div>
+        <div class="callout callout-info" style="background:var(--green-soft);color:#14432b;">
+          <div><b>Досвід творчої діяльності.</b> Власна ідея, вдалий підбір кольорів,
+            оригінальний факт або малюнок.</div>
+        </div>
+        <div class="callout callout-info" style="background:var(--orange-soft);color:#6b4400;">
+          <div><b>Самостійність і старанність.</b> Учень доводить роботу до кінця,
+            перевіряє результат, звертається по допомогу за потреби.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Фрази -->
+    <div class="card" style="margin-top:18px;">
+      <span class="pill pill-green" style="margin-bottom:14px;">Фрази-характеристики для вчителя</span>
+      <p style="font-size:15.5px;color:var(--ink2);margin-bottom:16px;">
+        Формулювання мають бути позитивними, конструктивними та відповідати критеріям
+        з документа: якість знань, сформованість умінь, досвід творчої діяльності.
+      </p>
+
+      <div class="phrase">
+        <span class="who">Якість знань</span>
+        «Твоя презентація з трьох слайдів готова — і це справжній результат!
+        Текст на кожному слайді короткий і зрозумілий, а малюнки точно відповідають темі».
+      </div>
+
+      <div class="phrase">
+        <span class="who">Сформованість умінь</span>
+        «Ти самостійно впорався зі збереженням файлу — тепер твоя робота точно не загубиться.
+        Давай разом подивимося, як додати ще один слайд, щоб історія стала повнішою».
+      </div>
+
+      <div class="phrase">
+        <span class="who">Досвід творчої діяльності</span>
+        «Мені дуже сподобалась ідея з тваринами на другому слайді — це творчий підхід!
+        Наступного разу спробуй зробити заголовок трохи більшим, щоб він одразу
+        привертав увагу глядача».
+      </div>
+
+      <div class="phrase">
+        <span class="who">Самостійність і старанність</span>
+        «Ти дуже уважно перевірив кожен слайд — це ознака справжнього дослідника.
+        Пишаюся тим, як ти впорався з роботою!»
+      </div>
+    </div>
+
+    <!-- Замість / Краще -->
+    <div class="table-wrap" style="margin-top:18px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Замість цього…</th>
+            <th>…краще сказати так</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="bad">«Ти неправильно зберіг файл»</td>
+            <td class="good">«Твій малюнок дуже яскравий! Давай разом знайдемо найкращий спосіб
+              його зберегти, щоб він не загубився».</td>
+          </tr>
+          <tr>
+            <td class="bad">«У тебе замало слайдів»</td>
+            <td class="good">«Два слайди вже готові й виглядають охайно. Спробуймо додати третій —
+              який факт про твою тварину варто показати іншим?»</td>
+          </tr>
+          <tr>
+            <td class="bad">«Текст завеликий і все зіпсовано»</td>
+            <td class="good">«Ти вдало підібрав текст. Давай трохи зменшимо розмір шрифту,
+              щоб малюнок теж було добре видно».</td>
+          </tr>
+          <tr>
+            <td class="bad">«Це не схоже на презентацію»</td>
+            <td class="good">«Ти вже маєш заголовок і малюнок — це основа справжньої презентації.
+              Додамо ще один слайд, і вона стане завершеною».</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= 09. ЛІТЕРАТУРА ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">09 · Джерела</span>
+      <h2>Література та корисні посилання</h2>
+    </div>
+
+    <div class="src">
+      <ol>
+        <li>
+          Методика викладання інформатики в початковій школі: навчально-методичний посібник /
+          О. В. Єрьоміна, Н. І. Єфремова, О. О. Бондаренко та ін. — Київ: Генеза, 2015.
+        </li>
+        <li>
+          Методика викладання інформатики в початкових класах: теорія і практика /
+          В. О. Токар, О. М. Дем'яненко, Ю. В. Кіреєва та ін. — Київ: Атіка, 2017.
+        </li>
+        <li>
+          <a href="https://library.udpu.edu.ua/library_files/5503_01.pdf" target="_blank" rel="noopener">
+            https://library.udpu.edu.ua/library_files/5503_01.pdf</a>
+        </li>
+        <li>
+          <a href="https://drive.google.com/file/d/15uCKGpc_Aw0jPeLCCcPDbNUAHOKuworv/view" target="_blank" rel="noopener">
+            https://drive.google.com/file/d/15uCKGpc_Aw0jPeLCCcPDbNUAHOKuworv/view</a>
+        </li>
+        <li>
+          <a href="https://drive.google.com/file/d/1I1RRbW4XoinPoR6_b5P8KFVWD_iBjINT/view" target="_blank" rel="noopener">
+            https://drive.google.com/file/d/1I1RRbW4XoinPoR6_b5P8KFVWD_iBjINT/view</a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+</div>
+
+<!-- Кнопка друку -->
+<button class="print-btn no-print" onclick="window.print()">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9V3h12v6"/>
+    <rect x="6" y="18" width="12" height="3"/>
+    <path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/>
+  </svg>
+  Роздрукувати
+</button>
+
+</body>
+</html>
