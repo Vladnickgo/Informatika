@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Команди для роботи з мережею — практичне заняття</title>
+<style>
+  /* ================= БАЗА ================= */
+  :root{
+    --bg:#f5f5f7;
+    --card:#ffffff;
+    --text:#1d1d1f;
+    --muted:#6e6e73;
+    --line:#e3e3e8;
+    --accent:#0071e3;
+    --accent-dark:#0058b0;
+    --accent-soft:#e8f2ff;
+    --green:#28c840;
+    --radius:20px;
+    --shadow:0 1px 2px rgba(0,0,0,.045), 0 10px 28px rgba(0,0,0,.055);
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+                "Segoe UI", Roboto, Arial, sans-serif;
+    font-size:16.5px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-0.005em;
+  }
+
+  .wrap{
+    max-width:1000px;
+    margin:0 auto;
+    padding:0 22px 80px;
+  }
+
+  /* ================= ШАПКА ================= */
+  .hero{
+    background:linear-gradient(180deg,#ffffff 0%, #f0f6ff 55%, #f5f5f7 100%);
+    border-bottom:1px solid var(--line);
+    padding:56px 0 42px;
+    margin-bottom:36px;
+  }
+
+  .hero-inner{max-width:1000px;margin:0 auto;padding:0 22px;}
+
+  .badge{
+    display:inline-block;
+    background:var(--accent-soft);
+    color:var(--accent-dark);
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:6px 14px;
+    border-radius:100px;
+    margin-bottom:18px;
+  }
+
+  h1{
+    font-size:clamp(30px, 4.6vw, 46px);
+    line-height:1.1;
+    letter-spacing:-0.03em;
+    font-weight:700;
+    margin:0 0 16px;
+  }
+
+  .lead{
+    font-size:19px;
+    color:var(--muted);
+    max-width:760px;
+    margin:0 0 28px;
+    line-height:1.55;
+  }
+
+  .hero-meta{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    max-width:900px;
+  }
+
+  .hero-meta .box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:16px 20px;
+  }
+
+  .hero-meta .box span{
+    display:block;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--muted);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+
+  .hero-meta .box p{margin:0;font-size:15px;}
+
+  /* ================= НАВІГАЦІЯ ================= */
+  nav.toc{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 24px;
+    margin:0 0 34px;
+    box-shadow:var(--shadow);
+  }
+
+  nav.toc h2{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.09em;
+    color:var(--muted);
+    margin:0 0 12px;
+    font-weight:600;
+  }
+
+  nav.toc ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 10px;
+  }
+
+  nav.toc a{
+    display:inline-block;
+    font-size:14px;
+    color:var(--accent-dark);
+    background:var(--accent-soft);
+    text-decoration:none;
+    padding:7px 15px;
+    border-radius:100px;
+    transition:background .2s ease, transform .2s ease;
+  }
+
+  nav.toc a:hover{background:#d6e8ff; transform:translateY(-1px);}
+
+  /* ================= ЗАГОЛОВКИ ================= */
+  h2.section{
+    font-size:clamp(23px, 3vw, 30px);
+    letter-spacing:-0.025em;
+    font-weight:700;
+    margin:54px 0 18px;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+
+  h2.section .num{
+    color:var(--accent);
+    font-variant-numeric:tabular-nums;
+  }
+
+  h3{
+    font-size:20px;
+    letter-spacing:-0.015em;
+    margin:0 0 8px;
+    font-weight:650;
+  }
+
+  h4{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:.07em;
+    color:var(--muted);
+    font-weight:650;
+    margin:22px 0 8px;
+  }
+
+  p{margin:0 0 14px;}
+
+  /* ================= КАРТКИ ================= */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:26px 30px;
+    margin:0 0 20px;
+    border:1px solid rgba(0,0,0,.045);
+    box-shadow:var(--shadow);
+  }
+
+  .card > *:last-child{margin-bottom:0;}
+
+  .cmd{border-top:4px solid var(--accent);}
+
+  .cmd-head{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:12px;
+  }
+
+  .cmd-name{
+    font-family:"SF Mono", ui-monospace, Menlo, Consolas, "Courier New", monospace;
+    font-size:19px;
+    font-weight:700;
+    color:var(--accent-dark);
+    background:var(--accent-soft);
+    padding:5px 15px;
+    border-radius:10px;
+    letter-spacing:-0.01em;
+  }
+
+  .cmd-tag{
+    font-size:13px;
+    color:var(--muted);
+    background:#f5f5f7;
+    border:1px solid var(--line);
+    padding:4px 13px;
+    border-radius:100px;
+  }
+
+  .note{
+    background:var(--accent-soft);
+    border-left:4px solid var(--accent);
+    border-radius:12px;
+    padding:14px 18px;
+    margin:18px 0;
+    font-size:15px;
+  }
+
+  .note strong{color:var(--accent-dark);}
+
+  .warn{
+    background:#fff7e8;
+    border-left:4px solid #f0a500;
+    border-radius:12px;
+    padding:14px 18px;
+    margin:18px 0;
+    font-size:15px;
+  }
+
+  /* ================= ТЕРМІНАЛ ================= */
+  .term{
+    background:#1d1d1f;
+    border-radius:14px;
+    overflow:hidden;
+    margin:14px 0 18px;
+    box-shadow:0 12px 30px rgba(0,0,0,.16);
+  }
+
+  .term-bar{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:10px 14px;
+    background:#2c2c2e;
+  }
+
+  .term-bar i{
+    width:11px;height:11px;border-radius:50%;
+    background:#ff5f57;display:block;
+  }
+  .term-bar i:nth-child(2){background:#febc2e;}
+  .term-bar i:nth-child(3){background:#28c840;}
+
+  .term-bar em{
+    margin-left:8px;
+    font-style:normal;
+    font-size:11.5px;
+    color:#8e8e93;
+    letter-spacing:.03em;
+  }
+
+  .term pre{
+    margin:0;
+    padding:16px 20px 18px;
+    color:#e8e8ed;
+    font-family:"SF Mono", ui-monospace, Menlo, Consolas, "Courier New", monospace;
+    font-size:13.5px;
+    line-height:1.68;
+    overflow-x:auto;
+    white-space:pre;
+    tab-size:4;
+  }
+
+  /* ================= ФІГУРИ / SVG ================= */
+  figure{
+    margin:22px 0;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.05);
+    border-radius:18px;
+    padding:20px 18px 14px;
+    box-shadow:0 1px 2px rgba(0,0,0,.04);
+  }
+
+  figure svg{width:100%;height:auto;display:block;}
+
+  figcaption{
+    font-size:13px;
+    color:var(--muted);
+    text-align:center;
+    margin-top:12px;
+    line-height:1.5;
+  }
+
+  /* ================= ТАБЛИЦЯ ================= */
+  .table-wrap{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    margin:16px 0 20px;
+  }
+
+  table{width:100%;border-collapse:collapse;font-size:15px;}
+
+  th{
+    text-align:left;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--muted);
+    font-weight:650;
+    padding:12px 18px;
+    background:#fafafc;
+    border-bottom:1px solid var(--line);
+  }
+
+  td{
+    padding:11px 18px;
+    border-bottom:1px solid #f0f0f3;
+    vertical-align:top;
+  }
+
+  tr:last-child td{border-bottom:none;}
+
+  td code, p code, li code{
+    font-family:"SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size:13.5px;
+    background:#f2f2f5;
+    border:1px solid #e6e6eb;
+    border-radius:6px;
+    padding:1px 6px;
+    color:#1d1d1f;
+  }
+
+  /* ================= КРОКИ ================= */
+  .step{
+    display:grid;
+    grid-template-columns:44px 1fr;
+    gap:16px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.045);
+    border-radius:16px;
+    padding:20px 24px;
+    margin-bottom:14px;
+    box-shadow:0 1px 2px rgba(0,0,0,.04);
+  }
+
+  .step .n{
+    width:34px;height:34px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    font-size:15px;
+    margin-top:2px;
+  }
+
+  .step h4{margin:0 0 6px; color:var(--text); font-size:16px; text-transform:none; letter-spacing:-0.01em;}
+  .step p:last-child{margin-bottom:0;}
+
+  /* ================= СПИСКИ ================= */
+  ul.clean, ol.clean{padding-left:22px;margin:0 0 14px;}
+  ul.clean li, ol.clean li{margin-bottom:8px;}
+  ul.clean li::marker{color:var(--accent);}
+
+  /* ================= ФУТЕР ================= */
+  footer{
+    margin-top:60px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+    font-size:13.5px;
+    color:var(--muted);
+    text-align:center;
+  }
+
+  /* ================= ДРУК ================= */
+  @page{
+    size:A4;
+    margin:14mm 13mm;
+  }
+
+  @media print{
+    :root{
+      --bg:#fff;
+      --shadow:none;
+    }
+
+    body{
+      background:#fff;
+      font-size:11.5pt;
+      line-height:1.5;
+    }
+
+    .wrap{max-width:none;padding:0;}
+
+    .hero{
+      background:#fff;
+      border-bottom:1.5pt solid #1d1d1f;
+      padding:0 0 14pt;
+      margin-bottom:16pt;
+    }
+
+    .hero-inner{max-width:none;padding:0;}
+
+    .badge{
+      border:1pt solid #0071e3;
+      background:#fff;
+      color:#0058b0;
+    }
+
+    h1{font-size:24pt;}
+
+    .lead{font-size:12pt;color:#333;}
+
+    nav.toc{display:none !important;}
+
+    /* Заборона розриву блоків */
+    .card,
+    figure,
+    .term,
+    .step,
+    .table-wrap,
+    .note,
+    .warn,
+    table,
+    tr,
+    pre{
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+
+    h1, h2, h3, h4{
+      break-after:avoid;
+      page-break-after:avoid;
+    }
+
+    h2.section{
+      margin-top:22pt;
+      border-bottom:1pt solid #c8c8cc;
+    }
+
+    .card,
+    figure,
+    .step,
+    .table-wrap{
+      border:1pt solid #d2d2d7;
+      box-shadow:none;
+      margin-bottom:12pt;
+    }
+
+    .cmd{border-top:3pt solid #0071e3;}
+
+    .term{
+      background:#fff;
+      border:1pt solid #c8c8cc;
+      box-shadow:none;
+    }
+
+    .term-bar{
+      background:#f2f2f5;
+      border-bottom:1pt solid #d2d2d7;
+    }
+
+    .term pre{color:#000;font-size:9.5pt;}
+
+    .note,.warn{
+      border-left:3pt solid #0071e3;
+      background:#f7f7f9;
+    }
+
+    .step .n{
+      background:#fff;
+      color:#000;
+      border:1.5pt solid #1d1d1f;
+      -webkit-print-color-adjust:exact;
+      print-color-adjust:exact;
+    }
+
+    .cmd-name{
+      background:#f2f2f5;
+      color:#000;
+      border:1pt solid #d2d2d7;
+    }
+
+    th{background:#f7f7f9;}
+
+    a{color:#000;text-decoration:none;}
+
+    footer{margin-top:20pt;}
+
+    .page-break{page-break-before:always;break-before:page;}
+  }
+
+  @media (max-width:700px){
+    .hero-meta{grid-template-columns:1fr;}
+    .card{padding:22px 20px;}
+    .step{grid-template-columns:1fr;gap:10px;}
+    .step .n{width:30px;height:30px;font-size:14px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ШАПКА ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="badge">Практичне заняття · Комп'ютерні мережі</div>
+    <h1>Команди для роботи з мережею</h1>
+    <p class="lead">
+      Навігація в мережевих ресурсах через командний рядок. Перевірка стану мережі
+      та взаємодія з іншими пристроями.
+    </p>
+
+    <div class="hero-meta">
+      <div class="box">
+        <span>Мета заняття</span>
+        <p>Ознайомитися з основними командами командного рядка для роботи з мережею;
+           навчитися навігації в мережевих ресурсах, перевірки стану мережі та
+           взаємодії з іншими пристроями.</p>
+      </div>
+      <div class="box">
+        <span>Необхідне обладнання</span>
+        <p>Комп'ютер із підключенням до мережі · доступ до командного рядка
+           (<code>cmd</code> у Windows, термінал у Linux/macOS).</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ ЗМІСТ ============ -->
+  <nav class="toc">
+    <h2>Зміст заняття</h2>
+    <ul>
+      <li><a href="#theory">Теоретичні відомості</a></li>
+      <li><a href="#open">Відкриття командного рядка</a></li>
+      <li><a href="#ping">Перевірка підключення</a></li>
+      <li><a href="#nav">Навігація в мережевих ресурсах</a></li>
+      <li><a href="#remote">Взаємодія з пристроями</a></li>
+      <li><a href="#extra">Додаткові команди</a></li>
+      <li><a href="#tasks">Завдання для самостійної роботи</a></li>
+      <li><a href="#steps">Покрокова інструкція</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ ТЕОРІЯ ============ -->
+  <h2 class="section" id="theory"><span class="num">01.</span> Теоретичні відомості</h2>
+
+  <div class="card">
+    <h3>Командний рядок</h3>
+    <p>
+      <strong>Командний рядок</strong> — це текстовий інтерфейс для взаємодії з операційною
+      системою. Замість «клікати мишкою» ви вводите команду — короткий текстовий наказ —
+      і система його виконує, повертаючи результат у вигляді тексту.
+    </p>
+    <p>
+      Головна перевага командного рядка в роботі з мережею — <strong>точність і швидкість</strong>:
+      одна команда дає рівно ту інформацію, яка потрібна, і її легко повторити,
+      автоматизувати або зберегти в звіт.
+    </p>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd — Windows</em></div>
+<pre>C:\> echo Привіт, мережо!
+Привіт, мережо!
+
+C:\> cd C:\Users\student
+C:\Users\student&gt; dir
+ Volume in drive C has no label.
+ Directory of C:\Users\student</pre>
+    </div>
+    <div class="note">
+      <strong>Зверніть увагу:</strong> командний рядок Windows нечутливий до регістру —
+      <code>IPCONFIG</code> і <code>ipconfig</code> працюють однаково. У Linux/macOS
+      регістр має значення: <code>ls</code> і <code>LS</code> — різні речі.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Мережа, IP-адреса та DNS</h3>
+    <p>
+      <strong>Мережа</strong> — сукупність взаємопов'язаних пристроїв, які можуть обмінюватися
+      даними. Щоб комп'ютери «розуміли» один одного, кожному з них потрібна унікальна адреса.
+    </p>
+    <p>
+      <strong>IP-адреса</strong> — унікальна цифрова адреса, що присвоюється кожному пристрою
+      в мережі. У форматі IPv4 вона складається з чотирьох чисел від 0 до 255, розділених
+      крапками, наприклад <code>192.168.1.42</code>.
+    </p>
+    <p>
+      <strong>DNS</strong> (Domain Name System) — система доменних імен, яка перетворює
+      зрозумілі людині текстові адреси (наприклад, <code>google.com</code>) на зрозумілі
+      комп'ютеру IP-адреси.
+    </p>
+
+    <figure>
+      <svg viewBox="0 0 820 260" font-family="-apple-system, Helvetica, Arial, sans-serif" role="img"
+           aria-label="Схема локальної мережі з виходом до Інтернету">
+        <defs>
+          <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#0071e3"/>
+          </marker>
+        </defs>
+
+        <!-- ваш ПК -->
+        <rect x="30" y="92" width="150" height="88" rx="14" fill="#e8f2ff" stroke="#0071e3" stroke-width="1.6"/>
+        <text x="105" y="126" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">Ваш ПК</text>
+        <text x="105" y="150" text-anchor="middle" font-size="12.5" fill="#6e6e73">192.168.1.42</text>
+        <text x="105" y="168" text-anchor="middle" font-size="11" fill="#8e8e93">маска 255.255.255.0</text>
+
+        <!-- маршрутизатор -->
+        <rect x="245" y="92" width="150" height="88" rx="14" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+        <text x="320" y="126" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">Маршрутизатор</text>
+        <text x="320" y="150" text-anchor="middle" font-size="12.5" fill="#6e6e73">шлюз 192.168.1.1</text>
+
+        <!-- інтернет -->
+        <ellipse cx="490" cy="136" rx="88" ry="54" fill="#f0f7ff" stroke="#0071e3" stroke-dasharray="5 5" stroke-width="1.6"/>
+        <text x="490" y="133" text-anchor="middle" font-size="15" font-weight="600" fill="#0058b0">Інтернет</text>
+        <text x="490" y="153" text-anchor="middle" font-size="11.5" fill="#6e6e73">мережа мереж</text>
+
+        <!-- сервер -->
+        <rect x="655" y="92" width="140" height="88" rx="14" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+        <text x="725" y="126" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">Веб-сервер</text>
+        <text x="725" y="150" text-anchor="middle" font-size="12.5" fill="#6e6e73">142.250.75.14</text>
+
+        <!-- стрілки -->
+        <line x1="182" y1="136" x2="242" y2="136" stroke="#0071e3" stroke-width="2" marker-end="url(#ar1)"/>
+        <line x1="397" y1="136" x2="400" y2="136" stroke="#0071e3" stroke-width="2"/>
+        <line x1="397" y1="136" x2="450" y2="136" stroke="#0071e3" stroke-width="2" marker-end="url(#ar1)"/>
+        <line x1="580" y1="136" x2="652" y2="136" stroke="#0071e3" stroke-width="2" marker-end="url(#ar1)"/>
+
+        <text x="215" y="222" text-anchor="middle" font-size="12" fill="#6e6e73">локальна мережа</text>
+        <line x1="120" y1="205" x2="330" y2="205" stroke="#c8c8cc" stroke-width="1.2" stroke-dasharray="3 3"/>
+      </svg>
+      <figcaption>Мал. 1. Типова схема: комп'ютер → маршрутизатор (шлюз) → Інтернет → віддалений сервер</figcaption>
+    </figure>
+
+    <h4>Діапазони приватних адрес</h4>
+    <p>Ці адреси використовуються всередині локальних мереж і не маршрутизуються в Інтернеті напряму:</p>
+    <ul class="clean">
+      <li><code>10.0.0.0</code> – <code>10.255.255.255</code></li>
+      <li><code>172.16.0.0</code> – <code>172.31.255.255</code></li>
+      <li><code>192.168.0.0</code> – <code>192.168.255.255</code></li>
+    </ul>
+
+    <div class="note">
+      <strong>Цікавий факт:</strong> адреса <code>127.0.0.1</code> (localhost) — це «сам комп'ютер».
+      Команда <code>ping 127.0.0.1</code> перевіряє, чи справний мережевий стек операційної системи,
+      навіть якщо кабель вимкнено.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Як працює DNS — покроково</h3>
+
+    <figure>
+      <svg viewBox="0 0 700 380" font-family="-apple-system, Helvetica, Arial, sans-serif" role="img"
+           aria-label="Схема роботи DNS: запит імені та отримання IP-адреси">
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#0071e3"/>
+          </marker>
+          <marker id="ar2g" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#28c840"/>
+          </marker>
+        </defs>
+
+        <!-- браузер -->
+        <rect x="30" y="40" width="190" height="86" rx="14" fill="#e8f2ff" stroke="#0071e3" stroke-width="1.6"/>
+        <text x="125" y="76" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">Браузер</text>
+        <text x="125" y="99" text-anchor="middle" font-size="12" fill="#6e6e73">вводимо google.com</text>
+
+        <!-- DNS -->
+        <rect x="330" y="40" width="200" height="86" rx="14" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+        <text x="430" y="76" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">DNS-сервер</text>
+        <text x="430" y="99" text-anchor="middle" font-size="12" fill="#6e6e73">наприклад, 8.8.8.8</text>
+
+        <!-- запит -->
+        <line x1="225" y1="70" x2="325" y2="70" stroke="#0071e3" stroke-width="2" marker-end="url(#ar2)"/>
+        <text x="275" y="58" text-anchor="middle" font-size="12" fill="#0058b0">1. google.com?</text>
+
+        <!-- відповідь -->
+        <line x1="325" y1="100" x2="230" y2="100" stroke="#28c840" stroke-width="2" marker-end="url(#ar2g)"/>
+        <text x="277" y="120" text-anchor="middle" font-size="12" fill="#1a8a2c">2. 142.250.75.14</text>
+
+        <!-- веб-сервер -->
+        <rect x="30" y="255" width="200" height="86" rx="14" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+        <text x="130" y="291" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">Веб-сервер</text>
+        <text x="130" y="314" text-anchor="middle" font-size="12" fill="#6e6e73">142.250.75.14</text>
+
+        <!-- запит до сервера -->
+        <line x1="105" y1="132" x2="105" y2="250" stroke="#0071e3" stroke-width="2" marker-end="url(#ar2)"/>
+        <text x="117" y="196" font-size="12" fill="#0058b0">3. GET / HTTP/1.1</text>
+
+        <!-- відповідь -->
+        <line x1="185" y1="250" x2="185" y2="137" stroke="#28c840" stroke-width="2"
+              stroke-dasharray="5 4" marker-end="url(#ar2g)"/>
+        <text x="197" y="200" font-size="12" fill="#1a8a2c">4. HTML-сторінка</text>
+      </svg>
+      <figcaption>Мал. 2. DNS перетворює ім'я на IP-адресу, після чого браузер звертається вже безпосередньо до сервера</figcaption>
+    </figure>
+
+    <p>
+      Без DNS довелося б щоразу вводити числову адресу. Саме тому команда
+      <code>nslookup</code> є одним із найшвидших способів перевірити,
+      <em>чи правильно працює перетворення імен</em> у вашій мережі.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Порти: «двері» до сервісів</h3>
+    <p>
+      IP-адреса вказує на пристрій, а <strong>порт</strong> — на конкретну службу на цьому
+      пристрої. Порт записується через двокрапку: <code>142.250.75.14:443</code>.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Порт</th><th>Служба</th><th>Призначення</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>21</code></td><td>FTP</td><td>Передача файлів (без шифрування)</td></tr>
+          <tr><td><code>22</code></td><td>SSH / SFTP / SCP</td><td>Захищений віддалений доступ</td></tr>
+          <tr><td><code>23</code></td><td>Telnet</td><td>Віддалений доступ у відкритому тексті</td></tr>
+          <tr><td><code>53</code></td><td>DNS</td><td>Перетворення імен на IP-адреси</td></tr>
+          <tr><td><code>80</code></td><td>HTTP</td><td>Веб-сторінки без шифрування</td></tr>
+          <tr><td><code>443</code></td><td>HTTPS</td><td>Веб-сторінки із шифруванням TLS</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <strong>Практичний сенс:</strong> коли ви пишете <code>telnet www.example.com 80</code>,
+      ви «стукаєте» саме у 80-й порт. Якщо сервер відповідає — значить, веб-служба жива.
+    </div>
+  </div>
+
+  <!-- ============ ВІДКРИТТЯ КОМАНДНОГО РЯДКА ============ -->
+  <h2 class="section" id="open"><span class="num">02.</span> Відкриття командного рядка</h2>
+
+  <div class="card">
+    <h3>Windows</h3>
+    <ol class="clean">
+      <li>Натисніть кнопку <strong>«Пуск»</strong>.</li>
+      <li>Введіть у пошуку <code>cmd</code>.</li>
+      <li>Натисніть <strong>Enter</strong> (або клацніть «Командний рядок»).</li>
+    </ol>
+    <p>Для розширених прав: натисніть <code>Win + X</code> → «Windows Terminal (Admin)».</p>
+
+    <h3>Linux / macOS</h3>
+    <p>
+      Відкрийте <strong>Термінал</strong>: у macOS — <code>Command + Space</code> → «Terminal»;
+      у Linux — <code>Ctrl + Alt + T</code> або через меню застосунків.
+    </p>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>macOS / Linux</em></div>
+<pre>student@laptop ~ % whoami
+student
+student@laptop ~ % uname -a
+Darwin laptop 23.4.0 Darwin Kernel Version 23.4.0 arm64</pre>
+    </div>
+  </div>
+
+  <!-- ============ ПЕРЕВІРКА ПІДКЛЮЧЕННЯ ============ -->
+  <h2 class="section" id="ping"><span class="num">03.</span> Перевірка підключення до мережі</h2>
+
+  <!-- ping -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">ping</span>
+      <span class="cmd-tag">перевірка доступності вузла</span>
+    </div>
+    <p>
+      Надсилає невеликі пакети <strong>ICMP Echo Request</strong> і чекає на відповідь
+      <strong>Echo Reply</strong>. Це найпростіший спосіб дізнатися: «а чи живий той пристрій
+      і чи є взагалі зв'язок?»
+    </p>
+
+    <figure>
+      <svg viewBox="0 0 760 220" font-family="-apple-system, Helvetica, Arial, sans-serif" role="img"
+           aria-label="Схема обміну пакетами ping між клієнтом і сервером">
+        <defs>
+          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#0071e3"/>
+          </marker>
+          <marker id="ar3g" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#28c840"/>
+          </marker>
+        </defs>
+
+        <rect x="40" y="70" width="170" height="86" rx="14" fill="#e8f2ff" stroke="#0071e3" stroke-width="1.6"/>
+        <text x="125" y="106" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">Ваш ПК</text>
+        <text x="125" y="128" text-anchor="middle" font-size="12" fill="#6e6e73">192.168.1.42</text>
+
+        <rect x="550" y="70" width="170" height="86" rx="14" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+        <text x="635" y="106" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">8.8.8.8</text>
+        <text x="635" y="128" text-anchor="middle" font-size="12" fill="#6e6e73">Google DNS</text>
+
+        <line x1="215" y1="100" x2="545" y2="100" stroke="#0071e3" stroke-width="2" marker-end="url(#ar3)"/>
+        <text x="380" y="88" text-anchor="middle" font-size="12" fill="#0058b0">Echo Request (ICMP)</text>
+
+        <line x1="545" y1="130" x2="220" y2="130" stroke="#28c840" stroke-width="2" marker-end="url(#ar3g)"/>
+        <text x="380" y="152" text-anchor="middle" font-size="12" fill="#1a8a2c">Echo Reply (ICMP) · time = 18 ms</text>
+      </svg>
+      <figcaption>Мал. 3. Команда <code>ping</code>: запит і відповідь; час «time» — це час обертання пакета</figcaption>
+    </figure>
+
+    <h4>Синтаксис</h4>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>синтаксис</em></div>
+<pre>ping [опції] адреса
+
+Windows:      ping -n 4 8.8.8.8
+Linux/macOS:  ping -c 4 8.8.8.8</pre>
+    </div>
+
+    <h4>Приклад виконання</h4>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> ping 8.8.8.8
+
+Pinging 8.8.8.8 with 32 bytes of data:
+Reply from 8.8.8.8: bytes=32 time=18ms TTL=118
+Reply from 8.8.8.8: bytes=32 time=17ms TTL=118
+Reply from 8.8.8.8: bytes=32 time=19ms TTL=118
+Reply from 8.8.8.8: bytes=32 time=18ms TTL=118
+
+Ping statistics for 8.8.8.8:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 17ms, Maximum = 19ms, Average = 18ms</pre>
+    </div>
+
+    <h4>Як читати результат</h4>
+    <ul class="clean">
+      <li><code>time=18ms</code> — час обертання пакета. До 30 мс — чудово; 100–200 мс — помітні затримки; понад 500 мс — проблема.</li>
+      <li><code>TTL=118</code> — «час життя» пакета; за ним приблизно визначають кількість проміжних маршрутизаторів.</li>
+      <li><code>Lost = 0 (0% loss)</code> — відсоток втрачених пакетів. Ненульове значення — ознака нестабільного зв'язку.</li>
+    </ul>
+
+    <div class="warn">
+      <strong>Важливо:</strong> якщо <code>ping 8.8.8.8</code> проходить, а <code>ping google.com</code> — ні,
+      проблема майже напевно в <strong>DNS</strong>, а не в самому з'єднанні.
+    </div>
+  </article>
+
+  <!-- ipconfig -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">ipconfig</span>
+      <span class="cmd-tag">параметри мережевих адаптерів</span>
+    </div>
+    <p>
+      Показує інформацію про мережеві адаптери та їхні IP-адреси. У Linux/macOS
+      аналогами є <code>ifconfig</code> та сучасніша <code>ip addr</code>.
+    </p>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> ipconfig
+
+Windows IP Configuration
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . : home.lan
+   Link-local IPv6 Address . . . . . : fe80::1c2d:3e4f:5a6b:7c8d%12
+   IPv4 Address. . . . . . . . . . . : 192.168.1.42
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 192.168.1.1</pre>
+    </div>
+
+    <p>Розширена версія <code>ipconfig /all</code> додатково показує MAC-адресу, DHCP-сервер, DNS-сервери та час оренди адреси:</p>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> ipconfig /all
+
+   Physical Address. . . . . . . . . : A4-5E-60-1B-22-9F
+   DHCP Enabled. . . . . . . . . . . : Yes
+   IPv4 Address. . . . . . . . . . . : 192.168.1.42(Preferred)
+   Default Gateway . . . . . . . . . : 192.168.1.1
+   DNS Servers . . . . . . . . . . . : 192.168.1.1
+                                       8.8.8.8</pre>
+    </div>
+
+    <h4>Корисні ключі</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Команда</th><th>Що робить</th></tr></thead>
+        <tbody>
+          <tr><td><code>ipconfig /all</code></td><td>Повна інформація про всі адаптери</td></tr>
+          <tr><td><code>ipconfig /release</code></td><td>Відпустити поточну IP-адресу (DHCP)</td></tr>
+          <tr><td><code>ipconfig /renew</code></td><td>Запросити нову IP-адресу</td></tr>
+          <tr><td><code>ipconfig /flushdns</code></td><td>Очистити кеш DNS</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Linux/macOS:</strong> <code>ip addr show</code> або <code>ifconfig</code>.
+      Маршрут за замовчуванням (шлюз) — <code>ip route</code> або <code>netstat -rn</code>.
+    </div>
+  </article>
+
+  <!-- nslookup -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">nslookup</span>
+      <span class="cmd-tag">перевірка DNS</span>
+    </div>
+    <p>
+      Запитує DNS-сервер, яка IP-адреса відповідає доменному імені. Якщо ім'я не
+      перетворюється — ви побачите повідомлення про помилку, і це відразу вкаже
+      на проблему з DNS.
+    </p>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> nslookup google.com
+
+Server:  UnKnown
+Address:  192.168.1.1
+
+Non-authoritative answer:
+Name:    google.com
+Addresses:  2a00:1450:4010:c0e::64
+            142.250.75.14</pre>
+    </div>
+
+    <h4>Що тут важливо</h4>
+    <ul class="clean">
+      <li><strong>Server / Address</strong> — який DNS-сервер відповідав (зазвичай ваш маршрутизатор).</li>
+      <li><strong>Non-authoritative answer</strong> — відповідь узята з кешу, а не від «першоджерела»; це нормально.</li>
+      <li><strong>Addresses</strong> — отримані IP-адреси (може бути і IPv4, і IPv6).</li>
+    </ul>
+
+    <p>Перевірка конкретного типу запису:</p>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> nslookup -type=MX gmail.com
+gmail.com       MX preference = 5, mail exchanger = gmail-smtp-in.l.google.com
+
+C:\> nslookup 8.8.8.8
+Name:    dns.google
+Address:  8.8.8.8</pre>
+    </div>
+    <p>Останній приклад — <strong>зворотний запит</strong>: за IP-адресою отримуємо ім'я.</p>
+  </article>
+
+  <!-- ============ НАВІГАЦІЯ ============ -->
+  <h2 class="section" id="nav"><span class="num">04.</span> Навігація в мережевих ресурсах</h2>
+
+  <!-- telnet -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">telnet</span>
+      <span class="cmd-tag">підключення до віддалених серверів</span>
+    </div>
+    <p>
+      Дозволяє встановити з'єднання з віддаленим сервером за вказаним портом і
+      вручну «поговорити» з ним. Найчастіше використовується для діагностики:
+      чи відкритий порт, чи відповідає служба.
+    </p>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> telnet www.example.com 80
+
+GET / HTTP/1.1
+Host: www.example.com
+Connection: close
+
+HTTP/1.1 200 OK
+Date: Mon, 12 May 2025 10:15:42 GMT
+Content-Type: text/html; charset=UTF-8
+Content-Length: 1256
+Connection: close</pre>
+    </div>
+
+    <p>
+      Ми вручну надіслали HTTP-запит і отримали відповідь <code>200 OK</code> — це означає,
+      що веб-сервер працює і приймає з'єднання на 80-му порту.
+    </p>
+
+    <h4>Перевірка доступності інших портів</h4>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> telnet 192.168.1.100 22
+SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13
+
+C:\> telnet 192.168.1.100 3306
+Connecting To 192.168.1.100...Could not open connection
+to the host, on port 3306: Connect failed</pre>
+    </div>
+
+    <div class="warn">
+      <strong>Безпека:</strong> Telnet передає дані, включно з паролями, у відкритому
+      вигляді. Використовуйте його лише для діагностики в контрольованій мережі.
+      Для реальної роботи — <code>ssh</code>.<br>
+      У Windows Telnet часто вимкнений: «Панель керування» → «Програми» →
+      «Увімкнення або вимкнення компонентів Windows» → «Клієнт Telnet».
+    </div>
+  </article>
+
+  <!-- ftp -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">ftp</span>
+      <span class="cmd-tag">протокол передачі файлів</span>
+    </div>
+    <p>
+      Дозволяє підключитися до FTP-сервера, переглянути каталоги та завантажити
+      або вивантажити файли.
+    </p>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> ftp ftp.example.com
+Connected to ftp.example.com.
+220 Welcome to Example FTP service.
+User (ftp.example.com:(none)): anonymous
+331 Please specify the password.
+Password: ********
+230 Login successful.
+
+ftp> ls
+150 Here comes the directory listing.
+-rw-r--r--    1 0   0    10240 May 10 09:00 readme.txt
+-rw-r--r--    1 0   0   512000 May 10 09:00 manual.pdf
+226 Directory send OK.
+
+ftp> get readme.txt
+150 Opening BINARY mode data connection.
+226 Transfer complete.
+
+ftp> bye
+221 Goodbye.</pre>
+    </div>
+
+    <h4>Основні команди всередині сеансу ftp</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Команда</th><th>Дія</th></tr></thead>
+        <tbody>
+          <tr><td><code>ls</code> / <code>dir</code></td><td>Переглянути вміст каталогу</td></tr>
+          <tr><td><code>cd каталог</code></td><td>Перейти в каталог</td></tr>
+          <tr><td><code>get файл</code></td><td>Завантажити файл на локальний комп'ютер</td></tr>
+          <tr><td><code>put файл</code></td><td>Вивантажити файл на сервер</td></tr>
+          <tr><td><code>binary</code></td><td>Двійковий режим (для архівів, зображень)</td></tr>
+          <tr><td><code>bye</code></td><td>Завершити сеанс</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Сучасна альтернатива:</strong> звичайний FTP не шифрує ані пароль, ані дані.
+      Замість нього використовують <code>sftp</code> (через SSH) або <code>scp</code>.
+    </div>
+  </article>
+
+  <!-- ============ ВЗАЄМОДІЯ ============ -->
+  <h2 class="section" id="remote"><span class="num">05.</span> Взаємодія з іншими пристроями</h2>
+
+  <!-- ssh -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">ssh</span>
+      <span class="cmd-tag">безпечний віддалений доступ</span>
+    </div>
+    <p>
+      Протокол для захищеного віддаленого доступу. Усе, що передається каналом,
+      шифрується, тому пароль і дані не видно у мережевому трафіку.
+    </p>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>термінал</em></div>
+<pre>student@laptop:~$ ssh user@192.168.1.100
+The authenticity of host '192.168.1.100' can't be established.
+ED25519 key fingerprint is SHA256:9x3kLm2QpR7...
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+user@192.168.1.100's password:
+Welcome to Ubuntu 24.04 LTS
+Last login: Mon May 12 10:15:42 2025 from 192.168.1.42
+user@server:~$</pre>
+    </div>
+
+    <h4>Типові варіанти використання</h4>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>термінал</em></div>
+<pre># інший порт
+ssh -p 2222 user@server.com
+
+# створити ключ (без пароля щоразу)
+ssh-keygen -t ed25519
+
+# скопіювати публічний ключ на сервер
+ssh-copy-id user@192.168.1.100
+
+# виконати одну команду віддалено
+ssh user@192.168.1.100 "uptime"</pre>
+    </div>
+  </article>
+
+  <!-- scp -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">scp</span>
+      <span class="cmd-tag">копіювання файлів через SSH</span>
+    </div>
+    <p>
+      Копіює файли між локальною машиною та віддаленим сервером, використовуючи
+      той самий захищений канал, що й <code>ssh</code>.
+    </p>
+
+    <h4>Синтаксис</h4>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>синтаксис</em></div>
+<pre>scp [опції] джерело призначення
+
+scp локальний_файл користувач@сервер:віддалений_каталог
+scp користувач@сервер:віддалений_файл локальний_каталог</pre>
+    </div>
+
+    <h4>Приклади</h4>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>термінал</em></div>
+<pre># файл на сервер
+student@laptop:~$ scp index.html user@192.168.1.100:/var/www/html
+user@192.168.1.100's password:
+index.html                                 100% 4096     4.0KB/s   00:01
+
+# цілий каталог (рекурсивно)
+scp -r ./site user@192.168.1.100:/var/www/
+
+# файл із сервера до себе
+scp user@192.168.1.100:/var/log/syslog ./logs/
+
+# через нестандартний порт
+scp -P 2222 backup.tar.gz user@server.com:/home/user/</pre>
+    </div>
+
+    <div class="note">
+      <strong>Зверніть увагу:</strong> у <code>ssh</code> порт задається як <code>-p</code>
+      (мала літера), а у <code>scp</code> — як <code>-P</code> (велика). Це часта помилка.
+    </div>
+  </article>
+
+  <!-- ============ ДОДАТКОВІ ============ -->
+  <h2 class="section" id="extra"><span class="num">06.</span> Додаткові команди</h2>
+
+  <!-- tracert -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">tracert</span>
+      <span class="cmd-tag">маршрут до віддаленого хоста</span>
+    </div>
+    <p>
+      Показує послідовність маршрутизаторів, через які проходять пакети до вказаного
+      вузла. У Linux/macOS команда називається <code>traceroute</code>.
+    </p>
+
+    <figure>
+      <svg viewBox="0 0 900 230" font-family="-apple-system, Helvetica, Arial, sans-serif" role="img"
+           aria-label="Схема маршруту tracert через кілька маршрутизаторів">
+        <defs>
+          <marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#0071e3"/>
+          </marker>
+        </defs>
+
+        <!-- лінії -->
+        <line x1="120" y1="105" x2="162" y2="105" stroke="#0071e3" stroke-width="2" marker-end="url(#ar4)"/>
+        <line x1="274" y1="105" x2="316" y2="105" stroke="#0071e3" stroke-width="2" marker-end="url(#ar4)"/>
+        <line x1="428" y1="105" x2="470" y2="105" stroke="#0071e3" stroke-width="2" marker-end="url(#ar4)"/>
+        <line x1="582" y1="105" x2="624" y2="105" stroke="#0071e3" stroke-width="2" marker-end="url(#ar4)"/>
+        <line x1="736" y1="105" x2="778" y2="105" stroke="#0071e3" stroke-width="2" marker-end="url(#ar4)"/>
+
+        <!-- вузли -->
+        <g>
+          <rect x="10" y="70" width="110" height="70" rx="12" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
+          <text x="65" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">R1</text>
+          <text x="65" y="122" text-anchor="middle" font-size="11" fill="#6e6e73">шлюз</text>
+          <text x="65" y="60" text-anchor="middle" font-size="11" fill="#8e8e93">hop 1</text>
+          <text x="65" y="164" text-anchor="middle" font-size="11" fill="#6e6e73">192.168.1.1</text>
+        </g>
+
+        <g>
+          <rect x="164" y="70" width="110" height="70" rx="12" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
+          <text x="219" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">R2</text>
+          <text x="219" y="122" text-anchor="middle" font-size="11" fill="#6e6e73">провайдер</text>
+          <text x="219" y="60" text-anchor="middle" font-size="11" fill="#8e8e93">hop 2</text>
+          <text x="219" y="164" text-anchor="middle" font-size="11" fill="#6e6e73">10.0.0.1</text>
+        </g>
+
+        <g>
+          <rect x="318" y="70" width="110" height="70" rx="12" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
+          <text x="373" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">R3</text>
+          <text x="373" y="122" text-anchor="middle" font-size="11" fill="#6e6e73">магістраль</text>
+          <text x="373" y="60" text-anchor="middle" font-size="11" fill="#8e8e93">hop 3</text>
+          <text x="373" y="164" text-anchor="middle" font-size="11" fill="#6e6e73">172.16.4.9</text>
+        </g>
+
+        <g>
+          <rect x="472" y="70" width="110" height="70" rx="12" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
+          <text x="527" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">R4</text>
+          <text x="527" y="122" text-anchor="middle" font-size="11" fill="#6e6e73">обмін</text>
+          <text x="527" y="60" text-anchor="middle" font-size="11" fill="#8e8e93">hop 4</text>
+          <text x="527" y="164" text-anchor="middle" font-size="11" fill="#6e6e73">195.5.12.1</text>
+        </g>
+
+        <g>
+          <rect x="626" y="70" width="110" height="70" rx="12" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.5"/>
+          <text x="681" y="100" text-anchor="middle" font-size="15" font-weight="600" fill="#1d1d1f">R5</text>
+          <text x="681" y="122" text-anchor="middle" font-size="11" fill="#6e6e73">дата-центр</text>
+          <text x="681" y="60" text-anchor="middle" font-size="11" fill="#8e8e93">hop 5</text>
+          <text x="681" y="164" text-anchor="middle" font-size="11" fill="#6e6e73">72.14.203.1</text>
+        </g>
+
+        <g>
+          <rect x="780" y="70" width="110" height="70" rx="12" fill="#e8f2ff" stroke="#0071e3" stroke-width="1.8"/>
+          <text x="835" y="100" text-anchor="middle" font-size="14" font-weight="700" fill="#0058b0">Мета</text>
+          <text x="835" y="122" text-anchor="middle" font-size="11" fill="#6e6e73">google.com</text>
+          <text x="835" y="60" text-anchor="middle" font-size="11" fill="#8e8e93">hop 6</text>
+          <text x="835" y="164" text-anchor="middle" font-size="11" fill="#6e6e73">142.250.75.14</text>
+        </g>
+      </svg>
+      <figcaption>Мал. 4. <code>tracert</code> показує кожен «стрибок» (hop) між вами та кінцевим сервером</figcaption>
+    </figure>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> tracert google.com
+
+Tracing route to google.com [142.250.75.14]
+over a maximum of 30 hops:
+
+  1     2 ms     1 ms     1 ms  192.168.1.1
+  2    11 ms    10 ms    12 ms  10.0.0.1
+  3    14 ms    13 ms    15 ms  172.16.4.9
+  4    21 ms    22 ms    20 ms  195.5.12.1
+  5    24 ms    23 ms    24 ms  72.14.203.1
+  6    26 ms    25 ms    27 ms  142.250.75.14
+
+Trace complete.</pre>
+    </div>
+
+    <p>У Linux/macOS:</p>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>термінал</em></div>
+<pre>student@laptop:~$ traceroute www.google.com
+traceroute to www.google.com (142.250.75.14), 64 hops max
+ 1  192.168.1.1     1.842 ms  1.512 ms  1.470 ms
+ 2  10.0.0.1       11.203 ms 10.874 ms 12.011 ms
+ 3  172.16.4.9     14.556 ms 13.902 ms 15.114 ms</pre>
+    </div>
+
+    <p>
+      Якщо на певному «стрибку» час різко зростає або з'являються зірочки
+      <code>* * *</code> — це місце, де виникає затримка або блокування ICMP.
+    </p>
+  </article>
+
+  <!-- netstat -->
+  <article class="card cmd">
+    <div class="cmd-head">
+      <span class="cmd-name">netstat</span>
+      <span class="cmd-tag">статистика з'єднань</span>
+    </div>
+    <p>
+      Відображає активні мережеві з'єднання, відкриті порти та статистику.
+      Дуже зручно, коли треба зрозуміти «а хто взагалі зараз сидить у мережі».
+    </p>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> netstat -an
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING
+  TCP    192.168.1.42:52114     142.250.75.14:443      ESTABLISHED
+  TCP    192.168.1.42:52120     151.101.1.140:443      ESTABLISHED
+  TCP    192.168.1.42:52131     52.98.44.10:993        ESTABLISHED
+  UDP    192.168.1.42:5353      *:*</pre>
+    </div>
+
+    <h4>Як читати стани</h4>
+    <ul class="clean">
+      <li><code>LISTENING</code> — порт відкритий і чекає на підключення.</li>
+      <li><code>ESTABLISHED</code> — з'єднання встановлене й активне.</li>
+      <li><code>TIME_WAIT</code> — з'єднання щойно закрилося, порт ще «остигає».</li>
+      <li><code>CLOSE_WAIT</code> — віддалена сторона закрила з'єднання, а локальна ще ні.</li>
+    </ul>
+
+    <h4>Корисні варіанти</h4>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> netstat -ano
+  TCP    192.168.1.42:52114     142.250.75.14:443      ESTABLISHED     8744
+
+C:\> netstat -rn
+IPv4 Route Table
+          0.0.0.0          0.0.0.0      192.168.1.1     25</pre>
+    </div>
+
+    <div class="note">
+      <strong>Linux/macOS:</strong> сучасний аналог — <code>ss -tulpn</code>
+      (показує всі слухаючі TCP/UDP-порти з назвами процесів).
+    </div>
+  </article>
+
+  <!-- ============ ВІДПОВІДНІСТЬ КОМАНД ============ -->
+  <div class="card">
+    <h3>Відповідність команд: Windows ↔ Linux/macOS</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Завдання</th><th>Windows</th><th>Linux / macOS</th></tr></thead>
+        <tbody>
+          <tr><td>Перевірити доступність</td><td><code>ping -n 4 host</code></td><td><code>ping -c 4 host</code></td></tr>
+          <tr><td>Показати IP-адреси</td><td><code>ipconfig</code></td><td><code>ip addr</code> / <code>ifconfig</code></td></tr>
+          <tr><td>Показати шлюз</td><td><code>ipconfig</code></td><td><code>ip route</code></td></tr>
+          <tr><td>Перевірити DNS</td><td><code>nslookup</code></td><td><code>dig</code> / <code>nslookup</code></td></tr>
+          <tr><td>Маршрут до хоста</td><td><code>tracert</code></td><td><code>traceroute</code></td></tr>
+          <tr><td>Активні з'єднання</td><td><code>netstat -an</code></td><td><code>ss -tulpn</code></td></tr>
+          <tr><td>Очистити екран</td><td><code>cls</code></td><td><code>clear</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ============ ЗАВДАННЯ ============ -->
+  <h2 class="section" id="tasks"><span class="num">07.</span> Завдання для самостійної роботи</h2>
+
+  <div class="card">
+    <ol class="clean">
+      <li>Перевірте підключення до свого маршрутизатора (<code>ping</code> на адресу шлюзу).</li>
+      <li>Знайдіть IP-адресу свого комп'ютера та шлюзу (<code>ipconfig</code> / <code>ip addr</code>).</li>
+      <li>Підключіться до веб-сервера за допомогою <code>telnet</code> (якщо дозволено).</li>
+      <li>Спробуйте скопіювати файл на віддалений сервер за допомогою <code>scp</code> (якщо є доступ).</li>
+      <li>Визначте маршрут до популярного веб-сайту (<code>tracert</code> / <code>traceroute</code>).</li>
+    </ol>
+    <div class="note">
+      <strong>Результат оформіть як звіт:</strong> команда → отриманий вивід → короткий
+      висновок (що саме вдалося з'ясувати про стан мережі).
+    </div>
+  </div>
+
+  <!-- ============ ПОКРОКОВА ІНСТРУКЦІЯ ============ -->
+  <h2 class="section" id="steps"><span class="num">08.</span> Покрокова інструкція</h2>
+
+  <div class="step">
+    <div class="n">1</div>
+    <div>
+      <h4>Перевірка підключення</h4>
+      <p>
+        Відкрийте веб-браузер і спробуйте завантажити будь-яку сторінку. Потім відкрийте
+        термінал і введіть <code>ping 8.8.8.8</code>. Якщо все працює, ви побачите
+        відповіді від серверів Google DNS.
+      </p>
+      <div class="term">
+        <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> ping 8.8.8.8
+Reply from 8.8.8.8: bytes=32 time=18ms TTL=118</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">2</div>
+    <div>
+      <h4>Знаходження IP-адрес</h4>
+      <p><strong>Windows:</strong> відкрийте командний рядок і введіть <code>ipconfig</code>.
+         Знайдіть значення у рядках «IPv4 Address» (ваша IP) та «Default Gateway» (шлюз).</p>
+      <p><strong>Linux/macOS:</strong> введіть <code>ifconfig</code> або <code>ip addr</code>.
+         Шукайте інтерфейс (наприклад, <code>en0</code> або <code>eth0</code>) і значення
+         у рядках «inet» (ваша IP).</p>
+      <div class="term">
+        <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> ipconfig
+   IPv4 Address. . . . . . . . . . . : 192.168.1.42
+   Default Gateway . . . . . . . . . : 192.168.1.1</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">3</div>
+    <div>
+      <h4>Підключення до веб-сервера за допомогою telnet</h4>
+      <p>
+        Telnet часто заблокований з міркувань безпеки. Спробуйте підключитися до відомого
+        telnet-сервера, а потім — до IP-адреси та порту вашого веб-сервера.
+      </p>
+      <div class="term">
+        <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> telnet toefl.ets.org 70
+C:\> telnet 192.168.1.100 80</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">4</div>
+    <div>
+      <h4>Копіювання файлу за допомогою scp</h4>
+      <p>
+        Переконайтеся, що на віддаленому сервері налаштовано <code>ssh</code> та <code>scp</code>.
+        Виконайте команду й введіть пароль, коли буде запропоновано.
+      </p>
+      <div class="term">
+        <div class="term-bar"><i></i><i></i><i></i><em>термінал</em></div>
+<pre>student@laptop:~$ scp index.html user@192.168.1.100:/var/www/html
+user@192.168.1.100's password:
+index.html                                 100% 4096     4.0KB/s   00:01</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="n">5</div>
+    <div>
+      <h4>Визначення маршруту</h4>
+      <p>
+        Windows: <code>tracert www.google.com</code> · Linux/macOS:
+        <code>traceroute www.google.com</code>. Це покаже послідовність
+        маршрутизаторів, через які проходять пакети до вказаного веб-сайту.
+      </p>
+      <div class="term">
+        <div class="term-bar"><i></i><i></i><i></i><em>cmd</em></div>
+<pre>C:\> tracert www.google.com
+  1     2 ms     1 ms     1 ms  192.168.1.1
+  2    11 ms    10 ms    12 ms  10.0.0.1
+  3    14 ms    13 ms    15 ms  172.16.4.9
+Trace complete.</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ПАМ'ЯТКА ============ -->
+  <div class="card">
+    <h3>Пам'ятка: що робити, коли «нічого не працює»</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Симптом</th><th>Імовірна причина</th><th>Що перевірити</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Браузер не відкриває сторінки</td>
+            <td>Немає зв'язку з мережею</td>
+            <td><code>ping 8.8.8.8</code>, кабель / Wi-Fi</td>
+          </tr>
+          <tr>
+            <td><code>ping 8.8.8.8</code> працює, а сайти — ні</td>
+            <td>Проблема з DNS</td>
+            <td><code>nslookup google.com</code>, <code>ipconfig /flushdns</code></td>
+          </tr>
+          <tr>
+            <td>Немає IP-адреси або вона починається з <code>169.254.</code></td>
+            <td>Не отримано адресу від DHCP</td>
+            <td><code>ipconfig /renew</code>, кабель, роутер</td>
+          </tr>
+          <tr>
+            <td>Високий час відповіді, втрата пакетів</td>
+            <td>Перевантаження каналу / слабкий сигнал</td>
+            <td><code>ping -n 20</code>, <code>tracert</code></td>
+          </tr>
+          <tr>
+            <td><code>telnet</code> не підключається до порту</td>
+            <td>Порт закритий або служба не працює</td>
+            <td><code>netstat -an</code>, брандмауер сервера</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="warn">
+    <strong>Правила безпечної роботи:</strong> виконуйте команди лише у власній
+    або дозволеній мережі; не передавайте паролі через <code>telnet</code> та
+    звичайний <code>ftp</code>; для віддаленого доступу використовуйте <code>ssh</code>
+    і ключі замість паролів.
+  </div>
+
+  <footer>
+    Опорний конспект · Практичне заняття «Використання команд для роботи з мережею»
+  </footer>
+
+</div>
+</body>
+</html>
