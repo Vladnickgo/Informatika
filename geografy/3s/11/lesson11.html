@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Політико-економічна оцінка державного кордону України · Реформування АТУ</title>
+<style>
+  /* ============ APPLE-INSPIRED DESIGN SYSTEM ============ */
+  :root{
+    --bg: #f5f5f7;
+    --card: #ffffff;
+    --ink: #1d1d1f;
+    --ink-2: #424245;
+    --muted: #6e6e73;
+    --line: #e5e5ea;
+    --line-2: #d2d2d7;
+    --blue: #0071e3;
+    --blue-dark: #0058b0;
+    --blue-soft: #e8f2fd;
+    --green: #34c759;
+    --green-soft: #e8f8ee;
+    --orange: #ff9f0a;
+    --orange-soft: #fff4e0;
+    --red: #ff3b30;
+    --red-soft: #feecea;
+    --purple: #af52de;
+    --purple-soft: #f5eafb;
+    --radius: 20px;
+    --radius-sm: 14px;
+    --shadow: 0 2px 10px rgba(0,0,0,.045), 0 12px 36px rgba(0,0,0,.055);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.05), 0 4px 14px rgba(0,0,0,.04);
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+            "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:17px;
+    letter-spacing:-0.011em;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  ::selection{background:rgba(0,113,227,.18)}
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    background:#000;
+    color:#f5f5f7;
+    overflow:hidden;
+    padding:88px 24px 96px;
+    text-align:center;
+    isolation:isolate;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:-40%;
+    background:
+      radial-gradient(ellipse 42% 38% at 22% 24%, rgba(0,113,227,.42), transparent 62%),
+      radial-gradient(ellipse 40% 36% at 80% 26%, rgba(255,159,10,.22), transparent 62%),
+      radial-gradient(ellipse 46% 42% at 56% 96%, rgba(52,199,89,.18), transparent 66%),
+      radial-gradient(ellipse 34% 30% at 92% 84%, rgba(175,82,222,.22), transparent 62%);
+    filter:blur(24px);
+    z-index:-2;
+    animation:aurora 22s ease-in-out infinite alternate;
+  }
+  @keyframes aurora{
+    0%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}
+    100%{transform:translate3d(2%,-2%,0) scale(1.03)}
+  }
+  .hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+    background-size:52px 52px;
+    mask-image:radial-gradient(ellipse 74% 66% at 50% 46%, #000 22%, transparent 76%);
+    z-index:-1;
+  }
+  .hero-inner{max-width:980px;margin:0 auto;position:relative}
+  .hero .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:.76rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+    color:#a1a1a6;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border-radius:999px;
+    padding:7px 16px;
+    margin-bottom:26px;
+  }
+  .hero .eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 0 4px rgba(52,199,89,.18);
+  }
+  .hero h1{
+    font-size:clamp(2rem, 5.2vw, 3.4rem);
+    line-height:1.07;
+    letter-spacing:-0.03em;
+    font-weight:700;
+    margin:0 0 20px;
+    background:linear-gradient(180deg,#ffffff 32%,#a8b8cc 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .hero p.lead{
+    max-width:70ch;margin:0 auto;
+    color:#c7c7cc;
+    font-size:clamp(1rem,2vw,1.15rem);
+    line-height:1.6;
+    font-weight:400;
+  }
+  .hero .meta-row{
+    display:flex;flex-wrap:wrap;gap:10px 12px;justify-content:center;
+    margin-top:36px;
+  }
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.8rem;font-weight:500;
+    color:#e5e5ea;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:999px;
+    padding:8px 15px;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+  }
+  .pill svg{width:15px;height:15px;flex:0 0 auto;opacity:.85}
+
+  /* ============ LAYOUT ============ */
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px 100px}
+  .sec{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:40px 44px 44px;
+    margin-top:26px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(0,0,0,.035);
+    scroll-margin-top:24px;
+  }
+  .sec:first-of-type{margin-top:-44px;position:relative;z-index:2}
+
+  .sec-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:26px}
+  .sec-head .badge{
+    flex:0 0 auto;
+    width:46px;height:46px;border-radius:13px;
+    display:grid;place-items:center;
+    background:linear-gradient(145deg,var(--blue),#3b9bff);
+    color:#fff;font-size:1.05rem;font-weight:700;
+    box-shadow:0 6px 16px rgba(0,113,227,.28);
+    letter-spacing:-0.02em;
+  }
+  .sec-head .badge.green{background:linear-gradient(145deg,#34c759,#62d97f);box-shadow:0 6px 16px rgba(52,199,89,.28)}
+  .sec-head .badge.orange{background:linear-gradient(145deg,#ff9f0a,#ffbd52);box-shadow:0 6px 16px rgba(255,159,10,.3)}
+  .sec-head .badge.purple{background:linear-gradient(145deg,#af52de,#c97ee9);box-shadow:0 6px 16px rgba(175,82,222,.28)}
+  .sec-head .badge.red{background:linear-gradient(145deg,#ff3b30,#ff6a5e);box-shadow:0 6px 16px rgba(255,59,48,.28)}
+  .sec-head .badge.dark{background:linear-gradient(145deg,#1d1d1f,#48484c);box-shadow:0 6px 16px rgba(0,0,0,.28)}
+
+  .sec-head h2{
+    font-size:clamp(1.28rem,2.5vw,1.62rem);
+    line-height:1.22;letter-spacing:-0.022em;
+    font-weight:700;margin:0 0 6px;color:var(--ink);
+  }
+  .sec-head .sub{font-size:.94rem;color:var(--muted);margin:0;font-weight:400;line-height:1.5}
+
+  h3{
+    font-size:1.16rem;letter-spacing:-0.016em;font-weight:650;
+    margin:34px 0 14px;color:var(--ink);
+    display:flex;align-items:center;gap:10px;
+  }
+  h3::before{
+    content:"";width:5px;height:20px;border-radius:3px;
+    background:linear-gradient(180deg,var(--blue),#63b1ff);
+    flex:0 0 auto;
+  }
+  h4{font-size:1rem;font-weight:600;letter-spacing:-0.01em;margin:22px 0 10px;color:var(--ink)}
+  p{margin:0 0 15px;color:var(--ink-2)}
+  .sec > p:last-child{margin-bottom:0}
+
+  strong{font-weight:650;color:var(--ink)}
+  em{font-style:normal;color:var(--blue);font-weight:500}
+
+  /* ============ KEY FACT ============ */
+  .keyfact{
+    display:flex;gap:16px;
+    background:linear-gradient(135deg,#f8fbff,#eef6fe);
+    border:1px solid #d6e8fb;
+    border-radius:var(--radius-sm);
+    padding:20px 22px;
+    margin:22px 0;
+  }
+  .keyfact .kf-ico{
+    flex:0 0 auto;width:40px;height:40px;border-radius:11px;
+    background:#fff;display:grid;place-items:center;
+    box-shadow:0 2px 8px rgba(0,113,227,.14);
+  }
+  .keyfact .kf-ico svg{width:22px;height:22px}
+  .keyfact .kf-body{flex:1;min-width:0}
+  .keyfact .kf-title{
+    font-size:.73rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--blue);margin-bottom:6px;
+  }
+  .keyfact p{margin:0;font-size:.97rem;color:var(--ink-2);line-height:1.58}
+
+  /* ============ CALLOUTS ============ */
+  .callout{
+    border-radius:var(--radius-sm);
+    padding:20px 22px;
+    margin:22px 0;
+    border:1px solid;
+    font-size:.96rem;
+    line-height:1.6;
+  }
+  .callout .label{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:.72rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    margin-bottom:9px;
+  }
+  .callout .label svg{width:15px;height:15px}
+  .callout p:last-child{margin-bottom:0}
+  .callout.warn{background:var(--orange-soft);border-color:#ffe0ad}
+  .callout.warn .label{color:#a86900}
+  .callout.warn p{color:#6b4500}
+  .callout.danger{background:var(--red-soft);border-color:#ffd0cc}
+  .callout.danger .label{color:#b3261e}
+  .callout.danger p{color:#7d1a14}
+  .callout.ok{background:var(--green-soft);border-color:#c9eed7}
+  .callout.ok .label{color:#1d7a3a}
+  .callout.ok p{color:#185f2e}
+  .callout.info{background:var(--blue-soft);border-color:#cfe6fb}
+  .callout.info .label{color:var(--blue-dark)}
+  .callout.info p{color:#1c3d63}
+
+  /* ============ GRIDS / CARDS ============ */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius-sm);
+    padding:22px 22px 20px;
+    transition:transform .25s cubic-bezier(.25,.46,.45,.94),
+               box-shadow .25s cubic-bezier(.25,.46,.45,.94),
+               border-color .25s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 34px rgba(0,0,0,.09);
+    border-color:var(--line-2);
+  }
+  .card .ico{
+    width:44px;height:44px;border-radius:12px;
+    display:grid;place-items:center;margin-bottom:14px;
+    background:var(--blue-soft);
+  }
+  .card .ico svg{width:23px;height:23px}
+  .card .ico.g{background:var(--green-soft)}
+  .card .ico.o{background:var(--orange-soft)}
+  .card .ico.r{background:var(--red-soft)}
+  .card .ico.p{background:var(--purple-soft)}
+  .card h4{margin:0 0 8px;font-size:1.01rem;line-height:1.35}
+  .card p{margin:0;font-size:.9rem;color:var(--muted);line-height:1.6}
+  .card .tag{
+    display:inline-block;font-size:.7rem;font-weight:650;
+    letter-spacing:.06em;text-transform:uppercase;
+    padding:4px 10px;border-radius:999px;margin-bottom:10px;
+    background:var(--blue-soft);color:var(--blue-dark);
+  }
+  .card .tag.g{background:var(--green-soft);color:#1d7a3a}
+  .card .tag.o{background:var(--orange-soft);color:#a86900}
+  .card .tag.r{background:var(--red-soft);color:#b3261e}
+  .card .tag.p{background:var(--purple-soft);color:#7b2f9e}
+
+  /* ============ FIGURE / DIAGRAM ============ */
+  figure.diagram{
+    margin:26px 0 8px;
+    background:linear-gradient(180deg,#fafbfd,#f1f4f9);
+    border:1px solid var(--line);
+    border-radius:var(--radius-sm);
+    padding:24px 22px 14px;
+    overflow:hidden;
+  }
+  figure.diagram svg{width:100%;height:auto;display:block}
+  figure.diagram figcaption{
+    text-align:center;font-size:.82rem;color:var(--muted);
+    margin-top:14px;line-height:1.5;
+  }
+  figure.diagram figcaption b{color:var(--ink-2);font-weight:600}
+
+  /* ============ TABLE ============ */
+  .table-shell{
+    margin:24px 0 10px;
+    border:1px solid var(--line);
+    border-radius:var(--radius-sm);
+    overflow:hidden;
+    background:#fff;
+  }
+  .table-scroll{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:.91rem}
+  thead th{
+    background:#f7f7f9;
+    color:var(--ink);
+    text-align:left;font-weight:650;
+    font-size:.79rem;letter-spacing:.05em;text-transform:uppercase;
+    padding:14px 18px;
+    border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  tbody td{
+    padding:14px 18px;
+    border-top:1px solid var(--line);
+    color:var(--ink-2);
+    vertical-align:top;
+    line-height:1.55;
+  }
+  tbody tr:first-child td{border-top:none}
+  tbody tr:nth-child(even) td{background:#fbfbfd}
+  tbody tr:hover td{background:#f3f8ff}
+  td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+  td .num{font-variant-numeric:tabular-nums;font-weight:600;color:var(--blue-dark)}
+  .table-note{
+    font-size:.8rem;color:var(--muted);
+    padding:12px 18px;background:#f7f7f9;
+    border-top:1px solid var(--line);line-height:1.55;
+  }
+
+  /* ============ BORDER METER ============ */
+  .meters{margin:8px 0 4px}
+  .meter-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .meter-row .m-label{
+    flex:0 0 130px;font-size:.86rem;font-weight:600;color:var(--ink-2);
+    display:flex;align-items:center;gap:8px;
+  }
+  .meter-row .m-label .flag{
+    width:22px;height:15px;border-radius:3px;flex:0 0 auto;
+    border:1px solid rgba(0,0,0,.1);overflow:hidden;
+  }
+  .meter-track{
+    flex:1;height:12px;border-radius:999px;
+    background:#ececf0;overflow:hidden;position:relative;
+  }
+  .meter-fill{
+    height:100%;border-radius:999px;
+    background:linear-gradient(90deg,#0071e3,#3b9bff);
+    transition:width .8s cubic-bezier(.25,.46,.45,.94);
+    box-shadow:inset 0 -1px 0 rgba(0,0,0,.08);
+  }
+  .meter-fill.r{background:linear-gradient(90deg,#ff3b30,#ff7a6f)}
+  .meter-fill.o{background:linear-gradient(90deg,#ff9f0a,#ffc24d)}
+  .meter-fill.g{background:linear-gradient(90deg,#34c759,#6fe08c)}
+  .meter-fill.p{background:linear-gradient(90deg,#af52de,#cc85ea)}
+  .meter-row .m-val{
+    flex:0 0 96px;text-align:right;
+    font-size:.85rem;font-weight:650;color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .meter-row .m-val small{font-weight:500;color:var(--muted);font-size:.78em}
+
+  /* ============ MAP CARDS ============ */
+  .mapcard{
+    border:1px solid var(--line);
+    border-radius:var(--radius-sm);
+    overflow:hidden;
+    background:#fff;
+    display:flex;flex-direction:column;
+  }
+  .mapcard .map-visual{position:relative;background:#eef3f8}
+  .mapcard .map-visual svg{display:block;width:100%;height:auto}
+  .mapcard .body{padding:20px 22px 22px;flex:1}
+  .mapcard h4{margin:0 0 10px;font-size:1.02rem;line-height:1.35}
+  .mapcard dl{margin:0;font-size:.89rem}
+  .mapcard dt{
+    font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--blue);margin-top:12px;
+  }
+  .mapcard dt:first-child{margin-top:0}
+  .mapcard dd{margin:3px 0 0;color:var(--muted);line-height:1.58}
+
+  /* ============ TIMELINE ============ */
+  .timeline{position:relative;margin:26px 0 6px;padding-left:34px}
+  .timeline::before{
+    content:"";position:absolute;left:11px;top:6px;bottom:6px;
+    width:3px;border-radius:3px;
+    background:linear-gradient(180deg,var(--blue),#af52de);
+  }
+  .tl-item{position:relative;margin-bottom:22px}
+  .tl-item:last-child{margin-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;left:-29px;top:4px;
+    width:13px;height:13px;border-radius:50%;
+    background:#fff;border:3px solid var(--blue);
+    box-shadow:0 0 0 4px rgba(0,113,227,.1);
+  }
+  .tl-item:nth-child(2)::before{border-color:#34c759;box-shadow:0 0 0 4px rgba(52,199,89,.1)}
+  .tl-item:nth-child(3)::before{border-color:#ff9f0a;box-shadow:0 0 0 4px rgba(255,159,10,.12)}
+  .tl-item:nth-child(4)::before{border-color:#af52de;box-shadow:0 0 0 4px rgba(175,82,222,.12)}
+  .tl-item .tl-date{
+    font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--blue);margin-bottom:4px;
+  }
+  .tl-item h4{margin:0 0 5px;font-size:.98rem}
+  .tl-item p{margin:0;font-size:.9rem;color:var(--muted);line-height:1.6}
+
+  /* ============ QUESTIONS ============ */
+  .questions{counter-reset:q;list-style:none;padding:0;margin:0}
+  .questions li{
+    counter-increment:q;
+    position:relative;
+    padding:20px 22px 20px 70px;
+    border:1px solid var(--line);
+    border-radius:var(--radius-sm);
+    margin-bottom:14px;
+    background:#fbfbfd;
+    font-size:.97rem;
+    line-height:1.62;
+    color:var(--ink-2);
+    transition:background .2s ease,border-color .2s ease,transform .2s ease;
+  }
+  .questions li::before{
+    content:counter(q);
+    position:absolute;left:20px;top:19px;
+    width:34px;height:34px;
+    display:grid;place-items:center;
+    border-radius:10px;
+    background:linear-gradient(145deg,var(--blue),#3b9bff);
+    color:#fff;font-weight:700;font-size:.92rem;
+    box-shadow:0 4px 10px rgba(0,113,227,.24);
+  }
+  .questions li:hover{
+    background:#fff;border-color:#c9dff7;transform:translateY(-1px);
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+  }
+  .questions li strong{color:var(--ink)}
+
+  /* ============ TOC / NAV ============ */
+  .toc{
+    display:flex;flex-wrap:wrap;gap:9px;
+    margin:0 0 4px;
+  }
+  .toc a{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:.82rem;font-weight:500;
+    color:var(--ink-2);
+    text-decoration:none;
+    background:#f5f5f7;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:7px 14px;
+    transition:all .2s ease;
+  }
+  .toc a:hover{background:var(--blue-soft);border-color:#bcdcf8;color:var(--blue-dark)}
+  .toc a .n{
+    display:inline-grid;place-items:center;
+    width:18px;height:18px;border-radius:50%;
+    background:var(--blue);color:#fff;font-size:.66rem;font-weight:700;
+  }
+
+  /* ============ SECTION DIVIDER ============ */
+  .divider{height:1px;background:var(--line);margin:34px 0}
+
+  /* ============ FOOTER ============ */
+  .foot{
+    text-align:center;
+    color:var(--muted);
+    font-size:.83rem;
+    padding:50px 22px 20px;
+    line-height:1.7;
+  }
+  .foot b{color:var(--ink-2);font-weight:600}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:760px){
+    body{font-size:16px}
+    .sec{padding:28px 22px 32px;border-radius:var(--radius-sm)}
+    .sec:first-of-type{margin-top:-28px}
+    .sec-head{gap:14px}
+    .sec-head .badge{width:40px;height:40px;font-size:.95rem;border-radius:11px}
+    .hero{padding:60px 20px 70px}
+    .meter-row{flex-wrap:wrap;gap:6px 12px}
+    .meter-row .m-label{flex:1 1 100%;font-size:.84rem}
+    .meter-row .m-val{flex:0 0 auto}
+    .meter-track{flex:1 1 100%;order:3}
+    .questions li{padding:16px 18px 16px 60px}
+    .questions li::before{left:16px;top:15px;width:30px;height:30px;font-size:.84rem}
+    h3{font-size:1.06rem}
+  }
+
+  /* ============ PRINT ============ */
+  @media print{
+    @page{size:A4;margin:12mm 10mm}
+    html{background:#fff}
+    body{
+      background:#fff !important;
+      color:#000;
+      font-size:10.4pt;
+      line-height:1.45;
+      -webkit-print-color-adjust:exact;
+      print-color-adjust:exact;
+    }
+    .hero{
+      padding:22px 18px 26px;
+      background:#111 !important;
+      color:#fff !important;
+      border-radius:0;
+      page-break-after:avoid;
+    }
+    .hero::before,.hero::after{display:none !important}
+    .hero h1{font-size:20pt;-webkit-text-fill-color:#fff;background:none;color:#fff !important}
+    .hero p.lead{color:#e3e3e8 !important;font-size:10.5pt}
+    .hero .meta-row,.hero .eyebrow{display:none !important}
+    .wrap{max-width:none;padding:0 0 10mm}
+    .sec{
+      box-shadow:none !important;
+      border:1px solid #cfcfd4 !important;
+      border-radius:8px !important;
+      padding:16px 18px 18px;
+      margin:0 0 7mm !important;
+      page-break-inside:avoid;
+      break-inside:avoid;
+      background:#fff !important;
+    }
+    .sec:first-of-type{margin-top:0 !important}
+    .sec-head{page-break-after:avoid;break-after:avoid;margin-bottom:14px}
+    .sec-head .badge{
+      width:30px;height:30px;border-radius:8px;font-size:.8rem;
+      box-shadow:none !important;
+    }
+    .sec-head h2{font-size:13.5pt}
+    .sec-head .sub{font-size:9pt}
+    h3{font-size:11.5pt;margin:16px 0 8px;page-break-after:avoid;break-after:avoid}
+    h4{font-size:10.5pt;page-break-after:avoid;break-after:avoid}
+    p{orphans:3;widows:3;margin-bottom:8px}
+
+    .card,.mapcard,.keyfact,.callout,figure.diagram,.table-shell,.questions li,.tl-item{
+      page-break-inside:avoid !important;
+      break-inside:avoid !important;
+      box-shadow:none !important;
+    }
+    .grid{gap:9px}
+    .card{padding:12px 14px;border-radius:8px}
+    .card p{font-size:8.8pt}
+    .mapcard .body{padding:12px 14px}
+    .mapcard dd,.mapcard dt{font-size:8.4pt}
+    .keyfact,.callout{border-radius:8px;padding:12px 14px;margin:12px 0}
+    .keyfact p,.callout p{font-size:9.3pt}
+    figure.diagram{padding:12px 12px 8px;border-radius:8px;margin:14px 0 4px}
+    figure.diagram figcaption{font-size:8pt;margin-top:8px}
+    .table-shell{border-radius:8px;margin:14px 0 6px}
+    table{min-width:0;font-size:8.8pt}
+    thead th{padding:8px 10px;font-size:7.4pt}
+    tbody td{padding:8px 10px}
+    .table-note{font-size:7.6pt;padding:8px 10px}
+    .toc{display:none !important}
+    .questions li{padding:10px 12px 10px 44px;margin-bottom:8px;font-size:9.2pt}
+    .questions li::before{left:10px;top:9px;width:24px;height:24px;font-size:.72rem;box-shadow:none !important}
+    .divider{margin:16px 0}
+    .meter-row{margin-bottom:8px;gap:8px}
+    .meter-track{height:9px}
+    .meter-row .m-label{font-size:8.6pt;flex-basis:100px}
+    .meter-row .m-val{font-size:8.4pt;flex-basis:80px}
+    .foot{padding:16px 0 0;font-size:8pt}
+    .hero .pill{display:none}
+    a{color:#000 !important;text-decoration:none !important}
+    .card:hover,.questions li:hover{transform:none !important;box-shadow:none !important}
+    .hero, .sec { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow"><span class="dot"></span> Розділ ІІ. Суспільна географія України</span>
+    <h1>Політико-економічна оцінка державного кордону України.<br>Реформування адміністративно-територіального устрою</h1>
+    <p class="lead">
+      Комплексний аналіз двох фундаментальних основ суверенітету — державного кордону
+      та адміністративно-територіального устрою — в умовах збройної агресії та глибоких
+      трансформаційних процесів сучасної України.
+    </p>
+    <div class="meta-row">
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 5 v7 c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/></svg>
+        Суверенітет і безпека
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 h18"/><rect x="4" y="12" width="3.6" height="8"/><rect x="10.2" y="8" width="3.6" height="12"/><rect x="16.4" y="4" width="3.6" height="16"/></svg>
+        Економічний вимір
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12 h18"/><path d="M12 3 c2.8 3 2.8 15 0 18 c-2.8-3-2.8-15 0-18z"/></svg>
+        Децентралізація
+      </span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ==================== TOC ==================== -->
+  <nav class="toc" aria-label="Зміст заняття">
+    <a href="#s1"><span class="n">1</span> Кордон: суверенітет і безпека</a>
+    <a href="#s2"><span class="n">2</span> Сухопутні кордони: дані</a>
+    <a href="#s3"><span class="n">3</span> Економічний вимір кордону</a>
+    <a href="#s4"><span class="n">4</span> Реформа АТУ: завдання</a>
+    <a href="#s5"><span class="n">5</span> Наслідки реформи</a>
+    <a href="#s6"><span class="n">6</span> Взаємозв’язок і синтез</a>
+    <a href="#questions"><span class="n">?</span> Контрольні запитання</a>
+  </nav>
+
+  <!-- ==================== INTRO ==================== -->
+  <section class="sec" id="intro">
+    <div class="sec-head">
+      <div class="badge dark">В</div>
+      <div>
+        <h2>Вступ: дві основи державності</h2>
+        <p class="sub">Чому кордон і адміністративно-територіальний устрій розглядаються разом</p>
+      </div>
+    </div>
+
+    <p>
+      Державний кордон та адміністративно-територіальний устрій є двома фундаментальними
+      основами, що визначають <strong>суверенітет, безпеку та економічний потенціал</strong> країни.
+      В умовах сучасної України, яка переживає збройну агресію та глибокі трансформаційні
+      процеси, їхнє комплексне оцінювання та реформування набувають критичного значення.
+    </p>
+
+    <p>
+      Політико-економічна оцінка державного кордону України визначається її
+      <em>транзитним положенням між Європою та Азією</em>, наявністю виходу до Чорного та
+      Азовського морів, а також сусідством з країнами Європейського Союзу, що створює як
+      економічні можливості для транзиту, так і політичні ризики через регіональну
+      нестабільність.
+    </p>
+
+    <p>
+      Реформування адміністративно-територіального устрою України (з 2015 року) передбачало
+      <strong>децентралізацію влади</strong>, надання більших повноважень місцевому
+      самоврядуванню та зміну поділу країни на менші, сильніші одиниці
+      (об’єднані територіальні громади).
+    </p>
+
+    <div class="keyfact">
+      <div class="kf-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2 L20 5 v7 c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/>
+          <path d="M9 12 l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="kf-body">
+        <div class="kf-title">Головна теза заняття</div>
+        <p>
+          Кордон — це не просто лінія на карті, а складний політико-економічний інститут,
+          а адміністративно-територіальний устрій — не просто поділ території, а механізм
+          розподілу влади й ресурсів. Їхня синхронізація є основою стійкої та європейської України.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 1. КОРДОН: СУВЕРЕНІТЕТ І БЕЗПЕКА ==================== -->
+  <section class="sec" id="s1">
+    <div class="sec-head">
+      <div class="badge">1</div>
+      <div>
+        <h2>Державний кордон: суверенітет і безпека</h2>
+        <p class="sub">Матеріальне втілення незалежності, цивілізаційний стик і прикордонна політика</p>
+      </div>
+    </div>
+
+    <p>
+      Державний кордон України — це не просто лінія на карті, а складний
+      <strong>політико-економічний інститут</strong>, який виконує кілька ключових функцій.
+      Розглянемо їх послідовно.
+    </p>
+
+    <h3>1.1. Територіальна цілісність та виклики функціонування</h3>
+
+    <p>
+      Кордон є матеріальним втіленням територіальної цілісності та незалежності України.
+      Сьогодні, у зв’язку з тимчасовою окупацією частини території та незаконною анексією
+      Криму, функціонування кордону як інструменту суверенного контролю значно ускладнено.
+      Це створює постійний політичний виклик і загрозу національній безпеці.
+    </p>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="ico g">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1d7a3a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 L20 5 v7 c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/>
+            <path d="M9 12 l2 2 4-4"/>
+          </svg>
+        </div>
+        <span class="tag g">Основа державності</span>
+        <h4>Територіальна цілісність</h4>
+        <p>
+          Матеріальне втілення суверенітету та незалежності. Основа національної
+          державності та міжнародного визнання.
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico r">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b3261e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 9 v4"/><path d="M12 17 h.01"/>
+            <path d="M10.3 3.9 1.8 18 a2 2 0 0 0 1.7 3 h17 a2 2 0 0 0 1.7-3 L13.7 3.9a2 2 0 0 0-3.4 0z"/>
+          </svg>
+        </div>
+        <span class="tag r">Обмеження</span>
+        <h4>Складнощі функціонування</h4>
+        <p>
+          Тимчасова окупація частини території (включно з Кримом та частинами
+          Сходу/Півдня) обмежує суверенний контроль на цих ділянках.
+        </p>
+      </div>
+    </div>
+
+    <h3>1.2. Цивілізаційний стик і прикордонна політика</h3>
+
+    <p>
+      Україна знаходиться на стику цивілізаційних плит — <strong>ЄС</strong> та
+      <strong>Євразійського економічного союзу</strong>. Її кордони відокремлюють
+      європейський демократичний простір від авторитарних режимів. Це змушує Україну
+      проводити надзвичайно виважену прикордонну політику, балансуючи між відкритістю
+      для співпраці та захистом від зовнішніх загроз (гібридних атак, нелегальної міграції,
+      контрабанди зброї).
+    </p>
+
+    <!-- ДІАГРАМА 1: ЦИВІЛІЗАЦІЙНИЙ СТИК -->
+    <figure class="diagram">
+      <svg viewBox="0 0 820 300" role="img" aria-label="Схема цивілізаційного стику: ЄС — Україна — ЄАЕС">
+        <defs>
+          <linearGradient id="euG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0071e3"/><stop offset="100%" stop-color="#3b9bff"/>
+          </linearGradient>
+          <linearGradient id="uaG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffd60a"/><stop offset="100%" stop-color="#ffc300"/>
+          </linearGradient>
+          <linearGradient id="eaG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8e8e93"/><stop offset="100%" stop-color="#636366"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ЄС -->
+        <rect x="16" y="46" width="238" height="208" rx="18" fill="url(#euG)" opacity=".94"/>
+        <text x="135" y="92" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">ЄВРОПЕЙСЬКИЙ</text>
+        <text x="135" y="114" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">СОЮЗ</text>
+        <text x="135" y="146" text-anchor="middle" font-size="13" fill="#dbeaff">демократія · права людини</text>
+        <text x="135" y="168" text-anchor="middle" font-size="13" fill="#dbeaff">відкритий ринок</text>
+        <text x="135" y="206" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Польща · Румунія ·</text>
+        <text x="135" y="226" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Словаччина · Угорщина</text>
+
+        <!-- Україна -->
+        <rect x="292" y="34" width="236" height="232" rx="18" fill="url(#uaG)" stroke="#e0a800" stroke-width="2"/>
+        <text x="410" y="76" text-anchor="middle" font-size="15" font-weight="800" fill="#1d1d1f">УКРАЇНА</text>
+        <text x="410" y="100" text-anchor="middle" font-size="12.5" fill="#4a3c00">буферна зона / фільтр</text>
+        <line x1="322" y1="118" x2="498" y2="118" stroke="#c99a00" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <text x="410" y="142" text-anchor="middle" font-size="12.5" fill="#4a3c00">територіальна цілісність</text>
+        <text x="410" y="162" text-anchor="middle" font-size="12.5" fill="#4a3c00">прикордонний контроль</text>
+        <text x="410" y="182" text-anchor="middle" font-size="12.5" fill="#4a3c00">транзитний потенціал</text>
+        <text x="410" y="212" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">баланс:</text>
+        <text x="410" y="232" text-anchor="middle" font-size="12.5" fill="#4a3c00">відкритість ↔ захист</text>
+
+        <!-- ЄАЕС -->
+        <rect x="566" y="46" width="238" height="208" rx="18" fill="url(#eaG)" opacity=".94"/>
+        <text x="685" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">ЄВРАЗІЙСЬКИЙ</text>
+        <text x="685" y="114" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">ЕКОНОМІЧНИЙ СОЮЗ</text>
+        <text x="685" y="146" text-anchor="middle" font-size="13" fill="#e5e5ea">авторитарні режими</text>
+        <text x="685" y="168" text-anchor="middle" font-size="13" fill="#e5e5ea">гібридні загрози</text>
+        <text x="685" y="206" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Росія · Білорусь</text>
+
+        <!-- Стрілки -->
+        <g stroke="#b0b0b8" stroke-width="2.4" fill="none"> 
+          <line x1="256" y1="150" x2="288" y2="150" marker-end="url(#arrA)"/>
+          <line x1="532" y1="150" x2="564" y2="150" marker-end="url(#arrA)"/>
+        </g>
+        <!--<defs>
+          <marker id="arrA" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#b0b0b8"/>
+          </marker>
+        </defs>-->
+
+        <text x="410" y="292" text-anchor="middle" font-size="11.5" fill="#6e6e73">Фільтр / буферна зона між двома цивілізаційними просторами</text>
+      </svg>
+      <figcaption><b>Рис. 1.</b> Україна як цивілізаційний стик між ЄС та ЄАЕС</figcaption>
+    </figure>
+
+    <h3>1.3. Основні зовнішні загрози</h3>
+
+    <div class="table-shell">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Категорія</th>
+              <th>Опис / характеристика</th>
+              <th>Значення для України</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Територіальна цілісність</td>
+              <td>Матеріальне втілення суверенітету та незалежності.</td>
+              <td>Основа національної державності та міжнародного визнання.</td>
+            </tr>
+            <tr>
+              <td>Складнощі функціонування</td>
+              <td>Тимчасова окупація частини території (включно з Кримом та частинами Сходу/Півдня).</td>
+              <td>Обмеження суверенного контролю на ділянках, що є постійним політичним викликом та загрозою безпеці.</td>
+            </tr>
+            <tr>
+              <td>Цивілізаційний стик</td>
+              <td>Розташування на межі ЄС (демократія) та Євразійського економічного союзу (авторитаризм).</td>
+              <td>Фільтр / буферна зона між двома цивілізаційними просторами. Визначає геополітичну роль.</td>
+            </tr>
+            <tr>
+              <td>Прикордонна політика</td>
+              <td>Необхідність балансувати між відкритістю (співпраця з ЄС) та захистом від загроз.</td>
+              <td>Вимагає надзвичайно виважених рішень для підтримки безпеки та інтеграції.</td>
+            </tr>
+            <tr>
+              <td>Основні зовнішні загрози</td>
+              <td>Гібридні атаки (військово-політичний тиск, дезінформація), нелегальна міграція, контрабанда (зброї, наркотиків, людей).</td>
+              <td>Безпосередня загроза національній безпеці, економіці та соціальній стабільності.</td>
+            </tr>
+            <tr>
+              <td>Стратегічна функція</td>
+              <td>Відокремлення європейського демократичного простору від авторитарних режимів.</td>
+              <td>Ключовий елемент системи колективної безпеки Європи та фактор євроатлантичної інтеграції.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-note">
+        Таблиця 1. Політико-безпекові виміри державного кордону України.
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <span class="label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9 v4"/><path d="M12 17 h.01"/><path d="M10.3 3.9 1.8 18 a2 2 0 0 0 1.7 3 h17 a2 2 0 0 0 1.7-3 L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        Після 2014-го, а особливо з 2022-го
+      </span>
+      <p>
+        Кордон з Білоруссю та Росією перетворився з адміністративної межі на
+        <strong>лінію фронту гібридної та звичайної війни</strong>. Це вимагає корінної
+        перебудови всієї прикордонної інфраструктури, технічного оснащення та оперативних процедур.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 2. СУХОПУТНІ КОРДОНИ: ДАНІ ==================== -->
+  <section class="sec" id="s2">
+    <div class="sec-head">
+      <div class="badge orange">2</div>
+      <div>
+        <h2>Сухопутні державні кордони України: цифри й акценти</h2>
+        <p class="sub">Протяжність ділянок, морські/річкові частини та геополітичні висновки</p>
+      </div>
+    </div>
+
+    <p>
+      Загальна конфігурація кордонів України відображає її складне геополітичне положення.
+      Найдовша ділянка — з Росією; значна частина кордону припадає на морські та річкові
+      ділянки; західні кордони — це «шлюз» до ЄС.
+    </p>
+
+    <div class="table-shell">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Країна</th>
+              <th>Загальна протяжність, км</th>
+              <th>Морська / річкова ділянка, км</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Росія</td><td><span class="num">2295,0</span></td><td><span class="num">432,1</span></td></tr>
+            <tr><td>Молдова <span style="font-weight:500;color:var(--muted)">(у т. ч. Придністров’я)</span></td><td><span class="num">1222</span> <span style="color:var(--muted)">(405)</span></td><td><span class="num">267</span></td></tr>
+            <tr><td>Білорусь</td><td><span class="num">1084,2</span></td><td><span class="num">325,9</span></td></tr>
+            <tr><td>Румунія</td><td><span class="num">613,8</span></td><td><span class="num">33 / 292,2</span></td></tr>
+            <tr><td>Польща</td><td><span class="num">542,39</span></td><td><span class="num">187,3</span></td></tr>
+            <tr><td>Угорщина</td><td><span class="num">136,7</span></td><td><span class="num">85,1</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-note">
+        Таблиця 2. Сухопутні державні кордони України. Дані наведено за офіційними джерелами
+        (Держприкордонслужба, Держгеокадастр).
+      </div>
+    </div>
+
+    <h3>Візуальне порівняння протяжності</h3>
+
+    <div class="meters">
+      <div class="meter-row">
+        <div class="m-label"><span class="flag" style="background:linear-gradient(180deg,#fff 33%,#0039a6 33% 66%,#d52b1e 66%)"></span> Росія</div>
+        <div class="meter-track"><div class="meter-fill r" style="width:100%"></div></div>
+        <div class="m-val">2295 км</div>
+      </div>
+      <div class="meter-row">
+        <div class="m-label"><span class="flag" style="background:linear-gradient(180deg,#003580 33%,#f6d000 33%)"></span> Молдова</div>
+        <div class="meter-track"><div class="meter-fill o" style="width:53%"></div></div>
+        <div class="m-val">1222 км</div>
+      </div>
+      <div class="meter-row">
+        <div class="m-label"><span class="flag" style="background:linear-gradient(180deg,#c8313e 40%,#fff 40% 60%,#4aa657 60%)"></span> Білорусь</div>
+        <div class="meter-track"><div class="meter-fill p" style="width:47%"></div></div>
+        <div class="m-val">1084 км</div>
+      </div>
+      <div class="meter-row">
+        <div class="m-label"><span class="flag" style="background:linear-gradient(90deg,#002b7f,#fcd116 33% 66%,#ce1126 66%)"></span> Румунія</div>
+        <div class="meter-track"><div class="meter-fill" style="width:27%"></div></div>
+        <div class="m-val">614 км</div>
+      </div>
+      <div class="meter-row">
+        <div class="m-label"><span class="flag" style="background:linear-gradient(180deg,#fff 50%,#dc143c 50%)"></span> Польща</div>
+        <div class="meter-track"><div class="meter-fill g" style="width:24%"></div></div>
+        <div class="m-val">542 км</div>
+      </div>
+      <div class="meter-row">
+        <div class="m-label"><span class="flag" style="background:linear-gradient(180deg,#ce2939 33%,#fff 33% 66%,#477050 66%)"></span> Угорщина</div>
+        <div class="meter-track"><div class="meter-fill" style="width:6%"></div></div>
+        <div class="m-val">137 км</div>
+      </div>
+    </div>
+
+    <div class="keyfact">
+      <div class="kf-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/><path d="M3 12 h18"/><path d="M12 3 c2.8 3 2.8 15 0 18 c-2.8-3-2.8-15 0-18z"/>
+        </svg>
+      </div>
+      <div class="kf-body">
+        <div class="kf-title">Геополітичний висновок</div>
+        <p>
+          Понад <strong>половину</strong> сухопутного кордону Україна має з Росією та Білоруссю —
+          це ділянки, які після 2014 року перетворилися на зону підвищеної безпекової загрози.
+          Водночас західні ділянки (Польща, Румунія, Словаччина, Угорщина) — це «шлюз» для
+          експорту та євроінтеграції.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. ЕКОНОМІЧНИЙ ВИМІР ==================== -->
+  <section class="sec" id="s3">
+    <div class="sec-head">
+      <div class="badge green">3</div>
+      <div>
+        <h2>Економічний вимір державного кордону</h2>
+        <p class="sub">Транзит, логістика, інвестиційний клімат і втрати через окупацію</p>
+      </div>
+    </div>
+
+    <p>
+      Україна має потенційно вигідне транзитне положення між ЄС та країнами Азії.
+      Добре функціонуючий кордон із країнами ЄС (Польщею, Румунією, Словаччиною, Угорщиною)
+      є <strong>«шлюзом»</strong> для експорту української сільськогосподарської продукції,
+      сировини та імпорту високотехнологічної продукції. Однак логістичні потужності цих
+      переходів часто не відповідають попиту, що призводить до черг, простоїв і збитків для бізнесу.
+    </p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12 h18"/><path d="M12 3 c2.8 3 2.8 15 0 18 c-2.8-3-2.8-15 0-18z"/><circle cx="12" cy="12" r="9"/>
+          </svg>
+        </div>
+        <h4>Транзитний потенціал</h4>
+        <p>Шлюз між ЄС та Азією. Потенціал для логістичних хабів, але інфраструктура переходів обмежена.</p>
+      </div>
+      <div class="card">
+        <div class="ico g">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1d7a3a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20 h16"/><path d="M6 16 v4"/><path d="M18 16 v4"/><path d="M4 8 h16 v8 H4z"/><path d="M9 8 V4 h6 v4"/>
+          </svg>
+        </div>
+        <h4>Інвестиційний клімат</h4>
+        <p>Затримки, бюрократія та корупція на митницях створювали бар’єри. Цифровізація покликана це змінити.</p>
+      </div>
+      <div class="card">
+        <div class="ico r">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b3261e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 17 l6-6 4 4 8-8"/><path d="M21 7 v6 h-6"/>
+          </svg>
+        </div>
+        <h4>Втрати через окупацію</h4>
+        <p>Втрачено контроль над значними ділянками кордону, портами Азово-Чорноморського басейну та родовищами.</p>
+      </div>
+    </div>
+
+    <h3>3.1. Реформи на кордоні: від бар’єру до інструменту торгівлі</h3>
+
+    <p>
+      Ефективність кордону безпосередньо впливає на інвестиційний клімат. Затримки,
+      бюрократія та корупція на митницях створювали значні бар’єри для міжнародної торгівлі.
+      Реформи Державної митниці та Державної прикордонної служби, їхня цифровізація
+      (впровадження систем «Єдине митне вікно», електронних накладних) спрямовані на
+      перетворення кордону з бар’єру на ефективний інструмент торгівлі.
+    </p>
+
+    <!-- ДІАГРАМА 2: ШЛЮЗ vs БАР'ЄР -->
+    <figure class="diagram">
+      <svg viewBox="0 0 820 260" role="img" aria-label="Порівняння кордону як бар'єру та як шлюзу">
+        <defs>
+          <linearGradient id="badG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff6b5e"/><stop offset="100%" stop-color="#ff3b30"/>
+          </linearGradient>
+          <linearGradient id="goodG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#6fe08c"/><stop offset="100%" stop-color="#34c759"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Бар'єр -->
+        <rect x="20" y="30" width="370" height="200" rx="16" fill="#fff5f4" stroke="#ffd0cc"/>
+        <rect x="20" y="30" width="370" height="52" rx="16" fill="url(#badG)"/>
+        <rect x="20" y="66" width="370" height="16" fill="url(#badG)"/>
+        <text x="205" y="62" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">КОРДОН ЯК БАР’ЄР</text>
+
+        <g font-size="12.5" fill="#7d1a14">
+          <text x="44" y="112">✕ черги на переходах</text>
+          <text x="44" y="138">✕ бюрократія та паперові процедури</text>
+          <text x="44" y="164">✕ корупційні ризики</text>
+          <text x="44" y="190">✕ простої та збитки бізнесу</text>
+        </g>
+        <text x="205" y="220" text-anchor="middle" font-size="12" font-weight="600" fill="#b3261e">результат: втрати торгівлі та інвестицій</text>
+
+        <!-- Шлюз -->
+        <rect x="430" y="30" width="370" height="200" rx="16" fill="#f2fdf6" stroke="#c9eed7"/>
+        <rect x="430" y="30" width="370" height="52" rx="16" fill="url(#goodG)"/>
+        <rect x="430" y="66" width="370" height="16" fill="url(#goodG)"/>
+        <text x="615" y="62" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">КОРДОН ЯК ШЛЮЗ</text>
+
+        <g font-size="12.5" fill="#185f2e">
+          <text x="454" y="112">✓ «Єдине митне вікно»</text>
+          <text x="454" y="138">✓ електронні накладні</text>
+          <text x="454" y="164">✓ цифровізація та прозорість</text>
+          <text x="454" y="190">✓ швидкий транзит і логістика</text>
+        </g>
+        <text x="615" y="220" text-anchor="middle" font-size="12" font-weight="600" fill="#1d7a3a">результат: зростання торгівлі та інвестицій</text>
+
+        <path d="M398 130 L422 130" stroke="#b0b0b8" stroke-width="2.4" stroke-dasharray="5 4"/>
+      </svg>
+      <figcaption><b>Рис. 2.</b> Трансформація функції кордону: від бар’єру до ефективного інструменту торгівлі</figcaption>
+    </figure>
+
+    <div class="callout danger">
+      <span class="label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 l6-6 4 4 8-8"/><path d="M21 7 v6 h-6"/></svg>
+        Економічні втрати
+      </span>
+      <p>
+        Тимчасово окуповані території на сході та в Криму позбавили Україну контролю над
+        значними ділянками кордону, доступом до морських портів Азово-Чорноморського басейну
+        та родовищ корисних копалин. Це нанесло колосальний економічний збиток і
+        деформувало логістичні ланцюги.
+      </p>
+    </div>
+
+    <p>
+      Політико-економічна оцінка свідчить, що державний кордон України є зоною одночасно
+      <strong>ризиків</strong> (військова загроза, контрабанда) та <strong>можливостей</strong>
+      (транзит, інтеграція в ЄС). Його подальша модернізація має бути спрямована на
+      максимальне відкриття на захід та надійне закриття на схід і північ.
+    </p>
+  </section>
+
+  <!-- ==================== 4. РЕФОРМА АТУ: ЗАВДАННЯ ==================== -->
+  <section class="sec" id="s4">
+    <div class="sec-head">
+      <div class="badge purple">4</div>
+      <div>
+        <h2>Реформування адміністративно-територіального устрою</h2>
+        <p class="sub">Децентралізація, об’єднані громади та новий поділ на райони</p>
+      </div>
+    </div>
+
+    <p>
+      Реформа децентралізації та зміни адміністративно-територіального устрою, розпочата
+      в 2014 році, є однією з <strong>найглибших і найуспішніших трансформацій</strong>
+      в історії незалежної України. Її мета — подолання радянської централізованої моделі управління.
+    </p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 820 380" role="img" aria-label="Схематична карта реформування адміністративно-територіального устрою">
+        <defs>
+          <linearGradient id="mapBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f4f8fd"/><stop offset="100%" stop-color="#e3eefa"/>
+          </linearGradient>
+          <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#c9d9ea" stroke-width="1.4"/>
+          </pattern>
+        </defs>
+
+        <rect x="10" y="10" width="800" height="360" rx="14" fill="url(#mapBg)"/>
+
+        <!-- Стилізований контур України -->
+        <path d="M150 80 L250 60 L360 68 L450 54 L560 66 L650 60 L710 86
+                 L720 140 L690 176 L700 230 L650 268 L600 292 L560 320
+                 L480 328 L430 310 L360 322 L300 300 L250 310 L210 282
+                 L168 250 L140 206 L118 160 L128 116 Z"
+              fill="#ffffff" stroke="#9bb9d6" stroke-width="2.4"/>
+
+        <!-- Умовні громади (кружечки) -->
+        <g fill="#0071e3" opacity=".85">
+          <circle cx="210" cy="130" r="6"/><circle cx="262" cy="118" r="6"/>
+          <circle cx="300" cy="152" r="6"/><circle cx="352" cy="110" r="6"/>
+          <circle cx="392" cy="148" r="6"/><circle cx="438" cy="104" r="6"/>
+          <circle cx="474" cy="144" r="6"/><circle cx="520" cy="112" r="6"/>
+          <circle cx="566" cy="150" r="6"/><circle cx="610" cy="120" r="6"/>
+          <circle cx="650" cy="158" r="6"/><circle cx="236" cy="192" r="6"/>
+          <circle cx="286" cy="210" r="6"/><circle cx="336" cy="186" r="6"/>
+          <circle cx="382" cy="222" r="6"/><circle cx="428" cy="190" r="6"/>
+          <circle cx="476" cy="228" r="6"/><circle cx="522" cy="196" r="6"/>
+          <circle cx="570" cy="234" r="6"/><circle cx="614" cy="202" r="6"/>
+          <circle cx="306" cy="262" r="6"/><circle cx="356" cy="252" r="6"/>
+          <circle cx="406" cy="272" r="6"/><circle cx="456" cy="256" r="6"/>
+          <circle cx="506" cy="276" r="6"/><circle cx="556" cy="258" r="6"/>
+        </g>
+
+        <!-- Районні кластери (еліпси) -->
+        <g fill="none" stroke="#af52de" stroke-width="1.8" stroke-dasharray="6 5" opacity=".7">
+          <ellipse cx="260" cy="140" rx="70" ry="46"/>
+          <ellipse cx="400" cy="140" rx="76" ry="48"/>
+          <ellipse cx="556" cy="142" rx="76" ry="46"/>
+          <ellipse cx="320" cy="236" rx="76" ry="46"/>
+          <ellipse cx="466" cy="238" rx="76" ry="46"/>
+          <ellipse cx="580" cy="238" rx="66" ry="42"/>
+        </g>
+
+        <!-- Легенда -->
+        <g font-size="12.5" fill="#424245">
+          <circle cx="54" cy="320" r="6" fill="#0071e3" opacity=".85"/>
+          <text x="68" y="325">об’єднані територіальні громади</text>
+
+          <ellipse cx="54" cy="344" rx="20" ry="10" fill="none" stroke="#af52de" stroke-width="1.8" stroke-dasharray="6 5" opacity=".7"/>
+          <text x="86" y="349">нові райони (136)</text>
+        </g>
+
+        <g font-size="12.5" fill="#6e6e73" text-anchor="end">
+          <text x="796" y="330">Замість 490 дрібних районів —</text>
+          <text x="796" y="350" font-weight="650" fill="#424245">136 більших і спроможніших</text>
+        </g>
+
+        <text x="410" y="40" text-anchor="middle" font-size="15" font-weight="700" fill="#0071e3">Схема децентралізації</text>
+      </svg>
+      <figcaption><b>Рис. 3.</b> Схематичне зображення реформування адміністративно-територіального устрою України</figcaption>
+    </figure>
+
+    <h3>4.1. Основні завдання реформи</h3>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21 v-2 a4 4 0 0 0-4-4 H5 a4 4 0 0 0-4 4 v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21 v-2 a4 4 0 0 0-3-3.87"/><path d="M16 3.13 a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <span class="tag">Об’єднання</span>
+        <h4>Створення спроможних громад</h4>
+        <p>
+          Об’єднання дрібних сільських рад у більші, фінансово та управлінсько спроможні
+          громади, здатні самостійно вирішувати питання місцевого значення (освіта,
+          охорона здоров’я, благоустрій).
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico o">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#a86900" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7 V5 a2 2 0 0 0-2-2 h-4 a2 2 0 0 0-2 2 v2"/><path d="M12 12 v3"/>
+          </svg>
+        </div>
+        <span class="tag o">Ресурси</span>
+        <h4>Передача повноважень і фінансів</h4>
+        <p>
+          Передача від обласних центрів до громад реальних повноважень, а головне —
+          фінансових ресурсів для їх реалізації через механізм місцевих бюджетів.
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico p">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7b2f9e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3 v18"/><path d="M3 9 h18"/>
+          </svg>
+        </div>
+        <span class="tag p">Райони</span>
+        <h4>Новий районний поділ</h4>
+        <p>
+          Замість колишніх <strong>490 дрібних та неефективних районів</strong> було створено
+          <strong>136 більших</strong>, які мають координувати розвиток громад у своїх межах.
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico g">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1d7a3a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4 h16 v16 H4z"/><path d="M4 10 h16"/><path d="M10 10 v10"/>
+          </svg>
+        </div>
+        <span class="tag g">Розмежування</span>
+        <h4>Чіткий розподіл функцій</h4>
+        <p>
+          Чітке розмежування функцій між органами влади різних рівнів — від громади до
+          області та центру.
+        </p>
+      </div>
+    </div>
+
+    <h3>4.2. Ключові цифри реформи</h3>
+
+    <div class="grid g3">
+      <div class="card" style="text-align:center">
+        <div style="font-size:2.4rem;font-weight:800;letter-spacing:-0.03em;color:var(--blue);line-height:1.1">490 → 136</div>
+        <p style="margin-top:10px">скорочення кількості районів</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-size:2.4rem;font-weight:800;letter-spacing:-0.03em;color:var(--green);line-height:1.1">2015</div>
+        <p style="margin-top:10px">старт реформи децентралізації</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-size:2.4rem;font-weight:800;letter-spacing:-0.03em;color:var(--purple);line-height:1.1">1469</div>
+        <p style="margin-top:10px">об’єднаних територіальних громад (станом на 2020 р.)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. НАСЛІДКИ РЕФОРМИ ==================== -->
+  <section class="sec" id="s5">
+    <div class="sec-head">
+      <div class="badge green">5</div>
+      <div>
+        <h2>Політико-економічні наслідки реформи</h2>
+        <p class="sub">Що змінилося для громад, громадян і держави</p>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="ico g">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1d7a3a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 20 h18"/><rect x="4" y="12" width="3.6" height="8"/><rect x="10.2" y="8" width="3.6" height="12"/><rect x="16.4" y="4" width="3.6" height="16"/>
+          </svg>
+        </div>
+        <h4>Фінансова спроможність</h4>
+        <p>
+          Об’єднані громади отримали значні власні доходи та дотації, що дозволило їм
+          інвестувати в інфраструктуру, створювати сприятливі умови для бізнесу, розвивати туризм.
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21 h18"/><path d="M5 21 V7 l7-4 7 4 v14"/><path d="M9 21 v-6 h6 v6"/>
+          </svg>
+        </div>
+        <h4>Сучасна інфраструктура</h4>
+        <p>
+          На місцевому рівні з’явилися сучасні лікарні, школи, культурні центри, які раніше
+          були недоступні для жителів сіл.
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico o">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#a86900" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 L2 7 l10 5 10-5z"/><path d="M2 17 l10 5 10-5"/><path d="M2 12 l10 5 10-5"/>
+          </svg>
+        </div>
+        <h4>Управління ресурсами</h4>
+        <p>
+          Громади отримали інструменти для ефективного управління своїми землями та
+          ресурсами, залучення інвестицій.
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico p">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7b2f9e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21 v-2 a4 4 0 0 0-4-4 H5 a4 4 0 0 0-4 4 v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21 v-2 a4 4 0 0 0-3-3.87"/>
+          </svg>
+        </div>
+        <h4>Відповідальність перед громадянами</h4>
+        <p>
+          Реформа зменшила залежність місцевої влади від центральної, підвищивши її
+          відповідальність перед громадянами.
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico g">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1d7a3a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12 l2 2 4-4"/><circle cx="12" cy="12" r="9"/>
+          </svg>
+        </div>
+        <h4>Пряма демократія</h4>
+        <p>
+          Жителі отримали реальний вплив на прийняття рішень на місцевому рівні через
+          інструменти прямої демократії.
+        </p>
+      </div>
+      <div class="card">
+        <div class="ico r">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b3261e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 L20 5 v7 c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/><path d="M9 12 l2 2 4-4"/>
+          </svg>
+        </div>
+        <h4>Довіра до держави</h4>
+        <p>
+          Ефективна влада на місцях, яка забезпечує якісні послуги, підвищує довіру громадян
+          до держави в цілому, що є ключовим фактором консолідації нації, особливо в умовах війни.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout ok">
+      <span class="label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 L9 17 l-5-5"/></svg>
+        Ключовий результат
+      </span>
+      <p>
+        Ефективна влада на місцях, яка забезпечує якісні послуги, підвищує довіру громадян
+        до держави в цілому, що є ключовим фактором консолідації нації, особливо в умовах війни.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 6. ВЗАЄМОЗВ'ЯЗОК І СИНТЕЗ ==================== -->
+  <section class="sec" id="s6">
+    <div class="sec-head">
+      <div class="badge dark">6</div>
+      <div>
+        <h2>Взаємозв’язок кордону та адміністративно-територіального устрою</h2>
+        <p class="sub">Синхронізація двох ключових процесів як основа стійкої України</p>
+      </div>
+    </div>
+
+    <p>
+      Існує тісний взаємозв’язок між станом державного кордону та адміністративно-територіальним
+      устроєм. <strong>Спроможні прикордонні громади</strong> можуть стати центрами
+      транскордонного співробітництва, розвивати прикордонну інфраструктуру, логістичні хаби,
+      що посилить економічну функцію кордону. Водночас, стабільний та безпечний кордон
+      створює умови для інвестицій та стабільного розвитку цих громад.
+    </p>
+
+    <!-- ДІАГРАМА 3: СИНЕРГІЯ -->
+    <figure class="diagram">
+      <svg viewBox="0 0 820 340" role="img" aria-label="Схема синергії між кордоном і реформою АТУ">
+        <defs>
+          <linearGradient id="coreBlue" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0071e3"/><stop offset="100%" stop-color="#0058b0"/>
+          </linearGradient>
+          <linearGradient id="coreGreen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#34c759"/><stop offset="100%" stop-color="#1d7a3a"/>
+          </linearGradient>
+          <linearGradient id="corePurple" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#af52de"/><stop offset="100%" stop-color="#7b2f9e"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Лівий блок: Кордон -->
+        <rect x="20" y="46" width="248" height="118" rx="16" fill="url(#coreBlue)"/>
+        <text x="144" y="88" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">ДЕРЖАВНИЙ КОРДОН</text>
+        <text x="144" y="112" text-anchor="middle" font-size="12.5" fill="#dbeaff">безпека · контроль · транзит</text>
+        <text x="144" y="136" text-anchor="middle" font-size="12" fill="#bcd9fb">інфраструктура переходів</text>
+
+        <!-- Правий блок: АТУ -->
+        <rect x="552" y="46" width="248" height="118" rx="16" fill="url(#coreGreen)"/>
+        <text x="676" y="88" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">РЕФОРМА АТУ</text>
+        <text x="676" y="112" text-anchor="middle" font-size="12.5" fill="#e0fbe8">громади · ресурси · самоврядування</text>
+        <text x="676" y="136" text-anchor="middle" font-size="12" fill="#bdeecb">спроможність і відповідальність</text>
+
+        <!-- Центр -->
+        <circle cx="410" cy="170" r="66" fill="url(#corePurple)"/>
+        <circle cx="410" cy="170" r="66" fill="none" stroke="#e2c6f3" stroke-width="2"/>
+        <text x="410" y="160" text-anchor="middle" font-size="13.5" font-weight="700" fill="#fff">СИНЕРГІЯ</text>
+        <text x="410" y="182" text-anchor="middle" font-size="11.5" fill="#eeddf8">стійка Україна</text>
+
+        <!-- Стрілки до центру -->
+        <g stroke="#b0b0b8" stroke-width="2.2" fill="none" stroke-dasharray="6 5">
+          <path d="M270 116 Q340 120 372 148" marker-end="url(#arrB)"/>
+          <path d="M552 116 Q480 120 448 148" marker-end="url(#arrB)"/>
+        </g>
+        <defs>
+          <marker id="arrB" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#b0b0b8"/>
+          </marker>
+        </defs>
+
+        <!-- Результати внизу -->
+        <g>
+          <rect x="60" y="248" width="190" height="62" rx="12" fill="#f2f9ff" stroke="#cfe6fb"/>
+          <text x="155" y="274" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0058b0">транскордонна співпраця</text>
+          <text x="155" y="294" text-anchor="middle" font-size="11.5" fill="#4a6a8c">логістичні хаби, інвестиції</text>
+
+          <rect x="315" y="248" width="190" height="62" rx="12" fill="#f3fdf6" stroke="#c9eed7"/>
+          <text x="410" y="274" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d7a3a">безпека + розвиток</text>
+          <text x="410" y="294" text-anchor="middle" font-size="11.5" fill="#3d7550">стабільність громад</text>
+
+          <rect x="570" y="248" width="190" height="62" rx="12" fill="#faf4fe" stroke="#e2c6f3"/>
+          <text x="665" y="274" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7b2f9e">європейська Україна</text>
+          <text x="665" y="294" text-anchor="middle" font-size="11.5" fill="#7a5b8f">стійка та процвітаюча</text>
+        </g>
+
+        <g stroke="#b0b0b8" stroke-width="1.8" stroke-dasharray="5 4" fill="none">
+          <line x1="410" y1="236" x2="410" y2="248"/>
+          <line x1="250" y1="278" x2="315" y2="278"/>
+          <line x1="505" y1="278" x2="570" y2="278"/>
+        </g>
+      </svg>
+      <figcaption><b>Рис. 4.</b> Синергія між модернізацією кордону та реформою адміністративно-територіального устрою</figcaption>
+    </figure>
+
+    <p>
+      Політико-економічна трансформація України полягає в <strong>синхронізації двох ключових
+      процесів</strong>: створення «розумного», безпечного та відкритого для співпраці кордону
+      та формування сильної, самодостатньої та демократичної системи місцевого самоврядування.
+      Ці дві складові є основою для побудови стійкої, процвітаючої та європейської України.
+    </p>
+
+    <h3>6.1. Історична ретроспектива реформ</h3>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">2014</div>
+        <h4>Старт децентралізації</h4>
+        <p>Ухвалення концепції реформування місцевого самоврядування та територіальної організації влади.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2015</div>
+        <h4>Перші об’єднані громади</h4>
+        <p>Створення перших ОТГ, запровадження міжбюджетних трансфертів та розширення власних доходів.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2020</div>
+        <h4>Новий районний поділ</h4>
+        <p>Замість 490 районів — 136 нових, укрупнення громад, завершення формування базового рівня.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2022 → сьогодні</div>
+        <h4>Виклики війни</h4>
+        <p>Роль громад у стійкості тилу, евакуації, гуманітарній допомозі; нові вимоги до кордону та безпеки.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== КОНТРОЛЬНІ ЗАПИТАННЯ ==================== -->
+  <section class="sec" id="questions">
+    <div class="sec-head">
+      <div class="badge red">?</div>
+      <div>
+        <h2>Контрольні запитання</h2>
+        <p class="sub">Для самоперевірки та обговорення на занятті</p>
+      </div>
+    </div>
+
+    <ol class="questions">
+      <li>
+        Які <strong>основні характеристики української держави</strong> згідно з її Конституцією?
+      </li>
+      <li>
+        Що входить до поняття <strong>«державна територія України»</strong>, крім площі суходолу?
+      </li>
+      <li>
+        Які <strong>основні загрози територіальній цілісності та національній безпеці</strong>
+        України з боку її сусідів?
+      </li>
+      <li>
+        Як <strong>змінився зовнішньополітичний курс України</strong> у відповідь на зовнішню агресію?
+      </li>
+      <li>
+        У чому полягає <strong>суть адміністративно-територіальної реформи</strong> в Україні?
+      </li>
+    </ol>
+  </section>
+
+  <footer class="foot">
+    <b>Заняття:</b> Політико-економічна оцінка державного кордону України. Реформування адміністративно-територіального устрою.<br>
+    Навчальні матеріали · Суспільна географія України
+  </footer>
+
+</div>
+</body>
+</html>
