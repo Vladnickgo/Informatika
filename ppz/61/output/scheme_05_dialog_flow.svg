@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="373.14pt" height="165.744pt" viewBox="0 0 373.14 165.744" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-06T11:35:02.107798</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 165.744 
+L 373.14 165.744 
+L 373.14 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 186.57 45.1728 
+Q 186.57 48.222 186.57 49.594149 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 188.97 44.794149 
+L 186.57 49.594149 
+L 184.17 44.794149 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 186.57 75.6648 
+Q 186.57 78.714 186.57 80.086149 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 188.97 75.286149 
+L 186.57 80.086149 
+L 184.17 75.286149 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 186.57 106.1568 
+Q 186.57 109.206 186.57 110.578149 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 188.97 105.778149 
+L 186.57 110.578149 
+L 184.17 105.778149 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 80.55 44.064 
+L 292.59 44.064 
+Q 298.17 44.064 298.17 38.52 
+L 298.17 24.66 
+Q 298.17 19.116 292.59 19.116 
+L 80.55 19.116 
+Q 74.97 19.116 74.97 24.66 
+L 74.97 38.52 
+Q 74.97 44.064 80.55 44.064 
+z
+" clip-path="url(#p01f7bd0de6)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 80.55 74.556 
+L 292.59 74.556 
+Q 298.17 74.556 298.17 69.012 
+L 298.17 55.152 
+Q 298.17 49.608 292.59 49.608 
+L 80.55 49.608 
+Q 74.97 49.608 74.97 55.152 
+L 74.97 69.012 
+Q 74.97 74.556 80.55 74.556 
+z
+" clip-path="url(#p01f7bd0de6)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 80.55 105.048 
+L 292.59 105.048 
+Q 298.17 105.048 298.17 99.504 
+L 298.17 85.644 
+Q 298.17 80.1 292.59 80.1 
+L 80.55 80.1 
+Q 74.97 80.1 74.97 85.644 
+L 74.97 99.504 
+Q 74.97 105.048 80.55 105.048 
+z
+" clip-path="url(#p01f7bd0de6)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 80.55 135.54 
+L 292.59 135.54 
+Q 298.17 135.54 298.17 129.996 
+L 298.17 116.136 
+Q 298.17 110.592 292.59 110.592 
+L 80.55 110.592 
+Q 74.97 110.592 74.97 116.136 
+L 74.97 129.996 
+Q 74.97 135.54 80.55 135.54 
+z
+" clip-path="url(#p01f7bd0de6)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="186.57" y="30.329344" transform="rotate(-0 186.57 30.329344)">InputBox</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="186.57" y="38.093469" transform="rotate(-0 186.57 38.093469)">введення даних від користувача</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c93400" x="186.57" y="60.821344" transform="rotate(-0 186.57 60.821344)">Перевірка ""</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="186.57" y="68.585469" transform="rotate(-0 186.57 68.585469)">чи не скасовано?</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="186.57" y="91.272328" transform="rotate(-0 186.57 91.272328)">MsgBox vbYesNo</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="186.57" y="99.077469" transform="rotate(-0 186.57 99.077469)">підтвердження дії</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c4001d" x="186.57" y="121.805344" transform="rotate(-0 186.57 121.805344)">Дія</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="186.57" y="129.569469" transform="rotate(-0 186.57 129.569469)">запис або вихід</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p01f7bd0de6">
+   <rect x="10.8" y="10.8" width="351.54" height="144.144"/>
+  </clipPath>
+ </defs>
+</svg>

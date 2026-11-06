@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="373.14pt" height="149.112pt" viewBox="0 0 373.14 149.112" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-06T11:35:01.766407</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 149.112 
+L 373.14 149.112 
+L 373.14 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 186.57 69.012 
+Q 186.57 77.328 186.57 83.966949 
+" style="fill: none; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 188.97 79.166949 
+L 186.57 83.966949 
+L 184.17 79.166949 
+z
+" style="fill: #c7c7cc; stroke: #c7c7cc; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 23.076 66.24 
+L 120.726 66.24 
+Q 126.306 66.24 126.306 60.696 
+L 126.306 16.344 
+Q 126.306 10.8 120.726 10.8 
+L 23.076 10.8 
+Q 17.496 10.8 17.496 16.344 
+L 17.496 60.696 
+Q 17.496 66.24 23.076 66.24 
+z
+" clip-path="url(#p743e67c35b)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 140.256 66.24 
+L 237.906 66.24 
+Q 243.486 66.24 243.486 60.696 
+L 243.486 16.344 
+Q 243.486 10.8 237.906 10.8 
+L 140.256 10.8 
+Q 134.676 10.8 134.676 16.344 
+L 134.676 60.696 
+Q 134.676 66.24 140.256 66.24 
+z
+" clip-path="url(#p743e67c35b)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 257.436 66.24 
+L 355.086 66.24 
+Q 360.666 66.24 360.666 60.696 
+L 360.666 16.344 
+Q 360.666 10.8 355.086 10.8 
+L 257.436 10.8 
+Q 251.856 10.8 251.856 16.344 
+L 251.856 60.696 
+Q 251.856 66.24 257.436 66.24 
+z
+" clip-path="url(#p743e67c35b)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 66.6 129.996 
+L 306.54 129.996 
+Q 312.12 129.996 312.12 124.452 
+L 312.12 93.96 
+Q 312.12 88.416 306.54 88.416 
+L 66.6 88.416 
+Q 61.02 88.416 61.02 93.96 
+L 61.02 124.452 
+Q 61.02 129.996 66.6 129.996 
+z
+" clip-path="url(#p743e67c35b)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="71.901" y="22.151312" transform="rotate(-0 71.901 22.151312)">Промпт</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="71.901" y="34.535438" transform="rotate(-0 71.901 34.535438)">обов'язковий</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="71.901" y="47.471437" transform="rotate(-0 71.901 47.471437)">текст</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="71.901" y="60.407438" transform="rotate(-0 71.901 60.407438)">повідомлення</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="189.081" y="22.151312" transform="rotate(-0 189.081 22.151312)">Кнопки</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="189.081" y="34.535438" transform="rotate(-0 189.081 34.535438)">опційно</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="189.081" y="47.471437" transform="rotate(-0 189.081 47.471437)">vbYesNo +</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="189.081" y="60.407438" transform="rotate(-0 189.081 60.407438)">vbQuestion</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c93400" x="306.261" y="22.151312" transform="rotate(-0 306.261 22.151312)">Заголовок</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="306.261" y="34.535438" transform="rotate(-0 306.261 34.535438)">опційно</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="306.261" y="47.471437" transform="rotate(-0 306.261 47.471437)">назва</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="306.261" y="60.407438" transform="rotate(-0 306.261 60.407438)">вікна</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 9.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="186.57" y="99.383094" transform="rotate(-0 186.57 99.383094)">Повертає код натиснутої кнопки</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="186.57" y="124.163438" transform="rotate(-0 186.57 124.163438)">vbYes = 6 · vbNo = 7 · vbCancel = 2</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p743e67c35b">
+   <rect x="10.8" y="10.8" width="351.54" height="127.512"/>
+  </clipPath>
+ </defs>
+</svg>
