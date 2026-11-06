@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ТНК та їх вплив на господарство України · Машинобудування та хімічна галузь</title>
+    <style>
+        /* ============ APPLE-INSPIRED DESIGN SYSTEM ============ */
+        :root {
+            --bg: #f5f5f7;
+            --card: #ffffff;
+            --ink: #1d1d1f;
+            --ink-2: #424245;
+            --muted: #6e6e73;
+            --line: #e5e5ea;
+            --line-2: #d2d2d7;
+            --blue: #0071e3;
+            --blue-dark: #0058b0;
+            --blue-soft: #e8f2fd;
+            --green: #34c759;
+            --green-soft: #e8f8ee;
+            --orange: #ff9f0a;
+            --orange-soft: #fff4e0;
+            --red: #ff3b30;
+            --red-soft: #feecea;
+            --purple: #af52de;
+            --purple-soft: #f5eafb;
+            --teal: #5ac8fa;
+            --teal-soft: #e6f6fe;
+            --radius: 20px;
+            --radius-sm: 14px;
+            --shadow: 0 2px 10px rgba(0, 0, 0, .045), 0 12px 36px rgba(0, 0, 0, .055);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .05), 0 4px 14px rgba(0, 0, 0, .04);
+            --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 17px;
+            letter-spacing: -0.011em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: rgba(0, 113, 227, .18)
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative;
+            background: #000;
+            color: #f5f5f7;
+            overflow: hidden;
+            padding: 88px 24px 96px;
+            text-align: center;
+            isolation: isolate;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(ellipse 42% 38% at 22% 24%, rgba(0, 113, 227, .42), transparent 62%),
+                radial-gradient(ellipse 40% 36% at 80% 26%, rgba(90, 200, 250, .26), transparent 62%),
+                radial-gradient(ellipse 46% 42% at 56% 96%, rgba(52, 199, 89, .18), transparent 66%),
+                radial-gradient(ellipse 34% 30% at 92% 84%, rgba(175, 82, 222, .20), transparent 62%);
+            filter: blur(24px);
+            z-index: -2;
+            animation: aurora 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes aurora {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1)
+            }
+
+            50% {
+                transform: translate3d(-2.5%, 1.5%, 0) scale(1.06)
+            }
+
+            100% {
+                transform: translate3d(2%, -2%, 0) scale(1.03)
+            }
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .028) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .028) 1px, transparent 1px);
+            background-size: 52px 52px;
+            mask-image: radial-gradient(ellipse 74% 66% at 50% 46%, #000 22%, transparent 76%);
+            z-index: -1;
+        }
+
+        .hero-inner {
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative
+        }
+
+        .hero .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: .76rem;
+            font-weight: 600;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            color: #a1a1a6;
+            border: 1px solid rgba(255, 255, 255, .14);
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 999px;
+            padding: 7px 16px;
+            margin-bottom: 26px;
+        }
+
+        .hero .eyebrow .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 4px rgba(52, 199, 89, .18);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            font-weight: 700;
+            margin: 0 0 20px;
+            background: linear-gradient(180deg, #ffffff 32%, #a8b8cc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.lead {
+            max-width: 72ch;
+            margin: 0 auto;
+            color: #c7c7cc;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .hero .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 12px;
+            justify-content: center;
+            margin-top: 36px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .8rem;
+            font-weight: 500;
+            color: #e5e5ea;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 999px;
+            padding: 8px 15px;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .pill svg {
+            width: 15px;
+            height: 15px;
+            flex: 0 0 auto;
+            opacity: .85
+        }
+
+        /* ============ LAYOUT ============ */
+        .wrap {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 0 22px 100px
+        }
+
+        .sec {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 40px 44px 44px;
+            margin-top: 26px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, .035);
+            scroll-margin-top: 24px;
+        }
+
+        .sec:first-of-type {
+            margin-top: -44px;
+            position: relative;
+            z-index: 2
+        }
+
+        .sec-head {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            margin-bottom: 26px
+        }
+
+        .sec-head .badge {
+            flex: 0 0 auto;
+            width: 46px;
+            height: 46px;
+            border-radius: 13px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(145deg, var(--blue), #3b9bff);
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            box-shadow: 0 6px 16px rgba(0, 113, 227, .28);
+            letter-spacing: -0.02em;
+        }
+
+        .sec-head .badge.green {
+            background: linear-gradient(145deg, #34c759, #62d97f);
+            box-shadow: 0 6px 16px rgba(52, 199, 89, .28)
+        }
+
+        .sec-head .badge.orange {
+            background: linear-gradient(145deg, #ff9f0a, #ffbd52);
+            box-shadow: 0 6px 16px rgba(255, 159, 10, .3)
+        }
+
+        .sec-head .badge.purple {
+            background: linear-gradient(145deg, #af52de, #c97ee9);
+            box-shadow: 0 6px 16px rgba(175, 82, 222, .28)
+        }
+
+        .sec-head .badge.red {
+            background: linear-gradient(145deg, #ff3b30, #ff6a5e);
+            box-shadow: 0 6px 16px rgba(255, 59, 48, .28)
+        }
+
+        .sec-head .badge.dark {
+            background: linear-gradient(145deg, #1d1d1f, #48484c);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .28)
+        }
+
+        .sec-head .badge.teal {
+            background: linear-gradient(145deg, #5ac8fa, #8adbff);
+            box-shadow: 0 6px 16px rgba(90, 200, 250, .3)
+        }
+
+        .sec-head h2 {
+            font-size: clamp(1.28rem, 2.5vw, 1.62rem);
+            line-height: 1.22;
+            letter-spacing: -0.022em;
+            font-weight: 700;
+            margin: 0 0 6px;
+            color: var(--ink);
+        }
+
+        .sec-head .sub {
+            font-size: .94rem;
+            color: var(--muted);
+            margin: 0;
+            font-weight: 400;
+            line-height: 1.5
+        }
+
+        h3 {
+            font-size: 1.16rem;
+            letter-spacing: -0.016em;
+            font-weight: 650;
+            margin: 34px 0 14px;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3::before {
+            content: "";
+            width: 5px;
+            height: 20px;
+            border-radius: 3px;
+            background: linear-gradient(180deg, var(--blue), #63b1ff);
+            flex: 0 0 auto;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin: 22px 0 10px;
+            color: var(--ink)
+        }
+
+        p {
+            margin: 0 0 15px;
+            color: var(--ink-2)
+        }
+
+        .sec>p:last-child {
+            margin-bottom: 0
+        }
+
+        strong {
+            font-weight: 650;
+            color: var(--ink)
+        }
+
+        em {
+            font-style: normal;
+            color: var(--blue);
+            font-weight: 500
+        }
+
+        /* ============ KEY FACT ============ */
+        .keyfact {
+            display: flex;
+            gap: 16px;
+            background: linear-gradient(135deg, #f8fbff, #eef6fe);
+            border: 1px solid #d6e8fb;
+            border-radius: var(--radius-sm);
+            padding: 20px 22px;
+            margin: 22px 0;
+        }
+
+        .keyfact .kf-ico {
+            flex: 0 0 auto;
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            background: #fff;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 2px 8px rgba(0, 113, 227, .14);
+        }
+
+        .keyfact .kf-ico svg {
+            width: 22px;
+            height: 22px
+        }
+
+        .keyfact .kf-body {
+            flex: 1;
+            min-width: 0
+        }
+
+        .keyfact .kf-title {
+            font-size: .73rem;
+            font-weight: 700;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 6px;
+        }
+
+        .keyfact p {
+            margin: 0;
+            font-size: .97rem;
+            color: var(--ink-2);
+            line-height: 1.58
+        }
+
+        /* ============ CALLOUTS ============ */
+        .callout {
+            border-radius: var(--radius-sm);
+            padding: 20px 22px;
+            margin: 22px 0;
+            border: 1px solid;
+            font-size: .96rem;
+            line-height: 1.6;
+        }
+
+        .callout .label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+
+        .callout .label svg {
+            width: 15px;
+            height: 15px
+        }
+
+        .callout p:last-child {
+            margin-bottom: 0
+        }
+
+        .callout.warn {
+            background: var(--orange-soft);
+            border-color: #ffe0ad
+        }
+
+        .callout.warn .label {
+            color: #a86900
+        }
+
+        .callout.warn p {
+            color: #6b4500
+        }
+
+        .callout.danger {
+            background: var(--red-soft);
+            border-color: #ffd0cc
+        }
+
+        .callout.danger .label {
+            color: #b3261e
+        }
+
+        .callout.danger p {
+            color: #7d1a14
+        }
+
+        .callout.ok {
+            background: var(--green-soft);
+            border-color: #c9eed7
+        }
+
+        .callout.ok .label {
+            color: #1d7a3a
+        }
+
+        .callout.ok p {
+            color: #185f2e
+        }
+
+        .callout.info {
+            background: var(--blue-soft);
+            border-color: #cfe6fb
+        }
+
+        .callout.info .label {
+            color: var(--blue-dark)
+        }
+
+        .callout.info p {
+            color: #1c3d63
+        }
+
+        /* ============ GRIDS / CARDS ============ */
+        .grid {
+            display: grid;
+            gap: 16px
+        }
+
+        .g2 {
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr))
+        }
+
+        .g3 {
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr))
+        }
+
+        .g4 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            padding: 22px 22px 20px;
+            transition: transform .25s cubic-bezier(.25, .46, .45, .94),
+                box-shadow .25s cubic-bezier(.25, .46, .45, .94),
+                border-color .25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, .09);
+            border-color: var(--line-2);
+        }
+
+        .card .ico {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 14px;
+            background: var(--blue-soft);
+        }
+
+        .card .ico svg {
+            width: 23px;
+            height: 23px
+        }
+
+        .card .ico.g {
+            background: var(--green-soft)
+        }
+
+        .card .ico.o {
+            background: var(--orange-soft)
+        }
+
+        .card .ico.r {
+            background: var(--red-soft)
+        }
+
+        .card .ico.p {
+            background: var(--purple-soft)
+        }
+
+        .card .ico.t {
+            background: var(--teal-soft)
+        }
+
+        .card h4 {
+            margin: 0 0 8px;
+            font-size: 1.01rem;
+            line-height: 1.35
+        }
+
+        .card p {
+            margin: 0;
+            font-size: .9rem;
+            color: var(--muted);
+            line-height: 1.6
+        }
+
+        .card .tag {
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 650;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+            background: var(--blue-soft);
+            color: var(--blue-dark);
+        }
+
+        .card .tag.g {
+            background: var(--green-soft);
+            color: #1d7a3a
+        }
+
+        .card .tag.o {
+            background: var(--orange-soft);
+            color: #a86900
+        }
+
+        .card .tag.r {
+            background: var(--red-soft);
+            color: #b3261e
+        }
+
+        .card .tag.p {
+            background: var(--purple-soft);
+            color: #7b2f9e
+        }
+
+        .card .tag.t {
+            background: var(--teal-soft);
+            color: #1c6b8f
+        }
+
+        /* ============ FIGURE / DIAGRAM ============ */
+        figure.diagram {
+            margin: 26px 0 8px;
+            background: linear-gradient(180deg, #fafbfd, #f1f4f9);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            padding: 24px 22px 14px;
+            overflow: hidden;
+        }
+
+        figure.diagram svg {
+            width: 100%;
+            height: auto;
+            display: block
+        }
+
+        figure.diagram figcaption {
+            text-align: center;
+            font-size: .82rem;
+            color: var(--muted);
+            margin-top: 14px;
+            line-height: 1.5;
+        }
+
+        figure.diagram figcaption b {
+            color: var(--ink-2);
+            font-weight: 600
+        }
+
+        /* ============ TABLE ============ */
+        .table-shell {
+            margin: 24px 0 10px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .table-scroll {
+            overflow-x: auto
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 600px;
+            font-size: .91rem
+        }
+
+        thead th {
+            background: #f7f7f9;
+            color: var(--ink);
+            text-align: left;
+            font-weight: 650;
+            font-size: .79rem;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--line);
+            white-space: nowrap;
+        }
+
+        tbody td {
+            padding: 14px 18px;
+            border-top: 1px solid var(--line);
+            color: var(--ink-2);
+            vertical-align: top;
+            line-height: 1.55;
+        }
+
+        tbody tr:first-child td {
+            border-top: none
+        }
+
+        tbody tr:nth-child(even) td {
+            background: #fbfbfd
+        }
+
+        tbody tr:hover td {
+            background: #f3f8ff
+        }
+
+        td:first-child {
+            font-weight: 600;
+            color: var(--ink);
+            white-space: nowrap
+        }
+
+        .company-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .company-cell .logo-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            display: grid;
+            place-items: center;
+            font-size: .72rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+            flex: 0 0 auto;
+        }
+
+        .table-note {
+            font-size: .8rem;
+            color: var(--muted);
+            padding: 12px 18px;
+            background: #f7f7f9;
+            border-top: 1px solid var(--line);
+            line-height: 1.55;
+        }
+
+        /* ============ IMPACT COLUMNS ============ */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 26px 0 6px;
+        }
+
+        .impact-col {
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid;
+        }
+
+        .impact-col.pos {
+            background: #f4fdf7;
+            border-color: #c9eed7
+        }
+
+        .impact-col.neg {
+            background: #fff5f4;
+            border-color: #ffd0cc
+        }
+
+        .impact-col .impact-head {
+            padding: 18px 22px 16px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .impact-col.pos .impact-head {
+            background: linear-gradient(135deg, #34c759, #1d7a3a)
+        }
+
+        .impact-col.neg .impact-head {
+            background: linear-gradient(135deg, #ff6b5e, #b3261e)
+        }
+
+        .impact-col .impact-head .ih-ico {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: rgba(255, 255, 255, .2);
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
+        }
+
+        .impact-col .impact-head .ih-ico svg {
+            width: 19px;
+            height: 19px
+        }
+
+        .impact-col .impact-head h3 {
+            margin: 0;
+            font-size: 1.05rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .impact-col .impact-head h3::before {
+            display: none
+        }
+
+        .impact-col .impact-head .sub {
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .85);
+            font-weight: 400;
+            margin-top: 2px
+        }
+
+        .impact-list {
+            list-style: none;
+            margin: 0;
+            padding: 10px 8px 12px
+        }
+
+        .impact-list li {
+            position: relative;
+            padding: 13px 18px 13px 48px;
+            border-bottom: 1px solid;
+            font-size: .92rem;
+            line-height: 1.55;
+            color: var(--ink-2);
+        }
+
+        .impact-col.pos .impact-list li {
+            border-color: #d9f2e2
+        }
+
+        .impact-col.neg .impact-list li {
+            border-color: #ffe0dc
+        }
+
+        .impact-list li:last-child {
+            border-bottom: none
+        }
+
+        .impact-list li .bullet {
+            position: absolute;
+            left: 16px;
+            top: 13px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: .72rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .impact-col.pos .impact-list li .bullet {
+            background: #34c759
+        }
+
+        .impact-col.neg .impact-list li .bullet {
+            background: #ff3b30
+        }
+
+        .impact-list li b {
+            color: var(--ink);
+            font-weight: 650
+        }
+
+        /* ============ MAP CARDS ============ */
+        .mapcard {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mapcard .map-visual {
+            position: relative;
+            background: #eef3f8
+        }
+
+        .mapcard .map-visual svg {
+            display: block;
+            width: 100%;
+            height: auto
+        }
+
+        .mapcard .body {
+            padding: 20px 22px 22px;
+            flex: 1
+        }
+
+        .mapcard h4 {
+            margin: 0 0 10px;
+            font-size: 1.02rem;
+            line-height: 1.35
+        }
+
+        .mapcard dl {
+            margin: 0;
+            font-size: .89rem
+        }
+
+        .mapcard dt {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-top: 12px;
+        }
+
+        .mapcard dt:first-child {
+            margin-top: 0
+        }
+
+        .mapcard dd {
+            margin: 3px 0 0;
+            color: var(--muted);
+            line-height: 1.58
+        }
+
+        /* ============ TASK BLOCKS ============ */
+        .task-block {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin: 22px 0;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .task-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 22px;
+            background: linear-gradient(135deg, #0071e3, #3b9bff);
+            color: #fff;
+        }
+
+        .task-head .tn {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            background: rgba(255, 255, 255, .22);
+            display: grid;
+            place-items: center;
+            font-size: 1.02rem;
+            font-weight: 800;
+            flex: 0 0 auto;
+        }
+
+        .task-head h4 {
+            margin: 0;
+            font-size: 1.04rem;
+            color: #fff;
+            font-weight: 650
+        }
+
+        .task-head .meta {
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .85);
+            margin-top: 2px
+        }
+
+        .task-body {
+            padding: 22px 24px
+        }
+
+        .task-body p {
+            margin: 0 0 12px
+        }
+
+        .task-body ul {
+            margin: 0 0 12px;
+            padding-left: 0;
+            list-style: none
+        }
+
+        .task-body ul li {
+            position: relative;
+            padding-left: 26px;
+            margin-bottom: 8px;
+            color: var(--ink-2);
+            font-size: .95rem;
+            line-height: 1.58;
+        }
+
+        .task-body ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: .62em;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--blue);
+            box-shadow: 0 0 0 3px var(--blue-soft);
+        }
+
+        .task-body ol {
+            padding-left: 22px;
+            margin: 0 0 12px;
+            color: var(--ink-2)
+        }
+
+        .task-body ol li {
+            margin-bottom: 8px;
+            font-size: .95rem;
+            line-height: 1.58
+        }
+
+        /* ============ RANKING WIDGET ============ */
+        .rank-widget {
+            background: linear-gradient(160deg, #f7fafd, #eaf1f8);
+            border: 1px dashed #b8d1e8;
+            border-radius: var(--radius-sm);
+            padding: 18px 20px;
+            margin: 16px 0;
+            font-size: .9rem;
+            color: var(--muted);
+        }
+
+        .rank-widget .rw-title {
+            font-size: .73rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+
+        .rank-widget .rw-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px
+        }
+
+        .rank-widget .rw-row:last-child {
+            margin-bottom: 0
+        }
+
+        .rank-widget .rw-num {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            background: #fff;
+            color: var(--blue);
+            font-weight: 800;
+            font-size: .82rem;
+            border: 1px solid #cfe6fb;
+            flex: 0 0 auto;
+        }
+
+        .rank-widget .rw-line {
+            flex: 1;
+            height: 8px;
+            border-radius: 999px;
+            background: repeating-linear-gradient(90deg, #e2eaf2 0 8px, transparent 8px 14px);
+        }
+
+        /* ============ QUESTIONS ============ */
+        .questions {
+            counter-reset: q;
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        .questions li {
+            counter-increment: q;
+            position: relative;
+            padding: 20px 22px 20px 70px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            margin-bottom: 14px;
+            background: #fbfbfd;
+            font-size: .97rem;
+            line-height: 1.62;
+            color: var(--ink-2);
+            transition: background .2s ease, border-color .2s ease, transform .2s ease;
+        }
+
+        .questions li::before {
+            content: counter(q);
+            position: absolute;
+            left: 20px;
+            top: 19px;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: linear-gradient(145deg, var(--blue), #3b9bff);
+            color: #fff;
+            font-weight: 700;
+            font-size: .92rem;
+            box-shadow: 0 4px 10px rgba(0, 113, 227, .24);
+        }
+
+        .questions li:hover {
+            background: #fff;
+            border-color: #c9dff7;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .06);
+        }
+
+        .questions li strong {
+            color: var(--ink)
+        }
+
+        /* ============ TOC / NAV ============ */
+        .toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin: 0 0 4px;
+        }
+
+        .toc a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .82rem;
+            font-weight: 500;
+            color: var(--ink-2);
+            text-decoration: none;
+            background: #f5f5f7;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 7px 14px;
+            transition: all .2s ease;
+        }
+
+        .toc a:hover {
+            background: var(--blue-soft);
+            border-color: #bcdcf8;
+            color: var(--blue-dark)
+        }
+
+        .toc a .n {
+            display: inline-grid;
+            place-items: center;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: #fff;
+            font-size: .66rem;
+            font-weight: 700;
+        }
+
+        /* ============ DIVIDER ============ */
+        .divider {
+            height: 1px;
+            background: var(--line);
+            margin: 34px 0
+        }
+
+        /* ============ FOOTER ============ */
+        .foot {
+            text-align: center;
+            color: var(--muted);
+            font-size: .83rem;
+            padding: 50px 22px 20px;
+            line-height: 1.7;
+        }
+
+        .foot b {
+            color: var(--ink-2);
+            font-weight: 600
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width:760px) {
+            body {
+                font-size: 16px
+            }
+
+            .sec {
+                padding: 28px 22px 32px;
+                border-radius: var(--radius-sm)
+            }
+
+            .sec:first-of-type {
+                margin-top: -28px
+            }
+
+            .sec-head {
+                gap: 14px
+            }
+
+            .sec-head .badge {
+                width: 40px;
+                height: 40px;
+                font-size: .95rem;
+                border-radius: 11px
+            }
+
+            .hero {
+                padding: 60px 20px 70px
+            }
+
+            .questions li {
+                padding: 16px 18px 16px 60px
+            }
+
+            .questions li::before {
+                left: 16px;
+                top: 15px;
+                width: 30px;
+                height: 30px;
+                font-size: .84rem
+            }
+
+            h3 {
+                font-size: 1.06rem
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr
+            }
+
+            .task-head {
+                padding: 14px 16px
+            }
+
+            .task-body {
+                padding: 16px 18px
+            }
+        }
+
+        /* ============ PRINT ============ */
+        @media print {
+            @page {
+                size: A4;
+                margin: 12mm 10mm
+            }
+
+            html {
+                background: #fff
+            }
+
+            body {
+                background: #fff !important;
+                color: #000;
+                font-size: 10.4pt;
+                line-height: 1.45;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .hero {
+                padding: 22px 18px 26px;
+                background: #111 !important;
+                color: #fff !important;
+                border-radius: 0;
+                page-break-after: avoid;
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none !important
+            }
+
+            .hero h1 {
+                font-size: 20pt;
+                -webkit-text-fill-color: #fff;
+                background: none;
+                color: #fff !important
+            }
+
+            .hero p.lead {
+                color: #e3e3e8 !important;
+                font-size: 10.5pt
+            }
+
+            .hero .meta-row,
+            .hero .eyebrow {
+                display: none !important
+            }
+
+            .wrap {
+                max-width: none;
+                padding: 0 0 10mm
+            }
+
+            .sec {
+                box-shadow: none !important;
+                border: 1px solid #cfcfd4 !important;
+                border-radius: 8px !important;
+                padding: 16px 18px 18px;
+                margin: 0 0 7mm !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                background: #fff !important;
+            }
+
+            .sec:first-of-type {
+                margin-top: 0 !important
+            }
+
+            .sec-head {
+                page-break-after: avoid;
+                break-after: avoid;
+                margin-bottom: 14px
+            }
+
+            .sec-head .badge {
+                width: 30px;
+                height: 30px;
+                border-radius: 8px;
+                font-size: .8rem;
+                box-shadow: none !important;
+            }
+
+            .sec-head h2 {
+                font-size: 13.5pt
+            }
+
+            .sec-head .sub {
+                font-size: 9pt
+            }
+
+            h3 {
+                font-size: 11.5pt;
+                margin: 16px 0 8px;
+                page-break-after: avoid;
+                break-after: avoid
+            }
+
+            h4 {
+                font-size: 10.5pt;
+                page-break-after: avoid;
+                break-after: avoid
+            }
+
+            p {
+                orphans: 3;
+                widows: 3;
+                margin-bottom: 8px
+            }
+
+            .card,
+            .mapcard,
+            .keyfact,
+            .callout,
+            figure.diagram,
+            .table-shell,
+            .questions li,
+            .task-block,
+            .impact-col,
+            .impact-list li {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                box-shadow: none !important;
+            }
+
+            .grid {
+                gap: 9px
+            }
+
+            .impact-grid {
+                gap: 8px
+            }
+
+            .card {
+                padding: 12px 14px;
+                border-radius: 8px
+            }
+
+            .card p {
+                font-size: 8.8pt
+            }
+
+            .impact-list li {
+                padding: 8px 12px 8px 34px;
+                font-size: 8.8pt
+            }
+
+            .impact-list li .bullet {
+                left: 10px;
+                top: 8px;
+                width: 18px;
+                height: 18px;
+                font-size: .62rem
+            }
+
+            .impact-col .impact-head {
+                padding: 12px 14px
+            }
+
+            .impact-col .impact-head h3 {
+                font-size: 10.5pt
+            }
+
+            .impact-col .impact-head .sub {
+                font-size: 7.6pt
+            }
+
+            .keyfact,
+            .callout {
+                border-radius: 8px;
+                padding: 12px 14px;
+                margin: 12px 0
+            }
+
+            .keyfact p,
+            .callout p {
+                font-size: 9.3pt
+            }
+
+            figure.diagram {
+                padding: 12px 12px 8px;
+                border-radius: 8px;
+                margin: 14px 0 4px
+            }
+
+            figure.diagram figcaption {
+                font-size: 8pt;
+                margin-top: 8px
+            }
+
+            .table-shell {
+                border-radius: 8px;
+                margin: 14px 0 6px
+            }
+
+            table {
+                min-width: 0;
+                font-size: 8.6pt
+            }
+
+            thead th {
+                padding: 8px 10px;
+                font-size: 7.2pt
+            }
+
+            tbody td {
+                padding: 8px 10px
+            }
+
+            .company-cell .logo-dot {
+                width: 24px;
+                height: 24px;
+                font-size: .58rem;
+                border-radius: 6px
+            }
+
+            .table-note {
+                font-size: 7.6pt;
+                padding: 8px 10px
+            }
+
+            .task-block {
+                border-radius: 8px;
+                margin: 12px 0
+            }
+
+            .task-head {
+                padding: 12px 14px
+            }
+
+            .task-head .tn {
+                width: 28px;
+                height: 28px;
+                border-radius: 7px;
+                font-size: .82rem
+            }
+
+            .task-head h4 {
+                font-size: 10.5pt
+            }
+
+            .task-head .meta {
+                font-size: 7.6pt
+            }
+
+            .task-body {
+                padding: 12px 14px
+            }
+
+            .task-body ul li,
+            .task-body ol li {
+                font-size: 9pt;
+                margin-bottom: 5px
+            }
+
+            .rank-widget {
+                padding: 10px 14px;
+                font-size: 8.6pt
+            }
+
+            .toc {
+                display: none !important
+            }
+
+            .questions li {
+                padding: 10px 12px 10px 44px;
+                margin-bottom: 8px;
+                font-size: 9.2pt
+            }
+
+            .questions li::before {
+                left: 10px;
+                top: 9px;
+                width: 24px;
+                height: 24px;
+                font-size: .72rem;
+                box-shadow: none !important
+            }
+
+            .divider {
+                margin: 16px 0
+            }
+
+            .foot {
+                padding: 16px 0 0;
+                font-size: 8pt
+            }
+
+            .hero .pill {
+                display: none
+            }
+
+            a {
+                color: #000 !important;
+                text-decoration: none !important
+            }
+
+            .card:hover,
+            .questions li:hover {
+                transform: none !important;
+                box-shadow: none !important
+            }
+
+            .hero,
+            .sec {
+                page-break-inside: avoid
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================== HERO ==================== -->
+    <header class="hero">
+        <div class="hero-inner">
+            <span class="eyebrow"><span class="dot"></span> Розділ І. Загальні суспільно-географічні закономірності
+                світу.
+            </span>
+            <h1>Транснаціональні компанії (ТНК)<br>та їх вплив на господарство України</h1>
+            <p class="lead">
+                Роль і вплив ТНК на розвиток та сучасний стан ключових галузей промисловості
+                України — на прикладі <strong style="color:white">машинобудівної</strong> та <strong
+                    style="color:white">хімічної</strong> галузей.<br>
+                Аргументи щодо переваг та ризиків їхньої діяльності.
+            </p>
+            <div class="meta-row">
+                <span class="pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M3 12h18" />
+                        <path d="M12 3c2.8 3 2.8 15 0 18c-2.8-3-2.8-15 0-18z" />
+                    </svg>
+                    Глобалізація
+                </span>
+                <span class="pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 20h18" />
+                        <rect x="4" y="12" width="3.6" height="8" />
+                        <rect x="10.2" y="8" width="3.6" height="12" />
+                        <rect x="16.4" y="4" width="3.6" height="16" />
+                    </svg>
+                    Інвестиції та технології
+                </span>
+                <span class="pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 2 L20 5v7c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z" />
+                    </svg>
+                    Переваги та ризики
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <div class="wrap">
+
+        <!-- ==================== TOC ==================== -->
+        <nav class="toc" aria-label="Зміст заняття">
+            <a href="#s1"><span class="n">1</span> Що таке ТНК</a>
+            <a href="#s2"><span class="n">2</span> Типи ТНК</a>
+            <a href="#s3"><span class="n">3</span> Чому ТНК ідуть в Україну</a>
+            <a href="#s4"><span class="n">4</span> Приклади ТНК</a>
+            <a href="#s5"><span class="n">5</span> Вплив на господарство</a>
+            <a href="#s6"><span class="n">6</span> Галузевий аналіз</a>
+            <a href="#tasks"><span class="n">✎</span> Практичні завдання</a>
+            <a href="#questions"><span class="n">?</span> Контрольні запитання</a>
+        </nav>
+
+        <!-- ==================== ВСТУП ==================== -->
+        <section class="sec" id="intro">
+            <div class="sec-head">
+                <div class="badge dark">В</div>
+                <div>
+                    <h2>Вступ: чому ТНК важливі для України</h2>
+                    <p class="sub">Глобалізація економіки та місце України в ній</p>
+                </div>
+            </div>
+
+            <p>
+                У сучасному світі економічний розвиток країн дедалі більше визначається діяльністю
+                <strong>транснаціональних компаній (ТНК)</strong>. Вони контролюють значну частину
+                світової торгівлі, інвестицій, технологій та інновацій. Для України, яка інтегрується
+                у світовий економічний простір, діяльність ТНК є водночас і <em>потужним драйвером
+                    модернізації</em>, і <em>джерелом серйозних викликів</em>.
+            </p>
+
+            <p>
+                Найбільш показовими для аналізу є дві галузі:
+                <strong>машинобудування</strong> (високотехнологічне, капіталомістке виробництво) та
+                <strong>хімічна промисловість</strong> (ресурсомістке виробництво з високими
+                екологічними ризиками). Саме тут присутність іноземних корпорацій є найбільш
+                помітною та суперечливою.
+            </p>
+
+            <div class="keyfact">
+                <div class="kf-ico">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.9" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M3 12h18" />
+                        <path d="M12 3c2.8 3 2.8 15 0 18c-2.8-3-2.8-15 0-18z" />
+                    </svg>
+                </div>
+                <div class="kf-body">
+                    <div class="kf-title">Мета заняття</div>
+                    <p>
+                        З’ясувати роль та вплив транснаціональних компаній на розвиток та сучасний стан
+                        ключових галузей промисловості України, сформулювати аргументи щодо переваг та
+                        ризиків їхньої діяльності.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 1. ЩО ТАКЕ ТНК ==================== -->
+        <section class="sec" id="s1">
+            <div class="sec-head">
+                <div class="badge">1</div>
+                <div>
+                    <h2>Що таке транснаціональна компанія (ТНК)?</h2>
+                    <p class="sub">Визначення, ключова ознака та структура</p>
+                </div>
+            </div>
+
+            <p>
+                <strong>ТНК</strong> — це велика корпорація, яка веде бізнес у <em>двох або більше
+                    країнах світу</em>. Її головна компанія (штаб-квартира) розташована в одній країні
+                (часто розвиненій), а виробничі підрозділи, дочірні фірми та офіси — у багатьох інших.
+            </p>
+
+            <div class="callout info">
+                <span class="label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 16v-4" />
+                        <path d="M12 8h.01" />
+                    </svg>
+                    Ключова ознака
+                </span>
+                <p>
+                    <strong>Координація та інтеграція діяльності</strong> між підрозділами у різних
+                    країнах для досягнення максимального прибутку.
+                </p>
+            </div>
+
+            <h3>Структура типової ТНК</h3>
+
+            <figure class="diagram">
+                <svg viewBox="0 0 820 400" role="img"
+                    aria-label="Структура типової ТНК: материнська компанія та зарубіжні підрозділи">
+                    <defs>
+                        <linearGradient id="hqG" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#0071e3" />
+                            <stop offset="100%" stop-color="#0058b0" />
+                        </linearGradient>
+                        <linearGradient id="subG" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#e8f2fd" />
+                            <stop offset="100%" stop-color="#cfe6fb" />
+                        </linearGradient>
+                        <marker id="lnk" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto">
+                            <path d="M0,0 L9,4.5 L0,9 z" fill="#8ba7c0" />
+                        </marker>
+                    </defs>
+
+                    <!-- Материнська компанія -->
+                    <rect x="290" y="30" width="240" height="92" rx="16" fill="url(#hqG)" />
+                    <text x="410" y="66" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">МАТЕРИНСЬКА
+                        КОМПАНІЯ</text>
+                    <text x="410" y="88" text-anchor="middle" font-size="12.5" fill="#cfe4fb">штаб-квартира · країна
+                        походження</text>
+                    <text x="410" y="108" text-anchor="middle" font-size="11.5" fill="#a8c9ea">стратегія · R&amp;D ·
+                        фінанси</text>
+
+                    <!-- Лінії вниз -->
+                    <g stroke="#8ba7c0" stroke-width="2" fill="none" marker-end="url(#lnk)">
+                        <path d="M410 122 L410 172" />
+                        <path d="M410 172 L140 172 L140 212" />
+                        <path d="M410 172 L290 172 L290 212" />
+                        <path d="M410 172 L530 172 L530 212" />
+                        <path d="M410 172 L680 172 L680 212" />
+                    </g>
+
+                    <!-- Дочірні підрозділи -->
+                    <g>
+                        <rect x="60" y="212" width="160" height="76" rx="12" fill="url(#subG)" stroke="#a9c8e5" />
+                        <text x="140" y="240" text-anchor="middle" font-size="12.5" font-weight="700"
+                            fill="#123152">Виробництво</text>
+                        <text x="140" y="260" text-anchor="middle" font-size="11" fill="#3f5c78">завод / фабрика</text>
+                        <text x="140" y="276" text-anchor="middle" font-size="10.5" fill="#6b8299">країна Б</text>
+
+                        <rect x="210" y="212" width="160" height="76" rx="12" fill="url(#subG)" stroke="#a9c8e5" />
+                        <text x="290" y="240" text-anchor="middle" font-size="12.5" font-weight="700"
+                            fill="#123152">Збут / маркетинг</text>
+                        <text x="290" y="260" text-anchor="middle" font-size="11" fill="#3f5c78">торговельна
+                            філія</text>
+                        <text x="290" y="276" text-anchor="middle" font-size="10.5" fill="#6b8299">країна В</text>
+
+                        <rect x="450" y="212" width="160" height="76" rx="12" fill="url(#subG)" stroke="#a9c8e5" />
+                        <text x="530" y="240" text-anchor="middle" font-size="12.5" font-weight="700"
+                            fill="#123152">Дослідження</text>
+                        <text x="530" y="260" text-anchor="middle" font-size="11" fill="#3f5c78">R&amp;D-центр</text>
+                        <text x="530" y="276" text-anchor="middle" font-size="10.5" fill="#6b8299">країна Г</text>
+
+                        <rect x="600" y="212" width="160" height="76" rx="12" fill="url(#subG)" stroke="#a9c8e5" />
+                        <text x="680" y="240" text-anchor="middle" font-size="12.5" font-weight="700"
+                            fill="#123152">Фінанси</text>
+                        <text x="680" y="260" text-anchor="middle" font-size="11" fill="#3f5c78">офшор /
+                            казначейство</text>
+                        <text x="680" y="276" text-anchor="middle" font-size="10.5" fill="#6b8299">країна Д</text>
+                    </g>
+
+                    <!-- Нижній ряд -->
+                    <g stroke="#8ba7c0" stroke-width="1.8" fill="none" marker-end="url(#lnk)">
+                        <path d="M140 288 L140 336" />
+                        <path d="M290 288 L290 336" />
+                        <path d="M530 288 L530 336" />
+                        <path d="M680 288 L680 336" />
+                    </g>
+
+                    <g>
+                        <rect x="60" y="336" width="160" height="48" rx="10" fill="#fff" stroke="#cfe6fb" />
+                        <text x="140" y="364" text-anchor="middle" font-size="11.5" fill="#424245">постачання
+                            сировини</text>
+
+                        <rect x="210" y="336" width="160" height="48" rx="10" fill="#fff" stroke="#cfe6fb" />
+                        <text x="290" y="364" text-anchor="middle" font-size="11.5" fill="#424245">сервісні
+                            центри</text>
+
+                        <rect x="450" y="336" width="160" height="48" rx="10" fill="#fff" stroke="#cfe6fb" />
+                        <text x="530" y="364" text-anchor="middle" font-size="11.5" fill="#424245">спільні
+                            підприємства</text>
+
+                        <rect x="600" y="336" width="160" height="48" rx="10" fill="#fff" stroke="#cfe6fb" />
+                        <text x="680" y="364" text-anchor="middle" font-size="11.5" fill="#424245">податкова
+                            оптимізація</text>
+                    </g>
+                </svg>
+                <figcaption><b>Рис. 1.</b> Типова структура ТНК: материнська компанія координує мережу зарубіжних
+                    підрозділів</figcaption>
+            </figure>
+        </section>
+
+        <!-- ==================== 2. ТИПИ ТНК ==================== -->
+        <section class="sec" id="s2">
+            <div class="sec-head">
+                <div class="badge teal">2</div>
+                <div>
+                    <h2>Типи ТНК за ступенем інтернаціоналізації</h2>
+                    <p class="sub">Від національного експортера до глобальної корпорації</p>
+                </div>
+            </div>
+
+            <p>
+                ТНК не є однорідним явищем. Залежно від глибини інтеграції діяльності в різних
+                країнах виділяють три основні типи. Ця класифікація показує <em>еволюцію компанії</em>
+                від національного лідера до глобального гравця.
+            </p>
+
+            <!-- ПІРАМІДА -->
+            <figure class="diagram">
+                <svg viewBox="0 0 820 380" role="img" aria-label="Піраміда типів ТНК за ступенем інтернаціоналізації">
+                    <defs>
+                        <linearGradient id="pyr1" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#5ac8fa" />
+                            <stop offset="100%" stop-color="#0071e3" />
+                        </linearGradient>
+                        <linearGradient id="pyr2" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#34c759" />
+                            <stop offset="100%" stop-color="#1d7a3a" />
+                        </linearGradient>
+                        <linearGradient id="pyr3" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#af52de" />
+                            <stop offset="100%" stop-color="#7b2f9e" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Основа: Інтернаціональні -->
+                    <polygon points="110,340 710,340 620,250 200,250" fill="url(#pyr1)" opacity=".9" />
+                    <text x="410" y="284" text-anchor="middle" font-size="17" font-weight="800"
+                        fill="#fff">ІНТЕРНАЦІОНАЛЬНІ</text>
+                    <text x="410" y="308" text-anchor="middle" font-size="12.5" fill="#e0f2ff">національні компанії з
+                        експортом / закордонними активами</text>
+                    <text x="410" y="328" text-anchor="middle" font-size="11" fill="#bde3fa">приклад: український
+                        виробник із філією за кордоном</text>
+
+                    <!-- Середина: Багатонаціональні -->
+                    <polygon points="200,250 620,250 540,160 280,160" fill="url(#pyr2)" opacity=".92" />
+                    <text x="410" y="196" text-anchor="middle" font-size="16" font-weight="800"
+                        fill="#fff">БАГАТОНАЦІОНАЛЬНІ</text>
+                    <text x="410" y="218" text-anchor="middle" font-size="12" fill="#dffbe8">об’єднують капітал та
+                        підприємства кількох країн</text>
+                    <text x="410" y="236" text-anchor="middle" font-size="10.5" fill="#bdeecb">приклад: спільне
+                        підприємство двох країн</text>
+
+                    <!-- Вершина: Глобальні -->
+                    <polygon points="280,160 540,160 470,70 350,70" fill="url(#pyr3)" opacity=".95" />
+                    <text x="410" y="104" text-anchor="middle" font-size="15" font-weight="800"
+                        fill="#fff">ГЛОБАЛЬНІ</text>
+                    <text x="410" y="126" text-anchor="middle" font-size="11.5" fill="#f1ddfb">єдина світова
+                        система</text>
+                    <text x="410" y="146" text-anchor="middle" font-size="10.5" fill="#e2c6f3">приклад: Apple, Siemens,
+                        BASF</text>
+
+                    <!-- Вершина-стрілка -->
+                    <text x="410" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#6e6e73">↑ вищий
+                        ступінь інтернаціоналізації</text>
+                </svg>
+                <figcaption><b>Рис. 2.</b> Піраміда типів ТНК: від інтернаціональних до глобальних</figcaption>
+            </figure>
+
+            <div class="grid g3">
+                <div class="card">
+                    <div class="ico t">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#1c6b8f" stroke-width="1.9" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M3 12h18" />
+                            <path d="M12 3v18" />
+                            <circle cx="12" cy="12" r="9" />
+                        </svg>
+                    </div>
+                    <span class="tag t">Рівень 1</span>
+                    <h4>Інтернаціональні</h4>
+                    <p>Національні компанії, які вийшли на міжнародний ринок шляхом експорту або створення закордонних
+                        активів.</p>
+                </div>
+                <div class="card">
+                    <div class="ico g">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#1d7a3a" stroke-width="1.9" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <span class="tag g">Рівень 2</span>
+                    <h4>Багатонаціональні</h4>
+                    <p>Корпорації, що об’єднують капітал та підприємства кількох країн.</p>
+                </div>
+                <div class="card">
+                    <div class="ico p">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#7b2f9e" stroke-width="1.9" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M2 12h20" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10a15.3 15.3 0 0 1-4 10a15.3 15.3 0 0 1-4-10a15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                    </div>
+                    <span class="tag p">Рівень 3</span>
+                    <h4>Глобальні</h4>
+                    <p>Найвища форма, що інтегрує господарську діяльність по всьому світу в єдину систему.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. ЧОМУ ТНК В УКРАЇНІ ==================== -->
+        <section class="sec" id="s3">
+            <div class="sec-head">
+                <div class="badge orange">3</div>
+                <div>
+                    <h2>Чому ТНК виходять на ринок України</h2>
+                    <p class="sub">Географія, ринок, ресурси та промислова база</p>
+                </div>
+            </div>
+
+            <p>
+                Україна має низку конкурентних переваг, які роблять її привабливою для транснаціонального
+                капіталу. Водночас ці ж фактори визначають і характер ризиків, з якими стикається
+                українська економіка.
+            </p>
+
+            <div class="grid g2">
+                <div class="card">
+                    <div class="ico">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.9" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M3 12h18" />
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 3c2.8 3 2.8 15 0 18c-2.8-3-2.8-15 0-18z" />
+                        </svg>
+                    </div>
+                    <span class="tag">Фактор 1</span>
+                    <h4>Географічне положення</h4>
+                    <p>«Ворота» до Європи, близькість до ринків ЄС та країн СНД. Вигідне транзитне розташування між
+                        Сходом і Заходом.</p>
+                </div>
+                <div class="card">
+                    <div class="ico g">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#1d7a3a" stroke-width="1.9" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        </svg>
+                    </div>
+                    <span class="tag g">Фактор 2</span>
+                    <h4>Доступ до ринку</h4>
+                    <p>Велика кількість потенційних споживачів — понад 40 млн осіб, а з урахуванням сусідніх ринків —
+                        значно більше.</p>
+                </div>
+                <div class="card">
+                    <div class="ico o">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#a86900" stroke-width="1.9" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M12 2v20" />
+                            <path d="M2 12h20" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                    </div>
+                    <span class="tag o">Фактор 3</span>
+                    <h4>Трудові ресурси</h4>
+                    <p>Кваліфікована та відносно недорога робоча сила. Значна частка населення з вищою освітою, особливо
+                        в технічних галузях.</p>
+                </div>
+                <div class="card">
+                    <div class="ico p">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#7b2f9e" stroke-width="1.9" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M12 2 L2 7l10 5 10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <span class="tag p">Фактор 4</span>
+                    <h4>Природні ресурси</h4>
+                    <p>Родовища корисних копалин, сприятливі умови для сільського господарства (сировина для хімічної
+                        промисловості).</p>
+                </div>
+                <div class="card">
+                    <div class="ico r">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#b3261e" stroke-width="1.9" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M3 21h18" />
+                            <path d="M5 21V7l7-4 7 4v14" />
+                            <path d="M9 21v-6h6v6" />
+                        </svg>
+                    </div>
+                    <span class="tag r">Фактор 5</span>
+                    <h4>Промислова база</h4>
+                    <p>Наявність готових виробничих потужностей (заводів) та інфраструктури — спадщина радянської
+                        індустріалізації.</p>
+                </div>
+            </div>
+
+            <div class="callout warn">
+                <span class="label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 9v4" />
+                        <path d="M12 17h.01" />
+                        <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+                    </svg>
+                    Двоїстий характер
+                </span>
+                <p>
+                    Ті самі фактори, що приваблюють ТНК, створюють і <strong>ризики</strong>:
+                    дешева робоча сила — це водночас низька оплата праці; наявність готових потужностей —
+                    це водночас застарілість основних фондів, що потребують модернізації.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== 4. ПРИКЛАДИ ТНК ==================== -->
+        <section class="sec" id="s4">
+            <div class="sec-head">
+                <div class="badge">4</div>
+                <div>
+                    <h2>Приклади ТНК у машинобудівній та хімічній галузях України</h2>
+                    <p class="sub">Країни-засновники, галузі та діяльність</p>
+                </div>
+            </div>
+
+            <div class="table-shell">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ТНК</th>
+                                <th>Країна-засновник</th>
+                                <th>Галузь в Україні</th>
+                                <th>Діяльність в Україні</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <span class="logo-dot"
+                                            style="background:linear-gradient(135deg,#009999,#00b3b3)">S</span>
+                                        Siemens
+                                    </div>
+                                </td>
+                                <td>Німеччина</td>
+                                <td>Машинобудування</td>
+                                <td>Виробництво систем контролю, автоматизації, енергетичного обладнання.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <span class="logo-dot"
+                                            style="background:linear-gradient(135deg,#005a8c,#0077b6)">B</span>
+                                        BASF
+                                    </div>
+                                </td>
+                                <td>Німеччина</td>
+                                <td>Хімічна</td>
+                                <td>Виробництво хімічних продуктів, агрохімікатів, пластмас.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <span class="logo-dot"
+                                            style="background:linear-gradient(135deg,#1d6fb8,#3b9bff)">GE</span>
+                                        General Electric (GE)
+                                    </div>
+                                </td>
+                                <td>США</td>
+                                <td>Машинобудування</td>
+                                <td>Розробка та поставка рішень для енергетики, транспорту, авіації.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <span class="logo-dot"
+                                            style="background:linear-gradient(135deg,#c0392b,#e74c3c)">D</span>
+                                        Dow Chemical
+                                    </div>
+                                </td>
+                                <td>США</td>
+                                <td>Хімічна</td>
+                                <td>Виробництво пластмас, хімічних речовин, агрохімікатів.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <span class="logo-dot"
+                                            style="background:linear-gradient(135deg,#e67e22,#f39c12)">AM</span>
+                                        ArcelorMittal
+                                    </div>
+                                </td>
+                                <td>Люксембург</td>
+                                <td>Машинобудування (металургія)</td>
+                                <td>Виробництво сталевих виробів.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="company-cell">
+                                        <span class="logo-dot"
+                                            style="background:linear-gradient(135deg,#f1c40f,#e67e22)">RNM</span>
+                                        Renault-Nissan-Mitsubishi
+                                    </div>
+                                </td>
+                                <td>Франція / Японія</td>
+                                <td>Машинобудування (автомобільна)</td>
+                                <td>Виробництво автомобілів та запчастин.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-note">
+                    Таблиця 1. Приклади транснаціональних компаній, присутніх в Україні, у розрізі
+                    машинобудівної та хімічної галузей.
+                </div>
+            </div>
+
+            <h3>Географія походження ТНК</h3>
+
+            <figure class="diagram">
+                <svg viewBox="0 0 820 260" role="img" aria-label="Розподіл ТНК за країнами походження">
+                    <defs>
+                        <linearGradient id="barBlue" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#0071e3" />
+                            <stop offset="100%" stop-color="#5ac8fa" />
+                        </linearGradient>
+                        <linearGradient id="barGreen" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#34c759" />
+                            <stop offset="100%" stop-color="#6fe08c" />
+                        </linearGradient>
+                        <linearGradient id="barOrange" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#ff9f0a" />
+                            <stop offset="100%" stop-color="#ffc24d" />
+                        </linearGradient>
+                        <linearGradient id="barPurple" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#af52de" />
+                            <stop offset="100%" stop-color="#cc85ea" />
+                        </linearGradient>
+                    </defs>
+
+                    <text x="410" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1d1d1f">Розподіл
+                        країн-засновників за кількістю компаній у вибірці</text>
+
+                    <!-- Ряд 1 -->
+                    <text x="30" y="76" font-size="13" font-weight="600" fill="#424245">Німеччина</text>
+                    <rect x="160" y="58" width="220" height="26" rx="13" fill="url(#barBlue)" />
+                    <text x="396" y="76" font-size="12.5" font-weight="700" fill="#0071e3">2 компанії</text>
+
+                    <!-- Ряд 2 -->
+                    <text x="30" y="116" font-size="13" font-weight="600" fill="#424245">США</text>
+                    <rect x="160" y="98" width="220" height="26" rx="13" fill="url(#barGreen)" />
+                    <text x="396" y="116" font-size="12.5" font-weight="700" fill="#1d7a3a">2 компанії</text>
+
+                    <!-- Ряд 3 -->
+                    <text x="30" y="156" font-size="13" font-weight="600" fill="#424245">Люксембург</text>
+                    <rect x="160" y="138" width="110" height="26" rx="13" fill="url(#barOrange)" />
+                    <text x="286" y="156" font-size="12.5" font-weight="700" fill="#a86900">1 компанія</text>
+
+                    <!-- Ряд 4 -->
+                    <text x="30" y="196" font-size="13" font-weight="600" fill="#424245">Франція / Японія</text>
+                    <rect x="160" y="178" width="110" height="26" rx="13" fill="url(#barPurple)" />
+                    <text x="286" y="196" font-size="12.5" font-weight="700" fill="#7b2f9e">1 компанія</text>
+
+                    <!-- Пояснення -->
+                    <text x="410" y="240" text-anchor="middle" font-size="11.5" fill="#6e6e73">Усі країни-засновники —
+                        розвинені економіки з високим рівнем доходу</text>
+                </svg>
+                <figcaption><b>Рис. 3.</b> Країни-засновники ТНК у вибірці: розвинені економіки домінують</figcaption>
+            </figure>
+
+            <div class="callout info">
+                <span class="label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 16v-4" />
+                        <path d="M12 8h.01" />
+                    </svg>
+                    Аналітичний коментар
+                </span>
+                <p>
+                    Усі компанії у таблиці походять із <strong>розвинених країн</strong> (Німеччина, США,
+                    Люксембург, Франція, Японія). Це відображає загальну закономірність: ТНК створюються
+                    в країнах із потужним фінансовим капіталом, розвиненою наукою та високою
+                    продуктивністю праці. Країни, що розвиваються, переважно <em>приймають</em>
+                    інвестиції, а не створюють власні глобальні корпорації.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== 5. ВПЛИВ НА ГОСПОДАРСТВО ==================== -->
+        <section class="sec" id="s5">
+            <div class="sec-head">
+                <div class="badge green">5</div>
+                <div>
+                    <h2>Вплив ТНК на господарство України</h2>
+                    <p class="sub">Переваги та ризики діяльності транснаціональних компаній</p>
+                </div>
+            </div>
+
+            <p>
+                Діяльність ТНК в Україні має <strong>двоїстий характер</strong>: вона приносить як
+                суттєві позитивні ефекти, так і серйозні ризики. Розуміння обох сторін є ключем до
+                виваженої державної політики.
+            </p>
+
+            <!-- ДВОКОЛОНКОВА ПОРІВНЯЛЬНА СХЕМА -->
+            <div class="impact-grid">
+                <div class="impact-col pos">
+                    <div class="impact-head">
+                        <div class="ih-ico">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Позитивний вплив</h3>
+                            <div class="sub">Переваги для економіки</div>
+                        </div>
+                    </div>
+                    <ul class="impact-list">
+                        <li><span class="bullet">1</span><b>Технологічний трансфер:</b> впровадження новітніх
+                            технологій, знань і стандартів якості.</li>
+                        <li><span class="bullet">2</span><b>Інвестиції:</b> капіталовкладення в модернізацію обладнання
+                            та будівництво нових цехів.</li>
+                        <li><span class="bullet">3</span><b>Розвиток експорту:</b> використання ТНК власних логістичних
+                            та маркетингових каналів для виходу української продукції на світові ринки.</li>
+                        <li><span class="bullet">4</span><b>Розвиток інфраструктури:</b> вкладення в дороги, залізниці,
+                            енергомережі для власних потреб, що покращує умови для всіх.</li>
+                        <li><span class="bullet">5</span><b>Створення робочих місць:</b> працевлаштування місцевого
+                            населення.</li>
+                        <li><span class="bullet">6</span><b>Підвищення кваліфікації персоналу:</b> навчання працівників
+                            за рахунок компанії.</li>
+                    </ul>
+                </div>
+
+                <div class="impact-col neg">
+                    <div class="impact-head">
+                        <div class="ih-ico">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18" />
+                                <path d="M6 6l12 12" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Негативний вплив</h3>
+                            <div class="sub">Ризики та проблеми</div>
+                        </div>
+                    </div>
+                    <ul class="impact-list">
+                        <li><span class="bullet">1</span><b>Відтік капіталу:</b> вивіз прибутку за кордон, а не
+                            реінвестування в українську економіку.</li>
+                        <li><span class="bullet">2</span><b>Конкуренція для місцевих виробників:</b> могутні ТНК можуть
+                            витіснити з ринку українські малі та середні підприємства.</li>
+                        <li><span class="bullet">3</span><b>Загроза деіндустріалізації:</b> Україна може перетворитися
+                            на «складовий цех» без власних комплексних виробництв.</li>
+                        <li><span class="bullet">4</span><b>Екологічні проблеми:</b> ризик забруднення навколишнього
+                            середовища, особливо в хімічній промисловості.</li>
+                        <li><span class="bullet">5</span><b>Вплив на політику:</b> можливий тиск ТНК на уряд для
+                            прийняття вигідних їм рішень.</li>
+                        <li><span class="bullet">6</span><b>Соціальна відповідальність:</b> не завжди високі стандарти
+                            оплати праці та умов роботи переносяться на українські підприємства.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout warn">
+                <span class="label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 9v4" />
+                        <path d="M12 17h.01" />
+                        <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+                    </svg>
+                    Баланс інтересів
+                </span>
+                <p>
+                    Ключове питання полягає не в тому, «добре» чи «погано» присутність ТНК, а в тому,
+                    як держава може <strong>максимізувати переваги та мінімізувати ризики</strong>.
+                    Це вимагає ефективного регулювання, антимонопольної політики та підтримки
+                    національного виробника.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== 6. ГАЛУЗЕВИЙ АНАЛІЗ ==================== -->
+        <section class="sec" id="s6">
+            <div class="sec-head">
+                <div class="badge purple">6</div>
+                <div>
+                    <h2>Галузевий аналіз: машинобудування та хімічна промисловість</h2>
+                    <p class="sub">Специфіка впливу ТНК у двох ключових галузях</p>
+                </div>
+            </div>
+
+            <p>
+                Вплив ТНК не є однаковим для різних галузей. <strong>Машинобудування</strong> та
+                <strong>хімічна промисловість</strong> мають різну структуру, різні ризики та різний
+                потенціал для співпраці з іноземним капіталом.
+            </p>
+
+            <div class="grid g2">
+                <article class="mapcard">
+                    <div class="map-visual">
+                        <svg viewBox="0 0 400 200" role="img" aria-label="Схема машинобудівної галузі">
+                            <rect width="400" height="200" fill="#eef4fb" />
+                            <!-- Шестерня -->
+                            <g transform="translate(120,100)">
+                                <circle r="46" fill="#0071e3" opacity=".15" />
+                                <circle r="34" fill="none" stroke="#0071e3" stroke-width="3" />
+                                <circle r="12" fill="#0071e3" />
+                                <g stroke="#0071e3" stroke-width="7" stroke-linecap="round">
+                                    <line x1="0" y1="-42" x2="0" y2="-50" />
+                                    <line x1="0" y1="42" x2="0" y2="50" />
+                                    <line x1="-42" y1="0" x2="-50" y2="0" />
+                                    <line x1="42" y1="0" x2="50" y2="0" />
+                                    <line x1="-30" y1="-30" x2="-36" y2="-36" />
+                                    <line x1="30" y1="30" x2="36" y2="36" />
+                                    <line x1="-30" y1="30" x2="-36" y2="36" />
+                                    <line x1="30" y1="-30" x2="36" y2="-36" />
+                                </g>
+                            </g>
+                            <!-- Мікросхема -->
+                            <g transform="translate(280,100)">
+                                <rect x="-40" y="-40" width="80" height="80" rx="10" fill="#34c759" opacity=".16" />
+                                <rect x="-26" y="-26" width="52" height="52" rx="6" fill="none" stroke="#1d7a3a"
+                                    stroke-width="2.4" />
+                                <g stroke="#1d7a3a" stroke-width="2.4" stroke-linecap="round">
+                                    <line x1="-26" y1="-12" x2="-38" y2="-12" />
+                                    <line x1="-26" y1="0" x2="-38" y2="0" />
+                                    <line x1="-26" y1="12" x2="-38" y2="12" />
+                                    <line x1="26" y1="-12" x2="38" y2="-12" />
+                                    <line x1="26" y1="0" x2="38" y2="0" />
+                                    <line x1="26" y1="12" x2="38" y2="12" />
+                                    <line x1="-12" y1="-26" x2="-12" y2="-38" />
+                                    <line x1="0" y1="-26" x2="0" y2="-38" />
+                                    <line x1="12" y1="-26" x2="12" y2="-38" />
+                                    <line x1="-12" y1="26" x2="-12" y2="38" />
+                                    <line x1="0" y1="26" x2="0" y2="38" />
+                                    <line x1="12" y1="26" x2="12" y2="38" />
+                                </g>
+                            </g>
+                            <text x="200" y="184" text-anchor="middle" font-size="11.5" fill="#6e6e73">високі технології
+                                · інжиніринг · автоматизація</text>
+                        </svg>
+                    </div>
+                    <div class="body">
+                        <h4>Машинобудування</h4>
+                        <dl>
+                            <dt>Провідні ТНК</dt>
+                            <dd>Siemens, General Electric, Renault-Nissan-Mitsubishi, ArcelorMittal.</dd>
+                            <dt>Позитив</dt>
+                            <dd>Високотехнологічний трансфер, модернізація виробництва, інтеграція у світові ланцюги
+                                постачання, створення висококваліфікованих робочих місць.</dd>
+                            <dt>Ризики</dt>
+                            <dd>Перетворення на «складальний цех», залежність від іноземних комплектуючих, витіснення
+                                національних виробників.</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="mapcard">
+                    <div class="map-visual">
+                        <svg viewBox="0 0 400 200" role="img" aria-label="Схема хімічної промисловості">
+                            <rect width="400" height="200" fill="#fdf3f1" />
+                            <!-- Колби -->
+                            <g transform="translate(120,110)">
+                                <path
+                                    d="M-26 -46 h52 v18 l26 62 a22 22 0 0 1 -20.5 30 h-63 a22 22 0 0 1 -20.5-30 l26-62 z"
+                                    fill="#ff9f0a" opacity=".22" stroke="#ff6b35" stroke-width="2.4" />
+                                <path d="M-14 20 q14 10 28 0 v10 a14 14 0 0 1 -28 0 z" fill="#ff6b35" opacity=".7" />
+                                <circle cx="-4" cy="0" r="4" fill="#ff6b35" opacity=".55" />
+                                <circle cx="10" cy="-6" r="3" fill="#ff6b35" opacity=".45" />
+                            </g>
+                            <!-- Молекула -->
+                            <g transform="translate(280,100)">
+                                <circle r="42" fill="#af52de" opacity=".14" />
+                                <g stroke="#7b2f9e" stroke-width="2.2" fill="none">
+                                    <line x1="-22" y1="-22" x2="0" y2="-6" />
+                                    <line x1="22" y1="-22" x2="0" y2="-6" />
+                                    <line x1="-22" y1="22" x2="0" y2="-6" />
+                                    <line x1="22" y1="22" x2="0" y2="-6" />
+                                </g>
+                                <circle cx="0" cy="-6" r="8" fill="#7b2f9e" />
+                                <circle cx="-22" cy="-22" r="6" fill="#af52de" />
+                                <circle cx="22" cy="-22" r="6" fill="#af52de" />
+                                <circle cx="-22" cy="22" r="6" fill="#af52de" />
+                                <circle cx="22" cy="22" r="6" fill="#af52de" />
+                            </g>
+                            <text x="200" y="184" text-anchor="middle" font-size="11.5" fill="#6e6e73">сировина · синтез
+                                · агрохімія · полімери</text>
+                        </svg>
+                    </div>
+                    <div class="body">
+                        <h4>Хімічна промисловість</h4>
+                        <dl>
+                            <dt>Провідні ТНК</dt>
+                            <dd>BASF, Dow Chemical.</dd>
+                            <dt>Позитив</dt>
+                            <dd>Доступ до сучасних технологій синтезу, інвестиції у виробничі потужності, розвиток
+                                агрохімічного сектору, підвищення стандартів безпеки.</dd>
+                            <dt>Ризики</dt>
+                            <dd>Екологічні ризики (забруднення), залежність від імпортної сировини, витіснення
+                                національних хімічних виробництв.</dd>
+                        </dl>
+                    </div>
+                </article>
+            </div>
+
+            <h3>Порівняльна характеристика галузей</h3>
+
+            <div class="table-shell">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Критерій</th>
+                                <th>Машинобудування</th>
+                                <th>Хімічна промисловість</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ключовий ресурс</td>
+                                <td>Технології, інженерні кадри</td>
+                                <td>Сировина, енергія</td>
+                            </tr>
+                            <tr>
+                                <td>Рівень технологій</td>
+                                <td>Високий</td>
+                                <td>Середній / високий</td>
+                            </tr>
+                            <tr>
+                                <td>Екологічні ризики</td>
+                                <td>Помірні</td>
+                                <td>Високі</td>
+                            </tr>
+                            <tr>
+                                <td>Потенціал співпраці з ТНК</td>
+                                <td>Високий (інжиніринг, складання)</td>
+                                <td>Середній (сировина, агрохімія)</td>
+                            </tr>
+                            <tr>
+                                <td>Основні ризики</td>
+                                <td>Деіндустріалізація, «складовий цех»</td>
+                                <td>Забруднення, залежність від сировини</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-note">
+                    Таблиця 2. Порівняння впливу ТНК на машинобудування та хімічну промисловість України.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ПРАКТИЧНІ ЗАВДАННЯ ==================== -->
+        <section class="sec" id="tasks">
+            <div class="sec-head">
+                <div class="badge orange">✎</div>
+                <div>
+                    <h2>Завдання для практичної роботи на занятті</h2>
+                    <p class="sub">Аналітичні та дискусійні вправи</p>
+                </div>
+            </div>
+
+            <!-- ЗАВДАННЯ 1 -->
+            <div class="task-block">
+                <div class="task-head">
+                    <div class="tn">1</div>
+                    <div>
+                        <h4>Ранжування переваг та ризиків</h4>
+                        <div class="meta">Робота з таблицею «Вплив ТНК» · аргументація</div>
+                    </div>
+                </div>
+                <div class="task-body">
+                    <p>
+                        Використовуючи таблицю «Вплив ТНК», виберіть та <strong>ранжуйте 3 найважливіші</strong>,
+                        на вашу думку, переваги та <strong>3 найнебезпечніші</strong> ризики для України від
+                        діяльності ТНК. Свій вибір аргументуйте.
+                    </p>
+
+                    <div class="rank-widget">
+                        <div class="rw-title">Форма для відповіді · переваги</div>
+                        <div class="rw-row"><span class="rw-num">1</span><span class="rw-line"></span></div>
+                        <div class="rw-row"><span class="rw-num">2</span><span class="rw-line"></span></div>
+                        <div class="rw-row"><span class="rw-num">3</span><span class="rw-line"></span></div>
+                    </div>
+                    <div class="rank-widget">
+                        <div class="rw-title">Форма для відповіді · ризики</div>
+                        <div class="rw-row"><span class="rw-num">1</span><span class="rw-line"></span></div>
+                        <div class="rw-row"><span class="rw-num">2</span><span class="rw-line"></span></div>
+                        <div class="rw-row"><span class="rw-num">3</span><span class="rw-line"></span></div>
+                    </div>
+
+                    <p style="margin-top:14px"><strong>Орієнтири для аргументації:</strong></p>
+                    <ul>
+                        <li>Який ефект має <em>найдовшу дію в часі</em> (наприклад, технологічний трансфер vs. створення
+                            робочих місць)?</li>
+                        <li>Який ризик є <em>найбільш незворотним</em> (наприклад, екологічне забруднення vs. відтік
+                            капіталу)?</li>
+                        <li>Який ризик найбільше загрожує <em>економічному суверенітету</em> країни?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ЗАВДАННЯ 2 -->
+            <div class="task-block">
+                <div class="task-head">
+                    <div class="tn">2</div>
+                    <div>
+                        <h4>Географія походження ТНК та економічний розвиток</h4>
+                        <div class="meta">Аналіз таблиці «Приклади ТНК» · висновки</div>
+                    </div>
+                </div>
+                <div class="task-body">
+                    <p>
+                        Проаналізуйте список ТНК у таблиці «Приклади ТНК». Які країни є <strong>лідерами
+                            у створенні ТНК</strong>? Як це пов’язано з їхнім економічним розвитком?
+                    </p>
+
+                    <div class="callout info" style="margin:14px 0">
+                        <span class="label">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M12 16v-4" />
+                                <path d="M12 8h.01" />
+                            </svg>
+                            Підказка для аналізу
+                        </span>
+                        <p>
+                            Зверніть увагу на зв’язок між <strong>рівнем ВВП на душу населення</strong>,
+                            <strong>витратами на R&amp;D</strong>, <strong>якістю освіти</strong> та
+                            <strong>кількістю ТНК</strong>, що походять із країни. Чи є тут закономірність?
+                        </p>
+                    </div>
+
+                    <p><strong>Питання для обговорення:</strong></p>
+                    <ol>
+                        <li>Які країни у вибірці є світовими лідерами за кількістю ТНК?</li>
+                        <li>Чи можна стверджувати, що всі ТНК походять із розвинених країн? Наведіть контрприклади
+                            (наприклад, ТНК із Китаю, Південної Кореї, Індії).</li>
+                        <li>Як економічний розвиток країни впливає на її здатність створювати власні ТНК?</li>
+                        <li>Що потрібно Україні, щоб з’явилися українські ТНК світового рівня?</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== КОНТРОЛЬНІ ЗАПИТАННЯ ==================== -->
+        <section class="sec" id="questions">
+            <div class="sec-head">
+                <div class="badge red">?</div>
+                <div>
+                    <h2>Контрольні запитання</h2>
+                    <p class="sub">Для самоперевірки та обговорення</p>
+                </div>
+            </div>
+
+            <ol class="questions">
+                <li>Дайте визначення <strong>транснаціональної компанії</strong>. Назвіть її ключову ознаку.</li>
+                <li>Охарактеризуйте <strong>три типи ТНК</strong> за ступенем інтернаціоналізації. Наведіть приклади.
+                </li>
+                <li>Які <strong>фактори приваблюють ТНК</strong> в Україну? Розкрийте кожен із них.</li>
+                <li>Назвіть по <strong>три переваги та три ризики</strong> діяльності ТНК для економіки України.</li>
+                <li>У чому полягає <strong>специфіка впливу ТНК</strong> на машинобудування та хімічну промисловість?
+                </li>
+                <li>Які країни є <strong>лідерами у створенні ТНК</strong>? Як це пов’язано з їхнім економічним
+                    розвитком?</li>
+                <li>Які <strong>загрози</strong> несе присутність ТНК для економічного суверенітету України?</li>
+                <li>Запропонуйте <strong>заходи державної політики</strong> для максимізації переваг та мінімізації
+                    ризиків від діяльності ТНК.</li>
+            </ol>
+
+            <div class="callout ok">
+                <span class="label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                    Підсумок заняття
+                </span>
+                <p>
+                    ТНК є потужним, але <strong>суперечливим</strong> чинником розвитку української
+                    економіки. Їхня присутність може прискорити модернізацію, але водночас несе
+                    ризики деіндустріалізації та втрати економічного суверенітету. Завдання держави —
+                    знайти баланс між <em>відкритістю для інвестицій</em> та <em>захистом національних
+                        інтересів</em>.
+                </p>
+            </div>
+        </section>
+
+        <footer class="foot">
+            <b>Заняття:</b> Транснаціональні компанії (ТНК) та їх вплив на господарство України<br>
+            На прикладі машинобудівної та хімічної галузей · Економічна географія · 2026
+        </footer>
+
+    </div>
+</body>
+
+</html>
