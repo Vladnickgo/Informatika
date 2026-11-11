@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620"
+     font-family="Arial, Liberation Sans, sans-serif">
+  <rect width="1000" height="620" fill="#f4f7fb"/>
+
+  <rect x="230" y="15" width="540" height="55" rx="10" fill="#1F3864"/>
+  <text x="500" y="50" text-anchor="middle" font-size="22"
+        font-weight="bold" fill="#ffffff">Класифікація систем обробки тексту</text>
+
+  <line x1="500" y1="70" x2="500" y2="95" stroke="#1F3864" stroke-width="2.5"/>
+  <line x1="170" y1="95" x2="830" y2="95" stroke="#1F3864" stroke-width="2.5"/>
+  <line x1="170" y1="95" x2="170" y2="110" stroke="#1F3864" stroke-width="2.5"/>
+  <line x1="500" y1="95" x2="500" y2="110" stroke="#1F3864" stroke-width="2.5"/>
+  <line x1="830" y1="95" x2="830" y2="110" stroke="#1F3864" stroke-width="2.5"/>
+
+  <!-- Column 1 -->
+  <rect x="25" y="110" width="290" height="52" rx="8" fill="#2E75B6"/>
+  <text x="170" y="143" text-anchor="middle" font-size="18"
+        font-weight="bold" fill="#ffffff">Текстові редактори</text>
+  <rect x="25" y="170" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="170" y="197" text-anchor="middle" font-size="14" fill="#1F3864">Введення та редагування тексту</text>
+  <rect x="25" y="220" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="170" y="247" text-anchor="middle" font-size="14" fill="#1F3864">Робота з буфером обміну</text>
+  <rect x="25" y="270" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="170" y="297" text-anchor="middle" font-size="14" fill="#1F3864">Пошук і заміна символів</text>
+  <rect x="25" y="320" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="170" y="347" text-anchor="middle" font-size="14" fill="#1F3864">Збереження у файлах .txt</text>
+  <rect x="25" y="370" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="170" y="397" text-anchor="middle" font-size="14" fill="#1F3864">Друк тексту</text>
+  <rect x="25" y="420" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="170" y="447" text-anchor="middle" font-size="14" fill="#1F3864">Приклад: Блокнот (Notepad)</text>
+
+  <!-- Column 2 -->
+  <rect x="355" y="110" width="290" height="52" rx="8" fill="#2E75B6"/>
+  <text x="500" y="143" text-anchor="middle" font-size="18"
+        font-weight="bold" fill="#ffffff">Текстові процесори</text>
+  <rect x="355" y="170" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="500" y="197" text-anchor="middle" font-size="14" fill="#1F3864">Форматування тексту</text>
+  <rect x="355" y="220" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="500" y="247" text-anchor="middle" font-size="14" fill="#1F3864">Перевірка правопису</text>
+  <rect x="355" y="270" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="500" y="297" text-anchor="middle" font-size="14" fill="#1F3864">Вставлення таблиць, формул, графіки</text>
+  <rect x="355" y="320" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="500" y="347" text-anchor="middle" font-size="14" fill="#1F3864">Автоматизація роботи користувача</text>
+  <rect x="355" y="370" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="500" y="397" text-anchor="middle" font-size="14" fill="#1F3864">Оформлення сторінок</text>
+  <rect x="355" y="420" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="500" y="447" text-anchor="middle" font-size="14" fill="#1F3864">Принцип WYSIWYG</text>
+
+  <!-- Column 3 -->
+  <rect x="685" y="110" width="290" height="52" rx="8" fill="#2E75B6"/>
+  <text x="830" y="143" text-anchor="middle" font-size="18"
+        font-weight="bold" fill="#ffffff">Видавничі системи</text>
+  <rect x="685" y="170" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="830" y="197" text-anchor="middle" font-size="14" fill="#1F3864">Маніпулювання блоками тексту</text>
+  <rect x="685" y="220" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="830" y="247" text-anchor="middle" font-size="14" fill="#1F3864">Робота з ілюстраціями</text>
+  <rect x="685" y="270" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="830" y="297" text-anchor="middle" font-size="14" fill="#1F3864">Зміна формату документа</text>
+  <rect x="685" y="320" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="830" y="347" text-anchor="middle" font-size="14" fill="#1F3864">Поліграфічна якість продукції</text>
+  <rect x="685" y="370" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="830" y="397" text-anchor="middle" font-size="14" fill="#1F3864">Приклад: Adobe InDesign</text>
+  <rect x="685" y="420" width="290" height="42" rx="6" fill="#DEEBF7"/>
+  <text x="830" y="447" text-anchor="middle" font-size="14" fill="#1F3864">Scribus, QuarkXPress</text>
+
+  <!-- arrows between columns (inheritance) -->
+  <text x="325" y="500" text-anchor="middle" font-size="13"
+        font-style="italic" fill="#C00000">↓ включає функції редакторів</text>
+  <text x="655" y="500" text-anchor="middle" font-size="13"
+        font-style="italic" fill="#C00000">↓ включає функції процесорів</text>
+
+  <text x="500" y="570" text-anchor="middle" font-size="14"
+        fill="#404040">Кожен наступний рівень успадковує можливості попереднього</text>
+</svg>

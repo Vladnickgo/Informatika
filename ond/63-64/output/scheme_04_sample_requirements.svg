@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="741.6pt" height="259.2pt" viewBox="0 0 741.6 259.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-10T09:54:46.650690</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 259.2 
+L 741.6 259.2 
+L 741.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 38.16 223.2 
+L 224.64 223.2 
+Q 237.6 223.2 237.6 210.24 
+L 237.6 88.56 
+Q 237.6 75.6 224.64 75.6 
+L 38.16 75.6 
+Q 25.2 75.6 25.2 88.56 
+L 25.2 210.24 
+Q 25.2 223.2 38.16 223.2 
+z
+" clip-path="url(#p946ae0d74d)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 282.96 223.2 
+L 469.44 223.2 
+Q 482.4 223.2 482.4 210.24 
+L 482.4 88.56 
+Q 482.4 75.6 469.44 75.6 
+L 282.96 75.6 
+Q 270 75.6 270 88.56 
+L 270 210.24 
+Q 270 223.2 282.96 223.2 
+z
+" clip-path="url(#p946ae0d74d)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 527.76 223.2 
+L 714.24 223.2 
+Q 727.2 223.2 727.2 210.24 
+L 727.2 88.56 
+Q 727.2 75.6 714.24 75.6 
+L 527.76 75.6 
+Q 514.8 75.6 514.8 88.56 
+L 514.8 210.24 
+Q 514.8 223.2 527.76 223.2 
+z
+" clip-path="url(#p946ae0d74d)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="370.8" y="35.285391" transform="rotate(-0 370.8 35.285391)">Три умови репрезентативної вибірки</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="131.4" y="106.409219" transform="rotate(-0 131.4 106.409219)">РЕПРЕЗЕНТАТИВНІСТЬ</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="131.4" y="136.471211" transform="rotate(-0 131.4 136.471211)">склад вибірки</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="131.4" y="161.573281" transform="rotate(-0 131.4 161.573281)">повторює склад</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="131.4" y="185.333281" transform="rotate(-0 131.4 185.333281)">популяції</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c93400" x="376.2" y="106.409219" transform="rotate(-0 376.2 106.409219)">ВИПАДКОВІСТЬ</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="376.2" y="136.373281" transform="rotate(-0 376.2 136.373281)">кожен об'єкт має</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="376.2" y="161.573281" transform="rotate(-0 376.2 161.573281)">рівний шанс</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="376.2" y="185.431211" transform="rotate(-0 376.2 185.431211)">потрапити у вибірку</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="621" y="107.122109" transform="rotate(-0 621 107.122109)">ДОСТАТНІЙ ОБСЯГ</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="621" y="136.373281" transform="rotate(-0 621 136.373281)">чим більший n,</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="621" y="161.573281" transform="rotate(-0 621 161.573281)">тим менша</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="621" y="185.333281" transform="rotate(-0 621 185.333281)">похибка</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p946ae0d74d">
+   <rect x="10.8" y="10.8" width="720" height="237.6"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="741.6pt" height="331.2pt" viewBox="0 0 741.6 331.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-10T09:54:46.216245</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 331.2 
+L 741.6 331.2 
+L 741.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 48.96 259.2 
+L 300.24 259.2 
+Q 313.2 259.2 313.2 246.24 
+L 313.2 70.56 
+Q 313.2 57.6 300.24 57.6 
+L 48.96 57.6 
+Q 36 57.6 36 70.56 
+L 36 246.24 
+Q 36 259.2 48.96 259.2 
+z
+" clip-path="url(#pbb7cbe91fb)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 441.36 259.2 
+L 692.64 259.2 
+Q 705.6 259.2 705.6 246.24 
+L 705.6 70.56 
+Q 705.6 57.6 692.64 57.6 
+L 441.36 57.6 
+Q 428.4 57.6 428.4 70.56 
+L 428.4 246.24 
+Q 428.4 259.2 441.36 259.2 
+z
+" clip-path="url(#pbb7cbe91fb)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="370.8" y="35.285391" transform="rotate(-0 370.8 35.285391)">Генеральна сукупність і вибірка</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="174.6" y="84.947188" transform="rotate(-0 174.6 84.947188)">ГЕНЕРАЛЬНА СУКУПНІСТЬ</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="174.6" y="112.853437" transform="rotate(-0 174.6 112.853437)">Популяція — усі об'єкти,</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="174.6" y="137.95125" transform="rotate(-0 174.6 137.95125)">що цікавлять дослідника</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="174.6" y="176.249219" transform="rotate(-0 174.6 176.249219)">Обсяг: N = 1240</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="174.6" y="211.973281" transform="rotate(-0 174.6 211.973281)">Приклад: усі учні 3-х</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="174.6" y="235.733281" transform="rotate(-0 174.6 235.733281)">класів міста</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="567" y="84.947188" transform="rotate(-0 567 84.947188)">ВИБІРКА</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="567" y="112.75125" transform="rotate(-0 567 112.75125)">Частина популяції,</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="567" y="138.053438" transform="rotate(-0 567 138.053438)">відібрана для вивчення</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="567" y="176.249219" transform="rotate(-0 567 176.249219)">Обсяг: n = 120</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="567" y="211.973281" transform="rotate(-0 567 211.973281)">Приклад: 120 учнів</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="567" y="235.733281" transform="rotate(-0 567 235.733281)">із 4 шкіл</text>
+   </g>
+   <g id="patch_4">
+    <path d="M 324 162 
+Q 370.8 162 415.587539 162 
+" clip-path="url(#pbb7cbe91fb)" style="fill: none; stroke: #0071e3; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 409.187539 158.8 
+L 415.587539 162 
+L 409.187539 165.2 
+z
+" clip-path="url(#pbb7cbe91fb)" style="fill: #0071e3; stroke: #0071e3; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="370.8" y="139.928984" transform="rotate(-0 370.8 139.928984)">відбір</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pbb7cbe91fb">
+   <rect x="10.8" y="10.8" width="720" height="309.6"/>
+  </clipPath>
+ </defs>
+</svg>

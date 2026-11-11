@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основи автоматизації завдань в командному рядку</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            blue: '#0071e3',
+                            'blue-hover': '#0077ed',
+                            gray: '#86868b',
+                            cardLight: 'rgba(255, 255, 255, 0.75)',
+                            cardDark: 'rgba(28, 28, 30, 0.75)',
+                            bgLight: '#f5f5f7',
+                            bgDark: '#000000',
+                            borderLight: 'rgba(0, 0, 0, 0.08)',
+                            borderDark: 'rgba(255, 255, 255, 0.12)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"Inter"', 'sans-serif'],
+                        mono: ['SFMono-Regular', 'Consolas', '"Liberation Mono"', 'Menlo', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .transition-base {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(134, 134, 139, 0.3);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(134, 134, 139, 0.5);
+        }
+
+        /* PRINT STYLESHEET EXCELLENCE */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 10pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-full-width {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .glass-panel {
+                background: #ffffff !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border: 1px solid #e5e5e5 !important;
+                box-shadow: none !important;
+            }
+            .printable-card, section, .code-block, .terminal-box, table, tr, code {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            h1, h2, h3, h4 {
+                color: #000000 !important;
+                break-after: avoid !important;
+                page-break-after: avoid !important;
+            }
+            .dark {
+                color-scheme: light !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-apple-bgLight dark:bg-apple-bgDark text-gray-900 dark:text-gray-100 font-sans transition-base min-h-screen antialiased selection:bg-apple-blue selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="no-print sticky top-0 z-50 glass-panel bg-white/75 dark:bg-zinc-900/75 border-b border-apple-borderLight dark:border-apple-borderDark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand -->
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-apple-blue flex items-center justify-center text-white font-bold text-lg shadow-md shadow-apple-blue/20">
+                        >_
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-apple-blue tracking-wider uppercase block">Освітній Модуль CLI</span>
+                        <h1 class="text-sm font-semibold truncate max-w-[200px] sm:max-w-xs md:max-w-sm">Автоматизація в командному рядку</h1>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex items-center gap-3">
+                    <div class="hidden sm:flex items-center gap-2 text-xs font-medium text-apple-gray">
+                        <span>Прогрес:</span>
+                        <span id="progress-percent" class="text-gray-900 dark:text-white font-semibold">0%</span>
+                    </div>
+
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" aria-label="Змінити тему" class="p-2.5 rounded-full hover:bg-gray-200/60 dark:hover:bg-zinc-800/60 transition-base text-gray-600 dark:text-gray-300">
+                        <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Print Button -->
+                    <button onclick="window.print()" class="hidden xs:flex items-center gap-2 bg-apple-blue hover:bg-apple-blue-hover text-white text-xs font-semibold px-4 py-2 rounded-full transition-base shadow-sm shadow-apple-blue/30 active:scale-95">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                        </svg>
+                        <span>Друк / PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="w-full bg-gray-200 dark:bg-zinc-800 h-1">
+            <div id="progress-bar" class="bg-apple-blue h-1 w-0 transition-all duration-150"></div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 print-full-width">
+
+        <!-- Hero Section -->
+        <section class="printable-card mb-12 rounded-3xl p-6 sm:p-10 glass-panel bg-white/70 dark:bg-zinc-900/70 border border-apple-borderLight dark:border-apple-borderDark shadow-xl relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-apple-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-apple-blue/10 text-apple-blue dark:bg-apple-blue/20">
+                        Тема Заняття
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                        ⏱ Тривалість: ~45 хв
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
+                        🎯 Рівень: Базовий
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                        💻 Комп'ютерні науки / Системне адміністрування
+                    </span>
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4 leading-tight">
+                    Основи автоматизації завдань в командному рядку
+                </h1>
+                <p class="text-base sm:text-lg text-apple-gray max-w-3xl leading-relaxed mb-6">
+                    Створення простих скриптів і пакетних файлів (.bat / .cmd) для автоматизації рутинних операцій та використання планувальника завдань для їх автоматичного виконання.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-200/80 dark:border-zinc-800">
+                    <div class="flex items-start gap-3">
+                        <div class="w-7 h-7 rounded-lg bg-apple-blue/10 text-apple-blue flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                        <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300"><strong class="block text-gray-900 dark:text-white">Знання CLI:</strong> Узагальнити знання про основні команди текстового інтерфейсу.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                        <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300"><strong class="block text-gray-900 dark:text-white">Інженерне мислення:</strong> Розвиток навичок створення програмних сценаріїв (пакетних файлів).</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-7 h-7 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                        <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300"><strong class="block text-gray-900 dark:text-white">Відповідальний підхід:</strong> Дотримання правил безпеки під час роботи з файловою системою.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Interactive Commands Directory (CLI Reference with Filter) -->
+        <section class="mb-14 printable-card">
+            <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">1. Інтерактивний Довідник Команд CLI</h2>
+                    <p class="text-xs sm:text-sm text-apple-gray">Порівняння команд Windows CMD та Linux / macOS Terminal</p>
+                </div>
+                <!-- Search Input -->
+                <div class="no-print w-full sm:w-64">
+                    <input type="text" id="command-search" oninput="filterCommands()" placeholder="Пошук команди (напр. dir, mkdir)..." class="w-full px-4 py-2 rounded-xl text-xs bg-gray-100 dark:bg-zinc-800 border border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-apple-blue">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="commands-grid">
+                <!-- Command Cards Dynamically Filtered -->
+                <div class="cmd-card printable-card glass-panel bg-white/70 dark:bg-zinc-900/70 p-5 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono font-bold text-apple-blue text-sm">ls / dir</span>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-blue-500/10 text-blue-500">Перегляд</span>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-900 dark:text-white mb-1">Список вмісту каталогу</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Виводить список файлів та папок в поточному каталозі.</p>
+                    <div class="mt-3 text-[11px] font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800/60 p-2 rounded-lg">
+                        > dir C:\Users
+                    </div>
+                </div>
+
+                <div class="cmd-card printable-card glass-panel bg-white/70 dark:bg-zinc-900/70 p-5 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono font-bold text-emerald-500 text-sm">cd</span>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500">Навігація</span>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-900 dark:text-white mb-1">Change Directory</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Переміщення між каталогами файлової системи.</p>
+                    <div class="mt-3 text-[11px] font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800/60 p-2 rounded-lg">
+                        > cd Documents
+                    </div>
+                </div>
+
+                <div class="cmd-card printable-card glass-panel bg-white/70 dark:bg-zinc-900/70 p-5 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono font-bold text-purple-500 text-sm">mkdir / md</span>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-purple-500/10 text-purple-500">Створення</span>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-900 dark:text-white mb-1">Make Directory</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Створює нову папку з вказаною назвою.</p>
+                    <div class="mt-3 text-[11px] font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800/60 p-2 rounded-lg">
+                        > mkdir NewFolder
+                    </div>
+                </div>
+
+                <div class="cmd-card printable-card glass-panel bg-white/70 dark:bg-zinc-900/70 p-5 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono font-bold text-red-500 text-sm">rm / del</span>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-red-500/10 text-red-500">Видалення</span>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-900 dark:text-white mb-1">Remove / Delete</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Видаляє вказаний файл з диска.</p>
+                    <div class="mt-3 text-[11px] font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800/60 p-2 rounded-lg">
+                        > del file.txt
+                    </div>
+                </div>
+
+                <div class="cmd-card printable-card glass-panel bg-white/70 dark:bg-zinc-900/70 p-5 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono font-bold text-amber-500 text-sm">cp / copy</span>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-amber-500/10 text-amber-500">Копіювання</span>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-900 dark:text-white mb-1">Copy File</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Копіює файл у вказану директорію.</p>
+                    <div class="mt-3 text-[11px] font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800/60 p-2 rounded-lg">
+                        > copy file.txt ..\backup
+                    </div>
+                </div>
+
+                <div class="cmd-card printable-card glass-panel bg-white/70 dark:bg-zinc-900/70 p-5 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono font-bold text-teal-500 text-sm">mv / move</span>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-teal-500/10 text-teal-500">Переміщення</span>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-900 dark:text-white mb-1">Move File</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Переміщує або перейменовує файл.</p>
+                    <div class="mt-3 text-[11px] font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800/60 p-2 rounded-lg">
+                        > move file.txt archive\
+                    </div>
+                </div>
+
+                <div class="cmd-card printable-card glass-panel bg-white/70 dark:bg-zinc-900/70 p-5 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono font-bold text-indigo-500 text-sm">cat / type / more</span>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-500">Вміст</span>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-900 dark:text-white mb-1">View File Content</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Виводить вміст файлу прямо у консоль.</p>
+                    <div class="mt-3 text-[11px] font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800/60 p-2 rounded-lg">
+                        > type file.txt
+                    </div>
+                </div>
+
+                <div class="cmd-card printable-card glass-panel bg-white/70 dark:bg-zinc-900/70 p-5 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono font-bold text-pink-500 text-sm">grep / findstr</span>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-pink-500/10 text-pink-500">Пошук</span>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-900 dark:text-white mb-1">Text Search</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Шукає фрагмент тексту всередині файлів.</p>
+                    <div class="mt-3 text-[11px] font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800/60 p-2 rounded-lg">
+                        > findstr "word" file.txt
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Scripting & Batch Files Process Visualization -->
+        <section class="mb-14 printable-card">
+            <div class="mb-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">2. Архітектура Пакетних Файлів (.bat / .cmd)</h2>
+                <p class="text-xs sm:text-sm text-apple-gray">Кроки створення та ключові оператори Windows Scripting Language</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Step-by-Step Flow Card -->
+                <div class="glass-panel bg-white/70 dark:bg-zinc-900/70 p-6 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark lg:col-span-2">
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white mb-4">Життєвий цикл розробки скрипта</h3>
+                    
+                    <!-- Flow Diagram SVG -->
+                    <div class="w-full py-4 flex justify-center">
+                        <svg class="w-full max-w-lg h-auto" viewBox="0 0 600 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Box 1 -->
+                            <rect x="10" y="30" width="120" height="60" rx="12" fill="#0071e3" fill-opacity="0.15" stroke="#0071e3" stroke-width="2"/>
+                            <text x="70" y="58" text-anchor="middle" fill="currentColor" class="text-[12px] font-bold">1. Редактор</text>
+                            <text x="70" y="74" text-anchor="middle" fill="#86868b" class="text-[10px]">Notepad / VSCode</text>
+
+                            <!-- Arrow 1 -->
+                            <path d="M140 60 H170" stroke="#86868b" stroke-width="2" stroke-dasharray="4 4"/>
+                            <polygon points="175,60 165,55 165,65" fill="#86868b"/>
+
+                            <!-- Box 2 -->
+                            <rect x="180" y="30" width="120" height="60" rx="12" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="2"/>
+                            <text x="240" y="58" text-anchor="middle" fill="currentColor" class="text-[12px] font-bold">2. Написання</text>
+                            <text x="240" y="74" text-anchor="middle" fill="#86868b" class="text-[10px]">Команди CLI</text>
+
+                            <!-- Arrow 2 -->
+                            <path d="M310 60 H340" stroke="#86868b" stroke-width="2" stroke-dasharray="4 4"/>
+                            <polygon points="345,60 335,55 335,65" fill="#86868b"/>
+
+                            <!-- Box 3 -->
+                            <rect x="350" y="30" width="120" height="60" rx="12" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-width="2"/>
+                            <text x="410" y="58" text-anchor="middle" fill="currentColor" class="text-[12px] font-bold">3. Збереження</text>
+                            <text x="410" y="74" text-anchor="middle" fill="#86868b" class="text-[10px]">Розширення .bat</text>
+
+                            <!-- Arrow 3 -->
+                            <path d="M480 60 H505" stroke="#86868b" stroke-width="2" stroke-dasharray="4 4"/>
+                            <polygon points="510,60 500,55 500,65" fill="#86868b"/>
+
+                            <!-- Box 4 -->
+                            <rect x="515" y="30" width="75" height="60" rx="12" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="552" y="58" text-anchor="middle" fill="currentColor" class="text-[12px] font-bold">4. Запуск</text>
+                            <text x="552" y="74" text-anchor="middle" fill="#86868b" class="text-[10px]">cmd / double click</text>
+                        </svg>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 border-t border-gray-200/60 dark:border-zinc-800 pt-4 text-xs text-gray-600 dark:text-gray-300">
+                        <div>
+                            <strong class="text-gray-900 dark:text-white block mb-1">Спеціальні оператори:</strong>
+                            <ul class="space-y-1 list-disc list-inside">
+                                <li><code>@echo off</code> – приховує дублювання введених команд.</li>
+                                <li><code>REM</code> – коментар (ігнорується під час виконання).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-gray-900 dark:text-white block mb-1">Перенаправлення потоків:</strong>
+                            <ul class="space-y-1 list-disc list-inside">
+                                <li><code>&gt;</code> – перезапис виводу у файл.</li>
+                                <li><code>&gt;&gt;</code> – додавання виводу в кінець файлу.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Scheduler Explanation Card -->
+                <div class="glass-panel bg-white/70 dark:bg-zinc-900/70 p-6 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold">
+                            ⏱
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 dark:text-white">Планувальник завдань</h3>
+                            <span class="text-xs text-apple-gray">Task Scheduler (Windows)</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                        Спеціальний інструмент ОС, який дозволяє налаштувати автоматичне виконання створених .bat скриптів за розкладом (наприклад, щодня о 00:00 для резервного копіювання).
+                    </p>
+                    <div class="bg-purple-500/10 border border-purple-500/20 p-3 rounded-xl text-xs text-purple-600 dark:text-purple-300 font-medium">
+                        💡 Автоматизація зменшує людський фактор та пришвидшує системне обслуговування!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Interactive CLI Emulator & Practical Task -->
+        <section class="mb-14 printable-card">
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">3. Практичний Симулятор CLI та Скрипту</h2>
+                    <p class="text-xs sm:text-sm text-apple-gray">Виконайте завдання у віртуальному терміналі або запустіть пакетний скрипт</p>
+                </div>
+                <button onclick="copyScriptCode()" class="no-print flex items-center gap-1.5 text-xs font-medium text-apple-blue hover:underline">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <span id="copy-text">Скопіювати .bat код</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Task Script Code Panel -->
+                <div class="glass-panel bg-zinc-950 text-gray-100 rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between px-4 py-3 bg-zinc-900/90 border-b border-zinc-800">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                            </div>
+                            <span class="text-xs font-mono text-gray-400">myscript.bat</span>
+                        </div>
+                        <div class="p-5 font-mono text-xs sm:text-sm leading-relaxed text-emerald-400">
+<pre id="bat-script-code"><code>@echo off
+REM Крок 1: Створення нового каталогу "MyScriptFolder"
+mkdir MyScriptFolder
+
+REM Крок 2: Перехід до нового каталогу
+cd MyScriptFolder
+
+REM Крок 3: Створення файлу "hello.txt" та запис рядка
+echo Hello, it's my first script > hello.txt
+
+REM Крок 4: Виведення списку файлів у каталозі
+dir
+
+REM Крок 5: Завершення скрипта
+@echo on</code></pre>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-zinc-900/50 border-t border-zinc-800 flex justify-end no-print">
+                        <button onclick="runBatScript()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2 rounded-xl text-xs font-semibold transition-base flex items-center gap-2 shadow-lg shadow-emerald-600/20 active:scale-95">
+                            <span>▶ Запустити .bat скрипт</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Terminal Simulator -->
+                <div class="glass-panel bg-black text-gray-200 rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl flex flex-col justify-between min-h-[320px] font-mono text-xs">
+                    <div class="flex items-center justify-between px-4 py-3 bg-zinc-900/90 border-b border-zinc-800">
+                        <span class="text-xs text-gray-400">Command Prompt (CMD Emulator)</span>
+                        <button onclick="clearTerminal()" class="text-[11px] text-gray-500 hover:text-gray-300">Очистити</button>
+                    </div>
+
+                    <div id="terminal-output" class="p-4 overflow-y-auto max-h-[260px] space-y-1 leading-normal text-emerald-400">
+                        <div class="text-gray-500">Microsoft Windows [Version 10.0.19045]</div>
+                        <div class="text-gray-500">(c) Microsoft Corporation. All rights reserved.</div>
+                        <br>
+                        <div>C:\Users\Student> <span class="text-white">Введіть команду нижче або запустіть скрипт кнопкою ліворуч.</span></div>
+                    </div>
+
+                    <!-- Terminal Input Bar -->
+                    <form onsubmit="handleTerminalSubmit(event)" class="no-print border-t border-zinc-800 flex items-center bg-zinc-950 px-3 py-2">
+                        <span class="text-emerald-500 font-bold mr-2" id="prompt-path">C:\Users\Student></span>
+                        <input type="text" id="terminal-input" autocomplete="off" placeholder="mkdir MyScriptFolder, cd, dir..." class="w-full bg-transparent text-white focus:outline-none text-xs font-mono">
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Quiz (5 Questions from PDF) -->
+        <section class="mb-14 printable-card">
+            <div class="mb-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">4. Контрольні Запитання (Перевірка знань)</h2>
+                <p class="text-xs sm:text-sm text-apple-gray">Дайте відповідь на запитання для закріплення навчального матеріалу</p>
+            </div>
+
+            <div class="glass-panel bg-white/70 dark:bg-zinc-900/70 p-6 sm:p-8 rounded-2xl border border-apple-borderLight dark:border-apple-borderDark shadow-sm">
+                <div id="quiz-container">
+                    <div class="flex items-center justify-between mb-4">
+                        <span id="quiz-progress-text" class="text-xs font-semibold text-apple-blue uppercase tracking-wider">Запитання 1 з 5</span>
+                        <span id="quiz-score" class="text-xs font-semibold text-gray-500">Бали: 0</span>
+                    </div>
+
+                    <h3 id="quiz-question" class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-6">
+                        Завантаження питання...
+                    </h3>
+
+                    <div id="quiz-options" class="space-y-3 mb-6">
+                        <!-- Options generated by JS -->
+                    </div>
+
+                    <div id="quiz-feedback" class="hidden p-4 rounded-xl mb-4 text-xs font-semibold"></div>
+
+                    <button id="quiz-next-btn" onclick="nextQuestion()" class="no-print hidden bg-apple-blue text-white px-6 py-2.5 rounded-full text-xs font-semibold hover:bg-apple-blue-hover transition-base">
+                        Наступне запитання →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Safety Rules & Precautions -->
+        <section class="mb-12 printable-card">
+            <div class="mb-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">5. Застереження та Безпека</h2>
+                <p class="text-xs sm:text-sm text-apple-gray">Важливі правила під час роботи зі скриптами автоматизації</p>
+            </div>
+
+            <div class="glass-panel bg-amber-500/10 dark:bg-amber-500/5 p-6 rounded-2xl border border-amber-500/20 text-gray-800 dark:text-gray-200">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-xl shrink-0">
+                        ⚠️
+                    </div>
+                    <div class="space-y-2 text-xs sm:text-sm">
+                        <h3 class="font-bold text-amber-600 dark:text-amber-400 text-base">Правила безпечного запуску:</h3>
+                        <p>1. <strong>Перевіряйте команди перед запуском:</strong> Скрипт автоматично виконує всі команди з правами вашого користувача без додаткового підтвердження.</p>
+                        <p>2. <strong>Обережно з командами видалення:</strong> Команди на кшталт <code>del /f /s /q</code> або <code>rm -rf</code> видаляють файли безповоротно (оминаючи Корзину!).</p>
+                        <p>3. <strong>Тестуйте у безпечному каталозі:</strong> Завжди виконуйте перші тести .bat файлу в окремо створеній порожній папці.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="printable-card border-t border-apple-borderLight dark:border-apple-borderDark py-8 bg-white/40 dark:bg-zinc-950/40">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-apple-gray">
+            <p class="mb-2">© 2026 Конспект Навчального Заняття з Автоматизації CLI. Всі права захищено.</p>
+            <p class="text-[11px]">Розроблено відповідно до рекомендацій Apple HIG.</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        // --- 1. Theme Management ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function initTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        });
+        initTheme();
+
+        // --- 2. Scroll Progress ---
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+            document.getElementById('progress-percent').innerText = Math.round(scrolled) + '%';
+        });
+
+        // --- 3. Filter Commands Search ---
+        function filterCommands() {
+            const query = document.getElementById('command-search').value.toLowerCase();
+            const cards = document.querySelectorAll('#commands-grid .cmd-card');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // --- 4. CLI Terminal Emulator Logic ---
+        let currentPath = "C:\\Users\\Student";
+        let inSubFolder = false;
+        let createdFiles = [];
+
+        function appendOutput(htmlContent) {
+            const output = document.getElementById('terminal-output');
+            const line = document.createElement('div');
+            line.innerHTML = htmlContent;
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function clearTerminal() {
+            document.getElementById('terminal-output').innerHTML = '<div class="text-gray-500">Термінал очищено.</div>';
+        }
+
+        function handleTerminalSubmit(e) {
+            e.preventDefault();
+            const inputEl = document.getElementById('terminal-input');
+            const cmdText = inputEl.value.trim();
+            if (!cmdText) return;
+
+            // Output command prompt line
+            appendOutput(`<div>${currentPath}> <span class="text-white">${cmdText}</span></div>`);
+            inputEl.value = '';
+
+            processCommand(cmdText);
+        }
+
+        function processCommand(cmd) {
+            const lower = cmd.toLowerCase();
+
+            if (lower === 'cls' || lower === 'clear') {
+                clearTerminal();
+            } else if (lower.startsWith('mkdir ') || lower.startsWith('md ')) {
+                const folderName = cmd.split(' ')[1] || 'NewFolder';
+                appendOutput(`<div class="text-gray-400">Каталог "${folderName}" успішно створено.</div>`);
+            } else if (lower === 'cd myscriptfolder') {
+                inSubFolder = true;
+                currentPath = "C:\\Users\\Student\\MyScriptFolder";
+                document.getElementById('prompt-path').innerText = currentPath + ">";
+                appendOutput(`<div class="text-gray-400">Перехід здійснено. Поточний каталог: MyScriptFolder</div>`);
+            } else if (lower === 'cd ..') {
+                inSubFolder = false;
+                currentPath = "C:\\Users\\Student";
+                document.getElementById('prompt-path').innerText = currentPath + ">";
+                appendOutput(`<div class="text-gray-400">Повернення до основного каталогу.</div>`);
+            } else if (lower.includes('echo') && lower.includes('>')) {
+                const parts = cmd.split('>');
+                const filename = parts[1] ? parts[1].trim() : 'file.txt';
+                createdFiles.push(filename);
+                appendOutput(`<div class="text-gray-400">Запис виконано у файл [${filename}].</div>`);
+            } else if (lower === 'dir' || lower === 'ls') {
+                let items = `<div class="text-gray-400">Вміст директорії ${currentPath}:</div>`;
+                if (inSubFolder) {
+                    items += `<div><span class="text-amber-400">&lt;DIR&gt;</span> .</div>`;
+                    items += `<div><span class="text-amber-400">&lt;DIR&gt;</span> ..</div>`;
+                    if (createdFiles.length > 0) {
+                        createdFiles.forEach(f => {
+                            items += `<div>14.03.2026  10:00    32 B    <span class="text-cyan-300">${f}</span></div>`;
+                        });
+                    } else {
+                        items += `<div>14.03.2026  10:00    28 B    <span class="text-cyan-300">hello.txt</span></div>`;
+                    }
+                } else {
+                    items += `<div><span class="text-amber-400">&lt;DIR&gt;</span> MyScriptFolder</div>`;
+                    items += `<div><span class="text-amber-400">&lt;DIR&gt;</span> Documents</div>`;
+                }
+                appendOutput(items);
+            } else {
+                appendOutput(`<div class="text-red-400">"${cmd}" не визначено як внутрішню або зовнішню команду.</div>`);
+            }
+        }
+
+        function runBatScript() {
+            clearTerminal();
+            appendOutput(`<div class="text-yellow-400">== Виконання myscript.bat ==</div>`);
+            
+            setTimeout(() => {
+                appendOutput(`<div>C:\\Users\\Student> <span class="text-white">mkdir MyScriptFolder</span></div>`);
+            }, 300);
+
+            setTimeout(() => {
+                appendOutput(`<div>C:\\Users\\Student> <span class="text-white">cd MyScriptFolder</span></div>`);
+                currentPath = "C:\\Users\\Student\\MyScriptFolder";
+                document.getElementById('prompt-path').innerText = currentPath + ">";
+                inSubFolder = true;
+            }, 700);
+
+            setTimeout(() => {
+                appendOutput(`<div>C:\\Users\\Student\\MyScriptFolder> <span class="text-white">echo Hello, it's my first script > hello.txt</span></div>`);
+                createdFiles.push('hello.txt');
+            }, 1200);
+
+            setTimeout(() => {
+                appendOutput(`<div>C:\\Users\\Student\\MyScriptFolder> <span class="text-white">dir</span></div>`);
+                processCommand('dir');
+                appendOutput(`<div class="text-emerald-400 font-bold mt-2">✓ Скрипт виконано успішно!</div>`);
+            }, 1700);
+        }
+
+        // --- 5. Clipboard Copy Logic ---
+        function copyScriptCode() {
+            const scriptText = document.getElementById('bat-script-code').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = scriptText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                const copySpan = document.getElementById('copy-text');
+                copySpan.innerText = 'Скопійовано!';
+                setTimeout(() => { copySpan.innerText = 'Скопіювати .bat код'; }, 2000);
+            } catch (err) {
+                console.error(err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // --- 6. Quiz Data from PDF ---
+        const quizQuestions = [
+            {
+                question: "1. Як CLI (Command Line Interface) дозволяє користувачеві взаємодіяти з операційною системою?",
+                options: [
+                    "Через графічні вікна та мишу",
+                    "Через текстовий інтерфейс за допомогою команд",
+                    "Виключно за допомогою голосвих команд",
+                    "Тільки через веб-браузер"
+                ],
+                answer: 1
+            },
+            {
+                question: "2. Які команди використовуються для створення нового каталогу та переміщення між каталогами в Windows?",
+                options: [
+                    "mkdir (або md) та cd",
+                    "create та move",
+                    "newdir та goto",
+                    "cat та grep"
+                ],
+                answer: 0
+            },
+            {
+                question: "3. Які команди дозволяють створити текстовий файл з вмістом та вивести список файлів в Windows?",
+                options: [
+                    "echo \"текст\" > file.txt та dir",
+                    "write file.txt та ls",
+                    "touch file.txt та show",
+                    "cat file.txt та list"
+                ],
+                answer: 0
+            },
+            {
+                question: "4. Яким чином використовується командний рядок для автоматизації завдань в ОС Windows?",
+                options: [
+                    "Шляхом написання послідовності команд у файл сценарію з розширенням .bat або .cmd",
+                    "Встановленням сторонніх антивірусних програм",
+                    "Ручним перезавантаженням комп'ютера щогодини",
+                    "Виключно редагуванням системного реестру в Блокноті"
+                ],
+                answer: 0
+            },
+            {
+                question: "5. Як правильно зберегти та запустити новий скрипт командного рядка?",
+                options: [
+                    "Зберегти з розширенням .bat (напр. myscript.bat) та виконати у CLI або подвійним кліком",
+                    "Зберегти як документ .docx та відкрити в Microsoft Word",
+                    "Зберегти як зображення .png",
+                    "Запустити через меню Диспетчера завдань без збереження"
+                ],
+                answer: 0
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let score = 0;
+
+        function loadQuizQuestion() {
+            const q = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-progress-text').innerText = `Запитання ${currentQuizIndex + 1} з ${quizQuestions.length}`;
+            document.getElementById('quiz-question').innerText = q.question;
+            
+            const optionsBox = document.getElementById('quiz-options');
+            optionsBox.innerHTML = '';
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-xl border border-gray-200 dark:border-zinc-800 hover:border-apple-blue transition-base text-xs sm:text-sm font-medium text-gray-800 dark:text-gray-200 bg-gray-50/50 dark:bg-zinc-800/30";
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(idx);
+                optionsBox.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selectedIdx) {
+            const q = quizQuestions[currentQuizIndex];
+            const feedback = document.getElementById('quiz-feedback');
+            const btns = document.getElementById('quiz-options').children;
+
+            for (let b of btns) {
+                b.disabled = true;
+                b.classList.add('opacity-70', 'cursor-not-allowed');
+            }
+
+            if (selectedIdx === q.answer) {
+                score++;
+                document.getElementById('quiz-score').innerText = `Бали: ${score}`;
+                feedback.className = "p-4 rounded-xl mb-4 text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20";
+                feedback.innerText = "✓ Правильна відповідь!";
+            } else {
+                feedback.className = "p-4 rounded-xl mb-4 text-xs font-semibold bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20";
+                feedback.innerText = `✕ Невірно. Правильно: "${q.options[q.answer]}"`;
+            }
+
+            feedback.classList.remove('hidden');
+
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('quiz-next-btn').innerText = `Тест завершено! Ваш результат: ${score}/${quizQuestions.length}`;
+                document.getElementById('quiz-next-btn').classList.remove('hidden');
+                document.getElementById('quiz-next-btn').onclick = null;
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                currentQuizIndex++;
+                loadQuizQuestion();
+            }
+        }
+
+        loadQuizQuestion();
+    </script>
+</body>
+</html>

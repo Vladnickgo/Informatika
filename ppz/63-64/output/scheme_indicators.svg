@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="720pt" height="252pt" viewBox="0 0 720 252" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-10T13:08:35.901385</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 252 
+L 720 252 
+L 720 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 28.9584 89.794286 
+L 691.0416 89.794286 
+Q 695.232 89.794286 695.232 85.844571 
+L 695.232 41.081143 
+Q 695.232 37.131429 691.0416 37.131429 
+L 28.9584 37.131429 
+Q 24.768 37.131429 24.768 41.081143 
+L 24.768 85.844571 
+Q 24.768 89.794286 28.9584 89.794286 
+z
+" clip-path="url(#pa6dff4d2b8)" style="fill: #0071e3; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 28.9584 221.451429 
+L 341.8416 221.451429 
+Q 346.032 221.451429 346.032 217.501714 
+L 346.032 113.492571 
+Q 346.032 109.542857 341.8416 109.542857 
+L 28.9584 109.542857 
+Q 24.768 109.542857 24.768 113.492571 
+L 24.768 217.501714 
+Q 24.768 221.451429 28.9584 221.451429 
+z
+" clip-path="url(#pa6dff4d2b8)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 378.1584 221.451429 
+L 691.0416 221.451429 
+Q 695.232 221.451429 695.232 217.501714 
+L 695.232 113.492571 
+Q 695.232 109.542857 691.0416 109.542857 
+L 378.1584 109.542857 
+Q 373.968 109.542857 373.968 113.492571 
+L 373.968 217.501714 
+Q 373.968 221.451429 378.1584 221.451429 
+z
+" clip-path="url(#pa6dff4d2b8)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="360" y="66.999263" transform="rotate(-0 360 66.999263)">Статистичні показники у педагогіці</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="185.4" y="139.269911" transform="rotate(-0 185.4 139.269911)">Міри центральної тенденції</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(107.392383 169.802498)">• Середнє арифметичне (M)</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(144.394219 181.560201)">• Медіана (Me)</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(152.538281 193.317904)">• Мода (Mo)</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="534.6" y="139.185536" transform="rotate(-0 534.6 139.185536)">Міри варіативності (розсіювання)</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(490.915078 169.802498)">• Дисперсія (𝜎²)</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(454.665469 181.560201)">• Стандартне відхилення (𝜎)</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(478.488164 193.317904)">• Розмах варіації (R)</text>
+   </g>
+   <g id="patch_5">
+    <path d="M 185.4 91.795179 
+Q 185.4 99.670278 185.4 105.532916 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 187.4 101.532916 
+L 185.4 105.532916 
+L 183.4 101.532916 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 534.6 91.795179 
+Q 534.6 99.670278 534.6 105.532916 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 536.6 101.532916 
+L 534.6 105.532916 
+L 532.6 101.532916 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pa6dff4d2b8">
+   <rect x="10.8" y="10.8" width="698.4" height="230.4"/>
+  </clipPath>
+ </defs>
+</svg>

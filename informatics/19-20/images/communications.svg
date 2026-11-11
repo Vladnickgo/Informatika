@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540"
+     font-family="Arial, Liberation Sans, sans-serif">
+  <rect width="1000" height="540" fill="#f4f7fb"/>
+
+  <rect x="280" y="15" width="440" height="55" rx="10" fill="#1F3864"/>
+  <text x="500" y="50" text-anchor="middle" font-size="22"
+        font-weight="bold" fill="#ffffff">Види комунікацій</text>
+
+  <!-- Column 1 -->
+  <rect x="15" y="95" width="235" height="50" rx="8" fill="#2E75B6"/>
+  <text x="132" y="127" text-anchor="middle" font-size="16"
+        font-weight="bold" fill="#ffffff">За способом</text>
+  <rect x="15" y="155" width="235" height="95" rx="6" fill="#DEEBF7"/>
+  <text x="132" y="180" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Письмова</text>
+  <text x="132" y="202" text-anchor="middle" font-size="13" fill="#333333">статут, звіти,</text>
+  <text x="132" y="222" text-anchor="middle" font-size="13" fill="#333333">протоколи, e-mail</text>
+  <rect x="15" y="260" width="235" height="95" rx="6" fill="#DEEBF7"/>
+  <text x="132" y="285" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Усна</text>
+  <text x="132" y="307" text-anchor="middle" font-size="13" fill="#333333">наради, обговорення,</text>
+  <text x="132" y="327" text-anchor="middle" font-size="13" fill="#333333">свята</text>
+
+  <!-- Column 2 -->
+  <rect x="260" y="95" width="235" height="50" rx="8" fill="#2E75B6"/>
+  <text x="377" y="127" text-anchor="middle" font-size="16"
+        font-weight="bold" fill="#ffffff">За характером</text>
+  <rect x="260" y="155" width="235" height="95" rx="6" fill="#DEEBF7"/>
+  <text x="377" y="180" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Формальна</text>
+  <text x="377" y="202" text-anchor="middle" font-size="13" fill="#333333">звіти, накази,</text>
+  <text x="377" y="222" text-anchor="middle" font-size="13" fill="#333333">офіційні документи</text>
+  <rect x="260" y="260" width="235" height="95" rx="6" fill="#DEEBF7"/>
+  <text x="377" y="285" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Неформальна</text>
+  <text x="377" y="307" text-anchor="middle" font-size="13" fill="#333333">записки,</text>
+  <text x="377" y="327" text-anchor="middle" font-size="13" fill="#333333">особисті листи</text>
+
+  <!-- Column 3 -->
+  <rect x="505" y="95" width="235" height="50" rx="8" fill="#2E75B6"/>
+  <text x="622" y="127" text-anchor="middle" font-size="16"
+        font-weight="bold" fill="#ffffff">За напрямком</text>
+  <rect x="505" y="155" width="235" height="95" rx="6" fill="#DEEBF7"/>
+  <text x="622" y="180" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Внутрішня</text>
+  <text x="622" y="202" text-anchor="middle" font-size="13" fill="#333333">всередині</text>
+  <text x="622" y="222" text-anchor="middle" font-size="13" fill="#333333">проєкту</text>
+  <rect x="505" y="260" width="235" height="95" rx="6" fill="#DEEBF7"/>
+  <text x="622" y="285" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Зовнішня</text>
+  <text x="622" y="307" text-anchor="middle" font-size="13" fill="#333333">споживачі, ЗМІ,</text>
+  <text x="622" y="327" text-anchor="middle" font-size="13" fill="#333333">громадськість</text>
+
+  <!-- Column 4 -->
+  <rect x="750" y="95" width="235" height="50" rx="8" fill="#2E75B6"/>
+  <text x="867" y="127" text-anchor="middle" font-size="16"
+        font-weight="bold" fill="#ffffff">За рівнем</text>
+  <rect x="750" y="155" width="235" height="95" rx="6" fill="#DEEBF7"/>
+  <text x="867" y="180" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Вертикальна</text>
+  <text x="867" y="202" text-anchor="middle" font-size="13" fill="#333333">вгору / вниз</text>
+  <text x="867" y="222" text-anchor="middle" font-size="13" fill="#333333">по ієрархії</text>
+  <rect x="750" y="260" width="235" height="95" rx="6" fill="#DEEBF7"/>
+  <text x="867" y="285" text-anchor="middle" font-size="15" font-weight="bold" fill="#1F3864">Горизонтальна</text>
+  <text x="867" y="307" text-anchor="middle" font-size="13" fill="#333333">з рівними</text>
+  <text x="867" y="327" text-anchor="middle" font-size="13" fill="#333333">за статусом</text>
+
+  <text x="500" y="420" text-anchor="middle" font-size="14" fill="#404040">
+    Кожен вид комунікації обирається залежно від терміновості, доступності технологій,
+    кваліфікації персоналу та тривалості проєкту.
+  </text>
+</svg>
