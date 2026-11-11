@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@
             --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
             --primary: #0071e3;
             --primary-hover: #0077ed;
-            
+
             /* Scratch Colors */
             --scratch-motion: #4C97FF;
             --scratch-looks: #9966FF;
@@ -63,7 +64,10 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-weight: 600;
             letter-spacing: -0.02em;
             line-height: 1.2;
@@ -241,28 +245,42 @@
             color: #fff;
             font-weight: 500;
             font-size: 0.95rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin: 4px 0;
             gap: 8px;
             white-space: nowrap;
         }
 
         .scratch-block .input {
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             color: #333;
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.85rem;
         }
 
-        .block-motion { background-color: var(--scratch-motion); }
-        .block-control { background-color: var(--scratch-control); }
-        .block-pen { background-color: var(--scratch-pen); }
-        .block-looks { background-color: var(--scratch-looks); }
-        .block-sensing { background-color: var(--scratch-sensing); }
+        .block-motion {
+            background-color: var(--scratch-motion);
+        }
+
+        .block-control {
+            background-color: var(--scratch-control);
+        }
+
+        .block-pen {
+            background-color: var(--scratch-pen);
+        }
+
+        .block-looks {
+            background-color: var(--scratch-looks);
+        }
+
+        .block-sensing {
+            background-color: var(--scratch-sensing);
+        }
 
         .code-block {
-            background: rgba(0,0,0,0.05);
+            background: rgba(0, 0, 0, 0.05);
             border-radius: 16px;
             padding: 20px;
             display: flex;
@@ -274,7 +292,7 @@
 
         @media (prefers-color-scheme: dark) {
             .code-block {
-                background: rgba(255,255,255,0.05);
+                background: rgba(255, 255, 255, 0.05);
             }
         }
 
@@ -361,7 +379,8 @@
                 color: #000 !important;
             }
 
-            .hero::before, .glass-card::before {
+            .hero::before,
+            .glass-card::before {
                 display: none !important;
             }
 
@@ -371,7 +390,11 @@
             }
 
             /* Prevent page breaks inside cards and sections */
-            .glass-card, section, .code-block, .svg-container, details {
+            .glass-card,
+            section,
+            .code-block,
+            .svg-container,
+            details {
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
                 box-shadow: none !important;
@@ -387,61 +410,96 @@
             }
 
             /* Hide interactive elements */
-            .tags, .theme-toggle, details::after, summary::after {
+            .tags,
+            .theme-toggle,
+            details::after,
+            summary::after {
                 display: none !important;
             }
 
             /* Optimize typography for print */
-            h1 { font-size: 24pt; }
-            h2 { font-size: 18pt; }
-            p, li { font-size: 11pt; color: #000 !important; }
-            
+            h1 {
+                font-size: 24pt;
+            }
+
+            h2 {
+                font-size: 18pt;
+            }
+
+            p,
+            li {
+                font-size: 11pt;
+                color: #000 !important;
+            }
+
             .scratch-block {
                 border: 1px solid #000 !important;
                 box-shadow: none !important;
                 color: #000 !important;
                 background: #eee !important;
             }
-            
-            a { text-decoration: none; color: #000; }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- HERO SECTION -->
     <header class="hero container">
         <div class="reveal">
             <h1>Середовище програмування Scratch</h1>
-            <p>Лекційне заняття №5. Ознайомлення з інтерфейсом, основним функціоналом та поняттями спрайту, сцени і костюму.</p>
+            <p>Лекційне заняття №5. Ознайомлення з інтерфейсом, основним функціоналом та поняттями спрайту, сцени і
+                костюму.</p>
             <div class="tags">
                 <span class="tag">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    45 хвилин
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    І семестр
                 </span>
                 <span class="tag">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    Початковий рівень
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+
                 </span>
                 <span class="tag">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                    Інформатика
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                    Основи програмування
                 </span>
             </div>
         </div>
     </header>
 
     <main class="container">
-        
+
         <!-- THEORY: INTERFACE -->
         <section class="reveal">
             <h2 class="section-title">Інтерфейс Scratch 3</h2>
             <div class="grid-2">
                 <div class="glass-card">
-                    <h3>Запуск та вибір мови</h3>
-                    <p>Для запуску Scratch 3 слід виконати: <strong>Пуск → Усі програми → Scratch 3</strong> або використати значок на Робочому столі.</p>
-                    <p>Щоб змінити мову інтерфейсу, натисніть кнопку в головному меню (іконка глобуса) та оберіть українську мову.</p>
-                    <p>Вікно Scratch 3 поділене на <strong>4 основні області</strong>:</p>
+                    <h3>Запуск</h3>
+                    <p>Для запуску Scratch 3 слід виконати: <strong>Пуск → Усі програми → Scratch 3</strong> або
+                        використати значок на Робочому столі.</p>
+                    <p><a href="https://scratch.mit.edu/">Scratch online</a></p>
+                    <h3>Вибір мови</h3>
+                    <div style="display: flex;">
+                        <p style="margin-right: 10px;width:40% ;"><img src="img/language.png" width="100%"></p>
+                        <p style="width:60% ;">Натисніть кнопку в головному меню
+                            ⚙️<strong>Налаштування🔻</strong> та оберіть українську мову.</p>
+                    </div>
+                    <h3>Вікно Scratch 3</h3>
+                    <p>Поділене на <strong>4 основні області</strong>:</p>
                     <ul class="list-styled">
                         <li><strong>Палітра блоків</strong> — містить команди, розподілені на 9 груп.</li>
                         <li><strong>Область скриптів</strong> — панель для складання програм.</li>
@@ -449,41 +507,51 @@
                         <li><strong>Область спрайтів</strong> — перелік усіх виконавців у проєкті.</li>
                     </ul>
                 </div>
-                
+
                 <div class="glass-card">
                     <h3>Візуалізація інтерфейсу</h3>
                     <div class="svg-container">
                         <!-- Custom SVG of Scratch Interface -->
-                        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="background: #f0f0f5; border-radius: 12px;">
+                        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg"
+                            style="background: #f0f0f5; border-radius: 12px;">
                             <!-- Top Bar -->
                             <rect x="0" y="0" width="600" height="40" fill="#4C97FF" />
                             <circle cx="20" cy="20" r="10" fill="#fff" />
-                            <text x="40" y="25" fill="#fff" font-family="sans-serif" font-size="12" font-weight="bold">Scratch 3</text>
-                            
+                            <text x="40" y="25" fill="#fff" font-family="sans-serif" font-size="12"
+                                font-weight="bold">Scratch 3</text>
+
                             <!-- Block Palette -->
                             <rect x="10" y="50" width="140" height="340" fill="#e6e6e6" rx="8" />
-                            <text x="30" y="70" fill="#333" font-family="sans-serif" font-size="12" font-weight="bold">Палітра блоків</text>
+                            <text x="30" y="70" fill="#333" font-family="sans-serif" font-size="12"
+                                font-weight="bold">Палітра блоків</text>
                             <rect x="20" y="80" width="120" height="20" fill="#4C97FF" rx="4" />
                             <rect x="20" y="110" width="120" height="20" fill="#9966FF" rx="4" />
                             <rect x="20" y="140" width="120" height="20" fill="#CF63CF" rx="4" />
-                            
+
                             <!-- Scripts Area -->
                             <rect x="160" y="50" width="220" height="340" fill="#fff" rx="8" stroke="#ccc" />
-                            <text x="200" y="70" fill="#333" font-family="sans-serif" font-size="12" font-weight="bold">Область скриптів</text>
-                            
+                            <text x="200" y="70" fill="#333" font-family="sans-serif" font-size="12"
+                                font-weight="bold">Область скриптів</text>
+
                             <!-- Stage Area -->
                             <rect x="390" y="50" width="200" height="200" fill="#fff" rx="8" stroke="#ccc" />
-                            <text x="430" y="70" fill="#333" font-family="sans-serif" font-size="12" font-weight="bold">Сцена</text>
+                            <text x="430" y="70" fill="#333" font-family="sans-serif" font-size="12"
+                                font-weight="bold">Сцена</text>
                             <!-- Cat -->
-                            <path d="M 470 160 Q 490 130 510 160 Q 520 180 500 200 Q 480 220 460 200 Q 440 180 470 160 Z" fill="#FFAB19" />
+                            <path
+                                d="M 470 160 Q 490 130 510 160 Q 520 180 500 200 Q 480 220 460 200 Q 440 180 470 160 Z"
+                                fill="#FFAB19" />
                             <circle cx="480" cy="150" r="5" fill="#333" />
                             <circle cx="500" cy="150" r="5" fill="#333" />
-                            
+
                             <!-- Sprite Area -->
                             <rect x="390" y="260" width="200" height="130" fill="#e6e6e6" rx="8" />
-                            <text x="430" y="280" fill="#333" font-family="sans-serif" font-size="12" font-weight="bold">Область спрайтів</text>
-                            <rect x="400" y="290" width="40" height="40" fill="#fff" rx="8" stroke="#4C97FF" stroke-width="2" />
-                            <path d="M 410 310 Q 420 300 430 310 Q 435 320 420 320 Q 405 320 410 310 Z" fill="#FFAB19" />
+                            <text x="430" y="280" fill="#333" font-family="sans-serif" font-size="12"
+                                font-weight="bold">Область спрайтів</text>
+                            <rect x="400" y="290" width="40" height="40" fill="#fff" rx="8" stroke="#4C97FF"
+                                stroke-width="2" />
+                            <path d="M 410 310 Q 420 300 430 310 Q 435 320 420 320 Q 405 320 410 310 Z"
+                                fill="#FFAB19" />
                         </svg>
                     </div>
                 </div>
@@ -496,15 +564,21 @@
             <div class="grid-3">
                 <div class="glass-card">
                     <h3>Сцена (Stage)</h3>
-                    <p>Це область, де виконується програма. За замовчуванням на Сцені розташовано виконавця <strong>Рудий кіт</strong>. Розміри Сцени — 480 на 360 кроків виконавця. Початкове положення кота можна змінити, перетягнувши його.</p>
+                    <p>Це область, де виконується програма. За замовчуванням на Сцені розташовано виконавця
+                        <strong>Рудий кіт</strong>. Розміри Сцени — 480 на 360 кроків виконавця. Початкове положення
+                        кота можна змінити, перетягнувши його.
+                    </p>
                 </div>
                 <div class="glass-card">
                     <h3>Спрайт (Sprite)</h3>
-                    <p>Основні елементи в Scratch. Програма складається зі спрайтів та скриптів для керування ними. Спрайти можуть реагувати на інші спрайти та на дії користувача. Один зі спрайтів є поточним (обведений синьою рамкою).</p>
+                    <p>Основні елементи в Scratch. Програма складається зі спрайтів та скриптів для керування ними.
+                        Спрайти можуть реагувати на інші спрайти та на дії користувача. Один зі спрайтів є поточним
+                        (обведений синьою рамкою).</p>
                 </div>
                 <div class="glass-card">
                     <h3>Костюм (Costume)</h3>
-                    <p>Зовнішній вигляд спрайту. Можна змінювати за допомогою блоків групи <strong>Вигляд</strong> (наприклад, "змінити образ на..."). Це дозволяє створювати анімацію руху.</p>
+                    <p>Зовнішній вигляд спрайту. Можна змінювати за допомогою блоків групи <strong>Вигляд</strong>
+                        (наприклад, "змінити образ на..."). Це дозволяє створювати анімацію руху.</p>
                 </div>
             </div>
         </section>
@@ -513,32 +587,41 @@
         <section class="reveal">
             <h2 class="section-title">Призначення блоків</h2>
             <div class="glass-card">
-                <p>Блоки зафарбовані різними кольорами відповідно до їх призначення. При поєднанні блоків отримуємо скрипти, у яких блоки виконуються по черзі.</p>
-                
+                <p>Блоки зафарбовані різними кольорами відповідно до їх призначення. При поєднанні блоків отримуємо
+                    скрипти, у яких блоки виконуються по черзі.</p>
+
                 <div class="grid-2" style="margin-top: 24px;">
                     <div>
                         <h4 style="margin-bottom: 12px; color: var(--scratch-motion);">Рух (Сині)</h4>
                         <div class="code-block">
-                            <div class="scratch-block block-motion">перемістити на <span class="input">10</span> кроків</div>
-                            <div class="scratch-block block-motion">поворот ↻ на <span class="input">15</span> градусів</div>
-                            <div class="scratch-block block-motion">повернути в напрямку <span class="input">90</span></div>
-                            <div class="scratch-block block-motion">слідувати за <span class="input">вказівник ▾</span></div>
+                            <div class="scratch-block block-motion">перемістити на <span class="input">10</span> кроків
+                            </div>
+                            <div class="scratch-block block-motion">поворот ↻ на <span class="input">15</span> градусів
+                            </div>
+                            <div class="scratch-block block-motion">повернути в напрямку <span class="input">90</span>
+                            </div>
+                            <div class="scratch-block block-motion">слідувати за <span class="input">вказівник ▾</span>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <h4 style="margin-bottom: 12px; color: var(--scratch-looks);">Вигляд (Фіолетові)</h4>
                         <div class="code-block">
-                            <div class="scratch-block block-looks">говорити <span class="input">Привіт!</span> <span class="input">2</span> сек</div>
+                            <div class="scratch-block block-looks">говорити <span class="input">Привіт!</span> <span
+                                    class="input">2</span> сек</div>
                             <div class="scratch-block block-looks">сховати</div>
                             <div class="scratch-block block-looks">показати</div>
-                            <div class="scratch-block block-looks">змінити образ на <span class="input">образ2 ▾</span></div>
+                            <div class="scratch-block block-looks">змінити образ на <span class="input">образ2 ▾</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div style="margin-top: 24px; padding: 16px; background: rgba(255, 171, 25, 0.1); border-left: 4px solid var(--scratch-control); border-radius: 8px;">
+                <div
+                    style="margin-top: 24px; padding: 16px; background: rgba(255, 171, 25, 0.1); border-left: 4px solid var(--scratch-control); border-radius: 8px;">
                     <h4 style="color: var(--scratch-control);">Керування (Коричневі/Оранжеві)</h4>
-                    <p style="margin-bottom: 8px;">Блоки керують діями. Наприклад, блок <strong>"коли 🚩 натиснуто"</strong> визначає, що робити, якщо натиснутий прапорець.</p>
+                    <p style="margin-bottom: 8px;">Блоки керують діями. Наприклад, блок <strong>"коли 🚩
+                            натиснуто"</strong> визначає, що робити, якщо натиснутий прапорець.</p>
                     <div class="code-block" style="background: transparent; padding: 0;">
                         <div class="scratch-block block-control">коли 🚩 натиснуто</div>
                         <div class="scratch-block block-control">завжди</div>
@@ -551,7 +634,7 @@
         <!-- PRACTICE & EXAMPLES -->
         <section class="reveal">
             <h2 class="section-title">Практика та Приклади</h2>
-            
+
             <div class="grid-2">
                 <!-- Example 1 -->
                 <div class="glass-card">
@@ -561,14 +644,20 @@
                         <li>Відкрий групу команд <strong>Керування</strong>.</li>
                         <li>Перетягни в Область скриптів блок <strong>Завжди</strong>.</li>
                         <li>Відкрий групу команд <strong>Рух</strong>.</li>
-                        <li>Перетягни блок <strong>Слідувати за</strong> і помісти його всередину блоку <strong>Завжди</strong>.</li>
-                        <li>Перетягни блок <strong>Перемістити на 10 кроків</strong> і помісти його всередину блоку <strong>Завжди</strong>.</li>
+                        <li>Перетягни блок <strong>Слідувати за</strong> і помісти його всередину блоку
+                            <strong>Завжди</strong>.
+                        </li>
+                        <li>Перетягни блок <strong>Перемістити на 10 кроків</strong> і помісти його всередину блоку
+                            <strong>Завжди</strong>.
+                        </li>
                         <li>Клікни будь-яку команду цієї програми. Кіт почне переслідувати вказівник миші.</li>
                     </ol>
                     <div class="code-block">
                         <div class="scratch-block block-control">завжди</div>
-                        <div class="scratch-block block-motion" style="margin-left: 16px;">слідувати за <span class="input">вказівник ▾</span></div>
-                        <div class="scratch-block block-motion" style="margin-left: 16px;">перемістити на <span class="input">10</span> кроків</div>
+                        <div class="scratch-block block-motion" style="margin-left: 16px;">слідувати за <span
+                                class="input">вказівник ▾</span></div>
+                        <div class="scratch-block block-motion" style="margin-left: 16px;">перемістити на <span
+                                class="input">10</span> кроків</div>
                     </div>
                 </div>
 
@@ -576,15 +665,20 @@
                 <div class="glass-card">
                     <h3>Приклад 2: Малювання червоного квадрату</h3>
                     <p>Скласти для Рудого кота програму малювання червоного квадрату.</p>
-                    <p><em>Спочатку потрібно додати розширення "Олівець" (кнопка "Додати розширення" в лівому нижньому куті).</em></p>
+                    <p><em>Спочатку потрібно додати розширення "Олівець" (кнопка "Додати розширення" в лівому нижньому
+                            куті).</em></p>
                     <div class="code-block">
                         <div class="scratch-block block-pen">очистити все</div>
-                        <div class="scratch-block block-pen">надати олівцю колір <span style="display:inline-block;width:16px;height:16px;background:red;border-radius:50%;vertical-align:middle;"></span></div>
+                        <div class="scratch-block block-pen">надати олівцю колір <span
+                                style="display:inline-block;width:16px;height:16px;background:red;border-radius:50%;vertical-align:middle;"></span>
+                        </div>
                         <div class="scratch-block block-pen">задати розмір олівця <span class="input">3</span></div>
                         <div class="scratch-block block-pen">опустити олівець</div>
                         <div class="scratch-block block-control">повторити <span class="input">4</span></div>
-                        <div class="scratch-block block-motion" style="margin-left: 16px;">перемістити на <span class="input">100</span> кроків</div>
-                        <div class="scratch-block block-motion" style="margin-left: 16px;">поворот ↻ на <span class="input">90</span> градусів</div>
+                        <div class="scratch-block block-motion" style="margin-left: 16px;">перемістити на <span
+                                class="input">100</span> кроків</div>
+                        <div class="scratch-block block-motion" style="margin-left: 16px;">поворот ↻ на <span
+                                class="input">90</span> градусів</div>
                         <div class="scratch-block block-pen">підняти олівець</div>
                     </div>
                 </div>
@@ -599,7 +693,8 @@
                     <div>
                         <h3>Збереження</h3>
                         <p>Виконай: <strong>Файл → Вивантажити на ваш комп'ютер</strong>.</p>
-                        <p>Відкриється вікно <em>Зберегти проект</em>, де потрібно вибрати папку, ввести ім'я файлу та натиснути <strong>Зберегти</strong>.</p>
+                        <p>Відкриється вікно <em>Зберегти проект</em>, де потрібно вибрати папку, ввести ім'я файлу та
+                            натиснути <strong>Зберегти</strong>.</p>
                     </div>
                     <div>
                         <h3>Відкриття</h3>
@@ -610,37 +705,41 @@
             </div>
         </section>
 
-<iframe src="https://scratch.mit.edu/projects/1438846628/embed" 
-allowtransparency="true" 
-width="485" 
-height="402" 
-frameborder="0" 
-scrolling="no" 
-allowfullscreen>
+        <iframe src="https://scratch.mit.edu/projects/1438846628/embed" allowtransparency="true" width="485"
+            height="402" frameborder="0" scrolling="no" allowfullscreen>
 
-</iframe>
+        </iframe>
 
 
 
-       <!-- CONTROL QUESTIONS (FAQ) -->
+        <!-- CONTROL QUESTIONS (FAQ) -->
         <section class="reveal">
             <h2 class="section-title">Контрольні питання</h2>
             <div style="max-width: 800px; margin: 0 auto;">
                 <details>
                     <summary>1. Назвіть основні області головного вікна Scratch 3 та їх призначення.</summary>
-                    <p>Вікно поділене на 4 області: Палітра блоків (містить команди), Область скриптів (панель для складання програм), Область сцени (демонстрація виконання), Область спрайтів (перелік усіх виконавців).</p>
+                    <p>Вікно поділене на 4 області: Палітра блоків (містить команди), Область скриптів (панель для
+                        складання програм), Область сцени (демонстрація виконання), Область спрайтів (перелік усіх
+                        виконавців).</p>
                 </details>
                 <details>
-                    <summary>2. Що таке спрайт, сцена та костюм у середовищі Scratch? Як вони взаємодіють між собою?</summary>
-                    <p>Сцена — область виконання програми. Спрайт — основний елемент (виконавець), який реагує на команди. Костюм — зовнішній вигляд спрайту. Спрайти розміщуються на Сцені, а їхній вигляд змінюється за допомогою Костюмів.</p>
+                    <summary>2. Що таке спрайт, сцена та костюм у середовищі Scratch? Як вони взаємодіють між собою?
+                    </summary>
+                    <p>Сцена — область виконання програми. Спрайт — основний елемент (виконавець), який реагує на
+                        команди. Костюм — зовнішній вигляд спрайту. Спрайти розміщуються на Сцені, а їхній вигляд
+                        змінюється за допомогою Костюмів.</p>
                 </details>
                 <details>
                     <summary>3. Опишіть алгоритм створення програми, в якій спрайт малює червоний квадрат.</summary>
-                    <p>Потрібно додати розширення "Олівець". Використати блоки: очистити все, надати олівцю колір (червоний), задати розмір, опустити олівець. Далі цикл "повторити 4": перемістити на 100 кроків, поворот на 90 градусів. Наприкінці — підняти олівець.</p>
+                    <p>Потрібно додати розширення "Олівець". Використати блоки: очистити все, надати олівцю колір
+                        (червоний), задати розмір, опустити олівець. Далі цикл "повторити 4": перемістити на 100 кроків,
+                        поворот на 90 градусів. Наприкінці — підняти олівець.</p>
                 </details>
                 <details>
-                    <summary>4. Як змінити мову інтерфейсу Scratch на українську та додати команди групи "Олівець"?</summary>
-                    <p>Мова змінюється через кнопку глобуса в головному меню. Група "Олівець" додається через кнопку "Додати розширення" (внизу ліворуч) та вибору відповідного розширення.</p>
+                    <summary>4. Як змінити мову інтерфейсу Scratch на українську та додати команди групи "Олівець"?
+                    </summary>
+                    <p>Мова змінюється через кнопку глобуса в головному меню. Група "Олівець" додається через кнопку
+                        "Додати розширення" (внизу ліворуч) та вибору відповідного розширення.</p>
                 </details>
                 <details>
                     <summary>5. Яку послідовність дій потрібно виконати для збереження проєкту на комп'ютері?</summary>
@@ -653,7 +752,8 @@ allowfullscreen>
 
     <footer style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.9rem;">
         <div class="container">
-            <p>Література: Васильєв О. Алгоритми; Васильєв О. Програмування мовою Java; Руденко В.Д. Основи алгоритмізації і програмування мовою Python.</p>
+            <p>Література: Васильєв О. Алгоритми; Васильєв О. Програмування мовою Java; Руденко В.Д. Основи
+                алгоритмізації і програмування мовою Python.</p>
             <p style="margin-top: 8px;">Створено з любов'ю до освіти та дизайну.</p>
         </div>
     </footer>
@@ -680,4 +780,5 @@ allowfullscreen>
         });
     </script>
 </body>
+
 </html>
