@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СРС №7: Поняття скрипту. Групи скриптів у Scratch</title>
+    <style>
+        /* =========================================
+           CSS VARIABLES & THEME SETUP
+           ========================================= */
+        :root {
+            --bg-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --text-secondary: #86868b;
+            --card-bg: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+            --primary: #0071e3;
+            
+            /* Scratch Colors */
+            --scratch-motion: #4C97FF;
+            --scratch-looks: #9966FF;
+            --scratch-sound: #CF63CF;
+            --scratch-events: #FFBF00;
+            --scratch-control: #FFAB19;
+            --scratch-sensing: #5CB1D6;
+            --scratch-operators: #59C059;
+            --scratch-variables: #FF8C1A;
+            --scratch-myblocks: #FF6680;
+            --scratch-pen: #0FBD8C;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #000000;
+                --text-color: #f5f5f7;
+                --text-secondary: #a1a1a6;
+                --card-bg: rgba(28, 28, 30, 0.65);
+                --card-border: rgba(255, 255, 255, 0.1);
+                --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+                --primary: #2997ff;
+            }
+        }
+
+        /* =========================================
+           RESET & BASE STYLES
+           ========================================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================================
+           LAYOUT & CONTAINERS
+           ========================================= */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr 1fr; }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* =========================================
+           GLASSMORPHISM CARDS
+           ========================================= */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(0, 113, 227, 0.15) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-color), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 32px;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tag {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* =========================================
+           TYPOGRAPHY & UTILITIES
+           ========================================= */
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        /* =========================================
+           SCRATCH BLOCKS STYLING
+           ========================================= */
+        .scratch-block {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 4px 0;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .scratch-block .input {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .block-motion { background-color: var(--scratch-motion); }
+        .block-control { background-color: var(--scratch-control); }
+        .block-pen { background-color: var(--scratch-pen); }
+        .block-looks { background-color: var(--scratch-looks); }
+        .block-sound { background-color: var(--scratch-sound); }
+
+        .code-block {
+            background: rgba(0,0,0,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+            overflow-x: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .code-block {
+                background: rgba(255,255,255,0.05);
+            }
+        }
+
+        /* =========================================
+           INTERACTIVE ACCORDION (FAQ & DISCUSSION)
+           ========================================= */
+        details {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 16px 24px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        details[open] {
+            background: var(--bg-color);
+            box-shadow: var(--glass-shadow);
+        }
+
+        summary {
+            font-weight: 600;
+            font-size: 1.1rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        details p {
+            margin-top: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================
+           SCROLL ANIMATIONS
+           ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           PRINT STYLESHEET (PDF EXPORT)
+           ========================================= */
+        @media print {
+            body {
+                background-color: #fff !important;
+                color: #000 !important;
+            }
+
+            .hero::before, .glass-card::before {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            /* Prevent page breaks inside cards and sections */
+            .glass-card, section, .code-block, details {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+                background: #fff !important;
+                backdrop-filter: none !important;
+                margin-bottom: 20px !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            /* Hide interactive elements */
+            .tags, details::after, summary::after {
+                display: none !important;
+            }
+
+            /* Optimize typography for print */
+            h1 { font-size: 24pt; }
+            h2 { font-size: 18pt; }
+            p, li { font-size: 11pt; color: #000 !important; }
+            
+            .scratch-block {
+                border: 1px solid #000 !important;
+                box-shadow: none !important;
+                color: #000 !important;
+                background: #eee !important;
+            }
+            
+            a { text-decoration: none; color: #000; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header class="hero container">
+        <div class="reveal">
+            <h1>Поняття скрипту. Групи скриптів</h1>
+            <p>Матеріали для самостійної роботи №7. Ознайомлення з основним призначенням різних груп блоків-скриптів у Scratch.</p>
+            <div class="tags">
+                <span class="tag">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Час: 2 год
+                </span>
+                <span class="tag">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Рівень: Середній
+                </span>
+                <span class="tag">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Інформатика
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- THEORY: WHAT IS A SCRIPT -->
+        <section class="reveal">
+            <h2 class="section-title">Що таке скрипт?</h2>
+            <div class="glass-card" style="max-width: 900px; margin: 0 auto;">
+                <p style="font-size: 1.1rem;">У Scratch <strong>скрипт (або програма)</strong> — це послідовність блоків-команд, що з’єднані між собою і визначають поведінку об’єкта (спрайта) або сцени.</p>
+                <p>Створення скриптів подібне до складання конструктора LEGO. Кожен блок має свою форму та колір, що допомагає легко орієнтуватися в великому наборі інструментів.</p>
+                
+                <div class="grid-2" style="margin-top: 24px;">
+                    <div>
+                        <h4 style="margin-bottom: 12px;">Чому блоки різної форми?</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--scratch-events)"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                                <span><strong>Шапки (Події)</strong> — запускають скрипт.</span>
+                            </li>
+                            <li style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--scratch-motion)"><path d="M3 12h18v4H3z"/></svg>
+                                <span><strong>Пазли (Команди)</strong> — виконують дію.</span>
+                            </li>
+                            <li style="display: flex; gap: 12px; align-items: center;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--scratch-operators)"><ellipse cx="12" cy="12" rx="8" ry="4"/></svg>
+                                <span><strong>Овали (Значення)</strong> — вставляються в інші блоки.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 12px;">Принцип групування</h4>
+                        <p>Блоки рознесені за <strong>кольоровими групами</strong> відповідно до їхнього функціоналу. Це дозволяє дітям молодшого шкільного віку швидко знаходити потрібну команду за візуальною ознакою.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THEORY: SCRIPT GROUPS -->
+        <section class="reveal">
+            <h2 class="section-title">Основні групи скриптів</h2>
+            <div class="grid-3">
+                <!-- Motion -->
+                <div class="glass-card">
+                    <div class="card-icon" style="background-color: var(--scratch-motion);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <h3>Рух</h3>
+                    <p>Відповідають за переміщення спрайта по сцені, повороти, зміну координат x та y.</p>
+                    <div class="code-block" style="margin-top: auto;">
+                        <div class="scratch-block block-motion">перемістити на <span class="input">10</span> кроків</div>
+                        <div class="scratch-block block-motion">повернути праворуч на <span class="input">15</span> градусів</div>
+                    </div>
+                </div>
+
+                <!-- Looks -->
+                <div class="glass-card">
+                    <div class="card-icon" style="background-color: var(--scratch-looks);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <h3>Вигляд</h3>
+                    <p>Змінюють зовнішній вигляд: костюми, розмір, ефекти (прозорість, колір), текстові повідомлення.</p>
+                    <div class="code-block" style="margin-top: auto;">
+                        <div class="scratch-block block-looks">говорити <span class="input">Привіт!</span> <span class="input">2</span> сек</div>
+                        <div class="scratch-block block-looks">змінити колір на <span class="input">25</span></div>
+                    </div>
+                </div>
+
+                <!-- Sound -->
+                <div class="glass-card">
+                    <div class="card-icon" style="background-color: var(--scratch-sound);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </div>
+                    <h3>Звук</h3>
+                    <p>Керують програванням мелодій, звуків тварин або записаного голосу.</p>
+                    <div class="code-block" style="margin-top: auto;">
+                        <div class="scratch-block block-sound">відтворити звук <span class="input">Мелодія ▾</span></div>
+                    </div>
+                </div>
+
+                <!-- Pen -->
+                <div class="glass-card">
+                    <div class="card-icon" style="background-color: var(--scratch-pen);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+                    </div>
+                    <h3>Олівець</h3>
+                    <p>Дозволяють спрайту «малювати» на сцені під час руху. Зміна кольору, товщини, очищення.</p>
+                    <div class="code-block" style="margin-top: auto;">
+                        <div class="scratch-block block-pen">опустити олівець</div>
+                        <div class="scratch-block block-pen">очистити все</div>
+                    </div>
+                </div>
+
+                <!-- Control -->
+                <div class="glass-card">
+                    <div class="card-icon" style="background-color: var(--scratch-control);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+                    </div>
+                    <h3>Керування</h3>
+                    <p>Найважливіша група для логіки. Цикли (завжди, повторити N разів), умови (якщо... то) та паузи.</p>
+                    <div class="code-block" style="margin-top: auto;">
+                        <div class="scratch-block block-control">завжди</div>
+                        <div class="scratch-block block-control">повторити <span class="input">4</span></div>
+                        <div class="scratch-block block-control">чекати <span class="input">1</span> сек</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRACTICE TASKS -->
+        <section class="reveal">
+            <h2 class="section-title">Завдання для виконання</h2>
+            
+            <div class="grid-2">
+                <!-- Task 1 -->
+                <div class="glass-card">
+                    <h3>Завдання 1 (Репродуктивне)</h3>
+                    <p>Створіть скрипт для Кота, щоб він пройшов 100 кроків, сказав «Привіт, діти!» протягом 2 секунд і змінив свій колір на 25 одиниць.</p>
+                    <div class="code-block">
+                        <div class="scratch-block block-events" style="background-color: var(--scratch-events);">коли 🚩 натиснуто</div>
+                        <div class="scratch-block block-motion">перемістити на <span class="input">100</span> кроків</div>
+                        <div class="scratch-block block-looks">говорити <span class="input">Привіт, діти!</span> <span class="input">2</span> сек</div>
+                        <div class="scratch-block block-looks">змінити колір на <span class="input">25</span></div>
+                    </div>
+                </div>
+
+                <!-- Task 2 -->
+                <div class="glass-card">
+                    <h3>Завдання 2 (Реконструктивне)</h3>
+                    <p>Використовуючи блоки групи «Олівець» та «Рух», складіть алгоритм для малювання квадрата зі стороною 100 одиниць.</p>
+                    <div class="code-block">
+                        <div class="scratch-block block-pen">опустити олівець</div>
+                        <div class="scratch-block block-control">повторити <span class="input">4</span></div>
+                        <div class="scratch-block block-motion" style="margin-left: 16px;">перемістити на <span class="input">100</span> кроків</div>
+                        <div class="scratch-block block-motion" style="margin-left: 16px;">повернути праворуч на <span class="input">90</span> градусів</div>
+                        <div class="scratch-block block-pen">підняти олівець</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 3 -->
+            <div class="glass-card" style="margin-top: 24px;">
+                <h3>Завдання 3 (Творче)</h3>
+                <p>Розробіть проект «Танцюючий спрайт». Спрайт має постійно (цикл завжди) змінювати костюми під музику, переміщуватися у випадкову позицію та залишати за собою різнокольоровий слід (олівець).</p>
+                <div class="code-block">
+                    <div class="scratch-block block-events" style="background-color: var(--scratch-events);">коли 🚩 натиснуто</div>
+                    <div class="scratch-block block-control">завжди</div>
+                    <div class="scratch-block block-looks" style="margin-left: 16px;">наступний костюм</div>
+                    <div class="scratch-block block-motion" style="margin-left: 16px;">перемістити в випадкове місце</div>
+                    <div class="scratch-block block-pen" style="margin-left: 16px;">надати олівцю колір <span class="input" style="background:red;color:#fff;">випадковий</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REPORT STRUCTURE & GRADING -->
+        <section class="reveal">
+            <h2 class="section-title">Вимоги до доповіді та оцінювання</h2>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>Структура доповіді</h3>
+                    <ol style="margin-top: 16px;">
+                        <li><strong>Титульний аркуш:</strong> Назва закладу, тема, дані студента та викладача.</li>
+                        <li><strong>Вступ:</strong> Визначення Scratch як об'єктно-орієнтованого середовища.</li>
+                        <li><strong>Основна частина:</strong>
+                            <ul>
+                                <li>Розділ 1. Поняття скрипту та алгоритму.</li>
+                                <li>Розділ 2. Порівняльна характеристика «Рух» та «Керування».</li>
+                                <li>Розділ 3. Особливості «Олівця».</li>
+                            </ul>
+                        </li>
+                        <li><strong>Висновки:</strong> Значення для майбутньої професійної діяльності.</li>
+                        <li><strong>Список використаних джерел.</strong></li>
+                    </ol>
+                    <p style="margin-top: 16px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <em>Вимоги до тексту:</em> Times New Roman, 14 кегль, 1.5 інтервал. Обсяг: 3–5 сторінок. Обов'язкові скриншоти скриптів із підписами.
+                    </p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>Критерії оцінювання</h3>
+                    <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                        <li style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--card-border);">
+                            <strong style="color: #34c759;">90-100 балів (5/Відмінно):</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.9rem;">Творчий підхід, виконання без помилок, додаткові ефекти, обґрунтований вибір блоків.</p>
+                        </li>
+                        <li style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--card-border);">
+                            <strong style="color: #0071e3;">74-89 балів (4/Добре):</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.9rem;">Завдання виконані в повному обсязі, але є нераціональні кроки (дублювання замість циклу).</p>
+                        </li>
+                        <li style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--card-border);">
+                            <strong style="color: #ff9500;">60-73 бали (3/Задовільно):</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.9rem;">Виконано лише перші два завдання. Плутанина в групах скриптів.</p>
+                        </li>
+                        <li>
+                            <strong style="color: #ff3b30;">Менше 60 балів (2/Незадовільно):</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.9rem;">Робота не виконана або скрипти не працюють через критичні помилки.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTROL QUESTIONS (FAQ) -->
+        <section class="reveal">
+            <h2 class="section-title">Контрольні запитання</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <details>
+                    <summary>1. Яка група блоків відповідає за логічні конструкції (умови та цикли)?</summary>
+                    <p>Група <strong>Керування</strong> (помаранчевий колір). Сюди входять такі блоки, як "завжди", "повторити N разів", "якщо... то", "чекати".</p>
+                </details>
+                <details>
+                    <summary>2. Яка команда дозволяє спрайту «залишити відбиток» на сцені?</summary>
+                    <p>Команда <strong>«опустити олівець»</strong> з групи «Олівець» (після додавання відповідного розширення). Також потрібно використовувати блоки руху для переміщення.</p>
+                </details>
+                <details>
+                    <summary>3. Чим відрізняється блок перемістити в х:0 у:0 від блоку ковзати 1 сек до х:0 у:0?</summary>
+                    <p>Блок <strong>«перемістити в»</strong> миттєво переносить спрайт у вказані координати. Блок <strong>«ковзати»</strong> плавно переміщує спрайт протягом заданого часу (в даному випадку 1 секунди), створюючи анімацію руху.</p>
+                </details>
+                <details>
+                    <summary>4. Як очистити сцену від малюнків олівця?</summary>
+                    <p>Використати блок <strong>«очистити все»</strong> з групи команд «Олівець».</p>
+                </details>
+                <details>
+                    <summary>5. Який блок завжди стоїть на початку будь-якого скрипту, щоб він запустився після натискання на прапорець?</summary>
+                    <p>Блок <strong>«коли 🚩 натиснуто»</strong> з групи «Події» (жовтий колір).</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- DISCUSSION QUESTIONS -->
+        <section class="reveal">
+            <h2 class="section-title">Питання для обговорення</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <details>
+                    <summary>Що таке «скрипт» у Scratch і як він співвідноситься з поняттям «алгоритм»?</summary>
+                    <p>Скрипт — це послідовність блоків-команд. Він є візуальною реалізацією алгоритму. Алгоритм — це логічна послідовність дій для досягнення мети, а скрипт — це його програмний код у Scratch.</p>
+                </details>
+                <details>
+                    <summary>Чому блоки в Scratch мають різну форму (пазли, шапки, овали)?</summary>
+                    <p>Форма вказує на призначення блоку: шапки (події) запускають скрипт; пазли (команди) з'єднуються в ланцюжок і виконують дії; овали (значення) вставляються всередину інших блоків як параметри.</p>
+                </details>
+                <details>
+                    <summary>За яким принципом блоки рознесені за різними кольоровими групами?</summary>
+                    <p>За функціоналом. Колір допомагає швидко знайти потрібну категорію команд (наприклад, синій — рух, фіолетовий — вигляд, помаранчевий — керування).</p>
+                </details>
+                <details>
+                    <summary>Чи може спрайт мати кілька скриптів, що працюють одночасно?</summary>
+                    <p>Так. У Scratch кожен скрипт, який запускається (наприклад, через прапорець або отримання повідомлення), працює паралельно з іншими. Це дозволяє створювати складну поведінку (наприклад, рух і одночасна зміна костюмів).</p>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+    <footer style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.9rem;">
+        <div class="container">
+            <p>Література: Руденко В.Д. Основи алгоритмізації і програмування мовою Python; Сліпченко В. Задачі з програмування мовою Python.</p>
+            <p style="margin-top: 8px;">Створено з любов'ю до освіти та дизайну.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR SCROLL ANIMATIONS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 150;
+
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger on load
+        });
+    </script>
+</body>
+</html>

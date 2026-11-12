@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кількість населення України. Відтворення населення</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f7;
+            --text-main: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent-blue: #0071e3;
+            --accent-red: #ff3b30;
+            --accent-green: #34c759;
+            --card-bg: #ffffff;
+            --border-radius: 18px;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e5ea;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--accent-blue);
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            color: #333;
+        }
+
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        /* Cards & Layout */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            break-inside: avoid;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Stat Blocks */
+        .stat-block {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-color);
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .highlight-red { color: var(--accent-red); }
+        .highlight-green { color: var(--accent-green); }
+
+        /* Visualizations */
+        .chart-container {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 1px solid #e5e5ea;
+        }
+
+        .chart-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        /* CSS Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 15%;
+        }
+
+        .bar {
+            width: 100%;
+            background: var(--accent-blue);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
+        }
+
+        .bar-label {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            color: var(--text-secondary);
+        }
+
+        /* Age Pyramid */
+        .pyramid {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            height: 250px;
+            align-items: flex-end;
+            padding: 20px 0;
+        }
+
+        .pyramid-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            width: 45%;
+            gap: 2px;
+        }
+
+        .pyramid-bar {
+            height: 20px;
+            border-radius: 2px;
+        }
+
+        .pyramid-bar.male { background: #5ac8fa; align-self: flex-end; }
+        .pyramid-bar.female { background: #ff2d55; align-self: flex-start; }
+        
+        .pyramid-labels {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            width: 10%;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            gap: 2px;
+            padding-bottom: 2px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                margin-bottom: 20px;
+                padding: 20px;
+                break-inside: avoid;
+            }
+            .grid-2, .grid-3 {
+                display: block; /* Stack on print for better readability */
+            }
+            .grid-2 > *, .grid-3 > * {
+                margin-bottom: 20px;
+            }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; page-break-after: avoid; }
+            .stat-block { border: 1px solid #eee; }
+            .page-break { page-break-before: always; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- HEADER -->
+    <h1>Кількість населення України</h1>
+    <div class="subtitle">Відтворення населення: показники, чинники та просторові відмінності</div>
+
+    <!-- META -->
+    <div class="card">
+        <h3>Мета заняття</h3>
+        <p>Проаналізувати політико-географічне положення України, визначити проблеми адміністративно-територіального устрою; розкрити особливості та закономірності демографічних процесів і розселення в Україні; з’ясувати вплив політико-географічного положення на економічний розвиток, місце в Європі та світі.</p>
+        <p><strong>Обладнання:</strong> Політична карта світу, адміністративна карта України, атласи, статистичні дані.</p>
+    </div>
+
+    <!-- INTRO -->
+    <div class="card">
+        <h2>Вступ: Суспільна географія</h2>
+        <p>Ми починаємо новий розділ – <strong>«Суспільна географія України»</strong>. У світовій науці цьому терміну відповідає <em>Human geography</em>. Вона вивчає тріаду <strong>«Населення — Господарство — Природа»</strong> у їхньому взаємозв'язку. Це базова частина географічної науки, яка комплексно досліджує антропосферу Землі. Сьогодні ми розглянемо становлення нашої держави у світовому просторі та проаналізуємо демографічні процеси.</p>
+    </div>
+
+    <!-- SECTION 1: TERRITORY -->
+    <div class="card">
+        <h2>1. Територія держави України</h2>
+        <p>Територія України — це суша, води, надра і повітряний простір у межах державного кордону.</p>
+        <div class="grid-2">
+            <div class="stat-block">
+                <div class="stat-number">603 628 км²</div>
+                <div class="stat-label">Загальна площа</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-number">5,7%</div>
+                <div class="stat-label">Території Європи (0,44% світу)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: POPULATION DYNAMICS -->
+    <div class="card">
+        <h2>2. Динаміка кількості населення</h2>
+        <p>Станом на початок 2019 року (без урахування окупованих територій) в Україні мешкало <strong>42,101 млн осіб</strong>.</p>
+        <p>Історичний пік чисельності населення було зафіксовано у <strong>1993 році — 52,2 млн осіб</strong>. З 1994 року спостерігається сумна динаміка зменшення: за 15 років населення скоротилося на 10 млн. Станом на 1 грудня 2018 року кількість становила 42 177 579 осіб (на 208 тисяч менше, ніж у 2017 році).</p>
+        
+        <!-- Chart: Population Line Graph (SVG Representation) -->
+        <div class="chart-container">
+            <div class="chart-title">Мал. 124. Зміна кількості населення України (1913–2019 рр.), млн осіб</div>
+            <svg viewBox="0 0 800 200" width="100%" height="200" preserveAspectRatio="none">
+                <!-- Grid Lines -->
+                <line x1="0" y1="50" x2="800" y2="50" stroke="#e5e5ea" stroke-width="1"/>
+                <line x1="0" y1="100" x2="800" y2="100" stroke="#e5e5ea" stroke-width="1"/>
+                <line x1="0" y1="150" x2="800" y2="150" stroke="#e5e5ea" stroke-width="1"/>
+                <!-- Data Line (Approximation) -->
+                <path d="M 50 130 L 100 160 L 150 120 L 200 125 L 250 80 L 300 100 L 350 70 L 400 55 L 450 50 L 500 45 L 550 45 L 600 60 L 650 80 L 700 90 L 750 95" 
+                      fill="none" stroke="#0071e3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Data Points -->
+                <circle cx="50" cy="130" r="4" fill="#0071e3"/>
+                <circle cx="100" cy="160" r="4" fill="#0071e3"/>
+                <circle cx="200" cy="125" r="4" fill="#0071e3"/>
+                <circle cx="350" cy="70" r="4" fill="#0071e3"/>
+                <circle cx="500" cy="45" r="4" fill="#0071e3"/>
+                <circle cx="550" cy="45" r="4" fill="#0071e3"/>
+                <circle cx="750" cy="95" r="4" fill="#0071e3"/>
+                <!-- Labels -->
+                <text x="50" y="190" font-size="12" fill="#86868b" text-anchor="middle">1913</text>
+                <text x="200" y="190" font-size="12" fill="#86868b" text-anchor="middle">1939</text>
+                <text x="350" y="190" font-size="12" fill="#86868b" text-anchor="middle">1959</text>
+                <text x="500" y="190" font-size="12" fill="#86868b" text-anchor="middle">1985</text>
+                <text x="550" y="190" font-size="12" fill="#86868b" text-anchor="middle">1993</text>
+                <text x="750" y="190" font-size="12" fill="#86868b" text-anchor="middle">2019</text>
+                
+                <text x="50" y="120" font-size="12" fill="#1d1d1f" text-anchor="middle">35.2</text>
+                <text x="550" y="35" font-size="14" font-weight="bold" fill="#0071e3" text-anchor="middle">52.2</text>
+                <text x="750" y="85" font-size="12" fill="#1d1d1f" text-anchor="middle">42.1</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- SECTION 3: REPRODUCTION -->
+    <div class="card">
+        <h2>3. Відтворення населення</h2>
+        <p>За даними Держслужби статистики, в Україні кількість померлих перевищує кількість новонароджених. Співвідношення складає <strong>100 померлих на 58 новонароджених</strong>.</p>
+        
+        <div class="grid-2" style="margin-top: 20px;">
+            <div class="stat-block" style="background: #fff0f0; border: 1px solid #ffcccc;">
+                <div class="stat-number highlight-red">298 017</div>
+                <div class="stat-label">Померлих (2018 р.)</div>
+            </div>
+            <div class="stat-block" style="background: #f0fff4; border: 1px solid #ccffcc;">
+                <div class="stat-number highlight-green">164 287</div>
+                <div class="stat-label">Народилося (2018 р.)</div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">Чинники, що впливають на кількість населення</h3>
+        <ul>
+            <li><strong>Міграційний потік:</strong> Більшість розвинутих країн компенсують низьку народжуваність імміграцією. В Україні цей механізм не працює через замалу кількість приїжджих.</li>
+            <li><strong>Втрата трудового потенціалу:</strong> Молоде, освічене та професійне населення виїжджає за кордон, що погіршує якісні характеристики тих, хто залишається.</li>
+            <li><strong>Високий рівень смертності:</strong> Зумовлений великою часткою людей пенсійного віку, а також передчасною смертністю серед населення середнього віку (алкогольна залежність, ДТП, поширення ВІЛ/СНІДу).</li>
+            <li><strong>Структура сімей:</strong> 74% українських сімей — однодітні, майже чверть — дводітні, і лише 3% виховують трьох і більше дітей. Причина — матеріальний стан та боязнь невизначеності.</li>
+        </ul>
+        <p><em>Для покращення ситуації необхідні системні підходи: розвиток економіки, соціальних стандартів та впевненість громадян у майбутньому.</em></p>
+
+        <h3>Просторові відмінності народжуваності</h3>
+        <div class="grid-2">
+            <div class="stat-block" style="background: #e8f2ff;">
+                <div class="stat-label" style="color: #0071e3; font-weight: bold; margin-bottom: 5px;">Найвища (1.8–1.9 дітей/жінку)</div>
+                <p>Західні та південні області (Волинська, Рівненська, Закарпатська). У сільській місцевості традиційно вища.</p>
+            </div>
+            <div class="stat-block" style="background: #fff4e8;">
+                <div class="stat-label" style="color: #ff9500; font-weight: bold; margin-bottom: 5px;">Найнижча</div>
+                <p>Сумська, Чернігівська, Луганська, Донецька області.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: AGE & SEX STRUCTURE -->
+    <div class="card page-break">
+        <h2>4. Віковий і статевий склад населення</h2>
+        <p>Чисельність постійного населення на 1 січня 2015 року становила 42 759,7 тис. осіб. З них <strong>68,8% — міські жителі</strong>, <strong>31,2% — сільські</strong>.</p>
+        
+        <div class="grid-3" style="margin-top: 20px;">
+            <div class="stat-block">
+                <div class="stat-number">53,7%</div>
+                <div class="stat-label">Жінки (переважають)</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-number">1161</div>
+                <div class="stat-label">Жінок на 1000 чоловіків</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-number">40,7</div>
+                <div class="stat-label">Середній вік населення (років)</div>
+            </div>
+        </div>
+        
+        <p>Чисельна перевага жінок спостерігається з 36 років і з віком збільшується. Середній вік чоловіків — 37,9 років, жінок — 43,1 року.</p>
+
+        <!-- Age-Sex Pyramid representation -->
+        <div class="chart-container">
+            <div class="chart-title">Мал. 126. Статево-вікова піраміда населення України (2017 р.)</div>
+            <div class="pyramid">
+                <div class="pyramid-side">
+                    <div class="pyramid-bar male" style="width: 100%;"></div>
+                    <div class="pyramid-bar male" style="width: 95%;"></div>
+                    <div class="pyramid-bar male" style="width: 85%;"></div>
+                    <div class="pyramid-bar male" style="width: 80%;"></div>
+                    <div class="pyramid-bar male" style="width: 75%;"></div>
+                    <div class="pyramid-bar male" style="width: 60%;"></div>
+                    <div class="pyramid-bar male" style="width: 50%;"></div>
+                    <div class="pyramid-bar male" style="width: 55%;"></div>
+                    <div class="pyramid-bar male" style="width: 60%;"></div>
+                </div>
+                <div class="pyramid-labels">
+                    <span>70+</span>
+                    <span>60-69</span>
+                    <span>50-59</span>
+                    <span>40-49</span>
+                    <span>30-39</span>
+                    <span>20-29</span>
+                    <span>10-19</span>
+                    <span>0-9</span>
+                </div>
+                <div class="pyramid-side">
+                    <div class="pyramid-bar female" style="width: 100%;"></div>
+                    <div class="pyramid-bar female" style="width: 100%;"></div>
+                    <div class="pyramid-bar female" style="width: 100%;"></div>
+                    <div class="pyramid-bar female" style="width: 95%;"></div>
+                    <div class="pyramid-bar female" style="width: 90%;"></div>
+                    <div class="pyramid-bar female" style="width: 85%;"></div>
+                    <div class="pyramid-bar female" style="width: 80%;"></div>
+                    <div class="pyramid-bar female" style="width: 75%;"></div>
+                    <div class="pyramid-bar female" style="width: 70%;"></div>
+                </div>
+            </div>
+            <div style="display:flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary); margin-top: 10px;">
+                <span>← Чоловіки</span>
+                <span>Жінки →</span>
+            </div>
+        </div>
+
+        <h3>Демографічне старіння</h3>
+        <p>Спостерігається стійка тенденція до старіння нації. Частка дітей (0-14 років) зменшується, тоді як частка людей похилого віку (60+) зростає. Це створює додаткове навантаження на економіку та пенсійну систему.</p>
+    </div>
+
+    <!-- SECTION 5: MIGRATION -->
+    <div class="card">
+        <h2>5. Міграційні процеси</h2>
+        <p>У 2015 році населений пункт проживання змінили лише 12 із тисячі українців. Проте внутрішні переміщення (місто-село, село-місто) переважають міжнародну міграцію у 10 разів. Сільське населення скорочується через відплив молоді в міста, що прискорює його старіння.</p>
+        
+        <h3>Внутрішньо переміщені особи (ВПО)</h3>
+        <p>З 2014 року через анексію Криму та воєнні дії на Донбасі в Україні з'явилися вимушені переселенці. Станом на 20 липня 2016 року з непідконтрольних територій переселено <strong>1 млн 29 тис. 571 особа</strong> (з них 170 тис. 581 дитина).</p>
+
+        <h3>Трудова міграція</h3>
+        <p>За даними МОМ (2014-2015), за кордоном для трудової діяльності перебувало близько 700 тис. громадян. Серед мігрантів переважають чоловіки віком 30-44 років. Основні країни призначення: <strong>Польща, РФ, Чехія, Італія</strong> (близько 80% потоків).</p>
+        <p>Сфери зайнятості: будівництво (чоловіки), домашні господарства, послуги, сільське господарство (жінки). Також зростає освітня міграція: у 2013/2014 році за кордоном навчалося понад 47 тис. українців (найбільше в Польщі, Німеччині, РФ).</p>
+    </div>
+
+    <!-- SECTION 6: DEMOGRAPHIC POLICY -->
+    <div class="card">
+        <h2>6. Демографічна політика</h2>
+        <p><strong>Демографічна політика</strong> — це діяльність органів державного управління та соціальних інститутів, спрямована на створення сталих кількісних і якісних параметрів відтворення населення.</p>
+        <p>В Україні здійснюються такі заходи:</p>
+        <ul>
+            <li>Фінансова допомога сім'ям (виплати при народженні дитини, гранти на освіту, субсидії на житло, податкові пільги).</li>
+            <li>Підтримка жінок у поєднанні роботи та материнства (відпустки, гнучкий графік).</li>
+            <li>Програма «Доступне житло» (відновлена у 2017 році): 30% компенсації для потребуючих, 50% — для учасників АТО та ВПО.</li>
+            <li>Допомога при вагітності та пологах (у 2019 році — від 2 до 3 тис. грн залежно від днів, максимальний розмір декретних виплат — 41 280 грн).</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 7: URBANIZATION -->
+    <div class="card">
+        <h2>7. Система розселення та урбанізація</h2>
+        <p>В Україні містами вважаються населені пункти з населенням не менше 10 тис. осіб, більшість яких зайнята не в сільському господарстві. Селища міського типу — не менше 2 тис. осіб.</p>
+        
+        <div class="grid-2">
+            <div>
+                <h3>Класифікація міст:</h3>
+                <ul>
+                    <li><strong>Малі:</strong> до 50 тис. осіб</li>
+                    <li><strong>Середні:</strong> 50-100 тис. осіб</li>
+                    <li><strong>Великі:</strong> понад 100 тис. осіб</li>
+                    <li><strong>Мільйонери:</strong> понад 1 млн (Київ, Харків, Одеса, Дніпро)</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Урбанізація та агломерації:</h3>
+                <p>Найвищий рівень урбанізації — у Донецькій, Луганській, Харківській та Дніпропетровській областях. В Україні налічується <strong>16 міських агломерацій</strong> (Київська, Харківська, Дніпровська, Одеська, Львівська та ін.).</p>
+            </div>
+        </div>
+
+        <h3>Сучасні процеси:</h3>
+        <ul>
+            <li><strong>Субурбанізація:</strong> зростання приміських зон навколо великих міст (вищі темпи зростання населення передмість).</li>
+            <li><strong>Джентрифікація:</strong> реконструкція та оновлення раніше непривабливих частин міста, переїзд туди заможних мешканців. Приклади в Києві: Боричів Тік, «Оболонські Липки», Осокорки. Також характеризується ревіталізацією (перетворенням старих заводів на житло та ТРЦ).</li>
+        </ul>
+    </div>
+
+    <!-- PRACTICAL WORK -->
+    <div class="card page-break" style="background: #f0f8ff; border: 1px solid #cce5ff;">
+        <h2 style="color: #0056b3; border-bottom-color: #cce5ff;">Практична робота</h2>
+        <h3>«Аналіз картограм народжуваності, смертності, природного приросту, густоти населення, урбанізації в Україні»</h3>
+        <p><em>Джерела: атласи «Україна у світі: природа, населення» (стор. 39-42).</em></p>
+
+        <div style="background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px;">
+            <h4>Завдання 1. Природний рух та прогноз</h4>
+            <p>Проаналізуйте дані щодо природного руху населення та зробіть висновки. Дайте прогноз зміни кількості населення на майбутні 20 років.</p>
+            <div style="background: #fafafa; padding: 15px; border-radius: 8px; margin: 10px 0; font-family: monospace;">
+                <strong>Дані (2018 р.):</strong><br>
+                Населення: 42,2 млн осіб<br>
+                Народилося: 164 287 осіб<br>
+                Померло: 298 017 осіб
+            </div>
+            <p><em>Підказка: Обчисліть природний приріст (Народжуваність - Смертність). Визначте, в яких областях показник найбільший/найменший і чому.</em></p>
+        </div>
+
+        <div style="background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px;">
+            <h4>Завдання 2. Аналіз статево-вікової піраміди</h4>
+            <p>За пірамідою (див. Мал. 126) обчисліть частку населення (у %) у таких вікових групах:</p>
+            <ul>
+                <li><strong>Діти (Д):</strong> 0–14 років</li>
+                <li><strong>Працездатні (П):</strong> 15–60 років</li>
+                <li><strong>Літні люди (Л):</strong> 60+ років</li>
+            </ul>
+            <p><em>Оцініть рівень забезпеченості України людьми працездатного віку нині та в майбутньому. Порівняйте рівень урбанізації в різних регіонах (карти стор. 39, 42). Назвіть міста-мільйонери.</em></p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 40px; padding-bottom: 20px;">
+        <p>Конспект заняття з географії. Оформлено для зручного читання та друку.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
