@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гурток інформатики · Заняття 3 · Мова CSS</title>
+<style>
+  :root{
+    --ink:#0d233a;
+    --ink-soft:#34526f;
+    --blue:#2563eb;
+    --blue-deep:#1e40af;
+    --sky:#dbeafe;
+    --mint:#dcfce7;
+    --amber:#fef3c7;
+    --rose:#ffe4e6;
+    --violet:#ede9fe;
+    --line:#d3e3f3;
+    --card:#ffffff;
+    --bg1:#f2f7fd;
+    --bg2:#e6eefb;
+    --green:#16a34a;
+    --violet2:#7c3aed;
+    --rose2:#e11d48;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Roboto,system-ui,-apple-system,sans-serif;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 5% -10%, #dbeafe 0%, transparent 60%),
+      radial-gradient(1000px 500px at 100% 5%, #ede9fe 0%, transparent 55%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
+    color:var(--ink);
+    line-height:1.65;
+    padding:2rem 1.2rem 4rem;
+    min-height:100vh;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    background:linear-gradient(135deg,#ffffff 0%,#f3f8ff 100%);
+    border-radius:36px;
+    padding:2.6rem 2.4rem;
+    box-shadow:0 30px 60px -30px rgba(13,52,110,.35), 0 2px 0 #ffffff inset;
+    border:1px solid rgba(255,255,255,.9);
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1.25fr 1fr;
+    gap:2rem;
+    align-items:center;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:auto -80px -120px auto;
+    width:320px;height:320px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #ddd6fe, transparent 70%);
+    z-index:0;
+  }
+  .hero-text{position:relative;z-index:1;}
+  .kicker{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:var(--violet);color:#5b21b6;
+    font-weight:700;font-size:.82rem;letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:.45rem 1rem;border-radius:999px;
+    margin-bottom:1rem;
+  }
+  .kicker .lvl{
+    background:var(--violet2);color:#fff;
+    width:22px;height:22px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:.75rem;
+  }
+  .hero h1{
+    font-size:clamp(1.9rem, 4vw, 2.9rem);
+    line-height:1.15;
+    letter-spacing:-.02em;
+    color:var(--ink);
+    margin-bottom:.7rem;
+  }
+  .hero h1 span{
+    background:linear-gradient(90deg, var(--violet2), var(--rose2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{color:var(--ink-soft);font-size:1.08rem;max-width:52ch;}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem;
+  }
+  .meta-chip{
+    display:inline-flex;align-items:center;gap:.4rem;
+    background:#fff;border:1px solid var(--line);
+    padding:.35rem .85rem;border-radius:12px;
+    font-size:.85rem;font-weight:600;color:var(--ink-soft);
+  }
+  .meta-chip svg{width:16px;height:16px;}
+  .hero-svg{position:relative;z-index:1;display:flex;justify-content:center;}
+  .hero-svg svg{width:100%;max-width:340px;height:auto;
+    filter:drop-shadow(0 20px 30px rgba(124,58,237,.22));}
+
+  /* SECTION */
+  section{margin-top:3rem;}
+  .section-head{display:flex;align-items:center;gap:1rem;margin-bottom:.6rem;}
+  .section-icon{
+    width:56px;height:56px;flex-shrink:0;
+    border-radius:18px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#e9e5ff,#f3f8ff);
+    border:1px solid var(--line);
+    box-shadow:0 8px 18px -10px rgba(124,58,237,.4);
+  }
+  .section-icon svg{width:30px;height:30px;}
+  .section-head h2{
+    font-size:clamp(1.5rem,2.6vw,2rem);
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .section-sub{
+    color:var(--ink-soft);font-size:1.05rem;margin-bottom:1.4rem;
+    max-width:75ch;
+  }
+
+  /* AGENDA */
+  .agenda{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1rem;
+    margin-top:1.4rem;
+  }
+  .agenda-item{
+    position:relative;
+    background:#fff;
+    border-radius:20px;
+    padding:1.2rem 1.1rem 1.1rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 12px 26px -22px rgba(13,52,110,.4);
+  }
+  .agenda-item .time{
+    font-size:.78rem;font-weight:800;letter-spacing:.06em;
+    color:var(--violet2);text-transform:uppercase;
+    margin-bottom:.4rem;
+    display:flex;align-items:center;gap:.4rem;
+  }
+  .agenda-item .time .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--violet2);
+  }
+  .agenda-item b{color:var(--ink);display:block;font-size:1rem;margin-bottom:.2rem;}
+  .agenda-item p{color:var(--ink-soft);font-size:.88rem;}
+
+  /* GRIDS + TILES */
+  .grid-3{
+    display:grid;gap:1.2rem;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    margin-top:1.2rem;
+  }
+  .grid-2{
+    display:grid;gap:1.2rem;
+    grid-template-columns:1fr 1fr;margin-top:1.2rem;
+  }
+  @media (max-width:820px){ .grid-2{grid-template-columns:1fr;} }
+  .tile{
+    background:#fff;
+    border-radius:22px;
+    padding:1.4rem 1.3rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 12px 26px -22px rgba(13,52,110,.4);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .tile:hover{
+    transform:translateY(-4px);
+    border-color:#c7dcf4;
+    box-shadow:0 22px 40px -22px rgba(124,58,237,.35);
+  }
+  .tile .ico{width:44px;height:44px;margin-bottom:.7rem;}
+  .tile h4{font-size:1.1rem;margin-bottom:.35rem;color:var(--ink);}
+  .tile p{color:var(--ink-soft);font-size:.95rem;}
+  .tile code, p code, li code{
+    background:#eef3f8;padding:.12rem .5rem;border-radius:6px;
+    font-family:"JetBrains Mono","Fira Code",monospace;
+    font-size:.88em;color:#1e40af;
+  }
+
+  /* CALLOUTS */
+  .callout{
+    display:flex;gap:1rem;align-items:flex-start;
+    background:linear-gradient(135deg,#fffbeb,#fff7e0);
+    border:1px solid #fde68a;
+    border-left:6px solid #f59e0b;
+    border-radius:20px;
+    padding:1.2rem 1.4rem;
+    margin:1.4rem 0;
+  }
+  .callout svg{flex-shrink:0;width:30px;height:30px;margin-top:2px;}
+  .callout p{color:#5c4212;font-size:1rem;}
+  .callout.info{
+    background:linear-gradient(135deg,#eff6ff,#e0edff);
+    border-color:#bfdbfe;border-left-color:var(--blue);
+  }
+  .callout.info p{color:#1e3a8a;}
+  .callout.good{
+    background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+    border-color:#86efac;border-left-color:var(--green);
+  }
+  .callout.good p{color:#14532d;}
+  .callout.violet{
+    background:linear-gradient(135deg,#f5f3ff,#ede9fe);
+    border-color:#ddd6fe;border-left-color:var(--violet2);
+  }
+  .callout.violet p{color:#4c1d95;}
+
+  /* CODE */
+  .code{
+    background:#0b1a2b;
+    border-radius:22px;
+    overflow:hidden;
+    margin:1.2rem 0;
+    box-shadow:0 22px 44px -30px #0a1a2e, 0 0 0 1px #1c3a56 inset;
+  }
+  .code-bar{
+    display:flex;align-items:center;gap:.5rem;
+    padding:.75rem 1.1rem;
+    background:#0e2238;
+    border-bottom:1px solid #16324c;
+  }
+  .code-bar .d{width:11px;height:11px;border-radius:50%;}
+  .code-bar .d1{background:#ff5f57;}
+  .code-bar .d2{background:#febc2e;}
+  .code-bar .d3{background:#28c840;}
+  .code-bar .fname{
+    margin-left:.6rem;color:#7fa8c9;
+    font-family:"JetBrains Mono",monospace;font-size:.82rem;
+  }
+  pre{
+    padding:1.3rem 1.5rem;
+    color:#d4e6ff;
+    font-family:"JetBrains Mono","Fira Code",monospace;
+    font-size:.9rem;line-height:1.7;
+    overflow-x:auto;
+  }
+  .k{color:#7dd3fc;}
+  .a{color:#fbbf24;}
+  .v{color:#86efac;}
+  .cm{color:#64748b;font-style:italic;}
+  .p{color:#e2e8f0;}
+
+  /* MINI CODE в плитках */
+  pre.mini{
+    background:#0b1a2b;
+    color:#d4e6ff;
+    border-radius:12px;
+    padding:.7rem .9rem;
+    font-family:"JetBrains Mono","Fira Code",monospace;
+    font-size:.78rem;
+    line-height:1.65;
+    overflow-x:auto;
+    margin-top:.7rem;
+  }
+
+  /* LEGEND (анатомія правила) */
+  .legend{
+    display:grid;gap:.8rem;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    margin-top:1.2rem;
+  }
+  .legend-item{
+    background:#fff;border:1px solid #eaf1fa;
+    border-left:5px solid var(--blue);
+    border-radius:14px;padding:.9rem 1rem;
+    box-shadow:0 8px 18px -18px rgba(13,52,110,.5);
+  }
+  .legend-item.sel{border-left-color:#38bdf8;}
+  .legend-item.brc{border-left-color:#f59e0b;}
+  .legend-item.prp{border-left-color:#22c55e;}
+  .legend-item.val{border-left-color:#a78bfa;}
+  .legend-item.smc{border-left-color:#94a3b8;}
+  .legend-item b{display:block;font-size:.98rem;margin-bottom:.15rem;color:var(--ink);}
+  .legend-item p{font-size:.88rem;color:var(--ink-soft);}
+
+  /* SWATCHES */
+  .swatches{
+    display:grid;gap:.8rem;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    margin-top:1.2rem;
+  }
+  .swatch{
+    border-radius:16px;
+    padding:1.1rem .8rem;
+    color:#fff;font-weight:700;font-size:.85rem;text-align:center;
+    box-shadow:0 12px 26px -16px rgba(13,52,110,.6);
+  }
+  .swatch small{
+    display:block;font-weight:600;opacity:.9;
+    font-family:"JetBrains Mono",monospace;font-size:.76rem;
+    margin-top:.25rem;letter-spacing:.02em;
+  }
+
+  /* DEMO: без CSS / з CSS */
+  .demo-plain{
+    background:#fff;border:1px dashed #cbd5e1;border-radius:12px;
+    padding:1rem;font-family:Georgia,serif;font-size:.9rem;color:#111;
+  }
+  .demo-plain .dp-t{font-size:1.45em;font-weight:700;margin-bottom:.4rem;}
+  .demo-styled{
+    background:linear-gradient(135deg,#eff6ff,#ede9fe);
+    border:1px solid #dbeafe;border-radius:20px;padding:1.2rem;
+    box-shadow:0 16px 34px -22px rgba(124,58,237,.7);
+  }
+  .demo-styled .ds-t{
+    font-size:1.45rem;font-weight:800;color:#1e40af;
+    text-align:center;margin-bottom:.55rem;letter-spacing:-.01em;
+  }
+  .demo-styled .ds-p{
+    font-size:.92rem;color:#34526f;line-height:1.6;
+  }
+  .demo-styled .ds-b{
+    display:inline-block;margin-top:.6rem;
+    background:#dcfce7;color:#166534;
+    padding:.2rem .75rem;border-radius:999px;
+    font-size:.76rem;font-weight:800;letter-spacing:.03em;
+  }
+
+  /* PLAYGROUND (блокова модель) */
+  .pg{
+    display:grid;gap:1.2rem;
+    grid-template-columns:1fr 1.15fr;
+    margin-top:1.2rem;
+    align-items:start;
+  }
+  @media (max-width:900px){ .pg{grid-template-columns:1fr;} }
+  .pg-panel{
+    background:#fff;border:1px solid #eaf1fa;border-radius:22px;
+    padding:1.4rem 1.3rem;
+    box-shadow:0 14px 30px -24px rgba(13,52,110,.5);
+  }
+  .pg-row{
+    display:flex;align-items:center;gap:.8rem;
+    margin-bottom:.9rem;
+    font-size:.9rem;font-weight:600;color:var(--ink-soft);
+  }
+  .pg-row label{width:118px;flex-shrink:0;color:var(--ink);}
+  .pg-row input[type=range]{flex:1;accent-color:var(--violet2);cursor:pointer;}
+  .pg-row span{
+    min-width:66px;text-align:right;
+    font-family:"JetBrains Mono",monospace;
+    font-size:.82rem;color:var(--violet2);
+  }
+  .pg-row input[type=color]{
+    width:48px;height:32px;border:1px solid var(--line);
+    border-radius:8px;background:#fff;padding:2px;cursor:pointer;flex-shrink:0;
+  }
+  .pg-stage{
+    border-radius:22px;
+    padding:2rem;
+    min-height:300px;
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    background-color:#fff;
+    background-image:
+      linear-gradient(45deg,#eef3f8 25%,transparent 25%),
+      linear-gradient(-45deg,#eef3f8 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#eef3f8 75%),
+      linear-gradient(-45deg,transparent 75%,#eef3f8 75%);
+    background-size:20px 20px;
+    background-position:0 0,0 10px,10px -10px,-10px 0;
+    overflow:hidden;
+  }
+  #pgBox{
+    background:#2563eb;color:#fff;font-weight:800;
+    padding:24px;border-radius:12px;font-size:20px;
+    text-align:center;line-height:1.3;
+    box-shadow:0 16px 34px -16px rgba(37,99,235,.8);
+    transition:padding .1s ease, border-radius .1s ease, font-size .1s ease;
+    max-width:100%;
+  }
+
+  /* LIVE EDITOR */
+  .editor-grid{
+    display:grid;gap:1.2rem;grid-template-columns:1fr 1fr;
+    margin-top:1.2rem;
+  }
+  @media (max-width:900px){ .editor-grid{grid-template-columns:1fr;} }
+  .editor-label{
+    font-size:.8rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:#5b21b6;
+    margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;
+  }
+  .editor-label .pin{width:8px;height:8px;border-radius:50%;background:var(--violet2);}
+  #liveCode{
+    width:100%;
+    min-height:400px;
+    padding:1.3rem 1.4rem;
+    background:#0b1a2b;color:#d4e6ff;
+    font-family:"JetBrains Mono","Fira Code",monospace;
+    font-size:.86rem;line-height:1.7;
+    border:0;border-radius:22px;resize:vertical;
+    box-shadow:0 22px 44px -30px #0a1a2e, 0 0 0 1px #1c3a56 inset;
+    outline:none;
+    tab-size:2;
+  }
+  #liveCode:focus{outline:2px solid var(--violet2);outline-offset:2px;}
+  .preview{
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:#fff;
+    box-shadow:0 18px 40px -30px rgba(13,52,110,.4);
+    height:100%;
+    min-height:400px;
+  }
+  .preview iframe{
+    width:100%;height:100%;min-height:400px;border:0;display:block;background:#fff;
+  }
+
+  /* SVG DIAGRAM WRAPPER */
+  .diagram{
+    background:#fff;border-radius:26px;padding:1.6rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 18px 40px -30px rgba(13,52,110,.35);
+    margin-top:1.2rem;
+    display:flex;justify-content:center;
+    overflow-x:auto;
+  }
+  .diagram svg{max-width:100%;height:auto;}
+
+  /* TAG / PROP LIST */
+  .tag-list{
+    display:grid;gap:.7rem;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    margin-top:1.2rem;
+  }
+  .tag-item{
+    display:flex;align-items:flex-start;gap:.9rem;
+    background:#fff;border-radius:16px;
+    padding:.9rem 1rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 8px 18px -18px rgba(13,52,110,.5);
+  }
+  .tag-item .code-tag{
+    flex-shrink:0;
+    font-family:"JetBrains Mono",monospace;
+    font-size:.82rem;font-weight:700;
+    background:#0b1a2b;color:#7dd3fc;
+    padding:.35rem .65rem;border-radius:8px;
+    white-space:nowrap;
+  }
+  .tag-item .code-tag.css{
+    background:#1b1030;color:#c4b5fd;
+  }
+  .tag-item p{font-size:.9rem;color:var(--ink-soft);}
+
+  /* QUIZ */
+  .quiz-grid{
+    display:grid;gap:1.1rem;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    margin-top:1.4rem;
+  }
+  .quiz{
+    background:#fff;border-radius:22px;padding:1.4rem 1.4rem 1.2rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 14px 30px -24px rgba(13,52,110,.5);
+    cursor:pointer;
+    transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .quiz::before{
+    content:"";
+    position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:linear-gradient(180deg,var(--violet2),var(--rose2));
+    opacity:.9;
+  }
+  .quiz:hover{transform:translateY(-3px);border-color:#c7dcf4;box-shadow:0 22px 36px -24px rgba(124,58,237,.4);}
+  .quiz .q{
+    display:flex;gap:.7rem;align-items:flex-start;
+    font-weight:600;font-size:1.02rem;color:var(--ink);
+    margin-bottom:.6rem;
+  }
+  .quiz .q .badge{
+    flex-shrink:0;width:26px;height:26px;border-radius:50%;
+    background:var(--violet);color:#5b21b6;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.8rem;font-weight:800;
+  }
+  .quiz .hint{
+    font-size:.88rem;color:#94a3b8;
+    transition:opacity .2s;
+    display:flex;align-items:center;gap:.4rem;
+  }
+  .quiz .answer{
+    max-height:0;opacity:0;overflow:hidden;
+    transition:max-height .35s ease, opacity .3s ease, margin-top .3s ease, padding .3s ease;
+    color:#14532d;background:var(--mint);
+    border-radius:12px;padding:0 1rem;
+    font-size:.95rem;font-weight:600;
+  }
+  .quiz.open .answer{
+    max-height:200px;opacity:1;
+    padding:.7rem 1rem;margin-top:.7rem;
+  }
+  .quiz.open .hint{opacity:0;height:0;margin:0;}
+
+  /* KEYBOARD */
+  .kb{
+    display:inline-block;
+    background:#0e2238;color:#d4e6ff;
+    font-family:"JetBrains Mono",monospace;
+    font-size:.82rem;font-weight:600;
+    padding:.18rem .55rem;border-radius:8px;
+    border-bottom:2px solid #06121f;
+    margin:0 .1rem;
+  }
+
+  /* HOMEWORK */
+  .hw{
+    background:linear-gradient(135deg,#ede9fe,#f5f3ff);
+    border:1px solid #ddd6fe;
+    border-radius:26px;
+    padding:1.8rem 1.9rem;
+    margin-top:1.4rem;
+  }
+  .hw h3{
+    color:#5b21b6;font-size:1.25rem;margin-bottom:.8rem;
+    display:flex;align-items:center;gap:.6rem;
+  }
+  .hw h3 svg{width:26px;height:26px;}
+  .hw ol{padding-left:1.4rem;color:#3b0764;}
+  .hw ol li{margin-bottom:.5rem;font-size:.98rem;}
+
+  footer{
+    margin-top:3.5rem;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:.92rem;
+    display:flex;align-items:center;justify-content:center;gap:.6rem;
+  }
+  footer svg{width:26px;height:26px;}
+
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr;padding:2rem 1.6rem;}
+    .hero-svg{order:-1;}
+    .hero-svg svg{max-width:220px;}
+    body{padding:1.2rem .8rem 3rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="hero-text">
+      <span class="kicker"><span class="lvl">3</span> Гурток інформатики · Заняття 3</span>
+      <h1>Мова <span>CSS</span>: одягаємо сторінку</h1>
+      <p>Минулого разу ми зробили «кістяк» сторінки. Сьогодні додамо до нього колір, шрифти, рамки й відступи — і побачимо, як звичайний текст перетворюється на справжній дизайн.</p>
+      <div class="hero-meta">
+        <span class="meta-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          60 хвилин
+        </span>
+        <span class="meta-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+          1 курс · Вчитель початкових класів
+        </span>
+        <span class="meta-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/></svg>
+          Живий редактор + пісочниця
+        </span>
+      </div>
+    </div>
+    <div class="hero-svg">
+      <svg viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cg1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#e11d48"/>
+          </linearGradient>
+          <linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3f8ff"/>
+          </linearGradient>
+          <filter id="csh" x="-25%" y="-25%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#7c3aed" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+
+        <!-- Вікно браузера -->
+        <rect x="40" y="50" width="300" height="232" rx="18" fill="url(#cg2)" stroke="#c7dcf4" stroke-width="2" filter="url(#csh)"/>
+        <path d="M40 88 h300" stroke="#dbeafe" stroke-width="2"/>
+        <circle cx="62" cy="69" r="5" fill="#ff5f57"/>
+        <circle cx="80" cy="69" r="5" fill="#febc2e"/>
+        <circle cx="98" cy="69" r="5" fill="#28c840"/>
+        <rect x="118" y="62" width="204" height="14" rx="7" fill="#e8f1fd"/>
+
+        <!-- Контент -->
+        <rect x="64" y="106" width="150" height="18" rx="9" fill="url(#cg1)"/>
+        <rect x="64" y="136" width="250" height="9" rx="4.5" fill="#cbd5e1"/>
+        <rect x="64" y="152" width="216" height="9" rx="4.5" fill="#cbd5e1"/>
+
+        <!-- Картка -->
+        <rect x="64" y="176" width="252" height="82" rx="14" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="2"/>
+        <circle cx="92" cy="204" r="12" fill="#dcfce7"/>
+        <rect x="114" y="196" width="118" height="9" rx="4.5" fill="#94a3b8"/>
+        <rect x="114" y="212" width="82" height="8" rx="4" fill="#cbd5e1"/>
+        <rect x="84" y="232" width="62" height="14" rx="7" fill="#7c3aed" opacity=".85"/>
+
+        <!-- Палітра -->
+        <g transform="translate(305,225)">
+          <circle r="36" fill="#ffffff" stroke="#ddd6fe" stroke-width="2" filter="url(#csh)"/>
+          <circle cx="-11" cy="-11" r="7.5" fill="#e11d48"/>
+          <circle cx="11" cy="-11" r="7.5" fill="#f59e0b"/>
+          <circle cx="17" cy="9" r="7.5" fill="#16a34a"/>
+          <circle cx="-4" cy="15" r="7.5" fill="#2563eb"/>
+        </g>
+
+        <!-- Маркери зверху -->
+        <g transform="translate(20,20)">
+          <rect width="52" height="24" rx="8" fill="#0b1a2b"/>
+          <text x="26" y="16" text-anchor="middle" fill="#c4b5fd" font-family="monospace" font-size="10" font-weight="700">color</text>
+        </g>
+        <g transform="translate(330,20)">
+          <rect width="56" height="24" rx="8" fill="#0b1a2b"/>
+          <text x="28" y="16" text-anchor="middle" fill="#86efac" font-family="monospace" font-size="10" font-weight="700">padding</text>
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ============ ПЛАН ЗАНЯТТЯ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <path d="M8 2v4M16 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+        </svg>
+      </div>
+      <h2>План заняття (60 хвилин)</h2>
+    </div>
+    <p class="section-sub">Логіка проста: спочатку побачити різницю, потім розібрати синтаксис, а далі — багато практики.</p>
+
+    <div class="agenda">
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>0–5 хв</div>
+        <b>Пригадуємо</b>
+        <p>Теги, структура документа, що таке «кістяк» сторінки.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>5–15 хв</div>
+        <b>Що таке CSS</b>
+        <p>Навіщо відділяти оформлення від вмісту. Порівняння «до/після».</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>15–25 хв</div>
+        <b>Синтаксис і селектори</b>
+        <p>Правило, властивість, значення. Тег, клас, ідентифікатор.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>25–45 хв</div>
+        <b>Практика</b>
+        <p>Стилізуємо власну сторінку-візитівку в живому редакторі.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>45–55 хв</div>
+        <b>Блокова модель</b>
+        <p>Padding, border, margin — граємось у пісочниці.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>55–60 хв</div>
+        <b>Квіз + підсумок</b>
+        <p>Закріплюємо матеріал і отримуємо домашнє завдання.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ЩО ТАКЕ CSS ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/>
+        </svg>
+      </div>
+      <h2>Що таке CSS?</h2>
+    </div>
+    <p class="section-sub">
+      <strong>CSS</strong> (Cascading Style Sheets) — <em>каскадні таблиці стилів</em>. Якщо HTML каже браузеру <strong>«що це за вміст»</strong>, то CSS каже <strong>«як він має виглядати»</strong>: якого кольору, розміру, де розташований, які в нього відступи й рамки.
+    </p>
+
+    <div class="grid-2">
+      <div class="tile">
+        <h4>Без CSS</h4>
+        <div class="demo-plain">
+          <div class="dp-t">Моя сторінка</div>
+          <div>Мене звати Олена. Я навчаюсь на 1 курсі. Ось мій список хобі: читання, малювання, інформатика.</div>
+        </div>
+        <p style="margin-top:.8rem;">Так сторінку показує браузер «за замовчуванням» — просто, але нудно.</p>
+      </div>
+      <div class="tile">
+        <h4>З CSS</h4>
+        <div class="demo-styled">
+          <div class="ds-t">Моя сторінка</div>
+          <div class="ds-p">Мене звати Олена. Я навчаюсь на 1 курсі. Ось мій список хобі: читання, малювання, інформатика.</div>
+          <span class="ds-b">HTML + CSS</span>
+        </div>
+        <p style="margin-top:.8rem;">Той самий текст — але з кольором, шрифтом, відступами й заокругленнями.</p>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <path d="M3 9h18M9 21V9"/>
+        </svg>
+        <h4>Це окремий шар</h4>
+        <p>HTML відповідає за <strong>зміст</strong>, CSS — за <strong>вигляд</strong>. Їх прийнято тримати окремо, як текст і його оформлення в документі.</p>
+      </div>
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="14.5" r="2.5"/>
+          <circle cx="8.5" cy="17.5" r="2.5"/><circle cx="6.5" cy="8.5" r="2.5"/>
+          <path d="M12 2a10 10 0 1 0 0 20c1.5 0 2-1 2-2s-.5-2 1-2h3a4 4 0 0 0 4-4c0-6-5-10-10-10z"/>
+        </svg>
+        <h4>Це «каскад»</h4>
+        <p>Кілька правил можуть стосуватись одного елемента. Браузер вибирає «переможця» за чіткими правилами — про це далі.</p>
+      </div>
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16v12H4z"/><path d="M8 20h8M12 16v4"/>
+          <path d="M7 9l2.5 2.5L7 14M12 14h4"/>
+        </svg>
+        <h4>Це просто</h4>
+        <p>Усередині — лише <code>властивість: значення;</code>. Жодної логіки, циклів чи умов. Ідеально для першого знайомства.</p>
+      </div>
+    </div>
+
+    <div class="callout violet">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/>
+      </svg>
+      <p><strong>Аналогія:</strong> HTML — це кістяк людини, CSS — це одяг, зачіска й макіяж, а JavaScript — це м'язи, які рухають. Минулого разу ми зробили кістяк. Сьогодні одягаємо його.</p>
+    </div>
+  </section>
+
+  <!-- ============ ТРИ СПОСОБИ ПІДКЛЮЧЕННЯ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/>
+          <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>
+        </svg>
+      </div>
+      <h2>Три способи підключити стилі</h2>
+    </div>
+    <p class="section-sub">Є три «двері», через які CSS потрапляє на сторінку. Усі три працюють, але призначення в них різне.</p>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h4>1. Вбудований (inline)</h4>
+        <p>Стиль прямо в атрибуті <code>style</code> конкретного тега.</p>
+        <pre class="mini">&lt;h1 style="color:#2563eb;"&gt;
+  Привіт
+&lt;/h1&gt;</pre>
+        <p style="margin-top:.6rem;"><strong>Плюс:</strong> швидко перевірити ідею.<br><strong>Мінус:</strong> не працює для великої кількості елементів.</p>
+      </div>
+      <div class="tile">
+        <h4>2. Внутрішній</h4>
+        <p>Тег <code>&lt;style&gt;</code> усередині <code>&lt;head&gt;</code> — усі стилі однієї сторінки в одному місці.</p>
+        <pre class="mini">&lt;style&gt;
+  h1 { color: #2563eb; }
+&lt;/style&gt;</pre>
+        <p style="margin-top:.6rem;"><strong>Плюс:</strong> зручно для однієї сторінки.<br><strong>Мінус:</strong> не перевикористати на інших сторінках.</p>
+      </div>
+      <div class="tile">
+        <h4>3. Зовнішній</h4>
+        <p>Окремий файл <code>style.css</code>, підключений через <code>&lt;link&gt;</code>.</p>
+        <pre class="mini">&lt;link rel="stylesheet"
+      href="style.css"&gt;</pre>
+        <p style="margin-top:.6rem;"><strong>Плюс:</strong> один файл — увесь сайт.<br><strong>Мінус:</strong> треба стежити за шляхом до файлу.</p>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+      <p><strong>Правило хорошого тону:</strong> для навчальних експериментів — <code>&lt;style&gt;</code> у <code>&lt;head&gt;</code>, а для справжніх проєктів — окремий файл <code>style.css</code>. Inline-стилі використовують лише для дрібних винятків.</p>
+    </div>
+  </section>
+
+  <!-- ============ СИНТАКСИС ПРАВИЛА ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/>
+        </svg>
+      </div>
+      <h2>Синтаксис CSS-правила</h2>
+    </div>
+    <p class="section-sub">Уся мова складається з одного візерунка: <strong>селектор</strong> + фігурні дужки + пари «властивість: значення». Запам'ятайте його — і ви вже знаєте CSS на 70%.</p>
+
+    <div class="code">
+      <div class="code-bar">
+        <span class="d d1"></span><span class="d d2"></span><span class="d d3"></span>
+        <span class="fname">style.css — три правила</span>
+      </div>
+<pre><span class="cm">/* Селектор за тегом — усі абзаци на сторінці */</span>
+<span class="k">p</span> <span class="p">{</span>
+  <span class="a">color</span><span class="p">:</span> <span class="v">#334155</span><span class="p">;</span>
+  <span class="a">font-size</span><span class="p">:</span> <span class="v">16px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Селектор за класом — усі елементи з class="card" */</span>
+<span class="k">.card</span> <span class="p">{</span>
+  <span class="a">background</span><span class="p">:</span> <span class="v">#ffffff</span><span class="p">;</span>
+  <span class="a">border</span><span class="p">:</span> <span class="v">2px solid #dbeafe</span><span class="p">;</span>
+  <span class="a">border-radius</span><span class="p">:</span> <span class="v">16px</span><span class="p">;</span>
+  <span class="a">padding</span><span class="p">:</span> <span class="v">18px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Селектор за id — один-єдиний елемент на сторінці */</span>
+<span class="k">#header</span> <span class="p">{</span>
+  <span class="a">text-align</span><span class="p">:</span> <span class="v">center</span><span class="p">;</span>
+  <span class="a">color</span><span class="p">:</span> <span class="v">#2563eb</span><span class="p">;</span>
+<span class="p">}</span></pre>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item sel">
+        <b>Селектор</b>
+        <p><code>p</code>, <code>.card</code>, <code>#header</code> — вказує, <strong>які саме</strong> елементи стилізуємо.</p>
+      </div>
+      <div class="legend-item brc">
+        <b>Фігурні дужки { }</b>
+        <p>Межі правила: усе, що всередині, стосується цього селектора.</p>
+      </div>
+      <div class="legend-item prp">
+        <b>Властивість</b>
+        <p><code>color</code>, <code>padding</code> — <strong>що саме</strong> змінюємо в елементі.</p>
+      </div>
+      <div class="legend-item val">
+        <b>Значення</b>
+        <p><code>#2563eb</code>, <code>16px</code>, <code>center</code> — <strong>як саме</strong> змінюємо.</p>
+      </div>
+      <div class="legend-item smc">
+        <b>Крапка з комою ;</b>
+        <p>Розділяє властивості. Забули — наступна властивість «з'їсть» попередню.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>
+      </svg>
+      <p><strong>Найчастіша помилка початківців:</strong> забути <code>;</code> після значення або переплутати <code>:</code> і <code>;</code>. Якщо стиль «не працює» — першим ділом перевіряйте ці два символи.</p>
+    </div>
+  </section>
+
+  <!-- ============ СЕЛЕКТОРИ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>
+        </svg>
+      </div>
+      <h2>Селектори: як «впіймати» потрібний елемент</h2>
+    </div>
+    <p class="section-sub">Селектор — це адреса елемента. Три основні типи покривають майже всі потреби початківця.</p>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h4>За тегом</h4>
+        <p><code>h1 { … }</code> — стилізує <strong>усі</strong> заголовки першого рівня на сторінці.</p>
+        <p style="margin-top:.5rem;color:#94a3b8;font-size:.86rem;">Коли: хочемо однаковий вигляд для всіх елементів цього типу.</p>
+      </div>
+      <div class="tile">
+        <h4>За класом <code>.назва</code></h4>
+        <p><code>.card { … }</code> — стилізує всі елементи з <code>class="card"</code>. Клас можна давати <strong>багатьом</strong> елементам.</p>
+        <p style="margin-top:.5rem;color:#94a3b8;font-size:.86rem;">Коли: найчастіше! Це основний робочий інструмент.</p>
+      </div>
+      <div class="tile">
+        <h4>За id <code>#назва</code></h4>
+        <p><code>#header { … }</code> — стилізує єдиний елемент з <code>id="header"</code>. Id на сторінці має бути <strong>один</strong>.</p>
+        <p style="margin-top:.5rem;color:#94a3b8;font-size:.86rem;">Коли: унікальні блоки — шапка, підвал, головна секція.</p>
+      </div>
+    </div>
+
+    <div class="code" style="margin-top:1.4rem;">
+      <div class="code-bar">
+        <span class="d d1"></span><span class="d d2"></span><span class="d d3"></span>
+        <span class="fname">як це пов'язано з HTML</span>
+      </div>
+<pre><span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="p">&lt;</span><span class="k">div</span> <span class="a">class</span>=<span class="v">"card"</span><span class="p">&gt;</span>Картка 1<span class="p">&lt;/</span><span class="k">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="k">div</span> <span class="a">class</span>=<span class="v">"card"</span><span class="p">&gt;</span>Картка 2<span class="p">&lt;/</span><span class="k">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="k">div</span> <span class="a">id</span>=<span class="v">"header"</span><span class="p">&gt;</span>Шапка сайту<span class="p">&lt;/</span><span class="k">div</span><span class="p">&gt;</span>
+
+<span class="cm">/* CSS — один клас стилізує ОБИДВІ картки */</span>
+<span class="k">.card</span> <span class="p">{</span> <span class="a">border</span><span class="p">:</span> <span class="v">2px solid #dbeafe</span><span class="p">;</span> <span class="p">}</span></pre>
+    </div>
+
+    <div class="callout info">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/>
+      </svg>
+      <p><strong>Каскад:</strong> якщо два правила «сперечаються» за один елемент, перемагає <em>специфічніше</em>: inline-стиль → id → клас → тег. А якщо специфічність однакова — перемагає те правило, що записане <em>нижче</em> у файлі.</p>
+    </div>
+  </section>
+
+  <!-- ============ КОЛЬОРИ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="14.5" r="2.5"/>
+          <circle cx="8.5" cy="17.5" r="2.5"/><circle cx="6.5" cy="8.5" r="2.5"/>
+          <path d="M12 2a10 10 0 1 0 0 20c1.5 0 2-1 2-2s-.5-2 1-2h3a4 4 0 0 0 4-4c0-6-5-10-10-10z"/>
+        </svg>
+      </div>
+      <h2>Кольори: три способи записати</h2>
+    </div>
+    <p class="section-sub">CSS розуміє колір у кількох форматах. Усі вони рівноцінні — обирайте той, що зручніший.</p>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h4>Назва</h4>
+        <p><code>color: red;</code> — просто й зрозуміло. Але назв лише близько 140, і точних відтінків серед них немає.</p>
+      </div>
+      <div class="tile">
+        <h4>HEX-код</h4>
+        <p><code>color: #2563eb;</code> — решітка й шість знаків: по два на червоний, зелений, синій. Найпопулярніший формат.</p>
+      </div>
+      <div class="tile">
+        <h4>rgb()</h4>
+        <p><code>color: rgb(37, 99, 235);</code> — три числа від 0 до 255. Зручно, коли треба порахувати відтінок.</p>
+      </div>
+    </div>
+
+    <div class="swatches">
+      <div class="swatch" style="background:#2563eb;">Синій<small>#2563eb</small></div>
+      <div class="swatch" style="background:#7c3aed;">Фіолетовий<small>#7c3aed</small></div>
+      <div class="swatch" style="background:#e11d48;">Малиновий<small>#e11d48</small></div>
+      <div class="swatch" style="background:#f59e0b;">Бурштиновий<small>#f59e0b</small></div>
+      <div class="swatch" style="background:#16a34a;">Зелений<small>#16a34a</small></div>
+      <div class="swatch" style="background:#0d233a;">Темно-синій<small>#0d233a</small></div>
+    </div>
+
+    <div class="callout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/>
+      </svg>
+      <p><strong>Де брати коди?</strong> Найпростіше — у браузері: відкрийте <span class="kb">F12</span>, вкладку Elements, і у вкладці Styles клікніть на будь-який квадратик кольору. Відкриється палітра з піпеткою. Або скористайтесь будь-яким «color picker» у пошуку.</p>
+    </div>
+  </section>
+
+  <!-- ============ ВЛАСТИВОСТІ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h10M4 18h14"/>
+        </svg>
+      </div>
+      <h2>Мінімальний набір властивостей</h2>
+    </div>
+    <p class="section-sub">Цих дванадцяти властивостей достатньо, щоб зробити сторінку охайною й приємною. Решту завжди можна знайти в довіднику.</p>
+
+    <div class="tag-list">
+      <div class="tag-item">
+        <span class="code-tag css">color</span>
+        <p>Колір тексту. <code>color: #e11d48;</code></p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">background</span>
+        <p>Колір або картинка фону. <code>background: #fef3c7;</code></p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">font-size</span>
+        <p>Розмір шрифту. <code>font-size: 18px;</code></p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">font-family</span>
+        <p>Гарнітура шрифту. <code>font-family: Georgia, serif;</code></p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">font-weight</span>
+        <p>Товщина накреслення. <code>font-weight: 700;</code> (= bold)</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">text-align</span>
+        <p>Вирівнювання тексту: <code>left</code>, <code>center</code>, <code>right</code>.</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">padding</span>
+        <p>Внутрішній відступ — «повітря» між рамкою і вмістом.</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">margin</span>
+        <p>Зовнішній відступ — проміжок між елементами.</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">border</span>
+        <p>Рамка: <code>border: 2px solid #2563eb;</code></p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">border-radius</span>
+        <p>Заокруглення кутів. <code>border-radius: 16px;</code></p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">width / height</span>
+        <p>Ширина й висота блоку. <code>width: 300px;</code></p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag css">box-shadow</span>
+        <p>Тінь під блоком. <code>box-shadow: 0 8px 20px rgba(0,0,0,.15);</code></p>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+      <p><strong>Порада:</strong> не намагайтесь вивчити всі властивості напам'ять — їх понад 300. Достатньо впевнено знати ці дванадцять і вміти гуглити решту (наприклад, на <em>developer.mozilla.org</em>).</p>
+    </div>
+  </section>
+
+  <!-- ============ БЛОКОВА МОДЕЛЬ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <rect x="7" y="7" width="10" height="10" rx="1.5"/>
+        </svg>
+      </div>
+      <h2>Блокова модель: «коробка в коробці»</h2>
+    </div>
+    <p class="section-sub">Кожен елемент у CSS — це прямокутна коробка. Усередині неї — ще три «шари». Розуміти цю схему — означає розуміти, чому відступи працюють саме так.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 780 380" width="780" height="380">
+        <!-- margin -->
+        <rect x="80" y="40" width="620" height="300" rx="16" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" stroke-dasharray="8 6"/>
+        <text x="100" y="68" fill="#b45309" font-size="14" font-weight="700">margin — зовнішній відступ (між елементами)</text>
+
+        <!-- border -->
+        <rect x="140" y="85" width="500" height="210" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="4"/>
+        <text x="160" y="112" fill="#1e40af" font-size="14" font-weight="700">border — рамка</text>
+
+        <!-- padding -->
+        <rect x="185" y="125" width="410" height="130" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+        <text x="205" y="150" fill="#166534" font-size="14" font-weight="700">padding — внутрішній відступ</text>
+
+        <!-- content -->
+        <rect x="235" y="168" width="310" height="62" rx="8" fill="#0b1a2b"/>
+        <text x="390" y="206" text-anchor="middle" fill="#d4e6ff" font-family="monospace" font-size="15" font-weight="700">content</text>
+
+        <!-- підпис -->
+        <text x="390" y="370" text-anchor="middle" font-size="12" fill="#34526f">
+          Реальна ширина блоку = width + padding×2 + border×2
+        </text>
+      </svg>
+    </div>
+
+    <div class="callout violet">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/>
+      </svg>
+      <p><strong>Головна різниця:</strong> <code>padding</code> — це <em>всередині</em> рамки (відсуває текст від країв), а <code>margin</code> — <em>зовні</em> (відсуває блок від сусідів). Якщо здається, що «відступ не там» — майже завжди переплутані саме ці дві властивості.</p>
+    </div>
+
+    <!-- ПІСОЧНИЦЯ -->
+    <h3 style="margin-top:2rem;font-size:1.2rem;color:#5b21b6;">Пісочниця: покрутіть повзунки</h3>
+    <p style="color:var(--ink-soft);margin-bottom:.4rem;">Змініть значення й подивіться, як поводиться блок. Код під повзунками оновлюється автоматично — його можна скопіювати у свою сторінку.</p>
+
+    <div class="pg">
+      <div class="pg-panel">
+        <div class="pg-row">
+          <label for="pgPad">padding</label>
+          <input type="range" id="pgPad" min="0" max="64" value="24">
+          <span id="pgPadV">24px</span>
+        </div>
+        <div class="pg-row">
+          <label for="pgRad">border-radius</label>
+          <input type="range" id="pgRad" min="0" max="64" value="12">
+          <span id="pgRadV">12px</span>
+        </div>
+        <div class="pg-row">
+          <label for="pgFs">font-size</label>
+          <input type="range" id="pgFs" min="12" max="44" value="20">
+          <span id="pgFsV">20px</span>
+        </div>
+        <div class="pg-row">
+          <label for="pgCol">background</label>
+          <input type="color" id="pgCol" value="#2563eb">
+          <span id="pgColV">#2563eb</span>
+        </div>
+        <pre class="mini" id="pgCode"></pre>
+      </div>
+      <div class="pg-stage">
+        <div id="pgBox">Мій блок</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ПРАКТИКА ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 17l-5-5 5-5M16 7l5 5-5 5"/>
+        </svg>
+      </div>
+      <h2>Практика: стилізуємо свою візитівку</h2>
+    </div>
+    <p class="section-sub">Праворуч — <strong>живий редактор</strong>. Змінюйте будь-що: кольори, розміри, відступи — і результат оновиться за мить.</p>
+
+    <div class="editor-grid">
+      <div>
+        <div class="editor-label"><span class="pin"></span>index.html — редагуйте код</div>
+        <textarea id="liveCode" spellcheck="false"><!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Моя стилізована сторінка</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f2f7fd;
+      color: #0d233a;
+      padding: 24px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #2563eb;
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #34526f;
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 2px solid #dbeafe;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      color: #7c3aed;
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    a { color: #e11d48; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <h1>Олена Петренко</h1>
+  <p class="subtitle">Майбутня вчителька початкових класів</p>
+
+  <div class="card">
+    <h2>Про мене</h2>
+    <p>Навчаюсь на 1 курсі педагогічного коледжу.
+       Люблю дітей, книжки й інформатику.</p>
+    <span class="badge">HTML</span>
+    <span class="badge">CSS</span>
+  </div>
+
+  <div class="card">
+    <h2>Мої хобі</h2>
+    <ul>
+      <li>Читання книжок</li>
+      <li>Малювання</li>
+      <li>Веб-дизайн</li>
+    </ul>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>Контакти</h2>
+    <p>Пишіть: <a href="https://example.com">мій профіль</a></p>
+  </div>
+
+</body>
+</html></textarea>
+      </div>
+      <div>
+        <div class="editor-label"><span class="pin"></span>Живий результат</div>
+        <div class="preview"><iframe id="previewFrame"></iframe></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2rem;font-size:1.2rem;color:#5b21b6;">Ідеї для експериментів</h3>
+    <div class="grid-3">
+      <div class="tile">
+        <h4>Змініть палітру</h4>
+        <p>Поміняйте <code>#2563eb</code> у <code>h1</code> на <code>#e11d48</code> — заголовок стане малиновим.</p>
+      </div>
+      <div class="tile">
+        <h4>Додайте тінь</h4>
+        <p>У <code>.card</code> додайте <code>box-shadow: 0 10px 24px rgba(37,99,235,.15);</code></p>
+      </div>
+      <div class="tile">
+        <h4>Зробіть «пілюлю»</h4>
+        <p>Задайте <code>.card</code> <code>border-radius: 40px;</code> — картки стануть овальними.</p>
+      </div>
+      <div class="tile">
+        <h4>Змініть шрифт</h4>
+        <p>У <code>body</code> поставте <code>font-family: Georgia, serif;</code> — сторінка «зазвучить» інакше.</p>
+      </div>
+      <div class="tile">
+        <h4>Центруйте все</h4>
+        <p>Додайте <code>max-width: 600px; margin: 0 auto;</code> до <code>body</code>.</p>
+      </div>
+      <div class="tile">
+        <h4>Фон-градієнт</h4>
+        <p><code>background: linear-gradient(135deg,#eff6ff,#ede9fe);</code> замість простого кольору.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/>
+      </svg>
+      <p><strong>Завдання:</strong> зробіть так, щоб усі три картки мали різні кольори рамок, а заголовки в них — різні кольори. Підказка: створіть додаткові класи, наприклад <code>.card-blue</code> і <code>.card-green</code>.</p>
+    </div>
+  </section>
+
+  <!-- ============ DEVTOOLS ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M6 8l3 3-3 3M11 14h6"/>
+        </svg>
+      </div>
+      <h2>DevTools: вкладка Styles</h2>
+    </div>
+    <p class="section-sub">Натисніть <span class="kb">F12</span> (або <span class="kb">Ctrl</span>+<span class="kb">Shift</span>+<span class="kb">I</span>) і перейдіть на вкладку <strong>Elements</strong>. Праворуч побачите <strong>Styles</strong> — усі CSS-правила, що зараз діють на вибраний елемент.</p>
+
+    <div class="grid-3">
+      <div class="tile">
+        <h4>Редагуйте на льоту</h4>
+        <p>Клікніть на будь-яке значення (наприклад, <code>32px</code>) і змініть його — сторінка оновиться миттєво, файл при цьому не зміниться.</p>
+      </div>
+      <div class="tile">
+        <h4>Вимикайте правила</h4>
+        <p>Зніміть галочку біля властивості — побачите, як виглядала б сторінка без неї. Чудовий спосіб зрозуміти, «хто за що відповідає».</p>
+      </div>
+      <div class="tile">
+        <h4>Шукайте «переможця»</h4>
+        <p>Закреслені властивості — ті, які перекрило інше правило. Саме тут видно каскад у дії.</p>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/>
+      </svg>
+      <p><strong>Трюк зі стилями:</strong> натисніть <span class="kb">Esc</span> у DevTools, щоб закрити панель, але залишити зміни. А якщо у вкладці Styles натиснути на маленький квадратик кольору — відкриється палітра з піпеткою, якою можна «вкрасти» колір із будь-якого місця екрана.</p>
+    </div>
+  </section>
+
+  <!-- ============ КВІЗ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"/>
+          <circle cx="12" cy="17.5" r=".8" fill="#7c3aed" stroke="none"/>
+        </svg>
+      </div>
+      <h2>Перевірте себе</h2>
+    </div>
+    <p class="section-sub">Натисніть на картку, щоб побачити відповідь. Спробуйте спершу відповісти подумки.</p>
+
+    <div class="quiz-grid">
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">1</span>Що означає абревіатура CSS?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">Cascading Style Sheets — каскадні таблиці стилів.</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">2</span>За що відповідає CSS, а за що — HTML?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">HTML — за зміст і структуру (що це за елемент). CSS — за зовнішній вигляд (колір, шрифт, відступи).</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">3</span>Як підключити зовнішній файл стилів?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">У &lt;head&gt; додати: &lt;link rel="stylesheet" href="style.css"&gt;.</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">4</span>Який селектор вибере елементи з class="card"?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">.card — з крапкою на початку. Без крапки це був би селектор за тегом.</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">5</span>Яка властивість змінює колір тексту?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">color. Наприклад: color: #e11d48; (а колір фону — це background).</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">6</span>Чим відрізняються padding і margin?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">padding — відступ всередині (між рамкою і вмістом). margin — зовні (між елементами).</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">7</span>Що робить border-radius: 16px?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">Заокруглює кути елемента радіусом 16 пікселів.</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">8</span>Що станеться, якщо забути крапку з комою?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">Наступна властивість може не застосуватись — браузер «склеїть» два оголошення і відкине обидва.</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">9</span>Як задати колір фону сторінки?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">body { background: #f2f7fd; } — або background-color замість background.</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">10</span>Що таке inline-стиль і коли він доречний?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">Атрибут style="..." прямо в теґу. Доречний для швидких винятків, але не для оформлення цілої сторінки.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ДОМАШНЄ ЗАВДАННЯ ============ -->
+  <section>
+    <div class="hw">
+      <h3>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4z"/>
+        </svg>
+        Домашнє завдання
+      </h3>
+      <ol>
+        <li>Відкрийте свою сторінку <code>index.html</code> із минулого заняття.</li>
+        <li>Додайте в <code>&lt;head&gt;</code> блок <code>&lt;style&gt;…&lt;/style&gt;</code> (або створіть окремий файл <code>style.css</code> і підключіть його через <code>&lt;link&gt;</code>).</li>
+        <li>Задайте для <code>body</code>: шрифт, колір фону, колір тексту й відступ <code>padding</code>.</li>
+        <li>Зробіть заголовок <code>h1</code> кольоровим і вирівняйте по центру.</li>
+        <li>Обгорніть кожен смисловий блок у <code>&lt;div class="card"&gt;</code> і створіть у CSS правило <code>.card</code> з рамкою, заокругленням і внутрішнім відступом.</li>
+        <li>Змініть колір посилань (<code>a</code>) і приберіть підкреслення через <code>text-decoration: none;</code>.</li>
+        <li>Відкрийте сторінку в браузері, натисніть <span class="kb">F12</span> → Elements → Styles і перевірте, що всі ваші правила застосувалися (жодне не закреслене без причини).</li>
+        <li>Принесіть файли <code>index.html</code> і <code>style.css</code> на наступне заняття.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#4b6f91" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 2"/>
+    </svg>
+    Гурток інформатики · Педагогічний коледж · Заняття 3 · Мова CSS
+  </footer>
+
+</div>
+
+<script>
+  /* ---- Живий прев'ю ---- */
+  const codeEl = document.getElementById('liveCode');
+  const frame  = document.getElementById('previewFrame');
+
+  function render(){
+    const html = codeEl.value;
+    const doc = frame.contentDocument || frame.contentWindow.document;
+    doc.open();
+    doc.write(html);
+    doc.close();
+  }
+
+  render();
+
+  let debounce;
+  codeEl.addEventListener('input', () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(render, 200);
+  });
+
+  /* Підтримка Tab у textarea */
+  codeEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab'){
+      e.preventDefault();
+      const start = codeEl.selectionStart;
+      const end = codeEl.selectionEnd;
+      codeEl.value = codeEl.value.substring(0, start) + '  ' + codeEl.value.substring(end);
+      codeEl.selectionStart = codeEl.selectionEnd = start + 2;
+    }
+  });
+
+  /* ---- Квіз ---- */
+  document.querySelectorAll('.quiz').forEach(card => {
+    const toggle = () => card.classList.toggle('open');
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+  });
+
+  /* ---- Пісочниця блокової моделі ---- */
+  const pgPad = document.getElementById('pgPad');
+  const pgRad = document.getElementById('pgRad');
+  const pgFs  = document.getElementById('pgFs');
+  const pgCol = document.getElementById('pgCol');
+
+  const pgPadV = document.getElementById('pgPadV');
+  const pgRadV = document.getElementById('pgRadV');
+  const pgFsV  = document.getElementById('pgFsV');
+  const pgColV = document.getElementById('pgColV');
+
+  const pgBox  = document.getElementById('pgBox');
+  const pgCode = document.getElementById('pgCode');
+
+  function pgUpdate(){
+    const pad = pgPad.value;
+    const rad = pgRad.value;
+    const fs  = pgFs.value;
+    const col = pgCol.value;
+
+    pgPadV.textContent = pad + 'px';
+    pgRadV.textContent = rad + 'px';
+    pgFsV.textContent  = fs + 'px';
+    pgColV.textContent = col;
+
+    pgBox.style.padding      = pad + 'px';
+    pgBox.style.borderRadius = rad + 'px';
+    pgBox.style.fontSize     = fs + 'px';
+    pgBox.style.background   = col;
+
+    pgCode.textContent =
+      '.box {\n' +
+      '  padding: ' + pad + 'px;\n' +
+      '  border-radius: ' + rad + 'px;\n' +
+      '  font-size: ' + fs + 'px;\n' +
+      '  background: ' + col + ';\n' +
+      '}';
+  }
+
+  [pgPad, pgRad, pgFs, pgCol].forEach(el => el.addEventListener('input', pgUpdate));
+  pgUpdate();
+</script>
+</body>
+</html>
