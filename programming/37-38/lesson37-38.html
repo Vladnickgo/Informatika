@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,7 @@
             --card-border: rgba(255, 255, 255, 0.5);
             --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
             --primary: #0071e3;
-            
+
             /* Scratch Colors */
             --scratch-motion: #4C97FF;
             --scratch-looks: #9966FF;
@@ -59,7 +60,10 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-weight: 600;
             letter-spacing: -0.02em;
             line-height: 1.2;
@@ -69,7 +73,8 @@
             margin-bottom: 1rem;
         }
 
-        ul, ol {
+        ul,
+        ol {
             margin-bottom: 1rem;
             padding-left: 1.5rem;
         }
@@ -113,8 +118,13 @@
         }
 
         @media (min-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr 1fr; }
-            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         /* =========================================
@@ -218,29 +228,46 @@
             color: #fff;
             font-weight: 500;
             font-size: 0.95rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin: 4px 0;
             gap: 8px;
             white-space: nowrap;
         }
 
         .scratch-block .input {
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             color: #333;
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.85rem;
         }
 
-        .block-motion { background-color: var(--scratch-motion); }
-        .block-control { background-color: var(--scratch-control); }
-        .block-pen { background-color: var(--scratch-pen); }
-        .block-looks { background-color: var(--scratch-looks); }
-        .block-events { background-color: var(--scratch-events); }
-        .block-sensing { background-color: var(--scratch-sensing); }
+        .block-motion {
+            background-color: var(--scratch-motion);
+        }
+
+        .block-control {
+            background-color: var(--scratch-control);
+        }
+
+        .block-pen {
+            background-color: var(--scratch-pen);
+        }
+
+        .block-looks {
+            background-color: var(--scratch-looks);
+        }
+
+        .block-events {
+            background-color: var(--scratch-events);
+        }
+
+        .block-sensing {
+            background-color: var(--scratch-sensing);
+        }
 
         .code-block {
-            background: rgba(0,0,0,0.05);
+            background: rgba(0, 0, 0, 0.05);
             border-radius: 16px;
             padding: 20px;
             display: flex;
@@ -253,7 +280,7 @@
 
         @media (prefers-color-scheme: dark) {
             .code-block {
-                background: rgba(255,255,255,0.05);
+                background: rgba(255, 255, 255, 0.05);
             }
         }
 
@@ -273,18 +300,21 @@
             text-align: left;
         }
 
-        th, td {
+        th,
+        td {
             padding: 16px;
             border-bottom: 1px solid var(--card-border);
         }
 
         th {
-            background: rgba(0,0,0,0.02);
+            background: rgba(0, 0, 0, 0.02);
             font-weight: 600;
         }
 
         @media (prefers-color-scheme: dark) {
-            th { background: rgba(255,255,255,0.02); }
+            th {
+                background: rgba(255, 255, 255, 0.02);
+            }
         }
 
         tr:last-child td {
@@ -328,7 +358,8 @@
                 color: #000 !important;
             }
 
-            .hero::before, .glass-card::before {
+            .hero::before,
+            .glass-card::before {
                 display: none !important;
             }
 
@@ -338,7 +369,11 @@
             }
 
             /* Prevent page breaks inside cards, sections, and tables */
-            .glass-card, section, .code-block, .svg-container, .table-wrapper {
+            .glass-card,
+            section,
+            .code-block,
+            .svg-container,
+            .table-wrapper {
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
                 box-shadow: none !important;
@@ -354,26 +389,43 @@
             }
 
             /* Hide interactive elements */
-            .tags, .theme-toggle {
+            .tags,
+            .theme-toggle {
                 display: none !important;
             }
 
             /* Optimize typography for print */
-            h1 { font-size: 24pt; }
-            h2 { font-size: 18pt; }
-            p, li, td, th { font-size: 11pt; color: #000 !important; }
-            
+            h1 {
+                font-size: 24pt;
+            }
+
+            h2 {
+                font-size: 18pt;
+            }
+
+            p,
+            li,
+            td,
+            th {
+                font-size: 11pt;
+                color: #000 !important;
+            }
+
             .scratch-block {
                 border: 1px solid #000 !important;
                 box-shadow: none !important;
                 color: #000 !important;
                 background: #eee !important;
             }
-            
-            a { text-decoration: none; color: #000; }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- HERO SECTION -->
@@ -383,15 +435,24 @@
             <p>Практичне заняття №9. Керування спрайтом за допомогою скриптів.</p>
             <div class="tags">
                 <span class="tag">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
                     45 хвилин
                 </span>
                 <span class="tag">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
                     Базовий рівень
                 </span>
                 <span class="tag">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
                     Інформатика
                 </span>
             </div>
@@ -399,58 +460,82 @@
     </header>
 
     <main class="container">
-        
+
         <!-- THEORY: INTERFACE & SPRITES -->
         <section class="reveal">
             <h2 class="section-title">1. Середовище Scratch і спрайти</h2>
             <div class="glass-card">
-                <p>Scratch — це візуальне середовище програмування, у якому алгоритм збирають із готових блоків. Основні частини середовища: сцена, список спрайтів, палітра блоків і робоче поле скриптів.</p>
-                
+                <p>Scratch — це візуальне середовище програмування, у якому алгоритм збирають із готових блоків. Основні
+                    частини середовища: сцена, список спрайтів, палітра блоків і робоче поле скриптів.</p>
+
                 <!-- SVG Diagram: Scratch Interface Flow -->
                 <div class="svg-container">
-                    <svg viewBox="0 0 800 150" xmlns="http://www.w3.org/2000/svg" style="background: transparent; width: 100%; max-width: 800px;">
+                    <svg viewBox="0 0 800 150" xmlns="http://www.w3.org/2000/svg"
+                        style="background: transparent; width: 100%; max-width: 800px;">
                         <!-- Box 1 -->
-                        <rect x="10" y="20" width="170" height="100" rx="12" fill="none" stroke="#4C97FF" stroke-width="2"/>
-                        <text x="95" y="55" text-anchor="middle" font-family="-apple-system, sans-serif" font-weight="bold" font-size="16" fill="currentColor">Сцена</text>
-                        <text x="95" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#86868b">візуальний</text>
-                        <text x="95" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#86868b">результат</text>
-                        
+                        <rect x="10" y="20" width="170" height="100" rx="12" fill="none" stroke="#4C97FF"
+                            stroke-width="2" />
+                        <text x="95" y="55" text-anchor="middle" font-family="-apple-system, sans-serif"
+                            font-weight="bold" font-size="16" fill="currentColor">Сцена</text>
+                        <text x="95" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12"
+                            fill="#86868b">візуальний</text>
+                        <text x="95" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12"
+                            fill="#86868b">результат</text>
+
                         <!-- Arrow 1 -->
-                        <line x1="185" y1="70" x2="215" y2="70" stroke="#86868b" stroke-width="2" marker-end="url(#arrow)"/>
-                        
+                        <line x1="185" y1="70" x2="215" y2="70" stroke="#86868b" stroke-width="2"
+                            marker-end="url(#arrow)" />
+
                         <!-- Box 2 -->
-                        <rect x="220" y="20" width="170" height="100" rx="12" fill="none" stroke="#59C059" stroke-width="2"/>
-                        <text x="305" y="55" text-anchor="middle" font-family="-apple-system, sans-serif" font-weight="bold" font-size="16" fill="currentColor">Спрайти</text>
-                        <text x="305" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#86868b">персонажі</text>
-                        <text x="305" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#86868b">та об'єкти</text>
+                        <rect x="220" y="20" width="170" height="100" rx="12" fill="none" stroke="#59C059"
+                            stroke-width="2" />
+                        <text x="305" y="55" text-anchor="middle" font-family="-apple-system, sans-serif"
+                            font-weight="bold" font-size="16" fill="currentColor">Спрайти</text>
+                        <text x="305" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12"
+                            fill="#86868b">персонажі</text>
+                        <text x="305" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12"
+                            fill="#86868b">та об'єкти</text>
 
                         <!-- Arrow 2 -->
-                        <line x1="395" y1="70" x2="425" y2="70" stroke="#86868b" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="395" y1="70" x2="425" y2="70" stroke="#86868b" stroke-width="2"
+                            marker-end="url(#arrow)" />
 
                         <!-- Box 3 -->
-                        <rect x="430" y="20" width="170" height="100" rx="12" fill="none" stroke="#FF8C1A" stroke-width="2"/>
-                        <text x="515" y="55" text-anchor="middle" font-family="-apple-system, sans-serif" font-weight="bold" font-size="16" fill="currentColor">Палітра блоків</text>
-                        <text x="515" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#86868b">команди</text>
-                        <text x="515" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#86868b">за категоріями</text>
+                        <rect x="430" y="20" width="170" height="100" rx="12" fill="none" stroke="#FF8C1A"
+                            stroke-width="2" />
+                        <text x="515" y="55" text-anchor="middle" font-family="-apple-system, sans-serif"
+                            font-weight="bold" font-size="16" fill="currentColor">Палітра блоків</text>
+                        <text x="515" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12"
+                            fill="#86868b">команди</text>
+                        <text x="515" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12"
+                            fill="#86868b">за категоріями</text>
 
                         <!-- Arrow 3 -->
-                        <line x1="605" y1="70" x2="635" y2="70" stroke="#86868b" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="605" y1="70" x2="635" y2="70" stroke="#86868b" stroke-width="2"
+                            marker-end="url(#arrow)" />
 
                         <!-- Box 4 -->
-                        <rect x="640" y="20" width="150" height="100" rx="12" fill="none" stroke="#9966FF" stroke-width="2"/>
-                        <text x="715" y="55" text-anchor="middle" font-family="-apple-system, sans-serif" font-weight="bold" font-size="16" fill="currentColor">Поле скриптів</text>
-                        <text x="715" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#86868b">збирання</text>
-                        <text x="715" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#86868b">алгоритму</text>
+                        <rect x="640" y="20" width="150" height="100" rx="12" fill="none" stroke="#9966FF"
+                            stroke-width="2" />
+                        <text x="715" y="55" text-anchor="middle" font-family="-apple-system, sans-serif"
+                            font-weight="bold" font-size="16" fill="currentColor">Поле скриптів</text>
+                        <text x="715" y="80" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12"
+                            fill="#86868b">збирання</text>
+                        <text x="715" y="95" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12"
+                            fill="#86868b">алгоритму</text>
 
                         <!-- Definitions -->
                         <defs>
-                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6"
+                                orient="auto-start-reverse">
                                 <path d="M 0 0 L 10 5 L 0 10 z" fill="#86868b" />
                             </marker>
                         </defs>
                     </svg>
                 </div>
-                <p><strong>Спрайт</strong> — це персонаж або об’єкт на сцені. У кожного спрайта є ім’я, координати, напрям, розмір і набір костюмів. Скрипт спрайта визначає, як саме він рухається, змінюється та реагує на події.</p>
+                <p><strong>Спрайт</strong> — це персонаж або об’єкт на сцені. У кожного спрайта є ім’я, координати,
+                    напрям, розмір і набір костюмів. Скрипт спрайта визначає, як саме він рухається, змінюється та
+                    реагує на події.</p>
             </div>
         </section>
 
@@ -460,36 +545,53 @@
             <div class="grid-2">
                 <div class="glass-card">
                     <h3>Створення та редагування спрайта</h3>
-                    <p>Спрайт можна обрати з бібліотеки, намалювати самостійно, завантажити зображення або створити за допомогою камери. Редактор спрайта дає змогу змінювати костюми, розмір, колір, положення та інші властивості.</p>
-                    <p>Для анімації часто використовують кілька костюмів одного спрайта. Команда зміни костюма створює ефект руху, крокування, помаху крил тощо.</p>
-                    
+                    <p>Спрайт можна обрати з бібліотеки, намалювати самостійно, завантажити зображення або створити за
+                        допомогою камери. Редактор спрайта дає змогу змінювати костюми, розмір, колір, положення та інші
+                        властивості.</p>
+                    <p>Для анімації часто використовують кілька костюмів одного спрайта. Команда зміни костюма створює
+                        ефект руху, крокування, помаху крил тощо.</p>
+
                     <!-- SVG Flow: Creation -->
                     <div class="svg-container" style="margin-top: 16px;">
-                        <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 600px;">
-                            <rect x="10" y="20" width="120" height="60" rx="8" fill="none" stroke="#ccc" stroke-width="1"/>
-                            <text x="70" y="45" text-anchor="middle" font-family="-apple-system" font-weight="bold" font-size="12" fill="currentColor">Обрати спрайт</text>
-                            <text x="70" y="62" text-anchor="middle" font-family="-apple-system" font-size="10" fill="#86868b">з бібліотеки</text>
-                            
-                            <path d="M 140 50 L 160 50" stroke="#86868b" stroke-width="2" marker-end="url(#arrow2)"/>
-                            
-                            <rect x="170" y="20" width="120" height="60" rx="8" fill="none" stroke="#ccc" stroke-width="1"/>
-                            <text x="230" y="45" text-anchor="middle" font-family="-apple-system" font-weight="bold" font-size="12" fill="currentColor">Редагувати</text>
-                            <text x="230" y="62" text-anchor="middle" font-family="-apple-system" font-size="10" fill="#86868b">костюм, розмір</text>
+                        <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg"
+                            style="width: 100%; max-width: 600px;">
+                            <rect x="10" y="20" width="120" height="60" rx="8" fill="none" stroke="#ccc"
+                                stroke-width="1" />
+                            <text x="70" y="45" text-anchor="middle" font-family="-apple-system" font-weight="bold"
+                                font-size="12" fill="currentColor">Обрати спрайт</text>
+                            <text x="70" y="62" text-anchor="middle" font-family="-apple-system" font-size="10"
+                                fill="#86868b">з бібліотеки</text>
 
-                            <path d="M 300 50 L 320 50" stroke="#86868b" stroke-width="2" marker-end="url(#arrow2)"/>
+                            <path d="M 140 50 L 160 50" stroke="#86868b" stroke-width="2" marker-end="url(#arrow2)" />
 
-                            <rect x="330" y="20" width="120" height="60" rx="8" fill="none" stroke="#ccc" stroke-width="1"/>
-                            <text x="390" y="45" text-anchor="middle" font-family="-apple-system" font-weight="bold" font-size="12" fill="currentColor">Додати скрипт</text>
-                            <text x="390" y="62" text-anchor="middle" font-family="-apple-system" font-size="10" fill="#86868b">подія + команди</text>
+                            <rect x="170" y="20" width="120" height="60" rx="8" fill="none" stroke="#ccc"
+                                stroke-width="1" />
+                            <text x="230" y="45" text-anchor="middle" font-family="-apple-system" font-weight="bold"
+                                font-size="12" fill="currentColor">Редагувати</text>
+                            <text x="230" y="62" text-anchor="middle" font-family="-apple-system" font-size="10"
+                                fill="#86868b">костюм, розмір</text>
 
-                            <path d="M 460 50 L 480 50" stroke="#86868b" stroke-width="2" marker-end="url(#arrow2)"/>
+                            <path d="M 300 50 L 320 50" stroke="#86868b" stroke-width="2" marker-end="url(#arrow2)" />
 
-                            <rect x="490" y="20" width="100" height="60" rx="8" fill="none" stroke="#ccc" stroke-width="1"/>
-                            <text x="540" y="45" text-anchor="middle" font-family="-apple-system" font-weight="bold" font-size="12" fill="currentColor">Запустити</text>
-                            <text x="540" y="62" text-anchor="middle" font-family="-apple-system" font-size="10" fill="#86868b">прапорець</text>
+                            <rect x="330" y="20" width="120" height="60" rx="8" fill="none" stroke="#ccc"
+                                stroke-width="1" />
+                            <text x="390" y="45" text-anchor="middle" font-family="-apple-system" font-weight="bold"
+                                font-size="12" fill="currentColor">Додати скрипт</text>
+                            <text x="390" y="62" text-anchor="middle" font-family="-apple-system" font-size="10"
+                                fill="#86868b">подія + команди</text>
+
+                            <path d="M 460 50 L 480 50" stroke="#86868b" stroke-width="2" marker-end="url(#arrow2)" />
+
+                            <rect x="490" y="20" width="100" height="60" rx="8" fill="none" stroke="#ccc"
+                                stroke-width="1" />
+                            <text x="540" y="45" text-anchor="middle" font-family="-apple-system" font-weight="bold"
+                                font-size="12" fill="currentColor">Запустити</text>
+                            <text x="540" y="62" text-anchor="middle" font-family="-apple-system" font-size="10"
+                                fill="#86868b">прапорець</text>
 
                             <defs>
-                                <marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                                <marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5"
+                                    markerHeight="5" orient="auto-start-reverse">
                                     <path d="M 0 0 L 10 5 L 0 10 z" fill="#86868b" />
                                 </marker>
                             </defs>
@@ -499,14 +601,18 @@
 
                 <div class="glass-card">
                     <h3>Скрипти: події, рух, вигляд і керування</h3>
-                    <p>Скрипт починається з події, наприклад «коли натиснуто прапорець». Далі додають команди руху, вигляду та керування.</p>
+                    <p>Скрипт починається з події, наприклад «коли натиснуто прапорець». Далі додають команди руху,
+                        вигляду та керування.</p>
                     <div class="code-block">
                         <div class="scratch-block block-events">коли 🚩 натиснуто</div>
                         <div class="scratch-block block-control">повторити <span class="input">10</span></div>
-                        <div class="scratch-block block-motion" style="margin-left: 16px;">перемістити на <span class="input">10</span></div>
+                        <div class="scratch-block block-motion" style="margin-left: 16px;">перемістити на <span
+                                class="input">10</span></div>
                         <div class="scratch-block block-looks" style="margin-left: 16px;">наступний костюм</div>
                     </div>
-                    <p style="margin-top: 16px;"><strong>Цикли та умови:</strong> Для повторюваних дій використовують блоки «повторити» та «завжди». Умова «якщо» дає змогу перевірити положення спрайта, торкання краю або натискання клавіші.</p>
+                    <p style="margin-top: 16px;"><strong>Цикли та умови:</strong> Для повторюваних дій використовують
+                        блоки «повторити» та «завжди». Умова «якщо» дає змогу перевірити положення спрайта, торкання
+                        краю або натискання клавіші.</p>
                 </div>
             </div>
         </section>
@@ -514,7 +620,7 @@
         <!-- PRACTICE TASKS -->
         <section class="reveal">
             <h2 class="section-title">Покроковий алгоритм виконання завдань</h2>
-            
+
             <!-- Level 1 -->
             <div class="glass-card" style="margin-bottom: 24px;">
                 <h3 style="color: var(--primary);">Рівень 1. Репродуктивний (≈ 7 хв)</h3>
@@ -541,12 +647,16 @@
                             <tr>
                                 <td>3</td>
                                 <td>Додати подію запуску</td>
-                                <td><span class="scratch-block block-events" style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">коли 🚩 натиснуто</span></td>
+                                <td><span class="scratch-block block-events"
+                                        style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">коли 🚩 натиснуто</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Додати рух спрайта</td>
-                                <td><span class="scratch-block block-motion" style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">перемістити на 10</span></td>
+                                <td><span class="scratch-block block-motion"
+                                        style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">перемістити на 10</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td>5</td>
@@ -574,32 +684,42 @@
                             <tr>
                                 <td>1</td>
                                 <td>Створити подію запуску</td>
-                                <td><span class="scratch-block block-events" style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">коли 🚩 натиснуто</span></td>
+                                <td><span class="scratch-block block-events"
+                                        style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">коли 🚩 натиснуто</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Додати повторення руху</td>
-                                <td><span class="scratch-block block-control" style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">повторити 10</span></td>
+                                <td><span class="scratch-block block-control"
+                                        style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">повторити 10</span></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Додати переміщення</td>
-                                <td><span class="scratch-block block-motion" style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">перемістити на 10</span></td>
+                                <td><span class="scratch-block block-motion"
+                                        style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">перемістити на 10</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Додати зміну костюма</td>
-                                <td><span class="scratch-block block-looks" style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">наступний костюм</span></td>
+                                <td><span class="scratch-block block-looks"
+                                        style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">наступний костюм</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Додати паузу</td>
-                                <td><span class="scratch-block block-control" style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">чекати 0.2 с</span></td>
+                                <td><span class="scratch-block block-control"
+                                        style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">чекати 0.2 с</span></td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Додати відбивання від краю</td>
-                                <td><span class="scratch-block block-motion" style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">якщо на межі, відбити</span></td>
+                                <td><span class="scratch-block block-motion"
+                                        style="padding: 4px 8px; font-size: 0.8rem; margin: 0;">якщо на межі,
+                                        відбити</span></td>
                             </tr>
                             <tr>
                                 <td>7</td>
@@ -614,7 +734,9 @@
             <!-- Level 3 -->
             <div class="glass-card">
                 <h3 style="color: var(--primary);">Рівень 3. Творчий (≈ 10 хв)</h3>
-                <p>Створіть коротку анімацію з двома спрайтами: один спрайт рухається й змінює костюм, другий реагує на його наближення або отримує повідомлення. Додайте щонайменше один ефект вигляду та одну умову. Продемонструйте результат групі.</p>
+                <p>Створіть коротку анімацію з двома спрайтами: один спрайт рухається й змінює костюм, другий реагує на
+                    його наближення або отримує повідомлення. Додайте щонайменше один ефект вигляду та одну умову.
+                    Продемонструйте результат групі.</p>
                 <div class="grid-2" style="margin-top: 16px;">
                     <div>
                         <h4>Вимоги до проєкту:</h4>
@@ -626,10 +748,13 @@
                         </ul>
                     </div>
                     <div class="code-block" style="margin-top: 0;">
-                        <div class="scratch-block block-events">коли я отримую <span class="input">повідомлення1</span></div>
+                        <div class="scratch-block block-events">коли я отримую <span class="input">повідомлення1</span>
+                        </div>
                         <div class="scratch-block block-looks">змінити розмір на <span class="input">10</span></div>
-                        <div class="scratch-block block-control">якщо &lt;торкається <span class="input">Спрайт2</span>?&gt; тоді</div>
-                        <div class="scratch-block block-sound" style="margin-left: 16px;">відтворити звук <span class="input">Pop</span></div>
+                        <div class="scratch-block block-control">якщо &lt;торкається <span
+                                class="input">Спрайт2</span>?&gt; тоді</div>
+                        <div class="scratch-block block-sound" style="margin-left: 16px;">відтворити звук <span
+                                class="input">Pop</span></div>
                     </div>
                 </div>
             </div>
@@ -685,6 +810,12 @@
                         <li>висновок про досягнення мети заняття.</li>
                     </ul>
                 </div>
+                <div>
+                    <iframe src="https://scratch.mit.edu/projects/1441710320/embed" allowtransparency="true" width="485"
+                        height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                        <p>Приклад виконання роботи</p>
+                </div>
+
             </div>
         </section>
 
@@ -692,7 +823,8 @@
 
     <footer style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.9rem;">
         <div class="container">
-            <p>Література: Морзе Н. В., Вембер В. П. Інформатика (10 клас); Ривкінд Й. Я. та ін. Інформатика (10 клас); Руденко В. Д. та ін. Інформатика (10 клас).</p>
+            <p>Література: Морзе Н. В., Вембер В. П. Інформатика (10 клас); Ривкінд Й. Я. та ін. Інформатика (10 клас);
+                Руденко В. Д. та ін. Інформатика (10 клас).</p>
             <p style="margin-top: 8px;">Створено з любов'ю до освіти та дизайну.</p>
         </div>
     </footer>
@@ -719,4 +851,5 @@
         });
     </script>
 </body>
+
 </html>
