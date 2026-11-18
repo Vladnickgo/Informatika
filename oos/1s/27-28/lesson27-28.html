@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Основи графічного інтерфейсу користувача (GUI) — лекція</title>
+<style>
+/* ============ БАЗА ============ */
+:root{
+  --bg:#f5f5f7;
+  --ink:#1d1d1f;
+  --muted:#6e6e73;
+  --line:#e3e3e8;
+  --blue:#0071e3;
+  --indigo:#5e5ce6;
+  --green:#34c759;
+  --orange:#ff9f0a;
+  --red:#ff3b30;
+  --purple:#af52de;
+  --teal:#30b0c7;
+  --shadow:0 1px 3px rgba(0,0,0,.04), 0 12px 32px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-weight:700;letter-spacing:-.022em;line-height:1.22;margin:0}
+p{margin:0 0 14px}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+svg{display:block}
+.container{max-width:1060px;margin:0 auto;padding:0 26px}
+
+/* ============ HERO ============ */
+.hero{
+  background:linear-gradient(180deg,#ffffff 0%,#f5f5f7 100%);
+  border-bottom:1px solid var(--line);
+  padding:70px 0 52px;
+}
+.kicker{
+  font-size:13px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:14px;
+}
+.hero h1{
+  font-size:clamp(32px,5.2vw,58px);
+  letter-spacing:-.03em;line-height:1.05;margin:0 0 18px;max-width:900px;
+}
+.grad{
+  background:linear-gradient(92deg,#0071e3 0%,#5e5ce6 48%,#af52de 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{font-size:clamp(17px,2.1vw,21px);color:var(--muted);max-width:780px;margin:0 0 26px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:8px 16px;font-size:14px;font-weight:500;color:#3a3a3c;
+}
+.chip b{color:var(--blue);font-weight:600}
+
+/* ============ TOC ============ */
+.toc{
+  position:sticky;top:0;z-index:30;
+  background:rgba(245,245,247,.85);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line);
+}
+.toc ul{
+  display:flex;gap:4px;list-style:none;margin:0;padding:10px 0;
+  overflow-x:auto;scrollbar-width:none;
+}
+.toc ul::-webkit-scrollbar{display:none}
+.toc a{
+  display:block;padding:8px 14px;border-radius:999px;white-space:nowrap;
+  font-size:14px;color:#3a3a3c;transition:background .18s;
+}
+.toc a:hover{background:#e8e8ed;color:#000;text-decoration:none}
+
+/* ============ БЛОКИ ============ */
+main{padding:26px 0 70px}
+.block{
+  background:#fff;border-radius:var(--radius);
+  padding:38px 40px 42px;margin:0 0 26px;
+  box-shadow:var(--shadow);
+  scroll-margin-top:74px;
+}
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.sec-num{
+  flex:0 0 auto;width:44px;height:44px;border-radius:14px;
+  background:linear-gradient(135deg,#0071e3,#5e5ce6);
+  color:#fff;font-weight:700;font-size:19px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,113,227,.28);
+}
+.block h2{font-size:clamp(23px,3vw,31px)}
+.block h3{font-size:20px;margin:30px 0 12px;color:#111}
+.block h4{font-size:16px;margin:0 0 6px}
+.muted{color:var(--muted)}
+
+/* ============ ВИЗНАЧЕННЯ / CALL-OUT ============ */
+.def{
+  background:linear-gradient(135deg,#f2f6ff 0%,#f6f2ff 100%);
+  border:1px solid #dde5ff;border-radius:18px;
+  padding:22px 24px;margin:20px 0;
+}
+.def .label{
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--indigo);margin-bottom:8px;
+}
+.def p:last-child{margin-bottom:0}
+.callout{
+  border-left:4px solid var(--blue);background:#f1f7ff;
+  border-radius:0 14px 14px 0;padding:16px 20px;margin:18px 0;
+}
+.callout .label{
+  font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:6px;
+}
+.callout.tip{border-color:var(--green);background:#f1fbf4}
+.callout.tip .label{color:#1f9d45}
+.callout.warn{border-color:var(--orange);background:#fff8ee}
+.callout.warn .label{color:#c97b00}
+.callout p:last-child{margin-bottom:0}
+
+/* ============ СІТКИ ============ */
+.grid{display:grid;gap:16px;margin:20px 0}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.tile{
+  background:#fbfbfd;border:1px solid var(--line);border-radius:16px;
+  padding:18px 20px;transition:transform .18s ease, box-shadow .18s ease;
+}
+.tile:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.07)}
+.tile h4{font-size:16px;margin-bottom:6px}
+.tile p{font-size:15px;margin:0;color:#424245}
+.tile .ico{width:34px;height:34px;margin-bottom:10px}
+
+/* WIMP-картки */
+.wimp-card{border-top:4px solid var(--blue);text-align:left;background:#fff;border:1px solid var(--line);border-top-width:4px;border-radius:16px;padding:20px}
+.wimp-card .letter{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:10px;font-weight:700;font-size:17px;
+  color:#fff;margin-bottom:10px;
+}
+.wimp-card:nth-child(1){border-top-color:#0071e3}
+.wimp-card:nth-child(2){border-top-color:#5e5ce6}
+.wimp-card:nth-child(3){border-top-color:#34c759}
+.wimp-card:nth-child(4){border-top-color:#ff9f0a}
+.wimp-card:nth-child(1) .letter{background:#0071e3}
+.wimp-card:nth-child(2) .letter{background:#5e5ce6}
+.wimp-card:nth-child(3) .letter{background:#34c759}
+.wimp-card:nth-child(4) .letter{background:#ff9f0a}
+
+/* Принципи */
+.principle{
+  border:1px solid var(--line);border-radius:16px;padding:20px;
+  background:#fff;border-top:4px solid var(--blue);
+}
+.principle:nth-child(1){border-top-color:#0071e3}
+.principle:nth-child(2){border-top-color:#5e5ce6}
+.principle:nth-child(3){border-top-color:#30b0c7}
+.principle:nth-child(4){border-top-color:#ff3b30}
+.principle:nth-child(5){border-top-color:#34c759}
+.principle:nth-child(6){border-top-color:#af52de}
+.principle .ico{width:30px;height:30px;margin-bottom:10px}
+.principle:nth-child(1) .ico{color:#0071e3}
+.principle:nth-child(2) .ico{color:#5e5ce6}
+.principle:nth-child(3) .ico{color:#30b0c7}
+.principle:nth-child(4) .ico{color:#ff3b30}
+.principle:nth-child(5) .ico{color:#34c759}
+.principle:nth-child(6) .ico{color:#af52de}
+.principle p{font-size:14.5px;margin:0;color:#424245}
+
+/* ============ ПОРІВНЯННЯ CLI / GUI ============ */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0}
+.panel{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.panel-head{
+  display:flex;align-items:center;gap:9px;padding:12px 16px;
+  font-size:14.5px;font-weight:600;
+}
+.panel-head .dotbar{display:flex;gap:6px;margin-right:4px}
+.panel-head .dotbar i{width:10px;height:10px;border-radius:50%;display:block}
+.cli .panel-head{background:#2c2c2e;color:#fff}
+.cli .panel-head .dotbar i:nth-child(1){background:#ff5f57}
+.cli .panel-head .dotbar i:nth-child(2){background:#febc2e}
+.cli .panel-head .dotbar i:nth-child(3){background:#28c840}
+.gui .panel-head{background:#eaf2ff;color:#0b57c4}
+.panel-body{padding:16px}
+.cli .panel-body{
+  background:#1d1d1f;color:#e8e8ed;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13.5px;line-height:1.85;min-height:186px;
+}
+.cli .prompt{color:#4ade80}
+.cli .out{color:#d7d7dc}
+.gui .panel-body{
+  background:linear-gradient(160deg,#eef4ff,#f7f9ff);min-height:186px;
+}
+.desk{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.desk-item{
+  background:#fff;border:1px solid #dfe4ef;border-radius:12px;
+  padding:14px 6px;text-align:center;font-size:12.5px;color:#3a3a3c;
+  box-shadow:0 2px 6px rgba(0,0,0,.04);
+}
+.desk-item svg{margin:0 auto 6px}
+.cap{font-size:13px;color:var(--muted);text-align:center;margin:10px 0 0}
+
+/* ============ ТАБЛИЦІ ============ */
+.table-wrap{
+  margin:20px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+}
+table{width:100%;border-collapse:collapse;font-size:15.5px;background:#fff}
+th{
+  background:#f5f5f7;text-align:left;padding:12px 16px;font-weight:600;
+  font-size:13.5px;letter-spacing:.02em;color:#3a3a3c;
+  border-bottom:1px solid var(--line);
+}
+td{padding:12px 16px;border-bottom:1px solid #f0f0f2;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td b{font-weight:600}
+
+/* ============ ТАЙМЛАЙН ============ */
+.timeline{list-style:none;margin:22px 0 0;padding:0 0 0 8px;border-left:2px solid #e3e3e8}
+.timeline li{position:relative;padding:0 0 22px 28px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{
+  content:"";position:absolute;left:-9px;top:6px;width:12px;height:12px;
+  border-radius:50%;background:var(--blue);border:3px solid #fff;
+  box-shadow:0 0 0 2px rgba(0,113,227,.28);
+}
+.timeline .year{
+  display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.04em;
+  color:var(--blue);background:#eaf3ff;border-radius:999px;padding:2px 10px;
+  margin-bottom:4px;
+}
+.timeline h4{margin:0 0 2px;font-size:16px}
+.timeline p{margin:0;font-size:15px;color:#424245}
+
+/* ============ ВІКНО (макет) ============ */
+.win{
+  border:1px solid #d6d6db;border-radius:14px;overflow:hidden;
+  box-shadow:0 14px 34px rgba(0,0,0,.10);margin:20px 0;background:#fff;
+}
+.win-bar{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  background:#f2f2f7;border-bottom:1px solid #e2e2e7;
+}
+.light{width:11px;height:11px;border-radius:50%;display:block}
+.light.red{background:#ff5f57}.light.yellow{background:#febc2e}.light.green{background:#28c840}
+.win-title{font-size:13px;font-weight:600;color:#3a3a3c;margin-left:6px}
+.win-ctrl{margin-left:auto;font-size:12px;color:#8e8e93;letter-spacing:3px}
+.win-menu{
+  display:flex;align-items:center;gap:18px;padding:8px 16px;
+  font-size:13px;color:#3a3a3c;background:#fafafa;border-bottom:1px solid #eee;
+}
+.win-body{display:flex;align-items:stretch;min-height:150px;background:#fff}
+.win-content{padding:16px;flex:1;display:flex;flex-direction:column;gap:9px}
+.file-row{
+  display:flex;align-items:center;gap:9px;font-size:13.5px;color:#3a3a3c;
+  padding:5px 8px;border-radius:8px;background:#f7f7fa;
+}
+.win-scroll{
+  width:20px;background:#f2f2f7;border-left:1px solid #e6e6ea;
+  display:flex;justify-content:center;padding:6px 0;
+}
+.win-scroll .thumb{width:12px;height:52px;border-radius:6px;background:#c7c7cc;display:block}
+.badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:21px;height:21px;border-radius:50%;background:var(--blue);color:#fff;
+  font-size:12px;font-weight:700;flex:0 0 auto;
+}
+.legend{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.legend li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px}
+.legend .badge{margin-top:3px}
+.legend b{font-weight:600}
+
+/* ============ КУРСОРИ ============ */
+.cursor-card{
+  background:#fbfbfd;border:1px solid var(--line);border-radius:16px;
+  padding:18px 16px;text-align:center;
+}
+.cursor-card .cur{width:36px;height:36px;margin:0 auto 10px}
+.cursor-card h4{font-size:14.5px;margin-bottom:4px}
+.cursor-card p{font-size:13.5px;margin:0;color:var(--muted)}
+
+/* ============ ПОКРОКОВИЙ ПРИКЛАД ============ */
+.steps{counter-reset:step;list-style:none;margin:14px 0 0;padding:0}
+.steps li{
+  counter-increment:step;position:relative;padding:0 0 12px 38px;font-size:15.5px;
+}
+.steps li::before{
+  content:counter(step);position:absolute;left:0;top:1px;
+  width:24px;height:24px;border-radius:50%;
+  background:#eaf3ff;color:var(--blue);font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.steps li:last-child{padding-bottom:0}
+.steps code{
+  background:#f2f2f7;border-radius:6px;padding:2px 7px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+/* ============ ЮЗАБІЛІТІ ============ */
+.usab{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+.usab li{
+  display:flex;gap:14px;align-items:flex-start;background:#fbfbfd;
+  border:1px solid var(--line);border-radius:14px;padding:14px 18px;
+}
+.usab .n{
+  flex:0 0 auto;width:28px;height:28px;border-radius:9px;
+  background:linear-gradient(135deg,#5e5ce6,#af52de);color:#fff;
+  font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.usab b{display:block;font-size:15.5px;margin-bottom:2px}
+.usab span.d{font-size:14.5px;color:#424245}
+
+/* Потік UCD */
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 0}
+.flow .step{
+  flex:1 1 150px;background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:14px;text-align:center;font-size:14px;font-weight:600;color:#1d1d1f;
+}
+.flow .step small{display:block;font-weight:400;font-size:12.5px;color:var(--muted);margin-top:4px}
+.flow .arrow{color:#c7c7cc;font-size:20px;font-weight:700}
+
+/* ============ ПИТАННЯ ============ */
+.questions{list-style:none;counter-reset:q;margin:18px 0 0;padding:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px 26px}
+.questions li{
+  counter-increment:q;position:relative;padding-left:34px;font-size:15.5px;
+}
+.questions li::before{
+  content:counter(q);position:absolute;left:0;top:2px;
+  width:23px;height:23px;border-radius:50%;background:#f2f2f7;color:#3a3a3c;
+  font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.sources{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.sources li{
+  background:#fbfbfd;border:1px solid var(--line);border-radius:12px;
+  padding:12px 16px;font-size:15px;
+}
+
+/* ============ ПІДСУМОК / ФУТЕР ============ */
+.summary{
+  background:linear-gradient(135deg,#0071e3,#5e5ce6 60%,#af52de);
+  color:#fff;border-radius:var(--radius);padding:38px 40px;margin:0 0 26px;
+}
+.summary h2{color:#fff;font-size:26px;margin-bottom:14px}
+.summary ul{margin:0;padding-left:20px}
+.summary li{margin-bottom:8px;font-size:16px}
+.summary li:last-child{margin-bottom:0}
+footer{padding:20px 0 60px;text-align:center;color:var(--muted);font-size:14px}
+
+/* ============ АДАПТИВ ============ */
+@media (max-width:900px){
+  .g3,.g4{grid-template-columns:repeat(2,1fr)}
+  .questions{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .block{padding:26px 22px 30px;border-radius:20px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .hero{padding:52px 0 40px}
+  .summary{padding:28px 24px}
+}
+
+/* ============ ДРУК ============ */
+@media print{
+  @page{ size:A4; margin:14mm 12mm; }
+
+  html,body{background:#fff !important;color:#000 !important;}
+  body{font-size:10.8pt;line-height:1.45;}
+
+  .container{max-width:none;padding:0;}
+  .no-print{display:none !important;}
+
+  .hero{
+    background:#fff !important;border-bottom:1px solid #000;
+    padding:0 0 8mm;margin-bottom:6mm;
+  }
+  .hero h1{font-size:24pt;margin-bottom:3mm}
+  .grad{color:#000 !important;-webkit-text-fill-color:#000 !important;background:none !important}
+  .lede{font-size:11.5pt;color:#000 !important;margin-bottom:4mm}
+  .chip{background:#fff !important;border:1px solid #999 !important;color:#000 !important;font-size:9pt}
+
+  main{padding:0}
+  .block{
+    background:#fff !important;box-shadow:none !important;border:1px solid #ccc;
+    border-radius:8px;padding:6mm 6mm 6mm;margin:0 0 6mm;
+    break-inside:auto;
+  }
+  .sec-num{background:#000 !important;box-shadow:none !important;width:9mm;height:9mm;font-size:11pt;border-radius:4px}
+  .block h2{font-size:15pt}
+  .block h3{font-size:12pt;margin:5mm 0 2mm}
+  .block h4{font-size:10.5pt}
+
+  /* заборона розривів */
+  .def,.callout,.tile,.wimp-card,.principle,.panel,.win,.table-wrap,
+  .cursor-card,.usab li,.sources li,.flow .step,.timeline li,.compare,
+  .grid > *,.summary,.cap,figure{
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+  h1,h2,h3,h4,.sec-head{break-after:avoid !important;page-break-after:avoid !important;}
+  .table-wrap{overflow:visible}
+  table{font-size:9.5pt}
+  th,td{padding:2mm 3mm}
+  tr{break-inside:avoid;page-break-inside:avoid}
+
+  /* прибираємо важкі заливки */
+  .def{background:#fff !important;border:1px solid #999 !important}
+  .callout{background:#fff !important;border-left:3px solid #000 !important}
+  .callout .label{color:#000 !important}
+  .tile,.principle,.cursor-card,.usab li,.sources li,.win{
+    background:#fff !important;box-shadow:none !important;border:1px solid #ccc !important;
+  }
+  .tile:hover{transform:none !important;box-shadow:none !important}
+  .principle{border-top-width:3px !important}
+
+  .cli .panel-body{background:#fff !important;color:#000 !important;border-top:1px solid #000}
+  .cli .panel-head{background:#eee !important;color:#000 !important}
+  .cli .prompt{color:#000 !important;font-weight:700}
+  .cli .out{color:#000 !important}
+  .gui .panel-head{background:#eee !important;color:#000 !important}
+  .gui .panel-body{background:#fff !important}
+  .desk-item{background:#fff !important;box-shadow:none !important}
+
+  .summary{background:#fff !important;color:#000 !important;border:1px solid #000;padding:5mm}
+  .summary h2{color:#000 !important}
+  .win-bar,.win-menu{background:#f2f2f2 !important}
+  .win-body{background:#fff !important}
+
+  a{color:#000 !important;text-decoration:none !important}
+
+  .g3,.g4{grid-template-columns:repeat(2,1fr) !important}
+  .g2{grid-template-columns:repeat(2,1fr) !important}
+  .compare{grid-template-columns:1fr 1fr !important}
+  .questions{grid-template-columns:1fr 1fr !important}
+
+  footer{padding:6mm 0 0;font-size:9pt;color:#000}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="container">
+    <div class="kicker">Лекція · Інформатика · Операційні системи</div>
+    <h1>Основи графічного інтерфейсу користувача <span class="grad">(GUI)</span></h1>
+    <p class="lede">
+      Визначення, історичний шлях від CLI до GUI, концепція WIMP, шість принципів
+      ефективного інтерфейсу та юзабіліті — з наочними схемами й прикладами з Windows.
+    </p>
+    <div class="chips">
+      <span class="chip"><b>WIMP</b> — вікна, піктограми, меню, вказівники</span>
+      <span class="chip"><b>CLI → GUI</b> — історія розвитку</span>
+      <span class="chip"><b>6 принципів</b> ефективного інтерфейсу</span>
+      <span class="chip"><b>Юзабіліті</b> та людино-орієнтований дизайн</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= НАВІГАЦІЯ ================= -->
+<nav class="toc no-print">
+  <div class="container">
+    <ul>
+      <li><a href="#s1">1. Поняття GUI</a></li>
+      <li><a href="#s2">2. Історія: CLI → GUI</a></li>
+      <li><a href="#s3">3. Концепція WIMP</a></li>
+      <li><a href="#s4">4. Принципи GUI</a></li>
+      <li><a href="#s5">5. Юзабіліті</a></li>
+      <li><a href="#s6">6. Для вчителя</a></li>
+      <li><a href="#qs">Контрольні питання</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<div class="container">
+
+  <!-- ================= 1 ================= -->
+  <section class="block" id="s1">
+    <div class="sec-head">
+      <span class="sec-num">1</span>
+      <h2>Поняття графічного інтерфейсу користувача</h2>
+    </div>
+
+    <p>
+      <b>Інтерфейс користувача</b> — це спосіб, у який людина взаємодіє з комп'ютером:
+      віддає команди, отримує результати й бачить реакцію системи. Інтерфейс може бути
+      текстовим (командний рядок) або графічним.
+    </p>
+
+    <div class="def">
+      <div class="label">Визначення</div>
+      <p>
+        <b>Графічний інтерфейс користувача (GUI, Graphical User Interface)</b> — це спосіб
+        взаємодії з комп'ютером, у якому об'єкти файлової системи та команди подано у вигляді
+        зображень (піктограм, вікон, кнопок, меню), а керування виконується за допомогою миші,
+        клавіатури або дотику, без потреби пам'ятати текстові команди.
+      </p>
+    </div>
+
+    <h3>CLI та GUI: два принципово різні підходи</h3>
+    <p>
+      У <b>CLI</b> (Command Line Interface) користувач пише команду й отримує текстову
+      відповідь. У <b>GUI</b> користувач бачить зображення об'єктів і виконує дії через
+      наочні елементи. Різниця принципова: замість того щоб <i>запам'ятовувати команду</i>,
+      користувач <i>упізнає образ</i> і обирає дію.
+    </p>
+
+    <div class="compare">
+      <!-- CLI -->
+      <div class="panel cli">
+        <div class="panel-head">
+          <span class="dotbar"><i></i><i></i><i></i></span>
+          CLI — командний рядок
+        </div>
+        <div class="panel-body">
+<div><span class="prompt">C:\Users\Student&gt;</span> <span class="out">dir</span></div>
+<div class="out">&nbsp;&nbsp;Документи</div>
+<div class="out">&nbsp;&nbsp;Завантаження</div>
+<div class="out">&nbsp;&nbsp;звіт.docx</div>
+<div><span class="prompt">C:\Users\Student&gt;</span> <span class="out">copy звіт.docx D:\Архів</span></div>
+<div class="out">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 файл скопійовано.</div>
+        </div>
+        <p class="cap">Клавіатура · тексти · команди</p>
+      </div>
+
+      <!-- GUI -->
+      <div class="panel gui">
+        <div class="panel-head">
+          <span class="dotbar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span>
+          GUI — робочий стіл
+        </div>
+        <div class="panel-body">
+          <div class="desk">
+            <div class="desk-item">
+              <svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 6.8A2.3 2.3 0 0 1 5.3 4.5h3.1c.6 0 1.2.25 1.6.7l.9.9h6.8A2.3 2.3 0 0 1 20 8.4v8.8a2.3 2.3 0 0 1-2.3 2.3H5.3A2.3 2.3 0 0 1 3 17.2z" fill="#5ea7ff"/></svg>
+              Документи
+            </div>
+            <div class="desk-item">
+              <svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 6.8A2.3 2.3 0 0 1 5.3 4.5h3.1c.6 0 1.2.25 1.6.7l.9.9h6.8A2.3 2.3 0 0 1 20 8.4v8.8a2.3 2.3 0 0 1-2.3 2.3H5.3A2.3 2.3 0 0 1 3 17.2z" fill="#7b61ff"/></svg>
+              Завантаження
+            </div>
+            <div class="desk-item">
+              <svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 2.5h7.2L19 8.3v13.2H6z" fill="#e9eef7" stroke="#9aa7bd" stroke-width="1.2"/><path d="M13.2 2.5v5.8H19" fill="none" stroke="#9aa7bd" stroke-width="1.2"/></svg>
+              звіт.docx
+            </div>
+            <div class="desk-item">
+              <svg viewBox="0 0 24 24" width="26" height="26"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="#eaf7ef" stroke="#34c759" stroke-width="1.3"/><circle cx="8.5" cy="10" r="1.8" fill="#34c759"/><path d="M4.5 17l4.5-4.5 3 3 3-2.5 4.5 4" fill="none" stroke="#34c759" stroke-width="1.3"/></svg>
+              фото.png
+            </div>
+          </div>
+        </div>
+        <p class="cap">Миша · значки · меню · вікна</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:22%">Критерій</th><th>CLI (командний рядок)</th><th>GUI (графічний інтерфейс)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Спосіб введення</b></td><td>Текстова команда з клавіатури</td><td>Клік, жест, дотик, гарячі клавіші</td></tr>
+          <tr><td><b>Що треба знати</b></td><td>Синтаксис і назви команд</td><td>Нічого не завчають — діють «на вигляд»</td></tr>
+          <tr><td><b>Швидкість</b></td><td>Дуже висока для досвідченого користувача</td><td>Висока для новачка; поступається автоматизації</td></tr>
+          <tr><td><b>Поріг входження</b></td><td>Високий</td><td>Низький — саме тому GUI зробив комп'ютери масовими</td></tr>
+          <tr><td><b>Наочність</b></td><td>Низька: лише текст</td><td>Висока: образи, кольори, іконки</td></tr>
+          <tr><td><b>Типове застосування</b></td><td>Сервери, адміністрування, скрипти</td><td>Повсякденна робота користувача</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Приклад: одна дія двома способами</h3>
+    <p>
+      Уявіть, що ви хочете скопіювати файл <code>звіт.docx</code> у папку <code>D:\Архів</code>.
+      Результат в обох випадках однаковий, а от спосіб — зовсім різний.
+    </p>
+
+    <div class="grid g2">
+      <div class="tile">
+        <h4>Спосіб 1 — CLI</h4>
+        <ol class="steps">
+          <li>Відкрити командний рядок.</li>
+          <li>Написати команду <code>copy звіт.docx D:\Архів</code>.</li>
+          <li>Натиснути <code>Enter</code> і прочитати текстове підтвердження.</li>
+        </ol>
+        <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">
+          Потрібно точно знати назву команди, шлях і синтаксис. Помилка в одному символі — і команда не спрацює.
+        </p>
+      </div>
+      <div class="tile">
+        <h4>Спосіб 2 — GUI</h4>
+        <ol class="steps">
+          <li>Знайти значок файлу <code>звіт.docx</code> і виділити його клацанням.</li>
+          <li>Натиснути <code>Ctrl + C</code> (або «Копіювати» в контекстному меню).</li>
+          <li>Відкрити папку «Архів» і натиснути <code>Ctrl + V</code>.</li>
+        </ol>
+        <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">
+          Нічого не треба завчати: об'єкти видно, дії — очевидні, а результат підтверджує індикатор копіювання.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2 ================= -->
+  <section class="block" id="s2">
+    <div class="sec-head">
+      <span class="sec-num">2</span>
+      <h2>Коротка історія: від CLI до GUI</h2>
+    </div>
+
+    <p>
+      Графічний інтерфейс не з'явився одразу — він став результатом кількох десятиліть
+      досліджень. Ключова ідея полягала в тому, щоб комп'ютер «показував» свої можливості,
+      а не вимагав від людини знання команд.
+    </p>
+
+    <ol class="timeline">
+      <li>
+        <span class="year">1970-ті</span>
+        <h4>Xerox PARC: перші експерименти</h4>
+        <p>У дослідницькому центрі Xerox PARC з'являються прототипи вікон, піктограм і маніпулятора «миша». Саме тут народилася концепція, яку згодом назвуть WIMP.</p>
+      </li>
+      <li>
+        <span class="year">1984</span>
+        <h4>Apple Macintosh — масовий графічний інтерфейс</h4>
+        <p>Перший широкодоступний комп'ютер, у якому робочий стіл, значки та вікна стали основним способом роботи. Комп'ютер перестав бути інструментом лише для програмістів.</p>
+      </li>
+      <li>
+        <span class="year">1985–1995</span>
+        <h4>Windows: від 1.0 до Windows 95</h4>
+        <p>Графічна оболонка Microsoft стає стандартом для IBM-сумісних ПК: з'являються «Пуск», панель завдань, вікна з кнопками керування, контекстне меню.</p>
+      </li>
+      <li>
+        <span class="year">2007</span>
+        <h4>Мультитач: інтерфейс без миші</h4>
+        <p>Смартфони з сенсорними екранами роблять вказівником палець, а жести (натиск, проведення, «щипок») — звичною взаємодією.</p>
+      </li>
+      <li>
+        <span class="year">2013</span>
+        <h4>Плоский дизайн (flat design)</h4>
+        <p>iOS 7 відмовляється від об'ємних елементів на користь плоских. Спершу це викликало суперечки, але згодом стало галузевим стандартом.</p>
+      </li>
+    </ol>
+
+    <div class="callout tip">
+      <div class="label">Чому це важливо</div>
+      <p>
+        Перехід до графічного інтерфейсу зробив комп'ютери доступними для мільйонів звичайних
+        користувачів. Саме тому сьогодні ми говоримо не лише про «функціональність» програми,
+        а й про її <b>зручність</b> — юзабіліті.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 3 ================= -->
+  <section class="block" id="s3">
+    <div class="sec-head">
+      <span class="sec-num">3</span>
+      <h2>Ключова концепція WIMP</h2>
+    </div>
+
+    <p>
+      Більшість графічних інтерфейсів побудовані за концепцією <b>WIMP</b>:
+      <b>W</b>indows, <b>I</b>cons, <b>M</b>enus, <b>P</b>ointers — вікна, піктограми, меню,
+      вказівники. Ці чотири елементи утворюють основу взаємодії користувача з комп'ютером.
+    </p>
+
+    <div class="grid g4">
+      <div class="wimp-card">
+        <span class="letter">W</span>
+        <h4>Windows — вікна</h4>
+        <p>Прямокутні області, у яких відкриваються програми, документи або діалоги.</p>
+      </div>
+      <div class="wimp-card">
+        <span class="letter">I</span>
+        <h4>Icons — піктограми</h4>
+        <p>Невеликі зображення, що позначають об'єкти файлової системи або програми.</p>
+      </div>
+      <div class="wimp-card">
+        <span class="letter">M</span>
+        <h4>Menus — меню</h4>
+        <p>Списки команд, об'єднані за тематикою: «Пуск», рядок меню, контекстне меню.</p>
+      </div>
+      <div class="wimp-card">
+        <span class="letter">P</span>
+        <h4>Pointers — вказівники</h4>
+        <p>Курсор миші або дотику, яким користувач указує на об'єкти та активує їх.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:22%">Елемент</th><th style="width:36%">Що це</th><th>Приклад у Windows</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Windows (вікна)</b></td><td>Прямокутні області, у яких відкриваються програми, документи або діалоги</td><td>Вікно «Проводник», вікно браузера, діалог збереження файлу</td></tr>
+          <tr><td><b>Icons (піктограми)</b></td><td>Невеликі зображення, що позначають об'єкти файлової системи або програми</td><td>Значок папки, документ .docx, ярлик браузера на робочому столі</td></tr>
+          <tr><td><b>Menus (меню)</b></td><td>Списки команд, об'єднані за тематикою</td><td>Головне меню «Пуск», контекстне меню (права кнопка), рядок меню у програмі</td></tr>
+          <tr><td><b>Pointers (вказівники)</b></td><td>Курсор миші або дотику, яким користувач указує на об'єкти та активує їх</td><td>Стрілка, рука, пісочний годинник, курсор у вигляді «І»</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3.1 Вікна -->
+    <h3>3.1. Вікна</h3>
+    <p>
+      <b>Вікно</b> — це прямокутна область на екрані, у якій відображається вміст програми або
+      документа. Вікна можна переміщувати, згортати, розгортати, змінювати їхній розмір,
+      розташовувати поруч або одне над одним. Саме можливість відкрити кілька вікон одночасно
+      дала назву концепції <b>багатозадачності</b>.
+    </p>
+
+    <div class="win" role="img" aria-label="Схема будови вікна програми">
+      <div class="win-bar">
+        <span class="light red"></span><span class="light yellow"></span><span class="light green"></span>
+        <span class="win-title">Проводник — Документи</span>
+        <span class="badge">1</span>
+        <span class="win-ctrl">– ▢ ✕</span>
+        <span class="badge">2</span>
+      </div>
+      <div class="win-menu">
+        <span>Файл</span><span>Редагування</span><span>Вигляд</span><span>Довідка</span>
+        <span class="badge">3</span>
+      </div>
+      <div class="win-body">
+        <div class="win-content">
+          <div class="file-row">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 6.8A2.3 2.3 0 0 1 5.3 4.5h3.1c.6 0 1.2.25 1.6.7l.9.9h6.8A2.3 2.3 0 0 1 20 8.4v8.8a2.3 2.3 0 0 1-2.3 2.3H5.3A2.3 2.3 0 0 1 3 17.2z" fill="#5ea7ff"/></svg>
+            Документи
+            <span class="badge" style="margin-left:auto">4</span>
+          </div>
+          <div class="file-row">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M6 2.5h7.2L19 8.3v13.2H6z" fill="#eef2f9" stroke="#9aa7bd" stroke-width="1.2"/><path d="M13.2 2.5v5.8H19" fill="none" stroke="#9aa7bd" stroke-width="1.2"/></svg>
+            звіт.docx
+          </div>
+          <div class="file-row">
+            <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="#eaf7ef" stroke="#34c759" stroke-width="1.3"/><circle cx="8.5" cy="10" r="1.8" fill="#34c759"/><path d="M4.5 17l4.5-4.5 3 3 3-2.5 4.5 4" fill="none" stroke="#34c759" stroke-width="1.3"/></svg>
+            фото.png
+          </div>
+        </div>
+        <div class="win-scroll"><span class="thumb"></span><span class="badge" style="position:relative;left:14px;top:60px">5</span></div>
+      </div>
+    </div>
+
+    <ul class="legend">
+      <li><span class="badge">1</span><span><b>Заголовок вікна</b> — показує назву програми й документа.</span></li>
+      <li><span class="badge">2</span><span><b>Кнопки керування</b> — згорнути, розгорнути, закрити.</span></li>
+      <li><span class="badge">3</span><span><b>Рядок меню</b> — команди, згруповані за категоріями.</span></li>
+      <li><span class="badge">4</span><span><b>Робоча область</b> — безпосередньо вміст вікна (файли, текст, зображення).</span></li>
+      <li><span class="badge">5</span><span><b>Смуги прокручування</b> — для переміщення вмісту, що не вміщується у вікні.</span></li>
+    </ul>
+
+    <!-- 3.2 Піктограми -->
+    <h3>3.2. Піктограми</h3>
+    <p>
+      <b>Піктограма</b> (значок, іконка) — це маленьке зображення, яке позначає об'єкт.
+      Піктограми допомагають упізнати об'єкт без читання його назви: значок папки виглядає як
+      канцелярська папка, значок документа — як аркуш паперу, значок програми — як логотип цієї
+      програми.
+    </p>
+
+    <div class="grid g3">
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#0071e3" stroke-width="2.6" stroke-linecap="round">
+          <ellipse cx="24" cy="24" rx="16" ry="10"/><circle cx="24" cy="24" r="4.4" fill="#0071e3" stroke="none"/>
+        </svg>
+        <h4>Впізнавана</h4>
+        <p>Одразу зрозуміло, що вона позначає: папка — це папка, а не «щось прямокутне».</p>
+      </div>
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#5e5ce6" stroke-width="2.6" stroke-linecap="round">
+          <circle cx="24" cy="24" r="12"/><circle cx="24" cy="24" r="3.4" fill="#5e5ce6" stroke="none"/>
+        </svg>
+        <h4>Проста</h4>
+        <p>Без зайвих деталей і дрібних елементів, які зникають уже на значку 16×16 пікселів.</p>
+      </div>
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#34c759" stroke-width="2.6" stroke-linecap="round">
+          <path d="M13 17h22M13 24h22M13 31h22"/>
+        </svg>
+        <h4>Послідовна</h4>
+        <p>Усі піктограми одного набору витримані в єдиному стилі: та сама товщина ліній, та сама палітра.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="label">Типова помилка</div>
+      <p>
+        Перевантажена піктограма: об'ємна, з тінню, градієнтом і дрібними деталями. На маленькому
+        розмірі вона перетворюється на «кольорову пляму» і втрачає головну функцію — допомагати
+        впізнаванню об'єкта.
+      </p>
+    </div>
+
+    <!-- 3.3 Меню -->
+    <h3>3.3. Меню</h3>
+    <p>
+      <b>Меню</b> — це список команд, з яких користувач обирає потрібну. Головна перевага меню
+      полягає в тому, що команди не треба пам'ятати: їх видно у списку. Головний недолік —
+      глибока вкладеність (меню в меню) ускладнює пошук.
+    </p>
+
+    <div class="grid g3">
+      <div class="tile">
+        <h4>Головне меню «Пуск»</h4>
+        <p>Точка входу до програм, налаштувань і файлів. Приклад: «Пуск» → «Параметри» → «Персоналізація».</p>
+      </div>
+      <div class="tile">
+        <h4>Рядок меню у програмі</h4>
+        <p>Файл, Редагування, Вигляд, Довідка — команди, згруповані за категоріями дій.</p>
+      </div>
+      <div class="tile">
+        <h4>Контекстне меню</h4>
+        <p>З'являється після натискання правої кнопки миші на об'єкті та показує саме ті дії, які до нього застосовні.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="label">Сучасна тенденція</div>
+      <p>
+        Через недоліки вкладених меню сучасні інтерфейси часто замінюють їх на панелі інструментів
+        або <b>стрічку (Ribbon)</b> — як у Microsoft Office, де команди зібрані у вигляді великих
+        наочних кнопок, згрупованих за змістом.
+      </p>
+    </div>
+
+    <!-- 3.4 Вказівники -->
+    <h3>3.4. Вказівники</h3>
+    <p>
+      <b>Вказівник</b> — це курсор, яким користувач керує мишею, тачпадом або пальцем на
+      сенсорному екрані. Вигляд курсора залежить від контексту й сам по собі є підказкою для
+      користувача.
+    </p>
+
+    <div class="grid g4">
+      <div class="cursor-card">
+        <svg class="cur" viewBox="0 0 48 48"><path d="M14 6v28l6.5-6.5 4.5 9.5 5-2.2-4.5-9.3 8.5-1.5z" fill="#1d1d1f" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h4>Стрілка</h4>
+        <p>Звичайне положення</p>
+      </div>
+      <div class="cursor-card">
+        <svg class="cur" viewBox="0 0 48 48" fill="none" stroke="#0071e3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 22V13a3 3 0 0 1 6 0v7"/><path d="M24 20v-3a3 3 0 0 1 6 0v4"/><path d="M30 21v-2a3 3 0 0 1 6 0v9c0 6-4 10-10 10h-3c-4 0-6-2-8-5l-5-7a3 3 0 0 1 5-3l3 3"/>
+        </svg>
+        <h4>Рука</h4>
+        <p>Над гіперпосиланням</p>
+      </div>
+      <div class="cursor-card">
+        <svg class="cur" viewBox="0 0 48 48" fill="none" stroke="#ff9f0a" stroke-width="2.6" stroke-linejoin="round">
+          <path d="M14 10h20M14 38h20M15 10c0 8 9 9 9 14s-9 6-9 14M33 10c0 8-9 9-9 14s9 6 9 14"/>
+        </svg>
+        <h4>Пісочний годинник</h4>
+        <p>Система виконує дію</p>
+      </div>
+      <div class="cursor-card">
+        <svg class="cur" viewBox="0 0 48 48" fill="none" stroke="#5e5ce6" stroke-width="2.6" stroke-linecap="round">
+          <path d="M24 10v28M18 10h12M18 38h12"/>
+        </svg>
+        <h4>Вертикальна риска</h4>
+        <p>Введення тексту</p>
+      </div>
+    </div>
+
+    <p style="margin-top:18px">
+      Крім миші, вказівником може бути палець (на планшеті чи смартфоні), стилус, а в голосових
+      інтерфейсах — голос. Але концепція залишається незмінною: користувач <b>указує</b> на об'єкт
+      і <b>виконує дію</b>.
+    </p>
+  </section>
+
+  <!-- ================= 4 ================= -->
+  <section class="block" id="s4">
+    <div class="sec-head">
+      <span class="sec-num">4</span>
+      <h2>Основні принципи ефективного GUI</h2>
+    </div>
+
+    <p>
+      Графічний інтерфейс може бути зручним або невдалим — залежно від того, чи дотримано базових
+      принципів. Існує шість принципів, які визначають якість графічного інтерфейсу.
+    </p>
+
+    <div class="grid g3">
+      <div class="principle">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+          <ellipse cx="24" cy="24" rx="16" ry="10"/><circle cx="24" cy="24" r="4.4" fill="currentColor" stroke="none"/>
+        </svg>
+        <h4>Наочність</h4>
+        <p>Об'єкти видно одразу, дію можна передбачити ще до натискання.</p>
+      </div>
+      <div class="principle">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+          <path d="M13 16h22M13 24h22M13 32h22"/>
+        </svg>
+        <h4>Послідовність</h4>
+        <p>Однакові дії виконуються однаково в усіх програмах.</p>
+      </div>
+      <div class="principle">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M33 15a12 12 0 1 0 4 9"/><path d="M37 10v10H27"/>
+        </svg>
+        <h4>Зворотний зв'язок</h4>
+        <p>Система показує результат кожної дії користувача.</p>
+      </div>
+      <div class="principle">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 13L11 23l11 10"/><path d="M11 23h17a9 9 0 0 1 0 18h-6"/>
+        </svg>
+        <h4>Толерантність до помилок</h4>
+        <p>Хибну дію можна скасувати (Ctrl + Z) або виправити.</p>
+      </div>
+      <div class="principle">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+          <circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="3.6" fill="currentColor" stroke="none"/>
+        </svg>
+        <h4>Простота</h4>
+        <p>Мінімум дій для типової операції.</p>
+      </div>
+      <div class="principle">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+          <path d="M24 9l4.4 9 9.9 1.4-7.2 7 1.7 9.8-8.8-4.6-8.8 4.6 1.7-9.8-7.2-7 9.9-1.4z"/>
+        </svg>
+        <h4>Естетика</h4>
+        <p>Охайне оформлення не відволікає від роботи.</p>
+      </div>
+    </div>
+
+    <h3>Наочність</h3>
+    <p>
+      Кожен об'єкт має бути видимим, а його призначення — зрозумілим. Користувач не повинен
+      вгадувати, що буде, якщо натиснути кнопку. Наприклад, кнопка з написом «Зберегти» і
+      значком дискети одразу показує свою дію.
+    </p>
+
+    <h3>Послідовність</h3>
+    <p>
+      Однакові дії в різних програмах мають виконуватися однаково. Якщо в одній програмі
+      <code>Ctrl + S</code> зберігає файл, то й в інших — теж. Якщо кнопка «ОК» розташована
+      справа, то й у всіх діалогах — справа. Це створює відчуття передбачуваності.
+    </p>
+
+    <h3>Зворотний зв'язок</h3>
+    <p>
+      Система повинна показувати результат кожної дії. Коли файл копіюється, з'являється індикатор
+      прогресу. Коли команда виконана — коротке повідомлення. Коли виникає помилка — зрозуміле
+      пояснення. Без зворотного зв'язку користувач почувається наче в темряві.
+    </p>
+
+    <h3>Толерантність до помилок</h3>
+    <p>
+      Люди помиляються. Добрий інтерфейс дозволяє виправити помилку: <code>Ctrl + Z</code> скасовує
+      останню дію, кошик дозволяє відновити видалений файл, а система попереджає перед небезпечною
+      дією. Мета — не покарати за помилку, а допомогти її виправити.
+    </p>
+
+    <h3>Простота</h3>
+    <p>
+      Типова операція виконується за мінімум дій. Якщо для звичайного збереження документа потрібно
+      п'ять кліків — інтерфейс поганий. Один клік або гаряча клавіша — добре. Простота економить
+      час користувача.
+    </p>
+
+    <h3>Естетика</h3>
+    <p>
+      Оформлення не повинно відволікати від роботи. Гармонійні кольори, виразні шрифти, виважене
+      розташування елементів — усе це створює відчуття порядку й комфорту. Навпаки, строкаті
+      кольори, мерехтіння й хаотичні елементи втомлюють очі.
+    </p>
+
+    <div class="callout">
+      <div class="label">Приклад з індустрії</div>
+      <p>
+        У 2012 році Apple представила новий дизайн iOS 7, у якому відмовилася від об'ємних елементів
+        на користь плоских. Це викликало суперечки, але згодом стало стандартом для всієї індустрії.
+        Причина — саме естетика й простота: плоскі елементи краще читаються на екранах різних
+        розмірів і не відволікають від змісту.
+      </p>
+    </div>
+
+    <h3>Принципи в дії: зведена таблиця</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:20%">Принцип</th><th style="width:38%">Як виявляється</th><th>Приклад з інтерфейсу Windows</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Наочність</b></td><td>Об'єкти видно, дію можна передбачити</td><td>Значок папки показує, що всередині — файли</td></tr>
+          <tr><td><b>Послідовність</b></td><td>Однакові дії — однаково</td><td>Ctrl + C, Ctrl + V у всіх програмах</td></tr>
+          <tr><td><b>Зворотний зв'язок</b></td><td>Результат дії видно</td><td>Індикатор копіювання файлів</td></tr>
+          <tr><td><b>Толерантність</b></td><td>Помилку можна виправити</td><td>Кошик, Ctrl + Z, попередження перед видаленням</td></tr>
+          <tr><td><b>Простота</b></td><td>Мінімум кроків</td><td>Один клік на значок запускає програму</td></tr>
+          <tr><td><b>Естетика</b></td><td>Оформлення не заважає</td><td>Єдиний стиль вікон і піктограм</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= 5 ================= -->
+  <section class="block" id="s5">
+    <div class="sec-head">
+      <span class="sec-num">5</span>
+      <h2>Юзабіліті та людино-орієнтований дизайн</h2>
+    </div>
+
+    <div class="def">
+      <div class="label">Визначення</div>
+      <p>
+        <b>Юзабіліті</b> (usability, зручність використання) — це ступінь, до якого інтерфейс
+        дозволяє користувачеві досягти своєї мети швидко, легко й без зайвих зусиль. Високе
+        юзабіліті означає: користувач інтуїтивно розуміє, що робити, і не витрачає час на боротьбу
+        з інтерфейсом.
+      </p>
+    </div>
+
+    <h3>П'ять складників юзабіліті</h3>
+    <ul class="usab">
+      <li>
+        <span class="n">1</span>
+        <span><b>Легкість навчання</b><span class="d">Наскільки швидко новачок опановує основні дії.</span></span>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <span><b>Ефективність</b><span class="d">Скільки часу й кроків займає типова операція.</span></span>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <span><b>Запам'ятовуваність</b><span class="d">Наскільки легко повернутися до інтерфейсу після перерви.</span></span>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <span><b>Стійкість до помилок</b><span class="d">Наскільки легко помилитися й наскільки легко виправити.</span></span>
+      </li>
+      <li>
+        <span class="n">5</span>
+        <span><b>Задоволення</b><span class="d">Наскільки комфортно працювати з програмою.</span></span>
+      </li>
+    </ul>
+
+    <h3>Людино-орієнтований дизайн</h3>
+    <p>
+      <b>Людино-орієнтований дизайн</b> (user-centered design, UCD) — це підхід, у якому інтерфейс
+      проєктують, відштовхуючись від потреб реальних користувачів. Перед створенням програми
+      розробники досліджують, як люди виконують свої задачі, які труднощі відчувають і що їм
+      допомогло б найбільше. Інтерфейс перевіряють на реальних користувачах і вдосконалюють за
+      результатами тестів.
+    </p>
+
+    <div class="flow">
+      <div class="step">Дослідження<small>інтерв'ю, спостереження</small></div>
+      <span class="arrow">→</span>
+      <div class="step">Прототип<small>макет, схема екранів</small></div>
+      <span class="arrow">→</span>
+      <div class="step">Тестування<small>реальні користувачі</small></div>
+      <span class="arrow">→</span>
+      <div class="step">Удосконалення<small>ітерація й повтор</small></div>
+    </div>
+
+    <div class="callout tip">
+      <div class="label">Приклад</div>
+      <p>
+        Розробники дитячого застосунку помітили: діти 7 років не знаходять кнопку «Назад», бо вона
+        була у вигляді текстового напису. Після тестування кнопку замінили на велику стрілку зі
+        зрозумілим значком — кількість помилок зменшилася. Це і є людино-орієнтований дизайн у дії.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 6 ================= -->
+  <section class="block" id="s6">
+    <div class="sec-head">
+      <span class="sec-num">6</span>
+      <h2>Значення GUI для вчителя початкової школи</h2>
+    </div>
+
+    <p>
+      Для вчителя початкової школи розуміння принципів GUI — не абстрактна теорія, а щоденний
+      інструмент. Молодші школярі опановують комп'ютер саме через графічний інтерфейс: вони бачать
+      значки, натискають кнопки, відкривають вікна. Якщо вчитель розуміє, чому інтерфейс працює
+      саме так, він може пояснити це дітям доступно й послідовно.
+    </p>
+
+    <div class="grid g2">
+      <div class="tile">
+        <h4>Використовуйте наочність</h4>
+        <p>Показуйте не текст команди, а значок або вікно, про яке йдеться.</p>
+      </div>
+      <div class="tile">
+        <h4>Дотримуйтеся послідовності</h4>
+        <p>Однакові дії завжди виконуйте однаково: наприклад, збереження — через Ctrl + S.</p>
+      </div>
+      <div class="tile">
+        <h4>Давайте зворотний зв'язок</h4>
+        <p>Після кожної дії дитини показуйте, що сталося: файл з'явився, папка створилася.</p>
+      </div>
+      <div class="tile">
+        <h4>Вчіть виправляти помилки</h4>
+        <p>Пояснюйте, що Ctrl + Z, кошик і повторна спроба — нормальна частина роботи.</p>
+      </div>
+      <div class="tile">
+        <h4>Не перевантажуйте інтерфейс</h4>
+        <p>Учень 1–2 класу має бачити лише ті елементи, які потрібні для конкретного завдання.</p>
+      </div>
+      <div class="tile">
+        <h4>Працюйте на позитивному досвіді</h4>
+        <p>Перше знайомство з комп'ютером має бути впевненим, послідовним і безпечним.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="label">Головна думка</div>
+      <p>
+        Коли учень уперше бачить комп'ютер, він не думає про WIMP-концепцію. Він бачить значки,
+        натискає на них і спостерігає, що відбувається. Завдання вчителя — зробити цей досвід
+        позитивним, послідовним і безпечним. Саме тому розуміння принципів GUI — професійна
+        необхідність для вчителя інформатики.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= ПІДСУМОК ================= -->
+  <section class="summary">
+    <h2>Підсумок лекції</h2>
+    <ul>
+      <li><b>GUI</b> — спосіб взаємодії з комп'ютером через зображення об'єктів і команд, а не через текстові команди.</li>
+      <li><b>WIMP</b> — вікна, піктограми, меню, вказівники: чотири опори графічного інтерфейсу.</li>
+      <li><b>Шість принципів</b> ефективного GUI: наочність, послідовність, зворотний зв'язок, толерантність до помилок, простота, естетика.</li>
+      <li><b>Юзабіліті</b> — здатність інтерфейсу допомогти користувачеві досягти мети швидко, легко й без зайвих зусиль.</li>
+      <li><b>Для вчителя</b> ці принципи — щоденний інструмент пояснення й формування позитивного досвіду роботи дитини з комп'ютером.</li>
+    </ul>
+  </section>
+
+  <!-- ================= ПИТАННЯ ================= -->
+  <section class="block" id="qs">
+    <div class="sec-head">
+      <span class="sec-num">?</span>
+      <h2>Контрольні питання</h2>
+    </div>
+
+    <ol class="questions">
+      <li>Дайте визначення графічного інтерфейсу користувача (GUI).</li>
+      <li>Чим GUI відрізняється від CLI? Наведіть приклад однієї дії, виконаної обома способами.</li>
+      <li>Розшифруйте абревіатуру WIMP і поясніть кожен складник.</li>
+      <li>Що таке вікно? Які елементи воно має?</li>
+      <li>Які вимоги висувають до якісної піктограми?</li>
+      <li>Які види меню ви знаєте? Наведіть приклади.</li>
+      <li>Чому вигляд курсора миші змінюється залежно від контексту?</li>
+      <li>Назвіть і поясніть шість основних принципів ефективного GUI.</li>
+      <li>Що таке юзабіліті? Які п'ять складників його визначають?</li>
+      <li>Навіщо розробники застосовують людино-орієнтований дизайн?</li>
+      <li>Як знання принципів GUI допомагає вчителю початкової школи в роботі з учнями 1–4 класів?</li>
+    </ol>
+
+    <h3>Рекомендовані джерела</h3>
+    <ul class="sources">
+      <li>Томпсон Д., Черніченко В. Операційні системи. Київ : Кондор, 2017.</li>
+      <li>Загорулько М. І., Сідоров О. М. Операційні системи: практикум. Київ : Наукова думка, 2019.</li>
+      <li>Зайцев В. Г., Дробязко І. П. Операційні системи : навч. посіб. для студ. спец. 123 «Комп'ютерна інженерія». Київ : КПІ ім. Ігоря Сікорського, 2019.</li>
+    </ul>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    Основи графічного інтерфейсу користувача (GUI) · матеріали лекції
+  </div>
+</footer>
+
+</body>
+</html>

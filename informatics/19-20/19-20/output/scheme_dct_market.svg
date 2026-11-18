@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="579.6pt" height="309.888pt" viewBox="0 0 579.6 309.888" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-13T11:33:30.783849</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 309.888 
+L 579.6 309.888 
+L 579.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 138.024 104.4936 
+L 441.576 104.4936 
+Q 451.62 104.4936 451.62 95.84496 
+L 451.62 65.09424 
+Q 451.62 56.4456 441.576 56.4456 
+L 138.024 56.4456 
+Q 127.98 56.4456 127.98 65.09424 
+L 127.98 95.84496 
+Q 127.98 104.4936 138.024 104.4936 
+z
+" clip-path="url(#p0b94139a93)" style="fill: #ebf4ff; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 34.794 255.8448 
+L 176.526 255.8448 
+Q 186.57 255.8448 186.57 247.19616 
+L 186.57 158.78784 
+Q 186.57 150.1392 176.526 150.1392 
+L 34.794 150.1392 
+Q 24.75 150.1392 24.75 158.78784 
+L 24.75 247.19616 
+Q 24.75 255.8448 34.794 255.8448 
+z
+" clip-path="url(#p0b94139a93)" style="fill: #ebf4ff; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 218.934 255.8448 
+L 360.666 255.8448 
+Q 370.71 255.8448 370.71 247.19616 
+L 370.71 158.78784 
+Q 370.71 150.1392 360.666 150.1392 
+L 218.934 150.1392 
+Q 208.89 150.1392 208.89 158.78784 
+L 208.89 247.19616 
+Q 208.89 255.8448 218.934 255.8448 
+z
+" clip-path="url(#p0b94139a93)" style="fill: #e8f5ec; stroke: #248a3d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 403.074 255.8448 
+L 544.806 255.8448 
+Q 554.85 255.8448 554.85 247.19616 
+L 554.85 158.78784 
+Q 554.85 150.1392 544.806 150.1392 
+L 403.074 150.1392 
+Q 393.03 150.1392 393.03 158.78784 
+L 393.03 247.19616 
+Q 393.03 255.8448 403.074 255.8448 
+z
+" clip-path="url(#p0b94139a93)" style="fill: #fff4e5; stroke: #c93400; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="289.8" y="26.348406" transform="rotate(-0 289.8 26.348406)">Структура ринку DCT (Document and Content Technologies)</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="289.8" y="84.707452" transform="rotate(-0 289.8 84.707452)">Програмне забезпечення DCT</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(29.549648 198.829305)">Системи електронного</text>
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(33.470547 214.053133)">документообігу (СЕД)</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 289.8 104.4936 
+Q 197.73 127.3164 107.179266 149.762596 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 113.288447 151.132964 
+L 107.179266 149.762596 
+L 111.941069 145.697472 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(222.758984 191.494148)">Системи управління</text>
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(229.999219 206.441219)">інформацією (IMS,</text>
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(259.95625 221.388289)">портали)</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 289.8 104.4936 
+Q 289.8 127.3164 289.8 148.573952 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 292.6 142.973952 
+L 289.8 148.573952 
+L 287 142.973952 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(406.898984 198.967684)">Системи управління</text>
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(427.601133 213.914754)">вмістом (CMS)</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 289.8 104.4936 
+Q 381.87 127.3164 472.420734 149.762596 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 467.658931 145.697472 
+L 472.420734 149.762596 
+L 466.311553 151.132964 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p0b94139a93">
+   <rect x="10.8" y="10.8" width="558" height="288.288"/>
+  </clipPath>
+ </defs>
+</svg>

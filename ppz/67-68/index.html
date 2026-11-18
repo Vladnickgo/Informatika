@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття № 19 — Пошукові системи та Google</title>
+<style>
+/* ============ БАЗА ============ */
+:root{
+  --ink:#1d1d1f;
+  --sub:#6e6e73;
+  --line:#d2d2d7;
+  --line-soft:#e8e8ed;
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --blue:#0071e3;
+  --blue-soft:#e8f1fd;
+  --purple:#af52de;
+  --purple-soft:#f6ecfc;
+  --orange:#ff9f0a;
+  --orange-soft:#fff4e2;
+  --red:#ff3b30;
+  --red-soft:#ffeceb;
+  --green:#34c759;
+  --green-soft:#e8f9ed;
+  --radius:22px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 28px rgba(0,0,0,.06);
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
+
+body{
+  margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+              "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 24px 96px;
+}
+
+/* ============ ХЕРО ============ */
+.hero{
+  position:relative;
+  margin:0 -24px 40px;
+  padding:76px 24px 64px;
+  text-align:center;
+  background:
+     radial-gradient(900px 380px at 50% -10%, #dbe9ff 0%, rgba(219,233,255,0) 70%),
+     linear-gradient(180deg,#ffffff 0%, #f5f5f7 100%);
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(600px 260px at 82% 18%, rgba(175,82,222,.10), transparent 65%),
+             radial-gradient(560px 240px at 16% 24%, rgba(0,113,227,.12), transparent 65%);
+  pointer-events:none;
+}
+.hero > *{position:relative; z-index:1;}
+
+.eyebrow{
+  display:inline-block;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--blue);
+  background:var(--blue-soft);
+  padding:7px 16px;
+  border-radius:100px;
+  margin-bottom:22px;
+}
+
+h1{
+  font-size:clamp(34px, 5.4vw, 56px);
+  line-height:1.08;
+  letter-spacing:-.025em;
+  font-weight:700;
+  margin:0 0 18px;
+}
+h1 .grad{
+  background:linear-gradient(92deg,#0071e3 0%, #af52de 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p.lead{
+  max-width:720px;
+  margin:0 auto 30px;
+  font-size:19px;
+  color:var(--sub);
+  line-height:1.55;
+}
+
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+.badge{
+  background:#fff;
+  border:1px solid var(--line-soft);
+  border-radius:100px;
+  padding:9px 18px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--sub);
+  box-shadow:0 1px 2px rgba(0,0,0,.03);
+}
+.badge b{color:var(--ink); font-weight:600;}
+
+/* ============ ЗМІСТ ============ */
+.toc{
+  position:sticky;
+  top:0;
+  z-index:50;
+  margin:0 -24px 44px;
+  padding:12px 24px;
+  background:rgba(245,245,247,.82);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line-soft);
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.toc::-webkit-scrollbar{display:none;}
+.toc a{
+  flex:0 0 auto;
+  font-size:13.5px;
+  font-weight:500;
+  color:var(--sub);
+  text-decoration:none;
+  padding:8px 15px;
+  border-radius:100px;
+  white-space:nowrap;
+  transition:.2s;
+}
+.toc a:hover{background:#fff; color:var(--blue);}
+
+/* ============ СЕКЦІЇ ============ */
+section{scroll-margin-top:80px;}
+
+h2{
+  font-size:clamp(26px,3.4vw,36px);
+  letter-spacing:-.02em;
+  line-height:1.15;
+  font-weight:700;
+  margin:0 0 10px;
+}
+h3{
+  font-size:22px;
+  letter-spacing:-.015em;
+  font-weight:650;
+  margin:0 0 8px;
+}
+h4{
+  font-size:17px;
+  font-weight:650;
+  margin:0 0 6px;
+}
+.section-sub{
+  color:var(--sub);
+  font-size:16.5px;
+  margin:0 0 28px;
+  max-width:760px;
+}
+
+.sec-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:0 0 8px;
+}
+.sec-num{
+  flex:0 0 auto;
+  width:40px;height:40px;
+  border-radius:12px;
+  background:linear-gradient(140deg,#0071e3,#4aa8ff);
+  color:#fff;
+  font-size:17px;
+  font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,113,227,.28);
+}
+
+/* ============ КАРТКИ ============ */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:30px 32px;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+  border:1px solid rgba(0,0,0,.03);
+}
+
+.grid-2{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+.grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+
+/* ============ МЕТА ============ */
+.meta-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-bottom:44px;
+}
+.meta-card{
+  background:#fff;
+  border-radius:20px;
+  padding:26px 24px;
+  box-shadow:var(--shadow);
+  border-top:4px solid var(--blue);
+}
+.meta-card:nth-child(2){border-top-color:var(--purple);}
+.meta-card:nth-child(3){border-top-color:var(--orange);}
+.meta-card h4{
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sub);
+  margin-bottom:12px;
+}
+.meta-card p{margin:0; font-size:15.5px; line-height:1.6;}
+.meta-card ul{margin:0; padding-left:18px; font-size:15px; line-height:1.7; color:#333;}
+.meta-card li{margin-bottom:8px;}
+
+/* ============ ПРИКЛАД ============ */
+.example{
+  background:linear-gradient(180deg,#f8fbff,#f2f7ff);
+  border:1px solid #cfe3fb;
+  border-left:4px solid var(--blue);
+  border-radius:16px;
+  padding:18px 22px;
+  margin:18px 0;
+  font-size:15.5px;
+}
+.example .tag{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:8px;
+}
+.example .tag::before{
+  content:"";
+  width:7px;height:7px;border-radius:50%;
+  background:var(--blue);
+  display:inline-block;
+}
+.example code{
+  background:#fff;
+  border:1px solid #d8e6f8;
+  border-radius:8px;
+  padding:2px 9px;
+  font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size:14px;
+  color:#0058b0;
+  white-space:nowrap;
+}
+.example .result-line{
+  margin-top:10px;
+  color:var(--sub);
+  font-size:14.5px;
+}
+
+/* ============ ТАБЛИЦІ ============ */
+.table-wrap{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin:20px 0 26px;
+  border:1px solid rgba(0,0,0,.03);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:15px;
+}
+thead th{
+  background:#fbfbfd;
+  text-align:left;
+  font-size:12.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sub);
+  font-weight:650;
+  padding:15px 18px;
+  border-bottom:1px solid var(--line-soft);
+}
+tbody td{
+  padding:14px 18px;
+  border-bottom:1px solid var(--line-soft);
+  vertical-align:top;
+  line-height:1.55;
+}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#fafafc;}
+td.code-cell code{
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  background:var(--blue-soft);
+  color:#0058b0;
+  padding:3px 9px;
+  border-radius:7px;
+  font-size:13.5px;
+  white-space:nowrap;
+}
+tbody td:empty::after{
+  content:"";
+  display:block;
+  min-height:20px;
+  border-bottom:1px dashed #cfd3da;
+}
+
+/* ============ КРОКИ ============ */
+.steps{
+  list-style:none;
+  counter-reset:st;
+  padding:0;
+  margin:16px 0 4px;
+}
+.steps li{
+  counter-increment:st;
+  position:relative;
+  padding:9px 0 9px 46px;
+  font-size:15.5px;
+  line-height:1.55;
+}
+.steps li::before{
+  content:counter(st);
+  position:absolute;
+  left:0; top:9px;
+  width:28px;height:28px;
+  border-radius:50%;
+  background:var(--blue-soft);
+  color:var(--blue);
+  font-size:13.5px;
+  font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ============ АНАТОМІЯ ЗАПИТУ ============ */
+.anatomy{
+  background:#fff;
+  border-radius:20px;
+  padding:26px 26px 20px;
+  box-shadow:var(--shadow);
+  margin:22px 0;
+}
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  font-size:15px;
+  margin-bottom:20px;
+}
+.chip{
+  padding:7px 13px;
+  border-radius:10px;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+.chip.c-site{background:var(--blue-soft); color:#0058b0;}
+.chip.c-quote{background:var(--purple-soft); color:#8c35b8;}
+.chip.c-file{background:var(--orange-soft); color:#b86e00;}
+.chip.c-minus{background:var(--red-soft); color:#c9241b;}
+.chip.c-plain{background:#f0f0f4; color:#3a3a3c;}
+
+.legend{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;
+  margin-top:6px;
+}
+.legend-item{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  font-size:14px;
+  color:var(--sub);
+  line-height:1.45;
+}
+.dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto;margin-top:6px;}
+
+/* ============ ДІАГРАМА-СМУГИ ============ */
+.bars{margin:6px 0;}
+.bar-row{
+  display:grid;
+  grid-template-columns:118px 1fr 62px;
+  align-items:center;
+  gap:14px;
+  margin-bottom:13px;
+  font-size:14.5px;
+}
+.bar-name{font-weight:600; color:var(--ink);}
+.bar-track{
+  height:14px;
+  background:#f0f0f4;
+  border-radius:100px;
+  overflow:hidden;
+}
+.bar-fill{
+  height:100%;
+  border-radius:100px;
+  background:linear-gradient(90deg,#0071e3,#4aa8ff);
+}
+.bar-fill.b2{background:linear-gradient(90deg,#af52de,#cf8df0);}
+.bar-fill.b3{background:linear-gradient(90deg,#ff9f0a,#ffc25c);}
+.bar-fill.b4{background:linear-gradient(90deg,#34c759,#7ee29a);}
+.bar-fill.b5{background:linear-gradient(90deg,#8e8e93,#c7c7cc);}
+.bar-val{text-align:right; font-weight:650; font-size:14px; color:var(--sub); font-variant-numeric:tabular-nums;}
+
+/* ============ КАРТКИ КРИТЕРІЇВ ============ */
+.crit{
+  background:#fff;
+  border-radius:18px;
+  padding:20px 20px 18px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,.03);
+  height:100%;
+}
+.crit .ico{
+  width:38px;height:38px;
+  border-radius:11px;
+  background:var(--blue-soft);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+}
+.crit h4{font-size:15.5px; margin-bottom:5px;}
+.crit p{font-size:13.8px; color:var(--sub); margin:0; line-height:1.5;}
+
+/* ============ ЗАВДАННЯ ============ */
+.task{
+  background:#fff;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:26px 30px;
+  margin-bottom:22px;
+  border:1px solid rgba(0,0,0,.03);
+}
+.task-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:6px;
+  flex-wrap:wrap;
+}
+.task-no{
+  flex:0 0 auto;
+  background:linear-gradient(140deg,#0071e3,#4aa8ff);
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:6px 14px;
+  border-radius:100px;
+}
+.task h3{margin:0; font-size:20px;}
+.task-desc{color:var(--sub); font-size:15.5px; margin:8px 0 6px;}
+
+/* ============ ПИТАННЯ ============ */
+.qlist{
+  counter-reset:q;
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:12px;
+}
+.qlist li{
+  counter-increment:q;
+  position:relative;
+  background:#fff;
+  border-radius:16px;
+  padding:18px 22px 18px 62px;
+  box-shadow:var(--shadow);
+  font-size:15.8px;
+  line-height:1.55;
+  border:1px solid rgba(0,0,0,.03);
+}
+.qlist li::before{
+  content:counter(q);
+  position:absolute;
+  left:20px; top:50%;
+  transform:translateY(-50%);
+  width:28px;height:28px;
+  border-radius:50%;
+  background:var(--blue-soft);
+  color:var(--blue);
+  font-size:13.5px;
+  font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ============ ФІГУРИ ============ */
+figure{
+  margin:24px 0;
+  background:#fff;
+  border-radius:20px;
+  padding:24px 20px 14px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,.03);
+}
+figure svg{display:block; width:100%; height:auto;}
+figcaption{
+  text-align:center;
+  font-size:13.5px;
+  color:var(--sub);
+  margin-top:14px;
+  line-height:1.45;
+}
+
+/* ============ БАЛ ТАБЛИЦЯ ============ */
+.total-row td{
+  background:var(--blue-soft);
+  font-weight:700;
+  color:#0058b0;
+}
+
+/* ============ ФУТЕР ============ */
+footer{
+  margin-top:56px;
+  padding-top:30px;
+  border-top:1px solid var(--line);
+  text-align:center;
+  color:var(--sub);
+  font-size:14px;
+}
+
+/* ============ КНОПКА ДРУКУ ============ */
+.print-btn{
+  position:fixed;
+  right:26px; bottom:26px;
+  z-index:99;
+  background:var(--blue);
+  color:#fff;
+  border:none;
+  border-radius:100px;
+  padding:15px 26px;
+  font-size:15px;
+  font-weight:600;
+  font-family:inherit;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,113,227,.38);
+  transition:transform .2s, box-shadow .2s;
+}
+.print-btn:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,113,227,.45);}
+
+/* ============ АДАПТИВ ============ */
+@media (max-width:900px){
+  .grid-3, .grid-4{grid-template-columns:repeat(2,1fr);}
+  .meta-grid{grid-template-columns:1fr;}
+}
+@media (max-width:640px){
+  body{font-size:16px;}
+  .wrap{padding:0 16px 70px;}
+  .hero{margin:0 -16px 32px; padding:52px 16px 44px;}
+  .toc{margin:0 -16px 32px; padding:10px 16px;}
+  .grid-2, .grid-3, .grid-4{grid-template-columns:1fr;}
+  .card{padding:22px 20px;}
+  .task{padding:22px 18px;}
+  .bar-row{grid-template-columns:92px 1fr 54px; gap:9px; font-size:13.5px;}
+  table{font-size:13.5px;}
+  thead th, tbody td{padding:11px 12px;}
+}
+
+/* ============ ДРУК ============ */
+@media print{
+  @page{
+    size:A4;
+    margin:12mm 12mm 14mm;
+  }
+
+  html, body{
+    background:#fff !important;
+    font-size:10.6pt;
+    line-height:1.45;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  .wrap{max-width:none; padding:0;}
+
+  /* ховаємо інтерактив */
+  .toc, .print-btn{display:none !important;}
+
+  /* херо стискаємо */
+  .hero{
+    margin:0 0 8mm;
+    padding:0 0 6mm;
+    background:none !important;
+    text-align:left;
+    border-bottom:2.5pt solid #0071e3;
+  }
+  .hero::after{display:none;}
+  .hero p.lead{max-width:none; font-size:11pt; margin-bottom:4mm;}
+  .eyebrow{font-size:8pt; padding:3pt 9pt; margin-bottom:4mm;}
+  h1{font-size:24pt; margin-bottom:3mm;}
+
+  /* ЖОДНИХ РОЗРИВІВ */
+  .card, .task, .meta-card, .crit, figure, .table-wrap,
+  .example, .anatomy, .qlist li, .steps li, .bar-row,
+  tr, td, th, figcaption, h2, h3, h4{
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  h2, h3, h4{break-after:avoid !important; page-break-after:avoid !important;}
+
+  section{break-before:auto; page-break-before:auto;}
+  .page-break{break-before:page; page-break-before:always;}
+
+  /* тіні прибираємо — економія фарби */
+  .card, .task, .meta-card, .crit, figure, .table-wrap, .anatomy, .qlist li{
+    box-shadow:none !important;
+    border:0.6pt solid #d2d2d7 !important;
+    border-radius:10pt !important;
+    padding:4.5mm 5mm !important;
+    margin-bottom:4mm !important;
+  }
+
+  .task-no, .sec-num, .steps li::before, .qlist li::before{
+    box-shadow:none !important;
+  }
+
+  .grid-2, .grid-3, .grid-4, .meta-grid{
+    gap:3.5mm !important;
+  }
+
+  .table-wrap{border-radius:10pt !important; overflow:visible !important;}
+  table{font-size:9pt;}
+  thead th{font-size:7.5pt; padding:2.5mm 3mm;}
+  tbody td{padding:2.2mm 3mm;}
+
+  thead{display:table-header-group;}
+
+  .qlist{gap:2.5mm !important;}
+  .qlist li{padding:3mm 4mm 3mm 12mm !important;}
+
+  .bar-track{background:#eee !important;}
+  figure svg{max-height:78mm;}
+
+  .example{background:#f7faff !important;}
+  a{color:inherit; text-decoration:none;}
+
+  footer{break-inside:avoid; page-break-inside:avoid; margin-top:8mm;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <span class="eyebrow">Практичне заняття № 19</span>
+    <h1>Пошукові системи та<br><span class="grad">пошуковий двигун Google</span></h1>
+    <p class="lead">Ефективний пошук інформації за допомогою Google: оператори, фільтри, спеціальні інструменти та перевірка достовірності джерел.</p>
+    <div class="badges">
+      <span class="badge">Тема: <b>Інформатика</b></span>
+      <span class="badge">Формат: <b>практична робота</b></span>
+      <span class="badge">Максимум: <b>15 (+1) балів</b></span>
+      <span class="badge">Обладнання: <b>інструкційні картки</b></span>
+    </div>
+  </header>
+
+  <!-- ================= TOC ================= -->
+  <nav class="toc">
+    <a href="#meta">Мета</a>
+    <a href="#discussion">Обговорення</a>
+    <a href="#theory">Теорія</a>
+    <a href="#t1">Пошукова система</a>
+    <a href="#t2">Популярні системи</a>
+    <a href="#t3">Як працює Google</a>
+    <a href="#t4">Оператори</a>
+    <a href="#t5">Інструменти</a>
+    <a href="#t6">Фільтри</a>
+    <a href="#t7">Пошук зображень</a>
+    <a href="#t8">Достовірність</a>
+    <a href="#practice">Практика</a>
+    <a href="#grading">Оцінювання</a>
+    <a href="#questions">Контрольні питання</a>
+  </nav>
+
+  <!-- ================= МЕТА ================= -->
+  <section id="meta">
+    <div class="meta-grid">
+      <div class="meta-card">
+        <h4>Мета заняття</h4>
+        <p>Навчати користуватися пошуковими системами, застосовувати оператори Google (лапки, мінус, <code>site:</code>, <code>filetype:</code>) для ефективного пошуку. Розвивати дослідницькі навички, вміння формулювати точні пошукові запити, критично оцінювати знайдену інформацію. Виховувати інформаційну грамотність, нетерпимість до недостовірних джерел, повагу до авторських прав.</p>
+      </div>
+      <div class="meta-card">
+        <h4>Обладнання</h4>
+        <ul>
+          <li>Інструкційні картки</li>
+          <li>Комп'ютер / ноутбук з доступом до Інтернету</li>
+          <li>Браузер (Chrome, Safari, Edge, Firefox)</li>
+          <li>Обліковий запис Google (для Google Академії)</li>
+        </ul>
+      </div>
+      <div class="meta-card">
+        <h4>Література</h4>
+        <ul>
+          <li>Холод О. М. Комунікаційні технології : навч. посіб. Київ : Центр навчальної літератури, 2019. 211 с.</li>
+          <li>Шумілова І. Ф. Новітні технології викладання освітніх галузей у початковій школі : навч. посіб. Київ : Олді, 2023. 248 с.</li>
+          <li>Юнчик В. Л. Системне, прикладне програмне забезпечення та хмарні технології в освіті : конспект лекцій. Луцьк : ВНУ імені Лесі Українки, 2024. 162 с.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ОБГОВОРЕННЯ ================= -->
+  <section id="discussion">
+    <div class="sec-head">
+      <div class="sec-num">?</div>
+      <h2>Питання для обговорення</h2>
+    </div>
+    <p class="section-sub">Поміркуйте та дайте розгорнуті відповіді — це налаштує на практичну частину.</p>
+
+    <ol class="qlist">
+      <li>Якими пошуковими системами ви користуєтесь? Чому обрали саме Google?</li>
+      <li>Чи завжди перші результати пошуку є найбільш релевантними?</li>
+      <li>Як відрізнити достовірну інформацію від недостовірної в результатах пошуку?</li>
+      <li>Які труднощі виникають під час пошуку навчальних матеріалів?</li>
+      <li>Чи використовуєте ви спеціальні оператори пошуку (лапки, мінус, <code>site:</code>)?</li>
+    </ol>
+  </section>
+
+  <!-- ================= ТЕОРІЯ ================= -->
+  <section id="theory">
+    <div class="sec-head">
+      <div class="sec-num">📘</div>
+      <h2>Теоретичні відомості</h2>
+    </div>
+    <p class="section-sub">Вісім ключових блоків: від будови пошукової системи — до перевірки достовірності знайденого матеріалу.</p>
+  </section>
+
+  <!-- ---------- 1 ---------- -->
+  <section id="t1">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">1</div>
+        <h2>Що таке пошукова система?</h2>
+      </div>
+      <p><strong>Пошукова система</strong> — це програмно-апаратний комплекс, що забезпечує пошук інформації в Інтернеті за ключовими словами. Користувач бачить лише «верхівку айсберга» — рядок пошуку та список результатів, але за цим стоїть складна інфраструктура з мільярдів проіндексованих сторінок.</p>
+
+      <h4 style="margin-top:22px;">Основні компоненти пошукової системи</h4>
+
+      <figure>
+        <svg viewBox="0 0 900 250" role="img" aria-label="Схема компонентів пошукової системи">
+          <defs>
+            <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#86868b"/>
+            </marker>
+          </defs>
+
+          <!-- Блок 1 -->
+          <g>
+            <rect x="14" y="62" width="184" height="118" rx="18" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="14" y="62" width="184" height="7" rx="3.5" fill="#0071e3"/>
+            <circle cx="106" cy="106" r="19" fill="#e8f1fd"/>
+            <text x="106" y="112" text-anchor="middle" font-size="16" font-weight="700" fill="#0071e3" font-family="Helvetica,Arial,sans-serif">1</text>
+            <text x="106" y="143" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Робот</text>
+            <text x="106" y="161" text-anchor="middle" font-size="11.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">сканує веб-сторінки</text>
+          </g>
+
+          <line x1="202" y1="121" x2="238" y2="121" stroke="#86868b" stroke-width="2" marker-end="url(#arw)"/>
+
+          <!-- Блок 2 -->
+          <g>
+            <rect x="244" y="62" width="184" height="118" rx="18" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="244" y="62" width="184" height="7" rx="3.5" fill="#af52de"/>
+            <circle cx="336" cy="106" r="19" fill="#f6ecfc"/>
+            <text x="336" y="112" text-anchor="middle" font-size="16" font-weight="700" fill="#af52de" font-family="Helvetica,Arial,sans-serif">2</text>
+            <text x="336" y="143" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Індексатор</text>
+            <text x="336" y="161" text-anchor="middle" font-size="11.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">обробляє та індексує</text>
+          </g>
+
+          <line x1="432" y1="121" x2="468" y2="121" stroke="#86868b" stroke-width="2" marker-end="url(#arw)"/>
+
+          <!-- Блок 3 -->
+          <g>
+            <rect x="474" y="62" width="184" height="118" rx="18" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="474" y="62" width="184" height="7" rx="3.5" fill="#ff9f0a"/>
+            <circle cx="566" cy="106" r="19" fill="#fff4e2"/>
+            <text x="566" y="112" text-anchor="middle" font-size="16" font-weight="700" fill="#ff9f0a" font-family="Helvetica,Arial,sans-serif">3</text>
+            <text x="566" y="143" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">База даних</text>
+            <text x="566" y="161" text-anchor="middle" font-size="11.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">зберігає індекс</text>
+          </g>
+
+          <line x1="662" y1="121" x2="698" y2="121" stroke="#86868b" stroke-width="2" marker-end="url(#arw)"/>
+
+          <!-- Блок 4 -->
+          <g>
+            <rect x="704" y="62" width="184" height="118" rx="18" fill="#ffffff" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="704" y="62" width="184" height="7" rx="3.5" fill="#34c759"/>
+            <circle cx="796" cy="106" r="19" fill="#e8f9ed"/>
+            <text x="796" y="112" text-anchor="middle" font-size="16" font-weight="700" fill="#34c759" font-family="Helvetica,Arial,sans-serif">4</text>
+            <text x="796" y="143" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Пошуковий</text>
+            <text x="796" y="160" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">двигун</text>
+            <text x="796" y="177" text-anchor="middle" font-size="11.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">ранжування</text>
+          </g>
+
+          <text x="450" y="30" text-anchor="middle" font-size="13" font-weight="600" fill="#6e6e73" font-family="Helvetica,Arial,sans-serif" letter-spacing="1.4">КОНВЕЄР ОБРОБКИ ІНФОРМАЦІЇ</text>
+          <text x="450" y="222" text-anchor="middle" font-size="12" fill="#86868b" font-family="Helvetica,Arial,sans-serif">Від сканування сторінки — до готового списку результатів для користувача</text>
+        </svg>
+        <figcaption>Рис. 1. Чотири компоненти пошукової системи та послідовність їхньої роботи</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th style="width:26%">Компонент</th><th>Опис</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Робот (пошуковий павук)</strong></td><td>Програма, яка сканує веб-сторінки, переходячи за посиланнями. Саме вона «обходить» Інтернет і приносить новий контент.</td></tr>
+            <tr><td><strong>Індексатор</strong></td><td>Обробляє сторінки та створює індекс — своєрідний «покажчик» слів із прив'язкою до адрес.</td></tr>
+            <tr><td><strong>База даних</strong></td><td>Зберігає проіндексовані сторінки та їхні характеристики (дата, мова, розмір, посилання).</td></tr>
+            <tr><td><strong>Пошуковий двигун</strong></td><td>Алгоритм пошуку та ранжування результатів — визначає, у якому порядку показувати знайдене.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад</div>
+        Ви публікуєте нову статтю на шкільному сайті. Проходить від кількох годин до кількох тижнів, перш ніж робот Google «побачить» її, індексатор опрацює текст, а сторінка з'явиться в результатах пошуку за її ключовими словами.
+        <div class="result-line">💡 Саме тому свіжі матеріали іноді «не знаходяться» — вони ще не встигли потрапити в індекс.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 2 ---------- -->
+  <section id="t2">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">2</div>
+        <h2>Популярні пошукові системи</h2>
+      </div>
+      <p>Світовий ринок пошукових систем розподілений нерівномірно: один гравець контролює близько 90% запитів. Розуміння цього розподілу допомагає обирати інструмент під конкретну задачу.</p>
+
+      <figure>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-name">Google</span>
+            <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
+            <span class="bar-val">~90%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Bing</span>
+            <div class="bar-track"><div class="bar-fill b2" style="width:3%"></div></div>
+            <span class="bar-val">~3%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Baidu</span>
+            <div class="bar-track"><div class="bar-fill b3" style="width:1%"></div></div>
+            <span class="bar-val">~1%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Yandex</span>
+            <div class="bar-track"><div class="bar-fill b3" style="width:1%"></div></div>
+            <span class="bar-val">~1%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">DuckDuckGo</span>
+            <div class="bar-track"><div class="bar-fill b4" style="width:0.8%"></div></div>
+            <span class="bar-val">&lt;1%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Yahoo!</span>
+            <div class="bar-track"><div class="bar-fill b5" style="width:0.6%"></div></div>
+            <span class="bar-val">&lt;1%</span>
+          </div>
+        </div>
+        <figcaption>Рис. 2. Орієнтовна частка світового ринку пошукових систем (станом на 2024 р.)</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Назва</th><th>Розробник</th><th>Частка ринку*</th><th>Особливості</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Google</strong></td><td>Google</td><td>~90%</td><td>Найбільш популярний, найкращий семантичний аналіз запитів</td></tr>
+            <tr><td><strong>Bing</strong></td><td>Microsoft</td><td>~3%</td><td>Інтеграція з Windows, вбудований штучний інтелект Copilot</td></tr>
+            <tr><td><strong>Baidu</strong></td><td>Baidu</td><td>~1%</td><td>Домінує в Китаї</td></tr>
+            <tr><td><strong>Yandex</strong></td><td>Yandex</td><td>~1%</td><td>Популярний в Україні, добре працює з російськомовними текстами</td></tr>
+            <tr><td><strong>DuckDuckGo</strong></td><td>DuckDuckGo</td><td>&lt;1%</td><td>Приватність, без трекінгу користувача</td></tr>
+            <tr><td><strong>Yahoo!</strong></td><td>Yahoo</td><td>&lt;1%</td><td>Стара пошукова система, що використовує технології Bing</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13.5px; color:var(--sub); margin-top:-10px;">* орієнтовна частка світового ринку</p>
+
+      <div class="example">
+        <div class="tag">Приклад вибору</div>
+        Для наукової роботи → <code>Google Академія</code>. Для максимально приватного пошуку → <code>DuckDuckGo</code>. Для пошуку українських освітніх матеріалів → <code>Google</code> з оператором <code>site:</code>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 3 ---------- -->
+  <section id="t3">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">3</div>
+        <h2>Як працює Google</h2>
+      </div>
+      <p>Google обробляє запит за частки секунди, проходячи п'ять етапів. Розуміння цієї послідовності допомагає усвідомити, чому одні сторінки опиняються на першій позиції, а інші — на десятому аркуші результатів.</p>
+
+      <figure>
+        <svg viewBox="0 0 900 210" role="img" aria-label="Схема обробки пошукового запиту Google">
+          <defs>
+            <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#0071e3"/>
+            </marker>
+          </defs>
+
+          <text x="450" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#6e6e73" font-family="Helvetica,Arial,sans-serif" letter-spacing="1.4">ШЛЯХ ЗАПИТУ</text>
+
+          <!-- 5 етапів -->
+          <g font-family="Helvetica,Arial,sans-serif">
+            <!-- 1 -->
+            <circle cx="76" cy="95" r="30" fill="#e8f1fd"/>
+            <text x="76" y="102" text-anchor="middle" font-size="18" font-weight="700" fill="#0071e3">1</text>
+            <text x="76" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Запит</text>
+            <text x="76" y="169" text-anchor="middle" font-size="10.5" fill="#86868b">введення слів</text>
+
+            <line x1="112" y1="95" x2="152" y2="95" stroke="#0071e3" stroke-width="2" marker-end="url(#arw2)"/>
+
+            <!-- 2 -->
+            <circle cx="226" cy="95" r="30" fill="#e8f1fd"/>
+            <text x="226" y="102" text-anchor="middle" font-size="18" font-weight="700" fill="#0071e3">2</text>
+            <text x="226" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Обробка</text>
+            <text x="226" y="169" text-anchor="middle" font-size="10.5" fill="#86868b">аналіз мови</text>
+
+            <line x1="262" y1="95" x2="302" y2="95" stroke="#0071e3" stroke-width="2" marker-end="url(#arw2)"/>
+
+            <!-- 3 -->
+            <circle cx="376" cy="95" r="30" fill="#e8f1fd"/>
+            <text x="376" y="102" text-anchor="middle" font-size="18" font-weight="700" fill="#0071e3">3</text>
+            <text x="376" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Пошук</text>
+            <text x="376" y="169" text-anchor="middle" font-size="10.5" fill="#86868b">в індексі</text>
+
+            <line x1="412" y1="95" x2="452" y2="95" stroke="#0071e3" stroke-width="2" marker-end="url(#arw2)"/>
+
+            <!-- 4 -->
+            <circle cx="526" cy="95" r="30" fill="#f6ecfc"/>
+            <text x="526" y="102" text-anchor="middle" font-size="18" font-weight="700" fill="#af52de">4</text>
+            <text x="526" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Ранжування</text>
+            <text x="526" y="169" text-anchor="middle" font-size="10.5" fill="#86868b">200+ факторів</text>
+
+            <line x1="562" y1="95" x2="602" y2="95" stroke="#0071e3" stroke-width="2" marker-end="url(#arw2)"/>
+
+            <!-- 5 -->
+            <circle cx="676" cy="95" r="30" fill="#e8f9ed"/>
+            <text x="676" y="102" text-anchor="middle" font-size="18" font-weight="700" fill="#34c759">5</text>
+            <text x="676" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Результати</text>
+            <text x="676" y="169" text-anchor="middle" font-size="10.5" fill="#86868b">10 на сторінку</text>
+
+            <!-- примітка -->
+            <rect x="740" y="52" width="148" height="86" rx="14" fill="#fbfbfd" stroke="#e2e2e7"/>
+            <text x="814" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#6e6e73" letter-spacing=".8">КРИТЕРІЇ</text>
+            <text x="814" y="94" text-anchor="middle" font-size="10.5" fill="#86868b">релевантність</text>
+            <text x="814" y="109" text-anchor="middle" font-size="10.5" fill="#86868b">популярність</text>
+            <text x="814" y="124" text-anchor="middle" font-size="10.5" fill="#86868b">якість · свіжість</text>
+          </g>
+        </svg>
+        <figcaption>Рис. 3. Процес обробки запиту Google: від введення слів — до списку результатів</figcaption>
+      </figure>
+
+      <h4 style="margin-top:26px;">Критерії ранжування</h4>
+      <p style="color:var(--sub); font-size:15.5px;">Google враховує понад 200 сигналів. Нижче — ключові з них, які найчастіше згадуються в освітньому курсі.</p>
+
+      <div class="grid-3" style="margin-top:16px;">
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <h4>Релевантність</h4>
+          <p>Наскільки зміст сторінки відповідає змісту запиту.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <h4>Популярність</h4>
+          <p>Кількість і якість зовнішніх посилань на сторінку.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/></svg>
+          </div>
+          <h4>Якість контенту</h4>
+          <p>Унікальність, повнота, грамотність, структурованість тексту.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8z"/></svg>
+          </div>
+          <h4>Швидкість завантаження</h4>
+          <p>Повільні сторінки опускаються в результатах.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 18v3"/></svg>
+          </div>
+          <h4>Адаптивність</h4>
+          <p>Зручність перегляду на мобільних пристроях.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <h4>Свіжість даних</h4>
+          <p>Актуальність: дата публікації та оновлення матеріалу.</p>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад</div>
+        Запит <code>календарне планування інформатика 3 клас</code> видасть десятки сторінок. Першими будуть сайти з якісним, добре структурованим контентом, частими оновленнями та згадками в інших джерелах — а не просто сторінка, де слово «календарне» зустрічається найбільше разів.
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 4 ---------- -->
+  <section id="t4">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">4</div>
+        <h2>Основні оператори Google</h2>
+      </div>
+      <p>Оператори — це «мова програмування» пошуку. Вони звужують колосальний масив Інтернету до кількох точних сторінок. Кожен оператор вирішує окрему задачу; сила — у комбінуванні.</p>
+
+      <div class="anatomy">
+        <h4 style="margin-bottom:14px;">Анатомія складного запиту</h4>
+        <div class="chips">
+          <span class="chip c-site">site:mon.gov.ua</span>
+          <span class="chip c-quote">"нова українська школа"</span>
+          <span class="chip c-file">filetype:pdf</span>
+          <span class="chip c-minus">-відео</span>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><span class="dot" style="background:#0071e3"></span><span><b>site:</b> — обмежує пошук лише сайтом МОН України</span></div>
+          <div class="legend-item"><span class="dot" style="background:#af52de"></span><span><b>"..."</b> — шукає точну фразу, а не окремі слова</span></div>
+          <div class="legend-item"><span class="dot" style="background:#ff9f0a"></span><span><b>filetype:</b> — повертає лише PDF-файли</span></div>
+          <div class="legend-item"><span class="dot" style="background:#ff3b30"></span><span><b>-</b> — виключає результати з відео</span></div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:17%">Оператор</th>
+              <th style="width:15%">Синтаксис</th>
+              <th style="width:25%">Приклад</th>
+              <th>Що робить</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Точний збіг</strong></td><td class="code-cell"><code>"слова"</code></td><td class="code-cell"><code>"система числення"</code></td><td>Шукає фразу точно, у тому ж порядку слів</td></tr>
+            <tr><td><strong>Виключення</strong></td><td class="code-cell"><code>-слово</code></td><td class="code-cell"><code>яблуко -телефон</code></td><td>Виключає слово з результатів</td></tr>
+            <tr><td><strong>Сайт</strong></td><td class="code-cell"><code>site:</code></td><td class="code-cell"><code>site:wikipedia.org</code></td><td>Шукає тільки на вказаному сайті</td></tr>
+            <tr><td><strong>Тип файлу</strong></td><td class="code-cell"><code>filetype:</code></td><td class="code-cell"><code>filetype:pdf</code></td><td>Шукає файли певного типу</td></tr>
+            <tr><td><strong>АБО</strong></td><td class="code-cell"><code>OR</code></td><td class="code-cell"><code>Python OR Java</code></td><td>Шукає будь-яке зі слів</td></tr>
+            <tr><td><strong>Заголовок</strong></td><td class="code-cell"><code>intitle:</code></td><td class="code-cell"><code>intitle:криптографія</code></td><td>Слово має бути в заголовку сторінки</td></tr>
+            <tr><td><strong>URL</strong></td><td class="code-cell"><code>inurl:</code></td><td class="code-cell"><code>inurl:blog</code></td><td>Слово має бути в адресі сторінки</td></tr>
+            <tr><td><strong>Між</strong></td><td class="code-cell"><code>..</code></td><td class="code-cell"><code>2019..2024</code></td><td>Значення в заданому діапазоні</td></tr>
+            <tr><td><strong>Схожі сайти</strong></td><td class="code-cell"><code>related:</code></td><td class="code-cell"><code>related:google.com</code></td><td>Показує сайти, схожі на вказаний</td></tr>
+            <tr><td><strong>Визначення</strong></td><td class="code-cell"><code>define:</code></td><td class="code-cell"><code>define:алгоритм</code></td><td>Дає визначення слова</td></tr>
+            <tr><td><strong>Кеш</strong></td><td class="code-cell"><code>cache:</code></td><td class="code-cell"><code>cache:example.com</code></td><td>Відкриває збережену копію сторінки</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 style="margin-top:26px;">Оператори на практиці: розгорнуті приклади</h4>
+
+      <div class="example">
+        <div class="tag">Лапки — точний збіг</div>
+        <code>"початкова освіта"</code> — знайде лише сторінки, де ці два слова стоять поруч.
+        <div class="result-line">Без лапок Google шукатиме «початкова» і «освіта» окремо — результатів буде в рази більше, але серед них трапляться нерелевантні.</div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Мінус — виключення</div>
+        <code>джерело живлення -комп'ютер</code> — знайде інформацію про джерела живлення (батарейки, акумулятори, блоки), відсікаючи комп'ютерну тематику.
+        <div class="result-line">Типове застосування: <code>урок -відео -презентація</code>, коли потрібен саме текстовий конспект.</div>
+      </div>
+
+      <div class="example">
+        <div class="tag">site: — пошук на конкретному сайті</div>
+        <code>site:naurok.com.ua інформатика 3 клас</code> — усі результати будуть лише з цього освітнього порталу.
+        <div class="result-line">Корисно, коли ви довіряєте конкретному джерелу й не хочете витрачати час на «сміття».</div>
+      </div>
+
+      <div class="example">
+        <div class="tag">filetype: — тип файлу</div>
+        <code>"теми з інформатики" filetype:pdf</code> — поверне лише PDF-документи з цією фразою.
+        <div class="result-line">Підтримуються: <code>pdf</code>, <code>doc</code>, <code>docx</code>, <code>ppt</code>, <code>pptx</code>, <code>xls</code>, <code>xlsx</code> та інші.</div>
+      </div>
+
+      <div class="example">
+        <div class="tag">intitle: — слово в заголовку</div>
+        <code>intitle:"методична розробка"</code> — знайде сторінки, де ця фраза є саме в заголовку (у вкладці браузера).
+        <div class="result-line">Заголовок — це «візитівка» сторінки, тому такі результати зазвичай точніші.</div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Діапазон ..</div>
+        <code>"новий рік" 2020..2024</code> — знайде матеріали, датовані 2020–2024 роками.
+        <div class="result-line">Працює і для чисел: <code>Intel Core i5 2020..2024</code>, <code>Samsung Galaxy S20..S23</code>.</div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Комбінування — найвищий рівень</div>
+        <code>site:osvita.ua "дистанційне навчання" filetype:pdf</code>
+        <div class="result-line">Три оператори в одному запиті: конкретний сайт + точна фраза + тип файлу. Саме так формулюють запити досвідчені користувачі.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 5 ---------- -->
+  <section id="t5">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">5</div>
+        <h2>Спеціальні інструменти пошуку Google</h2>
+      </div>
+      <p>Окрім звичайного пошуку, Google має низку спеціалізованих сервісів, кожен з яких «заточений» під свій тип інформації.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Інструмент</th><th>Призначення</th><th>Доступ</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Google Картинки</strong></td><td>Пошук зображень</td><td class="code-cell"><code>images.google.com</code></td></tr>
+            <tr><td><strong>Google Новини</strong></td><td>Пошук новин</td><td class="code-cell"><code>news.google.com</code></td></tr>
+            <tr><td><strong>Google Книги</strong></td><td>Пошук книг</td><td class="code-cell"><code>books.google.com</code></td></tr>
+            <tr><td><strong>Google Академія</strong></td><td>Наукові статті</td><td class="code-cell"><code>scholar.google.com</code></td></tr>
+            <tr><td><strong>Google Патенти</strong></td><td>Пошук патентів</td><td class="code-cell"><code>patents.google.com</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад</div>
+        Для курсової роботи відкрийте <code>scholar.google.com</code> і введіть <code>"інформаційні технології"</code>. На відміну від звичайного пошуку, тут будуть лише наукові публікації з можливістю скопіювати коректне бібліографічне посилання.
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 6 ---------- -->
+  <section id="t6">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">6</div>
+        <h2>Фільтри результатів пошуку</h2>
+      </div>
+      <p>Після виконання запиту під рядком пошуку з'являється вкладка <strong>«Інструменти»</strong>, що дозволяє звузити результати за часом.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:34%">Фільтр</th><th>Призначення</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Будь-який час</strong></td><td>Вся історія — фільтр вимкнено</td></tr>
+            <tr><td><strong>Останній рік</strong></td><td>Результати за рік</td></tr>
+            <tr><td><strong>Останній місяць</strong></td><td>Результати за місяць</td></tr>
+            <tr><td><strong>Останній тиждень</strong></td><td>Результати за тиждень</td></tr>
+            <tr><td><strong>Власний діапазон</strong></td><td>Користувацький інтервал дат</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад</div>
+        Шукаєте актуальну статистику для доповіді — оберіть <b>«Останній місяць»</b>. Готуєте історичний огляд — оберіть <b>«Власний діапазон»</b> і вкажіть, наприклад, 2015–2020 роки.
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 7 ---------- -->
+  <section id="t7">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">7</div>
+        <h2>Пошук зображень</h2>
+      </div>
+      <p>Google Картинки має власні оператори, які не працюють у звичайному пошуку.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:24%">Оператор</th><th style="width:30%">Приклад</th><th>Що робить</th></tr></thead>
+          <tbody>
+            <tr><td class="code-cell"><code>имя_файла:</code></td><td class="code-cell"><code>file:logo.png</code></td><td>Пошук за іменем файлу</td></tr>
+            <tr><td class="code-cell"><code>imagesize:</code></td><td class="code-cell"><code>imagesize:800x600</code></td><td>Пошук за розміром зображення</td></tr>
+            <tr><td class="code-cell"><code>blackandwhite:</code></td><td class="code-cell"><code>blackandwhite:cat</code></td><td>Чорно-білі фото</td></tr>
+            <tr><td class="code-cell"><code>type:face</code></td><td class="code-cell"><code>type:face</code></td><td>Тільки зображення облич</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад</div>
+        Для презентації потрібне чітке зображення схеми розміром не менше 800×600 пікселів. Запит: <code>imagesize:800x600 схема алгоритму</code>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 8 ---------- -->
+  <section id="t8">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">8</div>
+        <h2>Перевірка достовірності інформації</h2>
+      </div>
+      <p>Знайти інформацію — це половина справи. Друга половина — переконатися, що вона правдива. Оцінюйте кожне джерело за шістьма критеріями.</p>
+
+      <figure>
+        <svg viewBox="0 0 900 250" role="img" aria-label="Шість критеріїв оцінки достовірності джерела">
+          <g font-family="Helvetica,Arial,sans-serif">
+            <text x="450" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#6e6e73" letter-spacing="1.4">6 КРИТЕРІЇВ ОЦІНКИ ДЖЕРЕЛА</text>
+
+            <!-- Центр -->
+            <circle cx="450" cy="140" r="46" fill="#e8f1fd" stroke="#0071e3" stroke-width="2"/>
+            <text x="450" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#0071e3">ДЖЕРЕЛО</text>
+            <text x="450" y="152" text-anchor="middle" font-size="11" fill="#0071e3">надійне?</text>
+
+            <!-- 1 Авторство -->
+            <line x1="404" y1="115" x2="240" y2="72" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="60" y="52" width="170" height="44" rx="12" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="145" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Авторство</text>
+            <text x="145" y="87" text-anchor="middle" font-size="10.5" fill="#86868b">Хто автор? Контакти?</text>
+
+            <!-- 2 Точність -->
+            <rect x="60" y="120" width="170" height="44" rx="12" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="145" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Точність</text>
+            <text x="145" y="155" text-anchor="middle" font-size="10.5" fill="#86868b">Є посилання на джерела?</text>
+            <line x1="404" y1="140" x2="234" y2="142" stroke="#d2d2d7" stroke-width="1.6"/>
+
+            <!-- 3 Об'єктивність -->
+            <rect x="60" y="188" width="170" height="44" rx="12" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="145" y="208" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Об'єктивність</text>
+            <text x="145" y="223" text-anchor="middle" font-size="10.5" fill="#86868b">Упередження? Реклама?</text>
+            <line x1="404" y1="165" x2="234" y2="210" stroke="#d2d2d7" stroke-width="1.6"/>
+
+            <!-- 4 Свіжість -->
+            <line x1="496" y1="115" x2="660" y2="72" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="670" y="52" width="170" height="44" rx="12" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="755" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Свіжість</text>
+            <text x="755" y="87" text-anchor="middle" font-size="10.5" fill="#86868b">Коли опубліковано?</text>
+
+            <!-- 5 Домен -->
+            <rect x="670" y="120" width="170" height="44" rx="12" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="755" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Домен</text>
+            <text x="755" y="155" text-anchor="middle" font-size="10.5" fill="#86868b">.gov, .edu — надійніші</text>
+            <line x1="496" y1="140" x2="666" y2="142" stroke="#d2d2d7" stroke-width="1.6"/>
+
+            <!-- 6 Зворотне посилання -->
+            <rect x="670" y="188" width="170" height="44" rx="12" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="755" y="208" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Зворотні посилання</text>
+            <text x="755" y="223" text-anchor="middle" font-size="10.5" fill="#86868b">Хто посилається?</text>
+            <line x1="496" y1="165" x2="666" y2="210" stroke="#d2d2d7" stroke-width="1.6"/>
+          </g>
+        </svg>
+        <figcaption>Рис. 4. Шість критеріїв, за якими оцінюють достовірність знайденого джерела</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:30%">Критерій</th><th>Що перевіряти</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Авторство</strong></td><td>Хто автор? Чи є контакти?</td></tr>
+            <tr><td><strong>Точність</strong></td><td>Чи є посилання на джерела?</td></tr>
+            <tr><td><strong>Об'єктивність</strong></td><td>Чи є упередження, реклама?</td></tr>
+            <tr><td><strong>Свіжість</strong></td><td>Коли опубліковано?</td></tr>
+            <tr><td><strong>Домен</strong></td><td><code>.gov</code>, <code>.edu</code> — надійніші</td></tr>
+            <tr><td><strong>Зворотне посилання</strong></td><td>Чи посилаються на це інші?</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад оцінки</div>
+        Знайдено сторінку про «нові методи навчання». Перевіряємо: автор — вказаний, з посадою (✔ авторство); посилань на дослідження немає (✘ точність); половина сторінки — реклама курсів (✘ об'єктивність); дата — 2016 рік (✘ свіжість); домен — комерційний <code>.com</code> (—); на сторінку не посилається жоден освітній сайт (✘).
+        <div class="result-line">Висновок: джерело непридатне для навчальної роботи без додаткової перевірки.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПРАКТИКА ================= -->
+  <section id="practice" class="page-break">
+    <div class="sec-head">
+      <div class="sec-num">🧪</div>
+      <h2>Практичне завдання</h2>
+    </div>
+    <p class="section-sub"><strong>Тема роботи:</strong> «Ефективний пошук навчальних матеріалів за допомогою Google». <strong>Загальна умова:</strong> виконайте пошук з використанням різних операторів Google та заповніть таблиці.</p>
+  </section>
+
+  <!-- Завдання 1 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 1</span>
+      <h3>Базовий пошук простих запитів</h3>
+    </div>
+    <p class="task-desc">Виконайте три прості запити без операторів і зафіксуйте кількість результатів.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:38%">Запит</th><th style="width:30%">Результат</th><th>Кількість результатів</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>інформатика початкова школа</td><td></td><td></td></tr>
+          <tr><td>2</td><td>урок з інформатики 3 клас</td><td></td><td></td></tr>
+          <tr><td>3</td><td>презентації для вчителя</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Відкрийте Google (<code>google.com</code>).</li>
+      <li>Введіть запит у пошуковий рядок.</li>
+      <li>Запишіть кількість результатів (число під рядком пошуку).</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 2 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 2</span>
+      <h3>Точний пошук за допомогою лапок</h3>
+    </div>
+    <p class="task-desc">Порівняйте результати звичайного запиту та запиту в лапках.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:32%">Запит</th><th style="width:30%">Результат</th><th>Відмінність від простого запиту</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>"початкова освіта"</code></td><td></td><td></td></tr>
+          <tr><td>2</td><td><code>"Microsoft Excel формули"</code></td><td></td><td></td></tr>
+          <tr><td>3</td><td><code>"бази даних приклади"</code></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Введіть запит у лапках.</li>
+      <li>Порівняйте кількість результатів з простим запитом (без лапок).</li>
+      <li>Зробіть висновок про різницю.</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 3 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 3</span>
+      <h3>Пошук із виключенням слів (мінус)</h3>
+    </div>
+    <p class="task-desc">Перевірте, як оператор «мінус» прибирає зайві результати.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:42%">Запит</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>джерело живлення -комп'ютер</code></td><td></td></tr>
+          <tr><td>2</td><td><code>урок -відео -презентація</code></td><td></td></tr>
+          <tr><td>3</td><td><code>Excel -Microsoft</code></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Введіть запит з оператором <code>-</code>.</li>
+      <li>Переконайтеся, що виключені слова відсутні в результатах.</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 4 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 4</span>
+      <h3>Пошук на конкретному сайті (site:)</h3>
+    </div>
+    <p class="task-desc">Обмежте пошук лише вказаним доменом.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:42%">Запит</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>site:wikipedia.org інформатика</code></td><td></td></tr>
+          <tr><td>2</td><td><code>site:mon.gov.ua нова українська школа</code></td><td></td></tr>
+          <tr><td>3</td><td><code>site:naurok.com.ua інформатика 3 клас</code></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Введіть запит з оператором <code>site:</code>.</li>
+      <li>Переконайтеся, що всі результати — з вказаного сайту.</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 5 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 5</span>
+      <h3>Пошук файлів певного типу (filetype:)</h3>
+    </div>
+    <p class="task-desc">Знайдіть готові файли потрібного формату.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:46%">Запит</th><th>Результат (перший файл)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>"теми з інформатики" filetype:pdf</code></td><td></td></tr>
+          <tr><td>2</td><td><code>"презентація урок" filetype:ppt</code></td><td></td></tr>
+          <tr><td>3</td><td><code>"календарне планування" filetype:xls</code></td><td></td></tr>
+          <tr><td>4</td><td><code>"конспект уроку" filetype:doc</code></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Введіть запит з оператором <code>filetype:</code>.</li>
+      <li>Завантажте один файл для перевірки.</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 6 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 6</span>
+      <h3>Пошук у заголовку (intitle:)</h3>
+    </div>
+    <p class="task-desc">Знайдіть сторінки, де ключове слово є саме в заголовку.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:42%">Запит</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>intitle:"методична розробка"</code></td><td></td></tr>
+          <tr><td>2</td><td><code>intitle:"календарний план" інформатика</code></td><td></td></tr>
+          <tr><td>3</td><td><code>intitle:критерії оцінювання початкова школа</code></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Введіть запит з оператором <code>intitle:</code>.</li>
+      <li>Перевірте, що ключові слова справді є в заголовку сторінки.</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 7 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 7</span>
+      <h3>Пошук діапазону (..)</h3>
+    </div>
+    <p class="task-desc">Обмежте результати числовим або часовим діапазоном.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:42%">Запит</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>"новий рік" 2020..2024</code></td><td></td></tr>
+          <tr><td>2</td><td><code>Intel Core i5 2020..2024</code></td><td></td></tr>
+          <tr><td>3</td><td><code>Samsung Galaxy S20..S23</code></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Введіть запит з оператором <code>..</code>.</li>
+      <li>Перевірте, що результати належать заданому діапазону.</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 8 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 8</span>
+      <h3>Комбінування операторів</h3>
+    </div>
+    <p class="task-desc">Найвищий рівень майстерності — поєднання кількох операторів в одному запиті.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:52%">Запит</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>site:osvita.ua "дистанційне навчання" filetype:pdf</code></td><td></td></tr>
+          <tr><td>2</td><td><code>site:naurok.com.ua "інформатика" 3 клас -відео</code></td><td></td></tr>
+          <tr><td>3</td><td><code>intitle:"НУШ" filetype:pdf site:mon.gov.ua</code></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Спробуйте комбінувати оператори.</li>
+      <li>Запишіть найкращі приклади.</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 9 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 9 · додаткове</span>
+      <h3>Пошук з використанням Google Академія</h3>
+    </div>
+    <p class="task-desc">Виконайте пошук наукових публікацій на науковому порталі Google.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">№</th><th style="width:42%">Запит</th><th>Знайдена стаття</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>"інформаційні технології"</code></td><td></td></tr>
+          <tr><td>2</td><td><code>"початкова освіта" комп'ютеризація</code></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Відкрийте <code>scholar.google.com</code>.</li>
+      <li>Введіть запит.</li>
+      <li>Знайдіть статтю та збережіть посилання.</li>
+    </ol>
+  </section>
+
+  <!-- Завдання 10 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Завдання 10</span>
+      <h3>Перевірка достовірності інформації</h3>
+    </div>
+    <p class="task-desc">Навчіться критично оцінювати знайдене.</p>
+
+    <h4>Порядок виконання</h4>
+    <ol class="steps">
+      <li>Виберіть будь-яку тему для уроку.</li>
+      <li>Знайдіть 3 різних джерела за цією темою.</li>
+      <li>Оцініть кожне джерело за критеріями:
+        <div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:8px;">
+          <span class="chip c-plain">Хто автор?</span>
+          <span class="chip c-plain">Коли опубліковано?</span>
+          <span class="chip c-plain">Чи є посилання?</span>
+          <span class="chip c-plain">Чи є реклама?</span>
+          <span class="chip c-plain">Домен (.gov, .edu)?</span>
+        </div>
+      </li>
+      <li>Запишіть висновки.</li>
+    </ol>
+
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:8%">№</th>
+            <th style="width:26%">Джерело (URL)</th>
+            <th style="width:14%">Автор</th>
+            <th style="width:14%">Дата</th>
+            <th style="width:14%">Домен</th>
+            <th>Висновок</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= ОЦІНЮВАННЯ ================= -->
+  <section id="grading">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">🏆</div>
+        <h2>Критерії оцінювання</h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Критерій</th><th style="width:16%; text-align:right;">Бали</th></tr></thead>
+          <tbody>
+            <tr><td>Базовий пошук простих запитів (3 запити)</td><td style="text-align:right;">2</td></tr>
+            <tr><td>Точний пошук за допомогою лапок (3 запити)</td><td style="text-align:right;">2</td></tr>
+            <tr><td>Пошук із виключенням слів (3 запити)</td><td style="text-align:right;">1</td></tr>
+            <tr><td>Пошук на конкретному сайті (3 запити)</td><td style="text-align:right;">2</td></tr>
+            <tr><td>Пошук файлів певного типу (4 запити)</td><td style="text-align:right;">2</td></tr>
+            <tr><td>Пошук у заголовку (3 запити)</td><td style="text-align:right;">1</td></tr>
+            <tr><td>Пошук діапазону (3 запити)</td><td style="text-align:right;">1</td></tr>
+            <tr><td>Комбінування операторів (3 комбінації)</td><td style="text-align:right;">2</td></tr>
+            <tr><td>Перевірка достовірності інформації</td><td style="text-align:right;">2</td></tr>
+            <tr><td>Якщо виконано додаткове завдання (Google Академія)</td><td style="text-align:right;">+1</td></tr>
+            <tr class="total-row"><td>Максимальна кількість балів</td><td style="text-align:right;">15 (+1)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= КОНТРОЛЬНІ ПИТАННЯ ================= -->
+  <section id="questions">
+    <div class="sec-head">
+      <div class="sec-num">✔</div>
+      <h2>Контрольні запитання</h2>
+    </div>
+    <p class="section-sub">Дайте письмові відповіді — вони допоможуть узагальнити матеріал заняття.</p>
+
+    <ol class="qlist">
+      <li>Що таке пошукова система? З яких компонентів вона складається?</li>
+      <li>Які пошукові системи, крім Google, ви знаєте?</li>
+      <li>Для чого використовуються лапки ("") в пошуковому запиті?</li>
+      <li>Як виключити слово з результатів пошуку?</li>
+      <li>Як знайти файли певного типу (наприклад, PDF або презентації)?</li>
+      <li>Як обмежити пошук певним сайтом?</li>
+      <li>Як знайти сторінки, де ключове слово є в заголовку?</li>
+      <li>Як знайти матеріали за певний період?</li>
+      <li>Як перевірити достовірність інформації, знайденої в Інтернеті?</li>
+      <li>Для чого використовується Google Академія?</li>
+    </ol>
+  </section>
+
+  <footer>
+    <p style="margin:0 0 6px;"><strong>Практичне заняття № 19.</strong> Пошукові системи та пошуковий двигун Google.</p>
+    <p style="margin:0;">Ефективний пошук інформації за допомогою Google · 2024</p>
+  </footer>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨 Надрукувати</button>
+
+</body>
+</html>

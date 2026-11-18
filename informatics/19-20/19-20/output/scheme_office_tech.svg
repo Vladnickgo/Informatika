@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="691.2pt" height="309.888pt" viewBox="0 0 691.2 309.888" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-13T11:33:31.356851</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 309.888 
+L 691.2 309.888 
+L 691.2 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 260.784 104.4936 
+L 430.416 104.4936 
+Q 440.46 104.4936 440.46 95.84496 
+L 440.46 65.09424 
+Q 440.46 56.4456 430.416 56.4456 
+L 260.784 56.4456 
+Q 250.74 56.4456 250.74 65.09424 
+L 250.74 95.84496 
+Q 250.74 104.4936 260.784 104.4936 
+z
+" clip-path="url(#p2be64d9cb8)" style="fill: #ebf4ff; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 23.634 258.2472 
+L 120.726 258.2472 
+Q 130.77 258.2472 130.77 249.59856 
+L 130.77 151.58064 
+Q 130.77 142.932 120.726 142.932 
+L 23.634 142.932 
+Q 13.59 142.932 13.59 151.58064 
+L 13.59 249.59856 
+Q 13.59 258.2472 23.634 258.2472 
+z
+" clip-path="url(#p2be64d9cb8)" style="fill: #ebf4ff; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 160.344 258.2472 
+L 257.436 258.2472 
+Q 267.48 258.2472 267.48 249.59856 
+L 267.48 151.58064 
+Q 267.48 142.932 257.436 142.932 
+L 160.344 142.932 
+Q 150.3 142.932 150.3 151.58064 
+L 150.3 249.59856 
+Q 150.3 258.2472 160.344 258.2472 
+z
+" clip-path="url(#p2be64d9cb8)" style="fill: #e8f5ec; stroke: #248a3d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 297.054 258.2472 
+L 394.146 258.2472 
+Q 404.19 258.2472 404.19 249.59856 
+L 404.19 151.58064 
+Q 404.19 142.932 394.146 142.932 
+L 297.054 142.932 
+Q 287.01 142.932 287.01 151.58064 
+L 287.01 249.59856 
+Q 287.01 258.2472 297.054 258.2472 
+z
+" clip-path="url(#p2be64d9cb8)" style="fill: #fff4e5; stroke: #c93400; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 433.764 258.2472 
+L 530.856 258.2472 
+Q 540.9 258.2472 540.9 249.59856 
+L 540.9 151.58064 
+Q 540.9 142.932 530.856 142.932 
+L 433.764 142.932 
+Q 423.72 142.932 423.72 151.58064 
+L 423.72 249.59856 
+Q 423.72 258.2472 433.764 258.2472 
+z
+" clip-path="url(#p2be64d9cb8)" style="fill: #f2ebfa; stroke: #6e30a8; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 570.474 258.2472 
+L 667.566 258.2472 
+Q 677.61 258.2472 677.61 249.59856 
+L 677.61 151.58064 
+Q 677.61 142.932 667.566 142.932 
+L 570.474 142.932 
+Q 560.43 142.932 560.43 151.58064 
+L 560.43 249.59856 
+Q 560.43 258.2472 570.474 258.2472 
+z
+" clip-path="url(#p2be64d9cb8)" style="fill: #fde9ec; stroke: #c4001d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="345.6" y="26.490594" transform="rotate(-0 345.6 26.490594)">Класифікація офісної техніки</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="345.6" y="84.608663" transform="rotate(-0 345.6 84.608663)">Офісна техніка</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(40.457891 197.048202)">Складання</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(39.332109 210.201623)">документів</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 345.6 104.4936 
+Q 208.89 123.7128 73.730006 142.714094 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 79.665275 144.707226 
+L 73.730006 142.714094 
+L 78.885673 139.161758 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(171.477969 197.048202)">Копіювання і</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(162.67625 210.201623)">розмножування</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 345.6 104.4936 
+Q 277.245 123.7128 210.396819 142.508331 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 216.545662 143.688049 
+L 210.396819 142.508331 
+L 215.029899 138.297088 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(310.241875 197.141873)">Зберігання і</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(294.890859 210.295295)">транспортування</text>
+   </g>
+   <g id="patch_10">
+    <path d="M 345.6 104.4936 
+Q 345.6 123.7128 345.6 141.366752 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 348.4 135.766752 
+L 345.6 141.366752 
+L 342.8 135.766752 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(430.090937 197.048202)">Адміністративний</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(461.711641 210.201623)">зв'язок</text>
+   </g>
+   <g id="patch_11">
+    <path d="M 345.6 104.4936 
+Q 413.955 123.7128 480.803181 142.508331 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 476.170101 138.297088 
+L 480.803181 142.508331 
+L 474.654338 143.688049 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(582.575625 197.048202)">Репрографія</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(576.448281 210.201623)">та оздоблення</text>
+   </g>
+   <g id="patch_12">
+    <path d="M 345.6 104.4936 
+Q 482.31 123.7128 617.469994 142.714094 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 612.314327 139.161758 
+L 617.469994 142.714094 
+L 611.534725 144.707226 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p2be64d9cb8">
+   <rect x="10.8" y="10.8" width="669.6" height="288.288"/>
+  </clipPath>
+ </defs>
+</svg>

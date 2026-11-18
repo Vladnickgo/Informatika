@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб-браузери та їх функції — Лекція №6</title>
+    <style>
+        /* ==================== БАЗОВІ СТИЛІ ==================== */
+        :root {
+            --bg: #f5f5f7;
+            --card: #ffffff;
+            --text: #1d1d1f;
+            --text2: #6e6e73;
+            --line: #e8e8ed;
+            --accent: #0071e3;
+            --accent-soft: #e8f1fd;
+            --green: #34c759;
+            --green-soft: #e6f8ea;
+            --orange: #ff9f0a;
+            --orange-soft: #fff4e0;
+            --red: #ff3b30;
+            --red-soft: #ffecea;
+            --purple: #5e5ce6;
+            --purple-soft: #eeedfd;
+            --radius: 22px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .06);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, .09);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.01em;
+        }
+
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* ==================== ХЕРО ==================== */
+        .hero {
+            padding: 96px 0 56px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -260px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            height: 560px;
+            background: radial-gradient(circle, rgba(0, 113, 227, .14), rgba(94, 92, 230, .07) 45%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 7px 16px;
+            border-radius: 100px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5.2vw, 56px);
+            line-height: 1.08;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 0 0 20px;
+            background: linear-gradient(135deg, #1d1d1f 30%, #4a4a52 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.sub {
+            font-size: clamp(17px, 2vw, 21px);
+            color: var(--text2);
+            max-width: 700px;
+            margin: 0 auto 32px;
+            font-weight: 400;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta span {
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 14px;
+            color: var(--text2);
+            font-weight: 500;
+        }
+
+        /* ==================== СЕКЦІЇ ==================== */
+        section {
+            margin-top: 64px;
+        }
+
+        h2 {
+            font-size: clamp(24px, 3.2vw, 34px);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin: 0 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        h2 .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            flex: 0 0 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 650;
+            letter-spacing: -0.02em;
+            margin: 32px 0 14px;
+        }
+
+        .lead {
+            color: var(--text2);
+            font-size: 17px;
+            margin: 0 0 24px;
+            max-width: 820px;
+        }
+
+        /* ==================== КАРТКИ ==================== */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 28px 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, .03);
+        }
+
+        .grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .feature {
+            background: #fff;
+            border-radius: 18px;
+            padding: 22px 22px 20px;
+            border: 1px solid var(--line);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature .ico {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 14px;
+            background: var(--accent-soft);
+        }
+
+        .feature h4 {
+            font-size: 16.5px;
+            font-weight: 650;
+            margin: 0 0 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature p {
+            font-size: 14.5px;
+            color: var(--text2);
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        .ico.green {
+            background: var(--green-soft);
+        }
+
+        .ico.orange {
+            background: var(--orange-soft);
+        }
+
+        .ico.red {
+            background: var(--red-soft);
+        }
+
+        .ico.purple {
+            background: var(--purple-soft);
+        }
+
+        /* ==================== ЦИТАТА / ПРИМІТКА ==================== */
+        .note {
+            border-left: 4px solid var(--accent);
+            background: var(--accent-soft);
+            border-radius: 0 16px 16px 0;
+            padding: 18px 22px;
+            margin: 22px 0;
+            font-size: 15.5px;
+            color: #134a7a;
+        }
+
+        .note strong {
+            color: #0b3a61;
+        }
+
+        .note.warn {
+            border-left-color: var(--orange);
+            background: var(--orange-soft);
+            color: #7a4d00;
+        }
+
+        .note.warn strong {
+            color: #5c3a00;
+        }
+
+        .note.danger {
+            border-left-color: var(--red);
+            background: var(--red-soft);
+            color: #8a1a12;
+        }
+
+        .note.danger strong {
+            color: #6b120c;
+        }
+
+        .note.ok {
+            border-left-color: var(--green);
+            background: var(--green-soft);
+            color: #1c5c2b;
+        }
+
+        .note.ok strong {
+            color: #144420;
+        }
+
+        /* ==================== ТАБЛИЦІ ==================== */
+        .table-wrap {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, .03);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        thead th {
+            background: #fafafc;
+            text-align: left;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+            color: var(--text2);
+            border-bottom: 1px solid var(--line);
+        }
+
+        tbody td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #fafafc;
+        }
+
+        kbd {
+            display: inline-block;
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #d2d2d7;
+            border-bottom-width: 2px;
+            border-radius: 7px;
+            padding: 2px 8px;
+            color: #1d1d1f;
+            white-space: nowrap;
+            line-height: 1.5;
+        }
+
+        .kbd-group {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .kbd-group .plus {
+            color: var(--text2);
+            font-size: 12px;
+        }
+
+        /* ==================== ТАЙМЛАЙН ==================== */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 28px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 13px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), var(--purple), #d9d9e3);
+            border-radius: 2px;
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 22px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px 20px;
+            border: 1px solid var(--line);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .03);
+        }
+
+        .tl-item::before {
+            content: "";
+            position: absolute;
+            left: -33px;
+            top: 22px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 0 4px #fff;
+        }
+
+        .tl-item .year {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: .04em;
+        }
+
+        .tl-item .name {
+            font-size: 17px;
+            font-weight: 650;
+            margin: 2px 0 4px;
+        }
+
+        .tl-item .desc {
+            font-size: 14.5px;
+            color: var(--text2);
+            margin: 0;
+        }
+
+        /* ==================== ДІАГРАМА БАР ==================== */
+        .bar-chart {
+            margin-top: 8px;
+        }
+
+        .bar-row {
+            display: grid;
+            grid-template-columns: 170px 1fr 62px;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 0;
+        }
+
+        .bar-row .label {
+            font-size: 14.5px;
+            font-weight: 550;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex: 0 0 10px;
+        }
+
+        .bar-track {
+            height: 14px;
+            background: #f0f0f4;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 100px;
+            transition: width 1s cubic-bezier(.2, .8, .2, 1);
+        }
+
+        .bar-row .val {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text2);
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ==================== МОКАП БРАУЗЕРА ==================== */
+        .mock {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #d2d2d7;
+            font-size: 13px;
+        }
+
+        .mock-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: linear-gradient(180deg, #f7f7f9, #eeeef2);
+            border-bottom: 1px solid #e2e2e8;
+        }
+
+        .mock-dots {
+            display: flex;
+            gap: 7px;
+        }
+
+        .mock-dots i {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .mock-dots i:nth-child(1) {
+            background: #ff5f57;
+        }
+
+        .mock-dots i:nth-child(2) {
+            background: #febc2e;
+        }
+
+        .mock-dots i:nth-child(3) {
+            background: #28c840;
+        }
+
+        .mock-nav {
+            display: flex;
+            gap: 6px;
+            color: #86868b;
+            font-size: 15px;
+        }
+
+        .mock-nav span {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        .mock-nav span:hover {
+            background: #e2e2e8;
+        }
+
+        .mock-addr {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1d1d1f;
+            font-size: 12.5px;
+            min-width: 0;
+        }
+
+        .mock-addr .lock {
+            color: var(--green);
+            font-size: 12px;
+        }
+
+        .mock-addr .url {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .mock-addr .star {
+            margin-left: auto;
+            color: #c7c7cc;
+        }
+
+        .mock-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 8px 14px 0;
+            background: #eeeef2;
+        }
+
+        .mock-tab {
+            background: #e2e2e8;
+            border-radius: 9px 9px 0 0;
+            padding: 7px 14px;
+            font-size: 12px;
+            color: #6e6e73;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 180px;
+        }
+
+        .mock-tab.active {
+            background: #fff;
+            color: #1d1d1f;
+            font-weight: 550;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, .04);
+        }
+
+        .mock-tab .x {
+            color: #aeaeb2;
+            font-size: 13px;
+        }
+
+        .mock-tab-add {
+            padding: 7px 12px;
+            color: #6e6e73;
+            font-size: 14px;
+        }
+
+        .mock-view {
+            background: #fff;
+            padding: 46px 24px;
+            text-align: center;
+            color: #aeaeb2;
+            font-size: 13.5px;
+            border-top: 1px solid #e2e2e8;
+        }
+
+        .mock-view strong {
+            display: block;
+            color: #6e6e73;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .mock-status {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 16px;
+            background: #f7f7f9;
+            border-top: 1px solid #e2e2e8;
+            font-size: 11.5px;
+            color: #86868b;
+        }
+
+        .mock-status .ok {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        /* ==================== КОЛОНКИ ПОРІВНЯННЯ ==================== */
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .compare .col {
+            border-radius: 18px;
+            padding: 22px 24px;
+            border: 1px solid var(--line);
+            background: #fff;
+        }
+
+        .compare .col h4 {
+            font-size: 16px;
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .compare ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .compare li {
+            padding: 7px 0;
+            font-size: 14.5px;
+            border-bottom: 1px dashed #ececf1;
+            display: flex;
+            gap: 10px;
+        }
+
+        .compare li:last-child {
+            border-bottom: none;
+        }
+
+        .compare .no {
+            color: #c7c7cc;
+        }
+
+        .compare .yes {
+            color: var(--green);
+        }
+
+        /* ==================== SVG-ДІАГРАМИ ==================== */
+        .diagram {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, .03);
+            margin-top: 22px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .diagram svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ==================== СПИСКИ ==================== */
+        ul.clean {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul.clean li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        ul.clean li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 11px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        ol.steps {
+            counter-reset: step;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ol.steps li {
+            counter-increment: step;
+            position: relative;
+            padding-left: 46px;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        ol.steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: -1px;
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==================== ПИТАННЯ ==================== */
+        .q-list {
+            counter-reset: q;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .q-list li {
+            counter-increment: q;
+            position: relative;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px 22px 18px 64px;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .q-list li::before {
+            content: counter(q);
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==================== ФУТЕР ==================== */
+        footer {
+            margin-top: 80px;
+            padding-top: 32px;
+            border-top: 1px solid var(--line);
+            color: var(--text2);
+            font-size: 14px;
+        }
+
+        footer strong {
+            color: var(--text);
+        }
+
+        footer ol {
+            margin: 10px 0 0;
+            padding-left: 20px;
+        }
+
+        footer li {
+            margin-bottom: 6px;
+        }
+
+        /* ==================== КНОПКА ДРУКУ ==================== */
+        .print-btn {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 50;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 113, 227, .35);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 113, 227, .45);
+        }
+
+        /* ==================== АДАПТИВНІСТЬ ==================== */
+        @media (max-width: 820px) {
+
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .compare {
+                grid-template-columns: 1fr;
+            }
+
+            .bar-row {
+                grid-template-columns: 120px 1fr 52px;
+            }
+        }
+
+        @media (max-width: 560px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 22px 20px;
+            }
+
+            .hero {
+                padding: 64px 0 40px;
+            }
+
+            .bar-row {
+                grid-template-columns: 100px 1fr 46px;
+                font-size: 13px;
+            }
+
+            .print-btn {
+                right: 16px;
+                bottom: 16px;
+                padding: 12px 18px;
+            }
+        }
+
+        /* ==================== ДРУК ==================== */
+        @page {
+            size: A4;
+            margin: 14mm 12mm;
+        }
+
+        @media print {
+            :root {
+                --bg: #fff;
+                --shadow: none;
+                --shadow-lg: none;
+            }
+
+            body {
+                background: #fff !important;
+                font-size: 11.5pt;
+                line-height: 1.45;
+                color: #000;
+            }
+
+            .wrap {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .print-btn {
+                display: none !important;
+            }
+
+            .hero {
+                padding: 0 0 14px;
+                text-align: left;
+                border-bottom: 2px solid #000;
+                margin-bottom: 14px;
+            }
+
+            .hero::before {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 20pt;
+                background: none;
+                -webkit-text-fill-color: #000;
+                color: #000;
+                margin-bottom: 6px;
+            }
+
+            .hero p.sub {
+                font-size: 11pt;
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            .eyebrow {
+                background: none;
+                color: #000;
+                padding: 0;
+                font-size: 9pt;
+                border: 1px solid #000;
+                padding: 2px 8px;
+                border-radius: 4px;
+            }
+
+            .hero-meta {
+                justify-content: flex-start;
+                gap: 6px;
+                margin-top: 6px;
+            }
+
+            .hero-meta span {
+                border: 1px solid #bbb;
+                font-size: 9pt;
+                padding: 3px 9px;
+            }
+
+            section {
+                margin-top: 18px;
+            }
+
+            h2 {
+                font-size: 14pt;
+                margin-bottom: 6px;
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+
+            h2 .num {
+                background: #000 !important;
+                width: 24px;
+                height: 24px;
+                flex: 0 0 24px;
+                font-size: 10pt;
+                border-radius: 6px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            h3 {
+                font-size: 12pt;
+                margin: 12px 0 6px;
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+
+            .lead {
+                font-size: 10.5pt;
+                color: #444;
+                margin-bottom: 10px;
+            }
+
+            /* Блоки не розриваються */
+            .card,
+            .feature,
+            .note,
+            .table-wrap,
+            .tl-item,
+            .compare .col,
+            .diagram,
+            .q-list li,
+            .mock,
+            .bar-row,
+            table,
+            tr,
+            footer {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                box-shadow: none !important;
+            }
+
+            .card,
+            .feature,
+            .compare .col {
+                border: 1px solid #ccc;
+                padding: 12px 14px;
+                border-radius: 8px;
+            }
+
+            .note {
+                border-left: 3px solid #000;
+                background: #f4f4f4 !important;
+                color: #000 !important;
+                padding: 10px 12px;
+                margin: 10px 0;
+                border-radius: 0 8px 8px 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .note.warn,
+            .note.danger,
+            .note.ok {
+                border-left-color: #000;
+            }
+
+            .note strong {
+                color: #000 !important;
+            }
+
+            .grid {
+                gap: 8px;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .feature h4 {
+                font-size: 10.5pt;
+            }
+
+            .feature p {
+                font-size: 9.5pt;
+            }
+
+            .feature .ico {
+                width: 26px;
+                height: 26px;
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            table {
+                font-size: 9.5pt;
+            }
+
+            thead th {
+                padding: 7px 10px;
+                font-size: 8pt;
+                background: #eee !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            tbody td {
+                padding: 7px 10px;
+            }
+
+            kbd {
+                font-size: 8.5pt;
+                padding: 1px 5px;
+                background: #f2f2f2 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .timeline {
+                padding-left: 26px;
+            }
+
+            .timeline::before {
+                left: 7px;
+            }
+
+            .tl-item::before {
+                left: -26px;
+                width: 9px;
+                height: 9px;
+            }
+
+            .tl-item {
+                padding: 9px 12px;
+                margin-bottom: 9px;
+            }
+
+            .tl-item .name {
+                font-size: 11pt;
+            }
+
+            .tl-item .desc {
+                font-size: 9.5pt;
+            }
+
+            .bar-track {
+                background: #e5e5e5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .bar-fill {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .bar-row {
+                padding: 5px 0;
+                grid-template-columns: 130px 1fr 44px;
+            }
+
+            .diagram {
+                padding: 10px;
+                border: 1px solid #ddd;
+            }
+
+            .q-list li {
+                padding: 9px 12px 9px 46px;
+                margin-bottom: 6px;
+                font-size: 10.5pt;
+            }
+
+            .q-list li::before {
+                width: 24px;
+                height: 24px;
+                font-size: 9.5pt;
+                left: 12px;
+            }
+
+            ul.clean li,
+            ol.steps li {
+                font-size: 10.5pt;
+                margin-bottom: 5px;
+            }
+
+            footer {
+                margin-top: 20px;
+                padding-top: 10px;
+                font-size: 9pt;
+            }
+
+            /* Примусові розриви сторінок для великих блоків */
+            .page-break {
+                break-before: page;
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <!-- ==================== ХЕРО ==================== -->
+        <header class="hero">
+            <span class="eyebrow">Лекція № 6 · Прикладне програмне забезпечення</span>
+            <p class="sub">Служби Інтернет</p>
+            <h1>Веб-браузери та їх функції</h1>
+            <div class="hero-meta">
+                <span>🎯 Навігація · Закладки · Історія</span>
+                <span>🕶 Приватний режим</span>
+                <span>🔒 Безпека та конфіденційність</span>
+            </div>
+        </header>
+
+        <!-- ==================== МЕТА ==================== -->
+        <section>
+            <h2><span class="num">1</span>Мета заняття</h2>
+            <p class="lead">Наприкінці заняття ви будете впевнено орієнтуватися в інтерфейсі браузера, налаштовувати
+                його під власні потреби та усвідомлено ставитися до захисту персональних даних.</p>
+
+            <div class="grid grid-3">
+                <div class="feature">
+                    <div class="ico">🧭</div>
+                    <h4>Ознайомити</h4>
+                    <p>З функціями браузерів: навігація, закладки, історія, приватний режим, розширення.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico green">⚙️</div>
+                    <h4>Навчити</h4>
+                    <p>Налаштовувати браузер відповідно до потреб учителя та учнів.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico orange">🧠</div>
+                    <h4>Розвивати</h4>
+                    <p>Критичне мислення при виборі браузера, вміння налаштовувати безпеку й конфіденційність.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico purple">🛡</div>
+                    <h4>Виховувати</h4>
+                    <p>Усвідомлене ставлення до захисту персональних даних та розуміння ризиків роботи в мережі.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico">🧰</div>
+                    <h4>Обладнання</h4>
+                    <p>Інструкційні картки, комп'ютер із підключенням до Інтернету, проєктор.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico red">⏱</div>
+                    <h4>Тривалість</h4>
+                    <p>2 академічні години: теорія, практикум у браузері, обговорення.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ПИТАННЯ ДЛЯ ОБГОВОРЕННЯ ==================== -->
+        <section>
+            <h2><span class="num">2</span>Питання для обговорення</h2>
+            <p class="lead">Почніть заняття з короткого обговорення — це активує власний досвід учнів і робить подальший
+                матеріал особистісно значущим.</p>
+
+            <div class="card">
+                <ol class="steps">
+                    <li>Яким браузером ви користуєтесь найчастіше? Чому обрали саме його?</li>
+                    <li>Які функції браузера ви вважаєте найбільш корисними в роботі вчителя?</li>
+                    <li>Чи звертаєте ви увагу на налаштування безпеки та конфіденційності в браузері?</li>
+                    <li>Як ви думаєте, чому існує так багато різних браузерів?</li>
+                    <li>Які ризики пов'язані зі збереженням паролів у браузері?</li>
+                </ol>
+            </div>
+
+            <div class="note">
+                <strong>Підказка для вчителя.</strong> Запропонуйте учням порівняти браузер, яким вони користуються
+                вдома, і той, що встановлений у комп'ютерному класі. Зазвичай це різні програми — і це гарний привід
+                поговорити про сумісність, швидкість та звички користувача.
+            </div>
+        </section>
+
+        <!-- ==================== ЩО ТАКЕ БРАУЗЕР ==================== -->
+        <section>
+            <h2><span class="num">3</span>Що таке веб-браузер?</h2>
+            <p class="lead"><strong>Веб-браузер</strong> — це прикладна програма для перегляду веб-сторінок, відтворення
+                веб-документів і навігації між ними.</p>
+
+            <div class="card">
+                <h3 style="margin-top:0">Основне призначення браузера</h3>
+                <div class="grid grid-2">
+                    <div class="feature">
+                        <div class="ico">⬇️</div>
+                        <h4>1. Завантаження веб-сторінок</h4>
+                        <p>Браузер звертається до сервера за адресою (URL) і отримує файли сторінки.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ico purple">🧩</div>
+                        <h4>2. Інтерпретація HTML / CSS / JavaScript</h4>
+                        <p>Перетворює код на те, що ми бачимо: структуру, оформлення та інтерактивність.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ico green">🖼</div>
+                        <h4>3. Відображення контенту</h4>
+                        <p>Текст, зображення, відео, звук, PDF-документи, анімація.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ico orange">🔗</div>
+                        <h4>4. Навігація між сторінками</h4>
+                        <p>Переходи за посиланнями, кнопки «назад/вперед», вкладки.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ico red">💾</div>
+                        <h4>5. Збереження даних</h4>
+                        <p>Історія, закладки, паролі, налаштування, кеш.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ico">🔐</div>
+                        <h4>6. Безпека з'єднання</h4>
+                        <p>Перевірка HTTPS-сертифікатів, попередження про небезпечні сайти.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note ok">
+                <strong>Приклад із практики вчителя.</strong> Ви готуєте урок про Велику Британію. У браузері
+                відкриваєте: онлайн-карту (Google Maps), статтю у Вікіпедії, відео на YouTube та інтерактивну вправу на
+                LearningApps. Усі чотири ресурси працюють в одному вікні завдяки вкладкам — і саме браузер «збирає»
+                різні технології в єдиний робочий простір.
+            </div>
+
+            <div class="diagram">
+                <svg viewBox="0 0 760 220" role="img" aria-label="Схема роботи браузера">
+                    <defs>
+                        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#0071e3" />
+                            <stop offset="100%" stop-color="#5e5ce6" />
+                        </linearGradient>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6"
+                            orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#86868b" />
+                        </marker>
+                    </defs>
+
+                    <!-- Користувач -->
+                    <rect x="10" y="70" width="140" height="80" rx="16" fill="#f5f5f7" stroke="#e2e2e8" />
+                    <text x="80" y="105" text-anchor="middle" font-size="26">👩‍🏫</text>
+                    <text x="80" y="132" text-anchor="middle" font-size="13" font-weight="600"
+                        fill="#1d1d1f">Користувач</text>
+
+                    <!-- Браузер -->
+                    <rect x="210" y="52" width="180" height="116" rx="18" fill="url(#g1)" />
+                    <text x="300" y="92" text-anchor="middle" font-size="26" fill="#fff">🧭</text>
+                    <text x="300" y="118" text-anchor="middle" font-size="14" font-weight="700"
+                        fill="#fff">Веб-браузер</text>
+                    <text x="300" y="140" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.85)">HTML · CSS ·
+                        JS</text>
+
+                    <!-- Сервер -->
+                    <rect x="460" y="52" width="160" height="116" rx="18" fill="#f5f5f7" stroke="#e2e2e8" />
+                    <text x="540" y="92" text-anchor="middle" font-size="26">🖥</text>
+                    <text x="540" y="118" text-anchor="middle" font-size="14" font-weight="700"
+                        fill="#1d1d1f">Веб-сервер</text>
+                    <text x="540" y="140" text-anchor="middle" font-size="11" fill="#6e6e73">сайт · файли</text>
+
+                    <!-- Інтернет -->
+                    <text x="675" y="95" text-anchor="middle" font-size="26">🌐</text>
+                    <text x="675" y="122" text-anchor="middle" font-size="12" font-weight="600"
+                        fill="#6e6e73">Інтернет</text>
+
+                    <!-- Стрілки -->
+                    <line x1="152" y1="100" x2="200" y2="100" stroke="#86868b" stroke-width="2"
+                        marker-end="url(#arrow)" />
+                    <line x1="394" y1="90" x2="450" y2="90" stroke="#86868b" stroke-width="2"
+                        marker-end="url(#arrow)" />
+                    <line x1="450" y1="132" x2="394" y2="132" stroke="#86868b" stroke-width="2"
+                        marker-end="url(#arrow)" />
+                    <text x="422" y="82" text-anchor="middle" font-size="10" fill="#6e6e73">запит (URL)</text>
+                    <text x="422" y="150" text-anchor="middle" font-size="10" fill="#6e6e73">відповідь (HTML)</text>
+                    <line x1="622" y1="110" x2="655" y2="110" stroke="#d2d2d7" stroke-width="2"
+                        stroke-dasharray="4 4" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- ==================== ІСТОРІЯ ==================== -->
+        <section>
+            <h2><span class="num">4</span>Історія веб-браузерів</h2>
+            <p class="lead">Браузери пройшли шлях від першого текстового переглядача до складних платформ із
+                синхронізацією, розширеннями та вбудованим захистом.</p>
+
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="year">1990</div>
+                    <div class="name">WorldWideWeb</div>
+                    <p class="desc">Перший браузер, створений Тімом Бернерсом-Лі. Працював лише з текстом.</p>
+                </div>
+                <div class="tl-item">
+                    <div class="year">1993</div>
+                    <div class="name">Mosaic</div>
+                    <p class="desc">Перший графічний браузер: зображення поруч із текстом. Саме він зробив «Всесвітню
+                        павутину» популярною.</p>
+                </div>
+                <div class="tl-item">
+                    <div class="year">1994</div>
+                    <div class="name">Netscape Navigator</div>
+                    <p class="desc">Домінував у 90-х роках, задав стандарти інтерфейсу (кнопки «назад», адресний рядок).
+                    </p>
+                </div>
+                <div class="tl-item">
+                    <div class="year">1995</div>
+                    <div class="name">Internet Explorer</div>
+                    <p class="desc">Вбудований у Windows. Тривалий час був найпоширенішим браузером світу.</p>
+                </div>
+                <div class="tl-item">
+                    <div class="year">2003</div>
+                    <div class="name">Safari</div>
+                    <p class="desc">Браузер від Apple для macOS та iOS. Відомий енергоефективністю та інтеграцією з
+                        екосистемою.</p>
+                </div>
+                <div class="tl-item">
+                    <div class="year">2004</div>
+                    <div class="name">Firefox</div>
+                    <p class="desc">Браузер з відкритим кодом, альтернатива Internet Explorer. Зробив ставку на
+                        конфіденційність.</p>
+                </div>
+                <div class="tl-item">
+                    <div class="year">2008</div>
+                    <div class="name">Google Chrome</div>
+                    <p class="desc">Швидкий браузер від Google із власним рушієм та екосистемою розширень.</p>
+                </div>
+                <div class="tl-item">
+                    <div class="year">2015</div>
+                    <div class="name">Microsoft Edge</div>
+                    <p class="desc">Замінив Internet Explorer у Windows 10, а згодом — у Windows 11.</p>
+                </div>
+                <div class="tl-item">
+                    <div class="year">2019</div>
+                    <div class="name">Vivaldi, Brave</div>
+                    <p class="desc">Нові браузери з акцентом на конфіденційність та гнучке налаштування інтерфейсу.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ПОПУЛЯРНІ БРАУЗЕРИ ==================== -->
+        <section>
+            <h2><span class="num">5</span>Популярні веб-браузери</h2>
+            <p class="lead">Сьогодні на ринку домінує кілька браузерів. Вони різняться рушієм, розробником та
+                «філософією» — швидкість, конфіденційність або гнучкість.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Браузер</th>
+                            <th>Рушій</th>
+                            <th>Розробник</th>
+                            <th>Особливості</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Google Chrome</strong></td>
+                            <td>Blink</td>
+                            <td>Google</td>
+                            <td>Швидкість, синхронізація, величезна кількість розширень</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mozilla Firefox</strong></td>
+                            <td>Gecko</td>
+                            <td>Mozilla</td>
+                            <td>Відкритий код, сильний акцент на конфіденційності</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Microsoft Edge</strong></td>
+                            <td>Blink</td>
+                            <td>Microsoft</td>
+                            <td>Вбудований у Windows 10/11, режим читання, інтеграція з Copilot</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Safari</strong></td>
+                            <td>WebKit</td>
+                            <td>Apple</td>
+                            <td>Для macOS/iOS, енергоефективність, захист від відстеження</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opera</strong></td>
+                            <td>Blink</td>
+                            <td>Opera Software</td>
+                            <td>Вбудований VPN, швидкий доступ до соцмереж, блокувальник реклами</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Brave</strong></td>
+                            <td>Blink</td>
+                            <td>Brave Software</td>
+                            <td>Блокування реклами та трекерів «з коробки», конфіденційність</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vivaldi</strong></td>
+                            <td>Blink</td>
+                            <td>Vivaldi Technologies</td>
+                            <td>Надзвичайно гнучке налаштування інтерфейсу, вкладки-«стоси»</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Орієнтовний розподіл популярності</h3>
+            <p class="lead" style="margin-bottom:14px">Дані наведено як ілюстрацію (світова статистика, орієнтовно).
+                Точні цифри змінюються щомісяця.</p>
+
+            <div class="card">
+                <div class="bar-chart">
+                    <div class="bar-row">
+                        <div class="label"><span class="dot" style="background:#4285F4"></span>Google Chrome</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:65%;background:linear-gradient(90deg,#4285F4,#6aa8ff)">
+                            </div>
+                        </div>
+                        <div class="val">≈65%</div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="label"><span class="dot" style="background:#34c759"></span>Safari</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:18%;background:linear-gradient(90deg,#34c759,#7ee29a)">
+                            </div>
+                        </div>
+                        <div class="val">≈18%</div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="label"><span class="dot" style="background:#0078D4"></span>Microsoft Edge</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:6%;background:linear-gradient(90deg,#0078D4,#5eb3f0)">
+                            </div>
+                        </div>
+                        <div class="val">≈6%</div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="label"><span class="dot" style="background:#ff9500"></span>Mozilla Firefox</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:3%;background:linear-gradient(90deg,#ff9500,#ffc266)">
+                            </div>
+                        </div>
+                        <div class="val">≈3%</div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="label"><span class="dot" style="background:#ff3b30"></span>Opera</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:2.5%;background:linear-gradient(90deg,#ff3b30,#ff8a80)">
+                            </div>
+                        </div>
+                        <div class="val">≈2.5%</div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="label"><span class="dot" style="background:#8e8e93"></span>Інші</div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:5.5%;background:linear-gradient(90deg,#8e8e93,#c7c7cc)">
+                            </div>
+                        </div>
+                        <div class="val">≈5.5%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Чому браузерів так багато?</strong> Кожен розробник конкурує за користувача різними перевагами:
+                швидкістю, приватністю, інтеграцією з екосистемою, гнучкістю налаштувань. Для вчителя важливо обрати
+                той, що підтримує потрібні освітні платформи (Google Classroom, Microsoft Teams, Moodle) та має зручні
+                інструменти безпеки.
+            </div>
+        </section>
+
+        <!-- ==================== ОСНОВНІ ФУНКЦІЇ ==================== -->
+        <section>
+            <h2><span class="num">6</span>Основні функції веб-браузера</h2>
+            <p class="lead">Ці функції щодня використовує кожен — але в роботі вчителя вони стають справжніми
+                інструментами економії часу.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:22%">Функція</th>
+                            <th style="width:38%">Опис</th>
+                            <th style="width:40%">Як використовувати в роботі</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Навігація</strong></td>
+                            <td>Перехід між сторінками за посиланнями</td>
+                            <td>Пошук навчальних матеріалів, перехід між розділами онлайн-підручника</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Вкладки</strong></td>
+                            <td>Кілька сторінок в одному вікні</td>
+                            <td>Одночасна робота з електронним журналом, презентацією та відео</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Закладки</strong></td>
+                            <td>Збереження посилань</td>
+                            <td>Колекція корисних сайтів: онлайн-вправи, тести, бібліотеки</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Історія</strong></td>
+                            <td>Список відвіданих сторінок</td>
+                            <td>Пошук раніше переглянутих матеріалів, які не збереглися в закладках</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Приватний режим</strong></td>
+                            <td>Без збереження історії та cookie</td>
+                            <td>Перевірка сайтів на шкільному комп'ютері без збереження даних</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Пошук на сторінці</strong></td>
+                            <td>Пошук тексту (Ctrl+F)</td>
+                            <td>Швидке знаходження потрібного абзацу у довгому документі</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Масштабування</strong></td>
+                            <td>Зміна розміру сторінки (Ctrl+±)</td>
+                            <td>Демонстрація матеріалів на проєкторі для всього класу</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Друк сторінки</strong></td>
+                            <td>Друк веб-сторінки</td>
+                            <td>Підготовка роздаткових матеріалів до уроку</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Збереження сторінки</strong></td>
+                            <td>Збереження HTML/PDF</td>
+                            <td>Архівація важливих матеріалів на випадок відсутності Інтернету</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="note ok">
+                <strong>Практичний приклад.</strong> Учитель готує роздатковий матеріал: знаходить статтю, натискає
+                <kbd>Ctrl</kbd> + <kbd>P</kbd>, обирає «Зберегти як PDF» — і має файл, який можна надіслати учням або
+                роздрукувати без реклами та зайвих елементів.
+            </div>
+        </section>
+
+        <!-- ==================== ІНТЕРФЕЙС ==================== -->
+        <section>
+            <h2><span class="num">7</span>Інтерфейс веб-браузера</h2>
+            <p class="lead">Попри зовнішні відмінності, всі сучасні браузери мають однакову логіку будови. Розберемо її
+                на схемі.</p>
+
+            <div class="mock">
+                <div class="mock-top">
+                    <div class="mock-dots"><i></i><i></i><i></i></div>
+                    <div class="mock-nav"><span>◀</span><span>▶</span><span>⟳</span><span>⌂</span></div>
+                    <div class="mock-addr">
+                        <span class="lock">🔒</span>
+                        <span class="url">https://www.example.com/lesson</span>
+                        <span class="star">☆</span>
+                    </div>
+                    <div class="mock-nav"><span>⋮</span></div>
+                </div>
+                <div class="mock-tabs">
+                    <div class="mock-tab active">Вкладка 1 <span class="x">×</span></div>
+                    <div class="mock-tab">Вкладка 2 <span class="x">×</span></div>
+                    <div class="mock-tab">Вкладка 3 <span class="x">×</span></div>
+                    <div class="mock-tab-add">+</div>
+                </div>
+                <div class="mock-view">
+                    <strong>Робоча область</strong>
+                    відображення веб-сторінки
+                </div>
+                <div class="mock-status">
+                    <span>Готово · <span class="ok">🔒 Захищене з'єднання (HTTPS)</span> · cookie</span>
+                    <span>100%</span>
+                </div>
+            </div>
+
+            <h3>Що де розташовано</h3>
+            <div class="grid grid-2">
+                <div class="feature">
+                    <div class="ico">⬅️</div>
+                    <h4>Кнопки навігації</h4>
+                    <p>«Назад», «Вперед», «Оновити», «Додому» — керування переміщенням між сторінками.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico purple">🔗</div>
+                    <h4>Адресний рядок</h4>
+                    <p>Показує URL сторінки; тут же можна вводити адресу або пошуковий запит.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico green">🗂</div>
+                    <h4>Панель вкладок</h4>
+                    <p>Кожна вкладка — окрема сторінка. Кнопка «+» відкриває нову.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico orange">🖥</div>
+                    <h4>Робоча область</h4>
+                    <p>Основна частина вікна, де відображається сама веб-сторінка.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico red">📊</div>
+                    <h4>Статусний рядок</h4>
+                    <p>Показує завантаження, адресу посилання під курсором, стан HTTPS.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico">⚙️</div>
+                    <h4>Меню</h4>
+                    <p>Доступ до налаштувань, історії, закладок, розширень, приватного режиму.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== НАВІГАЦІЯ ==================== -->
+        <section>
+            <h2><span class="num">8</span>Навігація та керування</h2>
+            <p class="lead">Гарячі клавіші — це швидкість. Опанувавши десяток комбінацій, ви працюватимете з браузером у
+                рази ефективніше.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:30%">Елемент</th>
+                            <th style="width:34%">Комбінація</th>
+                            <th style="width:36%">Дія</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Назад</td>
+                            <td><span class="kbd-group"><kbd>Alt</kbd><span class="plus">+</span><kbd>←</kbd></span> або
+                                <kbd>Backspace</kbd>
+                            </td>
+                            <td>Попередня сторінка</td>
+                        </tr>
+                        <tr>
+                            <td>Вперед</td>
+                            <td><span class="kbd-group"><kbd>Alt</kbd><span class="plus">+</span><kbd>→</kbd></span>
+                            </td>
+                            <td>Наступна сторінка</td>
+                        </tr>
+                        <tr>
+                            <td>Оновити</td>
+                            <td><kbd>F5</kbd> або <span class="kbd-group"><kbd>Ctrl</kbd><span
+                                        class="plus">+</span><kbd>R</kbd></span></td>
+                            <td>Перезавантажити сторінку</td>
+                        </tr>
+                        <tr>
+                            <td>Додому</td>
+                            <td><span class="kbd-group"><kbd>Alt</kbd><span class="plus">+</span><kbd>Home</kbd></span>
+                            </td>
+                            <td>Головна сторінка</td>
+                        </tr>
+                        <tr>
+                            <td>Нова вкладка</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>T</kbd></span>
+                            </td>
+                            <td>Відкрити нову вкладку</td>
+                        </tr>
+                        <tr>
+                            <td>Закрити вкладку</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>W</kbd></span>
+                            </td>
+                            <td>Закрити поточну вкладку</td>
+                        </tr>
+                        <tr>
+                            <td>Перейти до адресного рядка</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>L</kbd></span>
+                                або <kbd>F6</kbd></td>
+                            <td>Фокус на адресний рядок</td>
+                        </tr>
+                        <tr>
+                            <td>Пошук на сторінці</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>F</kbd></span>
+                            </td>
+                            <td>Відкрити пошук на сторінці</td>
+                        </tr>
+                        <tr>
+                            <td>Масштабувати</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>+</kbd></span> /
+                                <span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>−</kbd></span>
+                            </td>
+                            <td>Збільшити / зменшити</td>
+                        </tr>
+                        <tr>
+                            <td>Повний екран</td>
+                            <td><kbd>F11</kbd></td>
+                            <td>Увімкнути / вимкнути повний екран</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="note">
+                <strong>Зверніть увагу.</strong> У більшості браузерів комбінації збігаються. Виняток — macOS: там
+                замість <kbd>Ctrl</kbd> використовується <kbd>⌘ Command</kbd> (наприклад, <kbd>⌘</kbd> + <kbd>T</kbd> —
+                нова вкладка).
+            </div>
+        </section>
+
+        <!-- ==================== ЗАКЛАДКИ ==================== -->
+        <section>
+            <h2><span class="num">9</span>Закладки</h2>
+            <p class="lead">Закладки — це особиста бібліотека посилань. Для вчителя це спосіб завжди мати під рукою
+                потрібні освітні ресурси.</p>
+
+            <h3>Як створити закладку</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:30%">Спосіб</th>
+                            <th>Дія</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Кнопка</strong></td>
+                            <td>Натиснути значок зірочки (★) в адресному рядку</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Гаряча клавіша</strong></td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>D</kbd></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Перетягування</strong></td>
+                            <td>Перетягнути піктограму з адресного рядка на панель закладок</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Як керувати закладками</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:30%">Операція</th>
+                            <th>Дія</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Перегляд закладок</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Shift</kbd><span
+                                        class="plus">+</span><kbd>O</kbd></span></td>
+                        </tr>
+                        <tr>
+                            <td>Створення папки</td>
+                            <td>ПКМ на панелі закладок → «Додати папку»</td>
+                        </tr>
+                        <tr>
+                            <td>Редагування</td>
+                            <td>ПКМ на закладці → «Редагувати»</td>
+                        </tr>
+                        <tr>
+                            <td>Видалення</td>
+                            <td>ПКМ на закладці → «Видалити»</td>
+                        </tr>
+                        <tr>
+                            <td>Імпорт / експорт</td>
+                            <td>Налаштування → Закладки → Імпортувати / експортувати</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="note ok">
+                <strong>Ідея для вчителя: тематичні папки.</strong> Створіть папки «Математика 5 клас», «Українська
+                література», «Інтерактивні вправи», «Перевірка знань». Додавайте туди закладки одразу під час підготовки
+                до уроку — і наступного разу не витрачайте час на пошук.
+            </div>
+        </section>
+
+        <!-- ==================== ІСТОРІЯ ==================== -->
+        <section>
+            <h2><span class="num">10</span>Історія відвідувань</h2>
+            <p class="lead">Історія зберігає перелік сторінок, які ви відкривали. Це рятує, коли потрібен матеріал,
+                знайдений «десь учора».</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:32%">Операція</th>
+                            <th>Дія</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Відкрити історію</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>H</kbd></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Пошук в історії</td>
+                            <td>Рядок пошуку у верхній частині сторінки історії</td>
+                        </tr>
+                        <tr>
+                            <td>Видалити окремий запис</td>
+                            <td>ПКМ → «Видалити»</td>
+                        </tr>
+                        <tr>
+                            <td>Очистити всю історію</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Shift</kbd><span
+                                        class="plus">+</span><kbd>Delete</kbd></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="note warn">
+                <strong>Важливо пам'ятати.</strong> Історія — це персональні дані. На спільному (шкільному) комп'ютері
+                після роботи варто очищати історію, а для перевірки сайтів користуватися приватним режимом.
+            </div>
+        </section>
+
+        <!-- ==================== ПРИВАТНИЙ РЕЖИМ ==================== -->
+        <section>
+            <h2><span class="num">11</span>Приватний режим</h2>
+            <p class="lead">Incognito (Chrome), InPrivate (Edge), Private Browsing (Firefox) — різні назви однієї
+                функції. Він не зберігає історію та cookie, але <strong>не робить вас анонімними в Інтернеті</strong>.
+            </p>
+
+            <div class="compare">
+                <div class="col">
+                    <h4>🚫 Не зберігається</h4>
+                    <ul>
+                        <li><span class="no">✕</span> Історія відвідувань</li>
+                        <li><span class="no">✕</span> Cookie та дані сайтів</li>
+                        <li><span class="no">✕</span> Кеш</li>
+                        <li><span class="no">✕</span> Дані форм</li>
+                        <li><span class="no">✕</span> Паролі (автоматично)</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>✅ Зберігається</h4>
+                    <ul>
+                        <li><span class="yes">✓</span> Файли, завантажені на комп'ютер</li>
+                        <li><span class="yes">✓</span> Закладки, створені в режимі</li>
+                        <li><span class="yes">✓</span> Паролі (якщо зберегти вручну)</li>
+                        <li><span class="yes">✓</span> Дані, видимі провайдеру та сайтам</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Як увімкнути приватний режим</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:22%">Браузер</th>
+                            <th style="width:30%">Комбінація</th>
+                            <th>Меню</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chrome</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Shift</kbd><span
+                                        class="plus">+</span><kbd>N</kbd></span></td>
+                            <td>⋮ → «Нове вікно в режимі інкогніто»</td>
+                        </tr>
+                        <tr>
+                            <td>Firefox</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Shift</kbd><span
+                                        class="plus">+</span><kbd>P</kbd></span></td>
+                            <td>≡ → «Приватне вікно»</td>
+                        </tr>
+                        <tr>
+                            <td>Edge</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Shift</kbd><span
+                                        class="plus">+</span><kbd>N</kbd></span></td>
+                            <td>… → «Нове вікно в режимі InPrivate»</td>
+                        </tr>
+                        <tr>
+                            <td>Opera</td>
+                            <td><span class="kbd-group"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Shift</kbd><span
+                                        class="plus">+</span><kbd>N</kbd></span></td>
+                            <td>O → «Приватне вікно»</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="note danger">
+                <strong>Поширена помилка.</strong> Учні часто думають, що приватний режим «ховає» їх від учителя чи
+                батьків. Насправді він лише не зберігає локальну історію. Провайдер, адміністратор мережі школи та самі
+                сайти все одно бачать запити.
+            </div>
+        </section>
+
+        <!-- ==================== НАЛАШТУВАННЯ ==================== -->
+        <section>
+            <h2><span class="num">12</span>Налаштування браузера</h2>
+            <p class="lead">Базові налаштування (на прикладі Chrome) варто переглянути одразу після встановлення
+                браузера.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:24%">Категорія</th>
+                            <th style="width:36%">Що налаштовувати</th>
+                            <th style="width:40%">Рекомендація</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Пошукова система</td>
+                            <td>За замовчуванням</td>
+                            <td>Google, Bing або DuckDuckGo</td>
+                        </tr>
+                        <tr>
+                            <td>Домашня сторінка</td>
+                            <td>При запуску</td>
+                            <td>Відкривати нову вкладку</td>
+                        </tr>
+                        <tr>
+                            <td>Кеш</td>
+                            <td>Очищення при закритті</td>
+                            <td>Періодично очищати</td>
+                        </tr>
+                        <tr>
+                            <td>Cookie</td>
+                            <td>Дозвіл / блокування</td>
+                            <td>Дозволити, але очищувати при виході</td>
+                        </tr>
+                        <tr>
+                            <td>Паролі</td>
+                            <td>Збереження</td>
+                            <td>Використовувати менеджер паролів</td>
+                        </tr>
+                        <tr>
+                            <td>Автозаповнення</td>
+                            <td>Адреси, платежі</td>
+                            <td>Обережно з особистими даними</td>
+                        </tr>
+                        <tr>
+                            <td>Безпека</td>
+                            <td>Захист від фішингу</td>
+                            <td>Увімкнути</td>
+                        </tr>
+                        <tr>
+                            <td>Приватність</td>
+                            <td>Do Not Track</td>
+                            <td>Увімкнути</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="note">
+                <strong>Порада.</strong> Увімкніть синхронізацію лише на власних пристроях. На шкільному комп'ютері
+                краще не входити в особистий акаунт браузера — інакше закладки, паролі та історія потраплять на спільний
+                пристрій.
+            </div>
+        </section>
+
+        <!-- ==================== РОЗШИРЕННЯ ==================== -->
+        <section>
+            <h2><span class="num">13</span>Розширення (Extensions)</h2>
+            <p class="lead"><strong>Розширення</strong> — це невеликі програми, що додають функціональність браузеру. Їх
+                встановлюють з офіційного магазину (Chrome Web Store, Firefox Add-ons).</p>
+
+            <div class="grid grid-3">
+                <div class="feature">
+                    <div class="ico red">🚫</div>
+                    <h4>AdBlock</h4>
+                    <p>Блокування реклами. Робить сторінки чистішими й швидшими.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico green">✍️</div>
+                    <h4>Grammarly</h4>
+                    <p>Перевірка правопису та граматики під час набору тексту.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico">🌍</div>
+                    <h4>Google Translate</h4>
+                    <p>Переклад сторінок і окремих фрагментів тексту.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico purple">🗂</div>
+                    <h4>One Tab</h4>
+                    <p>Згортає всі вкладки в один зручний список, звільняючи пам'ять.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico orange">🎥</div>
+                    <h4>Loom</h4>
+                    <p>Запис відеоекрану — зручно для пояснень та інструкцій.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico green">💾</div>
+                    <h4>Save to Google Drive</h4>
+                    <p>Збереження сторінок і зображень у Google Drive.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico">📖</div>
+                    <h4>Mercury Reader</h4>
+                    <p>Видаляє зайве зі сторінки, залишаючи лише текст для читання.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico purple">🛡</div>
+                    <h4>uBlock Origin</h4>
+                    <p>Легкий блокувальник реклами й трекерів з відкритим кодом.</p>
+                </div>
+                <div class="feature">
+                    <div class="ico red">🔐</div>
+                    <h4>Bitwarden</h4>
+                    <p>Менеджер паролів із шифруванням — безпечніше, ніж зберігати паролі в браузері.</p>
+                </div>
+            </div>
+
+            <div class="note warn">
+                <strong>Обережно!</strong> Встановлюйте розширення лише з офіційних магазинів і лише ті, які справді
+                потрібні. Кожне розширення має доступ до даних сторінок, а шкідливе — може красти паролі та особисту
+                інформацію.
+            </div>
+        </section>
+
+        <!-- ==================== БЕЗПЕКА ==================== -->
+        <section>
+            <h2><span class="num">14</span>Безпека веб-браузера</h2>
+            <p class="lead">Браузер — це «вікно» у світ Інтернету, тому саме через нього найчастіше відбуваються атаки.
+                Розглянемо основні загрози та способи захисту.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:24%">Загроза</th>
+                            <th style="width:38%">Опис</th>
+                            <th style="width:38%">Захист</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Фішинг</strong></td>
+                            <td>Підроблені сайти, що імітують справжні (банк, школа, пошта)</td>
+                            <td>Перевіряти URL та наявність HTTPS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Шкідливі розширення</strong></td>
+                            <td>Крадуть дані, вставляють рекламу</td>
+                            <td>Встановлювати лише з офіційного магазину</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Слідкування</strong></td>
+                            <td>Збір даних про поведінку користувача</td>
+                            <td>Приватний режим, блокувальники трекерів</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cookie</strong></td>
+                            <td>Відстеження між сайтами</td>
+                            <td>Очищати при закритті</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Збережені паролі</strong></td>
+                            <td>Доступ з іншого пристрою</td>
+                            <td>Головний пароль, менеджер паролів</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>HTTPS — захищене з'єднання</h3>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:40%">Ознака</th>
+                            <th>Значення</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🔒 Замок в адресному рядку</td>
+                            <td>З'єднання захищене</td>
+                        </tr>
+                        <tr>
+                            <td><strong>https://</strong></td>
+                            <td>Захищений протокол</td>
+                        </tr>
+                        <tr>
+                            <td>⚠️ Немає замка або попередження</td>
+                            <td>Ризик перехоплення даних</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="diagram">
+                <svg viewBox="0 0 760 240" role="img" aria-label="Схема HTTPS-з'єднання">
+                    <defs>
+                        <linearGradient id="gSecure" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#34c759" stop-opacity=".25" />
+                            <stop offset="100%" stop-color="#34c759" stop-opacity=".55" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Клієнт -->
+                    <rect x="30" y="70" width="180" height="110" rx="18" fill="#f5f5f7" stroke="#e2e2e8" />
+                    <text x="120" y="112" text-anchor="middle" font-size="30">💻</text>
+                    <text x="120" y="142" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Ваш
+                        комп'ютер</text>
+                    <text x="120" y="162" text-anchor="middle" font-size="11" fill="#6e6e73">браузер</text>
+
+                    <!-- Тунель -->
+                    <rect x="240" y="92" width="280" height="66" rx="33" fill="url(#gSecure)" stroke="#34c759"
+                        stroke-width="1.5" stroke-dasharray="6 4" />
+                    <text x="380" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#1c5c2b">🔐
+                        Зашифрований канал</text>
+                    <text x="380" y="138" text-anchor="middle" font-size="10.5" fill="#1c5c2b">TLS / HTTPS</text>
+
+                    <!-- Сервер -->
+                    <rect x="550" y="70" width="180" height="110" rx="18" fill="#f5f5f7" stroke="#e2e2e8" />
+                    <text x="640" y="112" text-anchor="middle" font-size="30">🖥</text>
+                    <text x="640" y="142" text-anchor="middle" font-size="13" font-weight="700"
+                        fill="#1d1d1f">Веб-сервер</text>
+                    <text x="640" y="162" text-anchor="middle" font-size="11" fill="#6e6e73">сайт</text>
+
+                    <!-- Підписи -->
+                    <text x="380" y="200" text-anchor="middle" font-size="11" fill="#6e6e73">Дані, що передаються, не
+                        може прочитати стороння особа</text>
+                </svg>
+            </div>
+
+            <div class="note danger">
+                <strong>Приклад фішингу.</strong> Учневі надходить лист: «Ваш акаунт у Google заблоковано, підтвердіть
+                пароль». Посилання веде на <em>g00gle-account.com</em> (дві нулі замість «o»). Браузер показує звичайний
+                сайт, але адреса — інша. Правило: <strong>завжди перевіряйте домен</strong>, а не лише назву.
+            </div>
+
+            <div class="note ok">
+                <strong>Мінімальний чек-лист безпеки для вчителя:</strong>
+                <ul class="clean" style="margin-top:8px">
+                    <li>Увімкнено захист від фішингу та небезпечних сайтів.</li>
+                    <li>Встановлено оновлення браузера (автоматично).</li>
+                    <li>Лише перевірені розширення.</li>
+                    <li>Паролі — у менеджері паролів, а не в браузері.</li>
+                    <li>Cookie та кеш очищуються при виході.</li>
+                    <li>Перед входом у систему — перевірка, чи це <strong>https://</strong>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ==================== КОНТРОЛЬНІ ЗАПИТАННЯ ==================== -->
+        <section class="page-break">
+            <h2><span class="num">15</span>Контрольні запитання</h2>
+            <p class="lead">Перевірте засвоєння матеріалу. Дайте відповіді усно або письмово.</p>
+
+            <ol class="q-list">
+                <li>Що таке веб-браузер? Яке його основне призначення?</li>
+                <li>Назвіть 5 найпопулярніших веб-браузерів.</li>
+                <li>Які основні функції веб-браузера ви знаєте?</li>
+                <li>Як створити закладку в браузері? (2 способи)</li>
+                <li>Для чого потрібен приватний режим? Що в ньому не зберігається?</li>
+                <li>Як очистити історію відвідувань?</li>
+                <li>Як знайти текст на веб-сторінці?</li>
+                <li>Для чого потрібні розширення браузера? Наведіть приклади корисних розширень.</li>
+                <li>Як розпізнати безпечне з'єднання (HTTPS)?</li>
+                <li>Які налаштування безпеки слід увімкнути в браузері?</li>
+            </ol>
+
+            <div class="note" style="margin-top:26px">
+                <strong>Домашнє завдання.</strong> Порівняйте два браузери (наприклад, Chrome і Firefox) за критеріями:
+                швидкість, зручність, налаштування приватності, наявність корисних розширень. Оформіть висновок у
+                вигляді короткої таблиці на 5–7 рядків.
+            </div>
+        </section>
+
+        <!-- ==================== ЛІТЕРАТУРА ==================== -->
+        <footer>
+            <strong>Література</strong>
+            <ol>
+                <li>Офісні технології : навч. посіб. / Трофименко О. Г., Прокоп Ю. В., Логінова Н. І., Чанишев Р. І.
+                    Одеса : Фенікс, 2019. 207 с.</li>
+                <li>Холод О. М. Комунікаційні технології : навч. посіб. Київ : Центр навчальної літератури, 2019. 211 с.
+                </li>
+                <li>Шумілова І. Ф. Новітні технології викладання освітніх галузей у початковій школі : навч. посіб. Київ
+                    : Олді, 2023. 248 с.</li>
+            </ol>
+        </footer>
+
+    </div>
+
+    <!-- Кнопка друку (не друкується) -->
+    <button class="print-btn" onclick="window.print()">🖨 Надрукувати</button>
+
+</body>
+
+</html>

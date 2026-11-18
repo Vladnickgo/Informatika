@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лекція 13. Збирання та організація даних</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-2: #fbfbfd;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --line: #d2d2d7;
+      --blue: #0071e3;
+      --blue-2: #2997ff;
+      --blue-soft: #e8f2ff;
+      --green: #30d158;
+      --green-soft: #f0fff5;
+      --orange: #ff9f0a;
+      --orange-soft: #fff8ec;
+      --purple: #bf5af2;
+      --purple-soft: #fbf3ff;
+      --red: #ff453a;
+      --red-soft: #fff1f0;
+      --radius: 24px;
+      --radius-sm: 16px;
+      --shadow: 0 18px 46px rgba(0, 0, 0, 0.09);
+      --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.055);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(0, 113, 227, 0.08), transparent 32rem),
+        radial-gradient(circle at 92% 16%, rgba(48, 209, 88, 0.07), transparent 26rem),
+        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 26px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #3a3a3c;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(48, 209, 88, 0.14);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      padding: clamp(28px, 5vw, 52px);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 84% 12%, rgba(100, 210, 255, 0.55), transparent 22rem),
+        radial-gradient(circle at 8% 88%, rgba(48, 209, 88, 0.24), transparent 20rem),
+        linear-gradient(135deg, #071a33 0%, #0a5bb8 54%, #0a84ff 100%);
+      color: #fff;
+      box-shadow: 0 28px 70px rgba(0, 53, 122, 0.24);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -20% -10% auto auto;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      filter: blur(2px);
+      z-index: -1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto auto -140px -80px;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: rgba(48, 209, 88, 0.18);
+      filter: blur(12px);
+      z-index: -1;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(2.1rem, 5.4vw, 4.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      font-weight: 750;
+    }
+
+    .hero .lead {
+      max-width: 760px;
+      margin: 20px 0 0;
+      font-size: clamp(1rem, 1.7vw, 1.22rem);
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: end;
+      margin-top: 28px;
+    }
+
+    .hero-panel {
+      padding: 18px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .hero-panel h2 {
+      margin: 0 0 8px;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: #fff;
+      font-size: 0.96rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .toc {
+      margin: 26px 0 32px;
+      padding: 18px 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 24px;
+    }
+
+    .toc a {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      padding: 6px 0;
+      color: var(--text);
+      font-weight: 560;
+    }
+
+    .toc a:hover { color: var(--blue); }
+
+    .toc .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .section { margin: 42px 0; }
+
+    .section h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.55rem, 3.2vw, 2.35rem);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+    }
+
+    .section h3 {
+      margin: 26px 0 10px;
+      font-size: 1.24rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section p { margin: 0 0 13px; }
+
+    .muted { color: var(--muted); }
+
+    .card,
+    .diagram-card,
+    .table-card,
+    .callout,
+    .formula,
+    .example,
+    .question,
+    .source,
+    .def-card,
+    .condition,
+    .mini-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card { padding: 22px; }
+
+    .diagram-card {
+      margin: 22px 0;
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .diagram-card svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figure { margin: 22px 0; }
+
+    figcaption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .def-card { padding: 20px; }
+
+    .def-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.06rem;
+      letter-spacing: -0.01em;
+    }
+
+    .def-card p { margin: 0; color: #3a3a3c; }
+
+    .symbol,
+    .mono {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+      background: #f5f5f7;
+      padding: 2px 7px;
+      border-radius: 7px;
+      font-size: 0.93em;
+      white-space: nowrap;
+    }
+
+    .callout {
+      margin: 18px 0;
+      padding: 18px 20px;
+      border-left: 5px solid var(--blue);
+      background: linear-gradient(180deg, #f7fbff, #fff);
+    }
+
+    .callout h4 {
+      margin: 0 0 7px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .callout.warn {
+      border-left-color: var(--orange);
+      background: linear-gradient(180deg, var(--orange-soft), #fff);
+    }
+    .callout.warn h4 { color: #b56500; }
+
+    .callout.good {
+      border-left-color: var(--green);
+      background: linear-gradient(180deg, var(--green-soft), #fff);
+    }
+    .callout.good h4 { color: #1f7a38; }
+
+    .callout.purple {
+      border-left-color: var(--purple);
+      background: linear-gradient(180deg, var(--purple-soft), #fff);
+    }
+    .callout.purple h4 { color: #7d2aa0; }
+
+    .callout.red {
+      border-left-color: var(--red);
+      background: linear-gradient(180deg, var(--red-soft), #fff);
+    }
+    .callout.red h4 { color: #b3261e; }
+
+    .formula {
+      margin: 20px 0;
+      padding: 22px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.08), transparent 18rem),
+        #fff;
+    }
+
+    .formula .big {
+      display: block;
+      margin: 6px 0;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+      font-size: clamp(1.25rem, 3vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .formula .note {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .table-card {
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .table-scroll { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      background: #f5f5f7;
+      color: #3a3a3c;
+      font-size: 0.86rem;
+      font-weight: 650;
+    }
+
+    td { font-size: 0.94rem; }
+
+    tr:last-child td { border-bottom: none; }
+
+    .example {
+      margin: 20px 0;
+      padding: 22px;
+      background:
+        linear-gradient(180deg, #fff 0%, #fbfbfd 100%);
+    }
+
+    .example h4 {
+      margin: 0 0 9px;
+      font-size: 0.84rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .example p:last-child { margin-bottom: 0; }
+
+    .condition {
+      padding: 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #fff, #fbfbfd);
+    }
+
+    .condition .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .condition h4 {
+      margin: 0 0 6px;
+      font-size: 1.02rem;
+    }
+
+    .condition p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .question {
+      margin: 10px 0;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .question .qnum {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .question p { margin: 0; }
+
+    .source {
+      margin: 10px 0;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .source .snum {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: #f5f5f7;
+      color: #3a3a3c;
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .source p { margin: 0; }
+
+    .footer {
+      margin-top: 46px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 650;
+    }
+
+    .two-col-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 22px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .two-col-list li {
+      position: relative;
+      padding-left: 18px;
+      color: #3a3a3c;
+    }
+
+    .two-col-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    @media (max-width: 900px) {
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 820px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .toc-grid,
+      .two-col-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { border-radius: 26px; }
+
+      table { min-width: 620px; }
+    }
+
+    @media (max-width: 560px) {
+      .grid-4 { grid-template-columns: 1fr; }
+    }
+
+    /* Друк: блоки не розриваються, тіні та декор прибираються */
+    @media print {
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 10.5pt;
+        line-height: 1.45;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+      }
+
+      .topbar,
+      .toc,
+      .no-print {
+        display: none !important;
+      }
+
+      .hero {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #cfcfcf;
+        border-radius: 14px;
+        box-shadow: none;
+        padding: 18px 20px;
+      }
+
+      .hero::before,
+      .hero::after { display: none !important; }
+
+      .hero h1,
+      .hero .lead,
+      .hero .eyebrow,
+      .hero-panel p,
+      .hero-panel h2,
+      .hero .chip {
+        color: #000 !important;
+      }
+
+      .hero .chip,
+      .hero-panel {
+        background: #f5f5f7 !important;
+        border-color: #cfcfcf !important;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      .card,
+      .diagram-card,
+      .table-card,
+      .callout,
+      .formula,
+      .example,
+      .question,
+      .source,
+      .def-card,
+      .condition,
+      .mini-card,
+      figure,
+      table,
+      tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .card,
+      .diagram-card,
+      .table-card,
+      .callout,
+      .formula,
+      .example,
+      .question,
+      .source,
+      .def-card,
+      .condition,
+      .mini-card {
+        box-shadow: none !important;
+        border: 1px solid #d0d0d0 !important;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        display: block;
+      }
+
+      .grid-2 > * + *,
+      .grid-3 > * + *,
+      .grid-4 > * + * {
+        margin-top: 10px;
+      }
+
+      h1, h2, h3, h4 {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      a {
+        color: #000 !important;
+        text-decoration: none !important;
+      }
+
+      .table-scroll { overflow: visible; }
+
+      table {
+        min-width: 0;
+        width: 100%;
+      }
+
+      th, td {
+        padding: 8px 9px;
+        font-size: 9.4pt;
+      }
+
+      .section { margin: 22px 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar no-print">
+      <span class="badge"><span class="dot"></span> Конспект лекції · збирання даних</span>
+      <span>Педагогічне дослідження · табличне подання</span>
+    </div>
+
+    <header class="hero">
+      <p class="eyebrow">Лекція 13</p>
+      <h1>Збирання та організація даних</h1>
+      <p class="lead">
+        Методи збору даних, вимоги до якості, табличне представлення та типові помилки.
+        Від сирих фактів — до структурованої таблиці, з якою можна працювати й робити висновки.
+      </p>
+
+      <div class="hero-grid">
+        <div class="hero-panel">
+          <h2>Тема</h2>
+          <p>Збирання та організація даних: методи збору даних, табличне представлення даних.</p>
+        </div>
+        <div class="hero-panel">
+          <h2>Мета</h2>
+          <p>
+            Формувати вміння збирати та організовувати дані, подавати їх у таблицях; розвивати вміння
+            систематизувати та впорядковувати дослідницькі дані; виховувати точність і акуратність
+            в організації даних.
+          </p>
+        </div>
+      </div>
+
+      <div class="chips">
+        <span class="chip">дані</span>
+        <span class="chip">збирання даних</span>
+        <span class="chip">метод</span>
+        <span class="chip">вибірка</span>
+        <span class="chip">генеральна сукупність</span>
+        <span class="chip">спостереження</span>
+        <span class="chip">опитування</span>
+        <span class="chip">анкета</span>
+        <span class="chip">інтерв’ю</span>
+        <span class="chip">аналіз документів</span>
+        <span class="chip">експеримент</span>
+        <span class="chip">таблиця</span>
+        <span class="chip">головка</span>
+        <span class="chip">боковик</span>
+        <span class="chip">комірка</span>
+        <span class="chip">групування</span>
+        <span class="chip">систематизація</span>
+      </div>
+    </header>
+
+    <nav class="toc no-print" aria-label="Зміст лекції">
+      <h2>Зміст</h2>
+      <div class="toc-grid">
+        <a href="#s1"><span class="num">1</span> Дані як «сировина» дослідження</a>
+        <a href="#s2"><span class="num">2</span> Методи збору даних</a>
+        <a href="#s3"><span class="num">3</span> Якість даних і вибірка</a>
+        <a href="#s4"><span class="num">4</span> Табличне представлення</a>
+        <a href="#s5"><span class="num">5</span> Види таблиць</a>
+        <a href="#s6"><span class="num">6</span> Алгоритм упорядкування</a>
+        <a href="#questions"><span class="num">?</span> Контрольні питання</a>
+        <a href="#sources"><span class="num">↗</span> Рекомендовані джерела</a>
+      </div>
+    </nav>
+
+    <section class="section" id="plan">
+      <h2>План лекції</h2>
+      <div class="card">
+        <ol>
+          <li>Дані та інформація: чому без упорядкування факти не мають цінності.</li>
+          <li>Методи збору даних у педагогічному дослідженні.</li>
+          <li>Вимоги до якості зібраних даних і поняття вибірки.</li>
+          <li>Табличне представлення даних: будова таблиці.</li>
+          <li>Види таблиць та правила їх побудови.</li>
+          <li>Алгоритм упорядкування даних і типові помилки.</li>
+        </ol>
+        <p class="muted" style="margin-bottom:0;">
+          Обладнання: інструкційні картки. Ключові поняття подано вгорі сторінки та розкрито в тексті лекції.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s1">
+      <h2>1. Дані як «сировина» дослідження</h2>
+
+      <p>
+        Кожне наукове дослідження починається з фактів. <strong>Дані</strong> — це окремі зафіксовані факти,
+        значення, відповіді, результати вимірювань, які дослідник зібрав у ході роботи. Самі по собі вони
+        ще не є висновком: це лише матеріал, з якого цей висновок буде зроблено.
+      </p>
+
+      <p>
+        Уявіть коробку з деталями конструктора. Поки деталі лежать у коробці, це просто купа — з неї нічого
+        не можна зрозуміти. Але щойно деталі розклали за формою, кольором і розміром, з’являється можливість
+        зібрати модель. Так само і з даними: спочатку їх збирають, потім упорядковують — і лише після цього
+        вони перетворюються на інформацію, з якої можна робити висновки.
+      </p>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 1000 280" role="img" aria-labelledby="dataInfoTitle dataInfoDesc">
+            <title id="dataInfoTitle">Від даних до інформації</title>
+            <desc id="dataInfoDesc">Три етапи: сирі факти, упорядкування, інформація та висновок.</desc>
+            <defs>
+              <marker id="arrowData" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#0071e3"/>
+              </marker>
+            </defs>
+
+            <rect x="25" y="48" width="260" height="165" rx="26" fill="#f5f5f7" stroke="#d2d2d7"/>
+            <text x="155" y="88" text-anchor="middle" font-size="18" font-weight="800" fill="#1d1d1f">ДАНІ</text>
+            <text x="155" y="118" text-anchor="middle" font-size="15" fill="#6e6e73">окремі факти,</text>
+            <text x="155" y="142" text-anchor="middle" font-size="15" fill="#6e6e73">відповіді, вимірювання</text>
+            <text x="155" y="178" text-anchor="middle" font-size="13" fill="#8e8e93">«купа деталей»</text>
+
+            <line x1="295" y1="130" x2="350" y2="130" stroke="#0071e3" stroke-width="4" marker-end="url(#arrowData)"/>
+
+            <rect x="365" y="48" width="260" height="165" rx="26" fill="#e8f2ff" stroke="#b7d7ff"/>
+            <text x="495" y="88" text-anchor="middle" font-size="18" font-weight="800" fill="#0071e3">УПОРЯДКУВАННЯ</text>
+            <text x="495" y="118" text-anchor="middle" font-size="15" fill="#6e6e73">групування,</text>
+            <text x="495" y="142" text-anchor="middle" font-size="15" fill="#6e6e73">сортування, таблиця</text>
+            <text x="495" y="178" text-anchor="middle" font-size="13" fill="#8e8e93">«розкладання за формою»</text>
+
+            <line x1="635" y1="130" x2="690" y2="130" stroke="#0071e3" stroke-width="4" marker-end="url(#arrowData)"/>
+
+            <rect x="705" y="48" width="270" height="165" rx="26" fill="#effff4" stroke="#b7f0c8"/>
+            <text x="840" y="88" text-anchor="middle" font-size="18" font-weight="800" fill="#1f7a38">ІНФОРМАЦІЯ</text>
+            <text x="840" y="118" text-anchor="middle" font-size="15" fill="#6e6e73">дані набувають змісту,</text>
+            <text x="840" y="142" text-anchor="middle" font-size="15" fill="#6e6e73">дають відповідь на запитання</text>
+            <text x="840" y="178" text-anchor="middle" font-size="13" fill="#8e8e93">«зібрана модель»</text>
+          </svg>
+          <figcaption>Схема 1. Дані — це сировина; інформація — це впорядковані дані, що мають зміст</figcaption>
+        </figure>
+      </div>
+
+      <div class="callout">
+        <h4>Ключове розрізнення</h4>
+        <p>
+          <strong>Дані</strong> — це зафіксовані факти. <strong>Інформація</strong> — це дані, упорядковані так,
+          що вони набувають змісту й дають відповідь на поставлене запитання.
+        </p>
+      </div>
+
+      <p>
+        Для майбутнього вчителя інформатики це особливо важливо: саме таблиця є першою моделлю бази даних,
+        з якою учні початкової школи знайомляться на уроках. Тому вміння збирати й упорядковувати дані — це
+        не лише дослідницька, а й професійна компетентність.
+      </p>
+
+      <div class="callout warn">
+        <h4>Важливо</h4>
+        <p>
+          Зібрані, але не впорядковані дані майже не мають цінності: за ними неможливо побачити ні тенденції,
+          ні закономірності. Упорядкування — не завершальний, а обов’язковий етап збору даних.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Розширений приклад: що змінює упорядкування</h4>
+        <p>
+          Учитель записав відповіді 24 учнів на запитання «Скільки хвилин ти витрачаєш на домашнє завдання
+          з інформатики?». У чернетці маємо набір чисел: 15, 20, 15, 25, 30, 20, 15, 10, 20, 25, 30, 20,
+          15, 20, 25, 10, 20, 15, 30, 25, 20, 15, 20, 25. Це лише дані. Після групування за значеннями
+          з’являється картина: 10 хв — 2 учні, 15 хв — 6, 20 хв — 8, 25 хв — 5, 30 хв — 3. Уже можна
+          побачити типове значення й розкид, тобто перейти від «купи фактів» до інформації.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s2">
+      <h2>2. Методи збору даних</h2>
+
+      <p>
+        Усі методи збору даних у педагогічному дослідженні можна об’єднати в чотири групи — від найпростішого
+        спостереження за реальним перебігом подій до спеціально організованого експерименту.
+      </p>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 1000 300" role="img" aria-labelledby="methodsTitle methodsDesc">
+            <title id="methodsTitle">Методи збору даних</title>
+            <desc id="methodsDesc">Чотири групи методів: спостереження, опитування, аналіз документів, експеримент.</desc>
+
+            <rect x="20" y="55" width="220" height="190" rx="24" fill="#e8f2ff" stroke="#b7d7ff"/>
+            <rect x="20" y="55" width="220" height="10" rx="5" fill="#0071e3"/>
+            <text x="130" y="110" text-anchor="middle" font-size="19" font-weight="800" fill="#1d1d1f">Спостереження</text>
+            <text x="130" y="145" text-anchor="middle" font-size="15" fill="#6e6e73">бачу і фіксую</text>
+            <text x="130" y="180" text-anchor="middle" font-size="13" fill="#8e8e93">не втручаюся</text>
+
+            <rect x="260" y="55" width="220" height="190" rx="24" fill="#effff4" stroke="#b7f0c8"/>
+            <rect x="260" y="55" width="220" height="10" rx="5" fill="#30d158"/>
+            <text x="370" y="110" text-anchor="middle" font-size="19" font-weight="800" fill="#1d1d1f">Опитування</text>
+            <text x="370" y="145" text-anchor="middle" font-size="15" fill="#6e6e73">питаю і слухаю</text>
+            <text x="370" y="180" text-anchor="middle" font-size="13" fill="#8e8e93">бесіда, анкета, інтерв’ю</text>
+
+            <rect x="500" y="55" width="220" height="190" rx="24" fill="#fff5e6" stroke="#ffd9a3"/>
+            <rect x="500" y="55" width="220" height="10" rx="5" fill="#ff9f0a"/>
+            <text x="610" y="110" text-anchor="middle" font-size="19" font-weight="800" fill="#1d1d1f">Аналіз документів</text>
+            <text x="610" y="145" text-anchor="middle" font-size="15" fill="#6e6e73">читаю і виписую</text>
+            <text x="610" y="180" text-anchor="middle" font-size="13" fill="#8e8e93">журнали, роботи, портфоліо</text>
+
+            <rect x="740" y="55" width="240" height="190" rx="24" fill="#fbf3ff" stroke="#e1c4ff"/>
+            <rect x="740" y="55" width="240" height="10" rx="5" fill="#bf5af2"/>
+            <text x="860" y="110" text-anchor="middle" font-size="19" font-weight="800" fill="#1d1d1f">Експеримент</text>
+            <text x="860" y="145" text-anchor="middle" font-size="15" fill="#6e6e73">перевіряю дослідом</text>
+            <text x="860" y="180" text-anchor="middle" font-size="13" fill="#8e8e93">констатувальний / формувальний</text>
+          </svg>
+          <figcaption>Схема 2. Чотири групи методів збору даних</figcaption>
+        </figure>
+      </div>
+
+      <div class="grid-2">
+        <div class="def-card">
+          <h4>Спостереження</h4>
+          <p>
+            Цілеспрямоване, планомірне й обов’язково зафіксоване сприймання педагогічного процесу. Дослідник
+            не втручається в події, а лише фіксує те, що відбувається. Приклад: на уроці інформатики у 2 класі
+            фіксуємо, скільки учнів піднімають руку, коли вчитель ставить запитання.
+          </p>
+        </div>
+        <div class="def-card">
+          <h4>Опитування</h4>
+          <p>
+            Метод, за якого інформацію отримують безпосередньо від учасників освітнього процесу. Його різновиди:
+            бесіда, анкета, інтерв’ю. Приклад: анкета «Що ти робиш на перерві?», яку заповнюють учні 3 класу.
+          </p>
+        </div>
+        <div class="def-card">
+          <h4>Аналіз документів</h4>
+          <p>
+            Вивчення вже наявних матеріалів: класних журналів, щоденників, результатів контрольних робіт,
+            портфоліо учня, календарно-тематичного планування вчителя.
+          </p>
+        </div>
+        <div class="def-card">
+          <h4>Експеримент</h4>
+          <p>
+            Спеціально організована перевірка гіпотези в контрольованих умовах. Констатувальний експеримент
+            фіксує наявний стан, формувальний — перевіряє, чи справді певний засіб дає очікуваний результат.
+          </p>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Метод</th>
+                <th>Що дає досліднику</th>
+                <th>Приклад зі школи</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Спостереження</strong></td>
+                <td>Бачу і фіксую те, що відбувається насправді.</td>
+                <td>Скільки учнів 2 класу піднімають руку на уроці інформатики.</td>
+              </tr>
+              <tr>
+                <td><strong>Опитування</strong></td>
+                <td>Отримую думки й відповіді самих учасників.</td>
+                <td>Анкета «Що ти робиш на перерві?» для учнів 3 класу.</td>
+              </tr>
+              <tr>
+                <td><strong>Аналіз документів</strong></td>
+                <td>Працюю з уже зафіксованою інформацією.</td>
+                <td>Оцінки з класного журналу за семестр.</td>
+              </tr>
+              <tr>
+                <td><strong>Експеримент</strong></td>
+                <td>Перевіряю, чи справді діє певний засіб.</td>
+                <td>Порівняння результатів уроків з навчальною грою та без неї.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h3>Розширені приклади методів</h3>
+
+      <div class="example">
+        <h4>Приклад 1. Спостереження на уроці</h4>
+        <p>
+          Учитель хоче з’ясувати, чи встигають учні 2 класу виконувати практичне завдання за 10 хвилин.
+          Під час уроку він фіксує в польовому щоденнику: дату, тему уроку, кількість учнів, час початку
+          практичної роботи, скількох учнів завершили роботу за 10 хвилин. Запис робиться одразу, а не
+          «по пам’яті» після уроків. Через кілька уроків можна порівняти результати й побачити тенденцію.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Приклад 2. Анкета для молодших школярів</h4>
+        <p>
+          Анкета «Що ти робиш на перерві?» для учнів 3 класу може містити такі запитання:
+        </p>
+        <ul class="two-col-list">
+          <li>Чи любиш ти перерви? (так / ні / іноді)</li>
+          <li>Що ти найчастіше робиш на перерві?</li>
+          <li>З ким ти зазвичай граєшся?</li>
+          <li>Чи встигаєш ти відпочити за перерву?</li>
+          <li>Що тобі найбільше подобається на перерві?</li>
+          <li>Чи хотів би ти, щоб перерва була довшою?</li>
+        </ul>
+        <p style="margin-top:12px;">
+          Важливо, щоб запитання були короткими, однозначними й зрозумілими дітям. Після збору відповідей
+          їх групують: наприклад, «граються» — 14 учнів, «читають» — 4, «спілкуються» — 8, «ходять по коридору» — 2.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Приклад 3. Аналіз документів</h4>
+        <p>
+          Дослідник вивчає класний журнал і виписує оцінки з інформатики за семестр. Важливо фіксувати
+          не лише самі бали, а й умови: клас, період, тему, тип роботи. Інакше числа втратять контекст
+          і їх не можна буде коректно порівняти.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Приклад 4. Експеримент: констатувальний і формувальний</h4>
+        <p>
+          <strong>Констатувальний експеримент:</strong> учитель фіксує початковий рівень швидкості складання
+          алгоритмів у двох групах учнів. <strong>Формувальний експеримент:</strong> в одній групі систематично
+          використовують інтерактивний тренажер, у другій — традиційні вправи. Після серії уроків обидві групи
+          проходять однакову діагностичну роботу, і дослідник порівнює результати. Головна умова — однакові
+          умови для обох груп, крім досліджуваного засобу.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s3">
+      <h2>3. Вимоги до якості зібраних даних і поняття вибірки</h2>
+
+      <p>
+        Зібрати дані — це лише половина справи. Щоб на їх основі можна було зробити коректний висновок,
+        дані мають відповідати низці вимог.
+      </p>
+
+      <div class="grid-3">
+        <div class="condition">
+          <div class="icon">✓</div>
+          <h4>Точність</h4>
+          <p>Записано саме те, що реально було, без «округлення на користь гіпотези».</p>
+        </div>
+        <div class="condition">
+          <div class="icon">▣</div>
+          <h4>Повнота</h4>
+          <p>Зібрано значення за всіма запланованими ознаками, без пропусків.</p>
+        </div>
+        <div class="condition">
+          <div class="icon">↻</div>
+          <h4>Надійність</h4>
+          <p>Повторний збір у схожих умовах дає близький результат.</p>
+        </div>
+        <div class="condition">
+          <div class="icon">⏱</div>
+          <h4>Своєчасність</h4>
+          <p>Дані зафіксовано тоді, коли подія відбулася, а не «по пам’яті» через тиждень.</p>
+        </div>
+        <div class="condition">
+          <div class="icon">A</div>
+          <h4>Однозначність</h4>
+          <p>Різні дослідники розуміють і тлумачать запис однаково.</p>
+        </div>
+        <div class="condition">
+          <div class="icon">◎</div>
+          <h4>Репрезентативність</h4>
+          <p>Вибірка представляє всю генеральну сукупність.</p>
+        </div>
+      </div>
+
+      <div class="callout red">
+        <h4>Найчастіше порушують репрезентативність</h4>
+        <p>
+          Якщо анкету в класі, де 28 учнів, заповнили лише 5 осіб, робити висновок про весь клас не можна:
+          така вибірка не є репрезентативною. Висновок стосуватиметься лише тих п’ятьох, хто відповідав.
+        </p>
+      </div>
+
+      <div class="callout good">
+        <h4>Практична порада</h4>
+        <p>
+          Фіксуйте дані одразу й за єдиним зразком: польовий щоденник, однаковий формат запису, дата й умови
+          спостереження. Запис, зроблений через кілька днів «по пам’яті», втрачає точність і перетворюється
+          на припущення.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Розширений приклад: чому 5 із 28 — це не вибірка класу</h4>
+        <p>
+          У класі 28 учнів. Анкету заповнили 5 учнів, які залишилися після уроків. Серед них троє мають
+          високий рівень навчальних досягнень. Якщо за цими відповідями зробити висновок «більшість класу
+          любить інформатику», це буде помилка: вибірка зміщена, адже вона не відображає всіх 28 учнів.
+          Коректне формулювання: «Серед 5 учнів, які взяли участь в анкетуванні, троє зазначили, що люблять
+          інформатику». Поширювати це на весь клас не можна.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s4">
+      <h2>4. Табличне представлення даних</h2>
+
+      <p>
+        Найзручніша форма впорядкування даних — таблиця. Це форма подання даних, у якій значення розміщуються
+        на перетині рядків і стовпців. Завдяки цьому кожне значення має свою «адресу»: воно належить
+        конкретному об’єкту (рядок) і конкретній ознаці (стовпець).
+      </p>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 1000 420" role="img" aria-labelledby="tableStructTitle tableStructDesc">
+            <title id="tableStructTitle">Будова таблиці</title>
+            <desc id="tableStructDesc">Показано головку, боковик, комірки, підсумковий рядок.</desc>
+
+            <text x="500" y="36" text-anchor="middle" font-size="20" font-weight="800" fill="#1d1d1f">Будова таблиці</text>
+
+            <rect x="95" y="80" width="810" height="230" rx="18" fill="#fff" stroke="#d2d2d7" stroke-width="2"/>
+
+            <rect x="95" y="80" width="810" height="62" rx="18" fill="#e8f2ff"/>
+            <text x="150" y="118" font-size="17" font-weight="700" fill="#0071e3">Клас</text>
+            <text x="330" y="118" font-size="17" font-weight="700" fill="#0071e3">Учнів</text>
+            <text x="510" y="118" font-size="17" font-weight="700" fill="#0071e3">Високий</text>
+            <text x="690" y="118" font-size="17" font-weight="700" fill="#0071e3">Середній</text>
+
+            <line x1="95" y1="142" x2="905" y2="142" stroke="#d2d2d7" stroke-width="2"/>
+            <line x1="95" y1="202" x2="905" y2="202" stroke="#d2d2d7" stroke-width="1.6"/>
+            <line x1="95" y1="262" x2="905" y2="262" stroke="#d2d2d7" stroke-width="1.6"/>
+            <line x1="95" y1="310" x2="905" y2="310" stroke="#d2d2d7" stroke-width="2"/>
+
+            <line x1="270" y1="80" x2="270" y2="310" stroke="#d2d2d7" stroke-width="1.6"/>
+            <line x1="450" y1="80" x2="450" y2="310" stroke="#d2d2d7" stroke-width="1.6"/>
+            <line x1="630" y1="80" x2="630" y2="310" stroke="#d2d2d7" stroke-width="1.6"/>
+
+            <g font-size="17" fill="#1d1d1f">
+              <text x="150" y="182">1-А</text>
+              <text x="330" y="182">25</text>
+              <text x="510" y="182">7</text>
+              <text x="690" y="182">12</text>
+
+              <text x="150" y="242">2-Б</text>
+              <text x="330" y="242">27</text>
+              <text x="510" y="242">9</text>
+              <text x="690" y="242">11</text>
+
+              <text x="150" y="298">3-В</text>
+              <text x="330" y="298">24</text>
+              <text x="510" y="298">6</text>
+              <text x="690" y="298">10</text>
+            </g>
+
+            <rect x="95" y="330" width="810" height="46" rx="14" fill="#effff4" stroke="#b7f0c8"/>
+            <text x="150" y="360" font-size="16" font-weight="700" fill="#1f7a38">Разом</text>
+            <text x="330" y="360" font-size="16" font-weight="700" fill="#1f7a38">76</text>
+            <text x="510" y="360" font-size="16" font-weight="700" fill="#1f7a38">22</text>
+            <text x="690" y="360" font-size="16" font-weight="700" fill="#1f7a38">33</text>
+
+            <text x="500" y="406" text-anchor="middle" font-size="13" fill="#6e6e73">Таблиця = рядки × стовпці: кожне значення має свою адресу — рядок і стовпець</text>
+          </svg>
+          <figcaption>Схема 3. Головка, боковик, комірки та підсумковий рядок</figcaption>
+        </figure>
+      </div>
+
+      <p>
+        У таблиці розрізняють <strong>головку (шапку)</strong> — рядок із назвами стовпців, <strong>боковик</strong> —
+        стовпець із назвами рядків, і <strong>комірки</strong> — місця перетину рядка та стовпця. Крім того,
+        виділяють <strong>підмет таблиці</strong> (те, про що йдеться, — об’єкти в рядках чи стовпцях) і
+        <strong>присудок</strong> (те, що про них сказано, — числові значення).
+      </p>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Елемент таблиці</th>
+                <th>Що в ньому розміщують</th>
+                <th>Приклад</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Головка (шапка)</strong></td>
+                <td>Назви стовпців — ознаки.</td>
+                <td>Клас, Учнів, Високий рівень.</td>
+              </tr>
+              <tr>
+                <td><strong>Боковик</strong></td>
+                <td>Назви рядків — об’єкти.</td>
+                <td>1-А, 2-Б, 3-В.</td>
+              </tr>
+              <tr>
+                <td><strong>Комірка</strong></td>
+                <td>Одне значення на перетині рядка і стовпця.</td>
+                <td>25, 7, 12.</td>
+              </tr>
+              <tr>
+                <td><strong>Підсумковий рядок</strong></td>
+                <td>Узагальнені результати за стовпцем.</td>
+                <td>Разом, Середнє.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h3>Правила побудови таблиці</h3>
+      <div class="card">
+        <ul class="two-col-list">
+          <li>Заголовки стовпців — короткі й зрозумілі, без крапки в кінці.</li>
+          <li>Одиниці вимірювання вказують у головці, наприклад «Кількість учнів, осіб».</li>
+          <li>Порожніх клітинок не залишають: ставлять «0» або «—».</li>
+          <li>У межах одного стовпця — однакова точність округлення.</li>
+          <li>Підсумковий рядок або стовпець — обов’язковий.</li>
+          <li>Усередині таблиці даних не використовують об’єднаних комірок.</li>
+        </ul>
+      </div>
+
+      <div class="callout purple">
+        <h4>Зв’язок із професією вчителя інформатики</h4>
+        <p>
+          Таблиця — це перша модель бази даних, з якою учні початкової школи знайомляться на уроках
+          інформатики. Якщо вчитель сам акуратно будує таблиці, він демонструє учням зразок роботи
+          з даними: рядок — об’єкт, стовпець — ознака, комірка — значення.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Розширений приклад: виправлення таблиці</h4>
+        <p>
+          <strong>Було:</strong> у стовпці «Кількість» записано «25 учнів», «27», «24 особи»; у клітинці
+          «Високий» — «7 (з них 2 хлопчики)»; підсумкового рядка немає; назви класів подані як «2-Б» і «2 Б».
+          <br>
+          <strong>Стало:</strong> у головці — «Кількість учнів, осіб»; у комірках — лише числа 25, 27, 24;
+          у кінці — рядок «Разом»; назви класів уніфіковано: «2-Б» в усіх рядках. Таблиця стає однозначною
+          й придатною для подальших обчислень.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s5">
+      <h2>5. Види таблиць</h2>
+
+      <p>
+        Залежно від кількості ознак, за якими впорядковано дані, таблиці поділяють на прості, групові
+        та комбінаційні.
+      </p>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 1000 310" role="img" aria-labelledby="tableTypesTitle tableTypesDesc">
+            <title id="tableTypesTitle">Види таблиць</title>
+            <desc id="tableTypesDesc">Проста, групова та комбінаційна таблиці.</desc>
+
+            <rect x="25" y="55" width="290" height="200" rx="26" fill="#e8f2ff" stroke="#b7d7ff"/>
+            <text x="170" y="100" text-anchor="middle" font-size="20" font-weight="800" fill="#0071e3">Проста</text>
+            <text x="170" y="135" text-anchor="middle" font-size="15" fill="#6e6e73">одна ознака,</text>
+            <text x="170" y="158" text-anchor="middle" font-size="15" fill="#6e6e73">один об’єкт</text>
+            <text x="170" y="198" text-anchor="middle" font-size="13" fill="#8e8e93">оцінки одного учня</text>
+            <text x="170" y="220" text-anchor="middle" font-size="13" fill="#8e8e93">за чвертями</text>
+
+            <rect x="355" y="55" width="290" height="200" rx="26" fill="#effff4" stroke="#b7f0c8"/>
+            <text x="500" y="100" text-anchor="middle" font-size="20" font-weight="800" fill="#1f7a38">Групова</text>
+            <text x="500" y="135" text-anchor="middle" font-size="15" fill="#6e6e73">об’єкти згруповані</text>
+            <text x="500" y="158" text-anchor="middle" font-size="15" fill="#6e6e73">за однією ознакою</text>
+            <text x="500" y="198" text-anchor="middle" font-size="13" fill="#8e8e93">середній бал учнів</text>
+            <text x="500" y="220" text-anchor="middle" font-size="13" fill="#8e8e93">1-А, 2-Б, 3-В</text>
+
+            <rect x="685" y="55" width="290" height="200" rx="26" fill="#fbf3ff" stroke="#e1c4ff"/>
+            <text x="830" y="100" text-anchor="middle" font-size="20" font-weight="800" fill="#7d2aa0">Комбінаційна</text>
+            <text x="830" y="135" text-anchor="middle" font-size="15" fill="#6e6e73">дві й більше ознак</text>
+            <text x="830" y="158" text-anchor="middle" font-size="15" fill="#6e6e73">одночасно</text>
+            <text x="830" y="198" text-anchor="middle" font-size="13" fill="#8e8e93">клас × предмет</text>
+            <text x="830" y="220" text-anchor="middle" font-size="13" fill="#8e8e93">× семестр</text>
+          </svg>
+          <figcaption>Схема 4. Прості, групові та комбінаційні таблиці</figcaption>
+        </figure>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Вид таблиці</th>
+                <th>Скільки ознак</th>
+                <th>Приклад</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Проста</strong></td>
+                <td>Одна ознака, один об’єкт.</td>
+                <td>Оцінки одного учня з інформатики за чвертями.</td>
+              </tr>
+              <tr>
+                <td><strong>Групова</strong></td>
+                <td>Об’єкти згруповані за однією ознакою.</td>
+                <td>Середній бал учнів 1-А, 2-Б, 3-В.</td>
+              </tr>
+              <tr>
+                <td><strong>Комбінаційна</strong></td>
+                <td>Дві й більше ознак одночасно.</td>
+                <td>Клас × предмет × семестр.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p>
+        Для дослідницької роботи найчастіше використовують групові таблиці: вони дають змогу порівняти
+        між собою окремі класи, паралелі або групи учнів за однією важливою ознакою.
+      </p>
+
+      <div class="example">
+        <h4>Приклад простої таблиці</h4>
+        <div class="table-card" style="margin:12px 0 0;">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Чверть</th><th>Оцінка з інформатики</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>І</td><td>9</td></tr>
+                <tr><td>ІІ</td><td>10</td></tr>
+                <tr><td>ІІІ</td><td>10</td></tr>
+                <tr><td>ІV</td><td>11</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="example">
+        <h4>Приклад групової таблиці</h4>
+        <div class="table-card" style="margin:12px 0 0;">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Клас</th><th>Кількість учнів</th><th>Середній бал</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1-А</td><td>25</td><td>8,6</td></tr>
+                <tr><td>2-Б</td><td>27</td><td>8,2</td></tr>
+                <tr><td>3-В</td><td>24</td><td>8,9</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="example">
+        <h4>Приклад комбінаційної таблиці</h4>
+        <div class="table-card" style="margin:12px 0 0;">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Клас</th><th>Предмет</th><th>І семестр</th><th>ІІ семестр</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>3-А</td><td>Інформатика</td><td>8,4</td><td>8,9</td></tr>
+                <tr><td>3-А</td><td>Математика</td><td>8,1</td><td>8,3</td></tr>
+                <tr><td>3-Б</td><td>Інформатика</td><td>8,0</td><td>8,5</td></tr>
+                <tr><td>3-Б</td><td>Математика</td><td>7,9</td><td>8,2</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="s6">
+      <h2>6. Алгоритм упорядкування даних і типові помилки</h2>
+
+      <p>
+        Щоб перетворити зібрані факти на таблицю, достатньо пройти шість послідовних кроків. Кожен наступний
+        крок спирається на попередній, тому пропускати їх не можна.
+      </p>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 1100 300" role="img" aria-labelledby="algorithmTitle algorithmDesc">
+            <title id="algorithmTitle">Алгоритм упорядкування даних</title>
+            <desc id="algorithmDesc">Шість кроків: мета, ознаки, метод, збір, групування, таблиця.</desc>
+            <defs>
+              <marker id="arrowAlg" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#0071e3"/>
+              </marker>
+            </defs>
+
+            <rect x="15" y="55" width="165" height="170" rx="22" fill="#e8f2ff" stroke="#b7d7ff"/>
+            <text x="97" y="105" text-anchor="middle" font-size="18" font-weight="800" fill="#0071e3">1. Мета</text>
+            <text x="97" y="140" text-anchor="middle" font-size="14" fill="#6e6e73">що досліджую</text>
+            <text x="97" y="170" text-anchor="middle" font-size="13" fill="#8e8e93">запитання</text>
+
+            <line x1="185" y1="140" x2="208" y2="140" stroke="#0071e3" stroke-width="3" marker-end="url(#arrowAlg)"/>
+
+            <rect x="215" y="55" width="165" height="170" rx="22" fill="#effff4" stroke="#b7f0c8"/>
+            <text x="297" y="105" text-anchor="middle" font-size="18" font-weight="800" fill="#1f7a38">2. Ознаки</text>
+            <text x="297" y="140" text-anchor="middle" font-size="14" fill="#6e6e73">що фіксую</text>
+            <text x="297" y="170" text-anchor="middle" font-size="13" fill="#8e8e93">перелік ознак</text>
+
+            <line x1="385" y1="140" x2="408" y2="140" stroke="#0071e3" stroke-width="3" marker-end="url(#arrowAlg)"/>
+
+            <rect x="415" y="55" width="165" height="170" rx="22" fill="#fff5e6" stroke="#ffd9a3"/>
+            <text x="497" y="105" text-anchor="middle" font-size="18" font-weight="800" fill="#b56500">3. Метод</text>
+            <text x="497" y="140" text-anchor="middle" font-size="14" fill="#6e6e73">як збираю</text>
+            <text x="497" y="170" text-anchor="middle" font-size="13" fill="#8e8e93">спостереження / анкета</text>
+
+            <line x1="585" y1="140" x2="608" y2="140" stroke="#0071e3" stroke-width="3" marker-end="url(#arrowAlg)"/>
+
+            <rect x="615" y="55" width="165" height="170" rx="22" fill="#fbf3ff" stroke="#e1c4ff"/>
+            <text x="697" y="105" text-anchor="middle" font-size="18" font-weight="800" fill="#7d2aa0">4. Збір</text>
+            <text x="697" y="140" text-anchor="middle" font-size="14" fill="#6e6e73">фіксую факти</text>
+            <text x="697" y="170" text-anchor="middle" font-size="13" fill="#8e8e93">єдиний формат</text>
+
+            <line x1="785" y1="140" x2="808" y2="140" stroke="#0071e3" stroke-width="3" marker-end="url(#arrowAlg)"/>
+
+            <rect x="815" y="55" width="130" height="170" rx="22" fill="#fff1f0" stroke="#ffc9c4"/>
+            <text x="880" y="105" text-anchor="middle" font-size="18" font-weight="800" fill="#b3261e">5. Групування</text>
+            <text x="880" y="140" text-anchor="middle" font-size="14" fill="#6e6e73">упорядковую</text>
+            <text x="880" y="170" text-anchor="middle" font-size="13" fill="#8e8e93">сортую, рахую</text>
+
+            <line x1="950" y1="140" x2="973" y2="140" stroke="#0071e3" stroke-width="3" marker-end="url(#arrowAlg)"/>
+
+            <rect x="980" y="55" width="105" height="170" rx="22" fill="#e8f2ff" stroke="#b7d7ff"/>
+            <text x="1032" y="105" text-anchor="middle" font-size="18" font-weight="800" fill="#0071e3">6. Таблиця</text>
+            <text x="1032" y="140" text-anchor="middle" font-size="14" fill="#6e6e73">подаю</text>
+            <text x="1032" y="170" text-anchor="middle" font-size="13" fill="#8e8e93">результат</text>
+          </svg>
+          <figcaption>Схема 5. Шлях від ідеї до таблиці: шість послідовних кроків</figcaption>
+        </figure>
+      </div>
+
+      <div class="card">
+        <ol>
+          <li><strong>Сформулювати мету:</strong> що саме хочемо з’ясувати.</li>
+          <li><strong>Визначити ознаки,</strong> значення яких фіксуватимемо.</li>
+          <li><strong>Обрати метод збору даних</strong> (або кілька методів).</li>
+          <li><strong>Зібрати дані</strong> та зафіксувати їх в єдиному форматі.</li>
+          <li><strong>Упорядкувати:</strong> згрупувати, відсортувати, порахувати підсумки.</li>
+          <li><strong>Побудувати таблицю</strong> й перевірити її на відповідність правилам.</li>
+        </ol>
+      </div>
+
+      <div class="callout good">
+        <h4>Цифрові інструменти</h4>
+        <p>
+          Готову таблицю зручно будувати в Microsoft Excel або Google Таблиці: програма автоматично рахує
+          суми й середні значення та дає змогу відсортувати рядки за обраною ознакою.
+        </p>
+      </div>
+
+      <h3>Типові помилки під час побудови таблиць</h3>
+      <div class="grid-2">
+        <div class="callout red" style="margin:0;">
+          <h4>Помилка 1</h4>
+          <p>Різні одиниці вимірювання в одному стовпці.</p>
+        </div>
+        <div class="callout red" style="margin:0;">
+          <h4>Помилка 2</h4>
+          <p>Кілька значень в одній комірці.</p>
+        </div>
+        <div class="callout red" style="margin:0;">
+          <h4>Помилка 3</h4>
+          <p>Об’єднані комірки всередині таблиці даних.</p>
+        </div>
+        <div class="callout red" style="margin:0;">
+          <h4>Помилка 4</h4>
+          <p>Відсутність підсумкового рядка.</p>
+        </div>
+        <div class="callout red" style="margin:0; grid-column: 1 / -1;">
+          <h4>Помилка 5</h4>
+          <p>Різні назви того самого об’єкта в різних рядках (наприклад, «2-Б» і «2 Б»).</p>
+        </div>
+      </div>
+
+      <div class="example">
+        <h4>Розширений приклад: від мети до таблиці</h4>
+        <p>
+          <strong>Мета:</strong> з’ясувати, скільки часу учні 3 класу витрачають на домашнє завдання
+          з інформатики. <strong>Ознаки:</strong> клас, стать, кількість хвилин. <strong>Метод:</strong>
+          коротке анкетування. <strong>Збір:</strong> однакові бланки, заповнені на уроці. <strong>Групування:</strong>
+          відповіді розподілено на інтервали «до 15 хв», «15–20 хв», «20–25 хв», «понад 25 хв». <strong>Таблиця:</strong>
+          у рядках — класи, у стовпцях — інтервали часу, у комірках — кількість учнів. Після цього можна
+          порівняти класи й зробити висновок, чи є типове навантаження однаковим.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="questions">
+      <h2>Контрольні питання</h2>
+
+      <div class="question"><span class="qnum">1</span><p>Що таке дані? Чим дані відрізняються від інформації?</p></div>
+      <div class="question"><span class="qnum">2</span><p>Чому зібрані, але не впорядковані дані майже не мають цінності?</p></div>
+      <div class="question"><span class="qnum">3</span><p>Назвіть основні методи збору даних у педагогічному дослідженні.</p></div>
+      <div class="question"><span class="qnum">4</span><p>У чому особливість спостереження як методу збору даних?</p></div>
+      <div class="question"><span class="qnum">5</span><p>Які різновиди опитування ви знаєте? Наведіть приклад анкети для молодших школярів.</p></div>
+      <div class="question"><span class="qnum">6</span><p>Що може бути джерелом даних під час аналізу документів?</p></div>
+      <div class="question"><span class="qnum">7</span><p>Чим констатувальний експеримент відрізняється від формувального?</p></div>
+      <div class="question"><span class="qnum">8</span><p>Які вимоги висувають до якості зібраних даних?</p></div>
+      <div class="question"><span class="qnum">9</span><p>Що таке репрезентативність вибірки? Наведіть приклад нерепрезентативної вибірки.</p></div>
+      <div class="question"><span class="qnum">10</span><p>Назвіть і охарактеризуйте основні елементи таблиці.</p></div>
+      <div class="question"><span class="qnum">11</span><p>Які види таблиць розрізняють? Наведіть приклад для кожного виду.</p></div>
+      <div class="question"><span class="qnum">12</span><p>Яких помилок слід уникати під час побудови таблиці даних?</p></div>
+    </section>
+
+    <section class="section" id="sources">
+      <h2>Рекомендовані джерела</h2>
+
+      <div class="source">
+        <span class="snum">1</span>
+        <p>Лаппо В. В. Основи педагогічних досліджень. Івано-Франківськ : НАІР, 2016. 284 с.</p>
+      </div>
+      <div class="source">
+        <span class="snum">2</span>
+        <p>
+          Оліяр М. П., Русин Г. А., Червінька І. Б. Основи науково-педагогічних досліджень
+          (модульно-рейтинговий підхід). Івано-Франківськ : Наїр, 2013. 214 с.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Лекція 13 · Збирання та організація даних: методи збору, табличне представлення, алгоритм упорядкування ·
+      матеріал підготовлено для друку та роботи в аудиторії.
+    </footer>
+  </main>
+</body>
+</html>

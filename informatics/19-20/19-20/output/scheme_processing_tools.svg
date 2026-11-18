@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="579.6pt" height="309.888pt" viewBox="0 0 579.6 309.888" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-13T11:33:31.160624</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 309.888 
+L 579.6 309.888 
+L 579.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 121.284 98.4876 
+L 458.316 98.4876 
+Q 468.36 98.4876 468.36 89.83896 
+L 468.36 61.49064 
+Q 468.36 52.842 458.316 52.842 
+L 121.284 52.842 
+Q 111.24 52.842 111.24 61.49064 
+L 111.24 89.83896 
+Q 111.24 98.4876 121.284 98.4876 
+z
+" clip-path="url(#pa89281aa71)" style="fill: #ebf4ff; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 30.609 258.2472 
+L 130.491 258.2472 
+Q 140.535 258.2472 140.535 249.59856 
+L 140.535 156.38544 
+Q 140.535 147.7368 130.491 147.7368 
+L 30.609 147.7368 
+Q 20.565 147.7368 20.565 156.38544 
+L 20.565 249.59856 
+Q 20.565 258.2472 30.609 258.2472 
+z
+" clip-path="url(#pa89281aa71)" style="fill: #ebf4ff; stroke: #0071e3; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 170.109 258.2472 
+L 269.991 258.2472 
+Q 280.035 258.2472 280.035 249.59856 
+L 280.035 156.38544 
+Q 280.035 147.7368 269.991 147.7368 
+L 170.109 147.7368 
+Q 160.065 147.7368 160.065 156.38544 
+L 160.065 249.59856 
+Q 160.065 258.2472 170.109 258.2472 
+z
+" clip-path="url(#pa89281aa71)" style="fill: #e8f5ec; stroke: #248a3d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 309.609 258.2472 
+L 409.491 258.2472 
+Q 419.535 258.2472 419.535 249.59856 
+L 419.535 156.38544 
+Q 419.535 147.7368 409.491 147.7368 
+L 309.609 147.7368 
+Q 299.565 147.7368 299.565 156.38544 
+L 299.565 249.59856 
+Q 299.565 258.2472 309.609 258.2472 
+z
+" clip-path="url(#pa89281aa71)" style="fill: #fff4e5; stroke: #c93400; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 449.109 258.2472 
+L 548.991 258.2472 
+Q 559.035 258.2472 559.035 249.59856 
+L 559.035 156.38544 
+Q 559.035 147.7368 548.991 147.7368 
+L 449.109 147.7368 
+Q 439.065 147.7368 439.065 156.38544 
+L 439.065 249.59856 
+Q 439.065 258.2472 449.109 258.2472 
+z
+" clip-path="url(#pa89281aa71)" style="fill: #f2ebfa; stroke: #6e30a8; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="289.8" y="26.560672" transform="rotate(-0 289.8 26.560672)">Засоби обробки та зберігання документів</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="289.8" y="79.557652" transform="rotate(-0 289.8 79.557652)">Засоби обробки та зберігання документів</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(63.735937 172.592569)">Носії</text>
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(42.463125 187.161131)">інформації</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(44.732812 226.198947)">папір, плівка,</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(41.544531 238.156603)">магнітні диски</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 289.8 99.6888 
+Q 185.175 123.7128 82.075547 147.386504 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 88.160137 148.862227 
+L 82.075547 147.386504 
+L 86.90688 143.404265 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(191.804063 165.433913)">Ручні та</text>
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(181.101562 179.87685)">друкарські</text>
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(196.441875 194.319788)">засоби</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(175.727344 226.198947)">ручки, машинки,</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(190.499219 238.156603)">диктофони</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 289.8 99.6888 
+Q 254.925 123.7128 221.339011 146.848852 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 227.539125 145.977884 
+L 221.339011 146.848852 
+L 224.362305 141.36618 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(313.768125 172.702256)">Комп'ютерна</text>
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(333.809063 187.051444)">техніка</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(322.099219 226.198947)">ПК, принтери,</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(323.104688 238.156603)">сканери, МФУ</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 289.8 99.6888 
+Q 324.675 123.7128 358.260989 146.848852 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 355.237695 141.36618 
+L 358.260989 146.848852 
+L 352.060875 145.977884 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(474.166875 172.702256)">Офісне</text>
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(457.11 187.051444)">обладнання</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(482.023438 220.220119)">лотки,</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(469.971875 232.177775)">картотеки,</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(475.267188 244.135431)">шредери</text>
+   </g>
+   <g id="patch_10">
+    <path d="M 289.8 99.6888 
+Q 394.425 123.7128 497.524453 147.386504 
+" style="fill: none; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 492.69312 143.404265 
+L 497.524453 147.386504 
+L 491.439863 148.862227 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pa89281aa71">
+   <rect x="10.8" y="10.8" width="558" height="288.288"/>
+  </clipPath>
+ </defs>
+</svg>

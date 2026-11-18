@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="579.6pt" height="265.536pt" viewBox="0 0 579.6 265.536" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-17T17:27:10.858667</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 265.536 
+L 579.6 265.536 
+L 579.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 164.808 77.8824 
+L 314.352 77.8824 
+Q 323.28 77.8824 323.28 69.012 
+L 323.28 57.924 
+Q 323.28 49.0536 314.352 49.0536 
+L 164.808 49.0536 
+Q 155.88 49.0536 155.88 57.924 
+L 155.88 69.012 
+Q 155.88 77.8824 164.808 77.8824 
+z
+" clip-path="url(#p06bc17a5c6)" style="fill: #0071e3; opacity: 0.88"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 164.808 121.1256 
+L 347.832 121.1256 
+Q 356.76 121.1256 356.76 112.2552 
+L 356.76 101.1672 
+Q 356.76 92.2968 347.832 92.2968 
+L 164.808 92.2968 
+Q 155.88 92.2968 155.88 101.1672 
+L 155.88 112.2552 
+Q 155.88 121.1256 164.808 121.1256 
+z
+" clip-path="url(#p06bc17a5c6)" style="fill: #248a3d; opacity: 0.88"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 164.808 164.3688 
+L 398.052 164.3688 
+Q 406.98 164.3688 406.98 155.4984 
+L 406.98 144.4104 
+Q 406.98 135.54 398.052 135.54 
+L 164.808 135.54 
+Q 155.88 135.54 155.88 144.4104 
+L 155.88 155.4984 
+Q 155.88 164.3688 164.808 164.3688 
+z
+" clip-path="url(#p06bc17a5c6)" style="fill: #c93400; opacity: 0.88"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 164.808 207.612 
+L 481.752 207.612 
+Q 490.68 207.612 490.68 198.7416 
+L 490.68 187.6536 
+Q 490.68 178.7832 481.752 178.7832 
+L 164.808 178.7832 
+Q 155.88 178.7832 155.88 187.6536 
+L 155.88 198.7416 
+Q 155.88 207.612 164.808 207.612 
+z
+" clip-path="url(#p06bc17a5c6)" style="fill: #6e30a8; opacity: 0.88"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="289.8" y="34.441852" transform="rotate(-0 289.8 34.441852)">Безпечна тривалість безперервної роботи за екраном</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #1d1d1f" x="141.93" y="66.917219" transform="rotate(-0 141.93 66.917219)">1 клас</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="333.324" y="66.77925" transform="rotate(-0 333.324 66.77925)">10 хв</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #1d1d1f" x="141.93" y="110.160419" transform="rotate(-0 141.93 110.160419)">2 клас</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="366.804" y="110.02245" transform="rotate(-0 366.804 110.02245)">12 хв</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #1d1d1f" x="141.93" y="153.403619" transform="rotate(-0 141.93 153.403619)">3 клас</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="417.024" y="153.26565" transform="rotate(-0 417.024 153.26565)">15 хв</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #1d1d1f" x="141.93" y="196.646819" transform="rotate(-0 141.93 196.646819)">4 клас</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="500.724" y="196.50885" transform="rotate(-0 500.724 196.50885)">20 хв</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #86868b" x="289.8" y="243.911313" transform="rotate(-0 289.8 243.911313)">для учнів 1 класу — не на кожному уроці</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p06bc17a5c6">
+   <rect x="10.8" y="10.8" width="558" height="243.936"/>
+  </clipPath>
+ </defs>
+</svg>

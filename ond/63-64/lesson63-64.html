@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лекція 12. Основні поняття статистики: вибірка, популяція, параметр, статистика</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-2: #fbfbfd;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --line: #d2d2d7;
+      --blue: #0071e3;
+      --blue-2: #2997ff;
+      --blue-soft: #e8f2ff;
+      --green: #30d158;
+      --green-soft: #f0fff5;
+      --orange: #ff9f0a;
+      --orange-soft: #fff8ec;
+      --purple: #bf5af2;
+      --purple-soft: #fbf3ff;
+      --red: #ff453a;
+      --radius: 24px;
+      --radius-sm: 16px;
+      --shadow: 0 18px 46px rgba(0, 0, 0, 0.09);
+      --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.055);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(0, 113, 227, 0.08), transparent 32rem),
+        radial-gradient(circle at 90% 18%, rgba(48, 209, 88, 0.07), transparent 26rem),
+        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 26px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #3a3a3c;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(48, 209, 88, 0.14);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      padding: clamp(28px, 5vw, 52px);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 84% 12%, rgba(100, 210, 255, 0.55), transparent 22rem),
+        radial-gradient(circle at 8% 88%, rgba(48, 209, 88, 0.24), transparent 20rem),
+        linear-gradient(135deg, #071a33 0%, #0a5bb8 54%, #0a84ff 100%);
+      color: #fff;
+      box-shadow: 0 28px 70px rgba(0, 53, 122, 0.24);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -20% -10% auto auto;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      filter: blur(2px);
+      z-index: -1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto auto -140px -80px;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: rgba(48, 209, 88, 0.18);
+      filter: blur(12px);
+      z-index: -1;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(2.1rem, 5.4vw, 4.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      font-weight: 750;
+    }
+
+    .hero .lead {
+      max-width: 760px;
+      margin: 20px 0 0;
+      font-size: clamp(1rem, 1.7vw, 1.22rem);
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: end;
+      margin-top: 28px;
+    }
+
+    .hero-panel {
+      padding: 18px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .hero-panel h2 {
+      margin: 0 0 8px;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: #fff;
+      font-size: 0.96rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .toc {
+      margin: 26px 0 32px;
+      padding: 18px 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 24px;
+    }
+
+    .toc a {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      padding: 6px 0;
+      color: var(--text);
+      font-weight: 560;
+    }
+
+    .toc a:hover { color: var(--blue); }
+
+    .toc .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .section { margin: 42px 0; }
+
+    .section h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.55rem, 3.2vw, 2.35rem);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+    }
+
+    .section h3 {
+      margin: 26px 0 10px;
+      font-size: 1.24rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section p { margin: 0 0 13px; }
+
+    .muted { color: var(--muted); }
+
+    .card,
+    .diagram-card,
+    .table-card,
+    .callout,
+    .formula,
+    .example,
+    .question,
+    .source,
+    .def-card,
+    .condition,
+    .mini-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card { padding: 22px; }
+
+    .diagram-card {
+      margin: 22px 0;
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .diagram-card svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figure { margin: 22px 0; }
+
+    figcaption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .def-card { padding: 20px; }
+
+    .def-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.06rem;
+      letter-spacing: -0.01em;
+    }
+
+    .def-card p { margin: 0; color: #3a3a3c; }
+
+    .symbol,
+    .mono {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+      background: #f5f5f7;
+      padding: 2px 7px;
+      border-radius: 7px;
+      font-size: 0.93em;
+      white-space: nowrap;
+    }
+
+    .callout {
+      margin: 18px 0;
+      padding: 18px 20px;
+      border-left: 5px solid var(--blue);
+      background: linear-gradient(180deg, #f7fbff, #fff);
+    }
+
+    .callout h4 {
+      margin: 0 0 7px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .callout.warn {
+      border-left-color: var(--orange);
+      background: linear-gradient(180deg, var(--orange-soft), #fff);
+    }
+    .callout.warn h4 { color: #b56500; }
+
+    .callout.good {
+      border-left-color: var(--green);
+      background: linear-gradient(180deg, var(--green-soft), #fff);
+    }
+    .callout.good h4 { color: #1f7a38; }
+
+    .callout.purple {
+      border-left-color: var(--purple);
+      background: linear-gradient(180deg, var(--purple-soft), #fff);
+    }
+    .callout.purple h4 { color: #7d2aa0; }
+
+    .formula {
+      margin: 20px 0;
+      padding: 22px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.08), transparent 18rem),
+        #fff;
+    }
+
+    .formula .big {
+      display: block;
+      margin: 6px 0;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+      font-size: clamp(1.25rem, 3vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .formula .note {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .table-card {
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .table-scroll { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      background: #f5f5f7;
+      color: #3a3a3c;
+      font-size: 0.86rem;
+      font-weight: 650;
+    }
+
+    td { font-size: 0.94rem; }
+
+    tr:last-child td { border-bottom: none; }
+
+    .example {
+      margin: 20px 0;
+      padding: 22px;
+      background:
+        linear-gradient(180deg, #fff 0%, #fbfbfd 100%);
+    }
+
+    .example h4 {
+      margin: 0 0 9px;
+      font-size: 0.84rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .example p:last-child { margin-bottom: 0; }
+
+    .condition {
+      padding: 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #fff, #fbfbfd);
+    }
+
+    .condition .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .condition h4 {
+      margin: 0 0 6px;
+      font-size: 1.02rem;
+    }
+
+    .condition p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .question {
+      margin: 10px 0;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .question .qnum {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .question p { margin: 0; }
+
+    .source {
+      margin: 10px 0;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .source .snum {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: #f5f5f7;
+      color: #3a3a3c;
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .source p { margin: 0; }
+
+    .footer {
+      margin-top: 46px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 650;
+    }
+
+    .two-col-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 22px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .two-col-list li {
+      position: relative;
+      padding-left: 18px;
+      color: #3a3a3c;
+    }
+
+    .two-col-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    @media (max-width: 820px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .toc-grid,
+      .two-col-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { border-radius: 26px; }
+
+      table { min-width: 620px; }
+    }
+
+    /* Друк: блоки не розриваються, тіні та декор прибираються */
+    @media print {
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 10.5pt;
+        line-height: 1.45;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+      }
+
+      .topbar,
+      .toc,
+      .no-print {
+        display: none !important;
+      }
+
+      .hero {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #cfcfcf;
+        border-radius: 14px;
+        box-shadow: none;
+        padding: 18px 20px;
+      }
+
+      .hero::before,
+      .hero::after { display: none !important; }
+
+      .hero h1,
+      .hero .lead,
+      .hero .eyebrow,
+      .hero-panel p,
+      .hero-panel h2,
+      .hero .chip {
+        color: #000 !important;
+      }
+
+      .hero .chip,
+      .hero-panel {
+        background: #f5f5f7 !important;
+        border-color: #cfcfcf !important;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      .card,
+      .diagram-card,
+      .table-card,
+      .callout,
+      .formula,
+      .example,
+      .question,
+      .source,
+      .def-card,
+      .condition,
+      .mini-card,
+      figure,
+      table,
+      tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .card,
+      .diagram-card,
+      .table-card,
+      .callout,
+      .formula,
+      .example,
+      .question,
+      .source,
+      .def-card,
+      .condition,
+      .mini-card {
+        box-shadow: none !important;
+        border: 1px solid #d0d0d0 !important;
+      }
+
+      .grid-2,
+      .grid-3 {
+        display: block;
+      }
+
+      .grid-2 > * + *,
+      .grid-3 > * + * {
+        margin-top: 10px;
+      }
+
+      h1, h2, h3, h4 {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      a {
+        color: #000 !important;
+        text-decoration: none !important;
+      }
+
+      .table-scroll { overflow: visible; }
+
+      table {
+        min-width: 0;
+        width: 100%;
+      }
+
+      th, td {
+        padding: 8px 9px;
+        font-size: 9.4pt;
+      }
+
+      .section { margin: 22px 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar no-print">
+      <span class="badge"><span class="dot"></span> Конспект лекції · статистика</span>
+      <span>Педагогічне дослідження · базові поняття</span>
+    </div>
+
+    <header class="hero">
+      <p class="eyebrow">Лекція 12</p>
+      <h1>Основні поняття статистики: вибірка, популяція, параметр, статистика</h1>
+      <p class="lead">
+        Від сирих даних — до коректного статистичного висновку. Розбираємо, що таке генеральна сукупність і вибірка,
+        чим параметр відрізняється від статистики, навіщо потрібна репрезентативність і як виникає похибка вибірки.
+      </p>
+
+      <div class="hero-grid">
+        <div class="hero-panel">
+          <h2>Тема</h2>
+          <p>Основні поняття статистики: вибірка, популяція, параметр, статистика.</p>
+        </div>
+        <div class="hero-panel">
+          <h2>Мета</h2>
+          <p>
+            Формувати знання про основні поняття статистики; розвивати статистичне мислення та розуміння
+            кількісних характеристик педагогічних явищ; виховувати точність і коректність у використанні
+            статистичних понять.
+          </p>
+        </div>
+      </div>
+
+      <div class="chips">
+        <span class="chip">статистика</span>
+        <span class="chip">статистичні дані</span>
+        <span class="chip">генеральна сукупність</span>
+        <span class="chip">вибірка</span>
+        <span class="chip">обсяг вибірки</span>
+        <span class="chip">репрезентативність</span>
+        <span class="chip">випадковий відбір</span>
+        <span class="chip">параметр</span>
+        <span class="chip">вибіркова оцінка</span>
+        <span class="chip">похибка вибірки</span>
+        <span class="chip">середнє арифметичне</span>
+        <span class="chip">стандартне відхилення</span>
+        <span class="chip">частка</span>
+      </div>
+    </header>
+
+    <nav class="toc no-print" aria-label="Зміст лекції">
+      <h2>Зміст</h2>
+      <div class="toc-grid">
+        <a href="#s1"><span class="num">1</span> Статистика як наука</a>
+        <a href="#s2"><span class="num">2</span> Генеральна сукупність і вибірка</a>
+        <a href="#s3"><span class="num">3</span> Параметр і статистика</a>
+        <a href="#s4"><span class="num">4</span> Репрезентативність і похибка</a>
+        <a href="#s5"><span class="num">5</span> Наскрізний приклад</a>
+        <a href="#questions"><span class="num">?</span> Контрольні питання</a>
+        <a href="#sources"><span class="num">↗</span> Рекомендовані джерела</a>
+        <a href="#plan"><span class="num">≡</span> План лекції</a>
+      </div>
+    </nav>
+
+    <section class="section" id="plan">
+      <h2>План лекції</h2>
+      <div class="card">
+        <ol>
+          <li>Статистика як наука: предмет, завдання і місце в педагогічному дослідженні.</li>
+          <li>Генеральна сукупність (популяція) і вибірка. Обсяг та способи формування вибірки.</li>
+          <li>Параметр і статистика: відмінність, позначення, приклади.</li>
+          <li>Репрезентативність вибірки, вибіркова мінливість і похибка вибірки.</li>
+          <li>Наскрізний приклад: від популяції до коректного статистичного висновку.</li>
+        </ol>
+        <p class="muted" style="margin-bottom:0;">
+          Обладнання: інструкційні картки. Ключові поняття подано вгорі сторінки та розкрито в тексті лекції.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s1">
+      <h2>1. Статистика як наука: предмет, завдання і місце в педагогічному дослідженні</h2>
+
+      <p>
+        Слово «статистика» походить від латинського <span class="mono">status</span> — «стан». У сучасній науці воно має два значення.
+        По-перше, це галузь знань про збирання, впорядкування, аналіз і тлумачення масових кількісних даних.
+        По-друге, це самі дані, упорядковані за певними правилами. Для педагога-дослідника важливі обидва значення:
+        він і збирає статистику (дані), і користується статистикою (методами).
+      </p>
+
+      <p>
+        Навіщо це вчителю початкової школи? Щоденна робота вчителя — це безперервний потік кількісних фактів:
+        скільки учнів класу виконали завдання, який середній час витрачають третьокласники на одну вправу,
+        як розподілилися оцінки за діагностичну роботу, чи справді інтерактивна гра підвищила результати.
+        Без статистики ці факти залишаються розрізненими враженнями («здається, цей клас слабший»);
+        зі статистикою вони перетворюються на перевірювані твердження.
+      </p>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 1000 250" role="img" aria-labelledby="stagesTitle stagesDesc">
+            <title id="stagesTitle">Етапи статистичного дослідження</title>
+            <desc id="stagesDesc">Чотири послідовні етапи: збір даних, впорядкування, аналіз, висновок.</desc>
+            <defs>
+              <marker id="arrow1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#0071e3"/>
+              </marker>
+            </defs>
+
+            <rect x="20" y="45" width="215" height="155" rx="26" fill="#e8f2ff" stroke="#b7d7ff"/>
+            <text x="127" y="88" text-anchor="middle" font-size="18" font-weight="800" fill="#0071e3">1. ЗБІР ДАНИХ</text>
+            <text x="127" y="122" text-anchor="middle" font-size="16" fill="#1d1d1f">спостереження,</text>
+            <text x="127" y="146" text-anchor="middle" font-size="16" fill="#1d1d1f">опитування</text>
+
+            <line x1="245" y1="123" x2="278" y2="123" stroke="#0071e3" stroke-width="4" marker-end="url(#arrow1)"/>
+
+            <rect x="285" y="45" width="215" height="155" rx="26" fill="#f3efff" stroke="#d8c8ff"/>
+            <text x="392" y="88" text-anchor="middle" font-size="18" font-weight="800" fill="#7d2aa0">2. ВПОРЯДКУВАННЯ</text>
+            <text x="392" y="122" text-anchor="middle" font-size="16" fill="#1d1d1f">групування,</text>
+            <text x="392" y="146" text-anchor="middle" font-size="16" fill="#1d1d1f">таблиці</text>
+
+            <line x1="510" y1="123" x2="543" y2="123" stroke="#0071e3" stroke-width="4" marker-end="url(#arrow1)"/>
+
+            <rect x="550" y="45" width="215" height="155" rx="26" fill="#fff5e6" stroke="#ffd9a3"/>
+            <text x="657" y="88" text-anchor="middle" font-size="18" font-weight="800" fill="#b56500">3. АНАЛІЗ</text>
+            <text x="657" y="122" text-anchor="middle" font-size="16" fill="#1d1d1f">обчислення,</text>
+            <text x="657" y="146" text-anchor="middle" font-size="16" fill="#1d1d1f">показники</text>
+
+            <line x1="775" y1="123" x2="808" y2="123" stroke="#0071e3" stroke-width="4" marker-end="url(#arrow1)"/>
+
+            <rect x="815" y="45" width="165" height="155" rx="26" fill="#effff4" stroke="#b7f0c8"/>
+            <text x="897" y="88" text-anchor="middle" font-size="18" font-weight="800" fill="#1f7a38">4. ВИСНОВОК</text>
+            <text x="897" y="122" text-anchor="middle" font-size="16" fill="#1d1d1f">тлумачення,</text>
+            <text x="897" y="146" text-anchor="middle" font-size="16" fill="#1d1d1f">рішення</text>
+          </svg>
+          <figcaption>Схема 1. Етапи статистичного дослідження</figcaption>
+        </figure>
+      </div>
+
+      <p>
+        Зверніть увагу: обчислення — лише третій етап. Найбільше помилок у студентських роботах виникає не через
+        арифметику, а через неякісний збір даних і поспішну інтерпретацію.
+      </p>
+
+      <div class="example">
+        <h4>Приклад: 28 оцінок — це ще не висновок</h4>
+        <p>
+          Учитель провів діагностичну роботу з інформатики у 3-А класі (28 учнів). Отримано 28 чисел — це дані.
+          Далі вчитель упорядкував їх, обчислив середній бал (8,4 з 12) і частку учнів, які виконали роботу
+          на достатньому рівні (0,71). Тепер у нього є не 28 окремих результатів, а два показники, з якими можна
+          працювати: порівнювати з паралельним класом, відстежувати динаміку, планувати корекційну роботу.
+        </p>
+      </div>
+
+      <div class="callout purple">
+        <h4>Аналогія з намистинами</h4>
+        <p>
+          Пояснюючи учням суть статистики, доречно використати аналогію з колекцією намистин: спочатку намистини
+          лежать у купі (дані), потім їх розкладають за кольором (упорядкування), рахують кожну групу (аналіз)
+          і роблять висновок, яких намистин найбільше (інтерпретація). Така сама логіка лежить в основі будь-якого,
+          навіть найскладнішого, статистичного дослідження.
+        </p>
+      </div>
+
+      <div class="callout warn">
+        <h4>Важливо</h4>
+        <p>
+          Дані — це ще не висновок. 28 оцінок у журналі перетворюються на знання лише тоді, коли їх упорядковано,
+          узагальнено й пояснено. Пропущений етап упорядкування робить будь-які обчислення беззмістовними.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s2">
+      <h2>2. Генеральна сукупність (популяція) і вибірка</h2>
+
+      <div class="grid-2">
+        <div class="def-card">
+          <h4>Генеральна сукупність (популяція)</h4>
+          <p>
+            Це вся множина об’єктів, щодо яких дослідник хоче зробити висновок. Приклади з педагогічної практики:
+            усі учні третіх класів міста; усі вчителі початкової школи області; усі завдання з теми «Алгоритми»
+            в підручнику; усі уроки інформатики за чверть в одній школі. Кількість об’єктів у популяції називають
+            обсягом і позначають великою латинською літерою <span class="symbol">N</span>.
+          </p>
+        </div>
+        <div class="def-card">
+          <h4>Вибірка</h4>
+          <p>
+            Це частина генеральної сукупності, відібрана для безпосереднього вивчення. Її обсяг позначають малою
+            латинською літерою <span class="symbol">n</span>. Вибірка виконує роль «представника» популяції
+            в дослідженні: ми вивчаємо невелику частину, а висновок поширюємо на ціле.
+          </p>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 1000 330" role="img" aria-labelledby="popSampleTitle popSampleDesc">
+            <title id="popSampleTitle">Генеральна сукупність і вибірка</title>
+            <desc id="popSampleDesc">Зліва популяція з багатьох точок, справа — вибірка, частина точок виділена зеленим.</desc>
+            <defs>
+              <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#0071e3"/>
+              </marker>
+            </defs>
+
+            <rect x="20" y="28" width="420" height="270" rx="28" fill="#f5f5f7" stroke="#d2d2d7"/>
+            <text x="230" y="70" text-anchor="middle" font-size="19" font-weight="800" fill="#1d1d1f">ГЕНЕРАЛЬНА СУКУПНІСТЬ</text>
+            <text x="230" y="98" text-anchor="middle" font-size="15" fill="#6e6e73">Популяція — усі об’єкти, що цікавлять дослідника</text>
+            <text x="230" y="132" text-anchor="middle" font-size="19" font-weight="800" fill="#0071e3">Обсяг: N = 1240</text>
+
+            <g fill="#8e8e93" opacity="0.9">
+              <circle cx="76" cy="170" r="6"/><circle cx="112" cy="170" r="6"/><circle cx="148" cy="170" r="6"/><circle cx="184" cy="170" r="6"/><circle cx="220" cy="170" r="6"/><circle cx="256" cy="170" r="6"/><circle cx="292" cy="170" r="6"/><circle cx="328" cy="170" r="6"/><circle cx="364" cy="170" r="6"/>
+              <circle cx="76" cy="198" r="6"/><circle cx="112" cy="198" r="6"/><circle cx="148" cy="198" r="6"/><circle cx="184" cy="198" r="6"/><circle cx="220" cy="198" r="6"/><circle cx="256" cy="198" r="6"/><circle cx="292" cy="198" r="6"/><circle cx="328" cy="198" r="6"/><circle cx="364" cy="198" r="6"/>
+              <circle cx="76" cy="226" r="6"/><circle cx="112" cy="226" r="6"/><circle cx="148" cy="226" r="6"/><circle cx="184" cy="226" r="6"/><circle cx="220" cy="226" r="6"/><circle cx="256" cy="226" r="6"/><circle cx="292" cy="226" r="6"/><circle cx="328" cy="226" r="6"/><circle cx="364" cy="226" r="6"/>
+              <circle cx="76" cy="254" r="6"/><circle cx="112" cy="254" r="6"/><circle cx="148" cy="254" r="6"/><circle cx="184" cy="254" r="6"/><circle cx="220" cy="254" r="6"/><circle cx="256" cy="254" r="6"/><circle cx="292" cy="254" r="6"/><circle cx="328" cy="254" r="6"/><circle cx="364" cy="254" r="6"/>
+            </g>
+            <text x="230" y="288" text-anchor="middle" font-size="14" fill="#6e6e73">Наприклад: усі учні 3-х класів міста</text>
+
+            <line x1="455" y1="165" x2="535" y2="165" stroke="#0071e3" stroke-width="4" marker-end="url(#arrow2)"/>
+            <text x="495" y="150" text-anchor="middle" font-size="14" font-weight="700" fill="#0071e3">відбір</text>
+
+            <rect x="560" y="28" width="420" height="270" rx="28" fill="#effff4" stroke="#b7f0c8"/>
+            <text x="770" y="70" text-anchor="middle" font-size="19" font-weight="800" fill="#1d1d1f">ВИБІРКА</text>
+            <text x="770" y="98" text-anchor="middle" font-size="15" fill="#6e6e73">Частина популяції, відібрана для вивчення</text>
+            <text x="770" y="132" text-anchor="middle" font-size="19" font-weight="800" fill="#1f7a38">Обсяг: n = 120</text>
+
+            <g fill="#d2d2d7">
+              <circle cx="616" cy="170" r="6"/><circle cx="652" cy="170" r="6"/><circle cx="688" cy="170" r="6"/><circle cx="724" cy="170" r="6"/><circle cx="760" cy="170" r="6"/><circle cx="796" cy="170" r="6"/><circle cx="832" cy="170" r="6"/><circle cx="868" cy="170" r="6"/><circle cx="904" cy="170" r="6"/>
+              <circle cx="616" cy="198" r="6"/><circle cx="652" cy="198" r="6"/><circle cx="688" cy="198" r="6"/><circle cx="724" cy="198" r="6"/><circle cx="760" cy="198" r="6"/><circle cx="796" cy="198" r="6"/><circle cx="832" cy="198" r="6"/><circle cx="868" cy="198" r="6"/><circle cx="904" cy="198" r="6"/>
+              <circle cx="616" cy="226" r="6"/><circle cx="652" cy="226" r="6"/><circle cx="688" cy="226" r="6"/><circle cx="724" cy="226" r="6"/><circle cx="760" cy="226" r="6"/><circle cx="796" cy="226" r="6"/><circle cx="832" cy="226" r="6"/><circle cx="868" cy="226" r="6"/><circle cx="904" cy="226" r="6"/>
+              <circle cx="616" cy="254" r="6"/><circle cx="652" cy="254" r="6"/><circle cx="688" cy="254" r="6"/><circle cx="724" cy="254" r="6"/><circle cx="760" cy="254" r="6"/><circle cx="796" cy="254" r="6"/><circle cx="832" cy="254" r="6"/><circle cx="868" cy="254" r="6"/><circle cx="904" cy="254" r="6"/>
+            </g>
+            <g fill="#30d158">
+              <circle cx="652" cy="170" r="7"/><circle cx="724" cy="170" r="7"/><circle cx="868" cy="170" r="7"/>
+              <circle cx="616" cy="198" r="7"/><circle cx="760" cy="198" r="7"/><circle cx="904" cy="198" r="7"/>
+              <circle cx="688" cy="226" r="7"/><circle cx="832" cy="226" r="7"/>
+              <circle cx="724" cy="254" r="7"/><circle cx="868" cy="254" r="7"/>
+            </g>
+            <text x="770" y="288" text-anchor="middle" font-size="14" fill="#6e6e73">Наприклад: 120 учнів із 4 шкіл</text>
+          </svg>
+          <figcaption>Схема 2. Співвідношення генеральної сукупності та вибірки</figcaption>
+        </figure>
+      </div>
+
+      <h3>Чому дослідник рідко вивчає всю популяцію?</h3>
+      <div class="grid-3">
+        <div class="mini-card card">
+          <h4>Недоступність</h4>
+          <p>Усі вчителі країни фізично недосяжні для одного дослідника.</p>
+        </div>
+        <div class="mini-card card">
+          <h4>Вартість</h4>
+          <p>Час, зусилля й кошти зростають пропорційно обсягу.</p>
+        </div>
+        <div class="mini-card card">
+          <h4>Руйнівність</h4>
+          <p>Іноді повне обстеження змінює сам об’єкт: тестування всіх учнів класу забирає урок, який планували на вивчення нового матеріалу.</p>
+        </div>
+      </div>
+
+      <p>
+        Водночас вибірка дає змогу дійти висновку про популяцію лише за однієї умови — репрезентативності.
+      </p>
+
+      <div class="callout purple">
+        <h4>Побутова аналогія: борщ і ложка</h4>
+        <p>
+          Щоб оцінити смак борщу, не потрібно з’їсти всю каструлю — достатньо ложки. Але ложку треба взяти після
+          ретельного перемішування: якщо зачерпнути з поверхні, можна набрати самісінького жиру й зробити хибний
+          висновок. Перемішування в статистиці — це випадковий відбір.
+        </p>
+      </div>
+
+      <h3>Способи формування вибірки</h3>
+      <p>Спосіб формування вибірки визначає, наскільки їй можна довіряти. Розгляньмо чотири основні способи.</p>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Спосіб формування</th>
+                <th>Як діє дослідник</th>
+                <th>Приклад у школі</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Проста випадкова</strong></td>
+                <td>Кожен об’єкт має рівний шанс потрапити до вибірки; використовують жеребкування або генератор випадкових чисел.</td>
+                <td>Із 1240 учнів програма випадково обирає 120 номерів у списку.</td>
+              </tr>
+              <tr>
+                <td><strong>Стратифікована</strong></td>
+                <td>Популяцію поділяють на групи (страти) і з кожної беруть пропорційну частку.</td>
+                <td>Окремо відбирають учнів міських і сільських шкіл у тій самій пропорції, що й у популяції.</td>
+              </tr>
+              <tr>
+                <td><strong>Кластерна (гніздова)</strong></td>
+                <td>Одиниця відбору — не окремий учень, а цілий клас або школа.</td>
+                <td>Обирають 4 школи і тестують усіх третьокласників цих шкіл.</td>
+              </tr>
+              <tr>
+                <td><strong>Систематична</strong></td>
+                <td>Відбирають кожен k-й елемент упорядкованого списку.</td>
+                <td>Кожного 10-го учня зі списку за журналом.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <h4>Обережно: вибірка «за зручністю»</h4>
+        <p>
+          Вибірка «за зручністю» — лише свій клас, лише знайомі вчителі, лише ті, хто погодився, — майже завжди
+          зміщена: вона відображає не популяцію, а той осередок, з якого її взято.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Розширений приклад: стратифікація у школі</h4>
+        <p>
+          Уявімо, що серед усіх 1240 третьокласників міста 40 % навчаються в сільських школах, а 60 % — у міських.
+          Якщо дослідник формує вибірку на 120 учнів стратифікованим способом, він має відібрати приблизно
+          48 учнів із сільських шкіл і 72 — із міських. Тоді вибірка відтворює структуру популяції, а не
+          «перекошується» в бік зручніших міських шкіл.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s3">
+      <h2>3. Параметр і статистика: відмінність, позначення, приклади</h2>
+
+      <div class="grid-2">
+        <div class="def-card">
+          <h4>Параметр</h4>
+          <p>
+            Це числова характеристика генеральної сукупності. Параметр описує популяцію повністю, тому є для
+            дослідника істинним, але, як правило, невідомим значенням. Параметри позначають грецькими літерами:
+            <span class="symbol">μ</span> (мю) — середнє, <span class="symbol">σ</span> (сигма) — стандартне
+            відхилення, <span class="symbol">p</span> — частка, <span class="symbol">ρ</span> (ро) — коефіцієнт
+            кореляції.
+          </p>
+        </div>
+        <div class="def-card">
+          <h4>Статистика (вибіркова статистика, оцінка)</h4>
+          <p>
+            Це числова характеристика, обчислена за даними вибірки. Її позначають латинськими літерами:
+            <span class="symbol">x̄</span> — вибіркове середнє, <span class="symbol">s</span> — вибіркове
+            стандартне відхилення, <span class="symbol">p̄</span> — вибіркова частка, <span class="symbol">r</span> —
+            вибірковий коефіцієнт кореляції.
+          </p>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 900 400" role="img" aria-labelledby="paramStatTitle paramStatDesc">
+            <title id="paramStatTitle">Відповідність параметрів і вибіркових статистик</title>
+            <desc id="paramStatDesc">Таблиця відповідності грецьких позначень параметрів і латинських позначень статистик.</desc>
+
+            <rect x="45" y="30" width="330" height="330" rx="28" fill="#e8f2ff" stroke="#b7d7ff"/>
+            <text x="210" y="72" text-anchor="middle" font-size="19" font-weight="800" fill="#0071e3">ПАРАМЕТР</text>
+            <text x="210" y="98" text-anchor="middle" font-size="14" fill="#6e6e73">генеральна сукупність</text>
+
+            <rect x="525" y="30" width="330" height="330" rx="28" fill="#effff4" stroke="#b7f0c8"/>
+            <text x="690" y="72" text-anchor="middle" font-size="19" font-weight="800" fill="#1f7a38">СТАТИСТИКА</text>
+            <text x="690" y="98" text-anchor="middle" font-size="14" fill="#6e6e73">вибірка</text>
+
+            <g font-size="24" font-weight="700" fill="#1d1d1f">
+              <text x="150" y="148" text-anchor="middle">μ</text>
+              <text x="150" y="192" text-anchor="middle">σ</text>
+              <text x="150" y="236" text-anchor="middle">p</text>
+              <text x="150" y="280" text-anchor="middle">ρ</text>
+              <text x="150" y="324" text-anchor="middle">N</text>
+
+              <text x="750" y="148" text-anchor="middle">x̄</text>
+              <text x="750" y="192" text-anchor="middle">s</text>
+              <text x="750" y="236" text-anchor="middle">p̄</text>
+              <text x="750" y="280" text-anchor="middle">r</text>
+              <text x="750" y="324" text-anchor="middle">n</text>
+            </g>
+
+            <g font-size="13" fill="#6e6e73">
+              <text x="270" y="148" text-anchor="middle">середнє</text>
+              <text x="270" y="192" text-anchor="middle">стандартне відхилення</text>
+              <text x="270" y="236" text-anchor="middle">частка</text>
+              <text x="270" y="280" text-anchor="middle">кореляція</text>
+              <text x="270" y="324" text-anchor="middle">обсяг</text>
+
+              <text x="630" y="148" text-anchor="middle">середнє</text>
+              <text x="630" y="192" text-anchor="middle">стандартне відхилення</text>
+              <text x="630" y="236" text-anchor="middle">частка</text>
+              <text x="630" y="280" text-anchor="middle">кореляція</text>
+              <text x="630" y="324" text-anchor="middle">обсяг</text>
+            </g>
+
+            <g stroke="#0071e3" stroke-width="2.5" stroke-dasharray="5 6" opacity="0.65">
+              <line x1="330" y1="140" x2="570" y2="140"/>
+              <line x1="330" y1="184" x2="570" y2="184"/>
+              <line x1="330" y1="228" x2="570" y2="228"/>
+              <line x1="330" y1="272" x2="570" y2="272"/>
+              <line x1="330" y1="316" x2="570" y2="316"/>
+            </g>
+          </svg>
+          <figcaption>Схема 3. Відповідність параметрів і вибіркових статистик</figcaption>
+        </figure>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Характеристика</th>
+                <th>Параметр (популяція)</th>
+                <th>Статистика (вибірка)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Середнє значення</td><td><span class="symbol">μ</span> (мю)</td><td><span class="symbol">x̄</span> (ікс з рискою)</td></tr>
+              <tr><td>Стандартне відхилення</td><td><span class="symbol">σ</span> (сигма)</td><td><span class="symbol">s</span></td></tr>
+              <tr><td>Частка</td><td><span class="symbol">p</span> (пі)</td><td><span class="symbol">p̄</span></td></tr>
+              <tr><td>Коефіцієнт кореляції</td><td><span class="symbol">ρ</span> (ро)</td><td><span class="symbol">r</span></td></tr>
+              <tr><td>Обсяг</td><td><span class="symbol">N</span></td><td><span class="symbol">n</span></td></tr>
+              <tr><td>Алфавіт позначень</td><td>грецькі літери</td><td>латинські літери</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p>
+        Ключова відмінність полягає в природі величини. Параметр — сталий (хоча й невідомий). Статистика — випадкова,
+        бо залежить від того, які саме об’єкти потрапили до вибірки. Одна й та сама статистика, обчислена за різними
+        вибірками з однієї популяції, дає різні числа. Це явище називають <strong>вибірковою мінливістю</strong>.
+      </p>
+
+      <div class="callout purple">
+        <h4>Побутова аналогія: термометр</h4>
+        <p>
+          Параметр — це «справжня температура тіла людини», яку ми ніколи не знаємо абсолютно точно; статистика —
+          показник термометра, який щоразу може відрізнятися на кілька десятих. Ми користуємося показаннями
+          термометра, але пам’ятаємо, що це оцінка, а не сама істина.
+        </p>
+      </div>
+
+      <div class="callout good">
+        <h4>Коректне формулювання висновку</h4>
+        <p>
+          Саме тому коректний висновок звучить не «середній бал третьокласників міста становить 8,4», а
+          «за даними вибірки середній бал оцінюється на рівні 8,4 з похибкою ±0,5». Перше твердження претендує
+          на знання параметра, якого дослідник не має; друге чесно вказує на вибірковий характер оцінки.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Міні-практикум: перепишіть висновок</h4>
+        <p>
+          <strong>Було:</strong> «Усі третьокласники школи мають середній бал 8,4».<br>
+          <strong>Стало:</strong> «За вибіркою з 30 учнів середній бал становить 8,4 (s = 1,6); істинне значення
+          для всієї школи, найімовірніше, лежить у межах приблизно 8,4 ± 0,6».
+        </p>
+      </div>
+
+      <p>
+        Статистика — не сам параметр, а його оцінка. Дві різні вибірки з однієї популяції дадуть різні значення
+        <span class="symbol">x̄</span>; це не помилка дослідника, а фундаментальна властивість вибіркового методу.
+      </p>
+    </section>
+
+    <section class="section" id="s4">
+      <h2>4. Репрезентативність вибірки, вибіркова мінливість і похибка вибірки</h2>
+
+      <p>
+        <strong>Репрезентативність</strong> — це властивість вибірки відтворювати основні характеристики генеральної
+        сукупності в тих самих пропорціях. Образно кажучи, репрезентативна вибірка — це мініатюрна копія популяції.
+        Якщо серед усіх третьокласників міста 40 % навчаються в сільських школах, то й у репрезентативній вибірці
+        їх має бути приблизно 40 %.
+      </p>
+
+      <h3>Три умови репрезентативної вибірки</h3>
+      <div class="grid-3">
+        <div class="condition">
+          <div class="icon">◎</div>
+          <h4>Репрезентативність</h4>
+          <p>Склад вибірки повторює склад популяції.</p>
+        </div>
+        <div class="condition">
+          <div class="icon">↔</div>
+          <h4>Випадковість</h4>
+          <p>Кожен об’єкт має рівний шанс потрапити у вибірку.</p>
+        </div>
+        <div class="condition">
+          <div class="icon">n</div>
+          <h4>Достатній обсяг</h4>
+          <p>Чим більший n, тим менша похибка.</p>
+        </div>
+      </div>
+
+      <p>
+        Репрезентативність забезпечують три взаємопов’язані умови. <strong>Випадковість відбору</strong> означає,
+        що кожен об’єкт популяції має рівний шанс потрапити до вибірки; жоден учень не повинен відбиратися тому,
+        що він «зручний» або «показовий». <strong>Достатній обсяг</strong> означає, що вибірка має бути настільки
+        великою, щоб випадкові відхилення взаємно зрівноважувалися. <strong>Повнота охоплення</strong> означає,
+        що до вибірки мають потрапити представники всіх груп популяції — хлопчики й дівчатка, міські й сільські
+        учні, діти з різним рівнем підготовки.
+      </p>
+
+      <p>
+        <strong>Похибка вибірки</strong> (стандартна похибка) — це розбіжність між статистикою та параметром,
+        зумовлена самим фактом відбору. Вона не є недбалістю дослідника; вона неминуча. Її величина орієнтовно
+        обернено пропорційна кореню з обсягу вибірки.
+      </p>
+
+      <div class="formula">
+        <span class="big">похибка ≈ σ / √n</span>
+        <span class="note">Практичний висновок: щоб зменшити похибку вдвічі, обсяг вибірки треба збільшити вчетверо.</span>
+      </div>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 900 360" role="img" aria-labelledby="errorTitle errorDesc">
+            <title id="errorTitle">Зменшення відносної похибки зі зростанням обсягу вибірки</title>
+            <desc id="errorDesc">Стовпчикова діаграма: відносна похибка зменшується зі збільшенням n.</desc>
+
+            <line x1="80" y1="300" x2="840" y2="300" stroke="#d2d2d7" stroke-width="2"/>
+            <line x1="80" y1="60" x2="80" y2="300" stroke="#d2d2d7" stroke-width="2"/>
+            <text x="35" y="190" font-size="13" fill="#6e6e73" transform="rotate(-90 35 190)">відносна похибка</text>
+            <text x="460" y="340" text-anchor="middle" font-size="13" fill="#6e6e73">обсяг вибірки n</text>
+
+            <g fill="#0071e3">
+              <rect x="125" y="100" width="70" height="200" rx="10"/>
+              <rect x="260" y="158" width="70" height="142" rx="10" fill="#2997ff"/>
+              <rect x="395" y="200" width="70" height="100" rx="10" fill="#64b5ff"/>
+              <rect x="530" y="229" width="70" height="71" rx="10" fill="#8ecbff"/>
+              <rect x="665" y="250" width="70" height="50" rx="10" fill="#b7ddff"/>
+            </g>
+
+            <g font-size="14" fill="#1d1d1f" text-anchor="middle" font-weight="700">
+              <text x="160" y="92">1,00</text>
+              <text x="295" y="150">0,71</text>
+              <text x="430" y="192">0,50</text>
+              <text x="565" y="221">0,35</text>
+              <text x="700" y="242">0,25</text>
+            </g>
+
+            <g font-size="14" fill="#6e6e73" text-anchor="middle">
+              <text x="160" y="322">30</text>
+              <text x="295" y="322">60</text>
+              <text x="430" y="322">120</text>
+              <text x="565" y="322">240</text>
+              <text x="700" y="322">480</text>
+            </g>
+
+            <text x="450" y="42" text-anchor="middle" font-size="16" font-weight="800" fill="#1d1d1f">Похибка зменшується, але повільно</text>
+          </svg>
+          <figcaption>Схема 5. Ілюстративний графік: відносна похибка ∝ 1/√n</figcaption>
+        </figure>
+      </div>
+
+      <p>
+        Для студентських досліджень орієнтуються на такі практичні межі: <span class="symbol">n ≥ 30</span> —
+        мінімальний обсяг для застосування більшості статистичних методів; для порівняння двох груп — не менше
+        25–30 учнів у кожній; для кореляційного аналізу — не менше 30–50 спостережень. Ці межі не є догмою,
+        але вони дисциплінують дослідника й захищають від надто сміливих висновків на п’яти спостереженнях.
+      </p>
+
+      <div class="callout warn">
+        <h4>Правило орієнтовне</h4>
+        <p>
+          Щоб зменшити похибку вибірки вдвічі, обсяг вибірки треба збільшити вчетверо. Тому збільшення n з 30 до 60
+          дає помітний виграш у точності, а з 300 до 330 — майже непомітний.
+        </p>
+      </div>
+
+      <div class="example">
+        <h4>Розширений приклад: що дає збільшення n</h4>
+        <p>
+          Якщо дослідник має n = 30 і хоче зменшити похибку приблизно вдвічі, йому потрібно орієнтуватися на
+          n ≈ 120. Збільшення з 30 до 60 зменшить похибку лише приблизно в 1,4 раза, а з 30 до 120 — приблизно
+          вдвічі. Саме тому в інструкційних картках зазначають не «бажано більше», а конкретний мінімальний обсяг.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="s5">
+      <h2>5. Наскрізний приклад: від популяції до коректного статистичного висновку</h2>
+
+      <p>
+        Розгляньмо типову ситуацію з практики студентки-практикантки. Вона перевіряє гіпотезу: чи підвищує
+        інтерактивний тренажер швидкість складання алгоритмів у третьокласників.
+        <strong>Генеральна сукупність</strong> — усі 96 учнів третіх класів школи
+        (<span class="symbol">N = 96</span>). <strong>Вибірка</strong> — 30 учнів 3-А і 3-Б класів
+        (<span class="symbol">n = 30</span>), відібраних випадково зі списків.
+      </p>
+
+      <div class="grid-2">
+        <div class="def-card">
+          <h4>Популяція</h4>
+          <p>Усі 96 учнів третіх класів школи. Параметри <span class="symbol">μ</span>, <span class="symbol">p</span>, <span class="symbol">σ</span> невідомі.</p>
+        </div>
+        <div class="def-card">
+          <h4>Вибірка</h4>
+          <p>30 учнів, відібраних випадково. Для них обчислено <span class="symbol">x̄ = 8,4</span>, <span class="symbol">p̄ = 0,73</span>, <span class="symbol">s = 1,6</span>.</p>
+        </div>
+      </div>
+
+      <p>
+        Після проведення діагностичної роботи студентка отримала результати, подані в таблиці. Зверніть увагу
+        на принципову різницю: ліворуч — те, що дослідниці насправді недоступне, праворуч — те, що вона реально
+        обчислила.
+      </p>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Показник</th>
+                <th>Параметр (усі 96 учнів)</th>
+                <th>Статистика (30 учнів)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Середній бал (з 12)</td><td><span class="symbol">μ</span> — невідомий</td><td><span class="symbol">x̄ = 8,4</span></td></tr>
+              <tr><td>Частка учнів, які виконали роботу</td><td><span class="symbol">p</span> — невідома</td><td><span class="symbol">p̄ = 0,73</span></td></tr>
+              <tr><td>Стандартне відхилення</td><td><span class="symbol">σ</span> — невідоме</td><td><span class="symbol">s = 1,6</span></td></tr>
+              <tr><td>Обсяг</td><td><span class="symbol">N = 96</span></td><td><span class="symbol">n = 30</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <figure>
+          <svg viewBox="0 0 900 330" role="img" aria-labelledby="scoreTitle scoreDesc">
+            <title id="scoreTitle">Ілюстративний розподіл балів у вибірці 30 учнів</title>
+            <desc id="scoreDesc">Стовпчикова діаграма частот балів від 5 до 12; достатній рівень позначено від 8 балів.</desc>
+
+            <line x1="85" y1="275" x2="825" y2="275" stroke="#d2d2d7" stroke-width="2"/>
+            <line x1="85" y1="45" x2="85" y2="275" stroke="#d2d2d7" stroke-width="2"/>
+            <text x="42" y="165" font-size="13" fill="#6e6e73" transform="rotate(-90 42 165)">кількість учнів</text>
+            <text x="455" y="315" text-anchor="middle" font-size="13" fill="#6e6e73">бал (з 12)</text>
+
+            <g fill="#0071e3">
+              <rect x="120" y="239" width="54" height="36" rx="8"/>
+              <rect x="205" y="203" width="54" height="72" rx="8"/>
+              <rect x="290" y="95" width="54" height="180" rx="8"/>
+              <rect x="375" y="131" width="54" height="144" rx="8"/>
+              <rect x="460" y="167" width="54" height="108" rx="8"/>
+              <rect x="545" y="203" width="54" height="72" rx="8"/>
+              <rect x="630" y="239" width="54" height="36" rx="8"/>
+              <rect x="715" y="257" width="54" height="18" rx="8"/>
+            </g>
+
+            <g font-size="13" fill="#1d1d1f" text-anchor="middle" font-weight="700">
+              <text x="147" y="229">1</text>
+              <text x="232" y="193">2</text>
+              <text x="317" y="85">5</text>
+              <text x="402" y="121">8</text>
+              <text x="487" y="157">7</text>
+              <text x="572" y="193">4</text>
+              <text x="657" y="229">2</text>
+              <text x="742" y="247">1</text>
+            </g>
+
+            <g font-size="14" fill="#6e6e73" text-anchor="middle">
+              <text x="147" y="297">5</text>
+              <text x="232" y="297">6</text>
+              <text x="317" y="297">7</text>
+              <text x="402" y="297">8</text>
+              <text x="487" y="297">9</text>
+              <text x="572" y="297">10</text>
+              <text x="657" y="297">11</text>
+              <text x="742" y="297">12</text>
+            </g>
+
+            <line x1="352" y1="55" x2="352" y2="275" stroke="#30d158" stroke-width="3" stroke-dasharray="8 6"/>
+            <text x="360" y="70" font-size="12" fill="#1f7a38">достатній рівень: 8+ балів</text>
+            <text x="455" y="32" text-anchor="middle" font-size="16" font-weight="800" fill="#1d1d1f">Ілюстративний розподіл балів (n = 30)</text>
+          </svg>
+          <figcaption>Схема 6. Приклад розподілу, узгодженого з наведеними показниками</figcaption>
+        </figure>
+      </div>
+
+      <div class="callout good">
+        <h4>Коректний висновок у звіті</h4>
+        <p>
+          «За результатами вибіркового дослідження (n = 30) середній бал становить 8,4 (s = 1,6); частка учнів,
+          які виконали роботу, — 0,73». Істинне значення параметра <span class="symbol">μ</span>, найімовірніше,
+          лежить у межах приблизно 8,4 ± 0,6. Твердження «середній бал усіх третьокласників школи дорівнює 8,4»
+          було б статистично некоректним, адже воно приписує параметру точне значення, якого дослідниця
+          не отримувала.
+        </p>
+      </div>
+
+      <div class="callout warn">
+        <h4>Що сталося б, якби студентка обмежилася п’ятьма учнями?</h4>
+        <p>
+          Похибка зросла б більш ніж удвічі, а висновок про всю школу втратив би надійність. Саме тому
+          в інструкційній картці до практичної роботи завжди зазначають мінімальний обсяг вибірки: це не
+          формальність, а умова, за якої статистичний висновок узагалі має сенс.
+        </p>
+      </div>
+
+      <h3>Алгоритм коректного статистичного висновку</h3>
+      <div class="grid-2">
+        <div class="card">
+          <h4>1. Опишіть популяцію</h4>
+          <p>Хто саме вас цікавить? Скільки об’єктів у популяції? Який параметр ви хочете оцінити?</p>
+        </div>
+        <div class="card">
+          <h4>2. Опишіть вибірку</h4>
+          <p>Який обсяг n? Як саме відбирали? Чи є відбір випадковим? Чи відтворює вибірка структуру популяції?</p>
+        </div>
+        <div class="card">
+          <h4>3. Подайте статистики</h4>
+          <p>Вкажіть <span class="symbol">x̄</span>, <span class="symbol">s</span>, <span class="symbol">p̄</span> та обсяг n. Не називайте їх параметрами.</p>
+        </div>
+        <div class="card">
+          <h4>4. Сформулюйте висновок як оцінку</h4>
+          <p>«За даними вибірки…», «оцінюється на рівні…», «з похибкою…» — саме так висновок залишається чесним.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="questions">
+      <h2>Контрольні питання</h2>
+
+      <div class="question"><span class="qnum">1</span><p>Що вивчає статистика? Наведіть приклад застосування статистики в початковій школі.</p></div>
+      <div class="question"><span class="qnum">2</span><p>Чим відрізняються сирі дані та статистичні показники? Наведіть приклад переходу від одного до іншого.</p></div>
+      <div class="question"><span class="qnum">3</span><p>Дайте означення генеральної сукупності. Наведіть два приклади популяцій з педагогічної практики.</p></div>
+      <div class="question"><span class="qnum">4</span><p>Що називають вибіркою? Якими літерами позначають обсяг популяції та обсяг вибірки?</p></div>
+      <div class="question"><span class="qnum">5</span><p>Назвіть три причини, чому дослідник рідко вивчає всю генеральну сукупність.</p></div>
+      <div class="question"><span class="qnum">6</span><p>Що таке репрезентативність вибірки? Які три умови її забезпечують?</p></div>
+      <div class="question"><span class="qnum">7</span><p>Охарактеризуйте просту випадкову, стратифіковану та кластерну вибірки. Наведіть шкільний приклад кожної.</p></div>
+      <div class="question"><span class="qnum">8</span><p>Що таке параметр? Якими літерами його позначають і чому саме ними?</p></div>
+      <div class="question"><span class="qnum">9</span><p>Що таке статистика (вибіркова оцінка)? Чому її позначають латинськими літерами?</p></div>
+      <div class="question"><span class="qnum">10</span><p>Поясніть різницю між μ і x̄, між σ і s, між p і p̄.</p></div>
+      <div class="question"><span class="qnum">11</span><p>Що таке похибка вибірки? Від чого вона залежить і як її можна зменшити?</p></div>
+      <div class="question"><span class="qnum">12</span><p>Чому статистика, обчислена за вибіркою, є випадковою величиною, а параметр — ні?</p></div>
+    </section>
+
+    <section class="section" id="sources">
+      <h2>Рекомендовані джерела</h2>
+
+      <div class="source">
+        <span class="snum">1</span>
+        <p>Дубасенюк О. А. Методологія та методи науково-педагогічного дослідження. Житомир : Полісся, 2016. 256 с.</p>
+      </div>
+      <div class="source">
+        <span class="snum">2</span>
+        <p>
+          Методичні рекомендації до виконання та захисту курсових робіт для здобувачів ОС «Бакалавр»
+          спеціальності 012 «Дошкільна освіта» / уклад. Н. В. Лісневська, Л. П. Загородня, С. А. Тітаренко,
+          І. Г. Данильченко, І. В. Корякіна, Н. М. Гордій. Глухів, 2023. 65 с.
+        </p>
+      </div>
+      <div class="source">
+        <span class="snum">3</span>
+        <p>Руденко В. М. Математична статистика. Київ : Центр учбової літератури, 2012. 304 с.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Лекція 12 · Основні поняття статистики: вибірка, популяція, параметр, статистика · матеріал підготовлено для друку та роботи в аудиторії.
+    </footer>
+  </main>
+</body>
+</html>
