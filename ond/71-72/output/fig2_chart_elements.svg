@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 868 190" width="868" height="190">
+    <style>
+      text { font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; fill: #1d1d1f; }
+      .title { font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .card { fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; }
+      .card-title { font-size: 12.5px; font-weight: 700; }
+      .item { font-size: 11px; }
+      .arrow { fill: none; stroke: #86868b; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  
+    <rect width="868" height="190" fill="#ffffff" />
+    <text x="434" y="32" class="title">Обов'язкові структурні елементи наукової діаграми</text>
+  
+    <!-- Карточка 1 -->
+    <g transform="translate(20, 52)">
+      <rect width="192" height="122" rx="10" class="card" />
+      <rect x="12" y="8" width="168" height="7" rx="3.5" fill="#0071e3" />
+      <text x="12" y="34" class="card-title">1. Назва та номер</text>
+      <text x="12" y="56" class="item">Підпис під рисунком:</text>
+      <text x="12" y="76" class="item" style="font-weight:700">Рис. 1. Розподіл учнів...</text>
+      <text x="12" y="96" class="item">Без повтору в полі графіка</text>
+    </g>
+  
+    <path d="M 217 113 H 227 M 223 109 L 227 113 L 223 117" class="arrow" />
+  
+    <!-- Карточка 2 -->
+    <g transform="translate(232, 52)">
+      <rect width="192" height="122" rx="10" class="card" />
+      <rect x="12" y="8" width="168" height="7" rx="3.5" fill="#248a3d" />
+      <text x="12" y="34" class="card-title">2. Осі та шкала</text>
+      <text x="12" y="56" class="item">Підписи осей X та Y</text>
+      <text x="12" y="76" class="item">Одиниці виміру (%, бали)</text>
+      <text x="12" y="96" class="item">Початок осі Y з нуля</text>
+    </g>
+  
+    <path d="M 429 113 H 439 M 435 109 L 439 113 L 435 117" class="arrow" />
+  
+    <!-- Карточка 3 -->
+    <g transform="translate(444, 52)">
+      <rect width="192" height="122" rx="10" class="card" />
+      <rect x="12" y="8" width="168" height="7" rx="3.5" fill="#c93400" />
+      <text x="12" y="34" class="card-title">3. Ряди та легенда</text>
+      <text x="12" y="56" class="item">Чіткий контраст кольорів</text>
+      <text x="12" y="76" class="item">Легенда для 2+ рядів</text>
+      <text x="12" y="96" class="item">Підписи значень даних</text>
+    </g>
+  
+    <path d="M 641 113 H 651 M 647 109 L 651 113 L 647 117" class="arrow" />
+  
+    <!-- Карточка 4 -->
+    <g transform="translate(656, 52)">
+      <rect width="192" height="122" rx="10" class="card" />
+      <rect x="12" y="8" width="168" height="7" rx="3.5" fill="#6e30a8" />
+      <text x="12" y="34" class="card-title">4. Посилання в тексті</text>
+      <text x="12" y="56" class="item">Згадка у тексті звіту</text>
+      <text x="12" y="76" class="item">Аналітичний висновок</text>
+      <text x="12" y="96" class="item">Пояснення тенденцій</text>
+    </g>
+  </svg>

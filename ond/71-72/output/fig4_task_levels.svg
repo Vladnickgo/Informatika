@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 884 216" width="884" height="216">
+    <style>
+      text { font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; fill: #1d1d1f; }
+      .title { font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .card { fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; }
+      .badge { font-size: 10.5px; font-weight: 700; }
+      .card-title { font-size: 12.8px; font-weight: 700; }
+      .item { font-size: 11px; }
+      .arrow { fill: none; stroke: #86868b; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  
+    <rect width="884" height="216" fill="#ffffff" />
+    <text x="442" y="32" class="title">Алгоритм виконання різнорівневих практичних завдань</text>
+  
+    <!-- Карточка 1 -->
+    <g transform="translate(20, 52)">
+      <rect width="268" height="146" rx="10" class="card" />
+      <rect x="14" y="8" width="240" height="7" rx="3.5" fill="#0071e3" />
+      <text x="14" y="33" class="badge" style="fill: #0071e3">БАЗОВИЙ (до 5 балів)</text>
+      <text x="14" y="52" class="card-title">1️⃣ Рівень 1. Репродуктивний</text>
+      <text x="14" y="74" class="item"></text>
+      <text x="14" y="94" class="item">• Введення вибірки у таблицю</text>
+      <text x="14" y="112" class="item">• Побудова стовпчастої діаграми</text>
+      <text x="14" y="130" class="item">• Оформлення осей і заголовка</text>
+    </g>
+  
+    <path d="M 293 125 H 303 M 299 121 L 303 125 L 299 129" class="arrow" />
+  
+    <!-- Карточка 2 -->
+    <g transform="translate(308, 52)">
+      <rect width="268" height="146" rx="10" class="card" />
+      <rect x="14" y="8" width="240" height="7" rx="3.5" fill="#c93400" />
+      <text x="14" y="33" class="badge" style="fill: #c93400">СЕРЕДНІЙ (до 9 балів)</text>
+      <text x="14" y="52" class="card-title">2️⃣ Рівень 2. Продуктивний</text>
+      <text x="14" y="74" class="item"></text>
+      <text x="14" y="94" class="item">• Обчислення частот і часток (%)</text>
+      <text x="14" y="112" class="item">• Комбінована діаграма динаміки</text>
+      <text x="14" y="130" class="item">• Порівняння двох груп учнів</text>
+    </g>
+  
+    <path d="M 581 125 H 591 M 587 121 L 591 125 L 587 129" class="arrow" />
+  
+    <!-- Карточка 3 -->
+    <g transform="translate(596, 52)">
+      <rect width="268" height="146" rx="10" class="card" />
+      <rect x="14" y="8" width="240" height="7" rx="3.5" fill="#248a3d" />
+      <text x="14" y="33" class="badge" style="fill: #248a3d">ВИСОКИЙ (до 12 балів)</text>
+      <text x="14" y="52" class="card-title">3️⃣ Рівень 3. Творчий</text>
+      <text x="14" y="74" class="item"></text>
+      <text x="14" y="94" class="item">• Добір оптимальної моделі графіка</text>
+      <text x="14" y="112" class="item">• Візуалізація власного мінідослідження</text>
+      <text x="14" y="130" class="item">• Формулювання наукових висновків</text>
+    </g>
+  </svg>

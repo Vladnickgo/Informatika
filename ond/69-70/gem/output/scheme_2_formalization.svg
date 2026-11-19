@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="691.2pt" height="221.184pt" viewBox="0 0 691.2 221.184" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-18T15:15:01.191750</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 221.184 
+L 691.2 221.184 
+L 691.2 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 29.214 197.6328 
+L 156.996 197.6328 
+Q 168.156 197.6328 168.156 186.5448 
+L 168.156 56.8152 
+Q 168.156 45.7272 156.996 45.7272 
+L 29.214 45.7272 
+Q 18.054 45.7272 18.054 56.8152 
+L 18.054 186.5448 
+Q 18.054 197.6328 29.214 197.6328 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 196.614 197.6328 
+L 324.396 197.6328 
+Q 335.556 197.6328 335.556 186.5448 
+L 335.556 56.8152 
+Q 335.556 45.7272 324.396 45.7272 
+L 196.614 45.7272 
+Q 185.454 45.7272 185.454 56.8152 
+L 185.454 186.5448 
+Q 185.454 197.6328 196.614 197.6328 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 364.014 197.6328 
+L 491.796 197.6328 
+Q 502.956 197.6328 502.956 186.5448 
+L 502.956 56.8152 
+Q 502.956 45.7272 491.796 45.7272 
+L 364.014 45.7272 
+Q 352.854 45.7272 352.854 56.8152 
+L 352.854 186.5448 
+Q 352.854 197.6328 364.014 197.6328 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 531.414 197.6328 
+L 661.986 197.6328 
+Q 673.146 197.6328 673.146 186.5448 
+L 673.146 56.8152 
+Q 673.146 45.7272 661.986 45.7272 
+L 531.414 45.7272 
+Q 520.254 45.7272 520.254 56.8152 
+L 520.254 186.5448 
+Q 520.254 197.6328 531.414 197.6328 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="345.6" y="31.151247" transform="rotate(-0 345.6 31.151247)">КОНВЕЄР ФОРМАЛІЗАЦІЇ ЕМПІРИЧНИХ ДАНИХ</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 36.468 76.2192 
+L 88.5015 76.2192 
+Q 96.3135 76.2192 96.3135 68.4576 
+L 96.3135 62.9136 
+Q 96.3135 55.152 88.5015 55.152 
+L 36.468 55.152 
+Q 28.656 55.152 28.656 62.9136 
+L 28.656 68.4576 
+Q 28.656 76.2192 36.468 76.2192 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 203.868 76.2192 
+L 255.9015 76.2192 
+Q 263.7135 76.2192 263.7135 68.4576 
+L 263.7135 62.9136 
+Q 263.7135 55.152 255.9015 55.152 
+L 203.868 55.152 
+Q 196.056 55.152 196.056 62.9136 
+L 196.056 68.4576 
+Q 196.056 76.2192 203.868 76.2192 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #6e30a8"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 371.268 76.2192 
+L 423.3015 76.2192 
+Q 431.1135 76.2192 431.1135 68.4576 
+L 431.1135 62.9136 
+Q 431.1135 55.152 423.3015 55.152 
+L 371.268 55.152 
+Q 363.456 55.152 363.456 62.9136 
+L 363.456 68.4576 
+Q 363.456 76.2192 371.268 76.2192 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 538.668 76.2192 
+L 591.957 76.2192 
+Q 599.769 76.2192 599.769 68.4576 
+L 599.769 62.9136 
+Q 599.769 55.152 591.957 55.152 
+L 538.668 55.152 
+Q 530.856 55.152 530.856 62.9136 
+L 530.856 68.4576 
+Q 530.856 76.2192 538.668 76.2192 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #248a3d"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="62.48475" y="68.582944" transform="rotate(-0 62.48475 68.582944)">КРОК 1</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="30.33" y="96.630769" transform="rotate(-0 30.33 96.630769)">Шифрування</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(30.33 116.178281)">Заміна ПІБ учнів</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(30.33 130.000366)">на анонімні коди</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(30.33 143.82245)">(У-01, У-02...)</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="229.88475" y="68.582944" transform="rotate(-0 229.88475 68.582944)">КРОК 2</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="197.73" y="96.529206" transform="rotate(-0 197.73 96.529206)">Кодування</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(197.73 116.178281)">Переведення відповідей</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(197.73 130.000366)">у числа (Так = 1,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(197.73 143.82245)">Частково = 0,5, Ні = 0)</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="397.28475" y="68.582944" transform="rotate(-0 397.28475 68.582944)">КРОК 3</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="365.13" y="96.630769" transform="rotate(-0 365.13 96.630769)">Зведена матриця</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(365.13 116.178281)">Внесення даних</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(365.13 130.2589)">у таблицю Excel /</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(365.13 144.339519)">Google Таблиці</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="565.3125" y="68.582944" transform="rotate(-0 565.3125 68.582944)">КРОК 4</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="532.53" y="96.630769" transform="rotate(-0 532.53 96.630769)">Аналіз і висновок</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(532.53 116.178281)">Підрахунок середніх,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(532.53 130.2589)">відсотків та побудова</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #515154" transform="translate(532.53 144.080984)">діаграм рівнів</text>
+   </g>
+   <g id="patch_10">
+    <path d="M 171.829182 121.68 
+Q 176.805286 121.68 180.117057 121.68 
+" clip-path="url(#p8e46485e14)" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 173.117057 117.18 
+L 180.117057 121.68 
+L 173.117057 126.18 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 339.229182 121.68 
+Q 344.205286 121.68 347.517057 121.68 
+" clip-path="url(#p8e46485e14)" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 340.517057 117.18 
+L 347.517057 121.68 
+L 340.517057 126.18 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 506.629182 121.68 
+Q 511.605286 121.68 514.917057 121.68 
+" clip-path="url(#p8e46485e14)" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 507.917057 117.18 
+L 514.917057 121.68 
+L 507.917057 126.18 
+z
+" clip-path="url(#p8e46485e14)" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p8e46485e14">
+   <rect x="10.8" y="10.8" width="669.6" height="199.584"/>
+  </clipPath>
+ </defs>
+</svg>

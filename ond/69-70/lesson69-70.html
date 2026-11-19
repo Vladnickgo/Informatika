@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практичне заняття 12 | Емпіричні методи дослідження</title>
+    <style>
+        :root {
+            --bg-page: #F5F5F7;
+            --bg-card: #FFFFFF;
+            --text-primary: #1D1D1F;
+            --text-secondary: #6E6E73;
+            --text-tertiary: #86868B;
+            --accent-blue: #0071E3;
+            --accent-blue-light: #E8F2FC;
+            --accent-green: #28CD41;
+            --accent-green-dark: #1D8F30;
+            --accent-green-light: #EAF9ED;
+            --accent-orange: #FF9500;
+            --accent-orange-dark: #C97500;
+            --accent-orange-light: #FFF4E5;
+            --accent-purple: #AF52DE;
+            --accent-purple-light: #F6ECFC;
+            --accent-red: #FF3B30;
+            --accent-red-light: #FFEBEB;
+            --border-light: #E5E5EA;
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            padding: 32px 20px;
+        }
+
+        .container {
+            max-width: 1020px;
+            margin: 0 auto;
+        }
+
+        /* Print Button Bar */
+        .action-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .btn-print {
+            background-color: var(--text-primary);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 980px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-print:hover {
+            background-color: #333336;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Header */
+        .hero-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 40px 44px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-blue-light);
+            color: var(--accent-blue);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 980px;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .hero-meta-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+            margin-top: 28px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .meta-box h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+        }
+
+        .meta-box p, .meta-box li {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .meta-box ul {
+            padding-left: 18px;
+        }
+
+        .meta-box li {
+            margin-bottom: 4px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 36px 40px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 28px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .section-num {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: var(--text-primary);
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+        }
+
+        .lead-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        /* Diagrams & Visuals (SVG + Apple Cards) */
+        .diagram-wrapper {
+            background: #FAFAFC;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .diagram-caption {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-top: 14px;
+            font-weight: 500;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .method-pill {
+            background: #FFFFFF;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 18px 16px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-pill::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 16px;
+            right: 16px;
+            height: 4px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .method-pill.blue::before { background: var(--accent-blue); }
+        .method-pill.green::before { background: var(--accent-green); }
+        .method-pill.orange::before { background: var(--accent-orange); }
+        .method-pill.purple::before { background: var(--accent-purple); }
+
+        .method-icon {
+            width: 40px;
+            height: 40px;
+            margin: 4px auto 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .method-pill.blue .method-icon { background: var(--accent-blue-light); color: var(--accent-blue); }
+        .method-pill.green .method-icon { background: var(--accent-green-light); color: var(--accent-green-dark); }
+        .method-pill.orange .method-icon { background: var(--accent-orange-light); color: var(--accent-orange-dark); }
+        .method-pill.purple .method-icon { background: var(--accent-purple-light); color: var(--accent-purple); }
+
+        .method-pill h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .method-pill p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14.5px;
+        }
+
+        th {
+            background-color: #F5F5F7;
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr.summary-row td {
+            background-color: #FAFAFC;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-top: 2px solid var(--border-light);
+        }
+
+        /* Callout / Example Boxes */
+        .example-box {
+            background: #F9F9FB;
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+
+        .example-box.green { border-left-color: var(--accent-green-dark); }
+        .example-box.orange { border-left-color: var(--accent-orange); }
+        .example-box.purple { border-left-color: var(--accent-purple); }
+
+        .example-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .example-box.green .example-label { color: var(--accent-green-dark); }
+        .example-box.orange .example-label { color: var(--accent-orange-dark); }
+        .example-box.purple .example-label { color: var(--accent-purple); }
+
+        .example-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        /* Good vs Bad Comparison Grid */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 18px 0;
+        }
+
+        .compare-card {
+            padding: 16px 18px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+        }
+
+        .compare-bad {
+            background: var(--accent-red-light);
+            border: 1px solid rgba(255, 59, 48, 0.2);
+        }
+
+        .compare-good {
+            background: var(--accent-green-light);
+            border: 1px solid rgba(40, 205, 65, 0.25);
+        }
+
+        .compare-tag {
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .compare-bad .compare-tag { color: var(--accent-red); }
+        .compare-good .compare-tag { color: var(--accent-green-dark); }
+
+        /* Checklist / Requirements */
+        .req-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .req-list li {
+            background: #FAFAFC;
+            border: 1px solid var(--border-light);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 14.5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .check-icon {
+            color: var(--accent-blue);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Step Flow (5 steps) */
+        .steps-flow {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            position: relative;
+        }
+
+        .step-node {
+            background: #FFFFFF;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 16px 12px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-node::before {
+            content: "";
+            display: block;
+            height: 4px;
+            border-radius: 4px;
+            background: var(--accent-blue);
+            margin-bottom: 12px;
+        }
+
+        .step-node:last-child::before {
+            background: var(--accent-green);
+        }
+
+        .step-node h5 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .step-node p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Task Levels */
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            margin: 24px 0 14px;
+        }
+
+        .level-1 { background: var(--accent-blue-light); color: var(--accent-blue); }
+        .level-2 { background: var(--accent-green-light); color: var(--accent-green-dark); }
+        .level-3 { background: var(--accent-purple-light); color: var(--accent-purple); }
+
+        .level-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .level-time {
+            font-size: 14px;
+            font-weight: 600;
+            background: #FFFFFF;
+            padding: 4px 12px;
+            border-radius: 980px;
+        }
+
+        /* Scale Bar */
+        .scale-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .scale-item {
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .scale-score {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .scale-grade {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Literature */
+        .lit-list {
+            padding-left: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .lit-list li {
+            margin-bottom: 6px;
+        }
+
+        /* =========================================================
+           PRINT STYLES - PREVENT PAGE BREAKS INSIDE BLOCKS
+           ========================================================= */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 14mm 14mm 14mm 14mm;
+            }
+
+            body {
+                background-color: #FFFFFF !important;
+                padding: 0 !important;
+                font-size: 11pt;
+                color: #000000;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .action-bar {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .hero-card,
+            .section-card {
+                box-shadow: none !important;
+                border: 1px solid #D1D1D6 !important;
+                padding: 20px 24px !important;
+                margin-bottom: 16px !important;
+                border-radius: 12px !important;
+            }
+
+            /* Critical: Prevent breaking blocks across pages */
+            .hero-card,
+            .diagram-wrapper,
+            .example-box,
+            .compare-grid,
+            .table-container,
+            .method-pill,
+            .step-node,
+            .scale-grid,
+            .level-block,
+            .req-list li,
+            tr,
+            blockquote {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            h1, h2, h3, h4, .section-header, .level-header {
+                break-after: avoid !important;
+                page-break-after: avoid !important;
+            }
+
+            /* Keep section intro with first content */
+            .section-header + .lead-text {
+                break-after: avoid !important;
+                page-break-after: avoid !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-meta-grid,
+            .methods-grid,
+            .compare-grid,
+            .req-list,
+            .steps-flow,
+            .scale-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-card, .section-card {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Кнопка друку (ховається при друку) -->
+    <div class="action-bar">
+        <button class="btn-print" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Роздрукувати / Зберегти в PDF
+        </button>
+    </div>
+
+    <!-- ВСТУПНИЙ БЛОК (HERO) -->
+    <header class="hero-card">
+        <span class="hero-badge">Практичне заняття № 12</span>
+        <h1 class="hero-title">Спостереження, тестування, анкетування, стандартизоване оцінювання та формалізація їхніх результатів</h1>
+        
+        <div class="hero-meta-grid">
+            <div class="meta-box">
+                <h3>Мета заняття</h3>
+                <p>Формувати вміння проводити спостереження, тестування, анкетування, стандартизоване оцінювання та формалізувати їхні результати; розвивати практичні навички збору емпіричних даних; виховувати відповідальність за достовірність і етичність збору даних.</p>
+                
+                <h3 style="margin-top: 18px;">Рекомендована література</h3>
+                <ol class="lit-list">
+                    <li>Лимар Ю. М. <em>Основи науково-педагогічних досліджень</em>. Чернігів : ЧНПУ ім. Т. Г. Шевченка, 2011. 56 с.</li>
+                    <li>Сисоєва С. О., Кристопчук Т. Є. <em>Методологія науково-педагогічних досліджень</em>. Рівне : Волинські обереги, 2013. 360 с.</li>
+                </ol>
+            </div>
+            
+            <div class="meta-box">
+                <h3>Обладнання та програмне забезпечення</h3>
+                <ul>
+                    <li>Інструкційні картки до практичного заняття;</li>
+                    <li>Зошит для практичних робіт, ручка, олівець, лінійка;</li>
+                    <li>ПК із текстовим редактором (Microsoft Word / Google Документи);</li>
+                    <li>Табличний процесор (Microsoft Excel / Google Таблиці);</li>
+                    <li>Бланки протоколу спостереження, анкети й тесту.</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- РОЗДІЛ 1 -->
+    <section class="section-card">
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2 class="section-title">Емпіричні методи в педагогічному дослідженні</h2>
+        </div>
+        <p class="lead-text">
+            <strong>Емпіричні методи</strong> дають досліднику первинний фактичний матеріал. До основних з них належать спостереження, тестування, анкетування та стандартизоване оцінювання. Кожен метод має свою мету, інструмент і форму фіксації результатів, тому в реальному дослідженні їх зазвичай поєднують.
+        </p>
+
+        <!-- Рис. 1: Схема методів -->
+        <div class="diagram-wrapper">
+            <div class="methods-grid">
+                <div class="method-pill blue">
+                    <div class="method-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </div>
+                    <h4>Спостереження</h4>
+                    <p>бачу і протоколюю</p>
+                </div>
+                <div class="method-pill green">
+                    <div class="method-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                    </div>
+                    <h4>Тестування</h4>
+                    <p>вимірюю завданнями</p>
+                </div>
+                <div class="method-pill orange">
+                    <div class="method-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    </div>
+                    <h4>Анкетування</h4>
+                    <p>питаю письмово</p>
+                </div>
+                <div class="method-pill purple">
+                    <div class="method-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    </div>
+                    <h4>Оцінювання</h4>
+                    <p>порівнюю зі шкалою</p>
+                </div>
+            </div>
+            <div class="diagram-caption">Рис. 1. Основні емпіричні методи педагогічного дослідження</div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 22%;">Метод</th>
+                        <th style="width: 30%;">Що дає досліднику</th>
+                        <th style="width: 24%;">Інструмент</th>
+                        <th style="width: 24%;">Форма фіксації</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Спостереження</strong></td>
+                        <td>Опис реального перебігу подій та поведінки</td>
+                        <td>Протокол, щоденник</td>
+                        <td>Записи за схемою</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Тестування</strong></td>
+                        <td>Числовий показник рівня підготовки</td>
+                        <td>Тест із ключем</td>
+                        <td>Бланк відповідей, бали</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Анкетування</strong></td>
+                        <td>Думки, ставлення, інтереси, самооцінку</td>
+                        <td>Анкета</td>
+                        <td>Зведена таблиця відповідей</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Стандартне оцінювання</strong></td>
+                        <td>Порівняння досягнень із єдиною шкалою</td>
+                        <td>Оцінний лист, рубрика</td>
+                        <td>Рівень за шкалою</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <span class="example-label">Золоте правило вибору методу</span>
+            <div class="example-title">Інструмент обирають під мету дослідження, а не навпаки</div>
+            <p style="font-size: 14.5px; color: var(--text-secondary);">
+                • Якщо треба з’ясувати, <strong>як учень поводиться на уроці</strong> (чи відволікається, чи звертається по допомогу) — застосовують <em>спостереження</em>.<br>
+                • Якщо треба <strong>порівняти рівень засвоєння теми</strong> у 3-А та 3-Б класах — проводять <em>тестування</em> або <em>стандартизоване оцінювання</em>.<br>
+                • Якщо треба дізнатися, <strong>які вправи дітям здаються найцікавішими</strong> — використовують <em>анкетування</em>.
+            </p>
+        </div>
+    </section>
+
+    <!-- РОЗДІЛ 2 -->
+    <section class="section-card">
+        <div class="section-header">
+            <div class="section-num">2</div>
+            <h2 class="section-title">Спостереження та протокол спостереження</h2>
+        </div>
+        <p class="lead-text">
+            <strong>Спостереження</strong> — це цілеспрямоване й планомірне сприймання педагогічного процесу з обов’язковою фіксацією побаченого. Результати заносять у <strong>протокол</strong> — таблицю, у якій заздалегідь визначено, що саме й у якій формі записувати.
+        </p>
+
+        <ul class="req-list">
+            <li><span class="check-icon">✓</span> <span><strong>Факт, а не оцінка:</strong> записуємо конкретну дію («підняв руку»), а не власне враження («був активний»).</span></li>
+            <li><span class="check-icon">✓</span> <span><strong>Точний хронометраж:</strong> обов’язково фіксуємо час початку та тривалість кожної події.</span></li>
+            <li><span class="check-icon">✓</span> <span><strong>Єдине кодування:</strong> використовуємо однакові умовні позначки впродовж усього спостереження.</span></li>
+            <li><span class="check-icon">✓</span> <span><strong>Синхронність запису:</strong> фіксуємо події безпосередньо під час уроку, а не «по пам’яті».</span></li>
+        </ul>
+
+        <!-- Порівняння правильної і неправильної фіксації -->
+        <div class="compare-grid">
+            <div class="compare-card compare-bad">
+                <span class="compare-tag">✕ Помилка (суб'єктивна оцінка)</span>
+                «Уч. 4 на початку уроку був неуважним, крутився, а потім зацікавився і добре працював за комп’ютером».
+            </div>
+            <div class="compare-card compare-good">
+                <span class="compare-tag">✓ Правильно (об'єктивний факт)</span>
+                «09:03 — Уч. 4 розмовляє із сусідом по парті (код: В — відволікся). 09:06 — Уч. 4 підняв руку та дав відповідь (код: ПР, ВП)».
+            </div>
+        </div>
+
+        <!-- Розширений приклад протоколу -->
+        <div class="example-box">
+            <span class="example-label">Практичний взірець</span>
+            <div class="example-title">Фрагмент протоколу спостереження за уроком інформатики у 2 класі (10 хв)</div>
+            <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 12px;">
+                <strong>Умовні позначки:</strong> <strong>ПР</strong> — підняв руку; <strong>ВП</strong> — дав правильну відповідь; <strong>ПЗ</strong> — поставив запитання вчителю; <strong>ВД</strong> — відволікся від завдання.
+            </p>
+            <div class="table-container" style="margin: 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 14%;">Час</th>
+                            <th style="width: 16%;">Код учня</th>
+                            <th style="width: 52%;">Зафіксована подія (факт дії)</th>
+                            <th style="width: 18%;">Позначка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>09:01</td>
+                            <td>Уч. 1</td>
+                            <td>Підняв руку після запитання вчителя про правила безпеки</td>
+                            <td><strong>ПР</strong></td>
+                        </tr>
+                        <tr>
+                            <td>09:02</td>
+                            <td>Уч. 1</td>
+                            <td>Назвав два правила роботи за комп’ютером без помилок</td>
+                            <td><strong>ВП</strong></td>
+                        </tr>
+                        <tr>
+                            <td>09:04</td>
+                            <td>Уч. 3</td>
+                            <td>Підняв руку та запитав, як запустити графічний редактор</td>
+                            <td><strong>ПР, ПЗ</strong></td>
+                        </tr>
+                        <tr>
+                            <td>09:07</td>
+                            <td>Уч. 2</td>
+                            <td>Дивиться у вікно протягом 30 секунд, не виконує вправу</td>
+                            <td><strong>ВД</strong></td>
+                        </tr>
+                        <tr class="summary-row">
+                            <td colspan="3">Разом за 10 хвилин спостереження:</td>
+                            <td>ПР: 2 | ВП: 1 | ПЗ: 1 | ВД: 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- РОЗДІЛ 3 -->
+    <section class="section-card">
+        <div class="section-header">
+            <div class="section-num">3</div>
+            <h2 class="section-title">Тестування і стандартизоване оцінювання</h2>
+        </div>
+        <p class="lead-text">
+            <strong>Тест</strong> — це система коротких завдань однакової структури з наперед визначеним ключем і правилами оцінювання. <strong>Стандартизоване оцінювання</strong> передбачає єдину шкалу та однакові критерії для всіх учасників без винятку (наприклад, рівні навчальних досягнень учнів початкової школи: <em>початковий, середній, достатній, високий</em>).
+        </p>
+
+        <!-- Схема елементів тесту -->
+        <div class="diagram-wrapper">
+            <svg width="100%" height="115" viewBox="0 0 860 115" xmlns="http://www.w3.org/2000/svg">
+                <!-- Box 1 -->
+                <rect x="5" y="10" width="195" height="90" rx="12" fill="#FFFFFF" stroke="#E5E5EA" stroke-width="1.5"/>
+                <rect x="25" y="10" width="155" height="4" rx="2" fill="#0071E3"/>
+                <text x="102" y="42" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#1D1D1F" text-anchor="middle">1. Інструкція</text>
+                <text x="102" y="63" font-family="-apple-system, sans-serif" font-size="12" fill="#6E6E73" text-anchor="middle">час виконання, правила</text>
+                <text x="102" y="80" font-family="-apple-system, sans-serif" font-size="12" fill="#6E6E73" text-anchor="middle">позначення відповідей</text>
+
+                <!-- Arrow 1 -->
+                <path d="M206 55 L220 55" stroke="#86868B" stroke-width="2" marker-end="url(#arrow)"/>
+
+                <!-- Box 2 -->
+                <rect x="225" y="10" width="195" height="90" rx="12" fill="#FFFFFF" stroke="#E5E5EA" stroke-width="1.5"/>
+                <rect x="245" y="10" width="155" height="4" rx="2" fill="#0071E3"/>
+                <text x="322" y="42" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#1D1D1F" text-anchor="middle">2. Завдання</text>
+                <text x="322" y="63" font-family="-apple-system, sans-serif" font-size="12" fill="#6E6E73" text-anchor="middle">закриті, відкриті та</text>
+                <text x="322" y="80" font-family="-apple-system, sans-serif" font-size="12" fill="#6E6E73" text-anchor="middle">на відповідність</text>
+
+                <!-- Arrow 2 -->
+                <path d="M426 55 L440 55" stroke="#86868B" stroke-width="2"/>
+
+                <!-- Box 3 -->
+                <rect x="445" y="10" width="195" height="90" rx="12" fill="#FFFFFF" stroke="#E5E5EA" stroke-width="1.5"/>
+                <rect x="465" y="10" width="155" height="4" rx="2" fill="#28CD41"/>
+                <text x="542" y="42" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#1D1D1F" text-anchor="middle">3. Ключ / Критерії</text>
+                <text x="542" y="63" font-family="-apple-system, sans-serif" font-size="12" fill="#6E6E73" text-anchor="middle">еталонні відповіді й</text>
+                <text x="542" y="80" font-family="-apple-system, sans-serif" font-size="12" fill="#6E6E73" text-anchor="middle">вартість кожного кроку</text>
+
+                <!-- Arrow 3 -->
+                <path d="M646 55 L660 55" stroke="#86868B" stroke-width="2"/>
+
+                <!-- Box 4 -->
+                <rect x="665" y="10" width="190" height="90" rx="12" fill="#FFFFFF" stroke="#E5E5EA" stroke-width="1.5"/>
+                <rect x="685" y="10" width="150" height="4" rx="2" fill="#AF52DE"/>
+                <text x="760" y="42" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#1D1D1F" text-anchor="middle">4. Шкала рівнів</text>
+                <text x="760" y="63" font-family="-apple-system, sans-serif" font-size="12" fill="#6E6E73" text-anchor="middle">переведення суми балів</text>
+                <text x="760" y="80" font-family="-apple-system, sans-serif" font-size="12" fill="#6E6E73" text-anchor="middle">у навчальний рівень</text>
+            </svg>
+            <div class="diagram-caption">Рис. 2. Обов’язкові структурні елементи тесту та оцінного листа</div>
+        </div>
+
+        <div class="example-box green">
+            <span class="example-label">Приклади тестових завдань різних типів (Тема «Пристрої комп’ютера», 2 клас)</span>
+            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">
+                <strong>1. Закрите завдання (вибір однієї правильної відповіді — 1 бал):</strong><br>
+                Який пристрій призначений для виведення зображення на екран?<br>
+                <em>А) Клавіатура &nbsp;&nbsp; Б) Монітор &nbsp;&nbsp; В) Миша &nbsp;&nbsp; Г) Мікрофон</em> &nbsp;→ <strong>Ключ: Б</strong>
+            </p>
+            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">
+                <strong>2. На встановлення відповідності (до 3 балів — по 1 за кожну пару):</strong><br>
+                З’єднай пристрій із його дією: <em>1) Принтер — Б) Друкує на папері; 2) Сканер — А) Копіює зображення в комп’ютер; 3) Навушники — В) Передають звук.</em>
+            </p>
+            <p style="font-size: 14px; color: var(--text-secondary);">
+                <strong>3. Відкрите завдання (коротка відповідь — 2 бали):</strong><br>
+                Напиши дві дії, які не можна робити біля комп’ютера: <em>(Еталон: їсти/пити, торкатися дротів).</em>
+            </p>
+        </div>
+    </section>
+
+    <!-- РОЗДІЛ 4 -->
+    <section class="section-card">
+        <div class="section-header">
+            <div class="section-num">4</div>
+            <h2 class="section-title">Анкетування: види запитань і вимоги</h2>
+        </div>
+        <p class="lead-text">
+            <strong>Анкета</strong> — це набір запитань, на які учасник відповідає письмово. За формою запитання поділяють на <strong>закриті</strong> (із готовими варіантами відповіді), <strong>напівзакриті</strong> (із варіантами та рядком «Інше: ____») і <strong>відкриті</strong> (вільна відповідь респондента).
+        </p>
+
+        <ul class="req-list">
+            <li><span class="check-icon">1</span> <span><strong>Вступна частина:</strong> коротка інструкція щодо заповнення й гарантія анонімності.</span></li>
+            <li><span class="check-icon">2</span> <span><strong>Одне запитання — одна думка:</strong> уникаємо подвійних формулювань («Чи подобаються вам ігри та тести?»).</span></li>
+            <li><span class="check-icon">3</span> <span><strong>Нейтральний тон:</strong> без навіювальних чи оцінних слів («Чи не здається вам, що урок складний?»).</span></li>
+            <li><span class="check-icon">4</span> <span><strong>Вікова відповідність та етикет:</strong> для молодших школярів — 5–7 простих запитань, у кінці — подяка.</span></li>
+        </ul>
+
+        <div class="compare-grid">
+            <div class="compare-card compare-bad">
+                <span class="compare-tag">✕ Невдале формулювання (навіювання + 2 думки)</span>
+                «Чи погоджуєшся ти, що вправи в Scratch дуже цікаві, а теорія в підручнику нудна?»
+            </div>
+            <div class="compare-card compare-good">
+                <span class="compare-tag">✓ Коректне формулювання (нейтрально + 1 думка)</span>
+                «Оціни за шкалою від 1 до 5, наскільки цікаво тобі створювати проєкти в середовищі Scratch».
+            </div>
+        </div>
+    </section>
+
+    <!-- РОЗДІЛ 5 -->
+    <section class="section-card">
+        <div class="section-header">
+            <div class="section-num">5</div>
+            <h2 class="section-title">Формалізація результатів дослідження</h2>
+        </div>
+        <p class="lead-text">
+            <strong>Формалізація</strong> — це перетворення «сирих» записів на впорядковані числові й табличні дані, придатні для порівняння та формулювання висновків. Вона включає п’ять послідовних кроків.
+        </p>
+
+        <!-- Рис. 3: Шлях формалізації -->
+        <div class="diagram-wrapper">
+            <div class="steps-flow">
+                <div class="step-node">
+                    <h5>1. Фіксація</h5>
+                    <p>протокол / бланк</p>
+                </div>
+                <div class="step-node">
+                    <h5>2. Кодування</h5>
+                    <p>єдині позначення</p>
+                </div>
+                <div class="step-node">
+                    <h5>3. Таблиця</h5>
+                    <p>рядки й стовпці</p>
+                </div>
+                <div class="step-node">
+                    <h5>4. Обробка</h5>
+                    <p>суми, середні, %</p>
+                </div>
+                <div class="step-node">
+                    <h5>5. Висновок</h5>
+                    <p>узагальнення</p>
+                </div>
+            </div>
+            <div class="diagram-caption">Рис. 3. Покроковий шлях формалізації емпіричних результатів</div>
+        </div>
+
+        <!-- Приклад таблиці та візуальної діаграми обробки -->
+        <div class="example-box purple">
+            <span class="example-label">Наскрізний приклад формалізації (Кроки 3–5)</span>
+            <div class="example-title">Зведена таблиця активності учнів 2 класу (N = 20 учнів)</div>
+            <div class="table-container" style="margin: 12px 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Показник активності</th>
+                            <th>Кількість проявів (осіб)</th>
+                            <th>Частка від класу (%)</th>
+                            <th>Візуалізація частки</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Підняв руку (ПР)</td>
+                            <td>14</td>
+                            <td>70,0%</td>
+                            <td>
+                                <div style="background:#E5E5EA; height:8px; border-radius:4px; width:100%;">
+                                    <div style="background:#0071E3; height:8px; border-radius:4px; width:70%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Дав правильну відповідь (ВП)</td>
+                            <td>11</td>
+                            <td>55,0%</td>
+                            <td>
+                                <div style="background:#E5E5EA; height:8px; border-radius:4px; width:100%;">
+                                    <div style="background:#28CD41; height:8px; border-radius:4px; width:55%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Поставив запитання (ПЗ)</td>
+                            <td>4</td>
+                            <td>20,0%</td>
+                            <td>
+                                <div style="background:#E5E5EA; height:8px; border-radius:4px; width:100%;">
+                                    <div style="background:#AF52DE; height:8px; border-radius:4px; width:20%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="summary-row">
+                            <td>Середнє значення по показниках:</td>
+                            <td>9,7</td>
+                            <td>48,3%</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 14px; color: var(--text-primary);">
+                <strong>Зразок висновку (Крок 5):</strong> Більшість учнів класу (70,0%) виявляють готовність відповідати, піднімаючи руку, проте ініціативні запитання вчителю ставить лише кожен п’ятий учень (20,0%), що вказує на потребу стимулювати пізнавальні запитання дітей.
+            </p>
+        </div>
+    </section>
+
+    <!-- РОЗДІЛ 6 -->
+    <section class="section-card">
+        <div class="section-header">
+            <div class="section-num">6</div>
+            <h2 class="section-title">Етика збору даних</h2>
+        </div>
+        <p class="lead-text">
+            Дослідник працює з людьми (зокрема з дітьми), тому достовірність даних — це не лише наукова, а й морально-етична вимога. Порушення етичних норм знецінює результати всієї роботи.
+        </p>
+
+        <!-- Рис. 4: Принципи етики -->
+        <div class="diagram-wrapper">
+            <div class="methods-grid">
+                <div class="method-pill blue">
+                    <h4>Добровільність</h4>
+                    <p>без примусу й тиску</p>
+                </div>
+                <div class="method-pill green">
+                    <h4>Анонімність</h4>
+                    <p>без прізвищ у звіті</p>
+                </div>
+                <div class="method-pill orange">
+                    <h4>Конфіденційність</h4>
+                    <p>дані не для третіх осіб</p>
+                </div>
+                <div class="method-pill purple">
+                    <h4>Достовірність</h4>
+                    <p>факти без вигадок</p>
+                </div>
+            </div>
+            <div class="diagram-caption">Рис. 4. Чотири базові принципи етики педагогічного дослідження</div>
+        </div>
+
+        <p style="font-size: 15px; color: var(--text-secondary);">
+            Якщо учасник відмовився відповідати або просить вилучити свої дані — його бажання виконують негайно й без обговорення. У протоколах та підсумковому звіті справжні прізвища та імена учнів не вказують: використовують знеособлені коди на зразок <strong>«Уч. 1»</strong>, <strong>«Уч. 2»</strong>.
+        </p>
+    </section>
+
+    <!-- ПРАКТИЧНА ЧАСТИНА: АЛГОРИТМ ЗАВДАНЬ -->
+    <section class="section-card">
+        <div class="section-header">
+            <div class="section-num" style="background: var(--accent-blue);">✎</div>
+            <h2 class="section-title">Покроковий алгоритм виконання різнорівневих завдань</h2>
+        </div>
+        <p class="lead-text">
+            Практична частина складається з трьох рівнів і виконується послідовно. Загальна орієнтовна тривалість роботи — <strong>25–30 хвилин</strong>.
+        </p>
+
+        <!-- Рівень 1 -->
+        <div class="level-block">
+            <div class="level-header level-1">
+                <span class="level-title">Рівень 1. Репродуктивний (повторюю зразок)</span>
+                <span class="level-time">≈ 7 хв · Макс. 3 бали</span>
+            </div>
+            <p style="font-size: 15px; margin-bottom: 12px;">
+                <strong>Завдання:</strong> За поданим зразком заповнити протокол спостереження за уроком інформатики у 2 класі (фрагмент — 10 хвилин). Зразок протоколу видає викладач на інструкційній картці.
+            </p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Крок</th>
+                            <th style="width: 52%;">Дія студента</th>
+                            <th style="width: 38%;">Очікуваний результат</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td>Ознайомтеся зі схемою протоколу на інструкційній картці</td>
+                            <td>Розумієте, які стовпці заповнювати</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td>Перегляньте відеофрагмент уроку (або заслухайте опис)</td>
+                            <td>Маєте об’єктивні факти для запису</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td>Заповніть стовпці «Час», «Подія», «Умовна позначка»</td>
+                            <td>Заповнений бланк протоколу</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td>Порахуйте кількість позначок кожного виду</td>
+                            <td>Заповнений підсумковий рядок</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td>Перевірте, чи не порушено правила фіксації фактів</td>
+                            <td>Виправлений і точний протокол</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Рівень 2 -->
+        <div class="level-block">
+            <div class="level-header level-2">
+                <span class="level-title">Рівень 2. Продуктивний (переношу в нову ситуацію)</span>
+                <span class="level-time">≈ 10 хв · Макс. 5 балів</span>
+            </div>
+            <p style="font-size: 15px; margin-bottom: 12px;">
+                <strong>Завдання:</strong> За результатами заповненого протоколу побудувати зведену таблицю <em>«Показники активності учнів 2 класу на уроці інформатики»</em>, обчислити відсотки й сформулювати один висновок.
+            </p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Крок</th>
+                            <th style="width: 52%;">Дія студента</th>
+                            <th style="width: 38%;">Очікуваний результат</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td>Визначте показники для зведення (підняв руку, відповів, поставив запитання)</td>
+                            <td>Перелік стовпців / рядків</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td>Перенесіть підсумки протоколу в таблицю Excel / Google Таблиці</td>
+                            <td>Таблиця з числовими даними</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td>Обчисліть відсоток кожного показника від загальної кількості учнів</td>
+                            <td>Заповнений стовпець «%»</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td>Додайте підсумковий рядок із середнім значенням</td>
+                            <td>Завершена зведена таблиця</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td>Сформулюйте висновок одним-двома реченнями</td>
+                            <td>Аналітичний текст під таблицею</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 13.5px; color: var(--text-secondary);">
+                <strong>Важливо:</strong> У таблиці мають бути однакові одиниці вимірювання в межах одного стовпця й обов’язковий підсумковий рядок. Порожніх клітинок не залишайте: ставте <code>0</code> або <code>–</code>.
+            </p>
+        </div>
+
+        <!-- Рівень 3 -->
+        <div class="level-block">
+            <div class="level-header level-3">
+                <span class="level-title">Рівень 3. Творчий (створюю власний інструмент)</span>
+                <span class="level-time">≈ 10 хв · Макс. 3 бали</span>
+            </div>
+            <p style="font-size: 15px; margin-bottom: 12px;">
+                <strong>Завдання:</strong> Скласти власну анкету з 5 запитань для учнів 3 класу за темою <em>«Що мені подобається на уроках інформатики?»</em>. Передбачити інструкцію, різні типи запитань та форму подання результатів у звіті.
+            </p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 22%;">Етап анкети</th>
+                            <th style="width: 44%;">Що необхідно зробити</th>
+                            <th style="width: 34%;">Приклад-орієнтир</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Інструкція</strong></td>
+                            <td>1–2 речення: мета опитування й гарантія анонімності</td>
+                            <td>«Привіт! Обери один варіант…»</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Запитання 1</strong></td>
+                            <td>Закрите — вибір одного варіанта з чотирьох</td>
+                            <td>«Що тобі найбільше подобається?»</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Запитання 2</strong></td>
+                            <td>Закрите — вибір кількох варіантів відповіді</td>
+                            <td>«Познач усе, що подобається»</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Запитання 3</strong></td>
+                            <td>Напівзакрите — варіанти + рядок «свій варіант»</td>
+                            <td>«Інше: ______________»</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Запитання 4</strong></td>
+                            <td>Відкрите — коротка вільна відповідь</td>
+                            <td>«Що б ти змінив на уроці?»</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Запитання 5</strong></td>
+                            <td>Оцінна шкала (від 1 до 5 балів)</td>
+                            <td>«Наскільки тобі цікаво?»</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Форма результату</strong></td>
+                            <td>Таблиця «№ запитання — кількість відповідей — %»</td>
+                            <td>Макет таблиці для звіту</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОЦІНЮВАННЯ ТА ФОРМА ЗВІТНОСТІ -->
+    <section class="section-card">
+        <div class="section-header">
+            <div class="section-num" style="background: var(--accent-green-dark);">★</div>
+            <h2 class="section-title">Критерії оцінювання та форма звітності</h2>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Вид роботи</th>
+                        <th style="width: 52%;">Що оцінює викладач</th>
+                        <th style="width: 18%; text-align: center;">Макс. балів</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Рівень 1. Репродуктивний</strong></td>
+                        <td>Повнота й точність протоколу, дотримання правил фіксації фактів</td>
+                        <td style="text-align: center;"><strong>3</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Рівень 2. Продуктивний</strong></td>
+                        <td>Правильність обчислень, охайність таблиці, обґрунтованість висновку</td>
+                        <td style="text-align: center;"><strong>5</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Рівень 3. Творчий</strong></td>
+                        <td>Структура анкети, доречність типів запитань, етичність формулювань</td>
+                        <td style="text-align: center;"><strong>3</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Оформлення звіту</strong></td>
+                        <td>Акуратність, єдиний стиль оформлення, вчасне подання</td>
+                        <td style="text-align: center;"><strong>2</strong></td>
+                    </tr>
+                    <tr class="summary-row">
+                        <td colspan="2">Максимальна сума балів за практичне заняття:</td>
+                        <td style="text-align: center;">13</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Шкала переведення балів -->
+        <div class="scale-grid">
+            <div class="scale-item" style="background: var(--accent-green-light); border-color: rgba(40,205,65,0.3);">
+                <div class="scale-score" style="color: var(--accent-green-dark);">11–13 балів</div>
+                <div class="scale-grade">«Відмінно»</div>
+            </div>
+            <div class="scale-item" style="background: var(--accent-blue-light); border-color: rgba(0,113,227,0.3);">
+                <div class="scale-score" style="color: var(--accent-blue);">8–10 балів</div>
+                <div class="scale-grade">«Добре»</div>
+            </div>
+            <div class="scale-item" style="background: var(--accent-orange-light); border-color: rgba(255,149,0,0.3);">
+                <div class="scale-score" style="color: var(--accent-orange-dark);">5–7 балів</div>
+                <div class="scale-grade">«Задовільно»</div>
+            </div>
+            <div class="scale-item" style="background: var(--accent-red-light); border-color: rgba(255,59,48,0.3);">
+                <div class="scale-score" style="color: var(--accent-red);">0–4 бали</div>
+                <div class="scale-grade">«Незадовільно»</div>
+            </div>
+        </div>
+
+        <!-- Вимоги до звіту -->
+        <div class="example-box" style="margin-top: 24px;">
+            <span class="example-label">Вимоги до оформлення результатів</span>
+            <div class="example-title">Структура електронного звіту (обсяг: 2–3 сторінки, Word або Google Документ)</div>
+            <ol style="padding-left: 20px; font-size: 14.5px; color: var(--text-secondary); margin-bottom: 12px;">
+                <li>Тема, мета й обладнання практичного заняття.</li>
+                <li>Заповнений протокол спостереження (Рівень 1).</li>
+                <li>Зведена таблиця показників із підсумковим рядком і висновком (Рівень 2).</li>
+                <li>Власна анкета з 5 запитань та опис форми обробки її результатів (Рівень 3).</li>
+                <li>Короткий підсумок-рефлексія (3–5 речень): що вдалося, які труднощі виникли, що врахуєте в майбутній професійній діяльності.</li>
+            </ol>
+            <p style="font-size: 13.5px; color: var(--text-primary); font-weight: 500;">
+                Пам’ятка: У звіті не вказуйте прізвищ учнів — лише коди («Уч. 1», «Уч. 2»). Усі таблиці оформлюйте в єдиному стилі, із заголовками стовпців і підсумковим рядком.
+            </p>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

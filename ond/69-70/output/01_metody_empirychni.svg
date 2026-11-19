@@ -1,0 +1,39 @@
+<svg width="725" height="238" viewBox="0 0 725 238" xmlns="http://www.w3.org/2000/svg">
+   <style>
+     text { font-family: 'DejaVu Sans', Arial, sans-serif; }
+     .header { font-weight: 700; font-size: 15px; fill: #1d1d1f; }
+     .card { fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; }
+     .title { font-weight: 700; font-size: 12.5px; fill: #1d1d1f; text-anchor: middle; }
+     .desc { font-size: 12px; fill: #86868b; text-anchor: middle; }
+   </style>
+ 
+   <!-- Фон -->
+   <rect width="725" height="238" fill="#ffffff" />
+ 
+   <!-- Заголовок -->
+   <text x="26" y="34" class="header">Емпіричні методи дослідження</text>
+ 
+   <!-- Картка 1: Спостереження -->
+   <rect x="26" y="76" width="154" height="110" rx="8" class="card" />
+   <rect x="32" y="79" width="142" height="4" rx="2" fill="#0071e3" />
+   <text x="103" y="128" class="title">Спостереження</text>
+   <text x="103" y="144" class="desc">бачу і протоколюю</text>
+ 
+   <!-- Картка 2: Тестування -->
+   <rect x="200" y="76" width="154" height="110" rx="8" class="card" />
+   <rect x="206" y="79" width="142" height="4" rx="2" fill="#248a3d" />
+   <text x="277" y="128" class="title">Тестування</text>
+   <text x="277" y="144" class="desc">вимірюю завданнями</text>
+ 
+   <!-- Картка 3: Анкетування -->
+   <rect x="373" y="76" width="154" height="110" rx="8" class="card" />
+   <rect x="379" y="79" width="142" height="4" rx="2" fill="#c93400" />
+   <text x="450" y="128" class="title">Анкетування</text>
+   <text x="450" y="144" class="desc">питаю письмово</text>
+ 
+   <!-- Картка 4: Стандарт. оцінювання -->
+   <rect x="547" y="76" width="154" height="110" rx="8" class="card" />
+   <rect x="553" y="79" width="142" height="4" rx="2" fill="#6e30a8" />
+   <text x="624" y="128" class="title">Оцінювання</text>
+   <text x="624" y="144" class="desc">порівнюю зі шкалою</text>
+ </svg>
