@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="885.6pt" height="374.4pt" viewBox="0 0 885.6 374.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-20T08:20:44.078769</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 374.4 
+L 885.6 374.4 
+L 885.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 35.856 209.25 
+L 206.928 209.25 
+Q 216.432 209.25 216.432 199.548 
+L 216.432 91.062 
+Q 216.432 81.36 206.928 81.36 
+L 35.856 81.36 
+Q 26.352 81.36 26.352 91.062 
+L 26.352 199.548 
+Q 26.352 209.25 35.856 209.25 
+z
+" clip-path="url(#pc1d61a1116)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 246.672 209.25 
+L 417.744 209.25 
+Q 427.248 209.25 427.248 199.548 
+L 427.248 91.062 
+Q 427.248 81.36 417.744 81.36 
+L 246.672 81.36 
+Q 237.168 81.36 237.168 91.062 
+L 237.168 199.548 
+Q 237.168 209.25 246.672 209.25 
+z
+" clip-path="url(#pc1d61a1116)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 457.488 209.25 
+L 628.56 209.25 
+Q 638.064 209.25 638.064 199.548 
+L 638.064 91.062 
+Q 638.064 81.36 628.56 81.36 
+L 457.488 81.36 
+Q 447.984 81.36 447.984 91.062 
+L 447.984 199.548 
+Q 447.984 209.25 457.488 209.25 
+z
+" clip-path="url(#pc1d61a1116)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 668.304 209.25 
+L 839.376 209.25 
+Q 848.88 209.25 848.88 199.548 
+L 848.88 91.062 
+Q 848.88 81.36 839.376 81.36 
+L 668.304 81.36 
+Q 658.8 81.36 658.8 91.062 
+L 658.8 199.548 
+Q 658.8 209.25 668.304 209.25 
+z
+" clip-path="url(#pc1d61a1116)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 35.856 328.32 
+L 839.376 328.32 
+Q 848.88 328.32 848.88 318.618 
+L 848.88 258.642 
+Q 848.88 248.94 839.376 248.94 
+L 35.856 248.94 
+Q 26.352 248.94 26.352 258.642 
+L 26.352 318.618 
+Q 26.352 328.32 35.856 328.32 
+z
+" clip-path="url(#pc1d61a1116)" style="fill: #fdf1f2; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="442.8" y="37.976531" transform="rotate(-0 442.8 37.976531)">Антиспам-захист поштової скриньки</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="121.392" y="131.904219" transform="rotate(-0 121.392 131.904219)">Перевірка адреси</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(74.942781 151.992145)">звіряйте домен,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(79.557625 165.56348)">а не лише ім’я</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="332.208" y="131.931562" transform="rotate(-0 332.208 131.931562)">Фільтри й правила</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(270.232453 151.992145)">сортування за темою</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(298.816984 165.56348)">та адресою</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c93400" x="543.024" y="131.931562" transform="rotate(-0 543.024 131.931562)">Чорний список</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(509.0615 152.085816)">блокування</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(492.57525 165.657152)">відомих спамерів</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6e30a8" x="753.84" y="131.931562" transform="rotate(-0 753.84 131.931562)">Двофакторний вхід</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(714.664531 151.992145)">пароль + код</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(719.117813 165.56348)">із телефона</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c4001d" x="437.616" y="292.194844" transform="rotate(-0 437.616 292.194844)">Правило: спершу перевір адресу відправника — потім відкривай вкладення</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 220.890375 145.305 
+Q 226.801908 145.305 230.70098 145.305 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 224.30098 142.105 
+L 230.70098 145.305 
+L 224.30098 148.505 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 431.706375 145.305 
+Q 437.617908 145.305 441.51698 145.305 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 435.11698 142.105 
+L 441.51698 145.305 
+L 435.11698 148.505 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 642.522375 145.305 
+Q 648.433908 145.305 652.33298 145.305 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 645.93298 142.105 
+L 652.33298 145.305 
+L 645.93298 148.505 
+z
+" style="fill: #86868b; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc1d61a1116">
+   <rect x="10.8" y="10.8" width="864" height="352.8"/>
+  </clipPath>
+ </defs>
+</svg>

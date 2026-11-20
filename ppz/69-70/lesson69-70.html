@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття № 20 — Електронна пошта та її використання</title>
+<style>
+/* ============ БАЗА ============ */
+:root{
+  --ink:#1d1d1f;
+  --sub:#6e6e73;
+  --line:#d2d2d7;
+  --line-soft:#e8e8ed;
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --blue:#0071e3;
+  --blue-soft:#e8f1fd;
+  --purple:#af52de;
+  --purple-soft:#f6ecfc;
+  --orange:#ff9f0a;
+  --orange-soft:#fff4e2;
+  --red:#ff3b30;
+  --red-soft:#ffeceb;
+  --green:#34c759;
+  --green-soft:#e8f9ed;
+  --teal:#30b0c7;
+  --teal-soft:#e5f7fa;
+  --radius:22px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 28px rgba(0,0,0,.06);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
+
+body{
+  margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+              "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:1080px; margin:0 auto; padding:0 24px 96px;}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  margin:0 -24px 40px;
+  padding:76px 24px 64px;
+  text-align:center;
+  background:
+     radial-gradient(900px 380px at 50% -10%, #dbe9ff 0%, rgba(219,233,255,0) 70%),
+     linear-gradient(180deg,#ffffff 0%, #f5f5f7 100%);
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(600px 260px at 82% 18%, rgba(175,82,222,.10), transparent 65%),
+             radial-gradient(560px 240px at 16% 24%, rgba(0,113,227,.12), transparent 65%);
+  pointer-events:none;
+}
+.hero > *{position:relative; z-index:1;}
+
+.eyebrow{
+  display:inline-block;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--blue);
+  background:var(--blue-soft);
+  padding:7px 16px;
+  border-radius:100px;
+  margin-bottom:22px;
+}
+
+h1{
+  font-size:clamp(32px, 5.2vw, 54px);
+  line-height:1.08;
+  letter-spacing:-.025em;
+  font-weight:700;
+  margin:0 0 18px;
+}
+h1 .grad{
+  background:linear-gradient(92deg,#0071e3 0%, #af52de 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p.lead{
+  max-width:740px;
+  margin:0 auto 30px;
+  font-size:19px;
+  color:var(--sub);
+  line-height:1.55;
+}
+
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+.badge{
+  background:#fff;
+  border:1px solid var(--line-soft);
+  border-radius:100px;
+  padding:9px 18px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--sub);
+  box-shadow:0 1px 2px rgba(0,0,0,.03);
+}
+.badge b{color:var(--ink); font-weight:600;}
+
+/* ============ ЗМІСТ ============ */
+.toc{
+  position:sticky;
+  top:0;
+  z-index:50;
+  margin:0 -24px 44px;
+  padding:12px 24px;
+  background:rgba(245,245,247,.82);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line-soft);
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.toc::-webkit-scrollbar{display:none;}
+.toc a{
+  flex:0 0 auto;
+  font-size:13.5px;
+  font-weight:500;
+  color:var(--sub);
+  text-decoration:none;
+  padding:8px 15px;
+  border-radius:100px;
+  white-space:nowrap;
+  transition:.2s;
+}
+.toc a:hover{background:#fff; color:var(--blue);}
+
+/* ============ СЕКЦІЇ ============ */
+section{scroll-margin-top:80px;}
+
+h2{
+  font-size:clamp(26px,3.4vw,36px);
+  letter-spacing:-.02em;
+  line-height:1.15;
+  font-weight:700;
+  margin:0 0 10px;
+}
+h3{
+  font-size:22px;
+  letter-spacing:-.015em;
+  font-weight:650;
+  margin:0 0 8px;
+}
+h4{font-size:17px; font-weight:650; margin:0 0 6px;}
+.section-sub{
+  color:var(--sub);
+  font-size:16.5px;
+  margin:0 0 28px;
+  max-width:780px;
+}
+
+.sec-head{display:flex; align-items:center; gap:14px; margin:0 0 8px;}
+.sec-num{
+  flex:0 0 auto;
+  width:40px;height:40px;
+  border-radius:12px;
+  background:linear-gradient(140deg,#0071e3,#4aa8ff);
+  color:#fff;
+  font-size:17px;
+  font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,113,227,.28);
+}
+
+/* ============ КАРТКИ ============ */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:30px 32px;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+  border:1px solid rgba(0,0,0,.03);
+}
+
+.grid-2{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+.grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+
+/* ============ МЕТА ============ */
+.meta-grid{
+  display:grid;
+  grid-template-columns:1.15fr 1fr 1fr;
+  gap:18px;
+  margin-bottom:44px;
+}
+.meta-card{
+  background:#fff;
+  border-radius:20px;
+  padding:26px 24px;
+  box-shadow:var(--shadow);
+  border-top:4px solid var(--blue);
+}
+.meta-card:nth-child(2){border-top-color:var(--purple);}
+.meta-card:nth-child(3){border-top-color:var(--orange);}
+.meta-card h4{
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--sub);
+  margin-bottom:12px;
+}
+.meta-card p{margin:0; font-size:15.5px; line-height:1.6;}
+.meta-card ul{margin:0; padding-left:18px; font-size:15px; line-height:1.7; color:#333;}
+.meta-card li{margin-bottom:8px;}
+
+/* ============ ПРИКЛАД ============ */
+.example{
+  background:linear-gradient(180deg,#f8fbff,#f2f7ff);
+  border:1px solid #cfe3fb;
+  border-left:4px solid var(--blue);
+  border-radius:16px;
+  padding:18px 22px;
+  margin:18px 0;
+  font-size:15.5px;
+}
+.example .tag{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:8px;
+}
+.example .tag::before{
+  content:"";
+  width:7px;height:7px;border-radius:50%;
+  background:var(--blue);
+  display:inline-block;
+}
+.example code{
+  background:#fff;
+  border:1px solid #d8e6f8;
+  border-radius:8px;
+  padding:2px 9px;
+  font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size:14px;
+  color:#0058b0;
+}
+.example .result-line{
+  margin-top:10px;
+  color:var(--sub);
+  font-size:14.5px;
+}
+.example.warn{
+  background:linear-gradient(180deg,#fff8f7,#fff0ee);
+  border-color:#f8cfc9;
+  border-left-color:var(--red);
+}
+.example.warn .tag{color:var(--red);}
+.example.warn .tag::before{background:var(--red);}
+.example.ok{
+  background:linear-gradient(180deg,#f4fdf6,#ebfaef);
+  border-color:#c9eed3;
+  border-left-color:var(--green);
+}
+.example.ok .tag{color:#1a8a3d;}
+.example.ok .tag::before{background:var(--green);}
+
+/* ============ ТАБЛИЦІ ============ */
+.table-wrap{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin:20px 0 26px;
+  border:1px solid rgba(0,0,0,.03);
+}
+table{width:100%; border-collapse:collapse; font-size:15px;}
+thead th{
+  background:#fbfbfd;
+  text-align:left;
+  font-size:12.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sub);
+  font-weight:650;
+  padding:15px 18px;
+  border-bottom:1px solid var(--line-soft);
+}
+tbody td{
+  padding:14px 18px;
+  border-bottom:1px solid var(--line-soft);
+  vertical-align:top;
+  line-height:1.55;
+}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#fafafc;}
+td.code-cell code{
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  background:var(--blue-soft);
+  color:#0058b0;
+  padding:3px 9px;
+  border-radius:7px;
+  font-size:13.5px;
+  white-space:nowrap;
+}
+tbody td:empty::after{
+  content:"";
+  display:block;
+  min-height:20px;
+  border-bottom:1px dashed #cfd3da;
+}
+.num-col{text-align:right; font-variant-numeric:tabular-nums;}
+
+/* ============ КРОКИ ============ */
+.steps{
+  list-style:none;
+  counter-reset:st;
+  padding:0;
+  margin:16px 0 4px;
+}
+.steps li{
+  counter-increment:st;
+  position:relative;
+  padding:9px 0 9px 46px;
+  font-size:15.5px;
+  line-height:1.55;
+}
+.steps li::before{
+  content:counter(st);
+  position:absolute;
+  left:0; top:9px;
+  width:28px;height:28px;
+  border-radius:50%;
+  background:var(--blue-soft);
+  color:var(--blue);
+  font-size:13.5px;
+  font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ============ АДРЕСА ============ */
+.addr{
+  display:inline-flex;
+  align-items:center;
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  font-size:20px;
+  font-weight:600;
+  margin:14px 0;
+  padding:12px 18px;
+  border-radius:14px;
+  background:#fff;
+  border:1px solid var(--line-soft);
+  box-shadow:var(--shadow);
+}
+.addr .local{
+  color:var(--blue);
+  padding:3px 6px;
+  border-radius:6px;
+  background:var(--blue-soft);
+}
+.addr .at{color:#a1a1a6; margin:0 4px;}
+.addr .domain{
+  color:var(--purple);
+  padding:3px 6px;
+  border-radius:6px;
+  background:var(--purple-soft);
+}
+
+/* ============ РІВНІ ============ */
+.levels{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin:22px 0 10px;
+}
+.lvl{
+  background:#fff;
+  border-radius:20px;
+  padding:24px 22px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,.03);
+  position:relative;
+  overflow:hidden;
+}
+.lvl::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;height:5px;
+  background:var(--blue);
+}
+.lvl.l2::before{background:var(--purple);}
+.lvl.l3::before{background:var(--orange);}
+.lvl .lvl-num{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--blue);
+  background:var(--blue-soft);
+  padding:5px 12px;
+  border-radius:100px;
+  margin-bottom:12px;
+}
+.lvl.l2 .lvl-num{color:var(--purple); background:var(--purple-soft);}
+.lvl.l3 .lvl-num{color:#b86e00; background:var(--orange-soft);}
+.lvl h3{font-size:19px; margin-bottom:6px;}
+.lvl .lvl-meta{
+  display:flex;
+  gap:14px;
+  font-size:13.5px;
+  color:var(--sub);
+  margin-bottom:10px;
+  font-weight:500;
+}
+.lvl p{font-size:14.5px; color:var(--sub); margin:0; line-height:1.55;}
+
+/* ============ ПИТАННЯ ============ */
+.qlist{
+  counter-reset:q;
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:12px;
+}
+.qlist li{
+  counter-increment:q;
+  position:relative;
+  background:#fff;
+  border-radius:16px;
+  padding:18px 22px 18px 62px;
+  box-shadow:var(--shadow);
+  font-size:15.8px;
+  line-height:1.55;
+  border:1px solid rgba(0,0,0,.03);
+}
+.qlist li::before{
+  content:counter(q);
+  position:absolute;
+  left:20px; top:50%;
+  transform:translateY(-50%);
+  width:28px;height:28px;
+  border-radius:50%;
+  background:var(--blue-soft);
+  color:var(--blue);
+  font-size:13.5px;
+  font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ============ ФІГУРИ ============ */
+figure{
+  margin:24px 0;
+  background:#fff;
+  border-radius:20px;
+  padding:24px 20px 14px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,.03);
+}
+figure svg{display:block; width:100%; height:auto;}
+figcaption{
+  text-align:center;
+  font-size:13.5px;
+  color:var(--sub);
+  margin-top:14px;
+  line-height:1.45;
+}
+
+/* ============ TOTAL ============ */
+.total-row td{
+  background:var(--blue-soft);
+  font-weight:700;
+  color:#0058b0;
+}
+
+/* ============ ФУТЕР ============ */
+footer{
+  margin-top:56px;
+  padding-top:30px;
+  border-top:1px solid var(--line);
+  text-align:center;
+  color:var(--sub);
+  font-size:14px;
+}
+
+/* ============ КНОПКА ДРУКУ ============ */
+.print-btn{
+  position:fixed;
+  right:26px; bottom:26px;
+  z-index:99;
+  background:var(--blue);
+  color:#fff;
+  border:none;
+  border-radius:100px;
+  padding:15px 26px;
+  font-size:15px;
+  font-weight:600;
+  font-family:inherit;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,113,227,.38);
+  transition:transform .2s, box-shadow .2s;
+}
+.print-btn:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,113,227,.45);}
+
+/* ============ АДАПТИВ ============ */
+@media (max-width:900px){
+  .grid-3, .grid-4{grid-template-columns:repeat(2,1fr);}
+  .meta-grid{grid-template-columns:1fr;}
+  .levels{grid-template-columns:1fr;}
+}
+@media (max-width:640px){
+  body{font-size:16px;}
+  .wrap{padding:0 16px 70px;}
+  .hero{margin:0 -16px 32px; padding:52px 16px 44px;}
+  .toc{margin:0 -16px 32px; padding:10px 16px;}
+  .grid-2, .grid-3, .grid-4{grid-template-columns:1fr;}
+  .card{padding:22px 20px;}
+  table{font-size:13.5px;}
+  thead th, tbody td{padding:11px 12px;}
+  .addr{font-size:16px;}
+}
+
+/* ============ ДРУК ============ */
+@media print{
+  @page{
+    size:A4;
+    margin:12mm 12mm 14mm;
+  }
+
+  html, body{
+    background:#fff !important;
+    font-size:10.6pt;
+    line-height:1.45;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  .wrap{max-width:none; padding:0;}
+
+  .toc, .print-btn{display:none !important;}
+
+  .hero{
+    margin:0 0 8mm;
+    padding:0 0 6mm;
+    background:none !important;
+    text-align:left;
+    border-bottom:2.5pt solid #0071e3;
+  }
+  .hero::after{display:none;}
+  .hero p.lead{max-width:none; font-size:11pt; margin-bottom:4mm;}
+  .eyebrow{font-size:8pt; padding:3pt 9pt; margin-bottom:4mm;}
+  h1{font-size:24pt; margin-bottom:3mm;}
+
+  .card, .task, .meta-card, .crit, figure, .table-wrap,
+  .example, .anatomy, .qlist li, .steps li, .bar-row,
+  tr, td, th, figcaption, h2, h3, h4, .lvl, .levels > *{
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  h2, h3, h4{break-after:avoid !important; page-break-after:avoid !important;}
+
+  .page-break{break-before:page; page-break-before:always;}
+
+  .card, .task, .meta-card, .crit, figure, .table-wrap, .anatomy, .qlist li, .lvl{
+    box-shadow:none !important;
+    border:0.6pt solid #d2d2d7 !important;
+    border-radius:10pt !important;
+    padding:4.5mm 5mm !important;
+    margin-bottom:4mm !important;
+  }
+
+  .task-no, .sec-num, .steps li::before, .qlist li::before{
+    box-shadow:none !important;
+  }
+
+  .grid-2, .grid-3, .grid-4, .meta-grid, .levels{gap:3.5mm !important;}
+
+  .table-wrap{border-radius:10pt !important; overflow:visible !important;}
+  table{font-size:9pt;}
+  thead th{font-size:7.5pt; padding:2.5mm 3mm;}
+  tbody td{padding:2.2mm 3mm;}
+  thead{display:table-header-group;}
+
+  .qlist{gap:2.5mm !important;}
+  .qlist li{padding:3mm 4mm 3mm 12mm !important;}
+
+  figure svg{max-height:78mm;}
+
+  .example{background:#f7faff !important;}
+  a{color:inherit; text-decoration:none;}
+
+  footer{break-inside:avoid; page-break-inside:avoid; margin-top:8mm;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <span class="eyebrow">Практичне заняття № 20</span>
+    <h1>Електронна пошта та<br><span class="grad">її використання</span></h1>
+    <p class="lead">Основи роботи з електронною поштою, діловий етикет листування, безпека поштової скриньки та антиспам-заходи.</p>
+    <div class="badges">
+      <span class="badge">Тема: <b>Інформатика</b></span>
+      <span class="badge">Формат: <b>практична робота</b></span>
+      <span class="badge">Тривалість: <b>25–30 хв</b></span>
+      <span class="badge">Максимум: <b>13 балів</b></span>
+    </div>
+  </header>
+
+  <!-- ================= TOC ================= -->
+  <nav class="toc">
+    <a href="#meta">Мета</a>
+    <a href="#t1">Адресація</a>
+    <a href="#t2">Етикет листа</a>
+    <a href="#t3">Вкладення</a>
+    <a href="#t4">Безпека</a>
+    <a href="#t5">Спам</a>
+    <a href="#t6">Пошта вчителя</a>
+    <a href="#practice">Практика</a>
+    <a href="#grading">Оцінювання</a>
+    <a href="#report">Звіт</a>
+  </nav>
+
+  <!-- ================= МЕТА ================= -->
+  <section id="meta">
+    <div class="meta-grid">
+      <div class="meta-card">
+        <h4>Мета заняття</h4>
+        <p>Опанувати реєстрацію поштової скриньки, надсилання й отримання листів, роботу з вкладеннями, налаштування фільтрів та захист від спаму. Розвивати навички ділової комунікації, уміння структурувати лист і захищати обліковий запис. Виховувати етикет електронного листування, відповідальність за безпеку паролів і повагу до чужого часу.</p>
+      </div>
+      <div class="meta-card">
+        <h4>Обладнання та ПЗ</h4>
+        <ul>
+          <li>Персональний комп'ютер з доступом до мережі Інтернет</li>
+          <li>Браузер Google Chrome або Mozilla Firefox</li>
+          <li>Поштовий сервіс Gmail або Ukr.net (веб-інтерфейс)</li>
+          <li>Інструкційні картки практичного заняття</li>
+          <li>Файли-заготовки: <code>zvit.docx</code>, <code>pamyatka.docx</code></li>
+        </ul>
+      </div>
+      <div class="meta-card">
+        <h4>Література</h4>
+        <ul>
+          <li>Шумілова І. Ф. Новітні технології викладання освітніх галузей у початковій школі : навч. посіб. Київ : Олді, 2023. 248 с.</li>
+          <li>Юнчик В. Л. Системне, прикладне програмне забезпечення та хмарні технології в освіті : конспект лекцій. Луцьк : ВНУ імені Лесі Українки, 2024. 162 с.</li>
+          <li>Анісімов А. В., Кулябко П. П. Інформаційні системи та бази даних : навч. посіб. Київ, 2017. 110 с.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ТЕОРІЯ ================= -->
+  <section id="theory">
+    <div class="sec-head">
+      <div class="sec-num">📘</div>
+      <h2>Теоретичні відомості</h2>
+    </div>
+    <p class="section-sub">Шість ключових блоків: від адресації поштової скриньки — до антиспам-заходів у роботі вчителя початкової школи.</p>
+  </section>
+
+  <!-- ---------- 1 ---------- -->
+  <section id="t1">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">1</div>
+        <h2>Електронна пошта: призначення та адресація</h2>
+      </div>
+      <p><strong>Електронна пошта</strong> — це служба передавання повідомлень між користувачами комп'ютерної мережі. Кожна скринька має адресу виду <code>name@domain</code>, де ліва частина — унікальне ім'я користувача, а права — домен поштового сервера.</p>
+
+      <div class="addr">
+        <span class="local">olena.petrova</span><span class="at">@</span><span class="domain">school-lyceum.ua</span>
+      </div>
+
+      <p style="margin-top:0; color:var(--sub); font-size:15.5px;">Для молодших школярів зручна аналогія з конвертом: <b>name</b> — це «квартира», а <b>domain</b> — «будинок», у якому працює поштове відділення.</p>
+
+      <figure>
+        <svg viewBox="0 0 900 230" role="img" aria-label="Схема шляху електронного листа від відправника до отримувача">
+          <defs>
+            <marker id="ae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#86868b"/>
+            </marker>
+          </defs>
+          <text x="450" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#6e6e73" font-family="Helvetica,Arial,sans-serif" letter-spacing="1.4">ШЛЯХ ЕЛЕКТРОННОГО ЛИСТА</text>
+
+          <!-- 1 -->
+          <g>
+            <rect x="14" y="72" width="160" height="108" rx="16" fill="#fff" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="14" y="72" width="160" height="6" rx="3" fill="#0071e3"/>
+            <circle cx="94" cy="112" r="17" fill="#e8f1fd"/>
+            <text x="94" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#0071e3" font-family="Helvetica,Arial,sans-serif">1</text>
+            <text x="94" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Відправник</text>
+            <text x="94" y="165" text-anchor="middle" font-size="10.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">веб-інтерфейс</text>
+          </g>
+          <line x1="178" y1="126" x2="212" y2="126" stroke="#86868b" stroke-width="2" marker-end="url(#ae)"/>
+
+          <!-- 2 SMTP -->
+          <g>
+            <rect x="218" y="72" width="150" height="108" rx="16" fill="#fff" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="218" y="72" width="150" height="6" rx="3" fill="#af52de"/>
+            <circle cx="293" cy="112" r="17" fill="#f6ecfc"/>
+            <text x="293" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#af52de" font-family="Helvetica,Arial,sans-serif">2</text>
+            <text x="293" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">SMTP</text>
+            <text x="293" y="165" text-anchor="middle" font-size="10.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">відправлення</text>
+          </g>
+          <line x1="372" y1="126" x2="406" y2="126" stroke="#86868b" stroke-width="2" marker-end="url(#ae)"/>
+
+          <!-- 3 Internet -->
+          <g>
+            <rect x="412" y="72" width="150" height="108" rx="16" fill="#fff" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="412" y="72" width="150" height="6" rx="3" fill="#ff9f0a"/>
+            <circle cx="487" cy="112" r="17" fill="#fff4e2"/>
+            <text x="487" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#ff9f0a" font-family="Helvetica,Arial,sans-serif">3</text>
+            <text x="487" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Інтернет</text>
+            <text x="487" y="165" text-anchor="middle" font-size="10.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">маршрутизація</text>
+          </g>
+          <line x1="566" y1="126" x2="600" y2="126" stroke="#86868b" stroke-width="2" marker-end="url(#ae)"/>
+
+          <!-- 4 Server -->
+          <g>
+            <rect x="606" y="72" width="150" height="108" rx="16" fill="#fff" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="606" y="72" width="150" height="6" rx="3" fill="#34c759"/>
+            <circle cx="681" cy="112" r="17" fill="#e8f9ed"/>
+            <text x="681" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#34c759" font-family="Helvetica,Arial,sans-serif">4</text>
+            <text x="681" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Сервер</text>
+            <text x="681" y="165" text-anchor="middle" font-size="10.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">отримувача</text>
+          </g>
+          <line x1="760" y1="126" x2="794" y2="126" stroke="#86868b" stroke-width="2" marker-end="url(#ae)"/>
+
+          <!-- 5 -->
+          <g>
+            <rect x="800" y="72" width="90" height="108" rx="16" fill="#e8f1fd" stroke="#0071e3" stroke-width="1.6"/>
+            <text x="845" y="112" text-anchor="middle" font-size="15" font-weight="700" fill="#0071e3" font-family="Helvetica,Arial,sans-serif">5</text>
+            <text x="845" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Отриму-</text>
+            <text x="845" y="154" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">вач</text>
+          </g>
+
+          <text x="450" y="212" text-anchor="middle" font-size="11.5" fill="#86868b" font-family="Helvetica,Arial,sans-serif">Відправник → SMTP-сервер → Інтернет → сервер отримувача → отримувач</text>
+        </svg>
+        <figcaption>Рис. 1. Шлях електронного листа від відправника до отримувача</figcaption>
+      </figure>
+
+      <h4 style="margin-top:26px;">Два способи роботи з поштою</h4>
+      <div class="grid-2" style="margin-top:14px;">
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg>
+          </div>
+          <h4>Веб-інтерфейс</h4>
+          <p>Відкривається у браузері. Не потребує налаштувань, доступний з будь-якого комп'ютера класу. Найзручніший варіант для вчителя початкової школи.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+          </div>
+          <h4>Поштовий клієнт</h4>
+          <p>Окрема програма на пристрої (Outlook, Thunderbird, Apple Mail). Потребує налаштування параметрів сервера, але працює офлайн і дозволяє зберігати листи локально.</p>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад</div>
+        Адреса <code>teacher.kolya@ukr.net</code> розшифровується так: <b>teacher.kolya</b> — унікальне ім'я користувача (його вигадує сама людина при реєстрації), <b>ukr.net</b> — домен поштового сервера, що обслуговує цю скриньку.
+        <div class="result-line">💡 Домен визначає «поштове відділення»: лист із будь-якої точки світу буде доставлено саме туди.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 2 ---------- -->
+  <section id="t2">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">2</div>
+        <h2>Структура та етикет ділового листа</h2>
+      </div>
+      <p>Діловий лист будується за сталою схемою: <b>тема → звертання → коротке пояснення мети → суть → конкретне прохання → підпис</b>. Один лист має містити одне питання: так адресат швидше відповість і не загубить важливу інформацію серед інших повідомлень.</p>
+
+      <figure>
+        <svg viewBox="0 0 900 380" role="img" aria-label="Анатомія ділового електронного листа">
+          <text x="450" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#6e6e73" font-family="Helvetica,Arial,sans-serif" letter-spacing="1.4">АНАТОМІЯ ДІЛОВОГО ЛИСТА</text>
+
+          <!-- Вікно листа -->
+          <rect x="220" y="46" width="540" height="310" rx="14" fill="#fff" stroke="#d2d2d7" stroke-width="1.6"/>
+          <rect x="220" y="46" width="540" height="34" rx="14" fill="#f5f5f7"/>
+          <rect x="220" y="66" width="540" height="14" fill="#f5f5f7"/>
+          <circle cx="240" cy="63" r="5" fill="#ff5f57"/>
+          <circle cx="257" cy="63" r="5" fill="#febc2e"/>
+          <circle cx="274" cy="63" r="5" fill="#28c840"/>
+          <text x="500" y="68" text-anchor="middle" font-size="11" fill="#86868b" font-family="Helvetica,Arial,sans-serif">Новий лист</text>
+
+          <!-- Поля -->
+          <line x1="220" y1="80" x2="760" y2="80" stroke="#e8e8ed"/>
+          <text x="240" y="102" font-size="11" font-weight="700" fill="#86868b" font-family="Helvetica,Arial,sans-serif">КОМУ</text>
+          <text x="300" y="102" font-size="12" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">batky-2v@school.ua</text>
+          <line x1="220" y1="112" x2="760" y2="112" stroke="#e8e8ed"/>
+          <text x="240" y="130" font-size="11" font-weight="700" fill="#86868b" font-family="Helvetica,Arial,sans-serif">ВСС</text>
+          <text x="300" y="130" font-size="11" fill="#6e6e73" font-family="Helvetica,Arial,sans-serif">27 прихованих адрес</text>
+          <line x1="220" y1="140" x2="760" y2="140" stroke="#e8e8ed"/>
+
+          <!-- Тема -->
+          <text x="240" y="160" font-size="11" font-weight="700" fill="#86868b" font-family="Helvetica,Arial,sans-serif">ТЕМА</text>
+          <text x="300" y="160" font-size="12.5" font-weight="700" fill="#0071e3" font-family="Helvetica,Arial,sans-serif">Домашнє завдання з інформатики, 2 клас — 15.11</text>
+          <line x1="220" y1="170" x2="760" y2="170" stroke="#e8e8ed"/>
+
+          <!-- Тіло -->
+          <text x="240" y="194" font-size="12" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Шановні батьки!</text>
+          <text x="240" y="216" font-size="12" fill="#3a3a3c" font-family="Helvetica,Arial,sans-serif">Нагадую, що до п'ятниці діти виконують</text>
+          <text x="240" y="233" font-size="12" fill="#3a3a3c" font-family="Helvetica,Arial,sans-serif">практичну роботу № 3 у файлі pamyatka.docx.</text>
+          <text x="240" y="250" font-size="12" fill="#3a3a3c" font-family="Helvetica,Arial,sans-serif">Прошу надіслати результат до 18:00.</text>
+          <text x="240" y="280" font-size="12" fill="#3a3a3c" font-family="Helvetica,Arial,sans-serif">З повагою,</text>
+          <text x="240" y="297" font-size="12" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Олена Петрівна, класний керівник 2-В</text>
+
+          <!-- Вкладення -->
+          <rect x="240" y="312" width="180" height="30" rx="8" fill="#fff4e2" stroke="#ffd08a"/>
+          <text x="330" y="332" text-anchor="middle" font-size="11" font-weight="700" fill="#b86e00" font-family="Helvetica,Arial,sans-serif">📎 pamyatka.docx</text>
+
+          <!-- Стрілки-підписи -->
+          <g font-family="Helvetica,Arial,sans-serif">
+            <!-- Кому -->
+            <line x1="216" y1="98" x2="130" y2="98" stroke="#0071e3" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <rect x="14" y="82" width="112" height="34" rx="9" fill="#e8f1fd"/>
+            <text x="70" y="103" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0071e3">Кому</text>
+
+            <!-- Всс -->
+            <line x1="216" y1="126" x2="130" y2="126" stroke="#af52de" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <rect x="14" y="110" width="112" height="34" rx="9" fill="#f6ecfc"/>
+            <text x="70" y="131" text-anchor="middle" font-size="11.5" font-weight="700" fill="#af52de">Всс</text>
+
+            <!-- Тема -->
+            <line x1="216" y1="156" x2="130" y2="156" stroke="#ff9f0a" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <rect x="14" y="140" width="112" height="34" rx="9" fill="#fff4e2"/>
+            <text x="70" y="161" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b86e00">Тема</text>
+
+            <!-- Тіло / прохання / підпис -->
+            <line x1="764" y1="208" x2="850" y2="208" stroke="#34c759" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <rect x="768" y="192" width="118" height="34" rx="9" fill="#e8f9ed"/>
+            <text x="827" y="213" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a8a3d">Суть</text>
+
+            <line x1="764" y1="244" x2="850" y2="244" stroke="#34c759" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <rect x="768" y="228" width="118" height="34" rx="9" fill="#e8f9ed"/>
+            <text x="827" y="249" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a8a3d">Прохання</text>
+
+            <line x1="764" y1="290" x2="850" y2="290" stroke="#34c759" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <rect x="768" y="274" width="118" height="34" rx="9" fill="#e8f9ed"/>
+            <text x="827" y="295" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a8a3d">Підпис</text>
+
+            <!-- Вкладення -->
+            <line x1="424" y1="327" x2="510" y2="327" stroke="#b86e00" stroke-width="1.6" stroke-dasharray="3 3"/>
+            <rect x="514" y="310" width="130" height="34" rx="9" fill="#fff4e2"/>
+            <text x="579" y="331" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b86e00">Вкладення</text>
+          </g>
+        </svg>
+        <figcaption>Рис. 2. Анатомія ділового електронного листа: кожен елемент має своє призначення</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th style="width:24%">Елемент листа</th><th style="width:34%">Призначення</th><th>Практична порада</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Поле «Кому»</strong></td><td>Основна адреса отримувача</td><td>Перевіряйте адресу після автопідказки</td></tr>
+            <tr><td><strong>Поле «Копія»</strong></td><td>Отримувачі, які мають бачити лист</td><td>Не перевантажуйте копію зайвими адресами</td></tr>
+            <tr><td><strong>Поле «Прихована копія»</strong></td><td>Приховані отримувачі листа</td><td>Для розсилки батькам — лише Всс</td></tr>
+            <tr><td><strong>Поле «Тема»</strong></td><td>Короткий зміст листа</td><td>5–7 слів, без «ТЕРМІНОВО!!!»</td></tr>
+            <tr><td><strong>Тіло листа</strong></td><td>Суть, розбита на абзаци</td><td>Один лист — одне питання</td></tr>
+            <tr><td><strong>Вкладення</strong></td><td>Файли, що передаються з листом</td><td>До 20–25 МБ, назва без пробілів</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад Всс</div>
+        Лист адресовано батькам усього класу — 27 родин. Якщо поставити всі адреси в поле «Кому» або «Копія», кожен із батьків побачить електронні адреси інших 26 родин. Це порушує приватність.
+        <div class="result-line">✅ Правильно: усі 27 адрес — у полі <b>«Прихована копія» (Всс)</b>. Тоді кожен отримувач бачить лише своє ім'я.</div>
+      </div>
+
+      <div class="example warn">
+        <div class="tag">Типова помилка</div>
+        Тема листа «ТЕРМІНОВО!!!» без змістовного опису. Адресат не розуміє, про що йдеться, і лист губиться серед інших.
+        <div class="result-line">❌ Погано: <code>ТЕРМІНОВО!!!</code> · ✅ Добре: <code>Домашнє завдання з інформатики, 2 клас — 15.11</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 3 ---------- -->
+  <section id="t3">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">3</div>
+        <h2>Робота з вкладеннями</h2>
+      </div>
+      <p><strong>Вкладення</strong> — це файл, що передається разом із листом. Більшість сервісів обмежують розмір листа 20–25 МБ, тому великі матеріали (відео, презентації з ілюстраціями) краще надсилати посиланням на хмарну теку.</p>
+
+      <h4 style="margin-top:20px;">Правила безпечної роботи з вкладеннями</h4>
+      <ol class="steps">
+        <li>Називайте файли <b>латиницею без пробілів</b>: <code>homework_2class.docx</code>.</li>
+        <li>Використовуйте формати <code>docx</code>, <code>pdf</code>, <code>jpg</code>, <code>png</code>, <code>zip</code>.</li>
+        <li>Не відкривайте вкладення <code>.exe</code>, <code>.scr</code>, <code>.js</code> навіть від знайомих.</li>
+        <li>Після надсилання перевірте, чи файл справді прикріпився, а не лише згаданий у тексті.</li>
+      </ol>
+
+      <div class="grid-2" style="margin-top:20px;">
+        <div class="example ok" style="margin:0;">
+          <div class="tag">Правильно</div>
+          <code>homework_2class.docx</code><br>
+          <code>pamyatka_batky.pdf</code><br>
+          <code>zvit_ivanenko.pdf</code>
+        </div>
+        <div class="example warn" style="margin:0;">
+          <div class="tag">Неправильно</div>
+          <code>Домашнє завдання 2 клас.docx</code><br>
+          <code>звіт Іваненка.docx</code><br>
+          <code>новий файл (1).docx</code>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад обмеження</div>
+        Відеоурок тривалістю 15 хвилин важить близько 200 МБ — це в 8–10 разів більше за ліміт. Правильне рішення: завантажити відео в Google Drive і надіслати в листі посилання з налаштованим доступом «Переглядач».
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 4 ---------- -->
+  <section id="t4">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">4</div>
+        <h2>Безпека поштової скриньки</h2>
+      </div>
+      <p>Поштова скринька — це ключ до багатьох інших сервісів, тому <b>пароль</b> має бути довгим (12 і більше символів), унікальним і не повторюватися на інших сайтах.</p>
+
+      <div class="grid-3" style="margin:20px 0;">
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          </div>
+          <h4>Довгий пароль</h4>
+          <p>12+ символів: літери різного регістру, цифри, символи.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <h4>Унікальність</h4>
+          <p>Не повторюйте пароль від пошти на інших сайтах.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h4>Двофакторна автентифікація</h4>
+          <p>Другий крок входу — код із телефона, який неможливо вгадати.</p>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Правило двох кроків</div>
+        Пароль зберігайте лише в <b>менеджері паролів</b>, а код підтвердження <b>нікому не повідомляйте</b> — навіть людині, яка представляється адміністратором школи.
+        <div class="result-line">🔒 Справжній адміністратор ніколи не попросить код із вашого телефона.</div>
+      </div>
+
+      <h4 style="margin-top:26px;">Ознаки підозрілого листа</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:40%">Ознака підозрілого листа</th><th>Що робити</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Невідомий або спотворений домен</strong></td><td>Не відкривати лист, позначити як спам</td></tr>
+            <tr><td><strong>Прохання «негайно підтвердити пароль»</strong></td><td>Не переходити за посиланням, зайти на сайт вручну</td></tr>
+            <tr><td><strong>Посилання веде на сторонній сайт</strong></td><td>Навести курсор і перевірити адресу</td></tr>
+            <tr><td><strong>Вкладення .exe, .scr, .js</strong></td><td>Не завантажувати й не відкривати</td></tr>
+            <tr><td><strong>Помилки в тексті, звертання «Шановний клієнте!»</strong></td><td>Видалити лист, повідомити адміністратора</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example warn">
+        <div class="tag">Фішинг</div>
+        <b>Фішинг</b> — це лист, що імітує повідомлення від відомої установи, аби змусити вас ввести пароль на підробленій сторінці.
+        <div class="result-line">🛡 Надійна звичка: заходити на сайт сервісу <b>вручну</b> (ввести адресу в браузері), а не за посиланням із листа.</div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад фішингу</div>
+        Лист нібито від «банку»: <i>«Ваш рахунок заблоковано. Негайно підтвердіть дані за посиланням: secure-bank-verify.com»</i>.
+        <div class="result-line">❌ Посилання веде на підроблений сайт, що зовні копіює справжній. ✅ Зателефонуйте в банк за офіційним номером і уточніть ситуацію; не переходьте за посиланням.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 5 ---------- -->
+  <section id="t5">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">5</div>
+        <h2>Спам і антиспам-заходи</h2>
+      </div>
+      <p><strong>Спам</strong> — це масова небажана розсилка реклами чи шахрайських повідомлень. Ознаки спаму: невідомий відправник, гучна обіцянка виграшу, вимога термінової дії, багато посилань і картинок. Основні засоби захисту — фільтри, чорний список, перевірка адреси та двофакторний вхід.</p>
+
+      <figure>
+        <svg viewBox="0 0 900 260" role="img" aria-label="Антиспам-захист поштової скриньки">
+          <text x="450" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#6e6e73" font-family="Helvetica,Arial,sans-serif" letter-spacing="1.4">АНТИСПАМ-ЗАХИСТ ПОШТОВОЇ СКРИНЬКИ</text>
+
+          <!-- Щит -->
+          <g>
+            <path d="M450 60 L510 82 L510 140 C510 178 480 200 450 212 C420 200 390 178 390 140 L390 82 Z" fill="#e8f9ed" stroke="#34c759" stroke-width="2.4"/>
+            <path d="M425 138 L445 158 L478 122" fill="none" stroke="#34c759" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="450" y="188" text-anchor="middle" font-size="11" font-weight="700" fill="#1a8a3d" font-family="Helvetica,Arial,sans-serif">ЗАХИСТ</text>
+          </g>
+
+          <!-- 5 елементів навколо -->
+          <g font-family="Helvetica,Arial,sans-serif">
+            <!-- 1 Фільтри -->
+            <line x1="386" y1="90" x2="270" y2="66" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="60" y="46" width="210" height="40" rx="11" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="165" y="62" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Фільтри</text>
+            <text x="165" y="78" text-anchor="middle" font-size="10.5" fill="#86868b">автоматичне сортування</text>
+
+            <!-- 2 Чорний список -->
+            <rect x="60" y="110" width="210" height="40" rx="11" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="165" y="126" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Чорний список</text>
+            <text x="165" y="142" text-anchor="middle" font-size="10.5" fill="#86868b">блокування адрес</text>
+            <line x1="386" y1="140" x2="274" y2="130" stroke="#d2d2d7" stroke-width="1.6"/>
+
+            <!-- 3 Перевірка адреси -->
+            <rect x="60" y="174" width="210" height="40" rx="11" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="165" y="190" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Перевірка адреси</text>
+            <text x="165" y="206" text-anchor="middle" font-size="10.5" fill="#86868b">домен, зворотні посилання</text>
+            <line x1="386" y1="190" x2="274" y2="194" stroke="#d2d2d7" stroke-width="1.6"/>
+
+            <!-- 4 Двофакторний вхід -->
+            <line x1="514" y1="90" x2="630" y2="66" stroke="#d2d2d7" stroke-width="1.6"/>
+            <rect x="630" y="46" width="210" height="40" rx="11" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="735" y="62" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Двофакторний вхід</text>
+            <text x="735" y="78" text-anchor="middle" font-size="10.5" fill="#86868b">код із телефона</text>
+
+            <!-- 5 Позначити як спам -->
+            <rect x="630" y="140" width="210" height="40" rx="11" fill="#fff" stroke="#d2d2d7" stroke-width="1.4"/>
+            <text x="735" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">Позначити як спам</text>
+            <text x="735" y="172" text-anchor="middle" font-size="10.5" fill="#86868b">навчання фільтра</text>
+            <line x1="514" y1="140" x2="626" y2="140" stroke="#d2d2d7" stroke-width="1.6"/>
+
+            <!-- 6 Не відповідати -->
+            <rect x="630" y="200" width="210" height="40" rx="11" fill="#ffeceb" stroke="#f8cfc9" stroke-width="1.4"/>
+            <text x="735" y="216" text-anchor="middle" font-size="12" font-weight="700" fill="#c9241b">Не відповідати</text>
+            <text x="735" y="232" text-anchor="middle" font-size="10.5" fill="#86868b">і не «відписуватись»</text>
+            <line x1="514" y1="190" x2="626" y2="210" stroke="#d2d2d7" stroke-width="1.6"/>
+          </g>
+        </svg>
+        <figcaption>Рис. 3. Антиспам-захист поштової скриньки: шість рівнів оборони</figcaption>
+      </figure>
+
+      <div class="example warn">
+        <div class="tag">Важливо</div>
+        Ніколи не відповідайте на спам і не натискайте «Відписатися» в підозрілому листі: так ви підтверджуєте, що адреса активна.
+        <div class="result-line">✅ Правильно: позначити лист як <b>спам</b> — фільтр поступово навчиться його розпізнавати.</div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад спаму</div>
+        «ВІТАЄМО! Ви виграли iPhone 15! Натисніть ТУТ, щоб отримати приз!» — від невідомого відправника, з граматичними помилками, без звертання по імені.
+        <div class="result-line">Класичні ознаки спаму: невідомий відправник, обіцянка виграшу, вимога негайної дії, багато посилань.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 6 ---------- -->
+  <section id="t6">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">6</div>
+        <h2>Пошта в роботі вчителя початкової школи</h2>
+      </div>
+      <p>У шкільній практиці пошта замінює частину паперового обігу: повідомлення батькам, збір дитячих робіт, обмін методичними матеріалами з колегами. Акуратність листування формує довіру батьків і економить час усім учасникам.</p>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
+          </div>
+          <h4>Розсилка батькам</h4>
+          <p>Лише через <b>Всс</b>. Тема з класом і датою: «Домашнє завдання, 2-В — 15.11».</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </div>
+          <h4>Збір робіт учнів</h4>
+          <p>Окрема папка <code>Роботи_2_клас</code> і фільтр за темою.</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          </div>
+          <h4>Шаблони відповідей</h4>
+          <p>Готові тексти на типові запитання батьків: «Коли збори?», «Де знайти завдання?».</p>
+        </div>
+        <div class="crit">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+          </div>
+          <h4>Окремі папки</h4>
+          <p>Для кожного класу та для методичних матеріалів. Архівування листів наприкінці семестру.</p>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="tag">Приклад робочого фільтра</div>
+        Умова: <code>від: batky-2v@school.ua</code> і <code>тема містить "Домашнє завдання"</code> → Дія: <code>позначити "Батьки 2-В"</code>, <code>архівувати</code>.
+        <div class="result-line">📁 Усі відповіді батьків автоматично потрапляють в окрему папку й не змішуються з іншими листами.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПРАКТИКА ================= -->
+  <section id="practice" class="page-break">
+    <div class="sec-head">
+      <div class="sec-num">🧪</div>
+      <h2>Покроковий алгоритм виконання різнорівневих завдань</h2>
+    </div>
+    <p class="section-sub">Практична частина триває <b>25–30 хв</b> і складається з трьох рівнів: репродуктивного (7 хв), продуктивного (10 хв) і творчого (10 хв). Кожен наступний рівень спирається на результат попереднього.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 210" role="img" aria-label="Структура різнорівневих завдань практичного заняття">
+        <text x="450" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#6e6e73" font-family="Helvetica,Arial,sans-serif" letter-spacing="1.4">СТРУКТУРА ПРАКТИЧНОЇ ЧАСТИНИ</text>
+
+        <!-- Level 1 -->
+        <g>
+          <rect x="14" y="58" width="200" height="108" rx="16" fill="#fff" stroke="#d2d2d7" stroke-width="1.6"/>
+          <rect x="14" y="58" width="200" height="6" rx="3" fill="#0071e3"/>
+          <text x="114" y="92" text-anchor="middle" font-size="11" font-weight="700" fill="#0071e3" font-family="Helvetica,Arial,sans-serif" letter-spacing=".8">РІВЕНЬ 1</text>
+          <text x="114" y="116" text-anchor="middle" font-size="14" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Репродуктивний</text>
+          <text x="114" y="140" text-anchor="middle" font-size="12" fill="#86868b" font-family="Helvetica,Arial,sans-serif">≈ 7 хв · 3 бали</text>
+        </g>
+
+        <line x1="218" y1="112" x2="252" y2="112" stroke="#86868b" stroke-width="2"/>
+        <path d="M252 106 L260 112 L252 118 Z" fill="#86868b"/>
+
+        <!-- Level 2 -->
+        <g>
+          <rect x="266" y="58" width="200" height="108" rx="16" fill="#fff" stroke="#d2d2d7" stroke-width="1.6"/>
+          <rect x="266" y="58" width="200" height="6" rx="3" fill="#af52de"/>
+          <text x="366" y="92" text-anchor="middle" font-size="11" font-weight="700" fill="#af52de" font-family="Helvetica,Arial,sans-serif" letter-spacing=".8">РІВЕНЬ 2</text>
+          <text x="366" y="116" text-anchor="middle" font-size="14" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Продуктивний</text>
+          <text x="366" y="140" text-anchor="middle" font-size="12" fill="#86868b" font-family="Helvetica,Arial,sans-serif">≈ 10 хв · 4 бали</text>
+        </g>
+
+        <line x1="470" y1="112" x2="504" y2="112" stroke="#86868b" stroke-width="2"/>
+        <path d="M504 106 L512 112 L504 118 Z" fill="#86868b"/>
+
+        <!-- Level 3 -->
+        <g>
+          <rect x="518" y="58" width="200" height="108" rx="16" fill="#fff" stroke="#d2d2d7" stroke-width="1.6"/>
+          <rect x="518" y="58" width="200" height="6" rx="3" fill="#ff9f0a"/>
+          <text x="618" y="92" text-anchor="middle" font-size="11" font-weight="700" fill="#b86e00" font-family="Helvetica,Arial,sans-serif" letter-spacing=".8">РІВЕНЬ 3</text>
+          <text x="618" y="116" text-anchor="middle" font-size="14" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Творчий</text>
+          <text x="618" y="140" text-anchor="middle" font-size="12" fill="#86868b" font-family="Helvetica,Arial,sans-serif">≈ 10 хв · 5 балів</text>
+        </g>
+
+        <line x1="722" y1="112" x2="756" y2="112" stroke="#86868b" stroke-width="2"/>
+        <path d="M756 106 L764 112 L756 118 Z" fill="#86868b"/>
+
+        <!-- Report + total -->
+        <g>
+          <rect x="770" y="58" width="120" height="108" rx="16" fill="#e8f1fd" stroke="#0071e3" stroke-width="1.6"/>
+          <text x="830" y="90" text-anchor="middle" font-size="11" font-weight="700" fill="#0071e3" font-family="Helvetica,Arial,sans-serif" letter-spacing=".8">ЗВІТ</text>
+          <text x="830" y="118" text-anchor="middle" font-size="22" font-weight="700" fill="#0071e3" font-family="Helvetica,Arial,sans-serif">+1</text>
+          <text x="830" y="144" text-anchor="middle" font-size="11" fill="#0058b0" font-family="Helvetica,Arial,sans-serif">скріншоти</text>
+        </g>
+
+        <text x="450" y="196" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f" font-family="Helvetica,Arial,sans-serif">Разом: 3 + 4 + 5 + 1 = <tspan fill="#0071e3">13 балів</tspan></text>
+      </svg>
+      <figcaption>Рис. 4. Структура різнорівневих завдань практичного заняття</figcaption>
+    </figure>
+
+    <div class="levels">
+      <div class="lvl l1">
+        <span class="lvl-num">Рівень 1</span>
+        <h3>Репродуктивний</h3>
+        <div class="lvl-meta"><span>⏱ ≈ 7 хв</span><span>🏆 3 бали</span></div>
+        <p>Реєстрація скриньки, надсилання та отримання листів.</p>
+      </div>
+      <div class="lvl l2">
+        <span class="lvl-num">Рівень 2</span>
+        <h3>Продуктивний</h3>
+        <div class="lvl-meta"><span>⏱ ≈ 10 хв</span><span>🏆 4 бали</span></div>
+        <p>Вкладення, підпис, фільтри.</p>
+      </div>
+      <div class="lvl l3">
+        <span class="lvl-num">Рівень 3</span>
+        <h3>Творчий</h3>
+        <div class="lvl-meta"><span>⏱ ≈ 10 хв</span><span>🏆 5 балів</span></div>
+        <p>Лист-пам'ятка для батьків із Всс і фільтром.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Рівень 1 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Рівень 1 · Репродуктивний</span>
+      <h3>Реєстрація скриньки та перший лист</h3>
+    </div>
+    <p class="task-desc">≈ 7 хвилин · 3 бали. Мета — створити поштову скриньку, надіслати лист викладачу та прочитати відповідь.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:8%">Крок</th>
+            <th style="width:30%">Дія</th>
+            <th style="width:32%">Де виконується / команда</th>
+            <th>Результат</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Відкрийте браузер і перейдіть на поштовий сервіс</td><td class="code-cell"><code>mail.google.com</code></td><td>Відкрито сторінку входу</td></tr>
+          <tr><td>2</td><td>Натисніть «Створити обліковий запис»</td><td>Кнопка на сторінці входу</td><td>Відкрито форму реєстрації</td></tr>
+          <tr><td>3</td><td>Заповніть ім'я, прізвище, ім'я користувача, пароль</td><td>Поля форми</td><td>Дані введено</td></tr>
+          <tr><td>4</td><td>Підтвердьте номер телефону кодом із SMS</td><td>Вікно підтвердження</td><td>Скриньку створено</td></tr>
+          <tr><td>5</td><td>Натисніть «Написати», вкажіть адресу викладача й тему</td><td>Кнопка «Написати»</td><td>Лист готовий до надсилання</td></tr>
+          <tr><td>6</td><td>Додайте текст-вітання і натисніть «Надіслати»</td><td>Кнопка «Надіслати»</td><td>Лист у папці «Надіслані»</td></tr>
+          <tr><td>7</td><td>Відкрийте папку «Вхідні» і прочитайте лист-відповідь</td><td>Папки пошти</td><td>Лист прочитано</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="example">
+      <div class="tag">Приклад тексту першого листа</div>
+      <b>Тема:</b> Вітання від студента групи І-21<br>
+      <b>Текст:</b> «Добрий день, <i>[ім'я викладача]</i>! Мене звати <i>[ПІБ]</i>, я студент групи І-21. Це моє перше практичне заняття з електронної пошти. Дякую за можливість навчатися! З повагою, <i>[ПІБ]</i>.»
+    </div>
+  </section>
+
+  <!-- Рівень 2 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Рівень 2 · Продуктивний</span>
+      <h3>Вкладення, підпис і фільтр</h3>
+    </div>
+    <p class="task-desc">≈ 10 хвилин · 4 бали. Мета — навчитися прикріплювати файли, налаштовувати підпис і створювати фільтри.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:8%">Крок</th>
+            <th style="width:30%">Дія</th>
+            <th style="width:32%">Налаштування / команда</th>
+            <th>Результат</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Створіть файл <code>zvit.docx</code> з прізвищем, групою і датою</td><td>Текстовий процесор</td><td>Файл створено</td></tr>
+          <tr><td>2</td><td>У вікні листа натисніть «Прикріпити файл» (скріпка)</td><td>Панель інструментів листа</td><td>Відкрито діалог вибору файлу</td></tr>
+          <tr><td>3</td><td>Виберіть <code>zvit.docx</code> і дочекайтеся завантаження</td><td>Діалог файлів</td><td>Вкладення додано</td></tr>
+          <tr><td>4</td><td>Перевірте назву й розмір вкладення (до 20–25 МБ)</td><td>Вікно листа</td><td>Вкладення коректне</td></tr>
+          <tr><td>5</td><td>Налаштуйте підпис: <i>Налаштування → Загальні → Підпис</i></td><td>Меню налаштувань</td><td>Підпис збережено</td></tr>
+          <tr><td>6</td><td>Створіть фільтр: <i>Налаштування → Фільтри → Створити фільтр</i></td><td>Меню фільтрів</td><td>Правило створено</td></tr>
+          <tr><td>7</td><td>Перевірте дію фільтра на тестовому листі</td><td>Папки пошти</td><td>Лист відсортовано автоматично</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="example">
+      <div class="tag">Приклад підпису</div>
+      «З повагою,<br>Іваненко Олена Петрівна<br>класний керівник 2-В<br>Ліцей № 5, м. Луцьк<br>+380 (50) 123-45-67»
+      <div class="result-line">📝 Підпис додається автоматично в кінці кожного листа — це економить час і виглядає професійно.</div>
+    </div>
+
+    <div class="example">
+      <div class="tag">Приклад фільтра</div>
+      <b>Умова:</b> <code>від: batky-2v@school.ua</code><br>
+      <b>Дія:</b> <code>позначити ярликом «Батьки 2-В»</code>, <code>архівувати</code>.
+      <div class="result-line">📁 Усі листи від батьків класу автоматично потрапляють в окрему папку й не змішуються з іншими.</div>
+    </div>
+  </section>
+
+  <!-- Рівень 3 -->
+  <section class="task">
+    <div class="task-head">
+      <span class="task-no">Рівень 3 · Творчий</span>
+      <h3>Лист-пам'ятка для батьків 2 класу</h3>
+    </div>
+    <p class="task-desc">≈ 10 хвилин · 5 балів. Підготуйте лист-пам'ятку для батьків учнів 2 класу про домашнє завдання з інформатики. Лист має містити вкладення <code>pamyatka.docx</code>, адреси батьків — у полі «Прихована копія», а відповіді батьків мають автоматично потрапляти в папку «Батьки».</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:8%">Етап</th><th style="width:52%">Зміст роботи</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Скласти текст за схемою: тема → звертання → суть → прохання → підпис (5–7 речень)</td><td>Готовий текст листа</td></tr>
+          <tr><td>2</td><td>Додати вкладення <code>pamyatka.docx</code>, перевірити назву файлу</td><td>Вкладення прикріплено</td></tr>
+          <tr><td>3</td><td>Розмістити адреси батьків у полі Всс, перевірити поле «Кому»</td><td>Розсилку налаштовано</td></tr>
+          <tr><td>4</td><td>Створити фільтр «відповіді батьків» → папка «Батьки»</td><td>Фільтр працює</td></tr>
+          <tr><td>5</td><td>Зробити 2–3 скріншоти та зберегти їх для звіту</td><td>Скріншоти готові</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="example ok">
+      <div class="tag">Приклад листа-пам'ятки</div>
+      <b>Тема:</b> Домашнє завдання з інформатики, 2 клас — 15.11<br><br>
+      <b>Шановні батьки!</b><br><br>
+      Нагадую, що до п'ятниці діти виконують практичну роботу № 3 з інформатики. У вкладенні — детальна пам'ятка з кроками. Прошу надіслати результат до 18:00 п'ятниці у відповіді на цей лист.<br><br>
+      Якщо виникнуть запитання — пишіть у відповідь, я відповім протягом дня.<br><br>
+      З повагою,<br>Олена Петрівна, класний керівник 2-В
+    </div>
+
+    <div class="example">
+      <div class="tag">Налаштування фільтра</div>
+      <b>Умова:</b> <code>від: batky-2v@school.ua</code> і <code>тема містить "Re: Домашнє завдання"</code><br>
+      <b>Дія:</b> <code>позначити ярликом «Батьки»</code>, <code>архівувати</code>, <code>позначити як прочитане</code>.
+    </div>
+  </section>
+
+  <!-- ================= ОЦІНЮВАННЯ ================= -->
+  <section id="grading">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">🏆</div>
+        <h2>Критерії оцінювання</h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Вид роботи</th><th style="width:52%">Показник</th><th style="width:14%; text-align:right;">Бали</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Рівень 1</strong></td><td>Скриньку створено, лист надіслано й прочитано</td><td class="num-col">3</td></tr>
+            <tr><td><strong>Рівень 2</strong></td><td>Вкладення, підпис і фільтр налаштовано коректно</td><td class="num-col">4</td></tr>
+            <tr><td><strong>Рівень 3</strong></td><td>Лист-пам'ятка повний, Всс і фільтр використано</td><td class="num-col">5</td></tr>
+            <tr><td><strong>Звіт</strong></td><td>Звіт оформлено, скріншоти наявні</td><td class="num-col">1</td></tr>
+            <tr class="total-row"><td><strong>Разом</strong></td><td>Максимальна кількість балів за заняття</td><td class="num-col">13</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ЗВІТ ================= -->
+  <section id="report">
+    <div class="card">
+      <div class="sec-head">
+        <div class="sec-num">📄</div>
+        <h2>Форма звітності</h2>
+      </div>
+      <p>Після виконання всіх рівнів студент подає звіт, який містить такі обов'язкові елементи:</p>
+
+      <ol class="steps">
+        <li>Звіт у файлі <code>zvit.docx</code>, назва якого містить прізвище студента (наприклад, <code>zvit_ivanenko.docx</code>).</li>
+        <li>Адреса створеної поштової скриньки.</li>
+        <li>3–4 скріншоти: реєстрація, лист із вкладенням, налаштований фільтр, лист-пам'ятка.</li>
+        <li>Короткий опис створеного фільтра (умова → дія).</li>
+        <li>Висновок: 2–3 речення про те, які заходи захисту скриньки ви вважаєте обов'язковими.</li>
+      </ol>
+
+      <div class="example">
+        <div class="tag">Приклад висновку</div>
+        «Обов'язковими заходами захисту я вважаю двофакторну автентифікацію та довгий унікальний пароль. Також важливо не переходити за посиланнями з підозрілих листів і позначати спам, щоб фільтр навчався.»
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p style="margin:0 0 6px;"><strong>Практичне заняття № 20.</strong> Електронна пошта та її використання.</p>
+    <p style="margin:0;">Основи роботи з електронною поштою · Безпека · Антиспам-заходи · 2026</p>
+  </footer>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨 Надрукувати</button>
+
+</body>
+</html>
