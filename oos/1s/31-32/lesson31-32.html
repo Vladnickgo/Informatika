@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Віконний графічний інтерфейс. Робота з вікнами — практичне заняття</title>
+<style>
+/* ============ БАЗА ============ */
+:root{
+  --bg:#f5f5f7;
+  --ink:#1d1d1f;
+  --muted:#6e6e73;
+  --line:#e3e3e8;
+  --blue:#0071e3;
+  --indigo:#5e5ce6;
+  --green:#34c759;
+  --orange:#ff9f0a;
+  --red:#ff3b30;
+  --purple:#af52de;
+  --teal:#30b0c7;
+  --shadow:0 1px 3px rgba(0,0,0,.04), 0 12px 32px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-weight:700;letter-spacing:-.022em;line-height:1.22;margin:0}
+p{margin:0 0 14px}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+code{
+  background:#f2f2f7;border-radius:6px;padding:2px 7px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+.container{max-width:1080px;margin:0 auto;padding:0 26px}
+
+/* ============ HERO ============ */
+.hero{
+  background:linear-gradient(180deg,#ffffff 0%,#f5f5f7 100%);
+  border-bottom:1px solid var(--line);
+  padding:64px 0 46px;
+}
+.kicker{
+  font-size:13px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:14px;
+}
+.hero h1{
+  font-size:clamp(32px,5.2vw,56px);
+  letter-spacing:-.03em;line-height:1.05;margin:0 0 18px;max-width:920px;
+}
+.grad{
+  background:linear-gradient(92deg,#0071e3 0%,#5e5ce6 48%,#af52de 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{font-size:clamp(17px,2.1vw,21px);color:var(--muted);max-width:860px;margin:0 0 24px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.chip{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:8px 16px;font-size:14px;font-weight:500;color:#3a3a3c;
+}
+.chip b{color:var(--blue);font-weight:600}
+
+.meta-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:14px;margin-top:8px}
+.meta-card{
+  background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:18px 20px;box-shadow:var(--shadow);
+}
+.meta-card .label{
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--indigo);margin-bottom:7px;
+}
+.meta-card p{font-size:14.5px;margin:0;color:#424245}
+.meta-card ul{margin:0;padding-left:18px;font-size:14.5px;color:#424245}
+.meta-card li{margin-bottom:4px}
+.meta-card li:last-child{margin-bottom:0}
+
+/* ============ TOC ============ */
+.toc{
+  position:sticky;top:0;z-index:30;
+  background:rgba(245,245,247,.86);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line);
+}
+.toc ul{
+  display:flex;gap:4px;list-style:none;margin:0;padding:10px 0;
+  overflow-x:auto;scrollbar-width:none;
+}
+.toc ul::-webkit-scrollbar{display:none}
+.toc a{
+  display:block;padding:8px 14px;border-radius:999px;white-space:nowrap;
+  font-size:14px;color:#3a3a3c;transition:background .18s;
+}
+.toc a:hover{background:#e8e8ed;color:#000;text-decoration:none}
+
+/* ============ БЛОКИ ============ */
+main{padding:26px 0 70px}
+.block{
+  background:#fff;border-radius:24px;
+  padding:36px 40px 40px;margin:0 0 24px;
+  box-shadow:var(--shadow);
+  scroll-margin-top:74px;
+}
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.sec-num{
+  flex:0 0 auto;width:44px;height:44px;border-radius:14px;
+  background:linear-gradient(135deg,#0071e3,#5e5ce6);
+  color:#fff;font-weight:700;font-size:19px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,113,227,.28);
+}
+.block h2{font-size:clamp(23px,3vw,31px)}
+.block h3{font-size:20px;margin:30px 0 12px;color:#111}
+.block h4{font-size:16px;margin:0 0 6px}
+.muted{color:var(--muted)}
+
+/* ============ ВИЗНАЧЕННЯ / CALLOUT ============ */
+.def{
+  background:linear-gradient(135deg,#f2f6ff 0%,#f6f2ff 100%);
+  border:1px solid #dde5ff;border-radius:18px;
+  padding:22px 24px;margin:20px 0;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.def .label{
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--indigo);margin-bottom:8px;
+}
+.def p:last-child{margin-bottom:0}
+
+.callout{
+  border-left:4px solid var(--blue);background:#f1f7ff;
+  border-radius:0 14px 14px 0;padding:16px 20px;margin:18px 0;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.callout .label{
+  font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:6px;
+}
+.callout.tip{border-color:var(--green);background:#f1fbf4}
+.callout.tip .label{color:#1f9d45}
+.callout.warn{border-color:var(--orange);background:#fff8ee}
+.callout.warn .label{color:#c97b00}
+.callout p:last-child{margin-bottom:0}
+
+/* ============ СІТКИ ============ */
+.grid{display:grid;gap:16px;margin:20px 0}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.tile{
+  background:#fbfbfd;border:1px solid var(--line);border-radius:16px;
+  padding:18px 20px;transition:transform .18s ease, box-shadow .18s ease;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.tile:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.07)}
+.tile h4{font-size:16px;margin-bottom:6px}
+.tile p{font-size:15px;margin:0;color:#424245}
+.tile .ico{width:34px;height:34px;margin-bottom:10px}
+
+/* ============ ТАБЛИЦІ ============ */
+.table-wrap{
+  margin:20px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  break-inside:avoid;page-break-inside:avoid;
+}
+table{width:100%;border-collapse:collapse;font-size:15.5px;background:#fff}
+th{
+  background:#f5f5f7;text-align:left;padding:12px 16px;font-weight:600;
+  font-size:13.5px;letter-spacing:.02em;color:#3a3a3c;
+  border-bottom:1px solid var(--line);
+}
+td{padding:12px 16px;border-bottom:1px solid #f0f0f2;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td b{font-weight:600}
+tr{break-inside:avoid;page-break-inside:avoid}
+
+/* ============ ВІКНО ============ */
+.win{
+  border:1px solid #d6d6db;border-radius:14px;overflow:hidden;
+  box-shadow:0 14px 34px rgba(0,0,0,.10);margin:20px 0;background:#fff;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.win-bar{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  background:#f2f2f7;border-bottom:1px solid #e2e2e7;
+}
+.light{width:11px;height:11px;border-radius:50%;display:block}
+.light.red{background:#ff5f57}.light.yellow{background:#febc2e}.light.green{background:#28c840}
+.win-title{font-size:13px;font-weight:600;color:#3a3a3c;margin-left:6px}
+.win-ctrl{margin-left:auto;font-size:12px;color:#8e8e93;letter-spacing:3px}
+.win-menu{
+  display:flex;align-items:center;gap:18px;padding:8px 16px;
+  font-size:13px;color:#3a3a3c;background:#fafafa;border-bottom:1px solid #eee;
+}
+.win-body{display:flex;align-items:stretch;min-height:170px;background:#fff}
+.win-content{padding:16px;flex:1;display:flex;flex-direction:column;gap:9px}
+.win-content p{margin:0;font-size:14px}
+.win-scroll{
+  width:24px;background:#f2f2f7;border-left:1px solid #e6e6ea;
+  display:flex;justify-content:center;padding:8px 0;position:relative;
+}
+.win-scroll .thumb{width:12px;height:62px;border-radius:6px;background:#c7c7cc;display:block}
+.win-status{
+  display:flex;align-items:center;gap:10px;padding:8px 14px;
+  background:#f2f2f7;border-top:1px solid #e2e2e7;
+  font-size:12.5px;color:#6e6e73;
+}
+.badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:21px;height:21px;border-radius:50%;background:var(--blue);color:#fff;
+  font-size:12px;font-weight:700;flex:0 0 auto;
+}
+.legend{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.legend li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;break-inside:avoid}
+.legend .badge{margin-top:3px}
+.legend b{font-weight:600}
+
+/* ============ РОБОЧИЙ СТІЛ ============ */
+.desktop-mockup{
+  border:1px solid #d6d6db;border-radius:18px;overflow:hidden;
+  box-shadow:0 14px 34px rgba(0,0,0,.10);margin:20px 0;background:#fff;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.desktop-stage{
+  background:linear-gradient(160deg,#eef5ff 0%,#f7f9ff 100%);
+  padding:18px;min-height:250px;position:relative;
+}
+.desktop-icons{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.desktop-icon{
+  width:88px;background:rgba(255,255,255,.86);border:1px solid #dfe4ef;
+  border-radius:12px;padding:12px 6px;text-align:center;
+  font-size:12.5px;color:#3a3a3c;box-shadow:0 2px 6px rgba(0,0,0,.04);
+}
+.desktop-icon svg{margin:0 auto 6px}
+.open-window{
+  position:absolute;right:18px;top:22px;width:300px;max-width:52%;
+  background:#fff;border:1px solid #d6d6db;border-radius:12px;
+  box-shadow:0 14px 28px rgba(0,0,0,.12);overflow:hidden;
+}
+.open-head{
+  background:#2c2c2e;color:#fff;font-size:12.5px;font-weight:600;
+  padding:8px 12px;
+}
+.open-window p{font-size:13px;margin:0;padding:14px;color:#424245}
+.taskbar{
+  display:flex;align-items:center;gap:10px;padding:9px 14px;
+  background:#2c2c2e;color:#fff;font-size:12.5px;flex-wrap:wrap;
+}
+.tb-start{
+  display:inline-flex;align-items:center;gap:7px;background:#3a3a3c;
+  border-radius:8px;padding:5px 10px;font-weight:600;
+}
+.tb-item{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:28px;border-radius:7px;background:#3a3a3c;
+  color:#fff;font-size:11px;
+}
+.tb-tray{margin-left:auto;display:inline-flex;align-items:center;gap:8px;color:#e8e8ed}
+.tb-show{display:inline-flex;align-items:center;justify-content:center;width:30px;height:24px;border:1px solid #555;border-radius:5px}
+.taskbar .badge{background:#0071e3}
+
+/* ============ FLOW ============ */
+.flow{
+  display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;
+  align-items:stretch;margin:20px 0;
+}
+.flow-step{
+  background:#fbfbfd;border:1px solid var(--line);border-radius:16px;
+  padding:18px 16px;text-align:center;break-inside:avoid;page-break-inside:avoid;
+}
+.flow-step .badge{margin:0 auto 10px}
+.flow-step h4{font-size:15px;margin-bottom:6px}
+.flow-step p{font-size:13.5px;color:#424245;margin:0 0 6px}
+.flow-step small{display:block;font-size:12.5px;color:var(--muted)}
+.flow-arrow{
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;color:#c7c7cc;font-weight:700;
+}
+
+/* ============ ПРАКТИКА ============ */
+.level-card{
+  background:#fbfbfd;border:1px solid var(--line);border-radius:18px;
+  padding:22px;margin:18px 0;break-inside:avoid;page-break-inside:avoid;
+}
+.level-head{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.level-badge{
+  background:linear-gradient(135deg,#0071e3,#5e5ce6);color:#fff;
+  border-radius:10px;padding:4px 10px;font-size:13px;font-weight:700;
+}
+.level-card h3{margin:0}
+.level-card p{font-size:15px}
+.task{
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:18px 20px;margin:12px 0;break-inside:avoid;page-break-inside:avoid;
+}
+.task h4{margin-bottom:6px}
+.task ol,.task ul{margin:8px 0 0;padding-left:22px;font-size:15px}
+.task li{margin-bottom:5px}
+.task li:last-child{margin-bottom:0}
+.steps{counter-reset:step;list-style:none;margin:14px 0 0;padding:0}
+.steps li{
+  counter-increment:step;position:relative;padding:0 0 12px 38px;font-size:15.5px;
+  break-inside:avoid;
+}
+.steps li::before{
+  content:counter(step);position:absolute;left:0;top:1px;
+  width:24px;height:24px;border-radius:50%;
+  background:#eaf3ff;color:var(--blue);font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.steps li:last-child{padding-bottom:0}
+
+/* ============ SUMMARY / SOURCES ============ */
+.summary{
+  background:linear-gradient(135deg,#0071e3,#5e5ce6 60%,#af52de);
+  color:#fff;border-radius:24px;padding:36px 40px;margin:0 0 24px;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.summary h2{color:#fff;font-size:26px;margin-bottom:14px}
+.summary ul{margin:0;padding-left:20px}
+.summary li{margin-bottom:8px;font-size:16px}
+.summary li:last-child{margin-bottom:0}
+.sources{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.sources li{
+  background:#fbfbfd;border:1px solid var(--line);border-radius:12px;
+  padding:12px 16px;font-size:15px;break-inside:avoid;page-break-inside:avoid;
+}
+.report-list{margin:16px 0 0;padding-left:24px;font-size:15.5px}
+.report-list li{margin-bottom:9px;break-inside:avoid;page-break-inside:avoid}
+footer{padding:20px 0 60px;text-align:center;color:var(--muted);font-size:14px}
+
+/* ============ АДАПТИВ ============ */
+@media (max-width:900px){
+  .g3,.g4{grid-template-columns:repeat(2,1fr)}
+  .meta-grid{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:1fr;gap:8px}
+  .flow-arrow{transform:rotate(90deg);height:18px}
+}
+@media (max-width:680px){
+  .block{padding:26px 22px 30px;border-radius:20px}
+  .g2,.g3,.g4,.meta-grid{grid-template-columns:1fr}
+  .hero{padding:52px 0 38px}
+  .open-window{position:static;width:auto;max-width:none;margin-top:14px}
+  .summary{padding:28px 24px}
+}
+
+/* ============ ДРУК ============ */
+@media print{
+  @page{ size:A4; margin:14mm 12mm; }
+
+  html,body{background:#fff !important;color:#000 !important;}
+  body{font-size:10.8pt;line-height:1.45;}
+
+  .container{max-width:none;padding:0;}
+  .no-print{display:none !important;}
+
+  .hero{
+    background:#fff !important;border-bottom:1px solid #000;
+    padding:0 0 8mm;margin-bottom:6mm;
+  }
+  .hero h1{font-size:23pt;margin-bottom:3mm}
+  .grad{color:#000 !important;-webkit-text-fill-color:#000 !important;background:none !important}
+  .lede{font-size:11.5pt;color:#000 !important;margin-bottom:4mm}
+  .chip{background:#fff !important;border:1px solid #999 !important;color:#000 !important;font-size:9pt}
+
+  main{padding:0}
+  .block{
+    background:#fff !important;box-shadow:none !important;border:1px solid #ccc;
+    border-radius:8px;padding:6mm 6mm 6mm;margin:0 0 6mm;
+    break-inside:auto;
+  }
+  .sec-num{background:#000 !important;box-shadow:none !important;width:9mm;height:9mm;font-size:11pt;border-radius:4px}
+  .block h2{font-size:15pt}
+  .block h3{font-size:12pt;margin:5mm 0 2mm}
+  .block h4{font-size:10.5pt}
+
+  /* заборона розривів для карток, таблиць, схем */
+  .def,.callout,.tile,.win,.table-wrap,.desktop-mockup,.flow-step,
+  .level-card,.task,.sources li,.summary,.meta-card,.legend li,
+  .report-list li,.steps li,.open-window,figure{
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+  h1,h2,h3,h4,.sec-head{break-after:avoid !important;page-break-after:avoid !important;}
+  .table-wrap{overflow:visible}
+  table{font-size:9.5pt}
+  th,td{padding:2mm 3mm}
+  tr{break-inside:avoid;page-break-inside:avoid}
+
+  /* полегшені заливки */
+  .def{background:#fff !important;border:1px solid #999 !important}
+  .callout{background:#fff !important;border-left:3px solid #000 !important}
+  .callout .label{color:#000 !important}
+  .tile,.level-card,.task,.sources li,.win,.desktop-mockup,
+  .meta-card,.flow-step,.summary{
+    background:#fff !important;box-shadow:none !important;border:1px solid #ccc !important;
+  }
+  .tile:hover{transform:none !important;box-shadow:none !important}
+  .win-bar,.win-menu,.win-status{background:#f2f2f2 !important}
+  .win-body{background:#fff !important}
+  .desktop-stage{background:#fff !important}
+  .taskbar{background:#f2f2f2 !important;color:#000 !important}
+  .tb-start,.tb-item{background:#fff !important;border:1px solid #ccc !important;color:#000 !important}
+  .tb-tray{color:#000 !important}
+  .open-head{background:#eee !important;color:#000 !important}
+  .summary{background:#fff !important;color:#000 !important;border:1px solid #000;padding:5mm}
+  .summary h2{color:#000 !important}
+  a{color:#000 !important;text-decoration:none !important}
+
+  .g3,.g4{grid-template-columns:repeat(2,1fr) !important}
+  .g2{grid-template-columns:repeat(2,1fr) !important}
+  footer{padding:6mm 0 0;font-size:9pt;color:#000}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="container">
+    <div class="kicker">Практичне заняття · Основи операційних систем</div>
+    <h1>Віконний графічний інтерфейс. <span class="grad">Робота з вікнами</span></h1>
+    
+   
+
+    <div class="meta-grid">
+
+     
+      
+  </div>
+  <div class="meta-card">
+    <div class="label">Мета</div>
+    <p>
+      Оволодіти практичними прийомами роботи з вікнами, панеллю задач, робочим столом,
+      буфером обміну та стандартними додатками Windows. Розвивати дрібну моторику й
+      координацію «рука–око» під час операцій із графічними об’єктами. Виховувати дбайливе
+      ставлення до інтерфейсу системи та організованість на робочому столі.
+    </p>
+  </div>
+  <div class="meta-card">
+    <div class="label">Обладнання</div>
+    <p>
+      Інструкційні картки; персональний комп’ютер з ОС Windows 10/11; проєктор або великий
+      екран для демонстрації схем.
+    </p>
+  </div>
+</header>
+
+<!-- ================= НАВІГАЦІЯ ================= -->
+<nav class="toc no-print">
+  <div class="container">
+    <ul>
+      <li><a href="#s1">1. Віконний інтерфейс</a></li>
+      <li><a href="#s2">2. Структура вікна</a></li>
+      <li><a href="#s3">3. Робочий стіл</a></li>
+      <li><a href="#s4">4. Буфер обміну</a></li>
+      <li><a href="#s5">5. Система меню</a></li>
+      <li><a href="#s6">6. Стандартні додатки</a></li>
+      <li><a href="#s7">7. Практичне завдання</a></li>
+     
+    </ul>
+  </div>
+</nav>
+
+<main>
+<div class="container">
+
+  <!-- ================= 1 ================= -->
+  <section class="block" id="s1">
+    <div class="sec-head">
+      <span class="sec-num">1</span>
+      <h2>Віконний графічний інтерфейс</h2>
+    </div>
+
+    <p>
+      <b>Віконний інтерфейс</b> — це спосіб взаємодії з комп’ютером, у якому кожна програма
+      відкривається в окремому прямокутному вікні. Користувач бачить не текстові команди, а
+      графічні об’єкти — вікна, значки, меню, кнопки — та керує ними за допомогою миші й
+      клавіатури. Саме віконний інтерфейс зробив комп’ютер зрозумілим для мільйонів людей без
+      спеціальної підготовки.
+    </p>
+
+    <div class="def">
+      <div class="label">Ключова ідея</div>
+      <p>
+        У Windows віконний інтерфейс реалізований через оболонку <b>Explorer</b>. Вона забезпечує
+        робочий стіл, панель задач, меню «Пуск» і файловий менеджер, який теж називається
+        <b>Провідник</b>. Тому всі ці елементи працюють узгоджено: з робочого столу можна
+        відкрити Провідник, із Провідника — запустити програму, а з панелі задач — перемкнутися
+        між відкритими вікнами.
+      </p>
+    </div>
+
+    <h3>Чотири складники оболонки Explorer</h3>
+    <div class="grid g4">
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#0071e3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="7" y="10" width="34" height="24" rx="3"/><path d="M7 18h34M14 34v4h20v-4"/>
+        </svg>
+        <h4>Робочий стіл</h4>
+        <p>Головна область екрана після входу в систему: значки, ярлики, відкриті вікна.</p>
+      </div>
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#5e5ce6" stroke-width="2.4" stroke-linecap="round">
+          <rect x="6" y="32" width="36" height="8" rx="2"/><path d="M12 36h4M22 36h4M32 36h4"/>
+        </svg>
+        <h4>Панель задач</h4>
+        <p>Горизонтальна смуга внизу екрана: «Пуск», закріплені програми, системний лоток.</p>
+      </div>
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#34c759" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="24" r="14"/><path d="M24 14v10l7 4"/>
+        </svg>
+        <h4>Меню «Пуск»</h4>
+        <p>Точка входу до програм, налаштувань, файлів і завершення роботи системи.</p>
+      </div>
+      <div class="tile">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#ff9f0a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 14h13l3 4h16v18H8z"/><path d="M8 14V10h12"/>
+        </svg>
+        <h4>Провідник</h4>
+        <p>Файловий менеджер: перегляд папок, копіювання, переміщення й пошук файлів.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="label">До технологічних механізмів Windows належать</div>
+      <p>
+        Буфер обміну, контекстне меню, гарячі клавіші, перетягування об’єктів (drag-and-drop),
+        прив’язування вікон до країв екрана (Snap), історія буфера обміну <code>Win + V</code>,
+        створення ярликів і закріплення програм на панелі задач.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 2 ================= -->
+  <section class="block" id="s2">
+    <div class="sec-head">
+      <span class="sec-num">2</span>
+      <h2>Структура вікна Windows</h2>
+    </div>
+
+    <p>
+      Будь-яке вікно Windows має однакову структуру. Це один із принципів <b>послідовності
+      інтерфейсу</b>: елементи керування розташовані там, де користувач очікує їх побачити.
+      Навіть якщо програми різні, заголовок, кнопки керування й рядок меню зазвичай зберігають
+      звичне розташування.
+    </p>
+
+    <div class="win" role="img" aria-label="Схема структури вікна Windows">
+      <div class="win-bar">
+        <span class="light red"></span><span class="light yellow"></span><span class="light green"></span>
+        <span class="win-title">Блокнот - Безименний</span>
+        <span class="badge">1</span>
+        <span class="win-ctrl"> </span>
+        <span class="win-ctrl"> </span>
+        <span class="win-ctrl"> </span>
+        <span class="badge" style="text-align:right;">2</span>
+        <span class="win-ctrl">— □ ✕</span>
+      </div>
+      <div class="win-menu">
+        <span>Файл</span><span>Редагування</span><span>Вигляд</span><span>Довідка</span>
+        <span class="badge">3</span>
+      </div>
+      <div class="win-body">
+        <div class="win-content">
+          <p class="muted">Робоча область</p>
+          <p>Тут відображається вміст документа, зображення або панелі програми.</p>
+        </div>
+        <div class="win-scroll">
+          <span class="thumb"></span>
+          <span class="badge" style="position:absolute;top:50px;left:28px">5</span>
+        </div>
+      </div>
+      <div class="win-status">
+        <span>Рядок стану</span>
+        <span class="badge">6</span>
+      </div>
+    </div>
+
+    <ul class="legend">
+      <li><span class="badge">1</span><span><b>Заголовок вікна</b> — назва програми або документа; за заголовок вікно можна перетягувати мишею.</span></li>
+      <li><span class="badge">2</span><span><b>Кнопки керування</b> — «Згорнути», «Розгорнути / Відновити», «Закрити»; розташовані у правому верхньому куті.</span></li>
+      <li><span class="badge">3</span><span><b>Рядок меню</b> — команди, згруповані за категоріями: Файл, Редагування, Вигляд, Довідка.</span></li>
+      <li><span class="badge">4</span><span><b>Робоча область</b> — безпосередньо вміст програми (текст, малюнок, список файлів).</span></li>
+      <li><span class="badge">5</span><span><b>Смуги прокручування</b> — вертикальна та горизонтальна; з’являються, коли вміст не вміщується повністю.</span></li>
+      <li><span class="badge">6</span><span><b>Рядок стану</b> (у деяких програмах) — додаткова інформація внизу вікна.</span></li>
+    </ul>
+
+    <h3>Основні елементи вікна: призначення та дії</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:24%">Елемент</th><th style="width:40%">Призначення</th><th>Типова дія</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Заголовок</b></td><td>Показує назву програми й документа</td><td>Перетягнути вікно; подвійне клацання — розгорнути / відновити</td></tr>
+          <tr><td><b>Кнопки керування</b></td><td>Згортання, розгортання, закриття</td><td>Клацнути «—», «□» або «✕» у правому верхньому куті</td></tr>
+          <tr><td><b>Рядок меню</b></td><td>Доступ до команд за категоріями</td><td>Відкрити «Файл» → «Зберегти як»</td></tr>
+          <tr><td><b>Робоча область</b></td><td>Місце для вмісту документа або програми</td><td>Ввести текст, намалювати фігуру, виділити файл</td></tr>
+          <tr><td><b>Смуги прокручування</b></td><td>Переміщення вмісту, що не вміщується</td><td>Потягнути повзунок або прокрутити коліщатком миші</td></tr>
+          <tr><td><b>Рядок стану</b></td><td>Додаткова інформація про стан документа</td><td>Переглянути кількість рядків, символів, масштаб</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Дії з вікнами</h3>
+    <p>
+      Дії з вікнами виконуються двома основними способами: <b>перетягуванням мишею</b> та
+      <b>подвійним клацанням на заголовку</b> (розгортання / відновлення). Розмір вікна можна
+      змінити, потягнувши за будь-який кут або край. Якщо перетягнути вікно до лівого чи правого
+      краю екрана, Windows запропонує розмістити його на половині екрана — це зручно для роботи
+      з двома документами поруч.
+    </p>
+
+    <div class="grid g3">
+      <div class="tile">
+        <h4>Згорнути</h4>
+        <p>Вікно зникає з екрана, але програма залишається запущеною на панелі задач.</p>
+      </div>
+      <div class="tile">
+        <h4>Розгорнути / відновити</h4>
+        <p>Подвійне клацання на заголовку або кнопка «□» розгортає вікно на весь екран.</p>
+      </div>
+      <div class="tile">
+        <h4>Змінити розмір</h4>
+        <p>Потягніть за будь-який кут чи край вікна, коли курсор перетвориться на двобічну стрілку.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="label">Приклад</div>
+      <p>
+        Відкрийте Блокнот і Калькулятор. Перетягніть Блокнот до лівого краю екрана, а
+        Калькулятор — до правого. Обидва вікна розташуються поруч, і ви зможете одночасно
+        переглядати текст і виконувати обчислення.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 3 ================= -->
+  <section class="block" id="s3">
+    <div class="sec-head">
+      <span class="sec-num">3</span>
+      <h2>Робочий стіл і панель задач</h2>
+    </div>
+
+    <p>
+      <b>Робочий стіл</b> — це головна область екрана, яка з’являється після входу в систему. На
+      ньому розташовані значки (ярлики, папки, файли) та відкриваються вікна програм. Робочий
+      стіл можна порівняти з поверхнею стола, на якому лежать потрібні інструменти: що краще
+      організовано, то швидше знайти потрібне.
+    </p>
+
+    <div class="desktop-mockup" role="img" aria-label="Схема робочого столу та панелі задач Windows">
+      <div class="desktop-stage">
+        <div class="desktop-icons">
+          <div class="desktop-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M5 7h14l-1.2 12H6.2z" fill="#e9eef7" stroke="#5e5ce6" stroke-width="1.2"/><path d="M8 7V5h8v2" fill="none" stroke="#5e5ce6" stroke-width="1.2"/></svg>
+            Кошик
+          </div>
+          <div class="desktop-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><rect x="3" y="5" width="18" height="12" rx="2" fill="#eaf3ff" stroke="#0071e3" stroke-width="1.2"/><path d="M8 20h8M12 17v3" stroke="#0071e3" stroke-width="1.2"/></svg>
+            Цей ПК
+          </div>
+          <div class="desktop-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M3 6.8A2.3 2.3 0 0 1 5.3 4.5h3.1c.6 0 1.2.25 1.6.7l.9.9h6.8A2.3 2.3 0 0 1 20 8.4v8.8a2.3 2.3 0 0 1-2.3 2.3H5.3A2.3 2.3 0 0 1 3 17.2z" fill="#5ea7ff"/></svg>
+            Документи
+          </div>
+        </div>
+        <div class="open-window">
+          <div class="open-head">Відкрите вікно</div>
+          <p>Вікно програми знаходиться поверх робочого столу.</p>
+        </div>
+      </div>
+      <div class="taskbar">
+        <span class="tb-start"><span class="badge">1</span> Пуск</span>
+        <span class="tb-item"><span class="badge">2</span></span>
+        <span class="tb-item">▣</span>
+        <span class="tb-item">▤</span>
+        <span class="tb-item">◈</span>
+        <span class="tb-tray"><span class="badge">3</span> 14:32 ▮</span>
+        <span class="tb-show"><span class="badge">4</span></span>
+      </div>
+    </div>
+
+    <h3>Що містить панель задач</h3>
+    <div class="grid g2">
+      <div class="tile">
+        <h4>1. Кнопка «Пуск»</h4>
+        <p>Відкриває головне меню системи: програми, налаштування, файли, завершення роботи.</p>
+      </div>
+      <div class="tile">
+        <h4>2. Значки закріплених і відкритих програм</h4>
+        <p>Дають змогу запускати програми одним клацанням і перемикатися між відкритими вікнами.</p>
+      </div>
+      <div class="tile">
+        <h4>3. Область сповіщень (системний лоток)</h4>
+        <p>Годинник, гучність, мережа, індикатори безпеки та повідомлення системи.</p>
+      </div>
+      <div class="tile">
+        <h4>4. Кнопка «Показати робочий стіл»</h4>
+        <p>Згортає всі вікна одним клацанням, щоб швидко побачити робочий стіл.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:16px">
+      На панелі задач можна закріплювати потрібні програми: права кнопка на значку →
+      <b>«Закріпити на панелі завдань»</b>. Це зручно для часто використовуваних додатків, адже
+      не потрібно щоразу шукати їх у меню «Пуск».
+    </p>
+
+    <div class="callout">
+      <div class="label">Практичний приклад</div>
+      <p>
+        Закріпіть Блокнот на панелі задач. Після цього закрийте його вікно й переконайтеся, що
+        значок залишився на панелі. Натисніть на нього — Блокнот запуститься знову. У звіті
+        додайте скріншот закріпленого значка.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 4 ================= -->
+  <section class="block" id="s4">
+    <div class="sec-head">
+      <span class="sec-num">4</span>
+      <h2>Буфер обміну</h2>
+    </div>
+
+    <p>
+      <b>Буфер обміну</b> — це тимчасова область пам’яті, у яку система поміщає скопійований або
+      вирізаний об’єкт. Звідти цей об’єкт можна вставити в інше місце — в іншу програму, документ
+      або папку. Буфер обміну працює між різними програмами, тому це один із найзручніших
+      технологічних механізмів Windows.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <span class="badge">1</span>
+        <h4>Виділити</h4>
+        <p>об’єкт і натиснути <code>Ctrl + C</code> або <code>Ctrl + X</code></p>
+        <small>об’єкт копіюється / вирізається у буфер</small>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <span class="badge">2</span>
+        <h4>Буфер обміну</h4>
+        <p>тимчасово зберігає один об’єкт (або один набір об’єктів)</p>
+        <small>нове копіювання замінює попередній вміст</small>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <span class="badge">3</span>
+        <h4>Вставити</h4>
+        <p>у потрібному місці натиснути <code>Ctrl + V</code></p>
+        <small>об’єкт з’являється в новому місці</small>
+      </div>
+    </div>
+
+    <h3>Три базові операції</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:18%">Комбінація</th><th style="width:26%">Назва</th><th>Що відбувається</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Ctrl + C</code></td><td><b>Копіювати</b></td><td>Виділений об’єкт поміщається в буфер, оригінал залишається на місці.</td></tr>
+          <tr><td><code>Ctrl + X</code></td><td><b>Вирізати</b></td><td>Об’єкт зникає з місця й поміщається в буфер; після вставки з’явиться в новому місці.</td></tr>
+          <tr><td><code>Ctrl + V</code></td><td><b>Вставити</b></td><td>Об’єкт з буфера вставляється в потрібне місце.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Буфер обміну зберігає лише один об’єкт (або один набір об’єктів) одночасно: коли ви
+      копіюєте щось нове, попередній вміст буфера замінюється. У Windows 10/11 є розширений
+      буфер обміну <code>Win + V</code>, який зберігає історію останніх копіювань і дозволяє
+      вибрати потрібний фрагмент.
+    </p>
+
+    <div class="callout tip">
+      <div class="label">Приклад між програмами</div>
+      <p>
+        Скопіюйте текст у Блокноті (<code>Ctrl + C</code>) і вставте його в Paint як напис або в
+        адресний рядок браузера (<code>Ctrl + V</code>). Саме завдяки буферу обміну вдається
+        швидко переносити дані з однієї програми в іншу без повторного введення.
+      </p>
+    </div>
+
+    <div class="callout warn">
+      <div class="label">Різниця, яку треба пояснити у звіті</div>
+      <p>
+        <b>Ctrl + C</b> залишає оригінал на місці й створює копію в буфері. <b>Ctrl + X</b>
+        прибирає об’єкт із поточного місця й поміщає його в буфер. Використовуйте копіювання,
+        коли потрібні два примірники; вирізання — коли об’єкт треба перенести, а не дублювати.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 5 ================= -->
+  <section class="block" id="s5">
+    <div class="sec-head">
+      <span class="sec-num">5</span>
+      <h2>Система меню</h2>
+    </div>
+
+    <p>
+      <b>Меню</b> — це список команд, з яких користувач обирає потрібну. У Windows використовують
+      кілька видів меню, і кожен із них має своє призначення.
+    </p>
+
+    <div class="grid g3">
+      <div class="tile">
+        <h4>Головне меню «Пуск»</h4>
+        <p>Запуск програм, налаштування, пошук, перехід до документів і вимкнення системи.</p>
+      </div>
+      <div class="tile">
+        <h4>Рядок меню у вікні програми</h4>
+        <p>Файл, Редагування, Вигляд, Довідка — команди, згруповані за категоріями дій.</p>
+      </div>
+      <div class="tile">
+        <h4>Контекстне меню</h4>
+        <p>З’являється після натискання правої кнопки миші на об’єкті; містить команди, доречні саме для цього об’єкта.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:16px">
+      <b>Контекстне меню</b> — найшвидший спосіб виконати типову дію (копіювати, перейменувати,
+      видалити, відкрити властивості), не шукаючи відповідну команду в рядку меню. Наприклад,
+      права кнопка на файлі одразу показує «Відкрити», «Копіювати», «Вирізати», «Перейменувати»,
+      «Властивості».
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:26%">Ситуація</th><th>Що зручніше</th><th>Чому</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Треба запустити програму</td><td>Меню «Пуск» або панель задач</td><td>Швидкий пошук і закріплені значки</td></tr>
+          <tr><td>Треба зберегти документ</td><td>Рядок меню «Файл» → «Зберегти як»</td><td>Повний набір команд роботи з файлом</td></tr>
+          <tr><td>Треба перейменувати файл</td><td>Контекстне меню → «Перейменувати»</td><td>Команда доступна одразу на об’єкті</td></tr>
+          <tr><td>Треба дізнатися властивості</td><td>Контекстне меню → «Властивості»</td><td>Не потрібно шукати команду в рядку меню</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= 6 ================= -->
+  <section class="block" id="s6">
+    <div class="sec-head">
+      <span class="sec-num">6</span>
+      <h2>Стандартні додатки Windows</h2>
+    </div>
+
+    <p>
+      Windows постачається з набором простих програм, достатніх для типових завдань користувача.
+      Їх називають <b>стандартними додатками</b>. Вони запускаються через меню «Пуск» (поле
+      пошуку) або через діалог «Виконати» (<code>Win + R</code>): <code>notepad</code>,
+      <code>calc</code>, <code>mspaint</code>.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:24%">Додаток</th><th style="width:32%">Призначення</th><th>Типове використання</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Блокнот</b></td><td>Простий текстовий редактор</td><td>Швидкі нотатки, чернетки, перегляд .txt</td></tr>
+          <tr><td><b>Калькулятор</b></td><td>Обчислення</td><td>Арифметичні дії, інженерні розрахунки</td></tr>
+          <tr><td><b>Paint</b></td><td>Растовий графічний редактор</td><td>Малюнки, обрізання скріншотів, схеми</td></tr>
+          <tr><td><b>Ножиці / Фрагмент</b></td><td>Створення скріншотів</td><td>Знімок екрана або окремої області</td></tr>
+          <tr><td><b>Провідник</b></td><td>Файловий менеджер</td><td>Робота з файлами й папками</td></tr>
+          <tr><td><b>WordPad</b></td><td>Розширений текстовий редактор</td><td>Документи з форматуванням (у старіших версіях)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Скріншоти: Print Screen і «Ножиці»</h3>
+    <p>
+      Захоплення всього екрана скріншотом (<code>Print Screen</code>) копіює зображення в буфер
+      обміну. Далі його можна вставити в Paint (<code>Ctrl + V</code>), обрізати й зберегти як
+      файл. Комбінація <code>Win + Shift + S</code> запускає «Ножиці» — зручніший спосіб зробити
+      знімок лише потрібної області екрана.
+    </p>
+
+    <div class="callout tip">
+      <div class="label">Практичний приклад</div>
+      <p>
+        Відкрийте Paint, намалюйте прямокутник із написом «Практика» та стрілку до другого
+        прямокутника з написом «ПІБ». Натисніть <code>Win + Shift + S</code>, виділіть лише
+        область малюнка, вставте його в звіт. Порівняйте: <code>Print Screen</code> копіює весь
+        екран, а «Ножиці» — лише потрібний фрагмент.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 7 ================= -->
+  <section class="block" id="s7">
+    <div class="sec-head">
+      <span class="sec-num">7</span>
+      <h2>Покроковий алгоритм виконання різнорівневих завдань</h2>
+    </div>
+
+    <p>
+      Практична частина заняття побудована за <b>трирівневою системою</b>. Студент виконує
+      завдання послідовно; орієнтовний час на кожен рівень — 7–10 хвилин, загальна тривалість —
+      25–30 хвилин. Оцінка залежить від кількості успішно виконаних рівнів.
+    </p>
+
+    <!-- Рівень 1 -->
+    <div class="level-card">
+      <div class="level-head">
+        <span class="level-badge">Рівень 1</span>
+        <h3>Робота з вікнами</h3>
+      </div>
+      <p>
+        <b>Мета:</b> навчитися відкривати вікна, керувати їхнім розміром і положенням,
+        перемикатися між кількома вікнами.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th style="width:8%">№</th><th style="width:34%">Дія</th><th>Як виконати</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Відкрийте Блокнот</td><td>Пуск → пошук → <code>notepad</code> → Enter</td></tr>
+            <tr><td>2</td><td>Відкрийте Калькулятор</td><td>Пуск → пошук → <code>calc</code> → Enter</td></tr>
+            <tr><td>3</td><td>Відкрийте Paint</td><td>Пуск → пошук → <code>mspaint</code> → Enter</td></tr>
+            <tr><td>4</td><td>Перемкніться між вікнами</td><td><code>Alt + Tab</code> або клацанням на панелі задач</td></tr>
+            <tr><td>5</td><td>Згорніть усі вікна</td><td>Кнопка «—» у заголовку або <code>Win + D</code></td></tr>
+            <tr><td>6</td><td>Розгорніть одне вікно на весь екран</td><td>Подвійне клацання на заголовку або кнопка «□»</td></tr>
+            <tr><td>7</td><td>Відновіть попередній розмір</td><td>Повторне подвійне клацання на заголовку</td></tr>
+            <tr><td>8</td><td>Змініть розмір вікна</td><td>Потягніть за будь-який кут чи край</td></tr>
+            <tr><td>9</td><td>Перемістіть вікно</td><td>Потягніть за заголовок</td></tr>
+            <tr><td>10</td><td>Розташуйте два вікна поруч</td><td>Перетягніть вікно до лівого або правого краю екрана</td></tr>
+            <tr><td>11</td><td>Зробіть скріншот</td><td><code>Print Screen</code> → вставте у звіт із підписом</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <div class="label">Що має бути у звіті після рівня 1</div>
+        <p>
+          Один скріншот, на якому видно два вікна поруч (наприклад, Блокнот і Калькулятор).
+          Якщо вікна не розташовуються поруч — перевірте, чи не увімкнено режим планшета.
+        </p>
+      </div>
+    </div>
+
+    <!-- Рівень 2 -->
+    <div class="level-card">
+      <div class="level-head">
+        <span class="level-badge">Рівень 2</span>
+        <h3>Буфер обміну та панель задач</h3>
+      </div>
+      <p>
+        <b>Мета:</b> навчитися копіювати й вставляти об’єкти між програмами, працювати з
+        контекстним меню та закріплювати програми на панелі задач.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th style="width:8%">№</th><th style="width:40%">Дія</th><th>Як виконати</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Скопіюйте текст у Блокноті</td><td>Виділіть текст → <code>Ctrl + C</code></td></tr>
+            <tr><td>2</td><td>Вставте текст у Блокнот</td><td>Клацніть у полі → <code>Ctrl + V</code></td></tr>
+            <tr><td>3</td><td>Скопіюйте число з Калькулятора</td><td>Обчисліть 15 × 24 → <code>Ctrl + C</code> (результат)</td></tr>
+            <tr><td>4</td><td>Вставте результат у Блокнот</td><td>Перемкніться у Блокнот → <code>Ctrl + V</code></td></tr>
+            <tr><td>5</td><td>Виріжте рядок із Блокнота</td><td>Виділіть рядок → <code>Ctrl + X</code></td></tr>
+            <tr><td>6</td><td>Вставте рядок в інше місце</td><td>Клацніть у кінці тексту → <code>Ctrl + V</code></td></tr>
+            <tr><td>7</td><td>Скопіюйте фрагмент малюнка у Paint</td><td>Виділіть область → <code>Ctrl + C</code></td></tr>
+            <tr><td>8</td><td>Вставте фрагмент у Paint</td><td><code>Ctrl + V</code> — з’явиться копія</td></tr>
+            <tr><td>9</td><td>Створіть ярлик на робочому столі</td><td>Права кнопка на робочому столі → Створити → Ярлик</td></tr>
+            <tr><td>10</td><td>Закріпіть Блокнот на панелі задач</td><td>Права кнопка на значку в панелі задач → «Закріпити на панелі завдань»</td></tr>
+            <tr><td>11</td><td>Відкрийте контекстне меню на файлі</td><td>Права кнопка на будь-якому ярлику</td></tr>
+            <tr><td>12</td><td>Зробіть скріншот</td><td>Знімок вікна Блокнота з трьома рядками: текст, число, вирізаний рядок</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <div class="label">Що має бути у звіті після рівня 2</div>
+        <p>
+          Скріншот Блокнота з трьома рядками тексту (оригінал, число з Калькулятора, вирізаний
+          рядок), скріншот закріпленого Блокнота на панелі задач і коротке пояснення різниці між
+          <code>Ctrl + C</code> і <code>Ctrl + X</code>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Рівень 3 -->
+    <div class="level-card">
+      <div class="level-head">
+        <span class="level-badge">Рівень 3</span>
+        <h3>Стандартні додатки</h3>
+      </div>
+      <p>
+        <b>Мета:</b> створити й зберегти файл у стандартному додатку, використовуючи навички
+        роботи з вікнами, меню та буфером обміну.
+      </p>
+
+      <div class="task">
+        <h4>Завдання А. Створіть зображення в Paint</h4>
+        <ol>
+          <li>Відкрийте Paint (<code>mspaint</code>).</li>
+          <li>Намалюйте просту схему: прямокутник із написом «Практика» та стрілку до другого прямокутника з написом «ПІБ».</li>
+          <li>Скопіюйте фрагмент малюнка (<code>Ctrl + C</code>) і вставте його в інше місце (<code>Ctrl + V</code>).</li>
+          <li>Збережіть файл: Файл → Зберегти як → «Практика_ПІБ.png» на робочому столі.</li>
+        </ol>
+      </div>
+
+      <div class="task">
+        <h4>Завдання Б. Створіть текстовий файл у Блокноті</h4>
+        <ol start="5">
+          <li>Відкрийте Блокнот.</li>
+          <li>Введіть три рядки: своє прізвище, дату й коротке речення про те, що сьогодні вивчили.</li>
+          <li>Скопіюйте перший рядок і вставте його ще раз у кінці.</li>
+          <li>Збережіть файл: Файл → Зберегти як → «Нотатка_ПІБ.txt» на робочому столі.</li>
+        </ol>
+      </div>
+
+      <div class="task">
+        <h4>Завдання В. Обчислення в Калькуляторі</h4>
+        <ol start="9">
+          <li>Відкрийте Калькулятор у режимі «Звичайний».</li>
+          <li>Обчисліть: <b>128 × 17 + 256 ÷ 4</b>.</li>
+          <li>Скопіюйте результат (<code>Ctrl + C</code>).</li>
+          <li>Вставте результат у текстовий файл «Нотатка_ПІБ.txt» (<code>Ctrl + V</code>) і збережіть зміни.</li>
+        </ol>
+      </div>
+
+      <div class="task">
+        <h4>Завдання Г. Підготуйте звіт</h4>
+        <ol start="13">
+          <li>Скріншот малюнка з Paint (два прямокутники й стрілка).</li>
+          <li>Скріншот текстового файлу в Блокноті з результатом обчислення.</li>
+          <li>Пояснення, у яких випадках зручніше використовувати <code>Ctrl + C</code>, а коли — <code>Ctrl + X</code>.</li>
+          <li>Короткий висновок (3–4 речення) про те, які навички сьогодні виявилися найпотрібнішими.</li>
+        </ol>
+      </div>
+
+      <div class="callout tip">
+        <div class="label">+1 бал</div>
+        <p>
+          Створіть скріншот лише області малюнка через «Ножиці» (<code>Win + Shift + S</code>) і
+          збережіть його окремим файлом «Скріншот_ПІБ.png». Поясніть, чим цей спосіб зручніший за
+          звичайний <code>Print Screen</code>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 8 ================= -->
+  <section class="block" id="s8">
+    <div class="sec-head">
+      <span class="sec-num">8</span>
+      <h2>Критерії оцінювання</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:24%">Рівень / критерій</th><th>Показник</th><th style="width:12%">Бали</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Рівень 1</b></td><td>Усі дії з вікнами виконано правильно; є скріншот із двома вікнами поруч</td><td>3</td></tr>
+          <tr><td><b>Рівень 2</b></td><td>Копіювання й вирізання працюють; ярлик створено; Блокнот закріплено на панелі задач; є скріншоти</td><td>4</td></tr>
+          <tr><td><b>Рівень 3</b></td><td>Малюнок у Paint і файл .txt створено й збережено; результат обчислення вставлено; є скріншоти й висновок</td><td>4</td></tr>
+          <tr><td><b>Якість звіту</b></td><td>Оформлення за вимогами; підписи до скріншотів; пояснення різниці між Ctrl + C і Ctrl + X</td><td>1</td></tr>
+          <tr><td><b>Ускладнення</b></td><td>Виконано ускладнення зі «Ножицями» або запропоновано власну ідею</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= 9 ================= -->
+  <section class="block" id="s9">
+    <div class="sec-head">
+      <span class="sec-num">9</span>
+      <h2>Форма звітності</h2>
+    </div>
+
+    <p>
+      Результати практичного заняття оформлюються у вигляді електронного звіту в текстовому
+      редакторі. Звіт повинен містити такі обов’язкові частини:
+    </p>
+
+    <ol class="report-list">
+      <li><b>Титульна сторінка:</b> навчальний заклад, тема, ПІБ студента, група, ПІБ викладача, дата.</li>
+      <li>Скріншот двох вікон поруч після рівня 1 (наприклад, Блокнот і Калькулятор).</li>
+      <li>Скріншот Блокнота з трьома рядками тексту, числа та вирізаного рядка після рівня 2.</li>
+      <li>Скріншот закріпленого Блокнота на панелі задач.</li>
+      <li>Скріншот малюнка в Paint після рівня 3 (два прямокутники й стрілка).</li>
+      <li>Скріншот текстового файлу «Нотатка_ПІБ.txt» із результатом обчислення.</li>
+      <li>
+        Відповіді на питання: чим <code>Ctrl + C</code> відрізняється від <code>Ctrl + X</code>;
+        які елементи має будь-яке вікно Windows; що таке контекстне меню і коли воно зручніше за
+        рядок меню.
+      </li>
+      <li>Висновок: що нового засвоїли, які навички виявилися найпотрібнішими.</li>
+      <li>
+        <b>Оформлення:</b> файл формату .docx або .pdf, шрифт Times New Roman 14 pt, інтервал
+        1,15, поля 2 см, обсяг — 3–5 сторінок без титульної. Ім’я файлу:
+        «Практика_Вікна_Windows_ПІБ.docx». Звіт надсилається викладачу до наступного заняття через
+        електронний курс.
+      </li>
+    </ol>
+  </section>
+
+  <!-- ================= ЛІТЕРАТУРА ================= -->
+  <section class="block" id="lit">
+    <div class="sec-head">
+      <span class="sec-num">i</span>
+      <h2>Література</h2>
+    </div>
+    <ul class="sources">
+      <li>Зайцев В. Г., Дробязко І. П. Операційні системи : навч. посіб. для студ. спец. 123 «Комп’ютерна інженерія». Київ : КПІ ім. Ігоря Сікорського, 2019.</li>
+      <li>Іванов О. В., Петрова Н. М. Основи операційних систем : навч. посіб. Київ : Основи, 2020.</li>
+      <li>Микитишин А. Г., Чихіра І. В. Операційні системи : консп. лекц. Тернопіль : ТНТУ імені Івана Пулюя, 2016.</li>
+    </ul>
+  </section>
+
+  <!-- ================= ПІДСУМОК ================= -->
+  
+
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    Віконний графічний інтерфейс. Робота з вікнами · практичне заняття
+  </div>
+</footer>
+
+</body>
+</html>

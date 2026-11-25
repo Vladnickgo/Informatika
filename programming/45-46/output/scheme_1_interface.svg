@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="691.2pt" height="309.888pt" viewBox="0 0 691.2 309.888" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-25T21:44:31.471928</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 309.888 
+L 691.2 309.888 
+L 691.2 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 37.584 164.3688 
+L 215.586 164.3688 
+Q 226.746 164.3688 226.746 153.2808 
+L 226.746 62.3592 
+Q 226.746 51.2712 215.586 51.2712 
+L 37.584 51.2712 
+Q 26.424 51.2712 26.424 62.3592 
+L 26.424 153.2808 
+Q 26.424 164.3688 37.584 164.3688 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 37.026 64.5768 
+L 216.144 64.5768 
+Q 218.934 64.5768 218.934 61.8048 
+L 218.934 61.8048 
+Q 218.934 59.0328 216.144 59.0328 
+L 37.026 59.0328 
+Q 34.236 59.0328 34.236 61.8048 
+L 34.236 61.8048 
+Q 34.236 64.5768 37.026 64.5768 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 256.32 164.3688 
+L 434.322 164.3688 
+Q 445.482 164.3688 445.482 153.2808 
+L 445.482 62.3592 
+Q 445.482 51.2712 434.322 51.2712 
+L 256.32 51.2712 
+Q 245.16 51.2712 245.16 62.3592 
+L 245.16 153.2808 
+Q 245.16 164.3688 256.32 164.3688 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 255.762 64.5768 
+L 434.88 64.5768 
+Q 437.67 64.5768 437.67 61.8048 
+L 437.67 61.8048 
+Q 437.67 59.0328 434.88 59.0328 
+L 255.762 59.0328 
+Q 252.972 59.0328 252.972 61.8048 
+L 252.972 61.8048 
+Q 252.972 64.5768 255.762 64.5768 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #6e30a8"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 475.614 164.3688 
+L 653.616 164.3688 
+Q 664.776 164.3688 664.776 153.2808 
+L 664.776 62.3592 
+Q 664.776 51.2712 653.616 51.2712 
+L 475.614 51.2712 
+Q 464.454 51.2712 464.454 62.3592 
+L 464.454 153.2808 
+Q 464.454 164.3688 475.614 164.3688 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 475.056 64.5768 
+L 654.174 64.5768 
+Q 656.964 64.5768 656.964 61.8048 
+L 656.964 61.8048 
+Q 656.964 59.0328 654.174 59.0328 
+L 475.056 59.0328 
+Q 472.266 59.0328 472.266 61.8048 
+L 472.266 61.8048 
+Q 472.266 64.5768 475.056 64.5768 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 87.804 286.3368 
+L 318.816 286.3368 
+Q 329.976 286.3368 329.976 275.2488 
+L 329.976 192.6432 
+Q 329.976 181.5552 318.816 181.5552 
+L 87.804 181.5552 
+Q 76.644 181.5552 76.644 192.6432 
+L 76.644 275.2488 
+Q 76.644 286.3368 87.804 286.3368 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 87.246 194.8608 
+L 319.374 194.8608 
+Q 322.164 194.8608 322.164 192.0888 
+L 322.164 192.0888 
+Q 322.164 189.3168 319.374 189.3168 
+L 87.246 189.3168 
+Q 84.456 189.3168 84.456 192.0888 
+L 84.456 192.0888 
+Q 84.456 194.8608 87.246 194.8608 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 372.384 286.3368 
+L 603.396 286.3368 
+Q 614.556 286.3368 614.556 275.2488 
+L 614.556 192.6432 
+Q 614.556 181.5552 603.396 181.5552 
+L 372.384 181.5552 
+Q 361.224 181.5552 361.224 192.6432 
+L 361.224 275.2488 
+Q 361.224 286.3368 372.384 286.3368 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 371.826 194.8608 
+L 603.954 194.8608 
+Q 606.744 194.8608 606.744 192.0888 
+L 606.744 192.0888 
+Q 606.744 189.3168 603.954 189.3168 
+L 371.826 189.3168 
+Q 369.036 189.3168 369.036 192.0888 
+L 369.036 192.0888 
+Q 369.036 194.8608 371.826 194.8608 
+z
+" clip-path="url(#pb6b6581302)" style="fill: #c4001d"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="345.6" y="37.81445" transform="rotate(-0 345.6 37.81445)">Основні зони робочого інтерфейсу Scratch 3.0</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="126.585" y="91.11505" transform="rotate(-0 126.585 91.11505)">1. Палітра блоків</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(38.732062 109.672341)">Категорії команд за кольором:</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(57.236344 122.996925)">Рух, Вигляд, Звук, Події,</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(68.427 136.321509)">Керування, Датчики</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="345.321" y="91.11505" transform="rotate(-0 345.321 91.11505)">2. Область скриптів</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(266.078531 109.548183)">Робоче поле для складання</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(287.744344 123.121083)">алгоритмів із блоків</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(275.815406 136.445667)">методом перетягування</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="564.615" y="90.693175" transform="rotate(-0 564.615 90.693175)">3. Сцена (Stage)</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(492.644813 109.672341)">Вікно виконання проєкту</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(482.192437 122.996925)">розміром 480 × 360 пікселів,</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(486.216281 136.321509)">прапорець запуску та Стоп</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="203.31" y="221.045534" transform="rotate(-0 203.31 221.045534)">4. Панель спрайтів і тла</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(55.736437 242.460633)">Керування персонажами, їхніми координатами X/Y,</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(63.835594 255.785217)">розміром, напрямком та перемикання тла сцени</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="487.89" y="221.045534" transform="rotate(-0 487.89 221.045534)">5. Вкладки та меню файлу</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(380.566688 242.428444)">Перемикання «Код / Образи / Звуки»,</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(336.38625 256.001344)">меню «Файл» для збереження та завантаження .sb3</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pb6b6581302">
+   <rect x="10.8" y="10.8" width="669.6" height="288.288"/>
+  </clipPath>
+ </defs>
+</svg>

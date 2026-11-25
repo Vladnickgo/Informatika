@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Практичне заняття №10 — Робота у середовищі Scratch 3.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ==========================================================================
+       ЗМІННІ ДИЗАЙНУ ТА ФІРМОВА ПАЛІТРА SCRATCH 3.0
+       ========================================================================== */
+    :root {
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F1F5F9;
+      --border-light: #E2E8F0;
+      --border-med: #CBD5E1;
+      --text-main: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+
+      /* Фірмові кольори категорій Scratch 3.0 */
+      --sc-motion: #4C97FF;
+      --sc-motion-border: #3373CC;
+      --sc-looks: #9966FF;
+      --sc-looks-border: #774DCB;
+      --sc-sound: #CF63CF;
+      --sc-sound-border: #A642A6;
+      --sc-events: #FFBF00;
+      --sc-events-border: #CC9900;
+      --sc-control: #FFAB19;
+      --sc-control-border: #CF8B17;
+      --sc-sensing: #5CB1D6;
+      --sc-sensing-border: #2E8EB8;
+      --sc-green: #10B981;
+      --sc-green-border: #059669;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.07), 0 2px 4px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em;
+    }
+
+    /* ==========================================================================
+       ВЕРХНЯ ПАНЕЛЬ НАВІГАЦІЇ ТА ДРУКУ (.no-print)
+       ========================================================================== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 10px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .top-nav-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .nav-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--sc-motion);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.83rem;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-link:hover {
+      background: #EFF6FF;
+      color: var(--sc-motion-border);
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--sc-motion);
+      color: #FFFFFF;
+      border: 1.5px solid var(--sc-motion-border);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 8px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(76, 151, 255, 0.25);
+      transition: transform 0.12s, background 0.15s;
+    }
+
+    .btn-print:hover {
+      background: var(--sc-motion-border);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       ОСНОВНИЙ КОНТЕЙНЕР ТА ТИПОГРАФІКА
+       ========================================================================== */
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 26px 20px 60px;
+    }
+
+    h1, h2, h3, h4, .section-header {
+      break-after: avoid;
+      page-break-after: avoid;
+      color: var(--text-main);
+    }
+
+    p {
+      margin-bottom: 11px;
+      color: var(--text-secondary);
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Шапка */
+    .hero-header {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
+      border: 1px solid var(--border-light);
+      border-top: 5px solid var(--sc-motion);
+      border-radius: var(--radius-lg);
+      padding: 26px 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 5px 13px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(1.38rem, 2.7vw, 1.85rem);
+      font-weight: 800;
+      line-height: 1.3;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .hero-sub {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+    }
+
+    /* Паспорт заняття */
+    .passport-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .span-2 {
+      grid-column: 1 / -1;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .passport-grid .card {
+      margin-bottom: 0;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .clean-list {
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .clean-list li {
+      margin-bottom: 6px;
+    }
+
+    .clean-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Заголовки розділів */
+    .section-block {
+      margin-top: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    .section-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 1.32rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sub-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
+    }
+
+    /* Виноски (Callouts) */
+    .callout {
+      border-radius: var(--radius-md);
+      padding: 15px 18px;
+      margin: 16px 0;
+      border-left: 4px solid var(--sc-motion);
+      background: #EFF6FF;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .callout.green { border-left-color: var(--sc-green); background: #ECFDF5; }
+    .callout.amber { border-left-color: var(--sc-control); background: #FFFBEB; }
+    .callout.purple { border-left-color: var(--sc-looks); background: #F5F3FF; }
+    .callout.pink { border-left-color: var(--sc-sound); background: #FDF4FF; }
+
+    .callout-title {
+      font-weight: 800;
+      font-size: 0.94rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .callout p, .callout li {
+      font-size: 0.91rem;
+      color: var(--text-secondary);
+    }
+
+    /* Сітки */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      margin: 14px 0;
+    }
+
+    .script-layout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ==========================================================================
+       ТАБЛИЦІ
+       ========================================================================== */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.91rem;
+    }
+
+    thead {
+      background: var(--bg-subtle);
+    }
+
+    th {
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-main);
+      padding: 11px 14px;
+      border-bottom: 2px solid var(--border-light);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+
+    tr {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #FAFCFF;
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.86rem;
+      color: #FFFFFF;
+      background: var(--sc-motion);
+    }
+
+    .step-badge.lvl1 { background: var(--sc-green); }
+    .step-badge.lvl2 { background: var(--sc-motion); }
+    .step-badge.lvl3 { background: var(--sc-looks); }
+
+    /* ==========================================================================
+       АВТЕНТИЧНІ CSS-БЛОКИ SCRATCH 3.0
+       ========================================================================== */
+    .sb-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      user-select: none;
+    }
+
+    .sb-block {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 7px 13px;
+      min-height: 34px;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.84rem;
+      line-height: 1.25;
+      border-radius: 6px;
+      border: 1.5px solid transparent;
+      margin-bottom: -1px;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.13);
+      white-space: nowrap;
+    }
+
+    /* Виступ пазла знизу */
+    .sb-block.sb-notch::after {
+      content: "";
+      position: absolute;
+      left: 15px;
+      bottom: -5px;
+      width: 17px;
+      height: 5px;
+      background: inherit;
+      border-left: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-right: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      z-index: 2;
+    }
+
+    /* Виїмка пазла зверху */
+    .sb-block.sb-cmd::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: -1.5px;
+      width: 17px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.28);
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Блок-шапка події */
+    .sb-hat {
+      border-top-left-radius: 22px 13px;
+      border-top-right-radius: 22px 13px;
+      padding-top: 9px;
+      padding-bottom: 7px;
+    }
+
+    /* Категорії кольорів */
+    .sb-motion  { background-color: var(--sc-motion);  border-color: var(--sc-motion-border); }
+    .sb-looks   { background-color: var(--sc-looks);   border-color: var(--sc-looks-border); }
+    .sb-sound   { background-color: var(--sc-sound);   border-color: var(--sc-sound-border); }
+    .sb-events  { background-color: var(--sc-events);  border-color: var(--sc-events-border); text-shadow: 0 1px 1px rgba(130, 88, 0, 0.35); }
+    .sb-control { background-color: var(--sc-control); border-color: var(--sc-control-border); }
+
+    /* Біле овальне поле введення */
+    .sb-input {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 21px;
+      padding: 0 8px;
+      background: #FFFFFF;
+      color: #0F172A;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.79rem;
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      text-shadow: none;
+    }
+
+    /* Випадаючий список */
+    .sb-dropdown {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 1px 8px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      color: #FFFFFF;
+      font-size: 0.79rem;
+      font-weight: 700;
+      text-shadow: none;
+    }
+
+    .sb-dropdown::after {
+      content: "▾";
+      font-size: 0.7rem;
+      opacity: 0.9;
+    }
+
+    .sb-flag {
+      color: #4CBF56;
+      font-size: 1rem;
+      line-height: 1;
+      filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.3));
+    }
+
+    /* ==========================================================================
+       ДІАГРАМИ ТА ІНТЕРАКТИВНА СЦЕНА
+       ========================================================================== */
+    .diagram-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .diagram-caption {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .caption-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .caption-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .diagram-svg-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .diagram-svg-wrap svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Легенда для Рис. 1 */
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .legend-item {
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 9px;
+      padding: 9px 11px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .legend-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--sc-motion);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.72rem;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    /* Інтерактивна панель для Рис. 3 */
+    .sim-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+    }
+
+    .btn-sim {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--sc-green);
+      color: #FFFFFF;
+      border: 1.5px solid var(--sc-green-border);
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 8px 15px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: filter 0.15s, transform 0.1s;
+    }
+
+    .btn-sim:hover {
+      filter: brightness(0.94);
+      transform: translateY(-1px);
+    }
+
+    .btn-sim:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .sim-readout {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: #FFFFFF;
+      border: 1px solid #BFDBFE;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* Картки порівняння назв файлів */
+    .naming-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .naming-col {
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.86rem;
+    }
+
+    .naming-good {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+    }
+
+    .naming-bad {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+    }
+
+    /* Заголовки рівнів */
+    .level-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin: 20px 0 12px;
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+
+    .level-banner.lvl1 { background: #ECFDF5; border: 1.5px solid #6EE7B7; }
+    .level-banner.lvl2 { background: #EFF6FF; border: 1.5px solid #93C5FD; }
+    .level-banner.lvl3 { background: #F5F3FF; border: 1.5px solid #C4B5FD; }
+
+    .level-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .level-points {
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      color: #FFFFFF;
+    }
+
+    /* Коментарі до скрипту Рівня 2 */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comment-item {
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-left: 3px solid var(--sc-motion);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Шкала оцінювання */
+    .score-bar-wrap {
+      margin-top: 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 14px 16px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .score-bar {
+      display: flex;
+      height: 28px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border-med);
+      margin: 10px 0;
+    }
+
+    .score-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .score-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .score-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+
+    .swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    /* Чеклист форми звітності */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 10px 13px;
+    }
+
+    .chk-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--sc-motion);
+      border-radius: 5px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: #FFFFFF;
+    }
+
+    .page-footer {
+      margin-top: 34px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ
+       ========================================================================== */
+    @media (max-width: 820px) {
+      .passport-grid,
+      .two-col,
+      .script-layout,
+      .naming-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .legend-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .container {
+        padding: 16px 12px 44px;
+      }
+
+      .hero-header {
+        padding: 18px 16px;
+      }
+    }
+
+    /* ==========================================================================
+       ПРОФЕСІЙНА ОПТИМІЗАЦІЯ ДЛЯ ДРУКУ (A4)
+       ========================================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 12mm;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html {
+        font-size: 13px;
+      }
+
+      body {
+        background: #FFFFFF !important;
+        color: #0F172A !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .hero-header {
+        box-shadow: none !important;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+      }
+
+      .card, .diagram-box, .callout, .table-wrap, .score-bar-wrap,
+      .level-banner, table, tr, figure, .sb-stack, .comment-item {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        box-shadow: none !important;
+      }
+
+      h1, h2, h3, h4, .section-header, .level-banner {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+      }
+
+      .passport-grid,
+      .two-col,
+      .naming-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .script-layout {
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+      }
+
+      .legend-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+
+      .section-block {
+        margin-top: 20px;
+      }
+
+      .table-wrap {
+        overflow: visible !important;
+      }
+
+      svg {
+        max-width: 100% !important;
+        height: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       ВЕРХНЯ ПАНЕЛЬ НАВІГАЦІЇ ТА ДРУКУ (.no-print)
+       ======================================================================== -->
+  <nav class="top-nav no-print" aria-label="Навігація по заняттю">
+    <div class="top-nav-inner">
+      <div class="nav-brand">
+        <span class="nav-brand-badge">П10</span>
+        <span>Scratch 3.0 • Практичне №10</span>
+      </div>
+      <div class="nav-links">
+        <a href="#passport" class="nav-link">Паспорт</a>
+        <a href="#sec-theory" class="nav-link">1. Теорія</a>
+        <a href="#sec-coords" class="nav-link">Координати</a>
+        <a href="#sec-levels" class="nav-link">2. Рівні завдань</a>
+        <a href="#sec-eval" class="nav-link">3. Оцінювання та звіт</a>
+      </div>
+      <button type="button" class="btn-print" onclick="window.print()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Друкувати / Зберегти як PDF
+      </button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ======================================================================
+         ШАПКА ТА ПАСПОРТ ЗАНЯТТЯ
+         ====================================================================== -->
+    <header id="passport" class="hero-header">
+      <div class="hero-badge">ПРАКТИЧНЕ ЗАНЯТТЯ №10 • SCRATCH 3.0 • ІНФОРМАТИКА</div>
+      <h1 class="hero-title">Робота у середовищі: вивчення інтерфейсу редактора; створення, редагування та збереження проекту; користування бібліотекою спрайтів, звуків, тла; переміщення спрайтів з використанням координат</h1>
+      <p class="hero-sub">Методичний путівник, інтерактивна координатна площина та покроковий практикум із різнорівневими завданнями</p>
+    </header>
+
+    <section class="passport-grid" aria-label="Паспорт заняття">
+      <div class="card span-2">
+        <div class="card-title">
+          <span class="card-icon" style="background:#EFF6FF; color:#1D4ED8;">🎯</span>
+          Мета заняття
+        </div>
+        <p>Закріпити практичні навички роботи в Scratch: створення проекту, пошук і додавання ресурсів з бібліотек, точне позиціонування спрайтів за координатами. Розвивати вміння самостійно навчатися роботі з новим програмним забезпеченням. Розвивати проектне мислення. Виховувати старанність, акуратність у роботі з цифровими активами (збереження проектів, організація робочого простору).</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#ECFDF5; color:#059669;">💻</span>
+          Обладнання та програмне забезпечення
+        </div>
+        <ol class="clean-list">
+          <li>Інструкційні картки.</li>
+          <li>Персональний комп'ютер або ноутбук із доступом до мережі Інтернет.</li>
+          <li>Середовище візуального програмування <strong>Scratch 3.0</strong> (онлайн-версія <span class="mono">scratch.mit.edu</span> або локальний додаток <strong>Scratch Desktop</strong>).</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#FFFBEB; color:#B45309;">📚</span>
+          Рекомендована література
+        </div>
+        <ol class="clean-list">
+          <li>Морзе Н. В., Вембер В. П. Інформатика (рівень стандарт) : підруч. для 10 кл. закл. загал. серед. освіти. Київ : Оріон, 2024.</li>
+          <li>Ривкінд Й. Я., Лисенко Т. І., Чернікова Л. А., Шакотько В. В. Інформатика (рівень стандарт) : підруч. для 10 кл. закл. загал. серед. освіти. Київ : Генеза, 2024.</li>
+          <li>Руденко В. Д., Речич Н. В., Потієнко В. О. Інформатика (рівень стандарт) : підруч. для 10 кл. закл. загал. серед. освіти. Харків : Ранок, 2024.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 1. ТЕОРЕТИЧНІ ВІДОМОСТІ
+         ====================================================================== -->
+    <section id="sec-theory" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-motion);">1</span>
+        <h2>Теоретичні відомості</h2>
+      </div>
+
+      <!-- Підрозділ 1.1 -->
+      <h3><span class="sub-pill">1.1</span> Інтерфейс редактора Scratch 3.0</h3>
+      <div class="card">
+        <p>Середовище <strong>Scratch 3.0</strong> побудоване за принципом конструктора: команди об'єднані у кольорові категорії, а алгоритм збирається шляхом з'єднання блоків між собою. Чітке розуміння розташування основних зон інтерфейсу дозволяє швидко знаходити потрібні інструменти та пояснювати будову вікна учням початкової школи.</p>
+      </div>
+
+      <!-- РИС. 1: Реалістична SVG-схема інтерфейсу Scratch 3.0 -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-motion);"></span>
+            Рис. 1. Основні зони робочого інтерфейсу Scratch 3.0
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 920 455" width="920" height="455" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема робочого вікна редактора Scratch 3.0 з 8 пронумерованими зонами">
+            <!-- Зовнішня рамка вікна -->
+            <rect x="4" y="4" width="912" height="447" rx="12" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2"/>
+
+            <!-- ЗОНА 1: Верхня синя панель меню -->
+            <rect x="4" y="4" width="912" height="42" rx="12" fill="#4C97FF"/>
+            <rect x="4" y="28" width="912" height="18" fill="#4C97FF"/>
+            <text x="20" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF">SCRATCH</text>
+            <!-- Глобус мови -->
+            <circle cx="112" cy="25" r="9" fill="none" stroke="#FFFFFF" stroke-width="1.6"/>
+            <ellipse cx="112" cy="25" rx="4" ry="9" fill="none" stroke="#FFFFFF" stroke-width="1.2"/>
+            <line x1="103" y1="25" x2="121" y2="25" stroke="#FFFFFF" stroke-width="1.2"/>
+            <text x="128" y="29" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#FFFFFF">Українська ▾</text>
+            <text x="225" y="29" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#FFFFFF">Файл ▾</text>
+            <text x="285" y="29" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#FFFFFF">Правка ▾</text>
+            <rect x="365" y="13" width="165" height="24" rx="6" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.45)"/>
+            <text x="377" y="29" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">PR10_Prizvyshche</text>
+            <!-- Маркер 1 -->
+            <circle cx="556" cy="25" r="12" fill="#0F172A" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="556" y="29.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">1</text>
+
+            <!-- ЗОНА 2: Вкладки Код / Образи / Звуки -->
+            <rect x="12" y="54" width="236" height="32" rx="8" fill="#E2E8F0"/>
+            <rect x="14" y="56" width="74" height="28" rx="6" fill="#FFFFFF"/>
+            <text x="51" y="74" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#4C97FF">Код</text>
+            <text x="128" y="74" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="600" fill="#475569">Образи</text>
+            <text x="205" y="74" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="600" fill="#475569">Звуки</text>
+            <!-- Маркер 2 -->
+            <circle cx="264" cy="70" r="12" fill="#9966FF" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="264" y="74.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">2</text>
+
+            <!-- ЗОНА 3: Палітра категорій блоків -->
+            <rect x="12" y="94" width="76" height="346" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <!-- Кольорові кружечки категорій -->
+            <circle cx="50" cy="118" r="9" fill="#4C97FF"/><text x="50" y="138" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#334155">Рух</text>
+            <circle cx="50" cy="160" r="9" fill="#9966FF"/><text x="50" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#334155">Вигляд</text>
+            <circle cx="50" cy="202" r="9" fill="#CF63CF"/><text x="50" y="222" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#334155">Звук</text>
+            <circle cx="50" cy="244" r="9" fill="#FFBF00"/><text x="50" y="264" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#334155">Події</text>
+            <circle cx="50" cy="286" r="9" fill="#FFAB19"/><text x="50" y="306" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#334155">Керув.</text>
+            <circle cx="50" cy="328" r="9" fill="#5CB1D6"/><text x="50" y="348" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#334155">Датчики</text>
+            <circle cx="50" cy="370" r="9" fill="#59C059"/><text x="50" y="390" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#334155">Операт.</text>
+            <!-- Маркер 3 -->
+            <circle cx="50" cy="422" r="12" fill="#4C97FF" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="50" y="426.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">3</text>
+
+            <!-- ЗОНА 4: Область доступних блоків -->
+            <rect x="94" y="94" width="174" height="346" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+            <text x="106" y="114" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" fill="#64748B">РУХ</text>
+            <rect x="104" y="124" width="148" height="24" rx="5" fill="#4C97FF"/><text x="112" y="140" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">перемістити на 10 кр.</text>
+            <rect x="104" y="156" width="152" height="24" rx="5" fill="#4C97FF"/><text x="112" y="172" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">перемістити в x:0 y:0</text>
+            <rect x="104" y="188" width="154" height="24" rx="5" fill="#4C97FF"/><text x="112" y="204" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">ковзати 1 сек до x: y:</text>
+            <rect x="104" y="220" width="136" height="24" rx="5" fill="#4C97FF"/><text x="112" y="236" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">змінити x на 10</text>
+            <rect x="104" y="252" width="136" height="24" rx="5" fill="#4C97FF"/><text x="112" y="268" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">змінити y на 10</text>
+            <!-- Маркер 4 -->
+            <circle cx="181" cy="422" r="12" fill="#0EA5E9" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="181" y="426.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">4</text>
+
+            <!-- ЗОНА 5: Область скриптів (робоче поле) -->
+            <rect x="276" y="94" width="290" height="346" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <!-- Сітка точок -->
+            <g fill="#CBD5E1">
+              <circle cx="300" cy="120" r="1.2"/><circle cx="340" cy="120" r="1.2"/><circle cx="380" cy="120" r="1.2"/><circle cx="420" cy="120" r="1.2"/><circle cx="460" cy="120" r="1.2"/><circle cx="500" cy="120" r="1.2"/><circle cx="540" cy="120" r="1.2"/>
+              <circle cx="300" cy="160" r="1.2"/><circle cx="340" cy="160" r="1.2"/><circle cx="380" cy="160" r="1.2"/><circle cx="420" cy="160" r="1.2"/><circle cx="460" cy="160" r="1.2"/><circle cx="500" cy="160" r="1.2"/><circle cx="540" cy="160" r="1.2"/>
+              <circle cx="300" cy="280" r="1.2"/><circle cx="340" cy="280" r="1.2"/><circle cx="380" cy="280" r="1.2"/><circle cx="420" cy="280" r="1.2"/><circle cx="460" cy="280" r="1.2"/><circle cx="500" cy="280" r="1.2"/><circle cx="540" cy="280" r="1.2"/>
+            </g>
+            <!-- Зібраний міні-скрипт -->
+            <path d="M 304 142 Q 332 128 362 142 L 486 142 L 486 168 L 304 168 Z" fill="#FFBF00" stroke="#CC9900" stroke-width="1.2"/>
+            <text x="314" y="159" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF">коли натиснуто ⚑</text>
+            <rect x="304" y="168" width="188" height="26" rx="4" fill="#4C97FF" stroke="#3373CC" stroke-width="1.2"/>
+            <text x="314" y="185" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF">перемістити в x: 0  y: 0</text>
+            <rect x="304" y="194" width="212" height="26" rx="4" fill="#4C97FF" stroke="#3373CC" stroke-width="1.2"/>
+            <text x="314" y="211" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF">ковзати 1 сек до x: 150 y: 100</text>
+            <rect x="304" y="220" width="175" height="26" rx="4" fill="#CF63CF" stroke="#A642A6" stroke-width="1.2"/>
+            <text x="314" y="237" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF">відтворити звук Pop</text>
+            <!-- Маркер 5 -->
+            <circle cx="421" cy="422" r="12" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="421" y="426.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">5</text>
+
+            <!-- ЗОНА 6: Сцена 480×360 із прапорцем і Стоп -->
+            <rect x="574" y="54" width="332" height="28" rx="6" fill="#E2E8F0"/>
+            <!-- Зелений прапорець -->
+            <text x="588" y="73" font-family="Inter, sans-serif" font-size="16" fill="#10B981">⚑</text>
+            <!-- Червона кнопка Стоп -->
+            <polygon points="616,62 624,62 628,66 628,74 624,78 616,78 612,74 612,66" fill="#EF4444"/>
+            <text x="644" y="72" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#475569">Сцена (480 × 360)</text>
+
+            <rect x="574" y="88" width="332" height="196" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+            <!-- Міні-сітка Xy-grid на сцені -->
+            <line x1="740" y1="92" x2="740" y2="280" stroke="#4C97FF" stroke-width="1.3"/>
+            <line x1="578" y1="186" x2="902" y2="186" stroke="#EA580C" stroke-width="1.3"/>
+            <!-- Спрайт на сцені -->
+            <circle cx="740" cy="186" r="15" fill="#FF9F1C" stroke="#1E293B" stroke-width="1.5"/>
+            <circle cx="735" cy="183" r="2.2" fill="#1E293B"/><circle cx="745" cy="183" r="2.2" fill="#1E293B"/>
+            <path d="M 735 190 Q 740 194 745 190" fill="none" stroke="#1E293B" stroke-width="1.4"/>
+            <!-- Маркер 6 -->
+            <circle cx="888" cy="108" r="12" fill="#10B981" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="888" y="112.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">6</text>
+
+            <!-- ЗОНА 7: Панель спрайтів (X, Y, Розмір, Напрям) -->
+            <rect x="574" y="292" width="244" height="148" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <text x="584" y="311" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#475569">Спрайт: Beetle   X: 0   Y: 0</text>
+            <text x="584" y="329" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#64748B">Розмір: 70   Напрям: 90</text>
+            <line x1="574" y1="339" x2="818" y2="339" stroke="#E2E8F0"/>
+            <!-- Картка спрайта -->
+            <rect x="586" y="350" width="64" height="66" rx="8" fill="#EFF6FF" stroke="#4C97FF" stroke-width="1.8"/>
+            <circle cx="618" cy="376" r="12" fill="#FF9F1C"/>
+            <text x="618" y="406" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#1D4ED8">Beetle</text>
+            <!-- Кнопка додати спрайт -->
+            <circle cx="794" cy="416" r="13" fill="#4C97FF"/>
+            <text x="794" y="421" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#FFFFFF">+</text>
+            <!-- Маркер 7 -->
+            <circle cx="696" cy="422" r="12" fill="#F97316" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="696" y="426.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">7</text>
+
+            <!-- ЗОНА 8: Панель керування тлом -->
+            <rect x="826" y="292" width="80" height="148" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <text x="866" y="311" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="800" fill="#475569">Тло</text>
+            <rect x="836" y="322" width="60" height="44" rx="5" fill="#F8FAFC" stroke="#4C97FF" stroke-width="1.5"/>
+            <line x1="866" y1="324" x2="866" y2="364" stroke="#93C5FD" stroke-width="1"/>
+            <line x1="838" y1="344" x2="894" y2="344" stroke="#FDBA74" stroke-width="1"/>
+            <text x="866" y="382" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#64748B">Xy-grid</text>
+            <!-- Маркер 8 -->
+            <circle cx="866" cy="422" r="12" fill="#EC4899" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="866" y="426.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">8</text>
+          </svg>
+        </div>
+
+        <!-- Легенда 8 зон -->
+        <div class="legend-grid">
+          <div class="legend-item"><span class="legend-num" style="background:#0F172A;">1</span><strong>Верхнє меню:</strong> глобус вибору мови, меню «Файл» (збереження <span class="mono">.sb3</span>), назва проєкту.</div>
+          <div class="legend-item"><span class="legend-num" style="background:#9966FF;">2</span><strong>Вкладки:</strong> перемикання режимів «Код / Образи / Звуки».</div>
+          <div class="legend-item"><span class="legend-num" style="background:#4C97FF;">3</span><strong>Палітра категорій:</strong> кольорові групи команд (Рух, Вигляд, Звук, Події, Керування).</div>
+          <div class="legend-item"><span class="legend-num" style="background:#0EA5E9;">4</span><strong>Область блоків:</strong> набір команд обраної категорії для перетягування.</div>
+          <div class="legend-item"><span class="legend-num" style="background:#8B5CF6;">5</span><strong>Область скриптів:</strong> робоче поле для складання алгоритмів із блоків.</div>
+          <div class="legend-item"><span class="legend-num" style="background:#10B981;">6</span><strong>Сцена (480×360):</strong> вікно виконання проєкту, зелений прапорець запуску та «Стоп».</div>
+          <div class="legend-item"><span class="legend-num" style="background:#F97316;">7</span><strong>Панель спрайтів:</strong> керування персонажами, координатами X/Y, розміром і напрямом.</div>
+          <div class="legend-item"><span class="legend-num" style="background:#EC4899;">8</span><strong>Панель тла:</strong> вибір, перемикання та редагування фону сцени.</div>
+        </div>
+      </figure>
+
+      <!-- Підрозділ 1.2 -->
+      <h3><span class="sub-pill">1.2</span> Створення, редагування та збереження проєкту</h3>
+      <div class="card">
+        <p>Новий проєкт створюється командою <strong>Файл → Новий</strong> (або <strong>File → New</strong>). Для збереження результату на локальний диск використовують команду <strong>Файл → Вивантажити на ваш комп'ютер</strong>, після чого формується файл формату <span class="mono" style="font-weight:700; color:#1D4ED8;">.sb3</span>. Щоб продовжити роботу над збереженим проєктом, виконують <strong>Файл → Завантажити з вашого комп'ютера</strong>.</p>
+      </div>
+
+      <!-- SVG-діаграма життєвого циклу файлу .sb3 -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-green);"></span>
+            Життєвий цикл файлу проєкту Scratch (.sb3)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 880 116" width="880" height="116" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Життєвий цикл файлу проєкту Scratch .sb3">
+            <!-- Крок 1 -->
+            <rect x="8" y="16" width="192" height="84" rx="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.8"/>
+            <text x="104" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#1E40AF">1. Створення</text>
+            <text x="104" y="63" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">Файл → Новий</text>
+            <text x="104" y="81" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#64748B">(File → New)</text>
+
+            <path d="M 204 58 L 228 58" stroke="#64748B" stroke-width="2.2"/>
+            <polygon points="228,53 237,58 228,63" fill="#64748B"/>
+
+            <!-- Крок 2 -->
+            <rect x="239" y="16" width="192" height="84" rx="12" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1.8"/>
+            <text x="335" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#5B21B6">2. Редагування</text>
+            <text x="335" y="63" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">Спрайти, тло, звуки,</text>
+            <text x="335" y="81" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">скрипти за етапами</text>
+
+            <path d="M 435 58 L 459 58" stroke="#64748B" stroke-width="2.2"/>
+            <polygon points="459,53 468,58 459,63" fill="#64748B"/>
+
+            <!-- Крок 3 -->
+            <rect x="470" y="16" width="192" height="84" rx="12" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.8"/>
+            <text x="566" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#065F46">3. Збереження (.sb3)</text>
+            <text x="566" y="63" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">Вивантажити на ваш</text>
+            <text x="566" y="81" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">комп'ютер</text>
+
+            <path d="M 666 58 L 690 58" stroke="#64748B" stroke-width="2.2"/>
+            <polygon points="690,53 699,58 690,63" fill="#64748B"/>
+
+            <!-- Крок 4 -->
+            <rect x="701" y="16" width="171" height="84" rx="12" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.8"/>
+            <text x="786" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#92400E">4. Відкриття</text>
+            <text x="786" y="63" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">Завантажити з вашого</text>
+            <text x="786" y="81" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">комп'ютера</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- Пам'ятка про іменування файлів -->
+      <div class="callout amber">
+        <div class="callout-title">📁 Пам'ятка: культура іменування файлів та проміжне збереження</div>
+        <p>Надавайте файлам зрозумілі імена без пробілів і випадкових символів, наприклад <strong class="mono">PR10_Prizvyshche.sb3</strong>. Зберігайте проміжну версію проєкту після кожного завершеного етапу, щоб не втратити результати роботи.</p>
+        <div class="naming-grid">
+          <div class="naming-col naming-good">
+            <strong style="color:#065F46;">✓ Правильні назви файлів:</strong>
+            <div class="mono" style="margin-top:5px; color:#047857;">• PR10_Ivanenko.sb3<br>• PR10_Prizvyshche.sb3</div>
+          </div>
+          <div class="naming-col naming-bad">
+            <strong style="color:#991B1B;">✕ Неправильні назви файлів:</strong>
+            <div class="mono" style="margin-top:5px; color:#B91C1C;">• новий проект 1 (2).sb3<br>• test123.sb3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Підрозділ 1.3 -->
+      <h3><span class="sub-pill">1.3</span> Користування бібліотеками спрайтів, образів, тла та звуків</h3>
+      <div class="card">
+        <p>Scratch містить вбудовані бібліотеки готових мультимедійних ресурсів, згрупованих за тематичними категоріями (<em>Тварини, Люди, Фантазія, Спорт, Музика</em> тощо). Кожен об'єкт можна не лише обрати з бібліотеки, а й відредагувати у вбудованому графічному або аудіоредакторі, намалювати власноруч, отримати випадковим чином («Сюрприз») чи завантажити з комп'ютера.</p>
+      </div>
+
+      <!-- РИС. 2: Бібліотеки ресурсів + 4 способи додавання -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-looks);"></span>
+            Рис. 2. Основні бібліотеки ресурсів у Scratch 3.0 та способи їх додавання
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 880 232" width="880" height="232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Чотири бібліотеки ресурсів Scratch 3.0 та чотири способи додавання">
+            <!-- 4 картки бібліотек -->
+            <!-- Спрайти -->
+            <rect x="8" y="8" width="204" height="122" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="8" y="8" width="204" height="8" rx="4" fill="#4C97FF"/>
+            <text x="110" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#0F172A">Спрайти</text>
+            <text x="110" y="66" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">Виконавці команд:</text>
+            <text x="110" y="84" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">тварини, люди,</text>
+            <text x="110" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">предмети, літери</text>
+
+            <!-- Образи -->
+            <rect x="228" y="8" width="204" height="122" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="228" y="8" width="204" height="8" rx="4" fill="#9966FF"/>
+            <text x="330" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#0F172A">Образи</text>
+            <text x="330" y="66" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">Зовнішній вигляд</text>
+            <text x="330" y="84" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">спрайта для анімації</text>
+            <text x="330" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">та зміни стану</text>
+
+            <!-- Тло сцени -->
+            <rect x="448" y="8" width="204" height="122" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="448" y="8" width="204" height="8" rx="4" fill="#10B981"/>
+            <text x="550" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#0F172A">Тло сцени</text>
+            <text x="550" y="66" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">Фон проєкту:</text>
+            <text x="550" y="84" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">кімната, космос,</text>
+            <text x="550" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">природа, сітка XY</text>
+
+            <!-- Звуки -->
+            <rect x="668" y="8" width="204" height="122" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="668" y="8" width="204" height="8" rx="4" fill="#CF63CF"/>
+            <text x="770" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#0F172A">Звуки</text>
+            <text x="770" y="66" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">Аудіоефекти,</text>
+            <text x="770" y="84" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">голоси, мелодії</text>
+            <text x="770" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" fill="#475569">та власний запис</text>
+
+            <!-- Нижня панель: 4 способи додавання ресурсів -->
+            <rect x="8" y="148" width="864" height="76" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+            <text x="24" y="170" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#64748B">4 УНІВЕРСАЛЬНІ СПОСОБИ ДОДАВАННЯ РЕСУРСУ:</text>
+
+            <!-- Дія 1: Лупа -->
+            <circle cx="44" cy="198" r="14" fill="#4C97FF"/>
+            <circle cx="42" cy="196" r="5" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+            <line x1="46" y1="200" x2="50" y2="204" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+            <text x="66" y="196" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#0F172A">Обрати з бібліотеки</text>
+            <text x="66" y="211" font-family="Inter, sans-serif" font-size="10" fill="#64748B">пошук готового об'єкта</text>
+
+            <!-- Дія 2: Пензлик -->
+            <circle cx="268" cy="198" r="14" fill="#9966FF"/>
+            <path d="M 262 204 L 272 192 L 275 195 L 265 207 Z" fill="#FFFFFF"/>
+            <text x="290" y="196" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#0F172A">Намалювати</text>
+            <text x="290" y="211" font-family="Inter, sans-serif" font-size="10" fill="#64748B">власний у редакторі</text>
+
+            <!-- Дія 3: Сюрприз -->
+            <circle cx="484" cy="198" r="14" fill="#FFAB19"/>
+            <text x="484" y="203" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF">★</text>
+            <text x="506" y="196" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#0F172A">Сюрприз</text>
+            <text x="506" y="211" font-family="Inter, sans-serif" font-size="10" fill="#64748B">випадковий вибір</text>
+
+            <!-- Дія 4: Завантажити -->
+            <circle cx="672" cy="198" r="14" fill="#10B981"/>
+            <path d="M 672 205 L 672 192 M 667 197 L 672 191 L 677 197" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="694" y="196" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#0F172A">Завантажити файл</text>
+            <text x="694" y="211" font-family="Inter, sans-serif" font-size="10" fill="#64748B">зображення чи звук із ПК</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- Підрозділ 1.4 -->
+      <h3 id="sec-coords"><span class="sub-pill">1.4</span> Координатна площина сцени та позиціонування спрайтів</h3>
+      <div class="card">
+        <p>Сцена Scratch має розмір <strong>480 × 360</strong> умовних одиниць (пікселів). Її центр знаходиться в точці <strong class="mono">(0; 0)</strong>. Горизонтальна вісь <strong>X</strong> змінюється від <strong class="mono">-240</strong> (лівий край) до <strong class="mono">240</strong> (правий край), а вертикальна вісь <strong>Y</strong> — від <strong class="mono">-180</strong> (нижній край) до <strong class="mono">180</strong> (верхній край). Для наочного тренування доречно тимчасово встановлювати бібліотечне тло <strong class="mono">Xy-grid</strong>.</p>
+      </div>
+
+      <!-- РИС. 3: ІНТЕРАКТИВНА КООРДИНАТНА ПЛОЩИНА + СИМУЛЯЦІЯ МАРШРУТУ РІВНЯ 2 -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-motion);"></span>
+            Рис. 3. Координатна площина сцени Scratch (480 × 360) із маршрутом Рівня 2
+          </span>
+          <span class="sim-readout no-print" id="coordReadout">
+            <span>Наведіть мишу:</span>
+            <strong class="mono" id="liveCoords" style="color:#1D4ED8;">X: 0, Y: 0</strong>
+            <span id="liveQuad" style="color:#059669;">(Центр)</span>
+          </span>
+        </figcaption>
+
+        <div class="diagram-svg-wrap">
+          <!-- Область сцени: x від 80 до 560 (ширина 480 => 1px = 1 од.), y від 35 до 395 (висота 360 => 1px = 1 од.), центр (320, 215) -->
+          <svg id="coordStageSvg" viewBox="0 0 640 430" width="640" height="430" style="cursor:crosshair;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Координатна площина сцени Scratch 480 на 360 з чотирма чвертями та маршрутом прямокутника">
+            <defs>
+              <marker id="arr-route" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#7C3AED"/>
+              </marker>
+              <marker id="arr-x" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+              </marker>
+              <marker id="arr-y" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+              </marker>
+            </defs>
+
+            <!-- М'яке підсвічування 4 чвертей -->
+            <rect x="320" y="35" width="240" height="180" fill="#EFF6FF"/> <!-- I чверть -->
+            <rect x="80" y="35" width="240" height="180" fill="#F0FDF4"/>  <!-- II чверть -->
+            <rect x="80" y="215" width="240" height="180" fill="#FFFBEB"/> <!-- III чверть -->
+            <rect x="320" y="215" width="240" height="180" fill="#FAF5FF"/><!-- IV чверть -->
+
+            <!-- Рамка сцени -->
+            <rect x="80" y="35" width="480" height="360" rx="8" fill="none" stroke="#3B82F6" stroke-width="2.2"/>
+
+            <!-- Допоміжна сітка через 100 од. -->
+            <g stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4">
+              <line x1="120" y1="35" x2="120" y2="395"/>
+              <line x1="220" y1="35" x2="220" y2="395"/>
+              <line x1="420" y1="35" x2="420" y2="395"/>
+              <line x1="520" y1="35" x2="520" y2="395"/>
+              <line x1="80" y1="115" x2="560" y2="115"/>
+              <line x1="80" y1="315" x2="560" y2="315"/>
+            </g>
+
+            <!-- Підписи чвертей -->
+            <g font-family="Inter, sans-serif" font-weight="800" text-anchor="middle">
+              <text x="440" y="68" font-size="12.5" fill="#1D4ED8">I чверть</text>
+              <text x="440" y="84" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#3B82F6">(x &gt; 0; y &gt; 0)</text>
+
+              <text x="200" y="68" font-size="12.5" fill="#047857">II чверть</text>
+              <text x="200" y="84" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#10B981">(x &lt; 0; y &gt; 0)</text>
+
+              <text x="200" y="362" font-size="12.5" fill="#B45309">III чверть</text>
+              <text x="200" y="378" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#D97706">(x &lt; 0; y &lt; 0)</text>
+
+              <text x="440" y="362" font-size="12.5" fill="#6D28D9">IV чверть</text>
+              <text x="440" y="378" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B5CF6">(x &gt; 0; y &lt; 0)</text>
+            </g>
+
+            <!-- Осі X та Y -->
+            <line x1="68" y1="215" x2="574" y2="215" stroke="#2563EB" stroke-width="2.2" marker-end="url(#arr-x)"/>
+            <line x1="320" y1="406" x2="320" y2="22" stroke="#059669" stroke-width="2.2" marker-end="url(#arr-y)"/>
+
+            <text x="586" y="220" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#2563EB">X</text>
+            <text x="303" y="23" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#059669">Y</text>
+
+            <!-- Крайні точки сцени -->
+            <circle cx="80" cy="215" r="4.5" fill="#2563EB"/>
+            <text x="72" y="236" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#1D4ED8">(-240; 0)</text>
+
+            <circle cx="560" cy="215" r="4.5" fill="#2563EB"/>
+            <text x="568" y="236" text-anchor="start" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#1D4ED8">(240; 0)</text>
+
+            <circle cx="320" cy="35" r="4.5" fill="#059669"/>
+            <text x="330" y="28" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#047857">(0; 180)</text>
+
+            <circle cx="320" cy="395" r="4.5" fill="#059669"/>
+            <text x="330" y="416" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#047857">(0; -180)</text>
+
+            <!-- Маршрут прямокутника (Рівень 2):
+                 Центр (320,215) -> I (470,115) -> II (170,115) -> III (170,315) -> IV (470,315) -> Центр (320,215) -->
+            <g fill="none" stroke="#7C3AED" stroke-width="2.2" stroke-dasharray="6 4">
+              <line x1="320" y1="215" x2="463" y2="120" marker-end="url(#arr-route)"/>
+              <line x1="470" y1="115" x2="180" y2="115" marker-end="url(#arr-route)"/>
+              <line x1="170" y1="115" x2="170" y2="305" marker-end="url(#arr-route)"/>
+              <line x1="170" y1="315" x2="460" y2="315" marker-end="url(#arr-route)"/>
+              <line x1="470" y1="315" x2="328" y2="220" marker-end="url(#arr-route)"/>
+            </g>
+
+            <!-- Вершини маршруту (підсвічуються під час симуляції) -->
+            <g id="wp-0">
+              <circle cx="320" cy="215" r="6" fill="#DC2626" stroke="#FFFFFF" stroke-width="2"/>
+              <rect x="328" y="191" width="54" height="18" rx="4" fill="#FFFFFF" fill-opacity="0.92" stroke="#FCA5A5"/>
+              <text x="355" y="204" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" fill="#B91C1C">(0; 0)</text>
+            </g>
+
+            <g id="wp-1">
+              <circle cx="470" cy="115" r="6.5" fill="#7C3AED" stroke="#FFFFFF" stroke-width="2"/>
+              <rect x="434" y="90" width="78" height="18" rx="4" fill="#FFFFFF" fill-opacity="0.94" stroke="#C4B5FD"/>
+              <text x="473" y="103" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#5B21B6">(150; 100)</text>
+            </g>
+
+            <g id="wp-2">
+              <circle cx="170" cy="115" r="6.5" fill="#7C3AED" stroke="#FFFFFF" stroke-width="2"/>
+              <rect x="128" y="90" width="84" height="18" rx="4" fill="#FFFFFF" fill-opacity="0.94" stroke="#C4B5FD"/>
+              <text x="170" y="103" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#5B21B6">(-150; 100)</text>
+            </g>
+
+            <g id="wp-3">
+              <circle cx="170" cy="315" r="6.5" fill="#7C3AED" stroke="#FFFFFF" stroke-width="2"/>
+              <rect x="124" y="325" width="90" height="18" rx="4" fill="#FFFFFF" fill-opacity="0.94" stroke="#C4B5FD"/>
+              <text x="169" y="338" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#5B21B6">(-150; -100)</text>
+            </g>
+
+            <g id="wp-4">
+              <circle cx="470" cy="315" r="6.5" fill="#7C3AED" stroke="#FFFFFF" stroke-width="2"/>
+              <rect x="428" y="325" width="86" height="18" rx="4" fill="#FFFFFF" fill-opacity="0.94" stroke="#C4B5FD"/>
+              <text x="471" y="338" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#5B21B6">(150; -100)</text>
+            </g>
+
+            <!-- Анімований спрайт-жук (Beetle) -->
+            <g id="simBeetle" transform="translate(320, 215)">
+              <ellipse cx="0" cy="0" rx="13" ry="10" fill="#EF4444" stroke="#1E293B" stroke-width="1.6"/>
+              <circle cx="10" cy="0" r="5.5" fill="#1E293B"/>
+              <line x1="-13" y1="0" x2="6" y2="0" stroke="#1E293B" stroke-width="1.4"/>
+              <circle cx="-4" cy="-4" r="2" fill="#1E293B"/>
+              <circle cx="-4" cy="4" r="2" fill="#1E293B"/>
+              <circle cx="2" cy="-3.5" r="1.8" fill="#1E293B"/>
+              <circle cx="2" cy="3.5" r="1.8" fill="#1E293B"/>
+              <!-- Вусики -->
+              <path d="M 14 -3 Q 19 -7 21 -5" fill="none" stroke="#1E293B" stroke-width="1.3"/>
+              <path d="M 14 3 Q 19 7 21 5" fill="none" stroke="#1E293B" stroke-width="1.3"/>
+            </g>
+
+            <!-- Інтерактивний маркер курсора -->
+            <circle id="mouseDot" cx="320" cy="215" r="4" fill="#10B981" stroke="#FFFFFF" stroke-width="1.5" style="display:none; pointer-events:none;"/>
+          </svg>
+        </div>
+
+        <div class="sim-toolbar no-print">
+          <button type="button" class="btn-sim" id="btnRunSim">
+            <span>▶</span> Запустити симуляцію маршруту (Рівень 2)
+          </button>
+          <span id="simStatus" style="font-size:0.84rem; font-weight:600; color:#475569;">
+            Статус: спрайт Beetle у центрі <span class="mono">(0; 0)</span>
+          </span>
+        </div>
+      </figure>
+
+      <!-- Підрозділ 1.5 -->
+      <h3><span class="sub-pill">1.5</span> Основні блоки переміщення за координатами</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:36%;">Блок команди (Scratch 3.0)</th>
+              <th style="width:34%;">Призначення</th>
+              <th style="width:30%;">Приклад використання</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-notch sb-motion">перемістити в x: <span class="sb-input">0</span> y: <span class="sb-input">0</span></div>
+                </div>
+              </td>
+              <td>Миттєво встановлює спрайт у задану точку сцени.</td>
+              <td>Початкова позиція персонажа при старті проєкту.</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">120</span> y: <span class="sb-input">90</span></div>
+                </div>
+              </td>
+              <td>Плавно переміщує спрайт до вказаних координат за заданий час.</td>
+              <td>Плавний рух героя по маршруту без ривків.</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-notch sb-motion">змінити x на <span class="sb-input">50</span></div>
+                </div>
+              </td>
+              <td>Зсуває спрайт горизонтально праворуч (<span class="mono">+</span>) або ліворуч (<span class="mono">-</span>).</td>
+              <td>Кроковий рух по прямій лінії.</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-notch sb-motion">змінити y на <span class="sb-input">-40</span></div>
+                </div>
+              </td>
+              <td>Зсуває спрайт вертикально вгору (<span class="mono">+</span>) або вниз (<span class="mono">-</span>).</td>
+              <td>Стрибок вгору або спуск вниз.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">💡 Чим відрізняється абсолютне позиціонування від відносного?</div>
+        <p><strong>Абсолютне позиціонування</strong> (<span class="mono">перемістити в x: ... y: ...</span>, <span class="mono">ковзати ... сек до x: ... y: ...</span>) переносить спрайт у <em>точну адресу на сцені</em> незалежно від того, де він був раніше. <strong>Відносне позиціонування</strong> (<span class="mono">змінити x на ...</span>, <span class="mono">змінити y на ...</span>) додає або віднімає вказану кількість кроків від <em>поточних</em> координат спрайта.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 2. ПОКРОКОВИЙ АЛГОРИТМ ВИКОНАННЯ РІЗНОРІВНЕВИХ ЗАВДАНЬ
+         ====================================================================== -->
+    <section id="sec-levels" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-looks);">2</span>
+        <h2>Покроковий алгоритм виконання різнорівневих завдань</h2>
+      </div>
+
+      <!-- РИС. 4: Сходинкова інфографіка розподілу балів -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-looks);"></span>
+            Рис. 4. Розподіл завдань за рівнями складності (максимум — 13 балів)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 900 142" width="900" height="142" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Сходинкова інфографіка рівнів складності та розподілу 13 балів">
+            <!-- Рівень 1 -->
+            <rect x="6" y="42" width="174" height="92" rx="12" fill="#ECFDF5" stroke="#10B981" stroke-width="1.8"/>
+            <text x="93" y="65" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#065F46">Рівень 1</text>
+            <text x="93" y="83" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#047857">Репродуктивний</text>
+            <rect x="48" y="96" width="90" height="24" rx="12" fill="#10B981"/>
+            <text x="93" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">до 4 балів</text>
+
+            <path d="M 184 88 L 200 88" stroke="#64748B" stroke-width="2"/><polygon points="200,83 208,88 200,93" fill="#64748B"/>
+
+            <!-- Рівень 2 -->
+            <rect x="210" y="30" width="174" height="104" rx="12" fill="#EFF6FF" stroke="#4C97FF" stroke-width="1.8"/>
+            <text x="297" y="56" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#1E40AF">Рівень 2</text>
+            <text x="297" y="75" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1D4ED8">Продуктивний</text>
+            <rect x="252" y="96" width="90" height="24" rx="12" fill="#4C97FF"/>
+            <text x="297" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">до 5 балів</text>
+
+            <path d="M 388 82 L 404 82" stroke="#64748B" stroke-width="2"/><polygon points="404,77 412,82 404,87" fill="#64748B"/>
+
+            <!-- Рівень 3 -->
+            <rect x="414" y="18" width="174" height="116" rx="12" fill="#F5F3FF" stroke="#9966FF" stroke-width="1.8"/>
+            <text x="501" y="48" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#5B21B6">Рівень 3</text>
+            <text x="501" y="68" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#6D28D9">Творчий</text>
+            <rect x="456" y="96" width="90" height="24" rx="12" fill="#9966FF"/>
+            <text x="501" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">до 3 балів</text>
+
+            <path d="M 592 76 L 608 76" stroke="#64748B" stroke-width="2"/><polygon points="608,71 616,76 608,81" fill="#64748B"/>
+
+            <!-- Культура роботи -->
+            <rect x="618" y="28" width="134" height="106" rx="12" fill="#FFFBEB" stroke="#FFAB19" stroke-width="1.8"/>
+            <text x="685" y="54" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#92400E">Культура</text>
+            <text x="685" y="71" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#B45309">роботи</text>
+            <rect x="646" y="96" width="78" height="24" rx="12" fill="#FFAB19"/>
+            <text x="685" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">1 бал</text>
+
+            <text x="767" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#475569">=</text>
+
+            <!-- Разом -->
+            <rect x="782" y="12" width="112" height="122" rx="14" fill="#0F172A"/>
+            <text x="838" y="46" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#94A3B8">РАЗОМ</text>
+            <text x="838" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">13</text>
+            <text x="838" y="114" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#38BDF8">балів</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- ================= РІВЕНЬ 1 ================= -->
+      <div class="level-banner lvl1">
+        <div class="level-title">Рівень 1. Репродуктивний</div>
+        <span class="level-points" style="background: var(--sc-green);">≈ 7 хв • до 4 балів</span>
+      </div>
+      <p><strong>Мета рівня:</strong> ознайомитися з інтерфейсом, підготувати робоче середовище, додати ресурси з бібліотек та зберегти базовий файл проєкту.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:9%;">Крок</th>
+              <th style="width:52%;">Дія студента</th>
+              <th style="width:39%;">Очікуваний результат</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge lvl1">1</span></td>
+              <td>Відкрийте середовище Scratch 3.0 та перевірте український інтерфейс (🌐 іконка глобуса → <strong>Українська</strong>).</td>
+              <td>Усі категорії блоків і меню відображаються українською мовою.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl1">2</span></td>
+              <td>Видаліть стандартного спрайта (Рудого Кота) натисканням на значок кошика 🗑️ на панелі спрайтів.</td>
+              <td>Сцена очищена від початкового персонажа.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl1">3</span></td>
+              <td>У бібліотеці тла оберіть координатну сітку <strong class="mono">Xy-grid</strong>.</td>
+              <td>На сцені відображаються осі X, Y та координатні позначки.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl1">4</span></td>
+              <td>У бібліотеці спрайтів додайте будь-якого персонажа (наприклад, <strong>Beetle</strong> або <strong>Cat Flying</strong>) та встановіть <strong>Розмір: 70</strong>.</td>
+              <td>Спрайт з'явився на сцені у зручному масштабі.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl1">5</span></td>
+              <td>Збережіть проєкт на комп'ютер під назвою <strong class="mono">PR10_Prizvyshche.sb3</strong>.</td>
+              <td>Файл проєкту збережено у робочій папці.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ================= РІВЕНЬ 2 ================= -->
+      <div class="level-banner lvl2">
+        <div class="level-title">Рівень 2. Продуктивний</div>
+        <span class="level-points" style="background: var(--sc-motion);">≈ 10 хв • до 5 балів</span>
+      </div>
+      <p><strong>Мета рівня:</strong> створити алгоритм точного переміщення спрайта по чотирьох чвертях координатної площини з використанням блоків руху, подій та звуку.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:8%;">Крок</th>
+              <th style="width:44%;">Дія студента</th>
+              <th style="width:48%;">Блоки / параметри</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge lvl2">1</span></td>
+              <td>Додайте точку старту алгоритму при натисканні на зелений прапорець і поверніть спрайт у центр сцени.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+                  <div class="sb-block sb-cmd sb-notch sb-motion">перемістити в x: <span class="sb-input">0</span> y: <span class="sb-input">0</span></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl2">2</span></td>
+              <td>Запрограмуйте плавний рух у I чверть, потім у II, III та IV чверті координатної площини.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">150</span> y: <span class="sb-input">100</span></div>
+                  <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">-150</span> y: <span class="sb-input">100</span></div>
+                  <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">-150</span> y: <span class="sb-input">-100</span></div>
+                  <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">150</span> y: <span class="sb-input">-100</span></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl2">3</span></td>
+              <td>Поверніть спрайт у центр сцени та додайте коротку паузу між точками для наочності.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-notch sb-control">чекати <span class="sb-input">0.5</span> секунд</div>
+                  <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">0</span> y: <span class="sb-input">0</span></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl2">4</span></td>
+              <td>Перейдіть на вкладку «Звуки», додайте звук із бібліотеки та відтворіть його після завершення маршруту.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-sound">відтворити звук <span class="sb-dropdown">Pop</span> до кінця</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl2">5</span></td>
+              <td>Запустіть скрипт, перевірте точність проходження вершин прямокутника та оновіть збережений файл.</td>
+              <td><strong>Файл → Вивантажити на ваш комп'ютер</strong> (<span class="mono">PR10_Prizvyshche.sb3</span>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Готовий зібраний скрипт для Рівня 2 -->
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#EFF6FF; color:#1D4ED8;">🧩</span>
+          Готовий зібраний скрипт для Рівня 2 (із паузами між усіма вершинами)
+        </div>
+        <div class="script-layout">
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">перемістити в x: <span class="sb-input">0</span> y: <span class="sb-input">0</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">150</span> y: <span class="sb-input">100</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-control">чекати <span class="sb-input">0.5</span> секунд</div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">-150</span> y: <span class="sb-input">100</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-control">чекати <span class="sb-input">0.5</span> секунд</div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">-150</span> y: <span class="sb-input">-100</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-control">чекати <span class="sb-input">0.5</span> секунд</div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">150</span> y: <span class="sb-input">-100</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-control">чекати <span class="sb-input">0.5</span> секунд</div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1</span> сек до x: <span class="sb-input">0</span> y: <span class="sb-input">0</span></div>
+              <div class="sb-block sb-cmd sb-sound">відтворити звук <span class="sb-dropdown">Pop</span> до кінця</div>
+            </div>
+          </div>
+
+          <div class="comment-list">
+            <div class="comment-item"><strong>Старт у центрі (0; 0):</strong> гарантує, що кожного разу маршрут починається з однакової початкової точки.</div>
+            <div class="comment-item"><strong>I чверть (150; 100):</strong> обидві координати додатні — верхній правий кут прямокутника.</div>
+            <div class="comment-item"><strong>II чверть (-150; 100):</strong> X стає від'ємним, Y залишається 100 — горизонтальний рух ліворуч.</div>
+            <div class="comment-item"><strong>III чверть (-150; -100):</strong> обидві координати від'ємні — вертикальний рух вниз.</div>
+            <div class="comment-item"><strong>IV чверть (150; -100):</strong> X знову додатний — завершення нижньої сторони прямокутника.</div>
+            <div class="comment-item" style="border-left-color: var(--sc-sound);"><strong>Фініш та звук:</strong> плавне повернення у <span class="mono">(0; 0)</span> та звуковий сигнал <span class="mono">Pop</span> про успішне виконання маршруту.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= РІВЕНЬ 3 ================= -->
+      <div class="level-banner lvl3">
+        <div class="level-title">Рівень 3. Творчий — Власна інтерактивна мінісцена</div>
+        <span class="level-points" style="background: var(--sc-looks);">≈ 10 хв • до 3 балів</span>
+      </div>
+      <p>Створіть власну інтерактивну мінісцену для уроку інформатики в початковій школі (наприклад, <strong>«Зустріч друзів у парку»</strong> або <strong>«Космічна подорож»</strong>), продемонструвавши охайну організацію робочого простору та точне позиціонування об'єктів.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:28%;">Вимога до мінісцени</th>
+              <th style="width:72%;">Конкретний зміст виконання</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Тематичне тло</strong></td>
+              <td>Замініть координатну сітку на сюжетне тло з бібліотеки (або додайте перемикання тла).</td>
+            </tr>
+            <tr>
+              <td><strong>Два спрайти</strong></td>
+              <td>Додайте другого персонажа, задайте обом різні стартові координати (ліва та права частини сцени).</td>
+            </tr>
+            <tr>
+              <td><strong>Рух за координатами</strong></td>
+              <td>Організуйте плавне зближення спрайтів до заданих точок зустрічі без накладання один на одного.</td>
+            </tr>
+            <tr>
+              <td><strong>Мультимедійний супровід</strong></td>
+              <td>Додайте короткі репліки (блок «говорити ... 2 сек») та щонайменше один звук із бібліотеки.</td>
+            </tr>
+            <tr>
+              <td><strong>Акуратність проєкту</strong></td>
+              <td>Перейменуйте спрайти зрозумілими назвами, вирівняйте блоки в області скриптів, збережіть фінальний файл <span class="mono">.sb3</span>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- РОЗШИРЕНИЙ ПРИКЛАД РЕАЛІЗАЦІЇ «ЗУСТРІЧ ДРУЗІВ У ПАРКУ» -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-green);"></span>
+            Приклад реалізації Рівня 3: мінісцена «Зустріч друзів у парку» (координати та дистанція)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 760 275" width="760" height="275" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема мінісцени Зустріч друзів у парку з координатами спрайтів та діалогом">
+            <defs>
+              <marker id="arr-p1" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#9966FF"/>
+              </marker>
+              <marker id="arr-p2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+              </marker>
+            </defs>
+
+            <!-- Фон парку -->
+            <rect x="6" y="6" width="748" height="263" rx="14" fill="#E0F2FE" stroke="#93C5FD" stroke-width="1.8"/>
+            <!-- Сонце та хмаринка -->
+            <circle cx="690" cy="48" r="22" fill="#FDE047"/>
+            <ellipse cx="145" cy="44" rx="34" ry="14" fill="#FFFFFF" opacity="0.9"/>
+            <ellipse cx="170" cy="48" rx="26" ry="12" fill="#FFFFFF" opacity="0.9"/>
+            <!-- Газон та доріжка -->
+            <rect x="6" y="156" width="748" height="113" rx="0" fill="#BBF7D0"/>
+            <rect x="6" y="182" width="748" height="58" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1.2"/>
+            <!-- Дерева -->
+            <rect x="62" y="106" width="12" height="54" fill="#92400E"/>
+            <circle cx="68" cy="96" r="26" fill="#22C55E"/>
+            <rect x="678" y="106" width="12" height="54" fill="#92400E"/>
+            <circle cx="684" cy="96" r="26" fill="#22C55E"/>
+
+            <!-- Стартові силуети (напівпрозорі) -->
+            <!-- Старт 1: x=-170 => svg x=130 -->
+            <circle cx="130" cy="184" r="14" fill="#9966FF" opacity="0.28" stroke="#7C3AED" stroke-dasharray="3 2"/>
+            <rect x="74" y="218" width="112" height="20" rx="5" fill="#FFFFFF" stroke="#C4B5FD"/>
+            <text x="130" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#6D28D9">Старт (-170; -60)</text>
+
+            <!-- Старт 2: x=170 => svg x=630 -->
+            <circle cx="630" cy="184" r="14" fill="#4C97FF" opacity="0.28" stroke="#2563EB" stroke-dasharray="3 2"/>
+            <rect x="578" y="218" width="104" height="20" rx="5" fill="#FFFFFF" stroke="#93C5FD"/>
+            <text x="630" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#1D4ED8">Старт (170; -60)</text>
+
+            <!-- Стрілки зближення -->
+            <line x1="150" y1="184" x2="274" y2="184" stroke="#9966FF" stroke-width="2.8" stroke-dasharray="6 4" marker-end="url(#arr-p1)"/>
+            <line x1="610" y1="184" x2="486" y2="184" stroke="#2563EB" stroke-width="2.8" stroke-dasharray="6 4" marker-end="url(#arr-p2)"/>
+
+            <!-- Спрайт 1 у точці зустрічі (-50; -60) => svg x=305 -->
+            <g transform="translate(305, 176)">
+              <rect x="-12" y="0" width="24" height="28" rx="8" fill="#9966FF" stroke="#5B21B6" stroke-width="1.5"/>
+              <circle cx="0" cy="-12" r="12" fill="#FDE68A" stroke="#5B21B6" stroke-width="1.5"/>
+              <circle cx="4" cy="-13" r="1.8" fill="#1E293B"/>
+            </g>
+            <rect x="255" y="218" width="100" height="20" rx="5" fill="#F5F3FF" stroke="#9966FF"/>
+            <text x="305" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" fill="#5B21B6">(-50; -60)</text>
+
+            <!-- Спрайт 2 у точці зустрічі (50; -60) => svg x=455 -->
+            <g transform="translate(455, 176)">
+              <rect x="-12" y="0" width="24" height="28" rx="8" fill="#4C97FF" stroke="#1E40AF" stroke-width="1.5"/>
+              <circle cx="0" cy="-12" r="12" fill="#FED7AA" stroke="#1E40AF" stroke-width="1.5"/>
+              <circle cx="-4" cy="-13" r="1.8" fill="#1E293B"/>
+            </g>
+            <rect x="408" y="218" width="94" height="20" rx="5" fill="#EFF6FF" stroke="#4C97FF"/>
+            <text x="455" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" fill="#1E40AF">(50; -60)</text>
+
+            <!-- Безпечна дистанція 100 од. -->
+            <line x1="322" y1="252" x2="438" y2="252" stroke="#059669" stroke-width="2"/>
+            <line x1="322" y1="247" x2="322" y2="257" stroke="#059669" stroke-width="2"/>
+            <line x1="438" y1="247" x2="438" y2="257" stroke="#059669" stroke-width="2"/>
+            <text x="380" y="264" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" fill="#065F46">Безпечна дистанція: 100 од. (без накладання)</text>
+
+            <!-- Хмаринки діалогу -->
+            <rect x="172" y="76" width="168" height="44" rx="12" fill="#FFFFFF" stroke="#9966FF" stroke-width="1.6"/>
+            <text x="256" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#5B21B6">Дівчинка_Оля:</text>
+            <text x="256" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">«Привіт! Підемо гуляти?»</text>
+
+            <rect x="422" y="76" width="176" height="44" rx="12" fill="#FFFFFF" stroke="#4C97FF" stroke-width="1.6"/>
+            <text x="510" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1E40AF">Хлопчик_Максим:</text>
+            <text x="510" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#334155">«Привіт! Із задоволенням!»</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- Два паралельні скрипти для Рівня 3 -->
+      <div class="two-col">
+        <div class="card" style="margin-bottom:0; border-top:4px solid var(--sc-looks);">
+          <div class="card-title">Спрайт 1: <span style="color:#6D28D9;">Дівчинка_Оля</span></div>
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-looks">змінити тло на <span class="sb-dropdown">Park</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">перемістити в x: <span class="sb-input">-170</span> y: <span class="sb-input">-60</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1.5</span> сек до x: <span class="sb-input">-50</span> y: <span class="sb-input">-60</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-looks">говорити <span class="sb-input">Привіт! Підемо гуляти?</span> <span class="sb-input">2</span> сек</div>
+              <div class="sb-block sb-cmd sb-notch sb-control">чекати <span class="sb-input">2</span> секунд</div>
+              <div class="sb-block sb-cmd sb-sound">відтворити звук <span class="sb-dropdown">Cheer</span> до кінця</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:0; border-top:4px solid var(--sc-motion);">
+          <div class="card-title">Спрайт 2: <span style="color:#1D4ED8;">Хлопчик_Максим</span></div>
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">перемістити в x: <span class="sb-input">170</span> y: <span class="sb-input">-60</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">ковзати <span class="sb-input">1.5</span> сек до x: <span class="sb-input">50</span> y: <span class="sb-input">-60</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-control">чекати <span class="sb-input">2</span> секунд</div>
+              <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-input">Привіт! Із задоволенням!</span> <span class="sb-input">2</span> сек</div>
+            </div>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-top:10px;">
+            <strong>Синхронізація діалогу:</strong> поки Оля говорить перші 2 секунди, Максим виконує <span class="mono">чекати 2 секунд</span>, щоб репліки не накладались одночасно.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 3. КРИТЕРІЇ ОЦІНЮВАННЯ ТА ФОРМА ЗВІТНОСТІ
+         ====================================================================== -->
+    <section id="sec-eval" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-green);">3</span>
+        <h2>Критерії оцінювання та форма звітності</h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:27%;">Компонент оцінювання</th>
+              <th style="width:59%;">Показники якості виконання</th>
+              <th style="width:14%; text-align:center;">Макс. балів</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Рівень 1 (репродуктивний)</strong></td>
+              <td>Коректне налаштування інтерфейсу, додавання тла <span class="mono">Xy-grid</span> і спрайта, правильне збереження файлу <span class="mono">.sb3</span>.</td>
+              <td style="text-align:center; font-weight:800; color:#059669;">4</td>
+            </tr>
+            <tr>
+              <td><strong>Рівень 2 (продуктивний)</strong></td>
+              <td>Точне проходження всіх 4 координатних чвертей, повернення в центр <span class="mono">(0; 0)</span>, коректне використання пауз і звуку.</td>
+              <td style="text-align:center; font-weight:800; color:#1D4ED8;">5</td>
+            </tr>
+            <tr>
+              <td><strong>Рівень 3 (творчий)</strong></td>
+              <td>Оригінальна мінісцена з 2 спрайтами, тематичним тлом, узгодженим рухом за координатами та звуковим супроводом.</td>
+              <td style="text-align:center; font-weight:800; color:#6D28D9;">3</td>
+            </tr>
+            <tr>
+              <td><strong>Культура роботи з проєктом</strong></td>
+              <td>Охайна структура скриптів, зрозуміле іменування файлу та спрайтів, своєчасне оформлення звіту.</td>
+              <td style="text-align:center; font-weight:800; color:#B45309;">1</td>
+            </tr>
+            <tr style="background:#EFF6FF;">
+              <td><strong>Разом</strong></td>
+              <td><strong>Максимальна сума балів за практичне заняття</strong></td>
+              <td style="text-align:center; font-size:1.05rem; font-weight:800; color:#0F172A;">13</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Візуальна шкала розподілу балів -->
+      <div class="score-bar-wrap">
+        <div style="font-size:0.86rem; font-weight:800; color:var(--text-main);">Візуальна структура оцінки (13 балів = 100%)</div>
+        <div class="score-bar" role="img" aria-label="Шкала розподілу 13 балів: 4 бали Рівень 1, 5 балів Рівень 2, 3 бали Рівень 3, 1 бал Культура роботи">
+          <div class="score-seg" style="width:30.77%; background:#10B981;">4 б. (31%)</div>
+          <div class="score-seg" style="width:38.46%; background:#4C97FF;">5 б. (38%)</div>
+          <div class="score-seg" style="width:23.08%; background:#9966FF;">3 б. (23%)</div>
+          <div class="score-seg" style="width:7.69%; background:#FFAB19;">1 б.</div>
+        </div>
+        <div class="score-legend">
+          <span><i class="swatch" style="background:#10B981;"></i>Рівень 1 (4 б.)</span>
+          <span><i class="swatch" style="background:#4C97FF;"></i>Рівень 2 (5 б.)</span>
+          <span><i class="swatch" style="background:#9966FF;"></i>Рівень 3 (3 б.)</span>
+          <span><i class="swatch" style="background:#FFAB19;"></i>Культура роботи (1 б.)</span>
+        </div>
+      </div>
+
+      <!-- Форма звітності -->
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">
+          <span class="card-icon" style="background:#ECFDF5; color:#059669;">📋</span>
+          Форма звітності (що подати викладачеві для зарахування)
+        </div>
+        <ul class="checklist">
+          <li>
+            <span class="chk-box"></span>
+            <span><strong>Файл виконаного проєкту</strong> у форматі <strong class="mono">PR10_Prizvyshche.sb3</strong>.</span>
+          </li>
+          <li>
+            <span class="chk-box"></span>
+            <span><strong>Короткий електронний звіт</strong> (1–2 сторінки) зі скриншотом фінальної сцени та зібраних скриптів для кожного спрайта.</span>
+          </li>
+          <li>
+            <span class="chk-box"></span>
+            <span><strong>Письмовий висновок</strong> (3–4 речення) про те, як наочність координатної сітки Scratch допомагає пояснювати поняття позиціонування учням початкової школи.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Орієнтовна структура письмового висновку -->
+      <div class="callout purple">
+        <div class="callout-title">✍️ Орієнтовна структура письмового висновку (підказка для студента)</div>
+        <ol class="clean-list" style="margin-top:6px;">
+          <li><strong>Візуалізація абстрактних чисел:</strong> сітка <span class="mono">Xy-grid</span> перетворює незрозумілі для молодших школярів числа (включно з від'ємними) на конкретні точки на екрані.</li>
+          <li><strong>Миттєвий зворотний зв'язок:</strong> змінюючи X або Y, учень одразу бачить, куди саме перемістився персонаж (вліво/вправо чи вгору/вниз).</li>
+          <li><strong>Ігровий контекст:</strong> завдання з маршрутами та зустріччю героїв формують просторове мислення природно, без механічного заучування правил.</li>
+          <li><strong>Пропедевтика математики:</strong> робота зі сценою Scratch створює міцну базу для майбутнього вивчення прямокутної системи координат у старших класах.</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <span>Практичне заняття №10 • Інформатика • Середовище Scratch 3.0</span>
+      <span>Оптимізовано для роботи на екрані та друку на аркушах A4</span>
+    </footer>
+  </main>
+
+  <!-- ========================================================================
+       ІНТЕРАКТИВНИЙ СКРИПТ ДЛЯ КООРДИНАТНОЇ ПЛОЩИНИ ТА СИМУЛЯЦІЇ МАРШРУТУ
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      const svg = document.getElementById('coordStageSvg');
+      const liveCoords = document.getElementById('liveCoords');
+      const liveQuad = document.getElementById('liveQuad');
+      const mouseDot = document.getElementById('mouseDot');
+      const beetle = document.getElementById('simBeetle');
+      const btnRun = document.getElementById('btnRunSim');
+      const simStatus = document.getElementById('simStatus');
+
+      if (!svg) return;
+
+      // Центр сцени всередині SVG: (320, 215), 1px = 1 умовна одиниця Scratch
+      const CX = 320;
+      const CY = 215;
+
+      function getQuadrantLabel(x, y) {
+        if (x === 0 && y === 0) return '(Центр)';
+        if (x === 0) return '(Вісь Y)';
+        if (y === 0) return '(Вісь X)';
+        if (x > 0 && y > 0) return '(I чверть)';
+        if (x < 0 && y > 0) return '(II чверть)';
+        if (x < 0 && y < 0) return '(III чверть)';
+        return '(IV чверть)';
+      }
+
+      // 1. Відстеження координат при наведенні миші / дотику
+      function handlePointer(clientX, clientY) {
+        try {
+          const pt = svg.createSVGPoint();
+          pt.x = clientX;
+          pt.y = clientY;
+          const loc = pt.matrixTransform(svg.getScreenCTM().inverse());
+
+          if (loc.x >= 80 && loc.x <= 560 && loc.y >= 35 && loc.y <= 395) {
+            const sx = Math.round(loc.x - CX);
+            const sy = Math.round(CY - loc.y);
+            if (liveCoords) liveCoords.textContent = `X: ${sx}, Y: ${sy}`;
+            if (liveQuad) liveQuad.textContent = getQuadrantLabel(sx, sy);
+            if (mouseDot) {
+              mouseDot.style.display = 'block';
+              mouseDot.setAttribute('cx', loc.x.toFixed(1));
+              mouseDot.setAttribute('cy', loc.y.toFixed(1));
+            }
+          } else if (mouseDot) {
+            mouseDot.style.display = 'none';
+          }
+        } catch (err) {
+          // Безпечне ігнорування, якщо CTM тимчасово недоступна
+        }
+      }
+
+      svg.addEventListener('mousemove', (e) => handlePointer(e.clientX, e.clientY));
+      svg.addEventListener('mouseleave', () => {
+        if (liveCoords) liveCoords.textContent = 'X: 0, Y: 0';
+        if (liveQuad) liveQuad.textContent = '(Центр)';
+        if (mouseDot) mouseDot.style.display = 'none';
+      });
+      svg.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          handlePointer(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      // 2. Анімація маршруту Рівня 2
+      const waypoints = [
+        { x: 0, y: 0, id: 'wp-0', label: 'Центр (0; 0)' },
+        { x: 150, y: 100, id: 'wp-1', label: 'I чверть (150; 100)' },
+        { x: -150, y: 100, id: 'wp-2', label: 'II чверть (-150; 100)' },
+        { x: -150, y: -100, id: 'wp-3', label: 'III чверть (-150; -100)' },
+        { x: 150, y: -100, id: 'wp-4', label: 'IV чверть (150; -100)' },
+        { x: 0, y: 0, id: 'wp-0', label: 'Фініш у центрі (0; 0) • Звук Pop!' }
+      ];
+
+      function highlightWaypoint(activeId) {
+        ['wp-0', 'wp-1', 'wp-2', 'wp-3', 'wp-4'].forEach((id) => {
+          const g = document.getElementById(id);
+          if (!g) return;
+          const circle = g.querySelector('circle');
+          if (!circle) return;
+          if (id === activeId) {
+            circle.setAttribute('r', '9.5');
+            circle.setAttribute('fill', '#10B981');
+          } else {
+            circle.setAttribute('r', id === 'wp-0' ? '6' : '6.5');
+            circle.setAttribute('fill', id === 'wp-0' ? '#DC2626' : '#7C3AED');
+          }
+        });
+      }
+
+      let isAnimating = false;
+
+      function glideSegment(fromPt, toPt, durationMs, onDone) {
+        const start = performance.now();
+        const x1 = CX + fromPt.x;
+        const y1 = CY - fromPt.y;
+        const x2 = CX + toPt.x;
+        const y2 = CY - toPt.y;
+        const angleDeg = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+
+        function frame(now) {
+          const t = Math.min(1, (now - start) / durationMs);
+          const curX = x1 + (x2 - x1) * t;
+          const curY = y1 + (y2 - y1) * t;
+          if (beetle) {
+            beetle.setAttribute('transform', `translate(${curX.toFixed(1)}, ${curY.toFixed(1)}) rotate(${angleDeg.toFixed(1)})`);
+          }
+          if (t < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            onDone();
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+
+      function runSimulation() {
+        if (isAnimating || !beetle) return;
+        isAnimating = true;
+        if (btnRun) btnRun.disabled = true;
+
+        let step = 0;
+        highlightWaypoint('wp-0');
+
+        function nextLeg() {
+          if (step >= waypoints.length - 1) {
+            isAnimating = false;
+            if (btnRun) btnRun.disabled = false;
+            beetle.setAttribute('transform', `translate(${CX}, ${CY}) rotate(0)`);
+            return;
+          }
+          const fromPt = waypoints[step];
+          const toPt = waypoints[step + 1];
+          if (simStatus) {
+            simStatus.innerHTML = `Ковзаємо до: <strong>${toPt.label}</strong>`;
+          }
+
+          glideSegment(fromPt, toPt, 950, () => {
+            highlightWaypoint(toPt.id);
+            step += 1;
+            if (step < waypoints.length - 1) {
+              setTimeout(nextLeg, 420); // пауза 0.5 сек між точками
+            } else {
+              if (simStatus) {
+                simStatus.innerHTML = `✓ <strong>${toPt.label}</strong>`;
+              }
+              setTimeout(nextLeg, 200);
+            }
+          });
+        }
+
+        nextLeg();
+      }
+
+      if (btnRun) {
+        btnRun.addEventListener('click', runSimulation);
+      }
+    })();
+  </script>
+</body>
+</html>
