@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практичне заняття №15 — Зовнішні джерела даних та GUI</title>
+<style>
+  :root{
+    --primary:#2563eb;
+    --primary-dark:#1e40af;
+    --accent:#f59e0b;
+    --success:#10b981;
+    --danger:#ef4444;
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#1e293b;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --code-bg:#1e293b;
+    --code-text:#e2e8f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',Roboto,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.65;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:20px}
+  
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,#2563eb 0%,#1e40af 100%);
+    color:#fff;
+    padding:50px 20px;
+    text-align:center;
+    border-radius:0 0 24px 24px;
+    box-shadow:0 4px 20px rgba(37,99,235,.2);
+  }
+  header .institution{font-size:14px;opacity:.85;margin-bottom:8px;letter-spacing:.5px}
+  header h1{font-size:28px;margin:10px 0;font-weight:700}
+  header .topic{font-size:18px;opacity:.95;margin:15px 0;font-weight:500}
+  header .meta{font-size:14px;opacity:.8;margin-top:15px}
+  header .motivation{
+    background:rgba(255,255,255,.15);
+    padding:15px 20px;
+    border-radius:12px;
+    margin:20px auto 0;
+    max-width:700px;
+    font-style:italic;
+    backdrop-filter:blur(10px);
+  }
+  
+  /* NAV */
+  nav.sticky-nav{
+    position:sticky;
+    top:0;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    z-index:100;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+  }
+  nav.sticky-nav ul{
+    display:flex;
+    list-style:none;
+    overflow-x:auto;
+    gap:5px;
+    padding:10px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  nav.sticky-nav a{
+    display:block;
+    padding:8px 16px;
+    text-decoration:none;
+    color:var(--text);
+    border-radius:8px;
+    font-size:14px;
+    font-weight:500;
+    white-space:nowrap;
+    transition:all .2s;
+  }
+  nav.sticky-nav a:hover{background:var(--bg);color:var(--primary)}
+  nav.sticky-nav a.active{background:var(--primary);color:#fff}
+  
+  /* SECTIONS */
+  section{
+    background:var(--card);
+    border-radius:16px;
+    padding:30px;
+    margin:25px 0;
+    box-shadow:0 2px 12px rgba(0,0,0,.04);
+    border:1px solid var(--border);
+  }
+  h2{
+    color:var(--primary-dark);
+    font-size:24px;
+    margin-bottom:20px;
+    padding-bottom:10px;
+    border-bottom:3px solid var(--primary);
+    display:inline-block;
+  }
+  h3{color:var(--primary-dark);font-size:19px;margin:20px 0 12px}
+  h4{color:var(--text);font-size:16px;margin:15px 0 8px}
+  p{margin:10px 0}
+  ul,ol{margin:10px 0 10px 25px}
+  li{margin:5px 0}
+  
+  /* GOALS */
+  .goals{
+    background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);
+    border-left:4px solid var(--primary);
+    padding:20px;
+    border-radius:10px;
+    margin:15px 0;
+  }
+  .goals h3{margin-top:0;color:var(--primary-dark)}
+  
+  /* INFO BLOCKS */
+  .info-block{
+    padding:15px 20px;
+    border-radius:10px;
+    margin:15px 0;
+    border-left:4px solid;
+  }
+  .info-block.remember{background:#fef3c7;border-color:var(--accent)}
+  .info-block.important{background:#fee2e2;border-color:var(--danger)}
+  .info-block.tip{background:#d1fae5;border-color:var(--success)}
+  .info-block strong{display:block;margin-bottom:5px}
+  
+  /* DEFINITION */
+  .definition{
+    background:#f1f5f9;
+    border:1px dashed var(--primary);
+    padding:15px 20px;
+    border-radius:10px;
+    margin:15px 0;
+  }
+  .definition .term{font-weight:700;color:var(--primary-dark);font-size:17px}
+  
+  /* CODE */
+  pre{
+    background:var(--code-bg);
+    color:var(--code-text);
+    padding:18px;
+    border-radius:10px;
+    overflow-x:auto;
+    font-family:'Consolas','Monaco',monospace;
+    font-size:14px;
+    line-height:1.5;
+    margin:15px 0;
+    border:1px solid #334155;
+  }
+  .kw{color:#f472b6}
+  .str{color:#86efac}
+  .num{color:#fbbf24}
+  .com{color:#94a3b8;font-style:italic}
+  .fn{color:#60a5fa}
+  .type{color:#c4b5fd}
+  
+  /* CARDS GRID */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin:20px 0;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    transition:all .2s;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.08);border-color:var(--primary)}
+  .card .icon{font-size:32px;margin-bottom:10px}
+  .card h4{margin-top:0;color:var(--primary-dark)}
+  
+  /* FLASHCARDS */
+  .flashcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin:20px 0}
+  .flashcard{
+    perspective:1000px;
+    height:180px;
+    cursor:pointer;
+  }
+  .flashcard-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform .6s;
+    transform-style:preserve-3d;
+  }
+  .flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
+  .flashcard-front,.flashcard-back{
+    position:absolute;
+    width:100%;
+    height:100%;
+    backface-visibility:hidden;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+    text-align:center;
+    font-weight:500;
+  }
+  .flashcard-front{background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff}
+  .flashcard-back{background:linear-gradient(135deg,#10b981,#059669);color:#fff;transform:rotateY(180deg)}
+  
+  /* ACCORDION */
+  .accordion{margin:15px 0}
+  .accordion-item{
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:10px;
+    overflow:hidden;
+  }
+  .accordion-header{
+    background:#f8fafc;
+    padding:15px 20px;
+    cursor:pointer;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:background .2s;
+  }
+  .accordion-header:hover{background:#f1f5f9}
+  .accordion-header::after{content:'▼';font-size:12px;transition:transform .3s}
+  .accordion-item.open .accordion-header::after{transform:rotate(180deg)}
+  .accordion-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    padding:0 20px;
+  }
+  .accordion-item.open .accordion-content{max-height:1000px;padding:15px 20px}
+  
+  /* TASKS */
+  .task{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    margin:15px 0;
+    border-left:5px solid var(--primary);
+  }
+  .task.level-1{border-left-color:#10b981}
+  .task.level-2{border-left-color:#3b82f6}
+  .task.level-3{border-left-color:#f59e0b}
+  .task.level-4{border-left-color:#ef4444}
+  .task-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:10px}
+  .task-title{font-weight:700;font-size:17px;color:var(--primary-dark)}
+  .level-badge{
+    font-size:12px;
+    padding:4px 10px;
+    border-radius:20px;
+    color:#fff;
+    font-weight:600;
+  }
+  .level-1 .level-badge{background:#10b981}
+  .level-2 .level-badge{background:#3b82f6}
+  .level-3 .level-badge{background:#f59e0b}
+  .level-4 .level-badge{background:#ef4444}
+  .task input[type="text"],.task textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-family:inherit;
+    font-size:14px;
+    margin:8px 0;
+  }
+  .task textarea{min-height:80px;resize:vertical}
+  .btn{
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:9px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:500;
+    transition:all .2s;
+    margin:5px 5px 5px 0;
+  }
+  .btn:hover{background:var(--primary-dark);transform:translateY(-1px)}
+  .btn.secondary{background:#64748b}
+  .btn.secondary:hover{background:#475569}
+  .btn.success{background:var(--success)}
+  .btn.success:hover{background:#059669}
+  .btn.accent{background:var(--accent)}
+  .btn.accent:hover{background:#d97706}
+  .hint,.answer{
+    display:none;
+    background:#f1f5f9;
+    padding:12px 15px;
+    border-radius:8px;
+    margin:10px 0;
+    border-left:3px solid var(--primary);
+    font-size:14px;
+  }
+  .hint.show,.answer.show{display:block}
+  .answer{border-left-color:var(--success);background:#ecfdf5}
+  .feedback{
+    margin-top:10px;
+    padding:10px;
+    border-radius:8px;
+    font-size:14px;
+    display:none;
+  }
+  .feedback.correct{background:#d1fae5;color:#065f46;display:block}
+  .feedback.wrong{background:#fee2e2;color:#991b1b;display:block}
+  
+  /* QUIZ */
+  .quiz-question{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    margin:15px 0;
+  }
+  .quiz-question h4{margin-bottom:12px;color:var(--primary-dark)}
+  .quiz-options{display:flex;flex-direction:column;gap:8px}
+  .quiz-option{
+    display:flex;
+    align-items:center;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    cursor:pointer;
+    transition:all .2s;
+  }
+  .quiz-option:hover{background:#f8fafc;border-color:var(--primary)}
+  .quiz-option input{margin-right:10px}
+  .quiz-option.correct{background:#d1fae5;border-color:var(--success)}
+  .quiz-option.wrong{background:#fee2e2;border-color:var(--danger)}
+  .quiz-result{
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    margin:20px 0;
+    display:none;
+  }
+  .quiz-result.show{display:block}
+  .quiz-result .score{font-size:48px;font-weight:700;color:var(--primary-dark);margin:10px 0}
+  .quiz-result .grade{font-size:24px;font-weight:600;margin:10px 0}
+  
+  /* PROGRESS */
+  .progress-bar{
+    background:#e2e8f0;
+    height:8px;
+    border-radius:4px;
+    overflow:hidden;
+    margin:15px 0;
+  }
+  .progress-fill{
+    background:linear-gradient(90deg,var(--primary),var(--success));
+    height:100%;
+    width:0;
+    transition:width .3s;
+  }
+  
+  /* SUBMIT FORM */
+  .submit-form{
+    background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+    padding:25px;
+    border-radius:12px;
+    border:2px dashed var(--primary);
+  }
+  .submit-form label{display:block;margin:10px 0 5px;font-weight:600}
+  .submit-form input,.submit-form textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-family:inherit;
+    font-size:14px;
+  }
+  
+  /* SVG DIAGRAM */
+  .diagram{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    margin:15px 0;
+    text-align:center;
+  }
+  .diagram svg{max-width:100%;height:auto}
+  .diagram-caption{font-size:13px;color:var(--muted);margin-top:10px;font-style:italic}
+  
+  /* TABLE */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:15px 0;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 1px 4px rgba(0,0,0,.05);
+  }
+  th{background:var(--primary);color:#fff;padding:12px;text-align:left;font-weight:600}
+  td{padding:12px;border-bottom:1px solid var(--border)}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even){background:#f8fafc}
+  
+  /* FOOTER */
+  footer{
+    text-align:center;
+    padding:30px 20px;
+    color:var(--muted);
+    font-size:14px;
+    margin-top:30px;
+  }
+  
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    header h1{font-size:22px}
+    header .topic{font-size:16px}
+    section{padding:20px}
+    h2{font-size:20px}
+    nav.sticky-nav a{font-size:13px;padding:6px 12px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="institution">КОМУНАЛЬНИЙ ЗАКЛАД СУМСЬКОЇ ОБЛАСТІ<br>«ПУТИВЛЬСЬКИЙ ПЕДАГОГІЧНИЙ ПРОФЕСІЙНИЙ КОЛЕДЖ ІМ. С. В. РУДНЄВА»</div>
+  <h1>Практичне заняття №15</h1>
+  <div class="topic">Зовнішні джерела даних. Дані сенсорів та датчиків.<br>Прикладний програмний інтерфейс. Графічний інтерфейс користувача.<br>Поняття та приклади інтерактивних інсталяцій.</div>
+  <div class="meta">Дисципліна: Інформатика • Викладач: Володимир</div>
+  <div class="motivation">💡 «Сучасна програма — це не лише код, а міст між цифровим світом і реальністю. Як ваш комп'ютер може "відчути" температуру в кімнаті, погоду за вікном або дотик людини?»</div>
+</header>
+
+<nav class="sticky-nav">
+  <ul>
+    <li><a href="#intro" class="active">Вступ</a></li>
+    <li><a href="#theory">Теорія</a></li>
+    <li><a href="#examples">Приклади</a></li>
+    <li><a href="#practice">Практика</a></li>
+    <li><a href="#flashcards">Картки</a></li>
+    <li><a href="#quiz">Самоперевірка</a></li>
+    <li><a href="#submit">Надіслати роботу</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+<!-- ВСТУП -->
+<section id="intro">
+  <h2>🎯 Навчальна мета</h2>
+  <div class="goals">
+    <h3>Після опрацювання цього заняття ви зможете:</h3>
+    <ul>
+      <li>Пояснювати, що таке зовнішні джерела даних та навіщо вони потрібні програмі.</li>
+      <li>Розрізняти типи сенсорів і датчиків та розуміти принципи їхньої роботи.</li>
+      <li>Визначати поняття API та наводити приклади його використання.</li>
+      <li>Створювати простий графічний інтерфейс користувача (GUI) мовою Processing з бібліотекою ControlP5.</li>
+      <li>Розуміти, що таке інтерактивні інсталяції та де вони застосовуються.</li>
+      <li>Інтегрувати дані із зовнішнього світу у власний програмний проект.</li>
+    </ul>
+  </div>
+  
+  <div class="progress-bar"><div class="progress-fill" id="mainProgress"></div></div>
+  <p style="font-size:14px;color:var(--muted)">📊 Прогрес опрацювання матеріалу</p>
+</section>
+
+<!-- ТЕОРІЯ -->
+<section id="theory">
+  <h2>📚 Теоретичний матеріал</h2>
+  
+  <h3>1. Зовнішні джерела даних</h3>
+  <p>Сучасна програма рідко працює ізольовано. Вона постійно обмінюється інформацією із зовнішнім світом: отримує погоду, читає дані з датчиків, завантажує новини, реагує на дії користувача.</p>
+  
+  <div class="definition">
+    <div class="term">Зовнішні джерела даних</div>
+    <p>— це будь-які джерела інформації, розташовані поза межами самої програми: файли на диску, бази даних, вебсервери, сенсори, датчики, інші програми тощо.</p>
+  </div>
+  
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🌐</div>
+      <h4>Веб-API</h4>
+      <p>Погода, курси валют, карти, соціальні мережі.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📁</div>
+      <h4>Файли та БД</h4>
+      <p>Локальні файли CSV, JSON, XML, бази даних.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌡️</div>
+      <h4>Сенсори та датчики</h4>
+      <p>Температура, вологість, рух, звук, світло.</p>
+    </div>
+    <div class="card">
+      <div class="icon">👆</div>
+      <h4>Введення користувача</h4>
+      <p>Клавіатура, миша, тачскрін, камера, мікрофон.</p>
+    </div>
+  </div>
+  
+  <h3>2. Дані сенсорів та датчиків</h3>
+  <p><strong>Сенсор</strong> (від лат. <em>sensus</em> — відчуття) — пристрій, що перетворює фізичні величини (температуру, тиск, освітленість) на електричні сигнали, які може обробити комп'ютер.</p>
+  
+  <table>
+    <tr><th>Тип сенсора</th><th>Що вимірює</th><th>Приклад застосування</th></tr>
+    <tr><td>Температурний</td><td>Температуру</td><td>Метеостанції, термостати</td></tr>
+    <tr><td>Світловий</td><td>Освітленість</td><td>Автоматичне підсвічування екранів</td></tr>
+    <tr><td>Руху (PIR)</td><td>Наявність руху</td><td>Охоронні системи, інтерактивні інсталяції</td></tr>
+    <tr><td>Звуковий</td><td>Рівень звуку</td><td>Реакція на плескіт долонь</td></tr>
+    <tr><td>Відстані (ультразвуковий)</td><td>Відстань до об'єкта</td><td>Парктроніки, робототехніка</td></tr>
+    <tr><td>Акселерометр</td><td>Прискорення, нахил</td><td>Смартфони, фітнес-браслети</td></tr>
+  </table>
+  
+  <div class="info-block remember">
+    <strong>💡 Запам'ятай!</strong>
+    Сенсори перетворюють фізичний сигнал на цифровий. Комп'ютер "бачить" світло чи температуру як числа, які можна обробляти в програмі.
+  </div>
+  
+  <div class="diagram">
+    <svg viewBox="0 0 600 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
+        <linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#059669"/></linearGradient>
+        <linearGradient id="g3" x1="0" x2="1"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/></linearGradient>
+      </defs>
+      <rect x="10" y="40" width="140" height="60" rx="10" fill="url(#g1)"/>
+      <text x="80" y="75" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">СЕНСОР</text>
+      <path d="M 155 70 L 215 70" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="185" y="60" text-anchor="middle" font-size="11" fill="#64748b">аналог. сигнал</text>
+      <rect x="220" y="40" width="140" height="60" rx="10" fill="url(#g2)"/>
+      <text x="290" y="75" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">АЦП / Arduino</text>
+      <path d="M 365 70 L 425 70" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="395" y="60" text-anchor="middle" font-size="11" fill="#64748b">цифровий код</text>
+      <rect x="430" y="40" width="160" height="60" rx="10" fill="url(#g3)"/>
+      <text x="510" y="75" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">КОМП'ЮТЕР / ПРОГРАМА</text>
+      <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker></defs>
+    </svg>
+    <div class="diagram-caption">Рис. 1. Схема передачі даних від сенсора до програми</div>
+  </div>
+  
+  <h3>3. Прикладний програмний інтерфейс (API)</h3>
+  <div class="definition">
+    <div class="term">API (Application Programming Interface)</div>
+    <p>— це набір правил і протоколів, за допомогою яких одна програма може запитувати дані або послуги в іншої програми.</p>
+  </div>
+  <p>Уявіть API як <strong>меню в ресторані</strong>: ви (програма-клієнт) не йдете на кухню (сервер), а замовляєте страву через офіціанта (API). Офіціант приносить вам готову страву (дані) у зрозумілому вигляді.</p>
+  
+  <div class="info-block tip">
+    <strong>🔧 Порада</strong>
+    Найпопулярніший формат передачі даних через API — <strong>JSON</strong> (JavaScript Object Notation). Він читається і людиною, і машиною.
+  </div>
+  
+  <h4>Приклади популярних API:</h4>
+  <ul>
+    <li><strong>OpenWeatherMap</strong> — дані про погоду в будь-якій точці світу.</li>
+    <li><strong>Google Maps API</strong> — карти, маршрути, геокодування.</li>
+    <li><strong>Telegram Bot API</strong> — створення чат-ботів.</li>
+    <li><strong>Wikipedia API</strong> — отримання статей енциклопедії.</li>
+  </ul>
+  
+  <h3>4. Графічний інтерфейс користувача (GUI)</h3>
+  <div class="definition">
+    <div class="term">GUI (Graphical User Interface)</div>
+    <p>— це спосіб взаємодії користувача з програмою через графічні елементи: вікна, кнопки, меню, слайдери, поля введення тощо.</p>
+  </div>
+  
+  <p>Для створення GUI в середовищі <strong>Processing</strong> існує кілька бібліотек. Підключити їх можна через меню: <em>Скетч → Імпорт бібліотеки → Додати бібліотеку</em>.</p>
+  
+  <div class="info-block important">
+    <strong>⚠️ Важливо!</strong>
+    У цьому занятті ми використовуємо бібліотеку <strong>ControlP5</strong>. Її офіційна документація та приклади: <a href="http://www.sojamo.de/libraries/controlP5/" target="_blank">sojamo.de/libraries/controlP5</a>
+  </div>
+  
+  <h4>Основні елементи GUI в ControlP5:</h4>
+  <table>
+    <tr><th>Елемент</th><th>Призначення</th><th>Метод створення</th></tr>
+    <tr><td>Кнопка</td><td>Виконання дії при натисканні</td><td>addButton()</td></tr>
+    <tr><td>Слайдер</td><td>Вибір числового значення в діапазоні</td><td>addSlider()</td></tr>
+    <tr><td>Прапорець</td><td>Вибір так/ні</td><td>addToggle()</td></tr>
+    <tr><td>Текстове поле</td><td>Введення тексту</td><td>addTextfield()</td></tr>
+    <tr><td>Список</td><td>Вибір з кількох варіантів</td><td>addDropdown()</td></tr>
+    <tr><td>Повзунок</td><td>Керування значенням обертанням</td><td>addKnob()</td></tr>
+  </table>
+  
+  <h3>5. Інтерактивні інсталяції</h3>
+  <div class="definition">
+    <div class="term">Інтерактивна інсталяція</div>
+    <p>— це мистецький або дизайнерський проект, який реагує на дії глядача (рух, звук, дотик) і змінюється в реальному часі.</p>
+  </div>
+  
+  <p>Інсталяція поєднує <strong>сенсори</strong>, <strong>програму</strong> та <strong>візуальне/звукове відображення</strong>. Глядач стає співавтором твору.</p>
+  
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h4>TeamLab (Японія)</h4>
+      <p>Імерсивні виставки, де квіти розквітають від дотику відвідувачів.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🎵</div>
+      <h4>Звукові інсталяції</h4>
+      <p>Музика, що генерується залежно від рухів тіла танцівника.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💡</div>
+      <h4>Світлові проєкції</h4>
+      <p>Проєкції на будівлях, що реагують на погоду або перехожих.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🤖</div>
+      <h4>Роботизовані скульптури</h4>
+      <p>Об'єкти, що рухаються у відповідь на присутність людей.</p>
+    </div>
+  </div>
+  
+  <div class="info-block remember">
+    <strong>💡 Запам'ятай!</strong>
+    Інтерактивна інсталяція = <strong>Сенсор</strong> (збирає дані) + <strong>Програма</strong> (обробляє дані) + <strong>Відображення</strong> (звук, зображення, рух).
+  </div>
+</section>
+
+<!-- ПРИКЛАДИ -->
+<section id="examples">
+  <h2>💻 Приклади коду</h2>
+  
+  <h3>Приклад 1. Створення кнопки в ControlP5</h3>
+  <p>Цей приклад створює вікно з кнопкою. При натисканні на кнопку колір фону змінюється на випадковий.</p>
+  
+  <pre><span class="kw">import</span> controlP5.*;
+
+<span class="type">ControlP5</span> cp5;
+<span class="type">color</span> myColor = <span class="fn">color</span>(<span class="num">255</span>);
+<span class="type">color</span> c1;
+<span class="kw">int</span> n;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">size</span>(<span class="num">400</span>,<span class="num">600</span>);
+  cp5 = <span class="kw">new</span> <span class="type">ControlP5</span>(<span class="kw">this</span>);
+  <span class="com">// створення кнопки 'colorA': позиція (100,100), розмір 200×19</span>
+  cp5.<span class="fn">addButton</span>(<span class="str">"colorA"</span>)
+     .<span class="fn">setValue</span>(<span class="num">0</span>)
+     .<span class="fn">setPosition</span>(<span class="num">100</span>,<span class="num">100</span>)
+     .<span class="fn">setSize</span>(<span class="num">200</span>,<span class="num">19</span>);
+}
+
+<span class="kw">void</span> <span class="fn">draw</span>() {
+  <span class="fn">background</span>(myColor);
+  myColor = <span class="fn">color</span>(c1);
+}
+
+<span class="com">// обробник подій від елементів керування</span>
+<span class="kw">public void</span> <span class="fn">controlEvent</span>(<span class="type">ControlEvent</span> theEvent) {
+  <span class="fn">println</span>(theEvent.<span class="fn">getController</span>().<span class="fn">getName</span>());
+  n = n+<span class="num">1</span>;
+}
+
+<span class="com">// функція, що викликається при натисканні кнопки colorA</span>
+<span class="kw">public void</span> <span class="fn">colorA</span>() {
+  <span class="fn">println</span>(<span class="str">"a button event from colorA: "</span>+n);
+  c1 = <span class="fn">color</span>(<span class="kw">int</span>(<span class="fn">random</span>(<span class="num">255</span>)),<span class="kw">int</span>(<span class="fn">random</span>(<span class="num">255</span>)),<span class="kw">int</span>(<span class="fn">random</span>(<span class="num">255</span>)));
+}</pre>
+  
+  <div class="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header">🔍 Пояснення ключових рядків</div>
+      <div class="accordion-content">
+        <ul>
+          <li><code>import controlP5.*;</code> — підключаємо бібліотеку.</li>
+          <li><code>cp5 = new ControlP5(this);</code> — створюємо об'єкт керування інтерфейсом.</li>
+          <li><code>addButton("colorA")</code> — створюємо кнопку з іменем "colorA".</li>
+          <li><code>setPosition(100,100)</code> — координати верхнього лівого кута кнопки.</li>
+          <li><code>setSize(200,19)</code> — ширина 200, висота 19 пікселів.</li>
+          <li>Функція <code>colorA()</code> автоматично викликається при натисканні кнопки з таким самим ім'ям.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <h3>Приклад 2. Створення слайдера</h3>
+  <p>Слайдер дозволяє користувачеві змінювати яскравість фону в діапазоні 0–255.</p>
+  
+  <pre><span class="kw">import</span> controlP5.*;
+
+<span class="type">ControlP5</span> cp5;
+<span class="kw">int</span> sliderValue = <span class="num">100</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">size</span>(<span class="num">700</span>,<span class="num">400</span>);
+  <span class="fn">noStroke</span>();
+  cp5 = <span class="kw">new</span> <span class="type">ControlP5</span>(<span class="kw">this</span>);
+  <span class="com">// горизонтальний слайдер, діапазон 0-255</span>
+  cp5.<span class="fn">addSlider</span>(<span class="str">"sliderValue"</span>)
+     .<span class="fn">setPosition</span>(<span class="num">100</span>,<span class="num">50</span>)
+     .<span class="fn">setRange</span>(<span class="num">0</span>,<span class="num">255</span>);
+}
+
+<span class="kw">void</span> <span class="fn">draw</span>() {
+  <span class="fn">background</span>(sliderValue);
+  <span class="fn">fill</span>(sliderValue);
+  <span class="fn">rect</span>(<span class="num">0</span>,<span class="num">0</span>,width,<span class="num">100</span>);
+}</pre>
+  
+  <div class="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header">🔍 Пояснення ключових рядків</div>
+      <div class="accordion-content">
+        <ul>
+          <li><code>addSlider("sliderValue")</code> — створюємо слайдер, прив'язаний до змінної <code>sliderValue</code>.</li>
+          <li><code>setRange(0,255)</code> — задаємо діапазон значень від 0 до 255.</li>
+          <li>Коли користувач рухає слайдер, змінна <code>sliderValue</code> автоматично оновлюється.</li>
+          <li>У <code>draw()</code> ця змінна використовується для встановлення кольору фону.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРАКТИКА -->
+<section id="practice">
+  <h2>🛠 Практичні завдання</h2>
+  <p>Виконайте завдання послідовно — від простих до складних. Вводьте відповіді у поля та натискайте «Перевірити».</p>
+  
+  <div class="task level-1">
+    <div class="task-header">
+      <div class="task-title">Завдання 1. Початковий рівень</div>
+      <span class="level-badge">Рівень 1</span>
+    </div>
+    <p><strong>Формулювання:</strong> Яка бібліотека для Processing використовується в цьому занятті для створення GUI?</p>
+    <input type="text" id="task1" placeholder="Введіть назву бібліотеки">
+    <button class="btn" onclick="checkTask(1,'controlp5')">Перевірити</button>
+    <button class="btn secondary" onclick="toggleHint('hint1')">Підказка</button>
+    <button class="btn accent" onclick="toggleAnswer('ans1')">Показати відповідь</button>
+    <div class="hint" id="hint1">💡 Підказка: назва починається на "Control" і закінчується на цифру 5.</div>
+    <div class="answer" id="ans1">✅ Правильна відповідь: <strong>ControlP5</strong></div>
+    <div class="feedback" id="fb1"></div>
+  </div>
+  
+  <div class="task level-1">
+    <div class="task-header">
+      <div class="task-title">Завдання 2. Початковий рівень</div>
+      <span class="level-badge">Рівень 1</span>
+    </div>
+    <p><strong>Формулювання:</strong> Що таке API? Дайте коротке визначення (1–2 речення).</p>
+    <textarea id="task2" placeholder="Введіть свою відповідь"></textarea>
+    <button class="btn secondary" onclick="toggleHint('hint2')">Підказка</button>
+    <button class="btn accent" onclick="toggleAnswer('ans2')">Показати еталон</button>
+    <div class="hint" id="hint2">💡 Підказка: згадайте аналогію з рестораном і меню.</div>
+    <div class="answer" id="ans2">✅ Еталонна відповідь: API (Application Programming Interface) — це набір правил, за допомогою яких одна програма може запитувати дані або послуги в іншої програми.</div>
+  </div>
+  
+  <div class="task level-2">
+    <div class="task-header">
+      <div class="task-title">Завдання 3. Середній рівень</div>
+      <span class="level-badge">Рівень 2</span>
+    </div>
+    <p><strong>Формулювання:</strong> Який метод ControlP5 створює слайдер? Який метод задає діапазон його значень?</p>
+    <input type="text" id="task3" placeholder="Напр.: метод1, метод2">
+    <button class="btn" onclick="checkTask(3,'addslider setrange')">Перевірити</button>
+    <button class="btn secondary" onclick="toggleHint('hint3')">Підказка</button>
+    <button class="btn accent" onclick="toggleAnswer('ans3')">Показати відповідь</button>
+    <div class="hint" id="hint3">💡 Підказка: обидва методи починаються з "add..." та "set..." відповідно.</div>
+    <div class="answer" id="ans3">✅ Правильна відповідь: <strong>addSlider()</strong> створює слайдер, <strong>setRange()</strong> задає діапазон.</div>
+    <div class="feedback" id="fb3"></div>
+  </div>
+  
+  <div class="task level-2">
+    <div class="task-header">
+      <div class="task-title">Завдання 4. Середній рівень</div>
+      <span class="level-badge">Рівень 2</span>
+    </div>
+    <p><strong>Формулювання:</strong> Наведіть 3 приклади сенсорів, які можуть використовуватися в інтерактивній інсталяції, та поясніть, що саме вони вимірюють.</p>
+    <textarea id="task4" placeholder="1. Сенсор — ...&#10;2. Сенсор — ...&#10;3. Сенсор — ..."></textarea>
+    <button class="btn secondary" onclick="toggleHint('hint4')">Підказка</button>
+    <button class="btn accent" onclick="toggleAnswer('ans4')">Показати приклад відповіді</button>
+    <div class="hint" id="hint4">💡 Підказка: згадайте таблицю типів сенсорів у теорії.</div>
+    <div class="answer" id="ans4">✅ Приклад: 1) PIR-сенсор руху — виявляє присутність людини; 2) ультразвуковий датчик відстані — вимірює відстань до об'єкта; 3) мікрофон — фіксує рівень звуку.</div>
+  </div>
+  
+  <div class="task level-3">
+    <div class="task-header">
+      <div class="task-title">Завдання 5. Достатній рівень</div>
+      <span class="level-badge">Рівень 3</span>
+    </div>
+    <p><strong>Формулювання:</strong> Напишіть фрагмент коду Processing з ControlP5, який створює <strong>кнопку</strong> з ім'ям "myButton" у позиції (50, 50) розміром 150×30 пікселів.</p>
+    <textarea id="task5" placeholder="Введіть код..."></textarea>
+    <button class="btn secondary" onclick="toggleHint('hint5')">Підказка</button>
+    <button class="btn accent" onclick="toggleAnswer('ans5')">Показати розв'язок</button>
+    <div class="hint" id="hint5">💡 Підказка: використайте ланцюжок методів addButton().setValue().setPosition().setSize().</div>
+    <div class="answer" id="ans5">✅ Розв'язок:<br><pre style="margin:8px 0">cp5.addButton("myButton")
+   .setPosition(50,50)
+   .setSize(150,30);</pre></div>
+  </div>
+  
+  <div class="task level-3">
+    <div class="task-header">
+      <div class="task-title">Завдання 6. Достатній рівень</div>
+      <span class="level-badge">Рівень 3</span>
+    </div>
+    <p><strong>Формулювання:</strong> Опишіть послідовність дій (алгоритм) створення простої інтерактивної інсталяції, яка реагує на плескіт долонь зміною кольору проєкції.</p>
+    <textarea id="task6" placeholder="Крок 1: ...&#10;Крок 2: ...&#10;Крок 3: ..."></textarea>
+    <button class="btn secondary" onclick="toggleHint('hint6')">Підказка</button>
+    <button class="btn accent" onclick="toggleAnswer('ans6')">Показати еталон</button>
+    <div class="hint" id="hint6">💡 Підказка: подумайте про три компоненти: сенсор → програма → відображення.</div>
+    <div class="answer" id="ans6">✅ Еталонний алгоритм:<br>
+    1) Встановити мікрофон (звуковий сенсор), підключений до комп'ютера/Arduino.<br>
+    2) Написати програму на Processing, яка постійно зчитує рівень звуку.<br>
+    3) Якщо рівень звуку перевищує поріг (плескіт) — згенерувати випадковий колір.<br>
+    4) Змінити колір проєкції на екрані.<br>
+    5) Повторювати цикл.</div>
+  </div>
+  
+  <div class="task level-4">
+    <div class="task-header">
+      <div class="task-title">Завдання 7. Творчий рівень</div>
+      <span class="level-badge">Рівень 4</span>
+    </div>
+    <p><strong>Формулювання:</strong> Запропонуйте власну концепцію інтерактивної інсталяції для шкільного холу. Опишіть: ідею, які сенсори використаєте, як програма реагуватиме на відвідувачів, яку соціальну функцію виконуватиме.</p>
+    <textarea id="task7" placeholder="Опишіть вашу ідею..." style="min-height:150px"></textarea>
+    <button class="btn secondary" onclick="toggleHint('hint7')">Підказка</button>
+    <button class="btn accent" onclick="toggleAnswer('ans7')">Показати приклад концепції</button>
+    <div class="hint" id="hint7">💡 Підказка: подумайте про соціальну тему — екологія, толерантність, історія рідного краю, безпека.</div>
+    <div class="answer" id="ans7">✅ Приклад концепції: <strong>«Дерево добрих справ»</strong>. Відвідувач підходить до екрана, PIR-сенсор фіксує присутність. На екрані з'являється дерево. Людина торкається сенсорної панелі — на дереві розквітає квітка з написом доброї справи. Чим більше відвідувачів — тим пишніше дерево. Соціальна функція: мотивує до добрих вчинків, об'єднує колектив.</div>
+  </div>
+</section>
+
+<!-- КАРТКИ -->
+<section id="flashcards">
+  <h2>🎴 Інтерактивні картки для запам'ятовування</h2>
+  <p>Натисніть на картку, щоб побачити визначення.</p>
+  <div class="flashcards">
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">API</div>
+        <div class="flashcard-back">Application Programming Interface — набір правил для взаємодії програм</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">GUI</div>
+        <div class="flashcard-back">Graphical User Interface — графічний інтерфейс користувача</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Сенсор</div>
+        <div class="flashcard-back">Пристрій, що перетворює фізичні величини на електричні сигнали</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">ControlP5</div>
+        <div class="flashcard-back">Бібліотека Processing для створення GUI (кнопки, слайдери тощо)</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">JSON</div>
+        <div class="flashcard-back">Формат обміну даними, зручний і для людей, і для машин</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Інсталяція</div>
+        <div class="flashcard-back">Мистецький проєкт, що реагує на дії глядача в реальному часі</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ТЕСТ -->
+<section id="quiz">
+  <h2>📝 Самоперевірка</h2>
+  <p>Дайте відповіді на 10 запитань. Після завершення натисніть «Завершити тест» — ви побачите свій результат за 12-бальною шкалою.</p>
+  
+  <div id="quizContainer"></div>
+  
+  <button class="btn success" onclick="finishQuiz()" style="margin-top:15px;font-size:16px;padding:12px 24px">✅ Завершити тест</button>
+  <button class="btn secondary" onclick="resetQuiz()">🔄 Спочатку</button>
+  
+  <div class="quiz-result" id="quizResult">
+    <h3>Ваш результат</h3>
+    <div class="score" id="scoreText">0/10</div>
+    <div>Правильних відповідей: <span id="percentText">0%</span></div>
+    <div class="grade" id="gradeText">Оцінка: —</div>
+    <div id="recommendation" style="margin-top:15px;text-align:left;background:#fff;padding:15px;border-radius:10px"></div>
+  </div>
+</section>
+
+<!-- НАДІСЛАТИ -->
+<section id="submit">
+  <h2>📤 Надіслати роботу викладачеві</h2>
+  <p>Заповніть форму та надішліть результати виконання завдань і тесту.</p>
+  
+  <div class="submit-form">
+    <label>ПІБ студента *</label>
+    <input type="text" id="studentName" placeholder="Прізвище Ім'я По батькові" required>
+    
+    <label>Група *</label>
+    <input type="text" id="studentGroup" placeholder="Напр.: ІТ-21" required>
+    
+    <label>Відповіді на практичні завдання</label>
+    <textarea id="taskAnswers" placeholder="Буде заповнено автоматично після перевірки завдань..." style="min-height:120px"></textarea>
+    
+    <label>Результат тесту</label>
+    <input type="text" id="quizScore" placeholder="З'явиться після завершення тесту" readonly>
+    
+    <label>Посилання на виконану роботу (за наявності)</label>
+    <input type="text" id="workLink" placeholder="https://drive.google.com/...">
+    
+    <button class="btn success" onclick="submitWork()" style="margin-top:15px;font-size:16px;padding:12px 24px">📤 Надіслати відповіді</button>
+    <div id="submitStatus" style="margin-top:10px"></div>
+  </div>
+  
+  <div class="info-block tip" style="margin-top:20px">
+    <strong>🔧 Технічна примітка для викладача</strong>
+    Для повноцінного надсилання даних потрібно налаштувати Google Apps Script. Інструкцію та код скрипта надано нижче в окремому блоці після HTML-файлу.
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>© КЗ СО «Путивльський педагогічний професійний коледж ім. С. В. Руднева»</p>
+  <p>Інтерактивний навчальний ресурс • Практичне заняття №15</p>
+</footer>
+
+<script>
+// ============ НАВІГАЦІЯ ============
+const navLinks = document.querySelectorAll('nav.sticky-nav a');
+const sections = document.querySelectorAll('section');
+navLinks.forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    window.scrollTo({top:target.offsetTop-60,behavior:'smooth'});
+  });
+});
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{
+    if(window.scrollY >= s.offsetTop-100) current = s.id;
+  });
+  navLinks.forEach(l=>{
+    l.classList.remove('active');
+    if(l.getAttribute('href')==='#'+current) l.classList.add('active');
+  });
+  updateProgress();
+});
+
+// ============ ПРОГРЕС ============
+function updateProgress(){
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = Math.min(100,(window.scrollY/total)*100);
+  document.getElementById('mainProgress').style.width = pct+'%';
+}
+
+// ============ АККОРДЕОН ============
+document.querySelectorAll('.accordion-header').forEach(h=>{
+  h.addEventListener('click',()=>{
+    h.parentElement.classList.toggle('open');
+  });
+});
+
+// ============ ПІДКАЗКИ / ВІДПОВІДІ ============
+function toggleHint(id){document.getElementById(id).classList.toggle('show')}
+function toggleAnswer(id){document.getElementById(id).classList.toggle('show')}
+
+// ============ ПЕРЕВІРКА ЗАВДАНЬ ============
+function checkTask(num,correct){
+  const input = document.getElementById('task'+num).value.trim().toLowerCase();
+  const fb = document.getElementById('fb'+num);
+  const corrects = correct.split(' ');
+  const allFound = corrects.every(c=>input.includes(c));
+  if(allFound){
+    fb.className='feedback correct';
+    fb.textContent='✅ Правильно! Чудова робота.';
+  } else {
+    fb.className='feedback wrong';
+    fb.textContent='❌ Не зовсім правильно. Спробуйте ще раз або використайте підказку.';
+  }
+}
+
+// ============ ТЕСТ ============
+const quizData = [
+  {
+    q:"1. Що таке зовнішнє джерело даних?",
+    type:"single",
+    options:["Частина операційної системи","Будь-яке джерело інформації поза межами програми","Тільки файли на диску","Лише вебсайти"],
+    correct:1
+  },
+  {
+    q:"2. Який пристрій перетворює фізичні величини на електричні сигнали?",
+    type:"single",
+    options:["Процесор","Монітор","Сенсор","Принтер"],
+    correct:2
+  },
+  {
+    q:"3. Що означає абревіатура API?",
+    type:"single",
+    options:["Automatic Program Integration","Application Programming Interface","Advanced Protocol Internet","Applied Processing Index"],
+    correct:1
+  },
+  {
+    q:"4. Яка бібліотека використовується для створення GUI в цьому занятті?",
+    type:"single",
+    options:["Processing Core","Swing","ControlP5","JavaFX"],
+    correct:2
+  },
+  {
+    q:"5. Який метод ControlP5 створює кнопку?",
+    type:"single",
+    options:["addButton()","createButton()","newButton()","makeButton()"],
+    correct:0
+  },
+  {
+    q:"6. Що робить метод setRange() у слайдері?",
+    type:"single",
+    options:["Встановлює колір","Задає діапазон значень","Змінює розмір","Визначає позицію"],
+    correct:1
+  },
+  {
+    q:"7. Які компоненти входять до інтерактивної інсталяції? (оберіть усі правильні)",
+    type:"multiple",
+    options:["Сенсор","Програма","Відображення","Принтер"],
+    correct:[0,1,2]
+  },
+  {
+    q:"8. Установіть відповідність: сенсор → що вимірює",
+    type:"match",
+    pairs:[
+      {left:"PIR-сенсор",right:"Рух"},
+      {left:"Термодатчик",right:"Температура"},
+      {left:"Мікрофон",right:"Звук"},
+      {left:"Акселерометр",right:"Прискорення"}
+    ]
+  },
+  {
+    q:"9. Який формат даних найчастіше використовується в API?",
+    type:"single",
+    options:["XML","CSV","JSON","HTML"],
+    correct:2
+  },
+  {
+    q:"10. Введіть назву функції, що автоматично викликається при натисканні кнопки 'colorA' у прикладі:",
+    type:"input",
+    correct:"colora"
+  }
+];
+
+function renderQuiz(){
+  const c = document.getElementById('quizContainer');
+  c.innerHTML = '';
+  quizData.forEach((item,i)=>{
+    let html = `<div class="quiz-question" data-q="${i}"><h4>${item.q}</h4>`;
+    if(item.type==='single'){
+      html += `<div class="quiz-options">`;
+      item.options.forEach((opt,j)=>{
+        html += `<label class="quiz-option"><input type="radio" name="q${i}" value="${j}"> ${opt}</label>`;
+      });
+      html += `</div>`;
+    } else if(item.type==='multiple'){
+      html += `<div class="quiz-options">`;
+      item.options.forEach((opt,j)=>{
+        html += `<label class="quiz-option"><input type="checkbox" name="q${i}" value="${j}"> ${opt}</label>`;
+      });
+      html += `</div>`;
+    } else if(item.type==='match'){
+      html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">`;
+      html += `<div><strong>Сенсор:</strong>`;
+      item.pairs.forEach((p,j)=>{
+        html += `<div style="margin:5px 0">${p.left}: <select class="match-select" data-pair="${j}" style="padding:5px;border-radius:5px">`;
+        html += `<option value="">— оберіть —</option>`;
+        item.pairs.forEach(pp=>{html += `<option value="${pp.right}">${pp.right}</option>`});
+        html += `</select></div>`;
+      });
+      html += `</div></div>`;
+    } else if(item.type==='input'){
+      html += `<input type="text" class="quiz-input" placeholder="Ваша відповідь" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px">`;
+    }
+    html += `</div>`;
+    c.innerHTML += html;
+  });
+}
+renderQuiz();
+
+function finishQuiz(){
+  let score = 0;
+  quizData.forEach((item,i)=>{
+    const q = document.querySelector(`[data-q="${i}"]`);
+    if(item.type==='single'){
+      const sel = q.querySelector('input[type="radio"]:checked');
+      if(sel && parseInt(sel.value)===item.correct) score++;
+    } else if(item.type==='multiple'){
+      const sels = Array.from(q.querySelectorAll('input[type="checkbox"]:checked')).map(x=>parseInt(x.value));
+      if(sels.length===item.correct.length && sels.every(v=>item.correct.includes(v))) score++;
+    } else if(item.type==='match'){
+      const sels = q.querySelectorAll('.match-select');
+      let allCorrect = true;
+      sels.forEach((s,j)=>{
+        if(s.value !== item.pairs[j].right) allCorrect = false;
+      });
+      if(allCorrect) score++;
+    } else if(item.type==='input'){
+      const inp = q.querySelector('.quiz-input');
+      if(inp && inp.value.trim().toLowerCase()===item.correct) score++;
+    }
+  });
+  const total = quizData.length;
+  const pct = Math.round(score/total*100);
+  let grade = 1;
+  if(pct>=95) grade=12;
+  else if(pct>=88) grade=11;
+  else if(pct>=80) grade=10;
+  else if(pct>=74) grade=9;
+  else if(pct>=66) grade=8;
+  else if(pct>=58) grade=7;
+  else if(pct>=50) grade=6;
+  else if(pct>=42) grade=5;
+  else if(pct>=34) grade=4;
+  else if(pct>=24) grade=3;
+  else if(pct>=12) grade=2;
+  
+  document.getElementById('scoreText').textContent = score+'/'+total;
+  document.getElementById('percentText').textContent = pct+'%';
+  document.getElementById('gradeText').textContent = 'Оцінка: '+grade+'/12';
+  
+  let rec = '<strong>📌 Рекомендації:</strong><br>';
+  if(pct<50) rec += 'Вам варто повторити весь теоретичний матеріал, особливо розділи про API, сенсори та GUI. Поверніться до визначень та прикладів коду.';
+  else if(pct<75) rec += 'Непоганий результат! Зверніть увагу на ті питання, де були помилки. Рекомендуємо повторити роботу з бібліотекою ControlP5 та приклади коду.';
+  else if(pct<90) rec += 'Добре! Ви засвоїли більшість матеріалу. Для закріплення виконайте практичні завдання достатнього та творчого рівнів.';
+  else rec += 'Чудово! Ви чудово засвоїли матеріал. Спробуйте створити власний міні-проєкт з використанням ControlP5.';
+  document.getElementById('recommendation').innerHTML = rec;
+  document.getElementById('quizResult').classList.add('show');
+  document.getElementById('quizScore').value = score+'/'+total+' ('+pct+'%) — оцінка '+grade+'/12';
+  document.getElementById('quizResult').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function resetQuiz(){
+  renderQuiz();
+  document.getElementById('quizResult').classList.remove('show');
+  document.getElementById('quizScore').value = '';
+}
+
+// ============ НАДСИЛАННЯ ============
+// ⚠️ УМОВНИЙ МІСЦЕ ДЛЯ URL GOOGLE APPS SCRIPT
+const APPS_SCRIPT_URL = 'ВСТАВТЕ_СЮДИ_URL_ВАШОГО_WEB_APP';
+
+function submitWork(){
+  const name = document.getElementById('studentName').value.trim();
+  const group = document.getElementById('studentGroup').value.trim();
+  const tasks = document.getElementById('taskAnswers').value.trim();
+  const score = document.getElementById('quizScore').value;
+  const link = document.getElementById('workLink').value.trim();
+  const status = document.getElementById('submitStatus');
+  
+  if(!name || !group){
+    status.innerHTML = '<div class="feedback wrong">⚠️ Заповніть обов\'язкові поля: ПІБ та група.</div>';
+    return;
+  }
+  
+  if(APPS_SCRIPT_URL === 'ВСТАВТЕ_СЮДИ_URL_ВАШОГО_WEB_APP'){
+    status.innerHTML = '<div class="feedback wrong">⚠️ Функція надсилання ще не налаштована викладачем. Зверніться до викладача для отримання інструкцій або збережіть результати локально.</div>';
+    return;
+  }
+  
+  const data = {
+    timestamp: new Date().toISOString(),
+    name, group, tasks, score, link
+  };
+  
+  status.innerHTML = '<div class="feedback" style="display:block;background:#fef3c7;color:#92400e">⏳ Надсилання...</div>';
+  
+  fetch(APPS_SCRIPT_URL, {
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(data)
+  }).then(()=>{
+    status.innerHTML = '<div class="feedback correct">✅ Дані надіслано! Викладач отримає вашу роботу.</div>';
+  }).catch(err=>{
+    status.innerHTML = '<div class="feedback wrong">❌ Помилка надсилання: '+err.message+'</div>';
+  });
+}
+
+// Автозаповнення відповідей на практичні завдання
+function updateTaskSummary(){
+  const answers = [];
+  for(let i=1;i<=7;i++){
+    const el = document.getElementById('task'+i);
+    if(el && el.value.trim()) answers.push('Завдання '+i+': '+el.value.trim());
+  }
+  document.getElementById('taskAnswers').value = answers.join('\n\n');
+}
+document.querySelectorAll('#practice input, #practice textarea').forEach(el=>{
+  el.addEventListener('input',updateTaskSummary);
+});
+</script>
+
+</body>
+</html>

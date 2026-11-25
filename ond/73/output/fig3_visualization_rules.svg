@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="668.88pt" height="221.184pt" viewBox="0 0 668.88 221.184" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-24T09:42:38.414252</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 221.184 
+L 668.88 221.184 
+L 668.88 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 38.7 192.6432 
+L 208.89 192.6432 
+Q 220.05 192.6432 220.05 181.5552 
+L 220.05 62.3592 
+Q 220.05 51.2712 208.89 51.2712 
+L 38.7 51.2712 
+Q 27.54 51.2712 27.54 62.3592 
+L 27.54 181.5552 
+Q 27.54 192.6432 38.7 192.6432 
+z
+" clip-path="url(#p8cee9bd242)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 249.345 192.6432 
+L 419.535 192.6432 
+Q 430.695 192.6432 430.695 181.5552 
+L 430.695 62.3592 
+Q 430.695 51.2712 419.535 51.2712 
+L 249.345 51.2712 
+Q 238.185 51.2712 238.185 62.3592 
+L 238.185 181.5552 
+Q 238.185 192.6432 249.345 192.6432 
+z
+" clip-path="url(#p8cee9bd242)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 459.99 192.6432 
+L 630.18 192.6432 
+Q 641.34 192.6432 641.34 181.5552 
+L 641.34 62.3592 
+Q 641.34 51.2712 630.18 51.2712 
+L 459.99 51.2712 
+Q 448.83 51.2712 448.83 62.3592 
+L 448.83 181.5552 
+Q 448.83 192.6432 459.99 192.6432 
+z
+" clip-path="url(#p8cee9bd242)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="334.44" y="34.148453" transform="rotate(-0 334.44 34.148453)">Три правила коректного оформлення наукових графіків</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #0071e3" x="40.932" y="73.018144" transform="rotate(-0 40.932 73.018144)">ПРАВИЛО 1</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="40.932" y="94.936672" transform="rotate(-0 40.932 94.936672)">Повнота атрибутів</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(40.932 127.517442)">Кожен графік має змістовну</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(40.932 141.256236)">назву, підписи обох осей,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(40.932 154.99503)">одиниці вимірювання (%, бали)</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(40.932 168.482783)">та зрозумілу легенду.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #c4001d" x="251.577" y="73.018144" transform="rotate(-0 251.577 73.018144)">ПРАВИЛО 2</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="251.577" y="94.775187" transform="rotate(-0 251.577 94.775187)">Чесний масштаб осей</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(251.577 127.642962)">Вісь значень у стовпчастих</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(251.577 141.130716)">діаграмах завжди починається</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(251.577 154.869509)">з нуля, щоб не спотворювати</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(251.577 168.357262)">різницю між групами.</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #248a3d" x="462.222" y="73.018144" transform="rotate(-0 462.222 73.018144)">ПРАВИЛО 3</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="462.222" y="94.724406" transform="rotate(-0 462.222 94.724406)">Візуальна стриманість</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(462.222 127.736634)">У наукових роботах не</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(462.222 141.475428)">застосовують об’ємні 3D-ефекти,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(462.222 154.963181)">тіні та строкаті градієнти,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(462.222 168.450934)">які ускладнюють читання.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p8cee9bd242">
+   <rect x="10.8" y="10.8" width="647.28" height="199.584"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="774.9pt" height="309.888pt" viewBox="0 0 774.9 309.888" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-21T21:24:17.839861</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 309.888 
+L 774.9 309.888 
+L 774.9 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 40.461188 195.397316 
+L 240.085688 195.397316 
+Q 249.501937 195.397316 249.501937 186.097703 
+L 249.501937 61.01791 
+Q 249.501937 51.718297 240.085688 51.718297 
+L 40.461188 51.718297 
+Q 31.044937 51.718297 31.044937 61.01791 
+L 31.044937 186.097703 
+Q 31.044937 195.397316 40.461188 195.397316 
+z
+" clip-path="url(#p9a175b7a19)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 287.63775 195.397316 
+L 487.26225 195.397316 
+Q 496.6785 195.397316 496.6785 186.097703 
+L 496.6785 61.01791 
+Q 496.6785 51.718297 487.26225 51.718297 
+L 287.63775 51.718297 
+Q 278.2215 51.718297 278.2215 61.01791 
+L 278.2215 186.097703 
+Q 278.2215 195.397316 287.63775 195.397316 
+z
+" clip-path="url(#p9a175b7a19)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 534.814312 195.397316 
+L 734.438813 195.397316 
+Q 743.855063 195.397316 743.855063 186.097703 
+L 743.855063 61.01791 
+Q 743.855063 51.718297 734.438813 51.718297 
+L 534.814312 51.718297 
+Q 525.398063 51.718297 525.398063 61.01791 
+L 525.398063 186.097703 
+Q 525.398063 195.397316 534.814312 195.397316 
+z
+" clip-path="url(#p9a175b7a19)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 40.461188 283.743639 
+L 734.438813 283.743639 
+Q 743.855062 283.743639 743.855062 274.444026 
+L 743.855062 234.45569 
+Q 743.855062 225.156077 734.438813 225.156077 
+L 40.461188 225.156077 
+Q 31.044937 225.156077 31.044937 234.45569 
+L 31.044937 274.444026 
+Q 31.044937 283.743639 40.461188 283.743639 
+z
+" clip-path="url(#p9a175b7a19)" style="fill: #1c1c1e; stroke: #3a3a3c; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="387.45" y="32.650475" transform="rotate(-0 387.45 32.650475)">Взаємодія технологій HTML5, CSS3 та JavaScript в освітньому веб-проєкті</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 49.877437 81.942039 
+L 230.669437 81.942039 
+Q 237.260812 81.942039 237.260812 75.43231 
+L 237.260812 67.992619 
+Q 237.260812 61.48289 230.669437 61.48289 
+L 49.877437 61.48289 
+Q 43.286062 61.48289 43.286062 67.992619 
+L 43.286062 75.43231 
+Q 43.286062 81.942039 49.877437 81.942039 
+z
+" clip-path="url(#p9a175b7a19)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 297.054 81.942039 
+L 477.846 81.942039 
+Q 484.437375 81.942039 484.437375 75.43231 
+L 484.437375 67.992619 
+Q 484.437375 61.48289 477.846 61.48289 
+L 297.054 61.48289 
+Q 290.462625 61.48289 290.462625 67.992619 
+L 290.462625 75.43231 
+Q 290.462625 81.942039 297.054 81.942039 
+z
+" clip-path="url(#p9a175b7a19)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 544.230563 81.942039 
+L 725.022562 81.942039 
+Q 731.613937 81.942039 731.613937 75.43231 
+L 731.613937 67.992619 
+Q 731.613937 61.48289 725.022562 61.48289 
+L 544.230563 61.48289 
+Q 537.639187 61.48289 537.639187 67.992619 
+L 537.639187 75.43231 
+Q 537.639187 81.942039 544.230563 81.942039 
+z
+" clip-path="url(#p9a175b7a19)" style="fill: #248a3d"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="140.273438" y="74.747777" transform="rotate(-0 140.273438 74.747777)">HTML5 • СТРУКТУРА</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="140.273438" y="101.66558" transform="rotate(-0 140.273438 101.66558)">Каркас сторінки</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="140.273438" y="122.640783" transform="rotate(-0 140.273438 122.640783)">Теги &lt;header&gt;, &lt;main&gt;, &lt;footer&gt;</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="140.273438" y="143.099932" transform="rotate(-0 140.273438 143.099932)">Заголовки, правила, списки</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="140.273438" y="163.55908" transform="rotate(-0 140.273438 163.55908)">Кнопки та ілюстрації для учнів</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="387.45" y="74.747777" transform="rotate(-0 387.45 74.747777)">CSS3 • ОФОРМЛЕННЯ</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="387.45" y="101.644096" transform="rotate(-0 387.45 101.644096)">Візуальний стиль</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="387.45" y="122.640783" transform="rotate(-0 387.45 122.640783)">Кольорова палітра та контраст</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="387.45" y="143.193604" transform="rotate(-0 387.45 143.193604)">Великі читабельні шрифти</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="387.45" y="163.55908" transform="rotate(-0 387.45 163.55908)">Адаптивна сітка карток</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="634.626562" y="74.747777" transform="rotate(-0 634.626562 74.747777)">JS • ПОВЕДІНКА</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="634.626562" y="101.66558" transform="rotate(-0 634.626562 101.66558)">Інтерактивність</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="634.626562" y="122.640783" transform="rotate(-0 634.626562 122.640783)">Перевірка відповідей у тесті</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="634.626562" y="143.193604" transform="rotate(-0 634.626562 143.193604)">Миттєвий підрахунок балів</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #515154" x="634.626562" y="163.55908" transform="rotate(-0 634.626562 163.55908)">Зміна теми чи розміру тексту</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #30d158" x="50.819063" y="248.926476" transform="rotate(-0 50.819063 248.926476)">~/edu-site $</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="149.689687" y="249.245226" transform="rotate(-0 149.689687 249.245226)">index.html  +  css/style.css  +  js/script.js</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #d1d1d6" x="387.45" y="272.135469" transform="rotate(-0 387.45 272.135469)">Єдина інтерактивна освітня веб-сторінка вчителя початкової школи</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 140.273438 199.258722 
+Q 140.273438 209.812507 140.273438 218.979008 
+" style="fill: none; stroke: #c93400; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 142.873437 216.479008 
+L 140.273438 218.979008 
+L 137.673438 216.479008 
+" style="fill: none; stroke: #c93400; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 387.45 199.258722 
+Q 387.45 209.812507 387.45 218.979008 
+" style="fill: none; stroke: #0071e3; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 390.05 216.479008 
+L 387.45 218.979008 
+L 384.85 216.479008 
+" style="fill: none; stroke: #0071e3; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 634.626562 199.258722 
+Q 634.626562 209.812507 634.626562 218.979008 
+" style="fill: none; stroke: #248a3d; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 637.226562 216.479008 
+L 634.626562 218.979008 
+L 632.026562 216.479008 
+" style="fill: none; stroke: #248a3d; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p9a175b7a19">
+   <rect x="10.8" y="10.8" width="753.3" height="288.288"/>
+  </clipPath>
+ </defs>
+</svg>

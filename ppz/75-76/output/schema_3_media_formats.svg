@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="276.624pt" viewBox="0 0 635.4 276.624" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-20T14:26:14.651985</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 276.624 
+L 635.4 276.624 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 43.164 244.7568 
+L 201.636 244.7568 
+Q 212.796 244.7568 212.796 233.6688 
+L 212.796 67.9032 
+Q 212.796 56.8152 201.636 56.8152 
+L 43.164 56.8152 
+Q 32.004 56.8152 32.004 67.9032 
+L 32.004 233.6688 
+Q 32.004 244.7568 43.164 244.7568 
+z
+" clip-path="url(#p5264303c67)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 44.838 66.7944 
+L 199.962 66.7944 
+Q 201.636 66.7944 201.636 65.1312 
+L 201.636 65.1312 
+Q 201.636 63.468 199.962 63.468 
+L 44.838 63.468 
+Q 43.164 63.468 43.164 65.1312 
+L 43.164 65.1312 
+Q 43.164 66.7944 44.838 66.7944 
+z
+" clip-path="url(#p5264303c67)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 238.464 244.7568 
+L 396.936 244.7568 
+Q 408.096 244.7568 408.096 233.6688 
+L 408.096 67.9032 
+Q 408.096 56.8152 396.936 56.8152 
+L 238.464 56.8152 
+Q 227.304 56.8152 227.304 67.9032 
+L 227.304 233.6688 
+Q 227.304 244.7568 238.464 244.7568 
+z
+" clip-path="url(#p5264303c67)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 240.138 66.7944 
+L 395.262 66.7944 
+Q 396.936 66.7944 396.936 65.1312 
+L 396.936 65.1312 
+Q 396.936 63.468 395.262 63.468 
+L 240.138 63.468 
+Q 238.464 63.468 238.464 65.1312 
+L 238.464 65.1312 
+Q 238.464 66.7944 240.138 66.7944 
+z
+" clip-path="url(#p5264303c67)" style="fill: #6e30a8"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 433.764 244.7568 
+L 592.236 244.7568 
+Q 603.396 244.7568 603.396 233.6688 
+L 603.396 67.9032 
+Q 603.396 56.8152 592.236 56.8152 
+L 433.764 56.8152 
+Q 422.604 56.8152 422.604 67.9032 
+L 422.604 233.6688 
+Q 422.604 244.7568 433.764 244.7568 
+z
+" clip-path="url(#p5264303c67)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 435.438 66.7944 
+L 590.562 66.7944 
+Q 592.236 66.7944 592.236 65.1312 
+L 592.236 65.1312 
+Q 592.236 63.468 590.562 63.468 
+L 435.438 63.468 
+Q 433.764 63.468 433.764 65.1312 
+L 433.764 65.1312 
+Q 433.764 66.7944 435.438 66.7944 
+z
+" clip-path="url(#p5264303c67)" style="fill: #c93400"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="34.529391" transform="rotate(-0 317.7 34.529391)">Вибір форматів графіки та мультимедіа для освітнього сайту</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="122.4" y="86.459188" transform="rotate(-0 122.4 86.459188)">Растрова графіка</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(55.274625 115.713788)">JPG / JPEG — фотографії</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(55.240031 129.038372)">класу, подій, портрети.</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(122.4 142.362956)"/>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(46.951875 155.687541)">PNG — скріншоти, кнопки,</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(39.430687 169.012125)">картинки з прозорим фоном.</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(122.4 182.336709)"/>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(50.747906 195.661294)">WebP — сучасний легкий</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(58.582125 208.985878)">формат для швидкого</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(79.529906 222.310463)">завантаження.</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6e30a8" x="317.7" y="86.459188" transform="rotate(-0 317.7 86.459188)">Векторна графіка</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(249.069375 122.251922)">SVG — логотипи школи,</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(237.270375 135.576506)">іконки, математичні фігури.</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(317.7 148.901091)"/>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(288.907875 162.225675)">Переваги:</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(257.436844 175.550259)">• Не втрачає чіткості</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(242.927719 189.123159)">при будь-якому масштабі;</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(244.65825 202.447744)">• Має мінімальний розмір</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(297.900563 215.772328)">файлу.</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c93400" x="513" y="86.408406" transform="rotate(-0 513 86.408406)">Аудіо та відео</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(446.718375 115.58963)">MP3 / OGG (&lt;audio&gt;) —</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(449.450438 128.914214)">аудіоказки, диктанти,</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(468.099 142.238798)">фонова музика.</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(513 155.563383)"/>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(443.118094 168.887967)">MP4 / WebM (&lt;video&gt;) —</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(449.638594 182.212552)">навчальні відеоуроки.</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(513 195.537136)"/>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(447.962063 209.110036)">Обов'язковий атрибут:</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #1d1d1f" transform="translate(431.773031 222.43462)">controls (панель керування).</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p5264303c67">
+   <rect x="10.8" y="10.8" width="613.8" height="255.024"/>
+  </clipPath>
+ </defs>
+</svg>

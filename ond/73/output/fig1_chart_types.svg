@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="668.88pt" height="343.152pt" viewBox="0 0 668.88 343.152" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-24T09:42:37.938961</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 343.152 
+L 668.88 343.152 
+L 668.88 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 41.49 179.892 
+L 312.12 179.892 
+Q 323.28 179.892 323.28 168.804 
+L 323.28 66.24 
+Q 323.28 55.152 312.12 55.152 
+L 41.49 55.152 
+Q 30.33 55.152 30.33 66.24 
+L 30.33 168.804 
+Q 30.33 179.892 41.49 179.892 
+z
+" clip-path="url(#p02a209cb51)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 45.954 62.9136 
+L 112.356 62.9136 
+Q 114.03 62.9136 114.03 61.2504 
+L 114.03 61.2504 
+Q 114.03 59.5872 112.356 59.5872 
+L 45.954 59.5872 
+Q 44.28 59.5872 44.28 61.2504 
+L 44.28 61.2504 
+Q 44.28 62.9136 45.954 62.9136 
+z
+" clip-path="url(#p02a209cb51)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 356.76 179.892 
+L 627.39 179.892 
+Q 638.55 179.892 638.55 168.804 
+L 638.55 66.24 
+Q 638.55 55.152 627.39 55.152 
+L 356.76 55.152 
+Q 345.6 55.152 345.6 66.24 
+L 345.6 168.804 
+Q 345.6 179.892 356.76 179.892 
+z
+" clip-path="url(#p02a209cb51)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 361.224 62.9136 
+L 427.626 62.9136 
+Q 429.3 62.9136 429.3 61.2504 
+L 429.3 61.2504 
+Q 429.3 59.5872 427.626 59.5872 
+L 361.224 59.5872 
+Q 359.55 59.5872 359.55 61.2504 
+L 359.55 61.2504 
+Q 359.55 62.9136 361.224 62.9136 
+z
+" clip-path="url(#p02a209cb51)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 41.49 318.492 
+L 312.12 318.492 
+Q 323.28 318.492 323.28 307.404 
+L 323.28 204.84 
+Q 323.28 193.752 312.12 193.752 
+L 41.49 193.752 
+Q 30.33 193.752 30.33 204.84 
+L 30.33 307.404 
+Q 30.33 318.492 41.49 318.492 
+z
+" clip-path="url(#p02a209cb51)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 45.954 201.5136 
+L 112.356 201.5136 
+Q 114.03 201.5136 114.03 199.8504 
+L 114.03 199.8504 
+Q 114.03 198.1872 112.356 198.1872 
+L 45.954 198.1872 
+Q 44.28 198.1872 44.28 199.8504 
+L 44.28 199.8504 
+Q 44.28 201.5136 45.954 201.5136 
+z
+" clip-path="url(#p02a209cb51)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 356.76 318.492 
+L 627.39 318.492 
+Q 638.55 318.492 638.55 307.404 
+L 638.55 204.84 
+Q 638.55 193.752 627.39 193.752 
+L 356.76 193.752 
+Q 345.6 193.752 345.6 204.84 
+L 345.6 307.404 
+Q 345.6 318.492 356.76 318.492 
+z
+" clip-path="url(#p02a209cb51)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 361.224 201.5136 
+L 427.626 201.5136 
+Q 429.3 201.5136 429.3 199.8504 
+L 429.3 199.8504 
+Q 429.3 198.1872 427.626 198.1872 
+L 361.224 198.1872 
+Q 359.55 198.1872 359.55 199.8504 
+L 359.55 199.8504 
+Q 359.55 201.5136 361.224 201.5136 
+z
+" clip-path="url(#p02a209cb51)" style="fill: #6e30a8"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="334.44" y="34.250406" transform="rotate(-0 334.44 34.250406)">Основні види діаграм для візуалізації педагогічних даних</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #0071e3" x="44.28" y="78.007744" transform="rotate(-0 44.28 78.007744)">КАТЕГОРІАЛЬНІ ДАНІ • ПОРІВНЯННЯ</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="44.28" y="99.902756" transform="rotate(-0 44.28 99.902756)">Стовпчаста діаграма (Bar / Column)</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(44.28 126.774705)">Порівнює величини між окремими групами:</text>
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(44.28 140.8481)">контрольним та експериментальним класами,</text>
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(44.28 154.921495)">рівнями досягнень НУШ (П, С, Д, В).</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #c93400" x="359.55" y="78.007744" transform="rotate(-0 359.55 78.007744)">НЕПЕРЕРВНІ ДАНІ • ЧАСТОТА ІНТЕРВАЛІВ</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="359.55" y="99.850022" transform="rotate(-0 359.55 99.850022)">Гістограма розподілу (Histogram)</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(359.55 126.643088)">Показує, скільки учнів потрапило у кожен</text>
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(359.55 140.716483)">числовий інтервал (наприклад, час виконання</text>
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(359.55 155.053113)">тесту або розподіл балів від 0 до 100).</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #248a3d" x="44.28" y="216.607744" transform="rotate(-0 44.28 216.607744)">ЧАСТКИ ЦІЛОГО • ВІДСОТКОВА СТРУКТУРА</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="44.28" y="238.450022" transform="rotate(-0 44.28 238.450022)">Кругова діаграма (Pie Chart)</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(44.28 265.338463)">Відображає внесок кожної категорії у 100%</text>
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(44.28 279.675093)">вибірки (наприклад, частки відповідей учнів</text>
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(44.28 293.748488)">в анкеті при кількості категорій до 5).</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6e30a8" x="359.55" y="217.206572" transform="rotate(-0 359.55 217.206572)">ПАРНІ ЗМІННІ • КОРЕЛЯЦІЙНИЙ ЗВ'ЯЗОК</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="359.55" y="238.502756" transform="rotate(-0 359.55 238.502756)">Діаграма розсіювання (Scatter Plot)</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(359.55 265.243088)">Виявляє залежність між двома показниками</text>
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(359.55 279.316483)">одного учня (наприклад, часом тренувань</text>
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(359.55 293.653113)">у Scratch та підсумковим балом за проєкт).</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p02a209cb51">
+   <rect x="10.8" y="10.8" width="647.28" height="321.552"/>
+  </clipPath>
+ </defs>
+</svg>

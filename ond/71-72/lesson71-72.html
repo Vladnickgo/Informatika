@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практичне заняття № 13. Графічне представлення даних</title>
+    <style>
+        :root {
+            --bg: #f5f5f7;
+            --surface: #ffffff;
+            --surface-2: #fbfbfd;
+            --text: #1d1d1f;
+            --muted: #6e6e73;
+            --line: #d2d2d7;
+            --blue: #0071e3;
+            --blue-2: #2997ff;
+            --blue-soft: #e8f2ff;
+            --green: #30d158;
+            --green-soft: #f0fff5;
+            --orange: #ff9f0a;
+            --orange-soft: #fff8ec;
+            --purple: #bf5af2;
+            --purple-soft: #fbf3ff;
+            --red: #ff453a;
+            --red-soft: #fff1f0;
+            --radius: 24px;
+            --radius-sm: 16px;
+            --shadow: 0 18px 46px rgba(0, 0, 0, 0.09);
+            --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.055);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background:
+                radial-gradient(circle at 12% 0%, rgba(0, 113, 227, 0.08), transparent 32rem),
+                radial-gradient(circle at 92% 16%, rgba(48, 209, 88, 0.07), transparent 26rem),
+                linear-gradient(180deg, #fbfbfd 0%, var(--bg) 100%);
+            color: var(--text);
+            line-height: 1.58;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 36px));
+            margin: 0 auto;
+            padding: 26px 0 72px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #3a3a3c;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 4px rgba(48, 209, 88, 0.14);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            padding: clamp(28px, 5vw, 52px);
+            border-radius: 34px;
+            background:
+                radial-gradient(circle at 84% 12%, rgba(100, 210, 255, 0.55), transparent 22rem),
+                radial-gradient(circle at 8% 88%, rgba(48, 209, 88, 0.24), transparent 20rem),
+                linear-gradient(135deg, #071a33 0%, #0a5bb8 54%, #0a84ff 100%);
+            color: #fff;
+            box-shadow: 0 28px 70px rgba(0, 53, 122, 0.24);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -20% -10% auto auto;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            filter: blur(2px);
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto auto -140px -80px;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: rgba(48, 209, 88, 0.18);
+            filter: blur(12px);
+            z-index: -1;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            margin: 0;
+            font-size: clamp(2.1rem, 5.4vw, 4.4rem);
+            line-height: 0.98;
+            letter-spacing: -0.055em;
+            font-weight: 750;
+        }
+
+        .hero .lead {
+            max-width: 780px;
+            margin: 20px 0 0;
+            font-size: clamp(1rem, 1.7vw, 1.22rem);
+            color: rgba(255, 255, 255, 0.84);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 26px;
+            align-items: end;
+            margin-top: 28px;
+        }
+
+        .hero-panel {
+            padding: 18px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.11);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .hero-panel h2 {
+            margin: 0 0 8px;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .hero-panel p {
+            margin: 0;
+            color: #fff;
+            font-size: 0.96rem;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .toc {
+            margin: 26px 0 32px;
+            padding: 18px 22px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .toc h2 {
+            margin: 0 0 12px;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px 24px;
+        }
+
+        .toc a {
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            padding: 6px 0;
+            color: var(--text);
+            font-weight: 560;
+        }
+
+        .toc a:hover {
+            color: var(--blue);
+        }
+
+        .toc .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 24px;
+            height: 24px;
+            border-radius: 8px;
+            background: var(--blue-soft);
+            color: var(--blue);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .section {
+            margin: 42px 0;
+        }
+
+        .section h2 {
+            margin: 0 0 16px;
+            font-size: clamp(1.55rem, 3.2vw, 2.35rem);
+            line-height: 1.1;
+            letter-spacing: -0.035em;
+        }
+
+        .section h3 {
+            margin: 26px 0 10px;
+            font-size: 1.24rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section p {
+            margin: 0 0 13px;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .card,
+        .diagram-card,
+        .table-card,
+        .callout,
+        .formula,
+        .example,
+        .source,
+        .def-card,
+        .condition,
+        .mini-card,
+        .level-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card {
+            padding: 22px;
+        }
+
+        .diagram-card {
+            margin: 22px 0;
+            padding: 22px;
+            overflow: hidden;
+        }
+
+        .diagram-card svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        figure {
+            margin: 22px 0;
+        }
+
+        figcaption {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 0.88rem;
+            text-align: center;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .def-card {
+            padding: 20px;
+        }
+
+        .def-card h4 {
+            margin: 0 0 8px;
+            font-size: 1.06rem;
+            letter-spacing: -0.01em;
+        }
+
+        .def-card p {
+            margin: 0;
+            color: #3a3a3c;
+        }
+
+        .symbol,
+        .mono {
+            font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+            background: #f5f5f7;
+            padding: 2px 7px;
+            border-radius: 7px;
+            font-size: 0.93em;
+            white-space: nowrap;
+        }
+
+        .callout {
+            margin: 18px 0;
+            padding: 18px 20px;
+            border-left: 5px solid var(--blue);
+            background: linear-gradient(180deg, #f7fbff, #fff);
+        }
+
+        .callout h4 {
+            margin: 0 0 7px;
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--blue);
+        }
+
+        .callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        .callout.warn {
+            border-left-color: var(--orange);
+            background: linear-gradient(180deg, var(--orange-soft), #fff);
+        }
+
+        .callout.warn h4 {
+            color: #b56500;
+        }
+
+        .callout.good {
+            border-left-color: var(--green);
+            background: linear-gradient(180deg, var(--green-soft), #fff);
+        }
+
+        .callout.good h4 {
+            color: #1f7a38;
+        }
+
+        .callout.purple {
+            border-left-color: var(--purple);
+            background: linear-gradient(180deg, var(--purple-soft), #fff);
+        }
+
+        .callout.purple h4 {
+            color: #7d2aa0;
+        }
+
+        .callout.red {
+            border-left-color: var(--red);
+            background: linear-gradient(180deg, var(--red-soft), #fff);
+        }
+
+        .callout.red h4 {
+            color: #b3261e;
+        }
+
+        .formula {
+            margin: 20px 0;
+            padding: 22px;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.08), transparent 18rem),
+                #fff;
+        }
+
+        .formula .line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--line);
+        }
+
+        .formula .line:last-child {
+            border-bottom: none;
+        }
+
+        .formula code {
+            font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0a4fa8;
+            background: #f0f6ff;
+            padding: 5px 10px;
+            border-radius: 9px;
+            white-space: nowrap;
+        }
+
+        .formula .desc {
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .table-card {
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 680px;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--line);
+        }
+
+        th {
+            background: #f5f5f7;
+            color: #3a3a3c;
+            font-size: 0.86rem;
+            font-weight: 650;
+        }
+
+        td {
+            font-size: 0.94rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .example {
+            margin: 20px 0;
+            padding: 22px;
+            background:
+                linear-gradient(180deg, #fff 0%, #fbfbfd 100%);
+        }
+
+        .example h4 {
+            margin: 0 0 9px;
+            font-size: 0.84rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--blue);
+        }
+
+        .example p:last-child {
+            margin-bottom: 0;
+        }
+
+        .condition {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #fff, #fbfbfd);
+        }
+
+        .condition .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            background: var(--blue-soft);
+            color: var(--blue);
+            font-weight: 800;
+            font-size: 1.15rem;
+        }
+
+        .condition h4 {
+            margin: 0 0 6px;
+            font-size: 1.02rem;
+        }
+
+        .condition p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .source {
+            margin: 10px 0;
+            padding: 16px 18px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .source .snum {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: #f5f5f7;
+            color: #3a3a3c;
+            font-size: 0.86rem;
+            font-weight: 750;
+        }
+
+        .source p {
+            margin: 0;
+        }
+
+        .footer {
+            margin-top: 46px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.86rem;
+            text-align: center;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: var(--blue-soft);
+            color: var(--blue);
+            font-size: 0.8rem;
+            font-weight: 650;
+        }
+
+        .pill.green {
+            background: var(--green-soft);
+            color: #1f7a38;
+        }
+
+        .pill.orange {
+            background: var(--orange-soft);
+            color: #b56500;
+        }
+
+        .pill.purple {
+            background: var(--purple-soft);
+            color: #7d2aa0;
+        }
+
+        .pill.red {
+            background: var(--red-soft);
+            color: #b3261e;
+        }
+
+        .two-col-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px 22px;
+            margin: 12px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .two-col-list li {
+            position: relative;
+            padding-left: 18px;
+            color: #3a3a3c;
+        }
+
+        .two-col-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.68em;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--blue);
+        }
+
+        /* Міні-картки типів діаграм */
+        .chart-mini {
+            padding: 16px;
+            background: linear-gradient(180deg, #fff, #fbfbfd);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chart-mini h4 {
+            margin: 12px 0 4px;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .chart-mini p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .chart-mini svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            background: #fff;
+            border: 1px solid #ececf0;
+        }
+
+        /* Рівні практичної роботи */
+        .level-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .level-head h3 {
+            margin: 0;
+        }
+
+        .level-card {
+            padding: 22px;
+            margin: 22px 0;
+        }
+
+        .steps {
+            counter-reset: step;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .steps li {
+            position: relative;
+            padding: 10px 0 10px 44px;
+            border-bottom: 1px dashed var(--line);
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        .steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: var(--blue-soft);
+            color: var(--blue);
+            font-weight: 800;
+            font-size: 0.86rem;
+        }
+
+        .criteria-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--line);
+        }
+
+        .criteria-row:last-child {
+            border-bottom: none;
+        }
+
+        .bar {
+            flex: 1 1 auto;
+            height: 10px;
+            border-radius: 999px;
+            background: #ececf0;
+            overflow: hidden;
+            min-width: 90px;
+        }
+
+        .bar>span {
+            display: block;
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--blue-2), var(--blue));
+        }
+
+        @media (max-width: 900px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 820px) {
+
+            .hero-grid,
+            .grid-2,
+            .grid-3,
+            .toc-grid,
+            .two-col-list {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                border-radius: 26px;
+            }
+
+            table {
+                min-width: 620px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .criteria-row {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Друк: блоки не розриваються, тіні та декор прибираються */
+        @media print {
+            @page {
+                size: A4;
+                margin: 14mm;
+            }
+
+            body {
+                background: #fff !important;
+                color: #000 !important;
+                font-size: 10.5pt;
+                line-height: 1.45;
+            }
+
+            .wrap {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+            }
+
+            .topbar,
+            .toc,
+            .no-print {
+                display: none !important;
+            }
+
+            .hero {
+                background: #fff !important;
+                color: #000 !important;
+                border: 1px solid #cfcfcf;
+                border-radius: 14px;
+                box-shadow: none;
+                padding: 18px 20px;
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none !important;
+            }
+
+            .hero h1,
+            .hero .lead,
+            .hero .eyebrow,
+            .hero-panel p,
+            .hero-panel h2,
+            .hero .chip {
+                color: #000 !important;
+            }
+
+            .hero .chip,
+            .hero-panel {
+                background: #f5f5f7 !important;
+                border-color: #cfcfcf !important;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+
+            .card,
+            .diagram-card,
+            .table-card,
+            .callout,
+            .formula,
+            .example,
+            .source,
+            .def-card,
+            .condition,
+            .mini-card,
+            .level-card,
+            .chart-mini,
+            figure,
+            table,
+            tr {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .card,
+            .diagram-card,
+            .table-card,
+            .callout,
+            .formula,
+            .example,
+            .source,
+            .def-card,
+            .condition,
+            .mini-card,
+            .level-card,
+            .chart-mini {
+                box-shadow: none !important;
+                border: 1px solid #d0d0d0 !important;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                display: block;
+            }
+
+            .grid-2>*+*,
+            .grid-3>*+*,
+            .grid-4>*+* {
+                margin-top: 10px;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+
+            a {
+                color: #000 !important;
+                text-decoration: none !important;
+            }
+
+            .table-scroll {
+                overflow: visible;
+            }
+
+            table {
+                min-width: 0;
+                width: 100%;
+            }
+
+            th,
+            td {
+                padding: 8px 9px;
+                font-size: 9.4pt;
+            }
+
+            .section {
+                margin: 22px 0;
+            }
+
+            .bar {
+                background: #e5e5e5;
+            }
+
+            .bar>span {
+                background: #555;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="wrap">
+        <div class="topbar no-print">
+            <span class="badge"><span class="dot"></span> Практичне заняття № 13 · візуалізація даних</span>
+            <span>Педагогічне дослідження · табличний процесор</span>
+        </div>
+
+        <header class="hero">
+            <p class="eyebrow">Практичне заняття № 13</p>
+            <h1>Графічне представлення даних</h1>
+            <p class="lead">
+                Вчимося обирати тип графіка за логікою дослідницького запитання, будувати діаграми в табличному
+                процесорі та оформлювати їх за академічним стандартом.
+            </p>
+
+            <div class="hero-grid">
+                <!--<div class="hero-panel">
+                    <h2>Тема</h2>
+                    <p>Графічне представлення даних. Підготовка звіту.</p>
+                </div>-->
+                <div class="hero-panel">
+                    <h2>Мета</h2>
+                    <p>
+                        Формувати вміння графічно представляти дані. Розвивати візуальне мислення та вміння добирати
+                        графічні форми подання даних. Виховувати наочність і точність у представленні результатів.
+                    </p>
+                </div>
+            </div>
+
+           <!-- <div class="chips">
+                <span class="chip">графічне представлення</span>
+                <span class="chip">діаграма</span>
+                <span class="chip">гістограма</span>
+                <span class="chip">лінійний графік</span>
+                <span class="chip">секторна діаграма</span>
+                <span class="chip">точкова діаграма</span>
+                <span class="chip">легенда</span>
+                <span class="chip">осі та шкала</span>
+                <span class="chip">підпис рисунка</span>
+                <span class="chip">табличний процесор</span>
+                <span class="chip">аналітичний висновок</span>
+            </div>-->
+        </header>
+
+        <nav class="toc no-print" aria-label="Зміст заняття">
+            <h2>Зміст</h2>
+            <div class="toc-grid">
+                <a href="#meta"><span class="num">i</span> Мета, обладнання, література</a>
+                <a href="#t1"><span class="num">1</span> Сутність графічного методу</a>
+                <a href="#t2"><span class="num">2</span> Класифікація діаграм</a>
+                <a href="#t3"><span class="num">3</span> Попередня обробка даних</a>
+               <!-- <a href="#t4"><span class="num">4</span> Вимоги до оформлення</a>
+                <a href="#t5"><span class="num">5</span> Типові помилки візуалізації</a>
+                <a href="#levels"><span class="num">≡</span> Різнорівневі завдання</a>
+                <a href="#criteria"><span class="num">★</span> Критерії оцінювання</a>
+                <a href="#report"><span class="num">↗</span> Форма звітності</a>-->
+            </div>
+        </nav>
+
+        <section class="section" id="meta">
+            <h2>Організаційна інформація</h2>
+            <div class="grid-2">
+                <div class="def-card">
+                    <h4>Мета заняття</h4>
+                    <p>
+                        Формувати вміння графічно представляти дані; розвивати візуальне мислення та вміння добирати
+                        графічні форми подання даних; виховувати наочність і точність у представленні результатів.
+                    </p>
+                </div>
+                <div class="def-card">
+                    <h4>Обладнання</h4>
+                    <p>Інструкційні картки, комп’ютер із табличним процесором (Libreoffice Calc / Microsoft Excel /
+                        Google Таблиці), текстовий редактор для оформлення звіту.</p>
+                </div>
+            </div>
+
+            <h3>Література</h3>
+            <div class="source">
+                <span class="snum">1</span>
+                <p>
+                    Методичні рекомендації до виконання та захисту курсових робіт для здобувачів ОС «Бакалавр»
+                    спеціальності 012 «Дошкільна освіта» / уклад. Н. В. Лісневська, Л. П. Загородня, С. А. Тітаренко,
+                    І. Г. Данильченко, І. В. Корякіна, Н. М. Гордій. Глухів, 2023. 65 с.
+                </p>
+            </div>
+            <div class="source">
+                <span class="snum">2</span>
+                <p>Пріма Р. М. Сучасна наукова стаття: технологія творчості. Науковий вісник. 2020. № 4 (408). С.
+                    99–103.</p>
+            </div>
+        </section>
+
+        <section class="section" id="t1">
+            <h2>1. Сутність і роль графічного методу в педагогічному дослідженні</h2>
+
+            <p>
+                <strong>Графічне представлення даних</strong> — це спосіб наочного відображення кількісних і якісних
+                показників дослідження за допомогою геометричних образів (стовпчиків, ліній, секторів, точок).
+                У роботі вчителя інформатики початкової школи діаграми дають змогу швидко оцінити рівень сформованості
+                алгоритмічного мислення учнів, порівняти успішність контрольного та експериментального класів
+                і переконливо обґрунтувати ефективність обраної методики у звіті чи курсовій роботі.
+            </p>
+
+            <div class="diagram-card">
+                <figure>
+                    <svg viewBox="0 0 1000 250" role="img" aria-labelledby="graphRoleTitle graphRoleDesc">
+                        <title id="graphRoleTitle">Роль графічного методу в дослідженні</title>
+                        <desc id="graphRoleDesc">Таблиця даних перетворюється на діаграму, а діаграма — на аналітичний
+                            висновок.</desc>
+                        <defs>
+                            <marker id="arrG" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                                <path d="M0,0 L10,5 L0,10 Z" fill="#0071e3" />
+                            </marker>
+                        </defs>
+
+                        <rect x="20" y="45" width="240" height="160" rx="24" fill="#f5f5f7" stroke="#d2d2d7" />
+                        <text x="140" y="88" text-anchor="middle" font-size="17" font-weight="800"
+                            fill="#1d1d1f">ТАБЛИЦЯ ДАНИХ</text>
+                        <text x="140" y="120" text-anchor="middle" font-size="14" fill="#6e6e73">числа, факти,</text>
+                        <text x="140" y="144" text-anchor="middle" font-size="14" fill="#6e6e73">результати
+                            вимірювань</text>
+                        <text x="140" y="178" text-anchor="middle" font-size="13" fill="#8e8e93">«що є»</text>
+
+                        <line x1="272" y1="125" x2="318" y2="125" stroke="#0071e3" stroke-width="4"
+                            marker-end="url(#arrG)" />
+
+                        <rect x="330" y="45" width="240" height="160" rx="24" fill="#e8f2ff" stroke="#b7d7ff" />
+                        <text x="450" y="88" text-anchor="middle" font-size="17" font-weight="800"
+                            fill="#0071e3">ДІАГРАМА</text>
+                        <text x="450" y="120" text-anchor="middle" font-size="14" fill="#6e6e73">геометричний
+                            образ:</text>
+                        <text x="450" y="144" text-anchor="middle" font-size="14" fill="#6e6e73">стовпчик, лінія,
+                            сектор, точка</text>
+                        <text x="450" y="178" text-anchor="middle" font-size="13" fill="#8e8e93">«як це видно»</text>
+
+                        <line x1="582" y1="125" x2="628" y2="125" stroke="#0071e3" stroke-width="4"
+                            marker-end="url(#arrG)" />
+
+                        <rect x="640" y="45" width="340" height="160" rx="24" fill="#effff4" stroke="#b7f0c8" />
+                        <text x="810" y="88" text-anchor="middle" font-size="17" font-weight="800"
+                            fill="#1f7a38">АНАЛІТИЧНИЙ ВИСНОВОК</text>
+                        <text x="810" y="120" text-anchor="middle" font-size="14" fill="#6e6e73">порівняння,
+                            тенденція,</text>
+                        <text x="810" y="144" text-anchor="middle" font-size="14" fill="#6e6e73">частка,
+                            взаємозв’язок</text>
+                        <text x="810" y="178" text-anchor="middle" font-size="13" fill="#8e8e93">«що з цього
+                            випливає»</text>
+                    </svg>
+                    <figcaption>Схема 1. Ланцюжок «таблиця → діаграма → висновок»</figcaption>
+                </figure>
+            </div>
+
+            <div class="callout">
+                <h4>Ключова думка</h4>
+                <p>
+                    Діаграма — не прикраса звіту, а інструмент доведення. Вона має відповідати на конкретне запитання
+                    дослідження й бути зрозумілою читачеві без усних пояснень автора.
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="t2">
+            <h2>2. Класифікація діаграм за характером досліджуваних даних</h2>
+
+            <p>
+                Вибір типу діаграми визначається не естетичними вподобаннями автора, а логікою запитання, на яке
+                відповідає рисунок. Невідповідність типу графіка природі даних ускладнює сприйняття висновків
+                дослідження.
+            </p>
+
+            <div class="grid-4">
+                <div class="chart-mini">
+                    <svg viewBox="0 0 220 200" role="img" aria-label="Стовпчаста діаграма">
+                        <line x1="24" y1="180" x2="205" y2="180" stroke="#d2d2d7" stroke-width="2" />
+                        <line x1="24" y1="20" x2="24" y2="180" stroke="#d2d2d7" stroke-width="2" />
+                        <g fill="#0071e3">
+                            <rect x="42" y="120" width="30" height="60" rx="6" />
+                            <rect x="86" y="90" width="30" height="90" rx="6" fill="#2997ff" />
+                            <rect x="130" y="60" width="30" height="120" rx="6" fill="#64b5ff" />
+                            <rect x="174" y="105" width="30" height="75" rx="6" fill="#8ecbff" />
+                        </g>
+                        <g font-size="11" fill="#6e6e73" text-anchor="middle">
+                            <text x="57" y="194">A</text>
+                            <text x="101" y="194">B</text>
+                            <text x="145" y="194">C</text>
+                            <text x="189" y="194">D</text>
+                        </g>
+                    </svg>
+                    <h4>Стовпчаста</h4>
+                    <p>Порівняння значень між групами.</p>
+                </div>
+
+                <div class="chart-mini">
+                    <svg viewBox="0 0 220 200" role="img" aria-label="Лінійний графік">
+                        <line x1="24" y1="180" x2="205" y2="180" stroke="#d2d2d7" stroke-width="2" />
+                        <line x1="24" y1="20" x2="24" y2="180" stroke="#d2d2d7" stroke-width="2" />
+                        <polyline points="42,150 82,126 122,104 162,78 196,52" fill="none" stroke="#30d158"
+                            stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                        <g fill="#30d158">
+                            <circle cx="42" cy="150" r="5" />
+                            <circle cx="82" cy="126" r="5" />
+                            <circle cx="122" cy="104" r="5" />
+                            <circle cx="162" cy="78" r="5" />
+                            <circle cx="196" cy="52" r="5" />
+                        </g>
+                        <g font-size="11" fill="#6e6e73" text-anchor="middle">
+                            <text x="42" y="194">1</text>
+                            <text x="82" y="194">2</text>
+                            <text x="122" y="194">3</text>
+                            <text x="162" y="194">4</text>
+                            <text x="196" y="194">5</text>
+                        </g>
+                    </svg>
+                    <h4>Лінійний</h4>
+                    <p>Динаміка показника в часі.</p>
+                </div>
+
+                <div class="chart-mini">
+                    <svg viewBox="0 0 220 200" role="img" aria-label="Секторна діаграма">
+                        <path d="M110,110 L110,35 A75,75 0 0 1 154.1,170.7 Z" fill="#0071e3" />
+                        <path d="M110,110 L154.1,170.7 A75,75 0 0 1 38.7,133.2 Z" fill="#30d158" />
+                        <path d="M110,110 L38.7,133.2 A75,75 0 0 1 65.9,49.3 Z" fill="#ff9f0a" />
+                        <path d="M110,110 L65.9,49.3 A75,75 0 0 1 110,35 Z" fill="#bf5af2" />
+                        <text x="110" y="196" text-anchor="middle" font-size="11" fill="#6e6e73">частки в цілому</text>
+                    </svg>
+                    <h4>Секторна</h4>
+                    <p>Частка категорії в сукупності (100 %).</p>
+                </div>
+
+                <div class="chart-mini">
+                    <svg viewBox="0 0 220 200" role="img" aria-label="Точкова діаграма">
+                        <line x1="24" y1="180" x2="205" y2="180" stroke="#d2d2d7" stroke-width="2" />
+                        <line x1="24" y1="20" x2="24" y2="180" stroke="#d2d2d7" stroke-width="2" />
+                        <line x1="34" y1="168" x2="198" y2="46" stroke="#bf5af2" stroke-width="2.5"
+                            stroke-dasharray="6 5" />
+                        <g fill="#bf5af2">
+                            <circle cx="42" cy="158" r="5" />
+                            <circle cx="64" cy="146" r="5" />
+                            <circle cx="82" cy="132" r="5" />
+                            <circle cx="100" cy="124" r="5" />
+                            <circle cx="120" cy="108" r="5" />
+                            <circle cx="138" cy="96" r="5" />
+                            <circle cx="156" cy="82" r="5" />
+                            <circle cx="176" cy="64" r="5" />
+                            <circle cx="194" cy="54" r="5" />
+                        </g>
+                        <text x="112" y="196" text-anchor="middle" font-size="11" fill="#6e6e73">X ↔ Y</text>
+                    </svg>
+                    <h4>Точкова</h4>
+                    <p>Кореляція між двома кількісними ознаками.</p>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип діаграми</th>
+                                <th>Аналітичне завдання</th>
+                                <th>Приклад у початковій школі</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Стовпчаста (гістограма)</strong></td>
+                                <td>Порівняння абсолютних або відносних значень між групами.</td>
+                                <td>Порівняння середнього балу учнів 3-А і 3-Б класів за підсумками тесту з безпеки в
+                                    інтернеті.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Лінійний графік</strong></td>
+                                <td>Відображення динаміки показника в часі чи за етапами експерименту.</td>
+                                <td>Зміна швидкості набору тексту молодшими школярами протягом 5 тижнів тренувань.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Секторна (кругова)</strong></td>
+                                <td>Демонстрація частки кожної категорії у загальній сукупності (100 %).</td>
+                                <td>Структура вибірки за рівнями володіння блоковим середовищем Scratch (початковий,
+                                    середній, достатній, високий).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Точкова діаграма</strong></td>
+                                <td>Виявлення кореляції (взаємозв’язку) між двома кількісними ознаками.</td>
+                                <td>Залежність між часом роботи з інтерактивним тренажером і кількістю правильних
+                                    відповідей.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="callout purple">
+                <h4>Правило вибору</h4>
+                <p>
+                    Спершу сформулюйте запитання: «Що я хочу показати?» Якщо відповідь — «хто більший», обирайте
+                    стовпчасту;
+                    «як змінювалося» — лінійну; «яка структура» — секторну; «чи є зв’язок» — точкову.
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="t3">
+            <h2>3. Попередня обробка первинних даних у табличному процесорі</h2>
+
+            <p>
+                Перед побудовою діаграми первинні протоколи спостережень чи тестування зводять у таблицю.
+                Для автоматичного підрахунку показників у табличному процесорі застосовують базові функції:
+            </p>
+
+            <div class="formula">
+                <div class="line">
+                    <code>=AVERAGE(B2:B26)</code>
+                    <span class="desc">обчислення середнього арифметичного вибірки;</span>
+                </div>
+                <div class="line">
+                    <code>=COUNTIF(C2:C26; "Високий")</code>
+                    <span class="desc">підрахунок кількості учнів, які досягли певного рівня;</span>
+                </div>
+                <div class="line">
+                    <code>=F2/$F$6*100</code>
+                    <span class="desc">переведення абсолютних частот у відсоткові частки.</span>
+                </div>
+            </div>
+
+            <div class="callout warn">
+                <h4>Зверніть увагу на абсолютне посилання</h4>
+                <p>
+                    У формулі відсотків <span class="symbol">$F$6</span> — це загальна сума, закріплена знаком
+                    <span class="symbol">$</span>. Без абсолютного посилання під час копіювання формули вниз знаменник
+                    «поповзе» й усі відсотки порахуються неправильно.
+                </p>
+            </div>
+
+            <div class="example">
+                <h4>Розширений приклад: від сирих балів до відсотків</h4>
+                <p>
+                    У стовпці B записано рівні учнів (наприклад, «Високий», «Достатній», «Середній», «Початковий»),
+                    у стовпці C — бали. Формула <span class="symbol">=COUNTIF($B$2:$B$26;"Високий")</span> порахує,
+                    скільки учнів мають високий рівень. Якщо результат дорівнює 6, а всього учнів 26, то частка
+                    високого рівня становить <span class="symbol">6/26*100 ≈ 23,1 %</span>. Саме ці відсотки й
+                    використовують для побудови секторної або групової стовпчастої діаграми.
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="t4">
+            <h2>4. Вимоги до оформлення діаграм у науковому звіті</h2>
+
+            <p>
+                Діаграма у звіті є самостійним носієм інформації, тому читач має зрозуміти її зміст без додаткових
+                усних пояснень автора. Кожен рисунок обов’язково містить номер, змістовний підпис під ним,
+                позначення осей, одиниці виміру та легенду.
+            </p>
+
+            <div class="diagram-card">
+                <figure>
+                    <svg viewBox="0 0 1060 270" role="img" aria-labelledby="elementsTitle elementsDesc">
+                        <title id="elementsTitle">Обов’язкові структурні елементи наукової діаграми</title>
+                        <desc id="elementsDesc">Чотири блоки: назва та номер, осі та шкала, ряди та легенда, посилання в
+                            тексті.</desc>
+                        <defs>
+                            <marker id="arrE" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                                <path d="M0,0 L9,4.5 L0,9 Z" fill="#8e8e93" />
+                            </marker>
+                        </defs>
+
+                        <rect x="15" y="45" width="235" height="175" rx="22" fill="#e8f2ff" stroke="#b7d7ff" />
+                        <rect x="15" y="45" width="235" height="9" rx="4.5" fill="#0071e3" />
+                        <text x="132" y="88" text-anchor="middle" font-size="16" font-weight="800" fill="#0071e3">1.
+                            Назва та номер</text>
+                        <text x="132" y="118" text-anchor="middle" font-size="13" fill="#6e6e73">Підпис під
+                            рисунком:</text>
+                        <text x="132" y="142" text-anchor="middle" font-size="13" font-style="italic"
+                            fill="#3a3a3c">Рис. 1. Розподіл учнів…</text>
+                        <text x="132" y="176" text-anchor="middle" font-size="12" fill="#8e8e93">Без повтору в полі
+                            графіка</text>
+
+                        <line x1="258" y1="132" x2="282" y2="132" stroke="#8e8e93" stroke-width="2.5"
+                            marker-end="url(#arrE)" />
+
+                        <rect x="290" y="45" width="235" height="175" rx="22" fill="#effff4" stroke="#b7f0c8" />
+                        <rect x="290" y="45" width="235" height="9" rx="4.5" fill="#30d158" />
+                        <text x="407" y="88" text-anchor="middle" font-size="16" font-weight="800" fill="#1f7a38">2. Осі
+                            та шкала</text>
+                        <text x="407" y="118" text-anchor="middle" font-size="13" fill="#6e6e73">Підписи осей X та
+                            Y</text>
+                        <text x="407" y="142" text-anchor="middle" font-size="13" fill="#6e6e73">Одиниці виміру (%,
+                            бали)</text>
+                        <text x="407" y="176" text-anchor="middle" font-size="12" fill="#8e8e93">Початок осі Y з
+                            нуля</text>
+
+                        <line x1="533" y1="132" x2="557" y2="132" stroke="#8e8e93" stroke-width="2.5"
+                            marker-end="url(#arrE)" />
+
+                        <rect x="565" y="45" width="235" height="175" rx="22" fill="#fff5e6" stroke="#ffd9a3" />
+                        <rect x="565" y="45" width="235" height="9" rx="4.5" fill="#ff9f0a" />
+                        <text x="682" y="88" text-anchor="middle" font-size="16" font-weight="800" fill="#b56500">3.
+                            Ряди та легенда</text>
+                        <text x="682" y="118" text-anchor="middle" font-size="13" fill="#6e6e73">Чіткий контраст
+                            кольорів</text>
+                        <text x="682" y="142" text-anchor="middle" font-size="13" fill="#6e6e73">Легенда для 2+
+                            рядів</text>
+                        <text x="682" y="176" text-anchor="middle" font-size="12" fill="#8e8e93">Підписи значень
+                            даних</text>
+
+                        <line x1="808" y1="132" x2="832" y2="132" stroke="#8e8e93" stroke-width="2.5"
+                            marker-end="url(#arrE)" />
+
+                        <rect x="840" y="45" width="205" height="175" rx="22" fill="#fbf3ff" stroke="#e1c4ff" />
+                        <rect x="840" y="45" width="205" height="9" rx="4.5" fill="#bf5af2" />
+                        <text x="942" y="88" text-anchor="middle" font-size="16" font-weight="800" fill="#7d2aa0">4.
+                            Посилання</text>
+                        <text x="942" y="118" text-anchor="middle" font-size="13" fill="#6e6e73">Згадка в тексті
+                            звіту</text>
+                        <text x="942" y="142" text-anchor="middle" font-size="13" fill="#6e6e73">Аналітичний
+                            висновок</text>
+                        <text x="942" y="176" text-anchor="middle" font-size="12" fill="#8e8e93">Пояснення
+                            тенденцій</text>
+                    </svg>
+                    <figcaption>Схема 2. Обов’язкові елементи наукової діаграми в академічному звіті</figcaption>
+                </figure>
+            </div>
+
+            <div class="callout warn">
+                <h4>Не дублюйте заголовок</h4>
+                <p>
+                    У наукових звітах і статтях не дублюйте заголовок діаграми всередині її графічної області,
+                    якщо під рисунком уже розміщено підпис формату
+                    <em>Рис. 1. Розподіл учнів 4-х класів за рівнями цифрової грамотності.</em>
+                </p>
+            </div>
+
+            <div class="callout good">
+                <h4>Посилання та коментар</h4>
+                <p>
+                    У тексті звіту перед рисунком або одразу після нього обов’язково наводьте посилання (рис. 1)
+                    та стислий аналітичний коментар виявлених закономірностей.
+                </p>
+            </div>
+
+            <div class="example">
+                <h4>Приклад коректного фрагмента звіту</h4>
+                <p>
+                    «На рис. 1 подано розподіл учнів 4-х класів за рівнями цифрової грамотності. Як бачимо,
+                    найбільша частка учнів (40 %) має достатній рівень, тоді як високий рівень зафіксовано лише
+                    у 18 % респондентів. Це свідчить про доцільність посилення практичних завдань з цифрових
+                    навичок у 4 класі.»
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="t5">
+            <h2>5. Типові помилки візуалізації та контроль точності</h2>
+
+            <p>
+                Надмірне декоративне оформлення (об’ємні фігури, тіні, градієнти) або неправильно обраний масштаб
+                осі здатні викривити реальну картину педагогічного експерименту й знизити довіру до результатів.
+            </p>
+
+            <div class="diagram-card">
+                <figure>
+                    <svg viewBox="0 0 1000 360" role="img" aria-labelledby="distortTitle distortDesc">
+                        <title id="distortTitle">Порівняння обрізаної та нульової шкали</title>
+                        <desc id="distortDesc">Ліворуч обрізана вісь штучно збільшує різницю між стовпчиками; праворуч
+                            нульова база показує реальну картину.</desc>
+
+                        <rect x="20" y="20" width="460" height="320" rx="24" fill="#fff1f0" stroke="#ffc9c4" />
+                        <text x="250" y="58" text-anchor="middle" font-size="17" font-weight="800"
+                            fill="#b3261e">Обрізана вісь Y (60–90)</text>
+                        <text x="250" y="82" text-anchor="middle" font-size="13" fill="#8e8e93">штучне збільшення
+                            різниці</text>
+
+                        <line x1="90" y1="290" x2="430" y2="290" stroke="#d2d2d7" stroke-width="2" />
+                        <line x1="90" y1="105" x2="90" y2="290" stroke="#d2d2d7" stroke-width="2" />
+
+                        <g font-size="11" fill="#6e6e73" text-anchor="end">
+                            <text x="82" y="293">60</text>
+                            <text x="82" y="248">70</text>
+                            <text x="82" y="203">80</text>
+                            <text x="82" y="158">90</text>
+                        </g>
+
+                        <rect x="130" y="158" width="60" height="132" rx="8" fill="#ff453a" />
+                        <rect x="235" y="131" width="60" height="159" rx="8" fill="#ff6b5e" />
+                        <rect x="340" y="105" width="60" height="185" rx="8" fill="#ff8f85" />
+
+                        <g font-size="13" font-weight="700" fill="#b3261e" text-anchor="middle">
+                            <text x="160" y="150">82</text>
+                            <text x="265" y="123">86</text>
+                            <text x="370" y="97">90</text>
+                        </g>
+
+                        <text x="250" y="322" text-anchor="middle" font-size="12" fill="#8e8e93">Різниця «виглядає»
+                            драматичною</text>
+
+                        <rect x="520" y="20" width="460" height="320" rx="24" fill="#effff4" stroke="#b7f0c8" />
+                        <text x="750" y="58" text-anchor="middle" font-size="17" font-weight="800"
+                            fill="#1f7a38">Нульова база (0–90)</text>
+                        <text x="750" y="82" text-anchor="middle" font-size="13" fill="#8e8e93">реальна картина
+                            співвідношення</text>
+
+                        <line x1="590" y1="290" x2="930" y2="290" stroke="#d2d2d7" stroke-width="2" />
+                        <line x1="590" y1="105" x2="590" y2="290" stroke="#d2d2d7" stroke-width="2" />
+
+                        <g font-size="11" fill="#6e6e73" text-anchor="end">
+                            <text x="582" y="293">0</text>
+                            <text x="582" y="248">30</text>
+                            <text x="582" y="203">60</text>
+                            <text x="582" y="158">90</text>
+                        </g>
+
+                        <rect x="630" y="126" width="60" height="164" rx="8" fill="#30d158" />
+                        <rect x="735" y="118" width="60" height="172" rx="8" fill="#5ee07f" />
+                        <rect x="840" y="105" width="60" height="185" rx="8" fill="#8ff0a6" />
+
+                        <g font-size="13" font-weight="700" fill="#1f7a38" text-anchor="middle">
+                            <text x="660" y="118">82</text>
+                            <text x="765" y="110">86</text>
+                            <text x="870" y="97">90</text>
+                        </g>
+
+                        <text x="750" y="322" text-anchor="middle" font-size="12" fill="#8e8e93">Різниця видно такою,
+                            якою вона є</text>
+                    </svg>
+                    <figcaption>Схема 3. Обрізана шкала проти нульової бази: однакові дані, різне враження</figcaption>
+                </figure>
+            </div>
+
+            <div class="grid-2">
+                <div class="callout red" style="margin:0;">
+                    <h4>Помилки візуалізації</h4>
+                    <p>Неприпустимо у науковому звіті:</p>
+                    <ul class="two-col-list" style="grid-template-columns:1fr;">
+                        <li>Об’ємні 3D-діаграми, що викривляють пропорції.</li>
+                        <li>Обрізана вісь значень (штучне збільшення різниці).</li>
+                        <li>Понад 6 секторів у круговій діаграмі.</li>
+                        <li>Строкаті фони, тіні та кислотні відтінки.</li>
+                    </ul>
+                </div>
+
+                <div class="callout good" style="margin:0;">
+                    <h4>Правильний підхід</h4>
+                    <p>Академічний стандарт оформлення:</p>
+                    <ul class="two-col-list" style="grid-template-columns:1fr;">
+                        <li>Плоска (2D) геометрія з точними пропорціями.</li>
+                        <li>Нульова базова лінія для порівняння величин.</li>
+                        <li>Єдина спокійна колірна гама (2–4 відтінки).</li>
+                        <li>Читабельний шрифт підписів не менше 10–12 pt.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout purple">
+                <h4>Контрольне запитання перед публікацією</h4>
+                <p>
+                    Подивіться на власну діаграму й запитайте: «Чи побачить читач ту саму картину, що й я, без моїх
+                    пояснень?» Якщо відповідь «ні» — спростіть оформлення, перевірте шкалу й підписи.
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="levels">
+            <h2>Покроковий алгоритм виконання різнорівневих завдань</h2>
+
+            <p>
+                Практична частина заняття складається з трьох послідовних рівнів складності. Виконання кожного
+                наступного рівня підвищує підсумковий бал за заняття.
+            </p>
+
+            <div class="diagram-card">
+                <figure>
+                    <svg viewBox="0 0 1000 230" role="img" aria-labelledby="levelsTitle levelsDesc">
+                        <title id="levelsTitle">Структура різнорівневої практичної роботи</title>
+                        <desc id="levelsDesc">Три рівні: базовий, середній, високий.</desc>
+
+                        <rect x="20" y="40" width="300" height="160" rx="24" fill="#e8f2ff" stroke="#b7d7ff" />
+                        <rect x="20" y="40" width="300" height="9" rx="4.5" fill="#0071e3" />
+                        <text x="170" y="82" text-anchor="middle" font-size="15" font-weight="800"
+                            fill="#0071e3">БАЗОВИЙ (до 5 балів)</text>
+                        <text x="170" y="112" text-anchor="middle" font-size="17" font-weight="800"
+                            fill="#1d1d1f">Рівень 1. Репродуктивний</text>
+                        <text x="170" y="142" text-anchor="middle" font-size="13" fill="#6e6e73">таблиця → стовпчаста
+                            діаграма →</text>
+                        <text x="170" y="164" text-anchor="middle" font-size="13" fill="#6e6e73">осі, заголовок,
+                            підписи</text>
+
+                        <rect x="350" y="40" width="300" height="160" rx="24" fill="#fff5e6" stroke="#ffd9a3" />
+                        <rect x="350" y="40" width="300" height="9" rx="4.5" fill="#ff9f0a" />
+                        <text x="500" y="82" text-anchor="middle" font-size="15" font-weight="800"
+                            fill="#b56500">СЕРЕДНІЙ (до 9 балів)</text>
+                        <text x="500" y="112" text-anchor="middle" font-size="17" font-weight="800"
+                            fill="#1d1d1f">Рівень 2. Продуктивний</text>
+                        <text x="500" y="142" text-anchor="middle" font-size="13" fill="#6e6e73">частоти → відсотки
+                            →</text>
+                        <text x="500" y="164" text-anchor="middle" font-size="13" fill="#6e6e73">групова діаграма двох
+                            класів</text>
+
+                        <rect x="680" y="40" width="300" height="160" rx="24" fill="#effff4" stroke="#b7f0c8" />
+                        <rect x="680" y="40" width="300" height="9" rx="4.5" fill="#30d158" />
+                        <text x="830" y="82" text-anchor="middle" font-size="15" font-weight="800"
+                            fill="#1f7a38">ВИСОКИЙ (до 12 балів)</text>
+                        <text x="830" y="112" text-anchor="middle" font-size="17" font-weight="800"
+                            fill="#1d1d1f">Рівень 3. Творчий</text>
+                        <text x="830" y="142" text-anchor="middle" font-size="13" fill="#6e6e73">власне мінідослідження
+                            →</text>
+                        <text x="830" y="164" text-anchor="middle" font-size="13" fill="#6e6e73">вибір типу графіка →
+                            висновок</text>
+                    </svg>
+                    <figcaption>Схема 4. Структура різнорівневої практичної роботи</figcaption>
+                </figure>
+            </div>
+
+            <!-- РІВЕНЬ 1 -->
+            <article class="level-card">
+                <div class="level-head">
+                    <h3>Рівень 1 — репродуктивний</h3>
+                    <span class="pill">до 5 балів</span>
+                </div>
+
+                <p>
+                    Створіть у табличному процесорі аркуш <span class="mono">Рівень_1</span>, внесіть зведені результати
+                    діагностики навичок роботи з графічним редактором в учнів 2-А класу (високий рівень — 6 учнів,
+                    достатній — 11 учнів, середній — 7 учнів, початковий — 2 учні) та побудуйте стовпчасту діаграму.
+                </p>
+
+                <div class="table-card">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Крок</th>
+                                    <th>Зміст дії</th>
+                                    <th>Інструмент / команда</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Створити таблицю з двома стовпцями: «Рівень досягнень» та «Кількість учнів
+                                        (осіб)».</td>
+                                    <td>Діапазон A1:B5</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Виділити діапазон даних разом із заголовками стовпців і вставити плоску
+                                        стовпчасту діаграму.</td>
+                                    <td>Вставка → Діаграми → Гістограма 2D</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Додати підписи даних над стовпчиками та вказати одиниці виміру на вертикальній
+                                        осі.</td>
+                                    <td>Елементи діаграми → Підписи даних</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Прибрати декоративні ефекти, перевірити старт осі Y з нуля та зберегти діаграму.
+                                    </td>
+                                    <td>Формат осі → Мінімум: 0.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="diagram-card">
+                    <figure>
+                        <svg viewBox="0 0 900 420" role="img" aria-labelledby="level1Title level1Desc">
+                            <title id="level1Title">Розподіл учнів 2-А класу за рівнями досягнень</title>
+                            <desc id="level1Desc">Стовпчаста діаграма: високий — 6, достатній — 11, середній — 7,
+                                початковий — 2 учні.</desc>
+
+                            <line x1="100" y1="340" x2="840" y2="340" stroke="#d2d2d7" stroke-width="2" />
+                            <line x1="100" y1="90" x2="100" y2="340" stroke="#d2d2d7" stroke-width="2" />
+
+                            <g font-size="13" fill="#6e6e73" text-anchor="end">
+                                <text x="88" y="344">0</text>
+                                <text x="88" y="308">2</text>
+                                <text x="88" y="272">4</text>
+                                <text x="88" y="236">6</text>
+                                <text x="88" y="200">8</text>
+                                <text x="88" y="164">10</text>
+                                <text x="88" y="128">12</text>
+                            </g>
+
+                            <g stroke="#ececf0" stroke-width="1.5">
+                                <line x1="100" y1="304" x2="840" y2="304" />
+                                <line x1="100" y1="268" x2="840" y2="268" />
+                                <line x1="100" y1="232" x2="840" y2="232" />
+                                <line x1="100" y1="196" x2="840" y2="196" />
+                                <line x1="100" y1="160" x2="840" y2="160" />
+                                <line x1="100" y1="124" x2="840" y2="124" />
+                            </g>
+
+                            <g fill="#0071e3">
+                                <rect x="150" y="232" width="110" height="108" rx="12" />
+                                <rect x="330" y="142" width="110" height="198" rx="12" fill="#2997ff" />
+                                <rect x="510" y="214" width="110" height="126" rx="12" fill="#64b5ff" />
+                                <rect x="690" y="304" width="110" height="36" rx="12" fill="#8ecbff" />
+                            </g>
+
+                            <g font-size="18" font-weight="800" fill="#1d1d1f" text-anchor="middle">
+                                <text x="205" y="222">6</text>
+                                <text x="385" y="132">11</text>
+                                <text x="565" y="204">7</text>
+                                <text x="745" y="294">2</text>
+                            </g>
+
+                            <g font-size="14" fill="#3a3a3c" text-anchor="middle">
+                                <text x="205" y="366">Високий</text>
+                                <text x="385" y="366">Достатній</text>
+                                <text x="565" y="366">Середній</text>
+                                <text x="745" y="366">Початковий</text>
+                            </g>
+
+                            <text x="35" y="215" font-size="13" fill="#6e6e73" transform="rotate(-90 35 215)">Кількість
+                                учнів, осіб</text>
+                            <text x="470" y="402" text-anchor="middle" font-size="13" fill="#6e6e73">Рівень
+                                досягнень</text>
+                        </svg>
+                        <figcaption>Рис. 1. Розподіл учнів 2-А класу за рівнями навичок роботи з графічним редактором
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <div class="callout good">
+                    <h4>Зразок аналітичного коментаря</h4>
+                    <p>
+                        Як бачимо, найбільша група учнів 2-А класу (11 осіб) має достатній рівень навичок роботи
+                        з графічним редактором, тоді як високий рівень засвідчили лише 6 учнів. Початковий рівень
+                        зафіксовано у 2 учнів, що потребує додаткових практичних вправ.
+                    </p>
+                </div>
+            </article>
+
+            <!-- РІВЕНЬ 2 -->
+            <article class="level-card">
+                <div class="level-head">
+                    <h3>Рівень 2 — продуктивний</h3>
+                    <span class="pill orange">до 9 балів</span>
+                </div>
+
+                <p>
+                    На аркуші <span class="mono">Рівень_2</span> проведіть порівняльний аналіз результатів
+                    експериментального (3-А, 25 учнів) та контрольного (3-Б, 24 учні) класів після впровадження
+                    ігрових вправ з алгоритмізації. Переведіть абсолютні показники у відсотки та побудуйте
+                    порівняльну діаграму з двома рядами даних.
+                </p>
+
+                <div class="table-card">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Крок</th>
+                                    <th>Зміст дії</th>
+                                    <th>Інструмент / команда</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        Ввести дані для 3-А (високий — 9, достатній — 10, середній — 5, початковий — 1)
+                                        та 3-Б (високий — 4, достатній — 9, середній — 8, початковий — 3).
+                                    </td>
+                                    <td>Діапазон A1:C5</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>У сусідніх стовпцях розрахувати відсоткову частку кожного рівня для обох класів.
+                                    </td>
+                                    <td>=B2/SUM($B$2:$B$5)*100</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Побудувати групову стовпчасту діаграму за відсотковими показниками двох класів.
+                                    </td>
+                                    <td>Гістограма з групуванням</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Налаштувати контрастну двоколірну палітру, легенду внизу та підписи значень із
+                                        точністю до 1 знака.</td>
+                                    <td>Формат підписів → Число: 0,0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Рівень</th>
+                                    <th>3-А, осіб</th>
+                                    <th>3-А, %</th>
+                                    <th>3-Б, осіб</th>
+                                    <th>3-Б, %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Високий</td>
+                                    <td>9</td>
+                                    <td>36,0</td>
+                                    <td>4</td>
+                                    <td>16,7</td>
+                                </tr>
+                                <tr>
+                                    <td>Достатній</td>
+                                    <td>10</td>
+                                    <td>40,0</td>
+                                    <td>9</td>
+                                    <td>37,5</td>
+                                </tr>
+                                <tr>
+                                    <td>Середній</td>
+                                    <td>5</td>
+                                    <td>20,0</td>
+                                    <td>8</td>
+                                    <td>33,3</td>
+                                </tr>
+                                <tr>
+                                    <td>Початковий</td>
+                                    <td>1</td>
+                                    <td>4,0</td>
+                                    <td>3</td>
+                                    <td>12,5</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Разом</strong></td>
+                                    <td><strong>25</strong></td>
+                                    <td><strong>100</strong></td>
+                                    <td><strong>24</strong></td>
+                                    <td><strong>100</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="diagram-card">
+                    <figure>
+                        <svg viewBox="0 0 900 440" role="img" aria-labelledby="level2Title level2Desc">
+                            <title id="level2Title">Порівняння рівнів алгоритмічного мислення 3-А і 3-Б</title>
+                            <desc id="level2Desc">Групова стовпчаста діаграма у відсотках: 3-А та 3-Б за чотирма
+                                рівнями.</desc>
+
+                            <line x1="95" y1="330" x2="845" y2="330" stroke="#d2d2d7" stroke-width="2" />
+                            <line x1="95" y1="70" x2="95" y2="330" stroke="#d2d2d7" stroke-width="2" />
+
+                            <g font-size="12" fill="#6e6e73" text-anchor="end">
+                                <text x="84" y="334">0</text>
+                                <text x="84" y="282">10</text>
+                                <text x="84" y="230">20</text>
+                                <text x="84" y="178">30</text>
+                                <text x="84" y="126">40</text>
+                                <text x="84" y="74">50</text>
+                            </g>
+
+                            <g stroke="#ececf0" stroke-width="1.5">
+                                <line x1="95" y1="278" x2="845" y2="278" />
+                                <line x1="95" y1="226" x2="845" y2="226" />
+                                <line x1="95" y1="174" x2="845" y2="174" />
+                                <line x1="95" y1="122" x2="845" y2="122" />
+                            </g>
+
+                            <!-- Високий: 36,0 / 16,7 -->
+                            <rect x="140" y="142.8" width="62" height="187.2" rx="10" fill="#0071e3" />
+                            <rect x="210" y="243.2" width="62" height="86.8" rx="10" fill="#8ecbff" />
+                            <text x="171" y="132" text-anchor="middle" font-size="14" font-weight="800"
+                                fill="#0a4fa8">36,0</text>
+                            <text x="241" y="233" text-anchor="middle" font-size="14" font-weight="800"
+                                fill="#3d6f9e">16,7</text>
+
+                            <!-- Достатній: 40,0 / 37,5 -->
+                            <rect x="312" y="122" width="62" height="208" rx="10" fill="#0071e3" />
+                            <rect x="382" y="135" width="62" height="195" rx="10" fill="#8ecbff" />
+                            <text x="343" y="112" text-anchor="middle" font-size="14" font-weight="800"
+                                fill="#0a4fa8">40,0</text>
+                            <text x="413" y="125" text-anchor="middle" font-size="14" font-weight="800"
+                                fill="#3d6f9e">37,5</text>
+
+                            <!-- Середній: 20,0 / 33,3 -->
+                            <rect x="484" y="226" width="62" height="104" rx="10" fill="#0071e3" />
+                            <rect x="554" y="156.8" width="62" height="173.2" rx="10" fill="#8ecbff" />
+                            <text x="515" y="216" text-anchor="middle" font-size="14" font-weight="800"
+                                fill="#0a4fa8">20,0</text>
+                            <text x="585" y="147" text-anchor="middle" font-size="14" font-weight="800"
+                                fill="#3d6f9e">33,3</text>
+
+                            <!-- Початковий: 4,0 / 12,5 -->
+                            <rect x="656" y="309.2" width="62" height="20.8" rx="10" fill="#0071e3" />
+                            <rect x="726" y="265" width="62" height="65" rx="10" fill="#8ecbff" />
+                            <text x="687" y="299" text-anchor="middle" font-size="14" font-weight="800"
+                                fill="#0a4fa8">4,0</text>
+                            <text x="757" y="255" text-anchor="middle" font-size="14" font-weight="800"
+                                fill="#3d6f9e">12,5</text>
+
+                            <g font-size="14" fill="#3a3a3c" text-anchor="middle">
+                                <text x="206" y="358">Високий</text>
+                                <text x="378" y="358">Достатній</text>
+                                <text x="550" y="358">Середній</text>
+                                <text x="722" y="358">Початковий</text>
+                            </g>
+
+                            <text x="30" y="205" font-size="13" fill="#6e6e73" transform="rotate(-90 30 205)">Частка
+                                учнів, %</text>
+                            <text x="470" y="394" text-anchor="middle" font-size="13" fill="#6e6e73">Рівень
+                                алгоритмічного мислення</text>
+
+                            <!-- Легенда -->
+                            <rect x="310" y="408" width="16" height="16" rx="4" fill="#0071e3" />
+                            <text x="334" y="421" font-size="13" fill="#3a3a3c">3-А (експериментальний, n = 25)</text>
+                            <rect x="580" y="408" width="16" height="16" rx="4" fill="#8ecbff" />
+                            <text x="604" y="421" font-size="13" fill="#3a3a3c">3-Б (контрольний, n = 24)</text>
+                        </svg>
+                        <figcaption>Рис. 2. Порівняльний розподіл учнів 3-А та 3-Б класів за рівнями алгоритмічного
+                            мислення, %</figcaption>
+                    </figure>
+                </div>
+
+                <div class="callout good">
+                    <h4>Зразок аналітичного коментаря</h4>
+                    <p>
+                        На рис. 2 видно, що в експериментальному 3-А класі частка учнів із високим рівнем алгоритмічного
+                        мислення (36,0 %) більш ніж удвічі перевищує відповідний показник контрольного 3-Б класу (16,7
+                        %).
+                        Водночас у 3-Б класі суттєво більшою є частка учнів із середнім (33,3 % проти 20,0 %) і
+                        початковим
+                        (12,5 % проти 4,0 %) рівнями. Це дає підстави вважати запроваджені ігрові вправи з
+                        алгоритмізації
+                        ефективним засобом підвищення рівня алгоритмічного мислення молодших школярів.
+                    </p>
+                </div>
+            </article>
+
+            <!-- РІВЕНЬ 3 -->
+            <article class="level-card">
+                <div class="level-head">
+                    <h3>Рівень 3 — творчий</h3>
+                    <span class="pill green">до 12 балів</span>
+                </div>
+
+                <p>
+                    На аркуші <span class="mono">Рівень_3</span> змоделюйте результати власного мінідослідження
+                    з методики навчання інформатики в початковій школі (наприклад, динаміка успішності за 4 контрольні
+                    зрізи або зв’язок між кількістю виконаних інтерактивних вправ і підсумковою оцінкою). Самостійно
+                    оберіть оптимальний тип діаграми, оформіть її за науковими вимогами та напишіть аналітичний
+                    висновок обсягом 4–5 речень для розділу звіту.
+                </p>
+
+                <div class="table-card">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Етап</th>
+                                    <th>Вимоги до виконання творчого завдання</th>
+                                    <th>Результат у файлі та звіті</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Сформулювати тему мінідослідження та згенерувати коректний масив даних (не менше
+                                        8–10 значень або 4 часових етапів).</td>
+                                    <td>Таблиця вихідних даних із підписами одиниць виміру.</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Обґрунтувати вибір типу діаграми (лінійний графік або точкова діаграма з лінією
+                                        тренду).</td>
+                                    <td>Акуратна 2D-діаграма без візуального шуму.</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Експортувати діаграму у звіт, оформити підпис рисунка та сформулювати науковий
+                                        висновок.</td>
+                                    <td>Фрагмент тексту звіту з посиланням на рисунок.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="diagram-card">
+                    <figure>
+                        <svg viewBox="0 0 900 440" role="img" aria-labelledby="level3Title level3Desc">
+                            <title id="level3Title">Динаміка середнього балу за чотирма контрольними зрізами</title>
+                            <desc id="level3Desc">Лінійний графік: середній бал зростає від 7,2 до 9,3 за 12-бальною
+                                шкалою.</desc>
+
+                            <line x1="100" y1="340" x2="830" y2="340" stroke="#d2d2d7" stroke-width="2" />
+                            <line x1="100" y1="70" x2="100" y2="340" stroke="#d2d2d7" stroke-width="2" />
+
+                            <g font-size="12" fill="#6e6e73" text-anchor="end">
+                                <text x="88" y="344">0</text>
+                                <text x="88" y="304">2</text>
+                                <text x="88" y="264">4</text>
+                                <text x="88" y="224">6</text>
+                                <text x="88" y="184">8</text>
+                                <text x="88" y="144">10</text>
+                                <text x="88" y="104">12</text>
+                            </g>
+
+                            <g stroke="#ececf0" stroke-width="1.5">
+                                <line x1="100" y1="300" x2="830" y2="300" />
+                                <line x1="100" y1="260" x2="830" y2="260" />
+                                <line x1="100" y1="220" x2="830" y2="220" />
+                                <line x1="100" y1="180" x2="830" y2="180" />
+                                <line x1="100" y1="140" x2="830" y2="140" />
+                                <line x1="100" y1="100" x2="830" y2="100" />
+                            </g>
+
+                            <polyline points="175,196 360,163 545,148 730,127" fill="none" stroke="#30d158"
+                                stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+
+                            <g fill="#30d158" stroke="#fff" stroke-width="3">
+                                <circle cx="175" cy="196" r="7" />
+                                <circle cx="360" cy="163" r="7" />
+                                <circle cx="545" cy="148" r="7" />
+                                <circle cx="730" cy="127" r="7" />
+                            </g>
+
+                            <g font-size="14" font-weight="800" fill="#1f7a38" text-anchor="middle">
+                                <text x="175" y="180">7,2</text>
+                                <text x="360" y="147">8,1</text>
+                                <text x="545" y="132">8,6</text>
+                                <text x="730" y="111">9,3</text>
+                            </g>
+
+                            <g font-size="13" fill="#3a3a3c" text-anchor="middle">
+                                <text x="175" y="366">Зріз 1</text>
+                                <text x="360" y="366">Зріз 2</text>
+                                <text x="545" y="366">Зріз 3</text>
+                                <text x="730" y="366">Зріз 4</text>
+                            </g>
+
+                            <text x="35" y="205" font-size="13" fill="#6e6e73" transform="rotate(-90 35 205)">Середній
+                                бал (з 12)</text>
+                            <text x="460" y="404" text-anchor="middle" font-size="13" fill="#6e6e73">Етапи контрольного
+                                оцінювання</text>
+                        </svg>
+                        <figcaption>Рис. 3. Динаміка середнього балу учнів 3 класу за чотирма контрольними зрізами
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <div class="callout good">
+                    <h4>Зразок аналітичного висновку (4–5 речень)</h4>
+                    <p>
+                        На рис. 3 відображено динаміку середнього балу учнів 3 класу за чотирма контрольними зрізами
+                        з інформатики. Протягом періоду спостереження показник зріс із 7,2 до 9,3 бала, тобто на 2,1
+                        бала
+                        за 12-бальною шкалою. Найпомітніше зростання зафіксовано між першим і другим зрізами (+0,9
+                        бала),
+                        що збігається з початком систематичного використання інтерактивних вправ. Отримані дані свідчать
+                        про позитивну динаміку навчальних досягнень, хоча для підтвердження причинно-наслідкового
+                        зв’язку
+                        доцільно порівняти результати з контрольною групою.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <section class="section" id="criteria">
+            <h2>Критерії оцінювання</h2>
+
+            <div class="card">
+                <div class="criteria-row">
+                    <div style="flex:0 0 230px;">
+                        <strong>Рівень 1 (репродуктивний)</strong>
+                        <div class="muted" style="font-size:0.88rem;">
+                            Правильно внесено дані, побудовано плоску стовпчасту діаграму, коректно відображено осі та
+                            підписи значень.
+                        </div>
+                    </div>
+                    <div class="bar"><span style="width:33%"></span></div>
+                    <div style="flex:0 0 90px; text-align:right;"><strong>4 бали</strong></div>
+                </div>
+
+                <div class="criteria-row">
+                    <div style="flex:0 0 230px;">
+                        <strong>Рівень 2 (продуктивний)</strong>
+                        <div class="muted" style="font-size:0.88rem;">
+                            Безпомилково обчислено відсоткові частки за допомогою формул, побудовано групову діаграму
+                            порівняння двох класів, налаштовано легенду.
+                        </div>
+                    </div>
+                    <div class="bar"><span style="width:33%"></span></div>
+                    <div style="flex:0 0 90px; text-align:right;"><strong>4 бали</strong></div>
+                </div>
+
+                <div class="criteria-row">
+                    <div style="flex:0 0 230px;">
+                        <strong>Рівень 3 (творчий)</strong>
+                        <div class="muted" style="font-size:0.88rem;">
+                            Доцільно обрано тип діаграми відповідно до педагогічної задачі, відсутні візуальні
+                            спотворення, сформульовано логічний аналітичний висновок.
+                        </div>
+                    </div>
+                    <div class="bar"><span style="width:25%"></span></div>
+                    <div style="flex:0 0 90px; text-align:right;"><strong>3 бали</strong></div>
+                </div>
+
+                <div class="criteria-row">
+                    <div style="flex:0 0 230px;">
+                        <strong>Оформлення звіту</strong>
+                        <div class="muted" style="font-size:0.88rem;">
+                            Дотримано вимог до оформлення рисунків, підписів, посилань у тексті та охайності подання
+                            матеріалів.
+                        </div>
+                    </div>
+                    <div class="bar"><span style="width:8%"></span></div>
+                    <div style="flex:0 0 90px; text-align:right;"><strong>1 бал</strong></div>
+                </div>
+
+                <div class="criteria-row" style="border-top:2px solid var(--line); margin-top:6px; padding-top:16px;">
+                    <div style="flex:0 0 230px;"><strong>Разом</strong></div>
+                    <div class="bar"><span style="width:100%"></span></div>
+                    <div style="flex:0 0 90px; text-align:right;"><strong>12 балів</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="report">
+            <h2>Форма звітності</h2>
+
+            <p>За результатами заняття студент подає викладачеві два файли.</p>
+
+            <div class="grid-2">
+                <div class="def-card">
+                    <h4>1. Файл електронної таблиці</h4>
+                    <p>
+                        <span class="mono">Prizvyshche_PZ13.xlsx</span> (або <span class="mono">.ods</span>), що містить
+                        три окремі аркуші (<span class="mono">Рівень_1</span>, <span class="mono">Рівень_2</span>,
+                        <span class="mono">Рівень_3</span>) зі збереженими формулами та побудованими діаграмами.
+                    </p>
+                </div>
+                <div class="def-card">
+                    <h4>2. Текстовий звіт</h4>
+                    <p>
+                        <span class="mono">Prizvyshche_Zvit_PZ13.docx</span>, оформлений за вимогами академічної
+                        доброчесності (шрифт Times New Roman, кегль 14 pt, міжрядковий інтервал 1,15), який містить
+                        мету роботи, вставлені зображення всіх трьох діаграм із належними підписами під кожним рисунком,
+                        текстові посилання на них та підсумковий висновок щодо доцільності різних способів графічного
+                        представлення даних у педагогічному дослідженні.
+                    </p>
+                </div>
+            </div>
+
+            <div class="callout">
+                <h4>Чек-лист перед поданням</h4>
+                <ul class="two-col-list">
+                    <li>На кожному аркуші є таблиця й діаграма.</li>
+                    <li>Формули не перетворені на «мертві» числа.</li>
+                    <li>Вісь Y починається з нуля.</li>
+                    <li>Є підписи осей та одиниці виміру.</li>
+                    <li>Легенда є, якщо рядів два і більше.</li>
+                    <li>Кожен рисунок має підпис «Рис. N. …».</li>
+                    <li>У тексті є посилання на кожен рисунок.</li>
+                    <li>До кожного рисунка — аналітичний коментар.</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="footer">
+            Практичне заняття № 13 · Графічне представлення даних · матеріал підготовлено для друку та роботи в
+            аудиторії.
+        </footer>
+    </main>
+</body>
+
+</html>

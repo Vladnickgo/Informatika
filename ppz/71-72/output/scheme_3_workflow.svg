@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="663.3pt" height="210.096pt" viewBox="0 0 663.3 210.096" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-20T10:12:01.318676</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 210.096 
+L 663.3 210.096 
+L 663.3 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 37.584 174.348 
+L 123.516 174.348 
+Q 133.56 174.348 133.56 164.3688 
+L 133.56 76.2192 
+Q 133.56 66.24 123.516 66.24 
+L 37.584 66.24 
+Q 27.54 66.24 27.54 76.2192 
+L 27.54 164.3688 
+Q 27.54 174.348 37.584 174.348 
+z
+" clip-path="url(#p062a21981f)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 163.134 174.348 
+L 249.066 174.348 
+Q 259.11 174.348 259.11 164.3688 
+L 259.11 76.2192 
+Q 259.11 66.24 249.066 66.24 
+L 163.134 66.24 
+Q 153.09 66.24 153.09 76.2192 
+L 153.09 164.3688 
+Q 153.09 174.348 163.134 174.348 
+z
+" clip-path="url(#p062a21981f)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 288.684 174.348 
+L 374.616 174.348 
+Q 384.66 174.348 384.66 164.3688 
+L 384.66 76.2192 
+Q 384.66 66.24 374.616 66.24 
+L 288.684 66.24 
+Q 278.64 66.24 278.64 76.2192 
+L 278.64 164.3688 
+Q 278.64 174.348 288.684 174.348 
+z
+" clip-path="url(#p062a21981f)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 414.234 174.348 
+L 500.166 174.348 
+Q 510.21 174.348 510.21 164.3688 
+L 510.21 76.2192 
+Q 510.21 66.24 500.166 66.24 
+L 414.234 66.24 
+Q 404.19 66.24 404.19 76.2192 
+L 404.19 164.3688 
+Q 404.19 174.348 414.234 174.348 
+z
+" clip-path="url(#p062a21981f)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 539.784 174.348 
+L 625.716 174.348 
+Q 635.76 174.348 635.76 164.3688 
+L 635.76 76.2192 
+Q 635.76 66.24 625.716 66.24 
+L 539.784 66.24 
+Q 529.74 66.24 529.74 76.2192 
+L 529.74 164.3688 
+Q 529.74 174.348 539.784 174.348 
+z
+" clip-path="url(#p062a21981f)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="331.65" y="34.441852" transform="rotate(-0 331.65 34.441852)">Алгоритм виконання самостійної роботи</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 52.65 89.5248 
+L 108.45 89.5248 
+Q 114.03 89.5248 114.03 83.9808 
+L 114.03 79.5456 
+Q 114.03 74.0016 108.45 74.0016 
+L 52.65 74.0016 
+Q 47.07 74.0016 47.07 79.5456 
+L 47.07 83.9808 
+Q 47.07 89.5248 52.65 89.5248 
+z
+" clip-path="url(#p062a21981f)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 178.2 89.5248 
+L 234 89.5248 
+Q 239.58 89.5248 239.58 83.9808 
+L 239.58 79.5456 
+Q 239.58 74.0016 234 74.0016 
+L 178.2 74.0016 
+Q 172.62 74.0016 172.62 79.5456 
+L 172.62 83.9808 
+Q 172.62 89.5248 178.2 89.5248 
+z
+" clip-path="url(#p062a21981f)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 303.75 89.5248 
+L 359.55 89.5248 
+Q 365.13 89.5248 365.13 83.9808 
+L 365.13 79.5456 
+Q 365.13 74.0016 359.55 74.0016 
+L 303.75 74.0016 
+Q 298.17 74.0016 298.17 79.5456 
+L 298.17 83.9808 
+Q 298.17 89.5248 303.75 89.5248 
+z
+" clip-path="url(#p062a21981f)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 429.3 89.5248 
+L 485.1 89.5248 
+Q 490.68 89.5248 490.68 83.9808 
+L 490.68 79.5456 
+Q 490.68 74.0016 485.1 74.0016 
+L 429.3 74.0016 
+Q 423.72 74.0016 423.72 79.5456 
+L 423.72 83.9808 
+Q 423.72 89.5248 429.3 89.5248 
+z
+" clip-path="url(#p062a21981f)" style="fill: #6e30a8"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 554.85 89.5248 
+L 610.65 89.5248 
+Q 616.23 89.5248 616.23 83.9808 
+L 616.23 79.5456 
+Q 616.23 74.0016 610.65 74.0016 
+L 554.85 74.0016 
+Q 549.27 74.0016 549.27 79.5456 
+L 549.27 83.9808 
+Q 549.27 89.5248 554.85 89.5248 
+z
+" clip-path="url(#p062a21981f)" style="fill: #c4001d"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="80.55" y="84.660544" transform="rotate(-0 80.55 84.660544)">Етап 1</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="80.55" y="114.041219" transform="rotate(-0 80.55 114.041219)">Теорія</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(42.107695 135.861005)">Опрацювання</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(47.066484 148.416544)">видів сайтів</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(42.538359 160.972083)">і критеріїв ЦА</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="206.1" y="84.660544" transform="rotate(-0 206.1 84.660544)">Етап 2</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="206.1" y="114.24532" transform="rotate(-0 206.1 114.24532)">Відбір</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(164.053242 135.744766)">Пошук 5 сайтів</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(172.442578 148.300305)">різних типів</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(177.615469 161.088321)">у браузері</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="331.65" y="84.660544" transform="rotate(-0 331.65 84.660544)">Етап 3</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="331.65" y="114.041219" transform="rotate(-0 331.65 114.041219)">Аналіз</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(301.889063 135.861005)">Оцінка UX,</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(295.239609 148.416544)">структури та</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(296.439727 160.972083)">портрета ЦА</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="457.2" y="84.660544" transform="rotate(-0 457.2 84.660544)">Етап 4</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="457.2" y="114.041219" transform="rotate(-0 457.2 114.041219)">Таблиця</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(413.10082 135.861005)">Систематизація</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(408.105938 148.416544)">даних і перевірка</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(416.246719 160.972083)">етики дизайну</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #ffffff" x="582.75" y="84.660544" transform="rotate(-0 582.75 84.660544)">Етап 5</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="582.75" y="114.041219" transform="rotate(-0 582.75 114.041219)">Звіт</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(547.013906 135.744766)">Оформлення</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(552.767578 148.300305)">висновків і</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(543.143672 161.088321)">захист роботи</text>
+   </g>
+   <g id="patch_12">
+    <path d="M 137.789275 120.294 
+Q 143.323382 120.294 146.845028 120.294 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 142.845028 118.294 
+L 146.845028 120.294 
+L 142.845028 122.294 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 263.339275 120.294 
+Q 268.873382 120.294 272.395028 120.294 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 268.395028 118.294 
+L 272.395028 120.294 
+L 268.395028 122.294 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 388.889275 120.294 
+Q 394.423382 120.294 397.945028 120.294 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 393.945028 118.294 
+L 397.945028 120.294 
+L 393.945028 122.294 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 514.439275 120.294 
+Q 519.973382 120.294 523.495028 120.294 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 519.495028 118.294 
+L 523.495028 120.294 
+L 519.495028 122.294 
+" style="fill: none; stroke: #86868b; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p062a21981f">
+   <rect x="10.8" y="10.8" width="641.7" height="188.496"/>
+  </clipPath>
+ </defs>
+</svg>

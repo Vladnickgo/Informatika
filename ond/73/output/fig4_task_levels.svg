@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="671.639531pt" height="248.904pt" viewBox="0 0 671.639531 248.904" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-24T09:42:38.680903</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 248.904 
+L 671.639531 248.904 
+L 671.639531 -0 
+L 0 -0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 40.079766 218.7 
+L 210.269766 218.7 
+Q 221.429766 218.7 221.429766 207.612 
+L 221.429766 66.24 
+Q 221.429766 55.152 210.269766 55.152 
+L 40.079766 55.152 
+Q 28.919766 55.152 28.919766 66.24 
+L 28.919766 207.612 
+Q 28.919766 218.7 40.079766 218.7 
+z
+" clip-path="url(#pf5b426e045)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 46.775766 207.612 
+L 203.573766 207.612 
+Q 209.153766 207.612 209.153766 202.068 
+L 209.153766 192.0888 
+Q 209.153766 186.5448 203.573766 186.5448 
+L 46.775766 186.5448 
+Q 41.195766 186.5448 41.195766 192.0888 
+L 41.195766 202.068 
+Q 41.195766 207.612 46.775766 207.612 
+z
+" clip-path="url(#pf5b426e045)" style="fill: #ffffff; stroke: #e5e5ea; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 250.724766 218.7 
+L 420.914766 218.7 
+Q 432.074766 218.7 432.074766 207.612 
+L 432.074766 66.24 
+Q 432.074766 55.152 420.914766 55.152 
+L 250.724766 55.152 
+Q 239.564766 55.152 239.564766 66.24 
+L 239.564766 207.612 
+Q 239.564766 218.7 250.724766 218.7 
+z
+" clip-path="url(#pf5b426e045)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 257.420766 207.612 
+L 414.218766 207.612 
+Q 419.798766 207.612 419.798766 202.068 
+L 419.798766 192.0888 
+Q 419.798766 186.5448 414.218766 186.5448 
+L 257.420766 186.5448 
+Q 251.840766 186.5448 251.840766 192.0888 
+L 251.840766 202.068 
+Q 251.840766 207.612 257.420766 207.612 
+z
+" clip-path="url(#pf5b426e045)" style="fill: #ffffff; stroke: #e5e5ea; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 461.369766 218.7 
+L 631.559766 218.7 
+Q 642.719766 218.7 642.719766 207.612 
+L 642.719766 66.24 
+Q 642.719766 55.152 631.559766 55.152 
+L 461.369766 55.152 
+Q 450.209766 55.152 450.209766 66.24 
+L 450.209766 207.612 
+Q 450.209766 218.7 461.369766 218.7 
+z
+" clip-path="url(#pf5b426e045)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 468.065766 207.612 
+L 624.863766 207.612 
+Q 630.443766 207.612 630.443766 202.068 
+L 630.443766 192.0888 
+Q 630.443766 186.5448 624.863766 186.5448 
+L 468.065766 186.5448 
+Q 462.485766 186.5448 462.485766 192.0888 
+L 462.485766 202.068 
+Q 462.485766 207.612 468.065766 207.612 
+z
+" clip-path="url(#pf5b426e045)" style="fill: #ffffff; stroke: #e5e5ea; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="335.819766" y="34.385211" transform="rotate(-0 335.819766 34.385211)">Структура різнорівневих завдань практичної роботи (загальний час — 27 хв)</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #0071e3" x="42.311766" y="77.453344" transform="rotate(-0 42.311766 77.453344)">РІВЕНЬ 1 • ≈ 7 ХВ</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="42.311766" y="98.770753" transform="rotate(-0 42.311766 98.770753)">Репродуктивний</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(42.311766 128.29118)">Добір типу діаграми для</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(42.311766 141.862516)">педагогічних задач, порівняння</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(42.311766 155.433852)">гістограми та стовпчастої,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(42.311766 169.005188)">пошук помилок на графіку.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #0071e3" x="125.174766" y="200.113712" transform="rotate(-0 125.174766 200.113712)">Оцінювання: до 3 балів</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 226.221332 136.926 
+Q 230.49707 136.926 233.330588 136.926 
+" clip-path="url(#pf5b426e045)" style="fill: none; stroke: #86868b; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 227.330588 132.926 
+L 233.330588 136.926 
+L 227.330588 140.926 
+z
+" clip-path="url(#pf5b426e045)" style="fill: #86868b; stroke: #86868b; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #c93400" x="252.956766" y="77.453344" transform="rotate(-0 252.956766 77.453344)">РІВЕНЬ 2 • ≈ 10 ХВ</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="252.956766" y="98.770753" transform="rotate(-0 252.956766 98.770753)">Продуктивний</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(252.956766 128.29118)">Побудова в табличному</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(252.956766 141.862516)">процесорі стовпчастої,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(252.956766 155.433852)">гістограми та діаграми</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(252.956766 169.005188)">розсіювання з лінією тренду.</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #c93400" x="335.819766" y="200.113712" transform="rotate(-0 335.819766 200.113712)">Оцінювання: до 4 балів</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 436.866332 136.926 
+Q 441.14207 136.926 443.975588 136.926 
+" clip-path="url(#pf5b426e045)" style="fill: none; stroke: #86868b; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 437.975588 132.926 
+L 443.975588 136.926 
+L 437.975588 140.926 
+z
+" clip-path="url(#pf5b426e045)" style="fill: #86868b; stroke: #86868b; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #248a3d" x="463.601766" y="77.453344" transform="rotate(-0 463.601766 77.453344)">РІВЕНЬ 3 • ≈ 10 ХВ</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="463.601766" y="98.823487" transform="rotate(-0 463.601766 98.823487)">Творчий</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(463.601766 128.197509)">Візуалізація динаміки</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(463.601766 141.768845)">педагогічного експерименту</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(463.601766 155.34018)">у 3-х класах та написання</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #424245" transform="translate(463.601766 168.911516)">аналітичного висновку.</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #248a3d" x="546.464766" y="200.113712" transform="rotate(-0 546.464766 200.113712)">Оцінювання: до 4 балів</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pf5b426e045">
+   <rect x="12.179766" y="10.8" width="647.28" height="227.304"/>
+  </clipPath>
+ </defs>
+</svg>

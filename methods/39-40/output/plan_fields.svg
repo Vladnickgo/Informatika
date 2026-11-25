@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="635.4pt" height="343.152pt" viewBox="0 0 635.4 343.152" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-24T10:23:04.775781</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 343.152 
+L 635.4 343.152 
+L 635.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 32.004 143.856 
+L 196.056 143.856 
+Q 206.1 143.856 206.1 133.8768 
+L 206.1 67.9032 
+Q 206.1 57.924 196.056 57.924 
+L 32.004 57.924 
+Q 21.96 57.924 21.96 67.9032 
+L 21.96 133.8768 
+Q 21.96 143.856 32.004 143.856 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 28.656 66.7944 
+L 199.404 66.7944 
+Q 202.752 66.7944 202.752 63.468 
+L 202.752 63.468 
+Q 202.752 60.1416 199.404 60.1416 
+L 28.656 60.1416 
+Q 25.308 60.1416 25.308 63.468 
+L 25.308 63.468 
+Q 25.308 66.7944 28.656 66.7944 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 235.674 143.856 
+L 399.726 143.856 
+Q 409.77 143.856 409.77 133.8768 
+L 409.77 67.9032 
+Q 409.77 57.924 399.726 57.924 
+L 235.674 57.924 
+Q 225.63 57.924 225.63 67.9032 
+L 225.63 133.8768 
+Q 225.63 143.856 235.674 143.856 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 232.326 66.7944 
+L 403.074 66.7944 
+Q 406.422 66.7944 406.422 63.468 
+L 406.422 63.468 
+Q 406.422 60.1416 403.074 60.1416 
+L 232.326 60.1416 
+Q 228.978 60.1416 228.978 63.468 
+L 228.978 63.468 
+Q 228.978 66.7944 232.326 66.7944 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #6e30a8"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 439.344 143.856 
+L 603.396 143.856 
+Q 613.44 143.856 613.44 133.8768 
+L 613.44 67.9032 
+Q 613.44 57.924 603.396 57.924 
+L 439.344 57.924 
+Q 429.3 57.924 429.3 67.9032 
+L 429.3 133.8768 
+Q 429.3 143.856 439.344 143.856 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 435.996 66.7944 
+L 606.744 66.7944 
+Q 610.092 66.7944 610.092 63.468 
+L 610.092 63.468 
+Q 610.092 60.1416 606.744 60.1416 
+L 435.996 60.1416 
+Q 432.648 60.1416 432.648 63.468 
+L 432.648 63.468 
+Q 432.648 66.7944 435.996 66.7944 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 32.004 251.964 
+L 196.056 251.964 
+Q 206.1 251.964 206.1 241.9848 
+L 206.1 176.0112 
+Q 206.1 166.032 196.056 166.032 
+L 32.004 166.032 
+Q 21.96 166.032 21.96 176.0112 
+L 21.96 241.9848 
+Q 21.96 251.964 32.004 251.964 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 28.656 174.9024 
+L 199.404 174.9024 
+Q 202.752 174.9024 202.752 171.576 
+L 202.752 171.576 
+Q 202.752 168.2496 199.404 168.2496 
+L 28.656 168.2496 
+Q 25.308 168.2496 25.308 171.576 
+L 25.308 171.576 
+Q 25.308 174.9024 28.656 174.9024 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #c93400"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 235.674 251.964 
+L 399.726 251.964 
+Q 409.77 251.964 409.77 241.9848 
+L 409.77 176.0112 
+Q 409.77 166.032 399.726 166.032 
+L 235.674 166.032 
+Q 225.63 166.032 225.63 176.0112 
+L 225.63 241.9848 
+Q 225.63 251.964 235.674 251.964 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 232.326 174.9024 
+L 403.074 174.9024 
+Q 406.422 174.9024 406.422 171.576 
+L 406.422 171.576 
+Q 406.422 168.2496 403.074 168.2496 
+L 232.326 168.2496 
+Q 228.978 168.2496 228.978 171.576 
+L 228.978 171.576 
+Q 228.978 174.9024 232.326 174.9024 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #c9a400"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 439.344 251.964 
+L 603.396 251.964 
+Q 613.44 251.964 613.44 241.9848 
+L 613.44 176.0112 
+Q 613.44 166.032 603.396 166.032 
+L 439.344 166.032 
+Q 429.3 166.032 429.3 176.0112 
+L 429.3 241.9848 
+Q 429.3 251.964 439.344 251.964 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 435.996 174.9024 
+L 606.744 174.9024 
+Q 610.092 174.9024 610.092 171.576 
+L 610.092 171.576 
+Q 610.092 168.2496 606.744 168.2496 
+L 435.996 168.2496 
+Q 432.648 168.2496 432.648 171.576 
+L 432.648 171.576 
+Q 432.648 174.9024 435.996 174.9024 
+z
+" clip-path="url(#p82949f4acf)" style="fill: #c4001d"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="34.385211" transform="rotate(-0 317.7 34.385211)">Схема календарно-тематичного плану: обов’язкові графи</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="114.03" y="91.901625" transform="rotate(-0 114.03 91.901625)">Номер уроку</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(59.654766 105.03773)">порядковий номер</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(74.729922 119.444895)">у межах року</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="92.003187" transform="rotate(-0 317.7 92.003187)">Дата</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(267.439453 104.901906)">дата проведення</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(267.453203 119.580719)">або номер тижня</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="521.37" y="91.901625" transform="rotate(-0 521.37 91.901625)">Тема уроку</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(477.148281 105.03773)">формулювання</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(454.948047 119.444895)">з навчальної програми</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="114.03" y="200.060406" transform="rotate(-0 114.03 200.060406)">Очікувані результати</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(64.118359 213.14573)">державні вимоги</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(75.669219 227.552895)">до засвоєння</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="317.7" y="200.060406" transform="rotate(-0 317.7 200.060406)">Зміст матеріалу</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(267.770313 213.14573)">ключові поняття,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(273.321016 227.552895)">що вивчаються</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="521.37" y="200.060406" transform="rotate(-0 521.37 200.060406)">Діяльність учнів</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(468.551094 213.239402)">практичні роботи,</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(473.787266 227.646566)">вправи, проєкти</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p82949f4acf">
+   <rect x="10.8" y="10.8" width="613.8" height="321.552"/>
+  </clipPath>
+ </defs>
+</svg>

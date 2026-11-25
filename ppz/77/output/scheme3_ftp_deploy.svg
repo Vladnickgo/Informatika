@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="774.9pt" height="304.344pt" viewBox="0 0 774.9 304.344" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-21T21:24:18.052753</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 304.344 
+L 774.9 304.344 
+L 774.9 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 40.461188 273.28068 
+L 346.0185 273.28068 
+Q 355.43475 273.28068 355.43475 263.85588 
+L 355.43475 56.98152 
+Q 355.43475 47.55672 346.0185 47.55672 
+L 40.461188 47.55672 
+Q 31.044937 47.55672 31.044937 56.98152 
+L 31.044937 263.85588 
+Q 31.044937 273.28068 40.461188 273.28068 
+z
+" clip-path="url(#p38e3f5663f)" style="fill: #1c1c1e; stroke: #3a3a3c; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 418.523625 113.05908 
+L 735.380438 113.05908 
+Q 743.855063 113.05908 743.855063 104.57676 
+L 743.855063 56.03904 
+Q 743.855063 47.55672 735.380438 47.55672 
+L 418.523625 47.55672 
+Q 410.049 47.55672 410.049 56.03904 
+L 410.049 104.57676 
+Q 410.049 113.05908 418.523625 113.05908 
+z
+" clip-path="url(#p38e3f5663f)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 418.523625 193.16988 
+L 735.380438 193.16988 
+Q 743.855063 193.16988 743.855063 184.68756 
+L 743.855063 136.14984 
+Q 743.855063 127.66752 735.380438 127.66752 
+L 418.523625 127.66752 
+Q 410.049 127.66752 410.049 136.14984 
+L 410.049 184.68756 
+Q 410.049 193.16988 418.523625 193.16988 
+z
+" clip-path="url(#p38e3f5663f)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 418.523625 273.28068 
+L 735.380438 273.28068 
+Q 743.855063 273.28068 743.855063 264.79836 
+L 743.855063 216.26064 
+Q 743.855063 207.77832 735.380438 207.77832 
+L 418.523625 207.77832 
+Q 410.049 207.77832 410.049 216.26064 
+L 410.049 264.79836 
+Q 410.049 273.28068 418.523625 273.28068 
+z
+" clip-path="url(#p38e3f5663f)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="387.45" y="31.474611" transform="rotate(-0 387.45 31.474611)">Файлова структура проєкту та способи завантаження на сервер хостингу</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 421.819313 102.22056 
+L 423.702563 102.22056 
+Q 426.527438 102.22056 426.527438 99.39312 
+L 426.527438 61.22268 
+Q 426.527438 58.39524 423.702563 58.39524 
+L 421.819313 58.39524 
+Q 418.994438 58.39524 418.994438 61.22268 
+L 418.994438 99.39312 
+Q 418.994438 102.22056 421.819313 102.22056 
+z
+" clip-path="url(#p38e3f5663f)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 421.819313 182.33136 
+L 423.702563 182.33136 
+Q 426.527438 182.33136 426.527438 179.50392 
+L 426.527438 141.33348 
+Q 426.527438 138.50604 423.702563 138.50604 
+L 421.819313 138.50604 
+Q 418.994438 138.50604 418.994438 141.33348 
+L 418.994438 179.50392 
+Q 418.994438 182.33136 421.819313 182.33136 
+z
+" clip-path="url(#p38e3f5663f)" style="fill: #6e30a8"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 421.819313 262.44216 
+L 423.702563 262.44216 
+Q 426.527438 262.44216 426.527438 259.61472 
+L 426.527438 221.44428 
+Q 426.527438 218.61684 423.702563 218.61684 
+L 421.819313 218.61684 
+Q 418.994438 218.61684 418.994438 221.44428 
+L 418.994438 259.61472 
+Q 418.994438 262.44216 421.819313 262.44216 
+z
+" clip-path="url(#p38e3f5663f)" style="fill: #248a3d"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #30d158" x="48.465" y="70.013742" transform="rotate(-0 48.465 70.013742)">Корінь сайту: public_html/</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="50.819063" y="98.63654" transform="rotate(-0 50.819063 98.63654)">├── index.html</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="173.230313" y="97.745251" transform="rotate(-0 173.230313 97.745251)">  # Головна сторінка</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="50.819063" y="124.0835" transform="rotate(-0 50.819063 124.0835)">├── css/</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="50.819063" y="149.53046" transform="rotate(-0 50.819063 149.53046)">│   └── style.css</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="173.230313" y="148.639171" transform="rotate(-0 173.230313 148.639171)"> # Таблиця стилів</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="50.819063" y="174.97742" transform="rotate(-0 50.819063 174.97742)">├── js/</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="50.819063" y="200.42438" transform="rotate(-0 50.819063 200.42438)">│   └── script.js</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="173.230313" y="199.533091" transform="rotate(-0 173.230313 199.533091)"> # Логіка вікторини</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="50.819063" y="226.107629" transform="rotate(-0 50.819063 226.107629)">└── img/</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #ffffff" x="50.819063" y="251.55998" transform="rotate(-0 50.819063 251.55998)">    └── hero.png</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #d1d1d6" x="173.230313" y="250.427011" transform="rotate(-0 173.230313 250.427011)">  # Латиниця в іменах!</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="435.472875" y="71.269259" transform="rotate(-0 435.472875 71.269259)">1. FTP-клієнт (FileZilla)</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #515154" x="435.472875" y="95.304645" transform="rotate(-0 435.472875 95.304645)">Введення Host, User, Password (порт 21) у FileZilla</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="435.472875" y="151.535332" transform="rotate(-0 435.472875 151.535332)">2. Веб-менеджер файлів хостингу</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #515154" x="435.472875" y="175.265258" transform="rotate(-0 435.472875 175.265258)">Завантаження ZIP-архіву через панель у public_html</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1d1d1f" x="435.472875" y="231.469374" transform="rotate(-0 435.472875 231.469374)">3. Статичний хостинг GitHub Pages</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #515154" x="435.472875" y="255.618214" transform="rotate(-0 435.472875 255.618214)">Публікація репозиторію за адресою user.github.io</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 362.144547 160.65432 
+Q 382.035505 160.65432 400.421789 160.65432 
+" style="fill: none; stroke: #0071e3; stroke-width: 2.2; stroke-linecap: round"/>
+    <path d="M 397.621789 157.65432 
+L 400.421789 160.65432 
+L 397.621789 163.65432 
+" style="fill: none; stroke: #0071e3; stroke-width: 2.2; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p38e3f5663f">
+   <rect x="10.8" y="10.8" width="753.3" height="282.744"/>
+  </clipPath>
+ </defs>
+</svg>
