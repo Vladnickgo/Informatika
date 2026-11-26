@@ -1,0 +1,3155 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Практичне заняття №12 — Рішення типових завдань та тестування програм (Scratch 3.0)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ==========================================================================
+       ЗМІННІ ДИЗАЙНУ ТА ФІРМОВА ПАЛІТРА КАТЕГОРІЙ SCRATCH 3.0
+       ========================================================================== */
+    :root {
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-med: #cbd5e1;
+      --text-main: #1e293b;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+
+      /* Фірмові кольори категорій блоків Scratch 3.0 */
+      --sc-motion: #4C97FF;
+      --sc-motion-border: #3373CC;
+      --sc-looks: #9966FF;
+      --sc-looks-border: #774DCB;
+      --sc-sound: #CF63CF;
+      --sc-sound-border: #A63FA6;
+      --sc-events: #FFBF00;
+      --sc-events-border: #CC9900;
+      --sc-control: #FFAB19;
+      --sc-control-border: #CF8B17;
+      --sc-sensing: #5CB1D6;
+      --sc-sensing-border: #2E8EB8;
+      --sc-operators: #59C059;
+      --sc-operators-border: #389438;
+      --sc-variables: #FF8C1A;
+      --sc-variables-border: #DB6E00;
+
+      --accent-primary: #2563EB;
+      --accent-primary-dark: #1D4ED8;
+      --accent-teal: #0F766E;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.07), 0 2px 4px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.89em;
+    }
+
+    /* ==========================================================================
+       ВЕРХНЯ ЗАКРІПЛЕНА ПАНЕЛЬ НАВІГАЦІЇ (.no-print)
+       ========================================================================== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 10px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .top-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .nav-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--sc-motion), var(--accent-primary-dark));
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 9px;
+      border-radius: 8px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-link:hover {
+      background: #EFF6FF;
+      color: var(--accent-primary-dark);
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent-primary-dark);
+      color: #ffffff;
+      border: 1.5px solid #1E40AF;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(29, 78, 216, 0.22);
+      transition: transform 0.12s, background 0.15s;
+    }
+
+    .btn-print:hover {
+      background: #1E40AF;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       ОСНОВНИЙ КОНТЕЙНЕР ТА БАЗОВІ БЛОКИ
+       ========================================================================== */
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 26px 20px 64px;
+    }
+
+    h1, h2, h3, h4, .section-header, .task-banner {
+      break-after: avoid;
+      page-break-after: avoid;
+      color: var(--text-main);
+    }
+
+    p {
+      margin-bottom: 11px;
+      color: var(--text-secondary);
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Шапка заняття */
+    .hero-header {
+      background: linear-gradient(135deg, #ffffff 0%, #eff6ff 55%, #f5f3ff 100%);
+      border: 1px solid #bfdbfe;
+      border-top: 5px solid var(--sc-motion);
+      border-radius: var(--radius-lg);
+      padding: 26px 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #dbeafe;
+      color: #1e40af;
+      border: 1px solid #93c5fd;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 5px 13px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(1.42rem, 2.8vw, 1.98rem);
+      font-weight: 800;
+      line-height: 1.28;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Паспорт заняття */
+    .passport-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .span-2 {
+      grid-column: 1 / -1;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .passport-grid .card {
+      margin-bottom: 0;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.94rem;
+      flex-shrink: 0;
+    }
+
+    .clean-list {
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .clean-list li {
+      margin-bottom: 6px;
+    }
+
+    .clean-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Питання для обговорення */
+    .discuss-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .discuss-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--sc-motion);
+      border-radius: 10px;
+      padding: 11px 14px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .discuss-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--sc-motion);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .discuss-q {
+      font-weight: 700;
+      font-size: 0.93rem;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+
+    .discuss-hint {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* Заголовки розділів */
+    .section-block {
+      margin-top: 34px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    .section-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 1.34rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    /* Виноски (Callouts) */
+    .callout {
+      border-radius: var(--radius-md);
+      padding: 15px 18px;
+      margin: 16px 0;
+      border-left: 4px solid var(--sc-motion);
+      background: #eff6ff;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .callout.green  { border-left-color: var(--sc-operators); background: #f0fdf4; }
+    .callout.amber  { border-left-color: var(--sc-variables); background: #fff7ed; }
+    .callout.red    { border-left-color: #ef4444; background: #fef2f2; }
+    .callout.purple { border-left-color: var(--sc-looks); background: #f5f3ff; }
+
+    .callout-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .callout p, .callout li {
+      font-size: 0.91rem;
+      color: var(--text-secondary);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      margin: 14px 0;
+    }
+
+    .script-layout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ==========================================================================
+       ТАБЛИЦІ
+       ========================================================================== */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: var(--bg-subtle);
+    }
+
+    th {
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-main);
+      padding: 10px 13px;
+      border-bottom: 2px solid var(--border-light);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      padding: 10px 13px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+
+    tr {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fafcff;
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #ffffff;
+      background: var(--sc-motion);
+    }
+
+    .pts-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* ==========================================================================
+       АВТЕНТИЧНІ CSS-БЛОКИ SCRATCH 3.0 (УСІ КАТЕГОРІЇ ТА ФОРМИ)
+       ========================================================================== */
+    .sb-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      user-select: none;
+      max-width: 100%;
+    }
+
+    .sb-block {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 6px 12px;
+      min-height: 33px;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.81rem;
+      line-height: 1.25;
+      border-radius: 6px;
+      border: 1.5px solid transparent;
+      margin-bottom: -1px;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.14);
+    }
+
+    /* Пазловий виступ знизу */
+    .sb-block.sb-notch::after {
+      content: "";
+      position: absolute;
+      left: 15px;
+      bottom: -5px;
+      width: 16px;
+      height: 5px;
+      background: inherit;
+      border-left: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-right: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      z-index: 2;
+    }
+
+    /* Виїмка зверху */
+    .sb-block.sb-cmd::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: -1.5px;
+      width: 16px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.28);
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Шапка події (Hat block) */
+    .sb-hat {
+      border-top-left-radius: 22px 13px;
+      border-top-right-radius: 22px 13px;
+      padding-top: 9px;
+      padding-bottom: 7px;
+    }
+
+    /* Фірмові кольори категорій Scratch 3.0 */
+    .sb-motion    { background-color: var(--sc-motion);    border-color: var(--sc-motion-border); }
+    .sb-looks     { background-color: var(--sc-looks);     border-color: var(--sc-looks-border); }
+    .sb-sound     { background-color: var(--sc-sound);     border-color: var(--sc-sound-border); }
+    .sb-events    { background-color: var(--sc-events);    border-color: var(--sc-events-border); text-shadow: 0 1px 1px rgba(125, 86, 0, 0.35); }
+    .sb-control   { background-color: var(--sc-control);   border-color: var(--sc-control-border); }
+    .sb-sensing   { background-color: var(--sc-sensing);   border-color: var(--sc-sensing-border); }
+    .sb-operators { background-color: var(--sc-operators); border-color: var(--sc-operators-border); }
+    .sb-variables { background-color: var(--sc-variables); border-color: var(--sc-variables-border); }
+
+    /* Біле овальне поле введення */
+    .sb-input {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      min-height: 20px;
+      padding: 1px 8px;
+      background: #ffffff;
+      color: #0f172a;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.77rem;
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      text-shadow: none;
+    }
+
+    /* Випадаючий список */
+    .sb-dropdown {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 1px 8px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      color: #ffffff;
+      font-size: 0.77rem;
+      font-weight: 700;
+      text-shadow: none;
+    }
+
+    .sb-dropdown::after {
+      content: "▾";
+      font-size: 0.7rem;
+      opacity: 0.9;
+    }
+
+    /* Кольоровий кружечок для "торкається кольору" */
+    .sb-color-dot {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: #1e293b;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+    }
+
+    /* Овальний репортер */
+    .sb-oval {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 2px 10px;
+      min-height: 24px;
+      border-radius: 999px;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.78rem;
+      border: 1.5px solid rgba(0, 0, 0, 0.18);
+      box-shadow: inset 0 -1.5px 0 rgba(0, 0, 0, 0.12);
+      text-shadow: none;
+    }
+
+    .sb-oval.sb-motion    { background-color: var(--sc-motion);    border-color: var(--sc-motion-border); }
+    .sb-oval.sb-operators { background-color: var(--sc-operators); border-color: var(--sc-operators-border); }
+    .sb-oval.sb-variables { background-color: var(--sc-variables); border-color: var(--sc-variables-border); }
+    .sb-oval.sb-sensing   { background-color: var(--sc-sensing);   border-color: var(--sc-sensing-border); }
+
+    /* Шестикутний логічний блок (Boolean) */
+    .sb-hex {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 13px;
+      min-height: 25px;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.78rem;
+      clip-path: polygon(9px 0%, calc(100% - 9px) 0%, 100% 50%, calc(100% - 9px) 100%, 9px 100%, 0% 50%);
+      text-shadow: none;
+      white-space: nowrap;
+    }
+
+    .sb-hex.sb-sensing   { background-color: var(--sc-sensing); }
+    .sb-hex.sb-operators { background-color: var(--sc-operators); }
+    .sb-hex .sb-hex.sb-operators { background-color: #3FA343; padding: 2px 11px; min-height: 21px; }
+
+    /* C-блок керування (завжди, якщо ... то, повторити до) */
+    .sb-c {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: stretch;
+      margin-bottom: -1px;
+    }
+
+    .sb-c-head {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 12px;
+      min-height: 33px;
+      background-color: var(--sc-control);
+      border: 1.5px solid var(--sc-control-border);
+      border-bottom: none;
+      border-radius: 6px 6px 6px 0;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.81rem;
+    }
+
+    .sb-c-body {
+      padding: 5px 0 5px 14px;
+      border-left: 14px solid var(--sc-control);
+      box-shadow: inset 1.5px 0 0 var(--sc-control-border);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .sb-c-foot {
+      position: relative;
+      height: 19px;
+      min-width: 128px;
+      background-color: var(--sc-control);
+      border: 1.5px solid var(--sc-control-border);
+      border-top: none;
+      border-radius: 0 6px 6px 6px;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.13);
+    }
+
+    .sb-c-foot.sb-notch::after {
+      content: "";
+      position: absolute;
+      left: 15px;
+      bottom: -5px;
+      width: 16px;
+      height: 5px;
+      background: var(--sc-control);
+      border-left: 1.5px solid var(--sc-control-border);
+      border-right: 1.5px solid var(--sc-control-border);
+      border-bottom: 1.5px solid var(--sc-control-border);
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      z-index: 2;
+    }
+
+    .sb-flag {
+      color: #4CBF56;
+      font-size: 1rem;
+      line-height: 1;
+      filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+    }
+
+    /* ==========================================================================
+       ДІАГРАМИ ТА ІНТЕРАКТИВНИЙ ТЕСТ-ПЛАН
+       ========================================================================== */
+    .diagram-box {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .diagram-caption {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .caption-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .caption-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .diagram-svg-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .diagram-svg-wrap svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Інтерактивні перемикачі статусу тест-плану */
+    .test-status-btn {
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border-med);
+      background: #f8fafc;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.14s;
+      white-space: nowrap;
+    }
+
+    .test-status-btn[data-state="pass"] {
+      background: #dcfce7;
+      border-color: #4ade80;
+      color: #166534;
+    }
+
+    .test-status-btn[data-state="fail"] {
+      background: #fee2e2;
+      border-color: #f87171;
+      color: #991b1b;
+    }
+
+    .test-note-input {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.82rem;
+      padding: 5px 8px;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      color: var(--text-main);
+      background: #ffffff;
+    }
+
+    .test-note-input:focus {
+      outline: none;
+      border-color: var(--sc-motion);
+    }
+
+    .print-check-cell {
+      display: none;
+      font-size: 0.8rem;
+      color: #475569;
+      white-space: nowrap;
+    }
+
+    .print-line-cell {
+      display: none;
+      border-bottom: 1px dashed #94a3b8;
+      height: 18px;
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       ІНТЕРАКТИВНИЙ ПРОТОТИП ГРИ «LABIRINT» НА HTML5 CANVAS
+       ========================================================================== */
+    .game-box {
+      background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+      border: 1.5px solid #93c5fd;
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin: 18px 0;
+      box-shadow: var(--shadow-md);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .game-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .game-hud {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .hud-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border-med);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .hud-val {
+      display: inline-block;
+      min-width: 26px;
+      text-align: center;
+      padding: 1px 7px;
+      border-radius: 5px;
+      background: var(--sc-variables);
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+    }
+
+    .game-stage-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #cbd5e1;
+      background: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    #labirintCanvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .game-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .game-btn-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .g-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 0.83rem;
+      font-weight: 700;
+      padding: 8px 13px;
+      border-radius: 9px;
+      border: 1.5px solid var(--border-med);
+      background: #ffffff;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.14s;
+    }
+
+    .g-btn:hover {
+      background: #f1f5f9;
+    }
+
+    .g-btn.primary {
+      background: #16a34a;
+      border-color: #15803d;
+      color: #ffffff;
+    }
+
+    .g-btn.primary:hover {
+      background: #15803d;
+    }
+
+    .g-btn.debug-on {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+
+    /* Екранний D-Pad для мобільних і сенсорних пристроїв */
+    .dpad-wrap {
+      display: inline-grid;
+      grid-template-columns: repeat(3, 38px);
+      grid-template-rows: repeat(2, 34px);
+      gap: 4px;
+    }
+
+    .dpad-btn {
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 800;
+      border-radius: 8px;
+      border: 1.5px solid #93c5fd;
+      background: #eff6ff;
+      color: #1d4ed8;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .dpad-btn:active {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       БАНЕРИ ЗАВДАНЬ, ЗАПИТАННЯ ТА ОЦІНЮВАННЯ
+       ========================================================================== */
+    .task-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin: 22px 0 12px;
+      background: #eff6ff;
+      border: 1.5px solid #93c5fd;
+    }
+
+    .task-banner.green  { background: #ecfdf5; border-color: #6ee7b7; }
+    .task-banner.amber  { background: #fff7ed; border-color: #fdba74; }
+    .task-banner.purple { background: #f5f3ff; border-color: #c4b5fd; }
+
+    .task-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .task-pts {
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--accent-primary-dark);
+      color: #ffffff;
+    }
+
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comment-item {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-left: 3.5px solid var(--sc-motion);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Контрольні запитання */
+    .qa-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .qa-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 11px;
+      padding: 13px 15px;
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .qa-q {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .qa-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 23px;
+      height: 23px;
+      border-radius: 6px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-top: 1px;
+    }
+
+    .qa-a {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      padding-left: 31px;
+    }
+
+    .page-footer {
+      margin-top: 36px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .print-only-note {
+      display: none;
+    }
+
+    /* ==========================================================================
+       АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ
+       ========================================================================== */
+    @media (max-width: 840px) {
+      .passport-grid,
+      .two-col,
+      .script-layout,
+      .qa-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 16px 12px 44px;
+      }
+
+      .hero-header {
+        padding: 18px 16px;
+      }
+    }
+
+    /* ==========================================================================
+       ПРОФЕСІЙНА ОПТИМІЗАЦІЯ ДЛЯ ДРУКУ (A4)
+       ========================================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 12mm 14mm;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html {
+        font-size: 13px;
+      }
+
+      body {
+        background: #ffffff !important;
+        color: #1e293b !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .print-only-note {
+        display: block !important;
+        font-size: 0.82rem;
+        color: #475569;
+        margin-bottom: 8px;
+      }
+
+      .print-check-cell {
+        display: inline-block !important;
+      }
+
+      .print-line-cell {
+        display: block !important;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .hero-header {
+        box-shadow: none !important;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+      }
+
+      .card, .diagram-box, .callout, .table-wrap, .game-box,
+      .task-banner, .discuss-item, .qa-card, table, tr, figure, .sb-stack, .comment-item {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        box-shadow: none !important;
+      }
+
+      h1, h2, h3, h4, .section-header, .task-banner {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+      }
+
+      .passport-grid,
+      .two-col,
+      .qa-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .script-layout {
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+      }
+
+      .section-block {
+        margin-top: 20px;
+      }
+
+      .table-wrap {
+        overflow: visible !important;
+      }
+
+      svg, canvas {
+        max-width: 100% !important;
+        height: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       ВЕРХНЯ ЗАКРІПЛЕНА ПАНЕЛЬ НАВІГАЦІЇ (.no-print)
+       ======================================================================== -->
+  <nav class="top-nav no-print" aria-label="Навігація по заняттю">
+    <div class="top-nav-inner">
+      <div class="nav-brand">
+        <span class="nav-brand-badge">П12</span>
+        <span>Scratch 3.0</span>
+      </div>
+      <div class="nav-links">
+        
+        <a href="#sec-1" class="nav-link">1. Теорія і дебагінг</a>
+        <a href="#sec-2" class="nav-link">2. Гра «Labirint»</a>
+        <a href="#sec-3" class="nav-link">3. Оцінювання та питання</a>
+      </div>
+      <button type="button" class="btn-print" onclick="window.print()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Друкувати / Зберегти як PDF
+      </button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ======================================================================
+         ПАСПОРТ ЗАНЯТТЯ ТА ПИТАННЯ ДЛЯ ОБГОВОРЕННЯ
+         ====================================================================== -->
+    <header id="passport" class="hero-header">
+      <div class="hero-badge">ПРАКТИЧНЕ ЗАНЯТТЯ №12 • SCRATCH 3.0 • ПІДСУМКОВИЙ ПРОЄКТ</div>
+      <h1 class="hero-title">Рішення типових завдань та тестування програм</h1>
+      <p class="hero-sub">Навчально-методичний посібник: життєвий цикл створення проєкту, блок-схеми алгоритмів, пошук та виправлення багів (дебагінг), тест-план і повна розробка гри «Labirint»</p>
+    </header>
+
+    <section class="passport-grid" aria-label="Паспорт заняття">
+      <div class="card span-2">
+        <div class="card-title">
+          <span class="card-icon" style="background:#dbeafe; color:#1d4ed8;">🎯</span>
+          Мета заняття
+        </div>
+        <p><strong>Навчальна:</strong> навчитися застосовувати всі отримані знання та навички в Scratch для створення завершених проєктів (наприклад, проста гра, інтерактивна історія), тестувати та налагоджувати проєкти. <strong>Розвивальна:</strong> розвивати комплексне системне мислення, вміння планувати етапи створення великого проєкту; розвивати навички пошуку та виправлення помилок (дебагінг). <strong>Виховна:</strong> виховувати наполегливість, здатність доводити справу до кінця, отримувати задоволення від завершеного проєкту.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#ecfdf5; color:#166534;">💻</span>
+          Обладнання та програмне забезпечення
+        </div>
+        <ol class="clean-list">
+          <li>Інструкційні картки до практичного заняття №12.</li>
+          <li>Персональний комп'ютер або ноутбук із доступом до мережі Інтернет.</li>
+          <li>Середовище візуального програмування <strong>Scratch 3.0</strong> (<span class="mono">scratch.mit.edu</span> або локальний додаток <strong>Scratch Desktop</strong>).</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#fff7ed; color:#c2410c;">📚</span>
+          Рекомендована література
+        </div>
+        <ol class="clean-list">
+          <li>Васильєв О. Алгоритми / О. В. Васильєв. — К. : Навчальна книга – Богдан, 2022. — 424 с.</li>
+          <li>Васильєв О. Програмування мовою Java / О. В. Васильєв. — К. : Навчальна книга – Богдан, 2020. — 696 с.</li>
+          <li>Руденко В. Д. Основи алгоритмізації і програмування мовою Python / В. Д. Руденко, О. О. Жугастров. — Х. : Ранок, 2019. — 192 с.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Блок «Питання для обговорення» -->
+    <section class="card" aria-label="Питання для обговорення">
+      <div class="card-title">
+        <span class="card-icon" style="background:#f5f3ff; color:#6d28d9;">💬</span>
+        Питання для обговорення перед початком роботи
+      </div>
+      <div class="discuss-grid">
+        <div class="discuss-item">
+          <span class="discuss-num">1</span>
+          <div>
+            <div class="discuss-q">Чому важливо планувати створення великого проєкту, а не писати код «з наскоку»?</div>
+            <div class="discuss-hint">попередній план (список спрайтів, змінних і подій) запобігає суперечливим скриптам, економить час на переробку та допомагає розподілити роботу на невеликі зрозумілі кроки.</div>
+          </div>
+        </div>
+        <div class="discuss-item">
+          <span class="discuss-num">2</span>
+          <div>
+            <div class="discuss-q">Які етапи створення гри або інтерактивної історії ви можете виділити?</div>
+            <div class="discuss-hint">від задуму (ідеї) та проєктування сценарію — через графіку й програмування механік — до тестування, виправлення багів, фіналізації та публікації.</div>
+          </div>
+        </div>
+        <div class="discuss-item">
+          <span class="discuss-num">3</span>
+          <div>
+            <div class="discuss-q">Що таке тестування програми? Чому воно необхідне?</div>
+            <div class="discuss-hint">тестування — це систематична перевірка програми в різних ситуаціях (зокрема граничних і помилкових діях гравця), щоб переконатися, що фактична поведінка відповідає задуму.</div>
+          </div>
+        </div>
+        <div class="discuss-item">
+          <span class="discuss-num">4</span>
+          <div>
+            <div class="discuss-q">Як знайти помилку в програмі, якщо вона працює не так, як ви очікували?</div>
+            <div class="discuss-hint">локалізувати проблемний скрипт, вивести поточні значення змінних на сцену або через блок «говорити», перевірити умови зіткнень і початкові значення при натисканні ⚑.</div>
+          </div>
+        </div>
+        <div class="discuss-item">
+          <span class="discuss-num">5</span>
+          <div>
+            <div class="discuss-q">Які види помилок (тобто багів) ви вже зустрічали в своїх проєктах?</div>
+            <div class="discuss-hint">проходження персонажа крізь стіни, нескидання рахунку чи таймера під час нового старту, переплутані знаки порівняння (&gt; замість ≥) або «зависання» в циклі.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 1. ТЕОРЕТИЧНІ ВІДОМОСТІ
+         ====================================================================== -->
+    <section id="sec-1" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-motion);">1</span>
+        <h2>Теоретичні відомості</h2>
+      </div>
+
+      <!-- 1.1. Етапи створення програмного проєкту -->
+      <h3>1.1. Етапи створення програмного проєкту</h3>
+      <div class="card">
+        <p>Розробка завершеної гри чи навчальної програми в Scratch підпорядковується класичному <strong>життєвому циклу створення ІТ-проєкту</strong>. Особливу роль у ньому відіграє цикл зворотного зв'язку між <em>тестуванням</em> та <em>налагодженням (дебагінгом)</em>: доки в програмі виявляються помилки, розробник повертається до їх усунення і повторно перевіряє роботу проєкту.</p>
+      </div>
+
+      <!-- РИС. 1: Життєвий цикл розробки програмного проєкту -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-motion);"></span>
+            Рис. 1. Життєвий цикл розробки програмного проєкту (7 етапів із циклом дебагінгу)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 900 326" width="900" height="326" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Життєвий цикл розробки програмного проєкту: 7 етапів зі зворотним зв'язком від умови Є помилки? до етапу Налагодження">
+            <defs>
+              <marker id="arrDark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155"/>
+              </marker>
+              <marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+              </marker>
+              <marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+              </marker>
+            </defs>
+
+            <!-- ВЕРХНІЙ РЯД: Етапи 1 -> 2 -> 3 -> 4 -->
+            <!-- Етап 1 -->
+            <rect x="14" y="20" width="188" height="74" rx="14" fill="#EFF6FF" stroke="#4C97FF" stroke-width="2"/>
+            <rect x="24" y="29" width="24" height="24" rx="7" fill="#4C97FF"/>
+            <text x="36" y="45" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">1</text>
+            <text x="56" y="45" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">Ідея</text>
+            <text x="24" y="67" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Визначення мети та жанру</text>
+            <text x="24" y="82" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">(гра, тест, історія)</text>
+
+            <line x1="202" y1="57" x2="232" y2="57" stroke="#334155" stroke-width="2" marker-end="url(#arrDark)"/>
+
+            <!-- Етап 2 -->
+            <rect x="236" y="20" width="194" height="74" rx="14" fill="#F5F3FF" stroke="#9966FF" stroke-width="2"/>
+            <rect x="246" y="29" width="24" height="24" rx="7" fill="#9966FF"/>
+            <text x="258" y="45" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">2</text>
+            <text x="278" y="45" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">Планування</text>
+            <text x="246" y="67" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Блок-схема алгоритму,</text>
+            <text x="246" y="82" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">спрайти, фони та змінні</text>
+
+            <line x1="430" y1="57" x2="460" y2="57" stroke="#334155" stroke-width="2" marker-end="url(#arrDark)"/>
+
+            <!-- Етап 3 -->
+            <rect x="464" y="20" width="194" height="74" rx="14" fill="#F0FDF4" stroke="#59C059" stroke-width="2"/>
+            <rect x="474" y="29" width="24" height="24" rx="7" fill="#59C059"/>
+            <text x="486" y="45" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">3</text>
+            <text x="506" y="45" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">Розробка</text>
+            <text x="474" y="67" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Малювання сцени, збирання</text>
+            <text x="474" y="82" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">скриптів, звуків та подій</text>
+
+            <line x1="658" y1="57" x2="688" y2="57" stroke="#334155" stroke-width="2" marker-end="url(#arrDark)"/>
+
+            <!-- Етап 4 -->
+            <rect x="692" y="20" width="194" height="74" rx="14" fill="#FFF7ED" stroke="#FF8C1A" stroke-width="2"/>
+            <rect x="702" y="29" width="24" height="24" rx="7" fill="#FF8C1A"/>
+            <text x="714" y="45" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">4</text>
+            <text x="734" y="45" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">Тестування</text>
+            <text x="702" y="67" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Перевірка за тест-планом,</text>
+            <text x="702" y="82" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">пошук багів і збоїв</text>
+
+            <!-- Стрілка вниз від Тестування до умови "Є помилки?" -->
+            <line x1="789" y1="94" x2="789" y2="128" stroke="#334155" stroke-width="2" marker-end="url(#arrDark)"/>
+
+            <!-- Умова (Шестикутник Scratch): Є помилки? -->
+            <polygon points="712,132 866,132 886,158 866,184 712,184 692,158" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.2"/>
+            <text x="789" y="162" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#92400E">Є помилки (баги)?</text>
+
+            <!-- Гілка ТАК -> Етап 5. Налагодження -->
+            <line x1="692" y1="158" x2="626" y2="158" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arrRed)"/>
+            <text x="662" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#dc2626">ТАК</text>
+
+            <rect x="404" y="122" width="216" height="72" rx="14" fill="#FEF2F2" stroke="#EF4444" stroke-width="2"/>
+            <rect x="414" y="131" width="24" height="24" rx="7" fill="#EF4444"/>
+            <text x="426" y="147" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">5</text>
+            <text x="446" y="147" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#991B1B">Налагодження</text>
+            <text x="414" y="169" font-family="Inter, sans-serif" font-size="10.5" fill="#7F1D1D">Дебагінг: локалізація та</text>
+            <text x="414" y="184" font-family="Inter, sans-serif" font-size="10.5" fill="#7F1D1D">виправлення помилок у коді</text>
+
+            <!-- Зворотний зв'язок від Налагодження до Тестування -->
+            <path d="M 512 122 L 512 106 L 755 106 L 755 98" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#arrRed)"/>
+            <text x="632" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.8" font-weight="700" fill="#dc2626">повторна перевірка після виправлення</text>
+
+            <!-- Гілка НІ -> Етап 6. Фіналізація -->
+            <path d="M 789 184 L 789 266 L 626 266" fill="none" stroke="#16a34a" stroke-width="2.2" marker-end="url(#arrGreen)"/>
+            <text x="808" y="210" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#16a34a">НІ</text>
+
+            <!-- Етап 6. Фіналізація -->
+            <rect x="404" y="230" width="216" height="74" rx="14" fill="#ECFEFF" stroke="#06B6D4" stroke-width="2"/>
+            <rect x="414" y="239" width="24" height="24" rx="7" fill="#0891B2"/>
+            <text x="426" y="255" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">6</text>
+            <text x="446" y="255" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">Фіналізація</text>
+            <text x="414" y="277" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Оформлення правил для гравця,</text>
+            <text x="414" y="292" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">тест на аудиторії (одногрупнику)</text>
+
+            <line x1="404" y1="266" x2="352" y2="266" stroke="#334155" stroke-width="2" marker-end="url(#arrDark)"/>
+
+            <!-- Етап 7. Публікація -->
+            <rect x="114" y="230" width="232" height="74" rx="14" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.2"/>
+            <rect x="124" y="239" width="24" height="24" rx="7" fill="#16A34A"/>
+            <text x="136" y="255" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">7</text>
+            <text x="156" y="255" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#166534">Публікація та здача</text>
+            <text x="124" y="277" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Збереження файлу .sb3, опис</text>
+            <text x="124" y="292" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">інструкції, здача викладачу</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- 1.2. Типові проєкти в Scratch -->
+      <h3>1.2. Типові проєкти в Scratch</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:20%;">Тип проєкту</th>
+              <th style="width:29%;">Опис</th>
+              <th style="width:25%;">Приклад</th>
+              <th style="width:26%;">Ключові блоки Scratch</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Гра</strong></td>
+              <td>Використання клавіш керування, зіткнення, очки, таймер, умови перемоги й поразки.</td>
+              <td>Лабіринт, ловець яблук, космічний стрілець, пінг-понг.</td>
+              <td><span class="sb-hex sb-sensing">торкається ...?</span> &nbsp; <span class="sb-oval sb-variables">очки</span></td>
+            </tr>
+            <tr>
+              <td><strong>Інтерактивна історія</strong></td>
+              <td>Користувач впливає на розвиток сюжету через вибір реплік або кнопок.</td>
+              <td>Квест «Обери свою пригоду», анімована казка.</td>
+              <td><span class="sb-block sb-events" style="padding:2px 8px; min-height:24px; font-size:0.75rem;">оповістити ...</span></td>
+            </tr>
+            <tr>
+              <td><strong>Навчальний додаток</strong></td>
+              <td>Опитування, тест, генератор прикладів, інтерактивний тренажер із підрахунком балів.</td>
+              <td>Вікторина з математики, тренажер таблиці множення.</td>
+              <td><span class="sb-block sb-sensing" style="padding:2px 8px; min-height:24px; font-size:0.75rem;">запитати ... і чекати</span></td>
+            </tr>
+            <tr>
+              <td><strong>Симуляція</strong></td>
+              <td>Моделювання фізичних, природних або соціальних процесів із заданими параметрами.</td>
+              <td>Симулятор погоди, рух планет, ріст популяції.</td>
+              <td><span class="sb-oval sb-operators">випадкове від ... до ...</span></td>
+            </tr>
+            <tr>
+              <td><strong>Творчий проєкт</strong></td>
+              <td>Інтерактивне малювання, синтезатор музики, світломузична анімація.</td>
+              <td>Малювальний стіл, віртуальне піаніно, калейдоскоп.</td>
+              <td><span class="sb-block sb-sound" style="padding:2px 8px; min-height:24px; font-size:0.75rem;">грати ноту ...</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 1.3. Планування проєкту: блок-схема -->
+      <h3>1.3. Планування проєкту: блок-схема</h3>
+      <p>Перед складанням скриптів у Scratch корисно зобразити логіку роботи програми у вигляді <strong>блок-схеми</strong>. Нижче наведено приклад алгоритму класичної гри «Пінг-Понг» («Арканоїд») та її пряму відповідність конструкціям Scratch 3.0.</p>
+
+      <!-- РИС. 2: Блок-схема алгоритму гри «Пінг-Понг» -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-control);"></span>
+            Рис. 2. Блок-схема алгоритму гри «Пінг-Понг» та зв'язок із конструкціями Scratch 3.0
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 880 392" width="880" height="392" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Блок-схема алгоритму гри Пінг-Понг: ініціалізація очки=0, Головний цикл, рух ракетки за мишкою, рух м'яча, перевірка М'яч торкнувся краю?">
+            <defs>
+              <marker id="fcArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155"/>
+              </marker>
+              <marker id="fcBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+              </marker>
+            </defs>
+
+            <!-- ЛІВА ЧАСТИНА: БЛОК-СХЕМА -->
+            <!-- Початок -->
+            <circle cx="260" cy="20" r="13" fill="#1E293B"/>
+            <text x="292" y="24" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#475569">Початок (Натиснуто ⚑)</text>
+            <line x1="260" y1="33" x2="260" y2="50" stroke="#334155" stroke-width="2" marker-end="url(#fcArr)"/>
+
+            <!-- Ініціалізація -->
+            <rect x="115" y="54" width="290" height="36" rx="18" fill="#EFF6FF" stroke="#4C97FF" stroke-width="2"/>
+            <text x="260" y="76" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#1E293B">Встановити початкові значення (очки = 0)</text>
+            <line x1="260" y1="90" x2="260" y2="112" stroke="#334155" stroke-width="2" marker-end="url(#fcArr)"/>
+
+            <!-- Рамка Головного циклу -->
+            <rect x="44" y="114" width="446" height="266" rx="14" fill="#FFFBEB" fill-opacity="0.55" stroke="#FFAB19" stroke-width="2.2"/>
+            <path d="M 44 128 Q 44 114 58 114 L 188 114 L 174 138 L 44 138 Z" fill="#FFAB19"/>
+            <text x="110" y="130" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">Головний цикл</text>
+
+            <!-- Дія 1: Рух ракетки -->
+            <rect x="145" y="148" width="230" height="34" rx="17" fill="#FFFFFF" stroke="#4C97FF" stroke-width="1.8"/>
+            <text x="260" y="169" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#1E293B">Рух ракетки (за мишкою)</text>
+            <line x1="260" y1="182" x2="260" y2="198" stroke="#334155" stroke-width="2" marker-end="url(#fcArr)"/>
+
+            <!-- Дія 2: Рух м'яча -->
+            <rect x="170" y="202" width="180" height="34" rx="17" fill="#FFFFFF" stroke="#4C97FF" stroke-width="1.8"/>
+            <text x="260" y="223" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#1E293B">Рух м'яча та відбиття</text>
+            <line x1="260" y1="236" x2="260" y2="254" stroke="#334155" stroke-width="2" marker-end="url(#fcArr)"/>
+
+            <!-- Умова: М'яч торкнувся краю? -->
+            <polygon points="154,258 366,258 386,282 366,306 154,306 134,282" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+            <text x="260" y="286" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#0C4A6E">М'яч торкнувся нижнього краю?</text>
+
+            <!-- Гілка ТАК -> Game Over -> Кінець -->
+            <line x1="260" y1="306" x2="260" y2="326" stroke="#dc2626" stroke-width="2" marker-end="url(#fcArr)"/>
+            <text x="276" y="319" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#dc2626">Так</text>
+
+            <rect x="188" y="330" width="144" height="32" rx="16" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.8"/>
+            <text x="260" y="350" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#991B1B">Game Over (Стоп)</text>
+
+            <line x1="332" y1="346" x2="366" y2="346" stroke="#334155" stroke-width="2" marker-end="url(#fcArr)"/>
+            <circle cx="384" cy="346" r="12" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.2"/>
+            <circle cx="384" cy="346" r="6" fill="#1E293B"/>
+
+            <!-- Гілка НІ -> Продовжити цикл -->
+            <path d="M 386 282 L 456 282 L 456 165 L 381 165" fill="none" stroke="#2563EB" stroke-width="2" marker-end="url(#fcBlue)"/>
+            <text x="404" y="274" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#2563EB">Ні</text>
+            <rect x="398" y="210" width="84" height="34" rx="6" fill="#FEF9C3" stroke="#EAB308" stroke-width="1.2"/>
+            <text x="440" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#854D0E">Продовжити</text>
+            <text x="440" y="237" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#854D0E">цикл гри</text>
+
+            <!-- ПРАВА ЧАСТИНА: ВІДПОВІДНІСТЬ БЛОКАМ SCRATCH 3.0 -->
+            <rect x="514" y="20" width="356" height="360" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.6"/>
+            <text x="692" y="46" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#1E293B">Як це перекладається на блоки Scratch:</text>
+
+            <rect x="532" y="62" width="320" height="62" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+            <text x="546" y="83" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#DB6E00">1. Ініціалізація перед циклом:</text>
+            <text x="546" y="102" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#334155">надати [очки v] значення (0)</text>
+            <text x="546" y="116" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Виконується 1 раз при запуску проєкту.</text>
+
+            <rect x="532" y="136" width="320" height="72" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+            <text x="546" y="157" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#CF8B17">2. Головний ігровий цикл:</text>
+            <text x="546" y="176" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#334155">завжди { переміститися; перевірити... }</text>
+            <text x="546" y="194" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Безперервно оновлює координати спрайтів.</text>
+
+            <rect x="532" y="220" width="320" height="72" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+            <text x="546" y="241" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#2E8EB8">3. Умова завершення (шестикутник):</text>
+            <text x="546" y="260" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#334155">якщо &lt;торкається [межа v]?&gt; тоді</text>
+            <text x="546" y="278" font-family="Inter, sans-serif" font-size="10" fill="#64748B">Гілка «Ні» автоматично веде до наступного кроку.</text>
+
+            <rect x="532" y="304" width="320" height="62" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+            <text x="546" y="325" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#DC2626">4. Зупинка програми:</text>
+            <text x="546" y="344" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#334155">говорити [Game Over] 2 сек → зупинити [все v]</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- 1.4. Види помилок у програмах -->
+      <h3>1.4. Види помилок у програмах</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:21%;">Тип помилки</th>
+              <th style="width:27%;">Опис</th>
+              <th style="width:29%;">Приклад у Scratch</th>
+              <th style="width:23%;">Як уникнути</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Синтаксична</strong></td>
+              <td>Неправильне написання конструкції, несумісність типів блоків.</td>
+              <td>У Scratch форма блоків захищає від несумісності (овал не вставиться у шестикутник), але можлива одруківка в назві оповіщення.</td>
+              <td>Обирати назви зі списків, не змінювати назви повідомлень уручну.</td>
+            </tr>
+            <tr>
+              <td><strong>Логічна</strong></td>
+              <td>Програма запускається і працює без збоїв, але видає неправильний результат.</td>
+              <td>Записано <span class="mono">оцінка &gt; 10</span> (тоді 10 не враховується), або використано <span class="mono">змінити час на 60</span> замість <span class="mono">надати значення 60</span>.</td>
+              <td>Перевіряти граничні значення (0, 1, 10, 12) та початкову ініціалізацію змінних.</td>
+            </tr>
+            <tr>
+              <td><strong>Помилка часу виконання</strong></td>
+              <td>Програма «зависає», працює надто повільно або поводиться непередбачувано під час гри.</td>
+              <td>Нескінченне створення клонів без видалення, відсутність затримки в циклі або застрягання спрайта у стіні лабіринту.</td>
+              <td>Обмежувати цикли умовами, робити коридори ширшими за спрайт.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 1.5. Методи пошуку помилок (Дебагінг у Scratch) -->
+      <h3>1.5. Методи пошуку помилок (Дебагінг у Scratch)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:22%;">Метод дебагінгу</th>
+              <th style="width:41%;">Як виконати у середовищі Scratch 3.0</th>
+              <th style="width:37%;">Візуальний приклад блоків</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Перевірка гілок</strong></td>
+              <td>Увімкнути галочки біля змінних або тимчасово додати блок <span class="mono">говорити</span>, щоб побачити, чи виконується гілка і які значення мають змінні.</td>
+              <td><span class="sb-block sb-looks" style="padding:3px 10px; min-height:26px; font-size:0.76rem;">говорити <span class="sb-oval sb-variables">очки</span> <span class="sb-input">1</span> сек</span></td>
+            </tr>
+            <tr>
+              <td><strong>Спрощення</strong></td>
+              <td>Від'єднати частину великого скрипту, клацнути мишею по окремому блоку чи стеку для ізольованої перевірки найпростішого фрагмента.</td>
+              <td><span class="sb-block sb-motion" style="padding:3px 10px; min-height:26px; font-size:0.76rem;">змінити x на <span class="sb-input">10</span></span> <span style="font-size:0.78rem; color:#64748b;">(тест кліком)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Аналіз кроків</strong></td>
+              <td>Подумки або з паузами <span class="mono">чекати 0.5 секунд</span> пройти по алгоритму рядок за рядком, звіряючи кожен крок із блок-схемою.</td>
+              <td><span class="sb-block sb-control" style="padding:3px 10px; min-height:26px; font-size:0.76rem;">чекати <span class="sb-input">0.5</span> секунд</span></td>
+            </tr>
+            <tr>
+              <td><strong>Зупинка за умовою</strong></td>
+              <td>Поставити блок <span class="mono">зупинити все</span> одразу після підозрілого місця як контрольну точку (breakpoint), щоб зафіксувати стан сцени.</td>
+              <td><span class="sb-block sb-control" style="padding:3px 10px; min-height:26px; font-size:0.76rem;">зупинити <span class="sb-dropdown">все</span></span></td>
+            </tr>
+            <tr>
+              <td><strong>Перевірка зіткнень</strong></td>
+              <td>Візуальний контроль на сцені: піпеткою повторно вибрати точний колір стіни та перевірити центр костюма (хрестик у редакторі образів).</td>
+              <td><span class="sb-hex sb-sensing">торкається кольору <span class="sb-color-dot"></span> ?</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 1.6. Створення тестового плану (Test Plan) -->
+      <h3>1.6. Створення тестового плану (Test Plan)</h3>
+      <p>Перед здачею гри викладачеві розробник заповнює <strong>таблицю тестових сценаріїв</strong>. Натискайте на кнопки статусу нижче, щоб відмічати результати перевірки під час роботи, або заповніть таблицю ручкою на роздрукованому аркуші:</p>
+
+      <div class="table-wrap">
+        <table id="testPlanTable">
+          <thead>
+            <tr>
+              <th style="width:6%; text-align:center;">№</th>
+              <th style="width:31%;">Перевірка (тестовий сценарій)</th>
+              <th style="width:24%;">Очікуваний результат</th>
+              <th style="width:17%; text-align:center;">Факт (статус)</th>
+              <th style="width:22%;">Примітка / Виправлення</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center; font-weight:700;">1</td>
+              <td>Запуск проєкту натисканням <strong>⚑</strong></td>
+              <td>Герой на старті, усі 5 зірок видимі, <span class="mono">очки=0</span>, <span class="mono">час=60</span>.</td>
+              <td style="text-align:center;">
+                <button type="button" class="test-status-btn no-print" data-state="wait" onclick="cycleTestStatus(this)">⏳ Очікує</button>
+                <span class="print-check-cell">☐ Так &nbsp; ☐ Ні</span>
+              </td>
+              <td>
+                <input type="text" class="test-note-input no-print" placeholder="Коментар..." aria-label="Примітка до перевірки 1" />
+                <div class="print-line-cell"></div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:700;">2</td>
+              <td>Рух персонажа за 4 клавішами-стрілками</td>
+              <td>Спрайт плавно переміщується вгору, вниз, ліворуч і праворуч.</td>
+              <td style="text-align:center;">
+                <button type="button" class="test-status-btn no-print" data-state="wait" onclick="cycleTestStatus(this)">⏳ Очікує</button>
+                <span class="print-check-cell">☐ Так &nbsp; ☐ Ні</span>
+              </td>
+              <td>
+                <input type="text" class="test-note-input no-print" placeholder="Коментар..." aria-label="Примітка до перевірки 2" />
+                <div class="print-line-cell"></div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:700;">3</td>
+              <td>Спроба пройти крізь стіну лабіринту</td>
+              <td>Герой зупиняється біля стіни й не проходить крізь неї.</td>
+              <td style="text-align:center;">
+                <button type="button" class="test-status-btn no-print" data-state="wait" onclick="cycleTestStatus(this)">⏳ Очікує</button>
+                <span class="print-check-cell">☐ Так &nbsp; ☐ Ні</span>
+              </td>
+              <td>
+                <input type="text" class="test-note-input no-print" placeholder="Коментар..." aria-label="Примітка до перевірки 3" />
+                <div class="print-line-cell"></div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:700;">4</td>
+              <td>Збирання зірочки / предмета</td>
+              <td>Предмет зникає, лунає звук, <span class="mono">очки</span> та <span class="mono">зібрано</span> зростають на 1.</td>
+              <td style="text-align:center;">
+                <button type="button" class="test-status-btn no-print" data-state="wait" onclick="cycleTestStatus(this)">⏳ Очікує</button>
+                <span class="print-check-cell">☐ Так &nbsp; ☐ Ні</span>
+              </td>
+              <td>
+                <input type="text" class="test-note-input no-print" placeholder="Коментар..." aria-label="Примітка до перевірки 4" />
+                <div class="print-line-cell"></div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:700;">5</td>
+              <td>Робота зворотного таймера</td>
+              <td>Змінна <span class="mono">час</span> зменшується на 1 щосекунди (60 → 59 → ...).</td>
+              <td style="text-align:center;">
+                <button type="button" class="test-status-btn no-print" data-state="wait" onclick="cycleTestStatus(this)">⏳ Очікує</button>
+                <span class="print-check-cell">☐ Так &nbsp; ☐ Ні</span>
+              </td>
+              <td>
+                <input type="text" class="test-note-input no-print" placeholder="Коментар..." aria-label="Примітка до перевірки 5" />
+                <div class="print-line-cell"></div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:700;">6</td>
+              <td>Закінчення часу (<span class="mono">час = 0</span>)</td>
+              <td>З'являється повідомлення «Game Over», усі скрипти зупиняються.</td>
+              <td style="text-align:center;">
+                <button type="button" class="test-status-btn no-print" data-state="wait" onclick="cycleTestStatus(this)">⏳ Очікує</button>
+                <span class="print-check-cell">☐ Так &nbsp; ☐ Ні</span>
+              </td>
+              <td>
+                <input type="text" class="test-note-input no-print" placeholder="Коментар..." aria-label="Примітка до перевірки 6" />
+                <div class="print-line-cell"></div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:center; font-weight:700;">7</td>
+              <td>Збір усіх 5 предметів (<span class="mono">зібрано = 5</span>)</td>
+              <td>З'являється повідомлення «Виграш!», таймер і гра зупиняються.</td>
+              <td style="text-align:center;">
+                <button type="button" class="test-status-btn no-print" data-state="wait" onclick="cycleTestStatus(this)">⏳ Очікує</button>
+                <span class="print-check-cell">☐ Так &nbsp; ☐ Ні</span>
+              </td>
+              <td>
+                <input type="text" class="test-note-input no-print" placeholder="Коментар..." aria-label="Примітка до перевірки 7" />
+                <div class="print-line-cell"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 2. ПРАКТИЧНЕ ЗАВДАННЯ «СТВОРЕННЯ ГРИ LABIRINT»
+         ====================================================================== -->
+    <section id="sec-2" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-operators);">2</span>
+        <h2>Практичне завдання: «Створення гри Labirint (Лабіринт)»</h2>
+      </div>
+
+      <div class="callout green">
+        <div class="callout-title">🎮 Загальна умова проєкту «Labirint»</div>
+        <p>Створіть завершену гру в середовищі Scratch 3.0, у якій гравець керує персонажем (<span class="mono">Hero</span>) за допомогою клавіш-стрілок, обходить непрохідні стіни лабіринту та збирає 5 бонусних предметів до завершення відліку таймера (60 секунд). Реалізуйте підрахунок очок, повідомлення <strong>«Виграш!»</strong> та <strong>«Game Over»</strong>, а також проведіть тестування і дебагінг проєкту.</p>
+      </div>
+
+      <!-- РИС. 3: Архітектура сцени та координати об'єктів гри Labirint (480 × 360) -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-operators);"></span>
+            Рис. 3. Архітектура сцени та координати об'єктів гри «Labirint» (розмір сцени 480 × 360)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 860 390" width="860" height="390" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Архітектура сцени Scratch 480 на 360 з координатами героя (-200; 140), 5 зірочок, стін лабіринту та моніторів змінних">
+            <!-- Координатна підкладка зліва -->
+            <rect x="44" y="24" width="480" height="336" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="2"/>
+
+            <!-- Осі координат Scratch X та Y -->
+            <line x1="284" y1="24" x2="284" y2="360" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="5 4"/>
+            <line x1="44" y1="192" x2="524" y2="192" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="5 4"/>
+            <text x="284" y="16" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#475569">y = +180</text>
+            <text x="284" y="376" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#475569">y = -180</text>
+            <text x="22" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#475569">x=-240</text>
+            <text x="548" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#475569">x=+240</text>
+
+            <!-- Стіни лабіринту (однотонний темно-синій/чорний колір #1E293B) -->
+            <rect x="44" y="24" width="480" height="10" fill="#1E293B"/>
+            <rect x="44" y="350" width="480" height="10" fill="#1E293B"/>
+            <rect x="44" y="24" width="10" height="336" fill="#1E293B"/>
+            <rect x="514" y="24" width="10" height="336" fill="#1E293B"/>
+
+            <!-- Внутрішні перегородки лабіринту -->
+            <rect x="120" y="24" width="12" height="110" rx="4" fill="#1E293B"/>
+            <rect x="120" y="185" width="140" height="12" rx="4" fill="#1E293B"/>
+            <rect x="248" y="84" width="12" height="113" rx="4" fill="#1E293B"/>
+            <rect x="330" y="24" width="12" height="135" rx="4" fill="#1E293B"/>
+            <rect x="120" y="255" width="12" height="95" rx="4" fill="#1E293B"/>
+            <rect x="200" y="255" width="210" height="12" rx="4" fill="#1E293B"/>
+            <rect x="398" y="130" width="12" height="137" rx="4" fill="#1E293B"/>
+
+            <!-- Монітори змінних на сцені -->
+            <rect x="60" y="38" width="84" height="22" rx="5" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <text x="67" y="53" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#334155">очки</text>
+            <rect x="116" y="41" width="24" height="16" rx="4" fill="#FF8C1A"/>
+            <text x="128" y="53" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" fill="#FFFFFF">0</text>
+
+            <rect x="150" y="38" width="94" height="22" rx="5" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <text x="157" y="53" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#334155">зібрано</text>
+            <rect x="216" y="41" width="24" height="16" rx="4" fill="#FF8C1A"/>
+            <text x="228" y="53" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" fill="#FFFFFF">0</text>
+
+            <rect x="424" y="38" width="82" height="22" rx="5" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <text x="431" y="53" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#334155">час</text>
+            <rect x="476" y="41" width="26" height="16" rx="4" fill="#FF8C1A"/>
+            <text x="489" y="53" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" fill="#FFFFFF">60</text>
+
+            <!-- Старт Героя (-200; 140) -->
+            <circle cx="84" cy="92" r="15" fill="#4C97FF" stroke="#1D4ED8" stroke-width="2"/>
+            <circle cx="79" cy="89" r="2.2" fill="#FFFFFF"/>
+            <circle cx="89" cy="89" r="2.2" fill="#FFFFFF"/>
+            <path d="M 79 96 Q 84 100 89 96" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+            <rect x="56" y="110" width="76" height="18" rx="5" fill="#DBEAFE" stroke="#3B82F6"/>
+            <text x="94" y="122" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.2" font-weight="800" fill="#1E40AF">(-200; 140)</text>
+
+            <!-- 5 Зірочок для збору -->
+            <!-- Зірка 1 -->
+            <polygon points="184,78 188,88 199,88 190,94 193,104 184,98 175,104 178,94 169,88 180,88" fill="#FACC15" stroke="#CA8A04" stroke-width="1.3"/>
+            <text x="184" y="117" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#854D0E">★1 (-100; 105)</text>
+
+            <!-- Зірка 2 -->
+            <polygon points="84,220 88,230 99,230 90,236 93,246 84,240 75,246 78,236 69,230 80,230" fill="#FACC15" stroke="#CA8A04" stroke-width="1.3"/>
+            <text x="84" y="259" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#854D0E">★2 (-200; -40)</text>
+
+            <!-- Зірка 3 -->
+            <polygon points="292,140 296,150 307,150 298,156 301,166 292,160 283,166 286,156 277,150 288,150" fill="#FACC15" stroke="#CA8A04" stroke-width="1.3"/>
+            <text x="292" y="179" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#854D0E">★3 (10; 40)</text>
+
+            <!-- Зірка 4 -->
+            <polygon points="456,88 460,98 471,98 462,104 465,114 456,108 447,114 450,104 441,98 452,98" fill="#FACC15" stroke="#CA8A04" stroke-width="1.3"/>
+            <text x="456" y="127" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#854D0E">★4 (170; 90)</text>
+
+            <!-- Зірка 5 -->
+            <polygon points="260,300 264,310 275,310 266,316 269,326 260,320 251,326 254,316 245,310 256,310" fill="#FACC15" stroke="#CA8A04" stroke-width="1.3"/>
+            <text x="260" y="339" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#854D0E">★5 (-25; -120)</text>
+
+            <!-- Фініш / Портал -->
+            <rect x="452" y="294" width="44" height="44" rx="10" fill="#DCFCE7" stroke="#16A34A" stroke-width="2" stroke-dasharray="4 2"/>
+            <text x="474" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="800" fill="#166534">ФІНІШ</text>
+
+            <!-- ПРАВА ПАНЕЛЬ: ЛЕГЕНДА ОБ'ЄКТІВ -->
+            <rect x="576" y="24" width="276" height="336" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.6"/>
+            <text x="714" y="48" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#1E293B">Специфікація об'єктів сцени</text>
+
+            <rect x="590" y="62" width="248" height="62" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
+            <text x="602" y="81" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#1E40AF">1. Спрайт Hero (Гравець)</text>
+            <text x="602" y="98" font-family="Inter, sans-serif" font-size="10" fill="#334155">Старт: x = -200, y = 140; розмір 45%.</text>
+            <text x="602" y="113" font-family="Inter, sans-serif" font-size="10" fill="#334155">Крок руху: 3 пікселі за натискання.</text>
+
+            <rect x="590" y="134" width="248" height="62" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+            <text x="602" y="153" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#1E293B">2. Стіни лабіринту (Фон)</text>
+            <text x="602" y="170" font-family="Inter, sans-serif" font-size="10" fill="#334155">Однотонний колір (#1E293B / чорний).</text>
+            <text x="602" y="185" font-family="Inter, sans-serif" font-size="10" fill="#334155">Ширина проходів ≥ 1.5× ширини Hero.</text>
+
+            <rect x="590" y="206" width="248" height="66" rx="8" fill="#FEFCE8" stroke="#FDE047"/>
+            <text x="602" y="225" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#854D0E">3. Предмети Star1..Star5 (5 шт.)</text>
+            <text x="602" y="242" font-family="Inter, sans-serif" font-size="10" fill="#334155">При торканні Hero: сховати, +1 до очок,</text>
+            <text x="602" y="257" font-family="Inter, sans-serif" font-size="10" fill="#334155">+1 до змінної «зібрано», звук Pop.</text>
+
+            <rect x="590" y="282" width="248" height="66" rx="8" fill="#FFF7ED" stroke="#FDBA74"/>
+            <text x="602" y="301" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#C2410C">4. Глобальні змінні</text>
+            <text x="602" y="318" font-family="JetBrains Mono, monospace" font-size="10" fill="#334155">очки = 0 | зібрано = 0 | час = 60</text>
+            <text x="602" y="333" font-family="Inter, sans-serif" font-size="10" fill="#334155">Виграш при зібрано = 5; стоп при час = 0.</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- ВБУДОВАНИЙ ІНТЕРАКТИВНИЙ ПРОТОТИП ГРИ «LABIRINT» НА HTML5 CANVAS -->
+      <div class="game-box" id="labirintDemoBox">
+        <div class="game-header">
+          <div class="card-title" style="margin:0;">
+            <span class="card-icon" style="background:#dbeafe; color:#1d4ed8;">🕹️</span>
+            Інтерактивний прототип гри «Labirint» із режимом дебагінгу
+          </div>
+          <span style="font-size:0.78rem; font-weight:800; background:#dbeafe; color:#1e40af; padding:4px 10px; border-radius:999px;">Керування: стрілки ← ↑ ↓ → або кнопки нижче</span>
+        </div>
+
+        <p class="print-only-note">Стан ігрової сцени «Labirint» (у веб-версії доступне інтерактивне керування персонажем та живий режим дебагінгу координат):</p>
+
+        <div class="game-hud" aria-label="Панель змінних гри">
+          <div class="hud-chip">очки <span class="hud-val" id="hudScore">0</span></div>
+          <div class="hud-chip">зібрано <span class="hud-val" id="hudCollected">0 / 5</span></div>
+          <div class="hud-chip">час <span class="hud-val" id="hudTime" style="background:#2563eb;">60</span></div>
+          <div class="hud-chip" id="hudDebugChip" style="display:none; background:#fef3c7; border-color:#f59e0b;">
+            Scratch X/Y: <span class="mono" id="hudCoords">(-200; 140)</span> &nbsp;|&nbsp; Колізія: <span class="mono" id="hudCol">Ні</span>
+          </div>
+        </div>
+
+        <div class="game-stage-wrap">
+          <canvas id="labirintCanvas" width="640" height="420" tabindex="0" aria-label="Ігрове поле лабіринту Scratch"></canvas>
+        </div>
+
+        <div class="game-controls-bar no-print">
+          <div class="game-btn-group">
+            <button type="button" class="g-btn primary" id="btnStartGame">⚑ Старт / Перезапуск</button>
+            <button type="button" class="g-btn" id="btnToggleDebug">🐞 Режим дебагінгу: ВИМК</button>
+          </div>
+
+          <div class="dpad-wrap" aria-label="Екранні стрілки керування">
+            <div></div>
+            <button type="button" class="dpad-btn" data-dir="up" aria-label="Вгору">▲</button>
+            <div></div>
+            <button type="button" class="dpad-btn" data-dir="left" aria-label="Ліворуч">◀</button>
+            <button type="button" class="dpad-btn" data-dir="down" aria-label="Вниз">▼</button>
+            <button type="button" class="dpad-btn" data-dir="right" aria-label="Праворуч">▶</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ЗАВДАННЯ 1 ================= -->
+      <div class="task-banner">
+        <div class="task-title">Завдання 1. Планування проєкту</div>
+        <span class="task-pts">4 бали</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%;">Крок</th>
+              <th style="width:76%;">Дія студента</th>
+              <th style="width:14%; text-align:center;">Бали</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td>Визначте тему гри: завантажте або намалюйте лабіринт у графічному редакторі сцени.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td>Намалюйте або виберіть із бібліотеки спрайт героя (<span class="mono">Hero</span> — кіт, робот, космонавт тощо).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td>Намалюйте або оберіть предмети для збору (наприклад, 5 зірочок або яблук).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td>Складіть короткий текст правил гри (як вони будуть показані гравцеві на старті).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">📋 Приклад заповненої картки планування проєкту</div>
+        <ul class="clean-list">
+          <li><strong>Назва та тема:</strong> «Космічний лабіринт» — гравець проводить робота крізь відсіки станції, збираючи енерго-зірки.</li>
+          <li><strong>Спрайти та змінні:</strong> <span class="mono">Hero</span> (старт <span class="mono">x=-200, y=140</span>), <span class="mono">Star1..Star5</span> (5 зірок), змінні <span class="mono">очки</span>, <span class="mono">зібрано</span>, <span class="mono">час</span>.</li>
+          <li><strong>Текст правил на старті:</strong> <em>«Керуй стрілками, збери всі 5 зірочок за 60 секунд і не врізайся у стіни!»</em></li>
+        </ul>
+      </div>
+
+      <!-- ================= ЗАВДАННЯ 2 ================= -->
+      <div class="task-banner green">
+        <div class="task-title">Завдання 2. Створення спрайтів та сцени</div>
+        <span class="task-pts" style="background:#15803d;">6 балів</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%;">Крок</th>
+              <th style="width:76%;">Дія студента</th>
+              <th style="width:14%; text-align:center;">Бали</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">1</span></td>
+              <td>Намалюйте або завантажте фон сцени (<span class="mono">Labirint</span>) із чіткими стінами.</td>
+              <td style="text-align:center;"><span class="pts-pill">2</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">2</span></td>
+              <td>Переконайтеся, що стіни лабіринту будуть непрохідними (однаковий суцільний колір без градієнтів).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">3</span></td>
+              <td>Додайте спрайт гравця (<span class="mono">Hero</span>) і зменште його розмір (наприклад, до 40–50%).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">4</span></td>
+              <td>Додайте спрайти предметів для збору (5 шт.) та розташуйте їх у різних тупиках і коридорах.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">5</span></td>
+              <td>Додайте спрайт для фінішу або рухомої перешкоди / ворога (за бажанням).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout amber">
+        <div class="callout-title">💡 Практичні поради з дизайну сцени (щоб уникнути багів зіткнень)</div>
+        <ul class="clean-list">
+          <li><strong>Правило ширини коридорів:</strong> ширина кожного проходу лабіринту повинна бути <strong>не меншою за 1,5 ширини спрайта <span class="mono">Hero</span></strong>, інакше гравець застрягатиме на поворотах.</li>
+          <li><strong>Однотонність стін:</strong> малюйте всі стіни <em>одним суцільним кольором</em> без розмиття країв (у векторному режимі вимкніть зайву обводку іншого відтінку), щоб датчик <span class="mono">торкається кольору</span> спрацьовував безвідмовно.</li>
+          <li><strong>Центрування образу:</strong> у редакторі костюмів сумістіть центр малюнка <span class="mono">Hero</span> із центральним перехрестям полотна.</li>
+        </ul>
+      </div>
+
+      <!-- ================= ЗАВДАННЯ 3 ================= -->
+      <div class="task-banner">
+        <div class="task-title">Завдання 3. Програмування руху персонажа</div>
+        <span class="task-pts">5 балів</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%;">Крок</th>
+              <th style="width:76%;">Дія студента</th>
+              <th style="width:14%; text-align:center;">Бали</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td>Налаштуйте початкову позицію <span class="mono">Hero</span> на старті та рух за 4 стрілками (вгору, вниз, праворуч, ліворуч).</td>
+              <td style="text-align:center;"><span class="pts-pill">2</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td>Додайте обмеження: якщо торкається стіни (чорного кольору), то миттєво повертається назад на крок (<span class="mono">-3</span> або <span class="mono">+3</span>).</td>
+              <td style="text-align:center;"><span class="pts-pill">2</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td>Додайте перевірку краю сцени (<span class="mono">якщо на межі, відбити</span>), щоб герой не виходив за межі ігрового поля.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ПОВНИЙ СТЕК БЛОКІВ ЗАВДАННЯ 3 -->
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#dbeafe; color:#1d4ed8;">🧩</span>
+          Повний зібраний скрипт для спрайта <span class="mono">Hero</span> (усі 4 стрілки + захист стін і меж)
+        </div>
+        <div class="script-layout">
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">перемістити в x: <span class="sb-input">-200</span> y: <span class="sb-input">140</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-looks">говорити <span class="sb-input">Збери 5 зірок за 60 с!</span> <span class="sb-input">2</span> сек</div>
+
+              <div class="sb-c">
+                <div class="sb-c-head">завжди</div>
+                <div class="sb-c-body">
+                  <!-- Стрілка вгору -->
+                  <div class="sb-c">
+                    <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">клавішу <span class="sb-dropdown">вгору</span> натиснуто?</span> то</div>
+                    <div class="sb-c-body">
+                      <div class="sb-block sb-cmd sb-notch sb-motion">змінити y на <span class="sb-input">3</span></div>
+                      <div class="sb-c">
+                        <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">торкається кольору <span class="sb-color-dot"></span> ?</span> то</div>
+                        <div class="sb-c-body">
+                          <div class="sb-block sb-cmd sb-motion">змінити y на <span class="sb-input">-3</span></div>
+                        </div>
+                        <div class="sb-c-foot"></div>
+                      </div>
+                    </div>
+                    <div class="sb-c-foot sb-notch"></div>
+                  </div>
+
+                  <!-- Стрілка вниз -->
+                  <div class="sb-c">
+                    <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">клавішу <span class="sb-dropdown">вниз</span> натиснуто?</span> то</div>
+                    <div class="sb-c-body">
+                      <div class="sb-block sb-cmd sb-notch sb-motion">змінити y на <span class="sb-input">-3</span></div>
+                      <div class="sb-c">
+                        <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">торкається кольору <span class="sb-color-dot"></span> ?</span> то</div>
+                        <div class="sb-c-body">
+                          <div class="sb-block sb-cmd sb-motion">змінити y на <span class="sb-input">3</span></div>
+                        </div>
+                        <div class="sb-c-foot"></div>
+                      </div>
+                    </div>
+                    <div class="sb-c-foot sb-notch"></div>
+                  </div>
+
+                  <!-- Стрілка праворуч -->
+                  <div class="sb-c">
+                    <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">клавішу <span class="sb-dropdown">праворуч</span> натиснуто?</span> то</div>
+                    <div class="sb-c-body">
+                      <div class="sb-block sb-cmd sb-notch sb-motion">змінити x на <span class="sb-input">3</span></div>
+                      <div class="sb-c">
+                        <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">торкається кольору <span class="sb-color-dot"></span> ?</span> то</div>
+                        <div class="sb-c-body">
+                          <div class="sb-block sb-cmd sb-motion">змінити x на <span class="sb-input">-3</span></div>
+                        </div>
+                        <div class="sb-c-foot"></div>
+                      </div>
+                    </div>
+                    <div class="sb-c-foot sb-notch"></div>
+                  </div>
+
+                  <!-- Стрілка ліворуч -->
+                  <div class="sb-c">
+                    <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">клавішу <span class="sb-dropdown">ліворуч</span> натиснуто?</span> то</div>
+                    <div class="sb-c-body">
+                      <div class="sb-block sb-cmd sb-notch sb-motion">змінити x на <span class="sb-input">-3</span></div>
+                      <div class="sb-c">
+                        <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">торкається кольору <span class="sb-color-dot"></span> ?</span> то</div>
+                        <div class="sb-c-body">
+                          <div class="sb-block sb-cmd sb-motion">змінити x на <span class="sb-input">3</span></div>
+                        </div>
+                        <div class="sb-c-foot"></div>
+                      </div>
+                    </div>
+                    <div class="sb-c-foot sb-notch"></div>
+                  </div>
+
+                  <!-- Захист від виходу за межі сцени -->
+                  <div class="sb-block sb-cmd sb-motion">якщо на межі, відбити</div>
+                </div>
+                <div class="sb-c-foot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-list">
+            <div class="comment-item"><strong>Чому кожна стрілка має окремий <span class="mono">якщо</span>?</strong> Це дає змогу герою рухатися по діагоналі, коли затиснуто дві клавіші одночасно (наприклад, <span class="mono">вгору</span> + <span class="mono">праворуч</span>), і ковзати вздовж стіни без «прилипання».</div>
+            <div class="comment-item"><strong>Принцип миттєвого відкату:</strong> крок вперед (+3) і крок назад (-3) при торканні стіни відбуваються в межах одного кадру (1/30 с), тому око бачить плавну зупинку біля перешкоди.</div>
+            <div class="comment-item" style="border-left-color:var(--sc-variables);"><strong>Порада щодо стилю обертання:</strong> якщо використовуєте <span class="mono">якщо на межі, відбити</span>, додайте перед циклом блок <span class="mono">стиль обертання [зліва-направо v]</span>, щоб герой не перевертався догори ногами.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ЗАВДАННЯ 4 ================= -->
+      <div class="task-banner amber">
+        <div class="task-title">Завдання 4. Збирання предметів</div>
+        <span class="task-pts" style="background:#c2410c;">4 бали</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%;">Крок</th>
+              <th style="width:76%;">Дія студента</th>
+              <th style="width:14%; text-align:center;">Бали</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge" style="background:#ea580c;">1</span></td>
+              <td>Створіть дві глобальні змінні: <strong class="mono">очки</strong> та <strong class="mono">зібрано</strong>.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#ea580c;">2</span></td>
+              <td>Запрограмуйте кожен предмет так, щоб при торканні героя він зникав, а <span class="mono">очки</span> та <span class="mono">зібрано</span> збільшувалися на 1.</td>
+              <td style="text-align:center;"><span class="pts-pill">2</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#ea580c;">3</span></td>
+              <td>Додайте звуковий сигнал (<span class="mono">Pop</span> або <span class="mono">Collect</span>) при зборі предмета.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ПОВНИЙ СТЕК БЛОКІВ ЗАВДАННЯ 4 -->
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#fff7ed; color:#c2410c;">⭐</span>
+          Повний зібраний скрипт для кожного предмета (<span class="mono">Star1..Star5</span>)
+        </div>
+        <div class="script-layout">
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">перемістити в x: <span class="sb-input">-100</span> y: <span class="sb-input">105</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-looks">показати</div>
+
+              <div class="sb-c">
+                <div class="sb-c-head">завжди</div>
+                <div class="sb-c-body">
+                  <div class="sb-c">
+                    <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">торкається <span class="sb-dropdown">Hero</span> ?</span> то</div>
+                    <div class="sb-c-body">
+                      <div class="sb-block sb-cmd sb-notch sb-looks">сховати</div>
+                      <div class="sb-block sb-cmd sb-notch sb-variables">змінити <span class="sb-dropdown">очки</span> на <span class="sb-input">1</span></div>
+                      <div class="sb-block sb-cmd sb-notch sb-variables">змінити <span class="sb-dropdown">зібрано</span> на <span class="sb-input">1</span></div>
+                      <div class="sb-block sb-cmd sb-notch sb-sound">відтворити звук <span class="sb-dropdown">Pop</span></div>
+                      <div class="sb-block sb-cmd sb-control">зупинити <span class="sb-dropdown">цей скрипт</span></div>
+                    </div>
+                    <div class="sb-c-foot"></div>
+                  </div>
+                </div>
+                <div class="sb-c-foot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment-list">
+            <div class="comment-item"><strong>Обов'язковий блок <span class="mono">показати</span> на початку:</strong> якщо зірочка була схована в попередній грі, без команди <span class="mono">показати</span> при натисканні ⚑ вона залишиться невидимою!</div>
+            <div class="comment-item"><strong>Захист від повторного нарахування:</strong> блок <span class="mono">зупинити [цей скрипт v]</span> одразу після збору гарантує, що невидима зірочка більше не нараховуватиме зайві бали.</div>
+            <div class="comment-item" style="border-left-color:var(--sc-sound);"><strong>Звук без затримки:</strong> використовуйте <span class="mono">відтворити звук [Pop v]</span> (а не «до кінця»), щоб скрипт не зупинявся на час програвання мелодії.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ЗАВДАННЯ 5 ================= -->
+      <div class="task-banner purple">
+        <div class="task-title">Завдання 5. Таймер та закінчення гри</div>
+        <span class="task-pts" style="background:#6d28d9;">6 балів</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%;">Крок</th>
+              <th style="width:76%;">Дія студента</th>
+              <th style="width:14%; text-align:center;">Бали</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge" style="background:#7c3aed;">1</span></td>
+              <td>Створіть змінну <strong class="mono">час</strong> (таймер) та встановіть її початкове значення <span class="mono">60</span>.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#7c3aed;">2</span></td>
+              <td>Запустіть зворотний відлік таймера (від 60 секунд, зменшується на 1 кожну секунду).</td>
+              <td style="text-align:center;"><span class="pts-pill">2</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#7c3aed;">3</span></td>
+              <td>Якщо таймер досяг <span class="mono">0</span> — гра завершується повідомленням <strong>«Game Over»</strong> і зупинкою всіх скриптів.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#7c3aed;">4</span></td>
+              <td>Якщо гравець зібрав усі 5 предметів (<span class="mono">зібрано = 5</span>) — вивести <strong>«Виграш!»</strong> та зупинити гру.</td>
+              <td style="text-align:center;"><span class="pts-pill">2</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ОКРЕМИЙ МЕТОДИЧНИЙ БЛОК: РОЗБІР ТИПОВОЇ ПОМИЛКИ (ДЕБАГІНГ ІНІЦІАЛІЗАЦІЇ) -->
+      <div class="callout red">
+        <div class="callout-title">🐞 Розбір типової помилки (дебагінг ініціалізації змінних)</div>
+        <p>Початківці часто плутають два помаранчеві блоки: <span class="mono">надати [змінна v] значення (...)</span> (встановлює точне стартове число) та <span class="mono">змінити [змінна v] на (...)</span> (додає число до попереднього результату).</p>
+        <div class="two-col" style="margin-bottom:0;">
+          <div style="background:#ffffff; border:1px solid #fecaca; border-radius:9px; padding:10px 12px;">
+            <strong style="color:#991b1b; font-size:0.86rem;">✕ Баг у коді (помилка ініціалізації):</strong>
+            <div style="margin:6px 0;">
+              <div class="sb-stack">
+                <div class="sb-block sb-cmd sb-notch sb-variables">змінити <span class="sb-dropdown">час</span> на <span class="sb-input">60</span></div>
+                <div class="sb-block sb-cmd sb-variables">змінити <span class="sb-dropdown">очки</span> на <span class="sb-input">0</span></div>
+              </div>
+            </div>
+            <p style="font-size:0.82rem; color:#7f1d1d;"><strong>Наслідок:</strong> під час другого запуску гри до старого часу додасться ще 60 (стане 120, 180...), а набрані раніше очки не обнуляться!</p>
+          </div>
+          <div style="background:#ffffff; border:1px solid #bbf7d0; border-radius:9px; padding:10px 12px;">
+            <strong style="color:#166534; font-size:0.86rem;">✓ Виправлений код (правильний старт):</strong>
+            <div style="margin:6px 0;">
+              <div class="sb-stack">
+                <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">час</span> значення <span class="sb-input">60</span></div>
+                <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">очки</span> значення <span class="sb-input">0</span></div>
+                <div class="sb-block sb-cmd sb-variables">надати <span class="sb-dropdown">зібрано</span> значення <span class="sb-input">0</span></div>
+              </div>
+            </div>
+            <p style="font-size:0.82rem; color:#14532d;"><strong>Результат:</strong> кожен новий старт гарантовано починається з чистого рахунку 0 і рівно 60 секунд.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ПОВНИЙ ВИПРАВЛЕНИЙ СТЕК БЛОКІВ ЗАВДАННЯ 5 -->
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#f5f3ff; color:#6d28d9;">⏳</span>
+          Повний виправлений скрипт таймера, перемоги («Виграш!») та поразки («Game Over»)
+        </div>
+        <div class="script-layout">
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">час</span> значення <span class="sb-input">60</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">очки</span> значення <span class="sb-input">0</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">зібрано</span> значення <span class="sb-input">0</span></div>
+
+              <!-- Цикл повторити до (час = 0) або (зібрано = 5) -->
+              <div class="sb-c">
+                <div class="sb-c-head">повторити до <span class="sb-hex sb-operators"><span class="sb-hex sb-operators"><span class="sb-oval sb-variables">час</span> = <span class="sb-input">0</span></span> або <span class="sb-hex sb-operators"><span class="sb-oval sb-variables">зібрано</span> = <span class="sb-input">5</span></span></span></div>
+                <div class="sb-c-body">
+                  <div class="sb-block sb-cmd sb-notch sb-control">чекати <span class="sb-input">1</span> секунд</div>
+                  <div class="sb-block sb-cmd sb-variables">змінити <span class="sb-dropdown">час</span> на <span class="sb-input">-1</span></div>
+                </div>
+                <div class="sb-c-foot sb-notch"></div>
+              </div>
+
+              <!-- Перевірка: чи зібрано всі 5 предметів? -->
+              <div class="sb-c">
+                <div class="sb-c-head">якщо <span class="sb-hex sb-operators"><span class="sb-oval sb-variables">зібрано</span> = <span class="sb-input">5</span></span> то</div>
+                <div class="sb-c-body">
+                  <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-input">Виграш!</span> <span class="sb-input">2</span> сек</div>
+                </div>
+                <div class="sb-c-foot sb-notch"></div>
+              </div>
+
+              <!-- Перевірка: чи вийшов час? -->
+              <div class="sb-c">
+                <div class="sb-c-head">якщо <span class="sb-hex sb-operators"><span class="sb-oval sb-variables">час</span> = <span class="sb-input">0</span></span> то</div>
+                <div class="sb-c-body">
+                  <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-input">Game Over</span> <span class="sb-input">2</span> сек</div>
+                </div>
+                <div class="sb-c-foot sb-notch"></div>
+              </div>
+
+              <div class="sb-block sb-cmd sb-control">зупинити <span class="sb-dropdown">все</span></div>
+            </div>
+          </div>
+
+          <div class="comment-list">
+            <div class="comment-item"><strong>Умова зупинки циклу через «АБО»:</strong> цикл відліку секунд зупиниться достроково, щойно гравець збере всі 5 зірок, не змушуючи чекати залишок часу до нуля.</div>
+            <div class="comment-item"><strong>Розмежування фіналів:</strong> після виходу з циклу ми перевіряємо причину зупинки: якщо <span class="mono">зібрано = 5</span> — вітаємо з перемогою, якщо <span class="mono">час = 0</span> — повідомляємо «Game Over».</div>
+            <div class="comment-item" style="border-left-color:var(--sc-control);"><strong>Повна зупинка <span class="mono">зупинити [все v]</span>:</strong> зупиняє і скрипт руху персонажа, щоб гравець не міг рухатися після завершення партії.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ЗАВДАННЯ 6 ================= -->
+      <div class="task-banner">
+        <div class="task-title">Завдання 6. Тестування та налагодження</div>
+        <span class="task-pts">4 бали</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%;">Крок</th>
+              <th style="width:76%;">Дія студента</th>
+              <th style="width:14%; text-align:center;">Бали</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td>Запустіть гру та перевірте всі пункти за тест-планом із розділу 1.6.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td>Виправте знайдені помилки (неправильні зіткнення, застрягання в стінах, рух, збір предметів).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td>Додайте зрозумілу інструкцію для гравця (текст на стартовому фоні або репліку спрайта при старті).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td>Проведіть тест на користувачеві: дайте пограти одногрупнику та врахуйте його зауваження.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout purple">
+        <div class="callout-title">🤝 Міні-пам'ятка тестування з одногрупником (Playtesting)</div>
+        <p>Коли ви даєте гру одногрупнику, <strong>не підказуйте йому вголос</strong> у перші 30 секунд. Поспостерігайте: 1) чи зрозуміло йому без слів, якими клавішами керувати; 2) чи встигає він зібрати 5 зірок за 60 секунд; 3) чи не застрягає герой у вузькому проході. Усі зауваження занотуйте у тест-план і покращте баланс гри.</p>
+      </div>
+
+      <!-- ================= ЗАВДАННЯ 7 ================= -->
+      <div class="task-banner green">
+        <div class="task-title">Завдання 7. Покращення та творчі елементи</div>
+        <span class="task-pts" style="background:#15803d;">5 балів</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:10%;">Крок</th>
+              <th style="width:76%;">Дія студента</th>
+              <th style="width:14%; text-align:center;">Бали</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">1</span></td>
+              <td>Додайте фонову мелодію або звуковий супровід гри (у циклі <span class="mono">відтворити звук [...] до кінця</span>).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">2</span></td>
+              <td>Додайте анімацію руху героя через зміну образів (<span class="mono">наступний образ</span> під час натискання клавіш).</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">3</span></td>
+              <td>Додайте складніший лабіринт або перехід на 2-й рівень через систему оповіщень.</td>
+              <td style="text-align:center;"><span class="pts-pill">2</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge" style="background:#16a34a;">4</span></td>
+              <td>Збережіть файл <span class="mono">PR12_Labirint_Prizvyshche.sb3</span> та за бажанням опублікуйте проєкт на <span class="mono">scratch.mit.edu</span>.</td>
+              <td style="text-align:center;"><span class="pts-pill">1</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Приклад скрипту анімації та 2-го рівня -->
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#ecfdf5; color:#166534;">🚀</span>
+          Приклад скрипту: анімація кроків героя та перехід на 2-й рівень через оповіщення
+        </div>
+        <div class="two-col" style="margin-bottom:0;">
+          <div>
+            <div style="font-size:0.84rem; font-weight:800; margin-bottom:6px; color:var(--text-main);">Анімація зміни образів при русі:</div>
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-c">
+                <div class="sb-c-head">завжди</div>
+                <div class="sb-c-body">
+                  <div class="sb-c">
+                    <div class="sb-c-head">якщо <span class="sb-hex sb-sensing">клавішу <span class="sb-dropdown">будь-яку</span> натиснуто?</span> то</div>
+                    <div class="sb-c-body">
+                      <div class="sb-block sb-cmd sb-notch sb-looks">наступний образ</div>
+                      <div class="sb-block sb-cmd sb-control">чекати <span class="sb-input">0.12</span> секунд</div>
+                    </div>
+                    <div class="sb-c-foot"></div>
+                  </div>
+                </div>
+                <div class="sb-c-foot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:0.84rem; font-weight:800; margin-bottom:6px; color:var(--text-main);">Перехід на 2-й рівень через оповіщення:</div>
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли я отримую <span class="sb-dropdown">Рівень 2</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-looks">змінити тло на <span class="sb-dropdown">Labirint_2</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-motion">перемістити в x: <span class="sb-input">-200</span> y: <span class="sb-input">140</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">зібрано</span> значення <span class="sb-input">0</span></div>
+              <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-input">Рівень 2! Складніший лабіринт!</span> <span class="sb-input">2</span> сек</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 3. КРИТЕРІЇ ОЦІНЮВАННЯ ТА КОНТРОЛЬНІ ЗАПИТАННЯ
+         ====================================================================== -->
+    <section id="sec-3" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-looks);">3</span>
+        <h2>Критерії оцінювання та контрольні запитання</h2>
+      </div>
+
+      <!-- РИС. 4: Розподіл балів за етапами практичного заняття №12 (максимум 34 бали) -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-looks);"></span>
+            Рис. 4. Розподіл балів за етапами практичного заняття №12 (максимум 34 бали)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 880 158" width="880" height="158" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема розподілу 34 балів за 7 завданнями практичного заняття №12">
+            <!-- Сегментована смужка на 34 бали -->
+            <g transform="translate(14, 14)">
+              <!-- 1. Планування: 4/34 = 11.76% -> 100px -->
+              <rect x="0" y="0" width="100" height="36" rx="8" fill="#4C97FF"/>
+              <text x="50" y="23" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">1) 4 б.</text>
+
+              <!-- 2. Сцена/спрайти: 6/34 = 17.65% -> 150px -->
+              <rect x="103" y="0" width="150" height="36" rx="8" fill="#59C059"/>
+              <text x="178" y="23" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">2) 6 б.</text>
+
+              <!-- 3. Рух героя: 5/34 = 14.71% -> 125px -->
+              <rect x="256" y="0" width="125" height="36" rx="8" fill="#2563EB"/>
+              <text x="318.5" y="23" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">3) 5 б.</text>
+
+              <!-- 4. Предмети: 4/34 = 11.76% -> 100px -->
+              <rect x="384" y="0" width="100" height="36" rx="8" fill="#FF8C1A"/>
+              <text x="434" y="23" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">4) 4 б.</text>
+
+              <!-- 5. Таймер і фінал: 6/34 = 17.65% -> 150px -->
+              <rect x="487" y="0" width="150" height="36" rx="8" fill="#9966FF"/>
+              <text x="562" y="23" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">5) 6 б.</text>
+
+              <!-- 6. Тестування: 4/34 = 11.76% -> 100px -->
+              <rect x="640" y="0" width="100" height="36" rx="8" fill="#0891B2"/>
+              <text x="690" y="23" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">6) 4 б.</text>
+
+              <!-- 7. Творчі елементи: 5/34 = 14.71% -> 109px -->
+              <rect x="743" y="0" width="109" height="36" rx="8" fill="#16A34A"/>
+              <text x="797.5" y="23" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">7) 5 б.</text>
+            </g>
+
+            <!-- Легенда 2 рядки -->
+            <g transform="translate(14, 66)" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#334155">
+              <rect x="0" y="0" width="12" height="12" rx="3" fill="#4C97FF"/><text x="18" y="10">1. Планування (4 б.)</text>
+              <rect x="195" y="0" width="12" height="12" rx="3" fill="#59C059"/><text x="213" y="10">2. Сцена та спрайти (6 б.)</text>
+              <rect x="415" y="0" width="12" height="12" rx="3" fill="#2563EB"/><text x="433" y="10">3. Рух героя (5 б.)</text>
+              <rect x="615" y="0" width="12" height="12" rx="3" fill="#FF8C1A"/><text x="633" y="10">4. Збирання предметів (4 б.)</text>
+
+              <rect x="0" y="24" width="12" height="12" rx="3" fill="#9966FF"/><text x="18" y="34">5. Таймер і завершення (6 б.)</text>
+              <rect x="225" y="24" width="12" height="12" rx="3" fill="#0891B2"/><text x="243" y="34">6. Тестування і дебагінг (4 б.)</text>
+              <rect x="460" y="24" width="12" height="12" rx="3" fill="#16A34A"/><text x="478" y="34">7. Творчі елементи (5 б.)</text>
+              <text x="720" y="34" font-weight="800" fill="#1E293B">РАЗОМ: 34 БАЛИ</text>
+            </g>
+
+            <!-- Шкала переведення в 12-бальну систему -->
+            <rect x="14" y="114" width="852" height="34" rx="9" fill="#F8FAFC" stroke="#CBD5E1"/>
+            <text x="28" y="135" font-family="Inter, sans-serif" font-size="10.8" font-weight="800" fill="#475569">Шкала переведення в 12-бальну систему:</text>
+            <text x="295" y="135" font-family="Inter, sans-serif" font-size="10.8" font-weight="700" fill="#991B1B">1–11 б. → 1–3</text>
+            <text x="425" y="135" font-family="Inter, sans-serif" font-size="10.8" font-weight="700" fill="#B45309">12–19 б. → 4–6</text>
+            <text x="565" y="135" font-family="Inter, sans-serif" font-size="10.8" font-weight="700" fill="#1D4ED8">20–27 б. → 7–9</text>
+            <text x="705" y="135" font-family="Inter, sans-serif" font-size="10.8" font-weight="800" fill="#166534">28–34 б. → 10–12</text>
+          </svg>
+        </div>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:74%;">Категорія оцінювання</th>
+              <th style="width:26%; text-align:center;">Максимальна кількість балів</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Планування</strong> (тема, спрайти, предмети, мета та правила гри)</td>
+              <td style="text-align:center; font-weight:800;">4</td>
+            </tr>
+            <tr>
+              <td><strong>2. Створення сцени та спрайтів</strong> (лабіринт, непрохідні стіни, герой, 5 предметів)</td>
+              <td style="text-align:center; font-weight:800;">6</td>
+            </tr>
+            <tr>
+              <td><strong>3. Рух героя</strong> (4 клавіші-стрілки, відкат від стін, обмеження меж сцени)</td>
+              <td style="text-align:center; font-weight:800;">5</td>
+            </tr>
+            <tr>
+              <td><strong>4. Збирання предметів</strong> (змінні <span class="mono">очки</span> та <span class="mono">зібрано</span>, зникнення, звуковий сигнал)</td>
+              <td style="text-align:center; font-weight:800;">4</td>
+            </tr>
+            <tr>
+              <td><strong>5. Таймер та завершення гри</strong> (ініціалізація, відлік 60 с, повідомлення «Game Over» і «Виграш!»)</td>
+              <td style="text-align:center; font-weight:800;">6</td>
+            </tr>
+            <tr>
+              <td><strong>6. Тестування та налагодження</strong> (тест-план, виправлення багів, інструкція, тестування з одногрупником)</td>
+              <td style="text-align:center; font-weight:800;">4</td>
+            </tr>
+            <tr>
+              <td><strong>7. Додаткові творчі елементи</strong> (анімація, фонова музика, кілька рівнів, публікація)</td>
+              <td style="text-align:center; font-weight:800;">5</td>
+            </tr>
+            <tr style="background:#eff6ff;">
+              <td><strong>Максимальна кількість балів за практичне заняття №12</strong></td>
+              <td style="text-align:center; font-size:1.08rem; font-weight:800; color:#1d4ed8;">34</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 10 КОНТРОЛЬНИХ ЗАПИТАНЬ ІЗ ПІДКАЗКАМИ-ВІДПОВІДЯМИ -->
+      <h3>Контрольні запитання для самоперевірки</h3>
+      <div class="qa-grid">
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">1</span><span>Перелічіть етапи створення програмного проєкту.</span></div>
+          <div class="qa-a">1) Ідея; 2) Планування; 3) Розробка; 4) Тестування; 5) Налагодження (дебагінг); 6) Фіналізація; 7) Публікація.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">2</span><span>Що таке тестування? Чому воно важливе?</span></div>
+          <div class="qa-a">Це перевірка роботи програми в різних сценаріях (звичайних, граничних, помилкових), щоб вчасно знайти баги й гарантувати надійність проєкту.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">3</span><span>Як знайти помилку в програмі Scratch, якщо персонаж рухається неправильно?</span></div>
+          <div class="qa-a">Перевірити знаки координат (<span class="mono">+x / -x</span>, <span class="mono">+y / -y</span>), колір стіни у датчику торкання, розмір спрайта відносно ширини коридору та центр костюма.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">4</span><span>Наведіть приклад логічної помилки (програма працює, але дає неправильний результат).</span></div>
+          <div class="qa-a">Використання <span class="mono">оцінка &gt; 10</span> замість <span class="mono">оцінка &gt; 9</span> для діапазону 10–12 або <span class="mono">змінити час на 60</span> замість <span class="mono">надати значення 60</span> на старті.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">5</span><span>Як запланувати гру перед тим, як почати писати код?</span></div>
+          <div class="qa-a">Сформулювати мету і правила, визначити список спрайтів, фонів та змінних і намалювати блок-схему основного циклу гри.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">6</span><span>Що робити, якщо після зміни одного спрайту зламався інший?</span></div>
+          <div class="qa-a">Перевірити спільні точки взаємодії: назву спрайта у блоці <span class="mono">торкається [...]?</span>, імена оповіщень та спільні глобальні змінні.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">7</span><span>Чому важливо протестувати гру на іншому користувачеві?</span></div>
+          <div class="qa-a">Автор знає всі секрети керування, а новий гравець діє непередбачувано й одразу виявляє незрозумілі правила або приховані помилки балансу.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">8</span><span>Що таке дебагінг (налагодження)?</span></div>
+          <div class="qa-a">Процес пошуку, локалізації причин та виправлення помилок (багів) у програмному коді після тестування.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">9</span><span>Які блоки Scratch допомагають відстежувати значення змінних під час налагодження?</span></div>
+          <div class="qa-a">Монітори змінних на сцені (прапорець біля змінної), блок <span class="mono">говорити [змінна]</span> та контрольна зупинка <span class="mono">зупинити [все v]</span>.</div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q"><span class="qa-num">10</span><span>Назвіть три типи помилок у програмах (загальне ІТ).</span></div>
+          <div class="qa-a">1) Синтаксичні помилки; 2) Логічні помилки; 3) Помилки часу виконання (Runtime errors).</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <span>Практичне заняття №12 • Розробка проєктів, тестування та дебагінг у Scratch 3.0</span>
+      <span></span>
+    </footer>
+  </main>
+
+  <!-- ========================================================================
+       ІНТЕРАКТИВНІ СКРИПТИ: ТЕСТ-ПЛАН ТА ІГРОВИЙ ПРОТОТИП «LABIRINT»
+       ======================================================================== -->
+  <script>
+    // ------------------------------------------------------------------------
+    // 1. ІНТЕРАКТИВНІ ПЕРЕМИКАЧІ СТАТУСУ В ТАБЛИЦІ ТЕСТ-ПЛАНУ
+    // ------------------------------------------------------------------------
+    function cycleTestStatus(btn) {
+      const current = btn.getAttribute('data-state') || 'wait';
+      if (current === 'wait') {
+        btn.setAttribute('data-state', 'pass');
+        btn.textContent = '✓ Пройдено';
+      } else if (current === 'pass') {
+        btn.setAttribute('data-state', 'fail');
+        btn.textContent = '✕ Баг знайдено';
+      } else {
+        btn.setAttribute('data-state', 'wait');
+        btn.textContent = '⏳ Очікує';
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // 2. ІНТЕРАКТИВНИЙ ПРОТОТИП ГРИ «LABIRINT» НА HTML5 CANVAS
+    // ------------------------------------------------------------------------
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('labirintCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const hudScore = document.getElementById('hudScore');
+      const hudCollected = document.getElementById('hudCollected');
+      const hudTime = document.getElementById('hudTime');
+      const hudDebugChip = document.getElementById('hudDebugChip');
+      const hudCoords = document.getElementById('hudCoords');
+      const hudCol = document.getElementById('hudCol');
+      const btnStart = document.getElementById('btnStartGame');
+      const btnDebug = document.getElementById('btnToggleDebug');
+
+      const W = 640;
+      const H = 420;
+
+      // Стіни лабіринту (прямокутники в координатах Canvas 640x420)
+      const walls = [
+        // Зовнішній периметр
+        { x: 0, y: 0, w: W, h: 14 },
+        { x: 0, y: H - 14, w: W, h: 14 },
+        { x: 0, y: 0, w: 14, h: H },
+        { x: W - 14, y: 0, w: 14, h: H },
+        // Внутрішні перегородки
+        { x: 112, y: 14, w: 16, h: 142 },
+        { x: 112, y: 215, w: 195, h: 16 },
+        { x: 291, y: 84, w: 16, h: 147 },
+        { x: 405, y: 14, w: 16, h: 165 },
+        { x: 112, y: 295, w: 16, h: 111 },
+        { x: 215, y: 295, w: 280, h: 16 },
+        { x: 495, y: 145, w: 16, h: 166 }
+      ];
+
+      function createStars() {
+        return [
+          { x: 205, y: 88, collected: false },
+          { x: 64, y: 285, collected: false },
+          { x: 355, y: 148, collected: false },
+          { x: 565, y: 86, collected: false },
+          { x: 335, y: 356, collected: false }
+        ];
+      }
+
+      let hero = { x: 62, y: 66, r: 15, speed: 4 };
+      let stars = createStars();
+      let score = 0;
+      let collected = 0;
+      let timeLeft = 60;
+      let status = 'playing'; // 'playing' | 'win' | 'gameover'
+      let debugMode = false;
+      let lastCollision = 'Ні';
+      let keys = {};
+      let timerInterval = null;
+
+      // Синтезований звук збору зірочки через Web Audio API (без зовнішніх URL)
+      function playPopSound() {
+        try {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return;
+          const ac = new AudioCtx();
+          const osc = ac.createOscillator();
+          const gain = ac.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, ac.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, ac.currentTime + 0.11);
+          gain.gain.setValueAtTime(0.12, ac.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.12);
+          osc.connect(gain);
+          gain.connect(ac.destination);
+          osc.start();
+          osc.stop(ac.currentTime + 0.12);
+        } catch (e) {
+          // Ігноруємо обмеження автозапуску звуку в браузері
+        }
+      }
+
+      function toScratchCoords(cx, cy) {
+        const sx = Math.round(((cx - W / 2) / (W / 2)) * 240);
+        const sy = Math.round(((H / 2 - cy) / (H / 2)) * 180);
+        return { sx, sy };
+      }
+
+      function updateHud() {
+        if (hudScore) hudScore.textContent = String(score);
+        if (hudCollected) hudCollected.textContent = `${collected} / 5`;
+        if (hudTime) hudTime.textContent = String(timeLeft);
+        if (hudCoords) {
+          const { sx, sy } = toScratchCoords(hero.x, hero.y);
+          hudCoords.textContent = `(${sx}; ${sy})`;
+        }
+        if (hudCol) hudCol.textContent = lastCollision;
+      }
+
+      function hitsWall(nx, ny, r) {
+        for (let i = 0; i < walls.length; i++) {
+          const w = walls[i];
+          const closestX = Math.max(w.x, Math.min(nx, w.x + w.w));
+          const closestY = Math.max(w.y, Math.min(ny, w.y + w.h));
+          const dx = nx - closestX;
+          const dy = ny - closestY;
+          if (dx * dx + dy * dy < r * r) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function moveHero(dx, dy) {
+        if (status !== 'playing') return;
+        let collided = false;
+
+        if (dx !== 0) {
+          const nextX = hero.x + dx;
+          if (!hitsWall(nextX, hero.y, hero.r)) {
+            hero.x = nextX;
+          } else {
+            collided = true;
+          }
+        }
+
+        if (dy !== 0) {
+          const nextY = hero.y + dy;
+          if (!hitsWall(hero.x, nextY, hero.r)) {
+            hero.y = nextY;
+          } else {
+            collided = true;
+          }
+        }
+
+        lastCollision = collided ? 'Так (відкат)' : 'Ні';
+
+        // Перевірка торкання зірочок
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          if (!s.collected) {
+            const dist = Math.hypot(hero.x - s.x, hero.y - s.y);
+            if (dist < hero.r + 14) {
+              s.collected = true;
+              score += 1;
+              collected += 1;
+              playPopSound();
+              if (collected >= 5) {
+                status = 'win';
+                clearInterval(timerInterval);
+              }
+            }
+          }
+        }
+        updateHud();
+      }
+
+      function drawStar(cx, cy, outerR, innerR) {
+        ctx.save();
+        ctx.beginPath();
+        for (let i = 0; i < 10; i++) {
+          const angle = (Math.PI / 5) * i - Math.PI / 2;
+          const r = i % 2 === 0 ? outerR : innerR;
+          const x = cx + Math.cos(angle) * r;
+          const y = cy + Math.sin(angle) * r;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fillStyle = '#FACC15';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#CA8A04';
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, W, H);
+
+        // Фон сцени
+        ctx.fillStyle = '#F8FAFC';
+        ctx.fillRect(0, 0, W, H);
+
+        // Координатна сітка у режимі дебагінгу
+        if (debugMode) {
+          ctx.save();
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+          ctx.lineWidth = 1;
+          for (let gx = 40; gx < W; gx += 40) {
+            ctx.beginPath();
+            ctx.moveTo(gx, 0);
+            ctx.lineTo(gx, H);
+            ctx.stroke();
+          }
+          for (let gy = 40; gy < H; gy += 40) {
+            ctx.beginPath();
+            ctx.moveTo(0, gy);
+            ctx.lineTo(W, gy);
+            ctx.stroke();
+          }
+          ctx.strokeStyle = 'rgba(37, 99, 235, 0.45)';
+          ctx.setLineDash([5, 4]);
+          ctx.beginPath();
+          ctx.moveTo(W / 2, 0);
+          ctx.lineTo(W / 2, H);
+          ctx.moveTo(0, H / 2);
+          ctx.lineTo(W, H / 2);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // Зона фінішу (декоративний орієнтир)
+        ctx.save();
+        ctx.fillStyle = '#DCFCE7';
+        ctx.strokeStyle = '#22C55E';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.roundRect(558, 344, 56, 52, 8);
+        ctx.fill();
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#166534';
+        ctx.font = '700 10px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ФІНІШ', 586, 374);
+        ctx.restore();
+
+        // Стіни лабіринту
+        ctx.fillStyle = '#1E293B';
+        for (let i = 0; i < walls.length; i++) {
+          const w = walls[i];
+          ctx.fillRect(w.x, w.y, w.w, w.h);
+        }
+
+        // Зірочки
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          if (!s.collected) {
+            drawStar(s.x, s.y, 13, 6);
+            if (debugMode) {
+              ctx.fillStyle = '#854D0E';
+              ctx.font = '700 10px JetBrains Mono, monospace';
+              ctx.textAlign = 'center';
+              ctx.fillText(`★${i + 1}`, s.x, s.y + 23);
+            }
+          }
+        }
+
+        // Персонаж Hero
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(hero.x, hero.y, hero.r, 0, Math.PI * 2);
+        ctx.fillStyle = '#4C97FF';
+        ctx.fill();
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = '#1D4ED8';
+        ctx.stroke();
+
+        // Очі та усмішка Hero
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.arc(hero.x - 5, hero.y - 3, 2.5, 0, Math.PI * 2);
+        ctx.arc(hero.x + 5, hero.y - 3, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.arc(hero.x, hero.y + 2, 5.5, 0.15 * Math.PI, 0.85 * Math.PI);
+        ctx.stroke();
+
+        // Хітбокс і підпис координат у режимі дебагінгу
+        if (debugMode) {
+          ctx.strokeStyle = '#EF4444';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(hero.x - hero.r, hero.y - hero.r, hero.r * 2, hero.r * 2);
+          const { sx, sy } = toScratchCoords(hero.x, hero.y);
+          ctx.fillStyle = '#FEF3C7';
+          ctx.strokeStyle = '#F59E0B';
+          ctx.lineWidth = 1;
+          ctx.fillRect(hero.x - 36, hero.y - 35, 72, 16);
+          ctx.strokeRect(hero.x - 36, hero.y - 35, 72, 16);
+          ctx.fillStyle = '#92400E';
+          ctx.font = '700 9.5px JetBrains Mono, monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(`${sx}; ${sy}`, hero.x, hero.y - 24);
+        }
+        ctx.restore();
+
+        // Екран завершення гри (Виграш! або Game Over)
+        if (status !== 'playing') {
+          ctx.save();
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.65)';
+          ctx.fillRect(0, 0, W, H);
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.roundRect(W / 2 - 175, H / 2 - 64, 350, 128, 16);
+          ctx.fill();
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = status === 'win' ? '#16A34A' : '#EF4444';
+          ctx.stroke();
+
+          ctx.fillStyle = status === 'win' ? '#166534' : '#991B1B';
+          ctx.font = '800 24px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(status === 'win' ? '🎉 Виграш!' : '⏰ Game Over', W / 2, H / 2 - 14);
+
+          ctx.fillStyle = '#334155';
+          ctx.font = '600 13px Inter, sans-serif';
+          ctx.fillText(`Зібрано зірочок: ${collected} з 5 • Залишок часу: ${timeLeft} с`, W / 2, H / 2 + 16);
+          ctx.fillStyle = '#64748B';
+          ctx.font = '500 11.5px Inter, sans-serif';
+          ctx.fillText('Натисніть «⚑ Старт / Перезапуск», щоб зіграти знову', W / 2, H / 2 + 40);
+          ctx.restore();
+        }
+      }
+
+      function gameLoop() {
+        if (status === 'playing') {
+          let dx = 0;
+          let dy = 0;
+          if (keys['ArrowUp']) dy -= hero.speed;
+          if (keys['ArrowDown']) dy += hero.speed;
+          if (keys['ArrowLeft']) dx -= hero.speed;
+          if (keys['ArrowRight']) dx += hero.speed;
+          if (dx !== 0 || dy !== 0) {
+            moveHero(dx, dy);
+          }
+        }
+        render();
+        requestAnimationFrame(gameLoop);
+      }
+
+      function resetGame() {
+        hero = { x: 62, y: 66, r: 15, speed: 4 };
+        stars = createStars();
+        score = 0;
+        collected = 0;
+        timeLeft = 60;
+        status = 'playing';
+        lastCollision = 'Ні';
+        updateHud();
+
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+          if (status === 'playing') {
+            timeLeft -= 1;
+            if (timeLeft <= 0) {
+              timeLeft = 0;
+              status = 'gameover';
+              clearInterval(timerInterval);
+            }
+            updateHud();
+          }
+        }, 1000);
+      }
+
+      // Обробка клавіатури (тільки коли canvas у фокусі, щоб не заважати прокрутці сторінки)
+      canvas.addEventListener('keydown', (e) => {
+        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+          e.preventDefault();
+          keys[e.key] = true;
+        }
+      });
+
+      canvas.addEventListener('keyup', (e) => {
+        if (keys[e.key]) {
+          keys[e.key] = false;
+        }
+      });
+
+      canvas.addEventListener('click', () => {
+        canvas.focus();
+      });
+
+      // Керування екранними кнопками D-Pad (кліки і дотики)
+      const dpadBtns = document.querySelectorAll('.dpad-btn');
+      dpadBtns.forEach((btn) => {
+        const dir = btn.getAttribute('data-dir');
+        const step = 14;
+        const triggerMove = (e) => {
+          e.preventDefault();
+          if (dir === 'up') moveHero(0, -step);
+          if (dir === 'down') moveHero(0, step);
+          if (dir === 'left') moveHero(-step, 0);
+          if (dir === 'right') moveHero(step, 0);
+        };
+        btn.addEventListener('click', triggerMove);
+      });
+
+      if (btnStart) {
+        btnStart.addEventListener('click', () => {
+          resetGame();
+          canvas.focus();
+        });
+      }
+
+      if (btnDebug) {
+        btnDebug.addEventListener('click', () => {
+          debugMode = !debugMode;
+          btnDebug.textContent = debugMode ? '🐞 Режим дебагінгу: УВІМК' : '🐞 Режим дебагінгу: ВИМК';
+          btnDebug.classList.toggle('debug-on', debugMode);
+          if (hudDebugChip) {
+            hudDebugChip.style.display = debugMode ? 'inline-flex' : 'none';
+          }
+          updateHud();
+        });
+      }
+
+      resetGame();
+      requestAnimationFrame(gameLoop);
+    })();
+  </script>
+</body>
+</html>
