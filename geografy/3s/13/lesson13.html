@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сучасні риси національної економіки України — Конспект заняття</title>
+  <style>
+    :root {
+      --bg-page: #f4f7fb;
+      --bg-card: #ffffff;
+      --bg-soft-blue: #eff6ff;
+      --bg-soft-amber: #fffbeb;
+      --bg-soft-green: #ecfdf5;
+      --bg-soft-indigo: #eef2ff;
+      --bg-soft-slate: #f8fafc;
+
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+
+      --primary: #1d4ed8;
+      --primary-light: #3b82f6;
+      --accent-gold: #d97706;
+      --accent-green: #059669;
+      --accent-indigo: #4338ca;
+      --accent-red: #dc2626;
+
+      --border: #dbe3ee;
+      --border-strong: #cbd5e1;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 6px 20px rgba(15, 23, 42, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-body);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Панель керування (приховується при друку) */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .toolbar-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .toolbar-nav a {
+      text-decoration: none;
+      color: var(--text-body);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-soft-slate);
+      border: 1px solid var(--border);
+      transition: all 0.15s ease;
+    }
+
+    .toolbar-nav a:hover {
+      background: var(--bg-soft-blue);
+      color: var(--primary);
+      border-color: #93c5fd;
+    }
+
+    .btn-print {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(29, 78, 216, 0.25);
+      transition: background 0.15s ease;
+    }
+
+    .btn-print:hover {
+      background: #1e40af;
+    }
+
+    /* Основний контейнер */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    /* Шапка заняття */
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #eff6ff 65%, #fefce8 100%);
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--primary);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      line-height: 1.25;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-body);
+      max-width: 820px;
+      margin-bottom: 20px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .meta-pill {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      font-size: 13px;
+      color: var(--text-body);
+      font-weight: 600;
+    }
+
+    .meta-pill span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Секції та заголовки */
+    .lecture-section {
+      margin-bottom: 28px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 38px;
+      padding: 0 10px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+      color: var(--text-main);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    /* Універсальні картки (не розриваються під час друку!) */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 26px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      margin-bottom: 10px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Сітки */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    /* KPI-картки */
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .kpi-card.gold {
+      border-left-color: var(--accent-gold);
+    }
+
+    .kpi-card.green {
+      border-left-color: var(--accent-green);
+    }
+
+    .kpi-card.indigo {
+      border-left-color: var(--accent-indigo);
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .kpi-desc {
+      font-size: 13px;
+      color: var(--text-body);
+    }
+
+    /* Спеціальні блоки (Визначення, Приклади, Акценти) */
+    .callout {
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 14px 0;
+      border: 1px solid;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .callout-definition {
+      background: var(--bg-soft-blue);
+      border-color: #bfdbfe;
+      border-left: 4px solid var(--primary);
+    }
+
+    .callout-example {
+      background: var(--bg-soft-green);
+      border-color: #a7f3d0;
+      border-left: 4px solid var(--accent-green);
+    }
+
+    .callout-warning {
+      background: var(--bg-soft-amber);
+      border-color: #fde68a;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .callout-definition .callout-title {
+      color: #1e40af;
+    }
+
+    .callout-example .callout-title {
+      color: #065f46;
+    }
+
+    .callout-warning .callout-title {
+      color: #92400e;
+    }
+
+    /* Списки */
+    ul.styled-list,
+    ol.styled-list {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    ul.styled-list li,
+    ol.styled-list li {
+      margin-bottom: 8px;
+    }
+
+    ul.styled-list li:last-child,
+    ol.styled-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 4px;
+      background: var(--bg-soft-blue);
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+    }
+
+    .tag.gold {
+      background: var(--bg-soft-amber);
+      color: #b45309;
+      border-color: #fde68a;
+    }
+
+    .tag.green {
+      background: var(--bg-soft-green);
+      color: #047857;
+      border-color: #a7f3d0;
+    }
+
+    /* Таблиці */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: #ffffff;
+    }
+
+    thead th {
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 700;
+      text-align: left;
+      padding: 11px 14px;
+      border-bottom: 2px solid var(--border-strong);
+    }
+
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fafcff;
+    }
+
+    /* Контейнери для діаграм та рисунків */
+    .figure-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .figure-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed var(--border-strong);
+      padding-bottom: 8px;
+    }
+
+    .figure-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .figure-caption {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .svg-responsive {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Картки секторів */
+    .sector-card {
+      background: var(--bg-soft-slate);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .sector-card h4 {
+      font-size: 15px;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Адаптивність */
+    @media (max-width: 860px) {
+
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 22px 20px;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+    }
+
+    /* ============================================================
+       ПРАВИЛА ДЛЯ ПРОФЕСІЙНОГО ДРУКУ (БЕЗ РОЗРИВУ БЛОКІВ)
+       ============================================================ */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 13mm 13mm 15mm 13mm;
+      }
+
+      html,
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 10pt;
+        line-height: 1.42;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .no-print,
+      .toolbar {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .hero {
+        box-shadow: none !important;
+        border: 1.5px solid #94a3b8 !important;
+        border-top: 5px solid #1d4ed8 !important;
+        padding: 18px 22px !important;
+        margin-bottom: 16px !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      .hero h1 {
+        font-size: 20pt !important;
+      }
+
+      .hero-subtitle {
+        font-size: 10.5pt !important;
+        margin-bottom: 12px !important;
+      }
+
+      .section-header {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+        margin-top: 14px !important;
+        margin-bottom: 10px !important;
+      }
+
+      .section-header h2 {
+        font-size: 14.5pt !important;
+      }
+
+      h3,
+      h4 {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+      }
+
+      /* Заборона розриву будь-яких змістових блоків, діаграм, таблиць і карток */
+      .card,
+      .figure-box,
+      .kpi-card,
+      .callout,
+      .sector-card,
+      .table-wrap,
+      table,
+      tr,
+      svg {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      .card,
+      .figure-box,
+      .kpi-card {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+        padding: 14px 16px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 12px !important;
+      }
+
+      table {
+        font-size: 9pt !important;
+      }
+
+      thead th,
+      tbody td {
+        padding: 6px 8px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Навігаційна панель для роботи на екрані -->
+  <header class="toolbar no-print">
+    <nav class="toolbar-nav" aria-label="Навігація по темах">
+      <a href="#intro">Актуалізація</a>
+      <a href="#sec-1">1. Структура економіки</a>
+      <a href="#sec-2">2. Макропоказники</a>
+      <a href="#sec-3">3. АПК та сировина</a>
+      <a href="#sec-4">4. Енергетика</a>
+      <a href="#sec-5">5. Сучасні риси</a>
+      <a href="#sec-6">6. Високі технології</a>
+      <a href="#sec-7">7. Практикум</a>
+    </nav>
+    <button class="btn-print" onclick="window.print()" title="Роздрукувати конспект на аркушах А4 без розриву блоків">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+        <rect x="6" y="14" width="12" height="8"></rect>
+      </svg>
+      Друкувати конспект (A4)
+    </button>
+  </header>
+
+  <main class="container">
+
+    <!-- ШАПКА ЗАНЯТТЯ -->
+    <section class="hero">
+      <div class="hero-badge">Опорний конспект заняття • Географія та економіка</div>
+      <h1>Економіка України в міжнародному поділі праці</h1>
+      <p class="hero-subtitle">
+        Комплексний розбір сучасних рис національної економіки України, секторальної моделі, макроекономічних
+        індикаторів, конкурентних переваг на світових ринках продовольства, рудної сировини, металів, енергетики та
+        високотехнологічного машинобудування.
+      </p>
+      <div class="hero-meta">
+        <div class="meta-pill"><span>Етап розвитку:</span> Індустріальний (перехід до постіндустріального)</div>
+        <div class="meta-pill"><span>Ключові драйвери експорту:</span> АПК (35%) та металургія (25%)</div>
+        <div class="meta-pill"><span>Підручник:</span> Опрацювати § 29–31</div>
+      </div>
+    </section>
+
+    <!-- БЛОК АКТУАЛІЗАЦІЇ ЗНАНЬ -->
+    <section id="intro" class="lecture-section">
+      <div class="card"
+        style="background: linear-gradient(to right, #f8fafc, #eff6ff); border-left: 5px solid #3b82f6;">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2.3">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          Пригадайте перед вивченням теми (актуалізація опорних знань)
+        </h3>
+        <div class="grid-2" style="margin-bottom: 0; margin-top: 10px;">
+          <div class="sector-card" style="background: #ffffff;">
+            <h4>1. Показники суспільно-економічного розвитку</h4>
+            <p style="font-size: 14px;">Валовий внутрішній продукт (ВВП), ВВП на душу населення, індекс людського
+              розвитку (ІЛР), структура зайнятості та частка високотехнологічного експорту.</p>
+          </div>
+          <div class="sector-card" style="background: #ffffff;">
+            <h4>2. У чому різниця між ВВП та ВНП?</h4>
+            <p style="font-size: 14px;"><strong>ВВП</strong> рахується за територіальним принципом (усе вироблене
+              всередині держави), а <strong>ВНП</strong> — за принципом громадянства/резидентства (усе створене
+              резидентами країни вдома і за кордоном).</p>
+          </div>
+          <div class="sector-card" style="background: #ffffff;">
+            <h4>3. Форми організації виробництва та простору</h4>
+            <p style="font-size: 14px;">Суспільна організація: <em>концентрація, спеціалізація, кооперування,
+                комбінування</em>. Просторова організація: промислові центри, вузли, райони, агломерації та кластери.
+            </p>
+          </div>
+          <div class="sector-card" style="background: #ffffff;">
+            <h4>4. Чинники зональної спеціалізації АПК</h4>
+            <p style="font-size: 14px;">Агрокліматичні ресурси (співвідношення тепла й вологи) та родючість ґрунтів:
+              Полісся (дерново-підзолисті), Лісостеп (чорноземи й сірі лісові), Степ (чорноземи звичайні й південні).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- РОЗДІЛ 1 -->
+    <section id="sec-1" class="lecture-section">
+      <div class="section-header">
+        <span class="section-num">1</span>
+        <h2>Поняття та секторальна структура національної економіки</h2>
+      </div>
+
+      <div class="card">
+        <div class="callout callout-definition" style="margin-top: 0;">
+          <div class="callout-title">Базове визначення</div>
+          <p><strong>Національна економіка України</strong> — це цілісна сукупність підприємств, домогосподарств,
+            фінансових і державних установ, які функціонують у межах державної території України, пов'язані спільним
+            поділом праці, інфраструктурою та системою державного регулювання.</p>
+        </div>
+
+        <p>Сучасна економічна географія поділяє національне господарство на <strong>п'ять взаємопов'язаних
+            секторів</strong>, співвідношення між якими визначає рівень розвитку держави (аграрний, індустріальний чи
+          постіндустріальний):</p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="sector-card">
+            <h4>Первинний сектор <span class="tag green">Сировинний</span></h4>
+            <p style="font-size: 14px;">Безпосереднє використання природних ресурсів: сільське господарство, лісове та
+              рибне господарство, видобувна промисловість.</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;"><strong>Приклад:</strong> видобуток
+              залізної руди у Кривбасі, вирощування пшениці на Полтавщині.</p>
+          </div>
+          <div class="sector-card">
+            <h4>Вторинний сектор <span class="tag">Індустріальний</span></h4>
+            <p style="font-size: 14px;">Переробка сировини та створення матеріальних благ: металургія, машинобудування,
+              хімічна, харчова промисловість, будівництво.</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;"><strong>Приклад:</strong> виплавка
+              сталі в Запоріжжі, виробництво олії на олійноекстракційних заводах.</p>
+          </div>
+          <div class="sector-card">
+            <h4>Третинний сектор <span class="tag gold">Сервісний</span></h4>
+            <p style="font-size: 14px;">Сфера послуг: транспорт і логістика, торгівля, банківська справа, освіта,
+              охорона здоров'я, туризм, зв'язок.</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;"><strong>Приклад:</strong> вантажні
+              перевезення «Укрзалізниці», логістика «Нової Пошти».</p>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 0;">
+          <div class="sector-card" style="background: var(--bg-soft-indigo); border-color: #c7d2fe;">
+            <h4>Четвертий сектор <span class="tag"
+                style="background:#e0e7ff; color:#3730a3; border-color:#a5b4fc;">Інформаційний</span></h4>
+            <p style="font-size: 14px;">ІТ-індустрія, телекомунікації, наукові дослідження та розробки (R&amp;D),
+              консалтинг, інжиніринг та високотехнологічні стартапи.</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;"><strong>Стан в Україні:</strong>
+              розвинений фрагментарно, але ІТ-експорт демонструє найшвидші темпи зростання (Київ, Львів, Харків,
+              Дніпро).</p>
+          </div>
+          <div class="sector-card" style="background: var(--bg-soft-indigo); border-color: #c7d2fe;">
+            <h4>П'ятий сектор <span class="tag"
+                style="background:#e0e7ff; color:#3730a3; border-color:#a5b4fc;">Інноваційно-управлінський</span></h4>
+            <p style="font-size: 14px;">Стратегічне управління, прийняття рішень найвищого рівня, біотехнології,
+              робототехніка, космічні та квантові дослідження.</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;"><strong>Стан в Україні:</strong>
+              представлений окремими науковими центрами НАН України та авіакосмічним КБ «Південне».</p>
+          </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-bottom: 0;">
+          <div class="callout-title">Ключова структурна тенденція України</div>
+          <p><strong>Україна перебуває на індустріальному етапі розвитку.</strong> У секторальній структурі
+            спостерігається <strong>зменшення частки промисловості (вторинний сектор)</strong> та <strong>відставання
+              частки послуг (третинний сектор)</strong> порівняно з розвиненими країнами Європейського Союзу, де сфера
+            послуг та знань формує понад 70–75% ВВП.</p>
+        </div>
+      </div>
+
+      <!-- ДІАГРАМА 1 -->
+      <div class="figure-box">
+        <div class="figure-header">
+          <span class="figure-title">Рис. 1. П'ятисекторна модель національної економіки та напрям структурної
+            перебудови</span>
+          <span class="figure-caption">Схема еволюції господарського комплексу України</span>
+        </div>
+        <svg class="svg-responsive" viewBox="0 0 920 250" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Секторальна модель економіки">
+          <defs>
+            <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#1d4ed8" />
+            </marker>
+          </defs>
+          <!-- Фон -->
+          <rect x="0" y="0" width="920" height="250" rx="10" fill="#f8fafc" />
+
+          <!-- Сектор 1 -->
+          <rect x="18" y="24" width="164" height="150" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2" />
+          <circle cx="100" cy="52" r="16" fill="#059669" />
+          <text x="100" y="57" text-anchor="middle" fill="#ffffff" font-weight="800" font-size="14">I</text>
+          <text x="100" y="84" text-anchor="middle" fill="#065f46" font-weight="700" font-size="13">ПЕРВИННИЙ</text>
+          <text x="100" y="104" text-anchor="middle" fill="#334155" font-size="11.5">Сільське госп-во,</text>
+          <text x="100" y="120" text-anchor="middle" fill="#334155" font-size="11.5">видобуток руд і</text>
+          <text x="100" y="136" text-anchor="middle" fill="#334155" font-size="11.5">паливної сировини</text>
+          <rect x="34" y="148" width="132" height="18" rx="4" fill="#d1fae5" />
+          <text x="100" y="160" text-anchor="middle" fill="#065f46" font-weight="700" font-size="10.5">Сильна база
+            України</text>
+
+          <!-- Сектор 2 -->
+          <rect x="198" y="24" width="164" height="150" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" />
+          <circle cx="280" cy="52" r="16" fill="#1d4ed8" />
+          <text x="280" y="57" text-anchor="middle" fill="#ffffff" font-weight="800" font-size="14">II</text>
+          <text x="280" y="84" text-anchor="middle" fill="#1e40af" font-weight="700" font-size="13">ВТОРИННИЙ</text>
+          <text x="280" y="104" text-anchor="middle" fill="#334155" font-size="11.5">Переробна пром-сть,</text>
+          <text x="280" y="120" text-anchor="middle" fill="#334155" font-size="11.5">металургія, хімія,</text>
+          <text x="280" y="136" text-anchor="middle" fill="#334155" font-size="11.5">будівництво</text>
+          <rect x="214" y="148" width="132" height="18" rx="4" fill="#dbeafe" />
+          <text x="280" y="160" text-anchor="middle" fill="#1e40af" font-weight="700" font-size="10.5">Частка
+            зменшується</text>
+
+          <!-- Сектор 3 -->
+          <rect x="378" y="24" width="164" height="150" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
+          <circle cx="460" cy="52" r="16" fill="#d97706" />
+          <text x="460" y="57" text-anchor="middle" fill="#ffffff" font-weight="800" font-size="14">III</text>
+          <text x="460" y="84" text-anchor="middle" fill="#92400e" font-weight="700" font-size="13">ТРЕТИННИЙ</text>
+          <text x="460" y="104" text-anchor="middle" fill="#334155" font-size="11.5">Транспорт, торгівля,</text>
+          <text x="460" y="120" text-anchor="middle" fill="#334155" font-size="11.5">фінанси, освіта,</text>
+          <text x="460" y="136" text-anchor="middle" fill="#334155" font-size="11.5">медицина, туризм</text>
+          <rect x="394" y="148" width="132" height="18" rx="4" fill="#fef3c7" />
+          <text x="460" y="160" text-anchor="middle" fill="#92400e" font-weight="700" font-size="10.5">Відставання від
+            ЄС</text>
+
+          <!-- Сектор 4 -->
+          <rect x="558" y="24" width="164" height="150" rx="10" fill="#eef2ff" stroke="#4338ca" stroke-width="2" />
+          <circle cx="640" cy="52" r="16" fill="#4338ca" />
+          <text x="640" y="57" text-anchor="middle" fill="#ffffff" font-weight="800" font-size="14">IV</text>
+          <text x="640" y="84" text-anchor="middle" fill="#3730a3" font-weight="700" font-size="13">ЧЕТВЕРТИННИЙ</text>
+          <text x="640" y="104" text-anchor="middle" fill="#334155" font-size="11.5">ІТ-технології, наука,</text>
+          <text x="640" y="120" text-anchor="middle" fill="#334155" font-size="11.5">інжиніринг, R&amp;D,</text>
+          <text x="640" y="136" text-anchor="middle" fill="#334155" font-size="11.5">телекомунікації</text>
+          <rect x="574" y="148" width="132" height="18" rx="4" fill="#e0e7ff" />
+          <text x="640" y="160" text-anchor="middle" fill="#3730a3" font-weight="700" font-size="10.5">Точки зростання
+            (ІТ)</text>
+
+          <!-- Сектор 5 -->
+          <rect x="738" y="24" width="164" height="150" rx="10" fill="#fdf2f8" stroke="#be185d" stroke-width="2" />
+          <circle cx="820" cy="52" r="16" fill="#be185d" />
+          <text x="820" y="57" text-anchor="middle" fill="#ffffff" font-weight="800" font-size="14">V</text>
+          <text x="820" y="84" text-anchor="middle" fill="#9d174d" font-weight="700" font-size="13">П'ЯТИННИЙ</text>
+          <text x="820" y="104" text-anchor="middle" fill="#334155" font-size="11.5">Інноваційні центри,</text>
+          <text x="820" y="120" text-anchor="middle" fill="#334155" font-size="11.5">космічні та біо-</text>
+          <text x="820" y="136" text-anchor="middle" fill="#334155" font-size="11.5">технології, управління</text>
+          <rect x="754" y="148" width="132" height="18" rx="4" fill="#fce7f3" />
+          <text x="820" y="160" text-anchor="middle" fill="#9d174d" font-weight="700" font-size="10.5">Розвинутий
+            слабко</text>
+
+          <!-- Вектор переходу знизу -->
+          <line x1="40" y1="205" x2="875" y2="205" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arrowBlue)" />
+          <rect x="240" y="190" width="440" height="28" rx="14" fill="#1d4ed8" />
+          <text x="460" y="208" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="12">
+            Вектор структурної перебудови: від індустріальної до постіндустріальної економіки
+          </text>
+          <text x="105" y="232" text-anchor="middle" fill="#475569" font-size="11"
+            font-weight="600">Аграрно-індустріальне минуле</text>
+          <text x="815" y="232" text-anchor="middle" fill="#1d4ed8" font-size="11" font-weight="700">Економіка знань та
+            інновацій</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- РОЗДІЛ 2 -->
+    <section id="sec-2" class="lecture-section">
+      <div class="section-header">
+        <span class="section-num">2</span>
+        <h2>Основні макроекономічні показники України</h2>
+      </div>
+
+      <!-- KPI картки -->
+      <div class="grid-4">
+        <div class="kpi-card">
+          <div class="kpi-label">Загальний ВВП (2017 р.)</div>
+          <div class="kpi-value">$93,55 млрд</div>
+          <div class="kpi-desc"><strong>62-ге місце</strong> у світі та <strong>22-ге</strong> в Європі</div>
+        </div>
+        <div class="kpi-card gold">
+          <div class="kpi-label">ВВП на душу населення</div>
+          <div class="kpi-value">$2 205,67</div>
+          <div class="kpi-desc"><strong>133-тє місце</strong> у світі (один із найнижчих у Європі)</div>
+        </div>
+        <div class="kpi-card indigo">
+          <div class="kpi-label">Інноваційна активність</div>
+          <div class="kpi-value">~20%</div>
+          <div class="kpi-desc">Підприємств України (проти <strong>~44%</strong> у країнах ЄС)</div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-label">Експортні лідери</div>
+          <div class="kpi-value">60% разом</div>
+          <div class="kpi-desc">АПК (<strong>35%</strong>) та чорна металургія (<strong>25%</strong>)</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Розмежування ключових макропоказників: ВВП, ВНП та ВВП на душу населення</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 24%;">Показник</th>
+                <th style="width: 44%;">Економічний зміст</th>
+                <th style="width: 32%;">Практичний приклад для розуміння</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Валовий внутрішній продукт (ВВП)</strong></td>
+                <td>Сукупна ринкова вартість усіх кінцевих товарів і послуг, вироблених <strong>на території
+                    держави</strong> за рік (незалежно від того, кому належать підприємства — українцям чи іноземцям).
+                </td>
+                <td>Автомобільні кабелі, виготовлені на німецькому заводі <em>Leoni</em> у Львівській області, входять
+                  до <strong>ВВП України</strong>.</td>
+              </tr>
+              <tr>
+                <td><strong>Валовий національний продукт (ВНП)</strong></td>
+                <td>Ринкова вартість кінцевих товарів і послуг, створених <strong>громадянами (резидентами)
+                    держави</strong> як усередині країни, так і за її межами.</td>
+                <td>Прибуток української ІТ-компанії від офісу в Польщі входить до <strong>ВНП України</strong>, а
+                  прибуток іноземного заводу в Україні — до ВНП країни-інвестора.</td>
+              </tr>
+              <tr>
+                <td><strong>ВВП на душу населення</strong></td>
+                <td>Ключовий порівняльний індикатор добробуту та продуктивності економіки: відношення загального ВВП
+                  країни до чисельності її населення.</td>
+                <td>Дає змогу об'єктивно порівняти рівень життя у великій за населенням Україні та компактній Швейцарії
+                  чи Польщі.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warning" style="margin-bottom: 0;">
+          <div class="callout-title">Три головні причини низького ВВП на душу населення в Україні</div>
+          <ol class="styled-list">
+            <li><strong>Наслідки світової фінансово-економічної кризи</strong> та глибокої залежності українського
+              експорту від циклічних коливань світових цін на сировину (метал, зерно, руду).</li>
+            <li><strong>Геополітичні та воєнні події з 2014 року</strong> — окупація АР Крим та частини промислового
+              Донбасу, руйнування виробничих потужностей і традиційних логістичних ланцюгів.</li>
+            <li><strong>Низька інноваційна активність підприємств (~20% проти ~44% в ЄС)</strong> — переважання
+              продукції з низькою доданою вартістю (сировина та напівфабрикати замість готових високотехнологічних
+              виробів).</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ДІАГРАМА 2 -->
+      <div class="figure-box">
+        <div class="figure-header">
+          <span class="figure-title">Рис. 2. Схема формування ВВП і ВНП та розрив в інноваційній активності (Україна vs
+            ЄС)</span>
+          <span class="figure-caption">Візуалізація макроекономічних індикаторів</span>
+        </div>
+        <svg class="svg-responsive" viewBox="0 0 920 235" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Порівняння ВВП та інноваційної активності">
+          <rect x="0" y="0" width="920" height="235" rx="10" fill="#f8fafc" />
+
+          <!-- Ліва панель: Схема ВВП vs ВНП -->
+          <rect x="18" y="18" width="445" height="198" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+          <text x="36" y="44" fill="#0f172a" font-weight="700" font-size="14">Територіальний vs Резидентський
+            принцип</text>
+
+          <!-- Коло 1: Територія України (ВВП) -->
+          <rect x="36" y="60" width="195" height="136" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+          <text x="133" y="82" text-anchor="middle" fill="#1e40af" font-weight="700" font-size="13">ВВП УКРАЇНИ</text>
+          <text x="133" y="100" text-anchor="middle" fill="#334155" font-size="11">(Усе на території держави)</text>
+          <rect x="48" y="112" width="171" height="32" rx="5" fill="#dbeafe" />
+          <text x="133" y="132" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">Українські фірми в
+            Україні</text>
+          <rect x="48" y="152" width="171" height="32" rx="5" fill="#bfdbfe" />
+          <text x="133" y="172" text-anchor="middle" fill="#1e3a8a" font-size="11" font-weight="600">Іноземні заводи в
+            Україні</text>
+
+          <!-- Коло 2: Резиденти України (ВНП) -->
+          <rect x="248" y="60" width="198" height="136" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.8" />
+          <text x="347" y="82" text-anchor="middle" fill="#065f46" font-weight="700" font-size="13">ВНП УКРАЇНИ</text>
+          <text x="347" y="100" text-anchor="middle" fill="#334155" font-size="11">(Усе створене громадянами)</text>
+          <rect x="260" y="112" width="174" height="32" rx="5" fill="#d1fae5" />
+          <text x="347" y="132" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">Українські фірми в
+            Україні</text>
+          <rect x="260" y="152" width="174" height="32" rx="5" fill="#a7f3d0" />
+          <text x="347" y="172" text-anchor="middle" fill="#064e3b" font-size="11" font-weight="600">Українці та бізнес
+            за кордоном</text>
+
+          <!-- Права панель: Інноваційна активність -->
+          <rect x="482" y="18" width="420" height="198" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+          <text x="502" y="44" fill="#0f172a" font-weight="700" font-size="14">Частка інноваційно активних підприємств
+            (%)</text>
+
+          <!-- Україна бар -->
+          <text x="502" y="86" fill="#334155" font-weight="700" font-size="13">Україна</text>
+          <rect x="595" y="68" width="240" height="26" rx="6" fill="#e2e8f0" />
+          <rect x="595" y="68" width="109" height="26" rx="6" fill="#f59e0b" />
+          <text x="714" y="86" fill="#b45309" font-weight="800" font-size="14">~20%</text>
+
+          <!-- ЄС бар -->
+          <text x="502" y="134" fill="#334155" font-weight="700" font-size="13">Країни ЄС</text>
+          <rect x="595" y="116" width="240" height="26" rx="6" fill="#e2e8f0" />
+          <rect x="595" y="116" width="240" height="26" rx="6" fill="#1d4ed8" />
+          <text x="843" y="134" fill="#1d4ed8" font-weight="800" font-size="14">~44%</text>
+
+          <!-- Пояснення -->
+          <rect x="502" y="158" width="382" height="42" rx="6" fill="#fffbeb" stroke="#fde68a" />
+          <text x="514" y="176" fill="#92400e" font-size="11.5" font-weight="600">Висновок: технологічне відставання у
+            2,2 раза стримує</text>
+          <text x="514" y="192" fill="#92400e" font-size="11.5">зростання ВВП на душу населення ($2 205,67 — 133-тє
+            місце).</text>
+        </svg>
+      </div>
+    </section>
+    <div class="card">
+      <section>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="100%" height="100%">
+          <defs>
+
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#C8A579" />
+              <stop offset="55%" stop-color="#9B7B50" />
+              <stop offset="100%" stop-color="#5B4427" />
+            </linearGradient>
+
+
+            <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#A57CE5" />
+              <stop offset="55%" stop-color="#7B58B5" />
+              <stop offset="100%" stop-color="#553B83" />
+            </linearGradient>
+
+
+            <linearGradient id="vLineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FFFFFF" />
+              <stop offset="15%" stop-color="#E5E5E5" />
+              <stop offset="85%" stop-color="#E5E5E5" />
+              <stop offset="100%" stop-color="#FFFFFF" />
+            </linearGradient>
+
+            <linearGradient id="hLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#FFFFFF" />
+              <stop offset="15%" stop-color="#E5E5E5" />
+              <stop offset="85%" stop-color="#E5E5E5" />
+              <stop offset="100%" stop-color="#FFFFFF" />
+            </linearGradient>
+
+
+            <marker id="trendArrow" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7"
+              orient="auto">
+              <path d="M 1 1.5 L 11 6 L 1 10.5 L 3.2 6 Z" fill="#B69666" />
+            </marker>
+
+            <style>
+              .font-condensed {
+                font-family: 'Oswald', 'Arial Narrow', 'Roboto Condensed', 'Helvetica Neue', sans-serif;
+              }
+
+              .font-sans {
+                font-family: 'Inter', 'Roboto', 'Arial', sans-serif;
+              }
+
+              .title-main {
+                font-size: 36px;
+                font-weight: 700;
+                fill: #111111;
+              }
+
+              .subtitle {
+                font-size: 24px;
+                font-weight: 700;
+                fill: #111111;
+              }
+
+              .year-label {
+                font-size: 32px;
+                font-weight: 700;
+                fill: #111111;
+              }
+
+              .forecast-sub {
+                font-size: 13px;
+                font-weight: 400;
+                fill: #333333;
+              }
+
+              .val-gold-lg {
+                font-size: 52px;
+                font-weight: 700;
+                fill: #8D6F47;
+              }
+
+              .val-purple-lg {
+                font-size: 52px;
+                font-weight: 700;
+                fill: #7B58B5;
+              }
+
+              .delta-gray {
+                font-size: 62px;
+                font-weight: 700;
+                fill: #B5B5B5;
+              }
+
+              .country-label {
+                font-size: 28px;
+                font-weight: 700;
+                fill: #111111;
+              }
+
+              .bar-val-gold {
+                font-size: 32px;
+                font-weight: 700;
+                fill: #8D6F47;
+              }
+
+              .bar-val-purple {
+                font-size: 32px;
+                font-weight: 700;
+                fill: #7B58B5;
+              }
+
+              .growth-year {
+                font-size: 26px;
+                font-weight: 700;
+                fill: #111111;
+              }
+
+              .growth-val {
+                font-size: 46px;
+                font-weight: 700;
+                fill: #563D7C;
+              }
+            </style>
+          </defs>
+
+
+          <rect width="1280" height="720" fill="#FFFFFF" />
+
+
+          <text x="640" y="45" text-anchor="middle" class="font-condensed title-main">Економіка України: ключові
+            показники 2025</text>
+
+
+          <line x1="755" y1="68" x2="755" y2="670" stroke="url(#vLineGrad)" stroke-width="2" />
+
+
+          <g id="world-gdp-share">
+            <text x="380" y="105" text-anchor="middle" class="font-condensed subtitle">Частка економіки України у
+              світовому ВВП</text>
+
+
+            <text x="140" y="170" text-anchor="middle" class="font-sans year-label">2025 рік</text>
+            <text x="140" y="189" text-anchor="middle" class="font-sans forecast-sub">(прогноз)</text>
+            <rect x="211" y="131" width="124" height="67" fill="url(#goldGrad)" />
+            <text x="340" y="183" class="font-sans val-gold-lg">0,18%</text>
+
+
+            <text x="140" y="283" text-anchor="middle" class="font-sans year-label">2015 рік</text>
+            <rect x="211" y="232" width="110" height="67" fill="url(#purpleGrad)" />
+            <text x="327" y="285" class="font-sans val-purple-lg">0,15%</text>
+
+
+            <path d="M 523 252 L 523 190 L 512 190 L 531 162 L 550 190 L 539 190 L 539 252 Z" fill="#EAE3D9" />
+            <text x="546" y="238" class="font-sans delta-gray">+0,3%</text>
+          </g>
+
+
+          <line x1="50" y1="340" x2="720" y2="340" stroke="url(#hLineGrad)" stroke-width="2" />
+
+
+          <g id="nominal-gdp-per-capita">
+            <text x="380" y="380" text-anchor="middle" class="font-condensed subtitle">Номінальний ВВП на душу населення
+              в дол США:</text>
+            <text x="380" y="410" text-anchor="middle" class="font-condensed subtitle">прогноз МВФ за результатами 2025
+              року</text>
+
+
+            <line x1="266" y1="430" x2="266" y2="662" stroke="#222222" stroke-width="2.5" />
+
+
+            <text x="253" y="466" text-anchor="end" class="font-condensed country-label">Україна</text>
+            <rect x="267" y="435" width="40" height="38" rx="2" fill="url(#goldGrad)" />
+            <text x="312" y="466" class="font-condensed bar-val-gold">$ 6 380</text>
+
+
+            <text x="253" y="512" text-anchor="end" class="font-condensed country-label">Польща</text>
+            <rect x="267" y="482" width="178" height="38" rx="2" fill="url(#goldGrad)" />
+            <text x="450" y="512" class="font-condensed bar-val-gold">$ 28 500</text>
+
+
+            <text x="253" y="558" text-anchor="end" class="font-condensed country-label">Німеччина</text>
+            <rect x="267" y="529" width="386" height="38" rx="2" fill="url(#goldGrad)" />
+            <text x="656" y="558" class="font-condensed bar-val-gold">$60 100</text>
+
+
+            <text x="253" y="604" text-anchor="end" class="font-condensed country-label">ЄС</text>
+            <rect x="267" y="576" width="298" height="38" rx="2" fill="url(#goldGrad)" />
+            <text x="570" y="604" class="font-condensed bar-val-gold">$ 46 900</text>
+
+
+            <text x="253" y="650" text-anchor="end" class="font-condensed country-label">Середньосвітовий</text>
+            <rect x="267" y="622" width="96" height="38" rx="2" fill="url(#purpleGrad)" />
+            <text x="368" y="650" class="font-condensed bar-val-purple">$ 14 600</text>
+          </g>
+
+
+          <g id="ukraine-growth">
+            <text x="1020" y="105" text-anchor="middle" class="font-condensed subtitle">Зростання економіки
+              України</text>
+
+
+            <path
+              d="M 815 256 L 838 250 L 862 258 L 888 260 L 912 263 L 932 274 L 948 264 L 962 246 L 986 236 L 1012 240 L 1034 256 L 1052 276 L 1076 294 L 1110 302 L 1148 312 L 1188 326 L 1212 346 L 1206 376 L 1216 404 L 1196 426 L 1168 444 L 1142 464 L 1106 472 L 1074 486 L 1056 498 L 1068 506 L 1098 512 L 1126 520 L 1114 536 L 1086 548 L 1066 558 L 1048 544 L 1042 526 L 1052 512 L 1040 502 L 1012 492 L 984 488 L 960 500 L 942 518 L 924 538 L 904 558 L 888 552 L 896 530 L 912 510 L 904 484 L 884 462 L 864 442 L 838 438 L 814 434 L 788 420 L 784 396 L 802 376 L 800 344 L 812 314 L 808 282 Z"
+              fill="#E8E3ED" />
+
+
+            <line x1="955" y1="222" x2="1073" y2="550" stroke="#B69666" stroke-width="3"
+              marker-end="url(#trendArrow)" />
+
+
+            <circle cx="955" cy="222" r="8" fill="#DFD3C3" />
+            <circle cx="955" cy="222" r="4" fill="#B69666" />
+            <text x="930" y="158" text-anchor="middle" class="font-sans growth-year">2023 рік</text>
+            <text x="940" y="205" text-anchor="middle" class="font-sans growth-val">+5,5%</text>
+
+
+            <circle cx="1010" cy="377" r="8" fill="#DFD3C3" />
+            <circle cx="1010" cy="377" r="4" fill="#B69666" />
+            <text x="1032" y="358" class="font-sans growth-year">2024 рік</text>
+            <text x="1030" y="405" class="font-sans growth-val">+2,9%</text>
+
+
+            <circle cx="1076" cy="558" r="8" fill="#DFD3C3" />
+            <circle cx="1076" cy="558" r="4" fill="#B69666" />
+            <text x="1095" y="592" text-anchor="middle" class="font-sans growth-year">2025 рік</text>
+            <text x="1095" y="610" text-anchor="middle" class="font-sans forecast-sub">(прогноз)</text>
+            <text x="1095" y="655" text-anchor="middle" class="font-sans growth-val">+1,6%</text>
+          </g>
+
+
+          <g id="logo-ili" transform="translate(1150, 672)">
+            <rect x="0" y="0" width="3" height="28" fill="#B69666" />
+            <path d="M 7 0 L 10 0 L 10 25 L 15 25 L 15 28 L 7 28 Z" fill="#B69666" />
+            <rect x="18" y="0" width="3" height="28" fill="#B69666" />
+            <text x="28" y="8" class="font-condensed" font-size="9" font-weight="700"
+              fill="#222222">INTERNATIONAL</text>
+            <text x="28" y="18" class="font-condensed" font-size="9" font-weight="700" fill="#222222">LIBERTY</text>
+            <text x="28" y="28" class="font-condensed" font-size="9" font-weight="700" fill="#222222">INSTITUTE</text>
+          </g>
+        </svg>
+      </section>
+    </div>
+    <!-- РОЗДІЛ 3 -->
+    <section id="sec-3" class="lecture-section">
+      <div class="section-header">
+        <span class="section-num">3</span>
+        <h2>Конкурентні переваги України на світових ринках</h2>
+      </div>
+
+      <!-- ПІДРОЗДІЛ 3.1: СІЛЬСЬКЕ ГОСПОДАРСТВО -->
+      <div class="card">
+        <h3>А) Сільськогосподарська продукція та світовий продовольчий ринок</h3>
+        <p>Агропромисловий комплекс (АПК) — один із головних локомотивів української економіки: його частка у ВВП
+          становить <strong>14,4%</strong>, а в товарному експорті країни — <strong>35%</strong>. Україна посідає
+          <strong>1-ше місце в Європі за вартістю виробленої сільськогосподарської продукції</strong> та експортує
+          продовольство до <strong>190 країн світу</strong>. У структурі галузі переважає <strong>рослинництво
+            (69,3%)</strong> над <strong>тваринництвом (30,7%)</strong>.</p>
+
+        <div class="callout callout-example">
+          <div class="callout-title">Світові експортні позиції України (глобальне лідерство)</div>
+          <p style="font-size: 14.5px;">
+            <span class="tag gold">1-ше місце у світі</span> <strong>соняшникова олія</strong> (понад половина світового
+            експорту) &nbsp;•&nbsp;
+            <span class="tag gold">2-ге місце</span> <strong>соняшниковий шрот (макуха)</strong> &nbsp;•&nbsp;
+            <span class="tag green">4-те місце</span> <strong>ячмінь, кукурудза, насіння ріпаку</strong> &nbsp;•&nbsp;
+            <span class="tag">5-те місце</span> <strong>висівки та кормове борошно</strong> &nbsp;•&nbsp;
+            <span class="tag">7-ме місце</span> <strong>пшениця та соя</strong>.
+          </p>
+        </div>
+
+        <h4 style="margin: 14px 0 8px; color: var(--text-main);">Спеціалізація та географія провідних
+          сільськогосподарських культур</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 17%;">Культура</th>
+                <th style="width: 24%;">Основні зони та регіони</th>
+                <th style="width: 27%;">Частка площ та врожайність</th>
+                <th style="width: 32%;">Місце у світі та значення</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Соняшник</strong><br><span style="font-size:12px; color:#64748b;">(технічна олійна)</span>
+                </td>
+                <td>Степ і Південний Лісостеп (Дніпропетровська, Запорізька, Кіровоградська, Миколаївська, Харківська
+                  обл.)</td>
+                <td>Займає <strong>22% усіх посівних площ</strong> України; валові збори стабільно зростають</td>
+                <td><strong>1-ше місце у світі</strong> за виробництвом (<strong>28% світового</strong> збору) та
+                  експортом олії.</td>
+              </tr>
+              <tr>
+                <td><strong>Кукурудза</strong><br><span style="font-size:12px; color:#64748b;">(зернофуражна)</span>
+                </td>
+                <td>Степова зона та Лісостеп (Полтавська, Черкаська, Вінницька, Кіровоградська обл.)</td>
+                <td>Висока середня врожайність — <strong>57,1 ц/га</strong></td>
+                <td><strong>6-те місце у світі</strong> та <strong>1-ше в Європі</strong> (2,4% світового збору);
+                  забезпечує <strong>23% агроекспорту</strong>.</td>
+              </tr>
+              <tr>
+                <td><strong>Пшениця</strong><br><span style="font-size:12px; color:#64748b;">(продовольча
+                    зернова)</span></td>
+                <td>Степ та Лісостеп на родючих чорноземних ґрунтах</td>
+                <td>Засіяно <strong>23,2% ріллі</strong> країни</td>
+                <td><strong>7-ме місце у світі</strong> та <strong>2-ге в Європі</strong> після Франції (3,3% світового
+                  збору).</td>
+              </tr>
+              <tr>
+                <td><strong>Цукровий буряк</strong><br><span style="font-size:12px; color:#64748b;">(технічна
+                    цукриста)</span></td>
+                <td>Лісостепова зона (Вінницька, Хмельницька, Тернопільська, Полтавська обл.)</td>
+                <td>Площі — <strong>1,1% ріллі</strong>; дуже висока врожайність — <strong>435 ц/га</strong></td>
+                <td><strong>6-те місце у світі</strong> за валовими зборами та <strong>3-тє в Європі</strong> (після
+                  Франції та Німеччини).</td>
+              </tr>
+              <tr>
+                <td><strong>Ріпак</strong><br><span style="font-size:12px; color:#64748b;">(олійна та біопаливна)</span>
+                </td>
+                <td>Західний та Правобережний Лісостеп, Полісся (площі стрімко розширюються)</td>
+                <td>Площі становлять <strong>1,7% ріллі</strong> і швидко зростають</td>
+                <td><strong>4-те місце у світі</strong> за експортом; сировина для технологічної олії, дешевого
+                  біопалива та кормів.</td>
+              </tr>
+              <tr>
+                <td><strong>Соя</strong><br><span style="font-size:12px; color:#64748b;">(бобова олійна)</span></td>
+                <td>Лісостеп та зрошувані землі Степу (особливо Черкаська і Вінницька обл.)</td>
+                <td>За останні 25 років посівні площі зросли у <strong>20 разів</strong></td>
+                <td><strong>8-ме місце у світі</strong> та <strong>1-ше в Європі</strong> за зборами (1% світового);
+                  <strong>7-ме місце</strong> за експортом.</td>
+              </tr>
+              <tr>
+                <td><strong>Гречка</strong><br><span style="font-size:12px; color:#64748b;">(круп'яна зернова)</span>
+                </td>
+                <td>Полісся та Північний Лісостеп (холодостійка, невибаглива до ґрунтів)</td>
+                <td>Невисока врожайність — близько <strong>10 ц/га</strong>, невеликі посівні площі</td>
+                <td>Важлива культура внутрішнього продовольчого споживання.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <section>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 595" width="100%" height="100%">
+            <defs>
+              <style>
+                .font-main {
+                  font-family: 'Roboto Condensed', 'Arial Narrow', 'DejaVu Sans Condensed', 'Arial', sans-serif;
+                }
+                .rank-num {
+                  font-size: 38px;
+                  font-weight: 700;
+                  fill: #1A1A1A;
+                }
+                .rank-word {
+                  font-size: 16px;
+                  font-weight: 400;
+                  fill: #222222;
+                }
+                .item-label {
+                  font-size: 15.5px;
+                  font-weight: 400;
+                  fill: #2B2B2B;
+                }
+                .caption-title {
+                  font-family: 'Inter', 'Roboto', 'Arial', sans-serif;
+                  font-size: 21px;
+                  font-weight: 700;
+                  fill: #1A1A1A;
+                }
+                .connector {
+                  stroke: #495E67;
+                  stroke-width: 1.8;
+                  stroke-linecap: round;
+                }
+                .icon-stroke {
+                  stroke: #495E67;
+                  stroke-width: 2;
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                }
+              </style>
+          
+              
+              <path id="ribbon-shape" d="M -36 0 L 36 0 L 36 72 L 0 94 L -36 72 Z" />
+          
+              
+              <g id="icon-sunflower">
+                <g class="icon-stroke" fill="#FBF3B9">
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(0)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(30)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(60)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(90)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(120)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(150)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(180)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(210)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(240)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(270)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(300)" />
+                  <ellipse cx="0" cy="-16" rx="4" ry="8" transform="rotate(330)" />
+                </g>
+                <circle cx="0" cy="0" r="10" fill="#D2E3B8" class="icon-stroke" />
+                <circle cx="-3" cy="-3" r="1" fill="#495E67" />
+                <circle cx="3" cy="-2" r="1" fill="#495E67" />
+                <circle cx="-2" cy="3" r="1" fill="#495E67" />
+                <circle cx="3" cy="3" r="1" fill="#495E67" />
+                <circle cx="0" cy="0" r="1" fill="#495E67" />
+              </g>
+          
+              
+              <g id="icon-oil">
+                <path d="M 0 -22 C 0 -22 15 -4 15 7 A 15 15 0 1 1 -15 7 C -15 -4 0 -22 0 -22 Z" fill="#FBF3B9" class="icon-stroke" />
+                <path d="M -6 3 A 7 7 0 0 0 -3 13" fill="none" stroke="#495E67" stroke-width="1.8" stroke-linecap="round" />
+              </g>
+          
+              
+              <g id="icon-barley">
+                <line x1="0" y1="24" x2="0" y2="-16" class="icon-stroke" />
+                
+                <line x1="-8" y1="-2" x2="-10" y2="-22" class="icon-stroke" />
+                <line x1="8" y1="-2" x2="10" y2="-22" class="icon-stroke" />
+                <line x1="-7" y1="-10" x2="-8" y2="-26" class="icon-stroke" />
+                <line x1="7" y1="-10" x2="8" y2="-26" class="icon-stroke" />
+                <line x1="0" y1="-18" x2="0" y2="-28" class="icon-stroke" />
+                
+                <path d="M 0 14 C -8 12 -11 6 -8 0 C -3 3 0 8 0 14 Z" fill="#D2E3B8" class="icon-stroke" />
+                <path d="M 0 14 C 8 12 11 6 8 0 C 3 3 0 8 0 14 Z" fill="#D2E3B8" class="icon-stroke" />
+                <path d="M 0 5 C -8 3 -11 -3 -8 -9 C -3 -6 0 -1 0 5 Z" fill="#FBF3B9" class="icon-stroke" />
+                <path d="M 0 5 C 8 3 11 -3 8 -9 C 3 -6 0 -1 0 5 Z" fill="#FBF3B9" class="icon-stroke" />
+                <path d="M 0 -4 C -7 -6 -9 -11 -6 -17 C -2 -14 0 -10 0 -4 Z" fill="#D2E3B8" class="icon-stroke" />
+                <path d="M 0 -4 C 7 -6 9 -11 6 -17 C 2 -14 0 -10 0 -4 Z" fill="#D2E3B8" class="icon-stroke" />
+              </g>
+          
+              
+              <g id="icon-rapeseed">
+                <line x1="0" y1="24" x2="0" y2="-12" class="icon-stroke" />
+                <path d="M 0 12 L -11 2" class="icon-stroke" />
+                <path d="M 0 8 L 11 -2" class="icon-stroke" />
+                <path d="M 0 0 L -9 -10" class="icon-stroke" />
+                <path d="M 0 -2 L 9 -12" class="icon-stroke" />
+                
+                <path d="M 0 18 C -7 18 -11 14 -11 11 C -6 11 -2 14 0 18 Z" fill="#D2E3B8" class="icon-stroke" />
+                <path d="M 0 16 C 7 16 11 12 11 9 C 6 9 2 12 0 16 Z" fill="#D2E3B8" class="icon-stroke" />
+                
+                <circle cx="-13" cy="0" r="4.5" fill="#B8D4E3" class="icon-stroke" />
+                <circle cx="13" cy="-4" r="4.5" fill="#B8D4E3" class="icon-stroke" />
+                <circle cx="-11" cy="-12" r="4.5" fill="#B8D4E3" class="icon-stroke" />
+                <circle cx="11" cy="-14" r="4.5" fill="#B8D4E3" class="icon-stroke" />
+                <circle cx="0" cy="-17" r="5" fill="#B8D4E3" class="icon-stroke" />
+              </g>
+          
+              
+              <g id="icon-corn">
+                
+                <path d="M 0 -21 C 7 -21 9 -8 7 10 C 5 18 -5 18 -7 10 C -9 -8 -7 -21 0 -21 Z" fill="#FBF3B9" class="icon-stroke" />
+                <line x1="-2" y1="-16" x2="-2" y2="8" stroke="#495E67" stroke-width="1.3" stroke-dasharray="3,3" />
+                <line x1="2" y1="-16" x2="2" y2="8" stroke="#495E67" stroke-width="1.3" stroke-dasharray="3,3" />
+                
+                <path d="M -2 21 C -12 14 -15 0 -11 -10 C -6 -3 -4 8 -1 19 Z" fill="#D2E3B8" class="icon-stroke" />
+                <path d="M 2 21 C 12 14 15 0 11 -10 C 6 -3 4 8 1 19 Z" fill="#D2E3B8" class="icon-stroke" />
+              </g>
+          
+              
+              <g id="icon-wheat">
+                <line x1="0" y1="24" x2="0" y2="-14" class="icon-stroke" />
+                
+                <ellipse cx="0" cy="-16" rx="4" ry="7" fill="#FBF3B9" class="icon-stroke" />
+                
+                <path d="M 0 -6 C -9 -7 -13 -13 -10 -19 C -4 -17 -1 -12 0 -6 Z" fill="#D2E3B8" class="icon-stroke" />
+                <path d="M 0 -6 C 9 -7 13 -13 10 -19 C 4 -17 1 -12 0 -6 Z" fill="#D2E3B8" class="icon-stroke" />
+                <path d="M 0 4 C -10 3 -14 -3 -11 -9 C -5 -7 -1 -2 0 4 Z" fill="#FBF3B9" class="icon-stroke" />
+                <path d="M 0 4 C 10 3 14 -3 11 -9 C 5 -7 1 -2 0 4 Z" fill="#FBF3B9" class="icon-stroke" />
+                <path d="M 0 14 C -10 13 -14 7 -11 1 C -5 3 -1 8 0 14 Z" fill="#D2E3B8" class="icon-stroke" />
+                <path d="M 0 14 C 10 13 14 7 11 1 C 5 3 1 8 0 14 Z" fill="#D2E3B8" class="icon-stroke" />
+              </g>
+          
+              
+              <g id="icon-bee">
+                
+                <path d="M -4 -4 C -16 -10 -22 -3 -18 4 C -14 8 -6 5 -4 1 Z" fill="#FBF3B9" class="icon-stroke" />
+                <path d="M 4 -4 C 16 -10 22 -3 18 4 C 14 8 6 5 4 1 Z" fill="#FBF3B9" class="icon-stroke" />
+                
+                <path d="M -3 -15 L -7 -21" class="icon-stroke" />
+                <path d="M 3 -15 L 7 -21" class="icon-stroke" />
+                
+                <circle cx="0" cy="-12" r="4.5" fill="#B8D4E3" class="icon-stroke" />
+                <ellipse cx="0" cy="-4" rx="6.5" ry="5.5" fill="#FBF3B9" class="icon-stroke" />
+                
+                <path d="M -7 2 C -7 12 -3 19 0 21 C 3 19 7 12 7 2 Z" fill="#B8D4E3" class="icon-stroke" />
+                <line x1="-6.5" y1="7" x2="6.5" y2="7" class="icon-stroke" />
+                <line x1="-5" y1="13" x2="5" y2="13" class="icon-stroke" />
+              </g>
+          
+              
+              <g id="icon-soy">
+                <line x1="0" y1="24" x2="0" y2="-4" class="icon-stroke" />
+                
+                <path d="M 0 -2 C -8 -8 -8 -18 0 -23 C 8 -18 8 -8 0 -2 Z" fill="#FBF3B9" class="icon-stroke" />
+                <line x1="0" y1="-6" x2="0" y2="-16" stroke="#495E67" stroke-width="1.4" stroke-linecap="round" />
+                
+                <path d="M -1 6 C -11 7 -18 1 -18 -7 C -10 -8 -3 -3 -1 6 Z" fill="#D2E3B8" class="icon-stroke" />
+                
+                <path d="M 1 6 C 11 7 18 1 18 -7 C 10 -8 3 -3 1 6 Z" fill="#D2E3B8" class="icon-stroke" />
+              </g>
+            </defs>
+          
+            
+            <rect width="900" height="595" fill="#FFFFFF" />
+          
+            
+            <g transform="translate(85, 20)">
+              <use href="#ribbon-shape" fill="#F7C631" />
+              <text x="0" y="47" text-anchor="middle" class="font-main rank-num">1</text>
+              <text x="0" y="68" text-anchor="middle" class="font-main rank-word">місце</text>
+          
+              <line x1="0" y1="99" x2="0" y2="128" class="connector" />
+              <use href="#icon-sunflower" x="0" y="156" />
+              <text x="0" y="198" text-anchor="middle" class="font-main item-label">Виробництво</text>
+              <text x="0" y="216" text-anchor="middle" class="font-main item-label">соняшнику</text>
+          
+              <line x1="0" y1="230" x2="0" y2="250" class="connector" />
+              <use href="#icon-oil" x="0" y="276" />
+              <text x="0" y="316" text-anchor="middle" class="font-main item-label">Виробництво</text>
+              <text x="0" y="334" text-anchor="middle" class="font-main item-label">соняшникової</text>
+              <text x="0" y="352" text-anchor="middle" class="font-main item-label">олії</text>
+          
+              <line x1="0" y1="364" x2="0" y2="384" class="connector" />
+              <use href="#icon-oil" x="0" y="410" />
+              <text x="0" y="450" text-anchor="middle" class="font-main item-label">Експорт</text>
+              <text x="0" y="468" text-anchor="middle" class="font-main item-label">соняшникової</text>
+              <text x="0" y="486" text-anchor="middle" class="font-main item-label">олії</text>
+            </g>
+          
+            
+            <g transform="translate(231, 20)">
+              <use href="#ribbon-shape" fill="#DFCA84" />
+              <text x="0" y="47" text-anchor="middle" class="font-main rank-num">3</text>
+              <text x="0" y="68" text-anchor="middle" class="font-main rank-word">місце</text>
+          
+              <line x1="0" y1="99" x2="0" y2="128" class="connector" />
+              <use href="#icon-barley" x="0" y="156" />
+              <text x="0" y="198" text-anchor="middle" class="font-main item-label">Експорт</text>
+              <text x="0" y="216" text-anchor="middle" class="font-main item-label">ячменю</text>
+          
+              <line x1="0" y1="230" x2="0" y2="250" class="connector" />
+              <use href="#icon-rapeseed" x="0" y="276" />
+              <text x="0" y="316" text-anchor="middle" class="font-main item-label">Експорт</text>
+              <text x="0" y="334" text-anchor="middle" class="font-main item-label">ріпаку</text>
+          
+              <line x1="0" y1="364" x2="0" y2="384" class="connector" />
+              <use href="#icon-corn" x="0" y="410" />
+              <text x="0" y="450" text-anchor="middle" class="font-main item-label">Експорт</text>
+              <text x="0" y="468" text-anchor="middle" class="font-main item-label">кукурудзи</text>
+            </g>
+          
+            
+            <g transform="translate(377, 20)">
+              <use href="#ribbon-shape" fill="#E6E7E8" />
+              <text x="0" y="47" text-anchor="middle" class="font-main rank-num">4</text>
+              <text x="0" y="68" text-anchor="middle" class="font-main rank-word">місце</text>
+          
+              <line x1="0" y1="99" x2="0" y2="128" class="connector" />
+              <use href="#icon-barley" x="0" y="156" />
+              <text x="0" y="198" text-anchor="middle" class="font-main item-label">Виробництво</text>
+              <text x="0" y="216" text-anchor="middle" class="font-main item-label">ячменю</text>
+            </g>
+          
+            
+            <g transform="translate(523, 20)">
+              <use href="#ribbon-shape" fill="#E6E7E8" />
+              <text x="0" y="47" text-anchor="middle" class="font-main rank-num">6</text>
+              <text x="0" y="68" text-anchor="middle" class="font-main rank-word">місце</text>
+          
+              <line x1="0" y1="99" x2="0" y2="128" class="connector" />
+              <use href="#icon-corn" x="0" y="156" />
+              <text x="0" y="198" text-anchor="middle" class="font-main item-label">Виробництво</text>
+              <text x="0" y="216" text-anchor="middle" class="font-main item-label">кукурудзи</text>
+          
+              <line x1="0" y1="230" x2="0" y2="250" class="connector" />
+              <use href="#icon-wheat" x="0" y="276" />
+              <text x="0" y="316" text-anchor="middle" class="font-main item-label">Експорт</text>
+              <text x="0" y="334" text-anchor="middle" class="font-main item-label">пшениці</text>
+            </g>
+          
+            
+            <g transform="translate(669, 20)">
+              <use href="#ribbon-shape" fill="#E6E7E8" />
+              <text x="0" y="47" text-anchor="middle" class="font-main rank-num">7</text>
+              <text x="0" y="68" text-anchor="middle" class="font-main rank-word">місце</text>
+          
+              <line x1="0" y1="99" x2="0" y2="128" class="connector" />
+              <use href="#icon-bee" x="0" y="156" />
+              <text x="0" y="198" text-anchor="middle" class="font-main item-label">Виробництво</text>
+              <text x="0" y="216" text-anchor="middle" class="font-main item-label">меду</text>
+          
+              <line x1="0" y1="230" x2="0" y2="250" class="connector" />
+              <use href="#icon-soy" x="0" y="276" />
+              <text x="0" y="316" text-anchor="middle" class="font-main item-label">Експорт</text>
+              <text x="0" y="334" text-anchor="middle" class="font-main item-label">сої</text>
+            </g>
+          
+            
+            <g transform="translate(815, 20)">
+              <use href="#ribbon-shape" fill="#E6E7E8" />
+              <text x="0" y="47" text-anchor="middle" class="font-main rank-num">8</text>
+              <text x="0" y="68" text-anchor="middle" class="font-main rank-word">місце</text>
+          
+              <line x1="0" y1="99" x2="0" y2="128" class="connector" />
+              <use href="#icon-wheat" x="0" y="156" />
+              <text x="0" y="198" text-anchor="middle" class="font-main item-label">Виробництво</text>
+              <text x="0" y="216" text-anchor="middle" class="font-main item-label">пшениці</text>
+            </g>
+          
+            
+            <text x="450" y="568" text-anchor="middle" class="caption-title">Місце України на світовому ринку продовольства (2016 р.).</text>
+          </svg>
+        </section>
+
+        <h4 style="margin: 14px 0 8px; color: var(--text-main);">Зональна спеціалізація тваринництва України</h4>
+        <div class="grid-2" style="margin-bottom: 0;">
+          <div class="sector-card">
+            <h4>1. Велика рогата худоба (ВРХ) <span class="tag green">Молочно-м'ясне</span></h4>
+            <p style="font-size: 14px;">Найвища концентрація поголів'я характерна для <strong>Правобережного
+                Лісостепу</strong> та <strong>заходу Поліської зони</strong> (наявність соковитих кормів, лук і
+              пасовищ).</p>
+          </div>
+          <div class="sector-card">
+            <h4>2. Свинарство <span class="tag gold">Зональні напрями</span></h4>
+            <p style="font-size: 14px;">Полісся та Лісостеп — <strong>м'ясо-сальний напрям</strong> (на базі картоплі,
+              буряків і зерна); Степ — <strong>сальний напрям</strong>; приміські зони — <strong>м'ясний
+                напрям</strong>.</p>
+          </div>
+          <div class="sector-card">
+            <h4>3. Птахівництво <span class="tag">Орієнтація на споживача</span></h4>
+            <p style="font-size: 14px;">Високоіндустріальна галузь. Найбільше поголів'я зосереджене у <strong>приміських
+                зонах</strong> великих агломерацій, а також у <strong>Лісостепу та Степу</strong> (близькість до
+              зернової кормової бази).</p>
+          </div>
+          <div class="sector-card">
+            <h4>4. Вівчарство <span class="tag">Допоміжне значення</span></h4>
+            <p style="font-size: 14px;">Спеціалізація збереглася переважно у <strong>гірських і передгірських районах
+                Карпат</strong> (полонинське вівчарство, бринза, вовна) та окремих <strong>степових районах</strong>
+              Півдня.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ДІАГРАМА 3: АПК -->
+      <div class="figure-box">
+        <div class="figure-header">
+          <span class="figure-title">Рис. 3. Світові позиції українського АПК та внутрішня структура галузі</span>
+          <span class="figure-caption">За даними опорного конспекту та презентації</span>
+        </div>
+        <svg class="svg-responsive" viewBox="0 0 920 255" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Діаграма сільського господарства України">
+          <rect x="0" y="0" width="920" height="255" rx="10" fill="#f8fafc" />
+
+          <!-- Лівий блок: Структура АПК (кільцева діаграма) -->
+          <rect x="18" y="18" width="330" height="218" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+          <text x="183" y="44" text-anchor="middle" fill="#0f172a" font-weight="700" font-size="14">Структура сільського
+            господарства</text>
+
+          <!-- Кільцева діаграма: r=56, довжина кола 2*pi*56 = 351.86. 69.3% = 243.8, 30.7% = 108.0 -->
+          <circle cx="120" cy="135" r="56" fill="none" stroke="#f59e0b" stroke-width="24" />
+          <circle cx="120" cy="135" r="56" fill="none" stroke="#059669" stroke-width="24"
+            stroke-dasharray="243.8 351.86" transform="rotate(-90 120 135)" />
+          <text x="120" y="131" text-anchor="middle" fill="#0f172a" font-weight="800" font-size="15">14,4%</text>
+          <text x="120" y="147" text-anchor="middle" fill="#64748b" font-size="10.5" font-weight="600">частка у
+            ВВП</text>
+
+          <!-- Легенда лівого блоку -->
+          <rect x="198" y="92" width="14" height="14" rx="3" fill="#059669" />
+          <text x="218" y="104" fill="#0f172a" font-weight="700" font-size="13">Рослинництво</text>
+          <text x="218" y="121" fill="#059669" font-weight="800" font-size="16">69,3%</text>
+
+          <rect x="198" y="142" width="14" height="14" rx="3" fill="#f59e0b" />
+          <text x="218" y="154" fill="#0f172a" font-weight="700" font-size="13">Тваринництво</text>
+          <text x="218" y="171" fill="#d97706" font-weight="800" font-size="16">30,7%</text>
+
+          <text x="183" y="216" text-anchor="middle" fill="#475569" font-size="11.5" font-weight="600">1-ше місце в
+            Європі за вартістю продукції</text>
+
+          <!-- Правий блок: Місця України у світовому експорті -->
+          <rect x="366" y="18" width="536" height="218" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+          <text x="386" y="44" fill="#0f172a" font-weight="700" font-size="14">Рейтинг України у світовому експорті
+            продовольства (місце у світі)</text>
+
+          <!-- Рядок 1 -->
+          <text x="386" y="76" fill="#334155" font-size="12.5" font-weight="600">Соняшникова олія</text>
+          <rect x="570" y="61" width="265" height="20" rx="5" fill="#fef3c7" />
+          <rect x="570" y="61" width="265" height="20" rx="5" fill="#f59e0b" />
+          <text x="844" y="76" fill="#b45309" font-weight="800" font-size="13">1-ше місце</text>
+
+          <!-- Рядок 2 -->
+          <text x="386" y="108" fill="#334155" font-size="12.5" font-weight="600">Соняшниковий шрот</text>
+          <rect x="570" y="93" width="265" height="20" rx="5" fill="#d1fae5" />
+          <rect x="570" y="93" width="230" height="20" rx="5" fill="#10b981" />
+          <text x="808" y="108" fill="#047857" font-weight="800" font-size="13">2-ге місце</text>
+
+          <!-- Рядок 3 -->
+          <text x="386" y="140" fill="#334155" font-size="12.5" font-weight="600">Кукурудза, ячмінь, ріпак</text>
+          <rect x="570" y="125" width="265" height="20" rx="5" fill="#dbeafe" />
+          <rect x="570" y="125" width="185" height="20" rx="5" fill="#2563eb" />
+          <text x="763" y="140" fill="#1d4ed8" font-weight="800" font-size="13">4-те місце</text>
+
+          <!-- Рядок 4 -->
+          <text x="386" y="172" fill="#334155" font-size="12.5" font-weight="600">Висівки, кормове борошно</text>
+          <rect x="570" y="157" width="265" height="20" rx="5" fill="#e0e7ff" />
+          <rect x="570" y="157" width="155" height="20" rx="5" fill="#4f46e5" />
+          <text x="733" y="172" fill="#4338ca" font-weight="800" font-size="13">5-те місце</text>
+
+          <!-- Рядок 5 -->
+          <text x="386" y="204" fill="#334155" font-size="12.5" font-weight="600">Пшениця та соя</text>
+          <rect x="570" y="189" width="265" height="20" rx="5" fill="#f1f5f9" />
+          <rect x="570" y="189" width="120" height="20" rx="5" fill="#0284c7" />
+          <text x="698" y="204" fill="#0369a1" font-weight="800" font-size="13">7-ме місце</text>
+        </svg>
+      </div>
+
+      <!-- ПІДРОЗДІЛ 3.2: РУДНА СИРОВИНА ТА МЕТАЛУРГІЯ -->
+      <div class="card">
+        <h3>Б) Рудна сировина та чорна металургія</h3>
+        <p>Поєднання унікальних за масштабами покладів залізних і марганцевих руд у Придніпров'ї з коксівним вугіллям
+          Донбасу та вогнетривкими глинами сформувало один із найпотужніших у Європі гірничо-металургійних комплексів.
+        </p>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="sector-card" style="border-top: 3px solid #dc2626;">
+            <h4>Залізні руди <span class="tag" style="background:#fee2e2; color:#991b1b; border-color:#fecaca;">9%
+                світових запасів</span></h4>
+            <ul class="styled-list" style="font-size: 13.5px;">
+              <li><strong>5-те місце у світі</strong> за запасами (<strong>1-ше в Європі</strong>) та
+                <strong>6-те</strong> за видобутком (3% світового).</li>
+              <li><strong>Криворізький басейн:</strong> 68,5% запасів країни; руди багаті (50–67% Fe) та середні
+                (23–35%); 5 ГЗК (найбільший у Європі — <em>Північний ГЗК</em>).</li>
+              <li><strong>Кременчуцький район:</strong> запаси у 5 разів менші, руди середньої якості; <em>Дніпровський
+                  ГЗК</em> (Горішні Плавні).</li>
+              <li><strong>Білозерський район:</strong> найбагатші у світі руди за вмістом заліза (до
+                <strong>70%</strong>).</li>
+            </ul>
+          </div>
+
+          <div class="sector-card" style="border-top: 3px solid #d97706;">
+            <h4>Марганцеві руди <span class="tag gold">&gt;42% світових запасів</span></h4>
+            <ul class="styled-list" style="font-size: 13.5px;">
+              <li><strong>Понад 42% світових запасів</strong> зосереджено в Південноукраїнському (Придніпровському)
+                марганцеворудному басейні.</li>
+              <li><strong>Родовищні райони:</strong> Нікопольський (Дніпропетровська обл.), Великотокмацький (Запорізька
+                обл.), Інгулецький.</li>
+              <li><strong>Значення:</strong> критично важлива сировина для виплавки якісної сталі та феросплавів
+                (Нікопольський і Запорізький феросплавні заводи).</li>
+            </ul>
+          </div>
+
+          <div class="sector-card" style="border-top: 3px solid #4338ca;">
+            <h4>Титанові руди <span class="tag" style="background:#e0e7ff; color:#3730a3; border-color:#c7d2fe;">7,7%
+                світових запасів</span></h4>
+            <ul class="styled-list" style="font-size: 13.5px;">
+              <li><strong>11-те місце у світі</strong> за запасами (<strong>2-ге в Європі</strong> після Норвегії) та
+                <strong>6%</strong> світового видобутку.</li>
+              <li>Основний мінерал — <strong>ільменіт</strong> (містить ~30% титану).</li>
+              <li><strong>Головні родовища та ГЗК:</strong> <em>Іршанське</em> (Житомирська обл.) та <em>Самотканське /
+                  Вільногірський ГЗК</em> (Дніпропетровська обл.).</li>
+              <li>Титан використовується в авіакосмічній галузі (<em>«крилатий метал»</em>).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout callout-definition" style="margin-bottom: 0;">
+          <div class="callout-title">Чорна металургія — основа промислового експорту</div>
+          <p style="font-size: 14.5px;">
+            Чорна металургія забезпечує до <strong>45% вартості українського товарного експорту</strong> (1-ше місце
+            серед промислових галузей країни; <strong>12-те місце у світі</strong> у 2017 р.). <strong>85,5% експорту
+              сталі та прокату</strong> спрямовується до країн Європи та Близького Сходу.<br>
+            <strong>Головні центри:</strong> <em>Кривий Ріг</em> («АрселорМіттал Кривий Ріг» — приватизований найбільшою
+            металургійною корпорацією світу ArcelorMittal), <em>Дніпро</em>, <em>Запоріжжя</em> («Запоріжсталь»),
+            <em>Кам'янське</em>, <em>Маріуполь</em> («Азовсталь» — найбільший комбінат країни, ММК ім. Ілліча), а також
+            <em>Побужжя</em> (виробництво феронікелю).
+          </p>
+        </div>
+      </div>
+
+      <!-- ДІАГРАМА 4: РУДИ ТА МЕТАЛИ -->
+      <div class="figure-box">
+        <div class="figure-header">
+          <span class="figure-title">Рис. 4. Частка України у світових запасах руд та географія експорту металу</span>
+          <span class="figure-caption">Мінерально-сировинний потенціал Придніпров'я та Полісся</span>
+        </div>
+        <svg class="svg-responsive" viewBox="0 0 920 220" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Рудна сировина та металургія">
+          <rect x="0" y="0" width="920" height="220" rx="10" fill="#f8fafc" />
+
+          <!-- Лівий блок: Частка світових запасів -->
+          <rect x="18" y="16" width="490" height="188" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+          <text x="36" y="42" fill="#0f172a" font-weight="700" font-size="14">Частка України у світових запасах рудної
+            сировини (%)</text>
+
+          <!-- Марганець -->
+          <text x="36" y="78" fill="#334155" font-weight="700" font-size="13">Марганцеві руди</text>
+          <rect x="180" y="61" width="240" height="22" rx="5" fill="#f1f5f9" />
+          <rect x="180" y="61" width="205" height="22" rx="5" fill="#d97706" />
+          <text x="393" y="77" fill="#b45309" font-weight="800" font-size="13">&gt;42% (світовий лідер)</text>
+
+          <!-- Залізні руди -->
+          <text x="36" y="122" fill="#334155" font-weight="700" font-size="13">Залізні руди</text>
+          <rect x="180" y="105" width="240" height="22" rx="5" fill="#f1f5f9" />
+          <rect x="180" y="105" width="62" height="22" rx="5" fill="#dc2626" />
+          <text x="250" y="121" fill="#991b1b" font-weight="800" font-size="13">9,0% (5-те у світі / 1-ше в ЄС)</text>
+
+          <!-- Титанові руди -->
+          <text x="36" y="166" fill="#334155" font-weight="700" font-size="13">Титанові руди</text>
+          <rect x="180" y="149" width="240" height="22" rx="5" fill="#f1f5f9" />
+          <rect x="180" y="149" width="52" height="22" rx="5" fill="#4338ca" />
+          <text x="240" y="165" fill="#3730a3" font-weight="800" font-size="13">7,7% (11-те у світі / 2-ге в ЄС)</text>
+
+          <!-- Правий блок: Напрямки експорту сталі -->
+          <rect x="526" y="16" width="376" height="188" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+          <text x="714" y="42" text-anchor="middle" fill="#0f172a" font-weight="700" font-size="14">Географія експорту
+            сталі та прокату</text>
+
+          <!-- Горизонтальний стек-бар -->
+          <rect x="550" y="66" width="328" height="34" rx="6" fill="#e2e8f0" />
+          <rect x="550" y="66" width="280" height="34" rx="6" fill="#1d4ed8" />
+          <text x="690" y="88" text-anchor="middle" fill="#ffffff" font-weight="800" font-size="14">85,5% — Європа та
+            Близький Схід</text>
+          <text x="854" y="88" text-anchor="middle" fill="#334155" font-weight="700" font-size="12">14,5%</text>
+
+          <rect x="550" y="114" width="328" height="72" rx="8" fill="#f8fafc" stroke="#e2e8f0" />
+          <text x="564" y="135" fill="#0f172a" font-weight="700" font-size="12.5">Концентрація залізорудної бази:</text>
+          <text x="564" y="154" fill="#334155" font-size="12">• Криворізький басейн — 68,5% усіх запасів України</text>
+          <text x="564" y="172" fill="#334155" font-size="12">• Білозерський район — вміст заліза в руді до 70%</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- РОЗДІЛ 4 -->
+    <section id="sec-4" class="lecture-section">
+      <div class="section-header">
+        <span class="section-num">4</span>
+        <h2>Енергетика України: структурні зміни та розміщення електростанцій</h2>
+      </div>
+
+      <div class="card">
+        <h3>1. Динаміка виробництва та структура енергобалансу</h3>
+        <p>У 2018 році в Україні було вироблено <strong>163,7 млрд кВт·год</strong> електроенергії, що становить
+          <strong>0,7% світового виробництва</strong> (<strong>27-ме місце у світі</strong> та <strong>8-ме в
+            Європі</strong>). Основними споживачами електроенергії є: <strong>промисловість (близько 2/3)</strong>,
+          <strong>побут (понад 1/4)</strong>, <strong>транспорт (майже 1/10)</strong>, а також сільське господарство і
+          будівництво.</p>
+
+        <div class="grid-2" style="margin-top: 12px; margin-bottom: 0;">
+          <div class="callout callout-definition" style="margin: 0;">
+            <div class="callout-title">Зрушення в енергобалансі за останні 25 років</div>
+            <ul class="styled-list" style="font-size: 14px;">
+              <li><strong>Атомна енергетика (АЕС — 53%):</strong> стала базовою основою енергосистеми (існують
+                стратегічні плани збільшити її частку до <strong>60%</strong>). Причини: подорожчання імпортного
+                природного газу та втрата контролю над вугільними шахтами Донбасу з 2014 року.</li>
+              <li><strong>Теплова енергетика (ТЕС/ТЕЦ — 37,8%):</strong> частка суттєво зменшилася порівняно з 1990-ми
+                роками, коли вона домінувала.</li>
+              <li><strong>Гідроенергетика (ГЕС/ГАЕС — 7,5%):</strong> стабільна допоміжна роль — покриття пікових
+                навантажень в енергосистемі.</li>
+              <li><strong>Відновлювані джерела (ВДЕ: СЕС та ВЕС — 1,7%):</strong> найшвидші темпи росту нових
+                потужностей.</li>
+            </ul>
+          </div>
+
+          <div class="callout callout-example" style="margin: 0;">
+            <div class="callout-title">Стрімкий розвиток «зеленої» енергетики (ВЕС та СЕС)</div>
+            <ul class="styled-list" style="font-size: 14px;">
+              <li><strong>Вітроенергетика (ВЕС):</strong> встановлена потужність на материковій частині зросла з 90 МВт
+                (2009 р.) до <strong>437,8 МВт</strong> (2016 р., плюс 87,8 МВт у Криму). Найбільша <em>Ботієвська
+                  ВЕС</em> у Приазов'ї забезпечила 66% вітрогенерації у 2016 р.; великий потенціал мають Карпати.</li>
+              <li><strong>Сонячна енергетика (СЕС):</strong> потужність на материку досягла <strong>530,1 МВт</strong> у
+                2016 р. (+407,9 МВт у Криму).</li>
+              <li><strong>Домашні СЕС:</strong> з кінця 2014 р. до III кв. 2017 р. кількість сонячних установок
+                приватних домогосподарств зросла у <strong>371 раз</strong>!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ДІАГРАМА 5: ЕНЕРГЕТИКА -->
+      <div class="figure-box">
+        <div class="figure-header">
+          <span class="figure-title">Рис. 5. Енергетичний баланс України: генерація та структура споживання
+            електроенергії</span>
+          <span class="figure-caption">За матеріалами презентації та статистичного огляду (2018 р.)</span>
+        </div>
+        <svg class="svg-responsive" viewBox="0 0 920 245" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Енергетичний баланс України">
+          <rect x="0" y="0" width="920" height="245" rx="10" fill="#f8fafc" />
+
+          <!-- Лівий блок: Генерація електроенергії (Кільцева діаграма, r=58, C=364.42) -->
+          <!-- АЕС 53% = 193.14; ТЕС 37.8% = 137.75; ГЕС 7.5% = 27.33; ВДЕ 1.7% = 6.20 -->
+          <rect x="18" y="16" width="445" height="212" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+          <text x="240" y="42" text-anchor="middle" fill="#0f172a" font-weight="700" font-size="14">Структура
+            виробництва електроенергії (%)</text>
+
+          <circle cx="135" cy="132" r="58" fill="none" stroke="#10b981" stroke-width="24" />
+          <circle cx="135" cy="132" r="58" fill="none" stroke="#0284c7" stroke-width="24"
+            stroke-dasharray="358.2 364.42" transform="rotate(-90 135 132)" />
+          <circle cx="135" cy="132" r="58" fill="none" stroke="#f97316" stroke-width="24"
+            stroke-dasharray="330.9 364.42" transform="rotate(-90 135 132)" />
+          <circle cx="135" cy="132" r="58" fill="none" stroke="#1d4ed8" stroke-width="24"
+            stroke-dasharray="193.1 364.42" transform="rotate(-90 135 132)" />
+
+          <text x="135" y="128" text-anchor="middle" fill="#0f172a" font-weight="800" font-size="14">163,7</text>
+          <text x="135" y="143" text-anchor="middle" fill="#64748b" font-size="10" font-weight="600">млрд кВт·год</text>
+
+          <!-- Легенда генерації -->
+          <rect x="225" y="72" width="13" height="13" rx="3" fill="#1d4ed8" />
+          <text x="245" y="83" fill="#0f172a" font-size="12.5" font-weight="700">АЕС (атомні) — 53,0%</text>
+
+          <rect x="225" y="102" width="13" height="13" rx="3" fill="#f97316" />
+          <text x="245" y="113" fill="#0f172a" font-size="12.5" font-weight="700">ТЕС та ТЕЦ — 37,8%</text>
+
+          <rect x="225" y="132" width="13" height="13" rx="3" fill="#0284c7" />
+          <text x="245" y="143" fill="#0f172a" font-size="12.5" font-weight="700">ГЕС та ГАЕС — 7,5%</text>
+
+          <rect x="225" y="162" width="13" height="13" rx="3" fill="#10b981" />
+          <text x="245" y="173" fill="#0f172a" font-size="12.5" font-weight="700">ВДЕ (СЕС, ВЕС) — 1,7%</text>
+
+          <text x="240" y="208" text-anchor="middle" fill="#1d4ed8" font-size="11.5" font-weight="700">Стратегічна ціль:
+            збільшення частки АЕС до 60%</text>
+
+          <!-- Правий блок: Споживачі електроенергії -->
+          <rect x="480" y="16" width="422" height="212" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+          <text x="691" y="42" text-anchor="middle" fill="#0f172a" font-weight="700" font-size="14">Основні споживачі
+            електроенергії в Україні</text>
+
+          <!-- Промисловість -->
+          <text x="500" y="78" fill="#334155" font-weight="700" font-size="12.5">Промисловість</text>
+          <rect x="625" y="62" width="215" height="22" rx="5" fill="#e2e8f0" />
+          <rect x="625" y="62" width="143" height="22" rx="5" fill="#1e40af" />
+          <text x="776" y="78" fill="#1e40af" font-weight="800" font-size="13">близько 2/3 (~66%)</text>
+
+          <!-- Побут -->
+          <text x="500" y="120" fill="#334155" font-weight="700" font-size="12.5">Побут (населення)</text>
+          <rect x="625" y="104" width="215" height="22" rx="5" fill="#e2e8f0" />
+          <rect x="625" y="104" width="58" height="22" rx="5" fill="#d97706" />
+          <text x="691" y="120" fill="#b45309" font-weight="800" font-size="13">понад 1/4 (~26%)</text>
+
+          <!-- Транспорт -->
+          <text x="500" y="162" fill="#334155" font-weight="700" font-size="12.5">Транспорт та інші</text>
+          <rect x="625" y="146" width="215" height="22" rx="5" fill="#e2e8f0" />
+          <rect x="625" y="146" width="22" height="22" rx="5" fill="#059669" />
+          <text x="655" y="162" fill="#047857" font-weight="800" font-size="13">майже 1/10 (~8%)</text>
+
+          <rect x="500" y="182" width="382" height="32" rx="6" fill="#eff6ff" />
+          <text x="691" y="202" text-anchor="middle" fill="#1e3a8a" font-size="11.5" font-weight="600">Висока
+            енергоємність промисловості вимагає модернізації</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <h3>2. Чинники та географія розміщення електростанцій в Україні</h3>
+        <div class="table-wrap" style="margin-bottom: 0;">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 18%;">Тип станцій</th>
+                <th style="width: 28%;">Головні чинники розміщення</th>
+                <th style="width: 54%;">Найпотужніші об'єкти та регіони концентрації</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Атомні (АЕС)</strong></td>
+                <td><strong>Водний</strong> (величезні об'єми води для охолодження реакторів),
+                  <strong>споживчий</strong> (енергодефіцитні та промислові регіони) та <strong>безпековий</strong>.
+                </td>
+                <td>Діючі (Південь, Південний Захід та Захід): <strong>Запорізька</strong> (найбільша в Європі),
+                  <strong>Південноукраїнська</strong>, <strong>Рівненська</strong>, <strong>Хмельницька</strong>.
+                  <em>Чорнобильська АЕС</em> зупинена 15.12.2000 р.</td>
+              </tr>
+              <tr>
+                <td><strong>Теплові (ТЕС та ТЕЦ)</strong></td>
+                <td><strong>Споживчий</strong> (біля великих міст і промвузлів), <strong>паливний</strong> та
+                  <strong>екологічний</strong> (обов'язкове врахування <em>рози вітрів</em> для захисту житлових
+                  кварталів).</td>
+                <td>Два головні вузли: <strong>Донбас</strong> (Вуглегірська, Слов'янська, Курахівська) та
+                  <strong>Придніпров'я</strong> (Запорізька, Криворізька, Придніпровська); біля мегаполісів —
+                  <strong>Трипільська</strong> (біля Києва), <strong>Зміївська</strong> (біля Харкова), на Заході —
+                  <strong>Бурштинська</strong>.</td>
+              </tr>
+              <tr>
+                <td><strong>Гідравлічні (ГЕС та ГАЕС)</strong></td>
+                <td><strong>Природний чинник</strong> — жорстка прив'язка до гідроенергетичного потенціалу великих
+                  рівнинних річок із перепадами висот.</td>
+                <td><strong>Дніпровський каскад</strong> (Київська, Канівська, Кременчуцька, Середньодніпровська,
+                  Дніпровська, Каховська ГЕС), <strong>Дністровський каскад</strong> (Дністровська ГЕС та потужна
+                  <em>Дністровська ГАЕС</em>), <em>Ташлицька ГАЕС</em> на Південному Бузі.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- РОЗДІЛ 5 -->
+    <section id="sec-5" class="lecture-section">
+      <div class="section-header">
+        <span class="section-num">5</span>
+        <h2>Сучасні системні риси національної економіки України</h2>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 0;">
+        <div class="card">
+          <h3><span class="tag">01</span> Суверенізація та світова інтеграція</h3>
+          <p>Завершення оформлення державних кордонів, митної та фінансової систем; переорієнтація зовнішньої торгівлі
+            на ринки Європейського Союзу (Угода про асоціацію та зону вільної торгівлі). Україна дедалі активніше
+            інтегрується у виробничі мережі ЄС як промисловий та аграрний <strong>«субпостачальник»</strong>.</p>
+          <p style="font-size: 13.5px; color: var(--text-muted);"><strong>Приклад:</strong> робота заводів із
+            виробництва автокомпонентів і кабельних мереж у Закарпатській, Львівській та Волинській областях для
+            автоконцернів Volkswagen, BMW, Porsche.</p>
+        </div>
+
+        <div class="card">
+          <h3><span class="tag gold">02</span> Структурна перебудова економіки</h3>
+          <p>Поступовий, хоча й нерівномірний перехід від застарілої ресурсоємної індустріальної моделі до
+            <strong>інноваційної, постіндустріальної економіки</strong>, що потребує прискореного розвитку 4-го та 5-го
+            секторів, енергоефективності та цифровізації.</p>
+          <p style="font-size: 13.5px; color: var(--text-muted);"><strong>Приклад:</strong> швидке зростання експорту
+            комп'ютерних та інженерних послуг українськими ІТ-компаніями на ринки США та ЄС.</p>
+        </div>
+
+        <div class="card">
+          <h3><span class="tag green">03</span> Розвиток підприємництва</h3>
+          <p>Формування повноцінної <strong>багатоукладної ринкової економіки</strong> з домінуванням приватного
+            капіталу, залученням прямих іноземних інвестицій та активізацією малого і середнього бізнесу у сфері послуг,
+            переробки та агросектору.</p>
+          <p style="font-size: 13.5px; color: var(--text-muted);"><strong>Приклад:</strong> розвиток фермерських
+            господарств, крафтових харчових виробництв та мереж приватних медичних і логістичних сервісів.</p>
+        </div>
+
+        <div class="card">
+          <h3><span class="tag" style="background:#e0e7ff; color:#3730a3; border-color:#c7d2fe;">04</span>
+            Конкурентоспроможне виробництво та регіони</h3>
+          <p>Закріплення глобальної спеціалізації на експорті продукції <strong>АПК (35%)</strong> та <strong>металургії
+              (25%)</strong>; посилення орієнтації економіки на соціальну сферу, збалансований сталий розвиток і
+            формування <strong>самостійних регіональних економік</strong> у межах реформи децентралізації.</p>
+          <p style="font-size: 13.5px; color: var(--text-muted);"><strong>Приклад:</strong> спеціалізація Придніпров'я
+            на важкій індустрії, Центральної України — на агропереробці, Західної — на туризмі, деревообробці та
+            складальному виробництві.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- РОЗДІЛ 6 -->
+    <section id="sec-6" class="lecture-section">
+      <div class="section-header">
+        <span class="section-num">6</span>
+        <h2>Високотехнологічні галузі та місце в глобальних ланцюгах вартості</h2>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Авіаційно-космічний комплекс</h3>
+          <p style="font-size: 14px;">Україна входить до вузького кола держав світу із <strong>замкнутим циклом
+              створення авіаційної та ракетно-космічної техніки</strong>:</p>
+          <ul class="styled-list" style="font-size: 13.5px;">
+            <li><strong>ДП «Антонов» (Київ):</strong> розробник найбільших у світі транспортних літаків <em>АН-225
+                «Мрія»</em> та <em>АН-124 «Руслан»</em>.</li>
+            <li><strong>АТ «Мотор Січ» (Запоріжжя):</strong> один зі світових лідерів із виробництва авіаційних двигунів
+              та газотурбінних установок.</li>
+            <li><strong>КБ «Південне» та «Південмаш» (Дніпро):</strong> створення ракет-носіїв <em>«Зеніт»</em>,
+              <em>«Циклон»</em>, участь у міжнародному проєкті <em>«Морський старт»</em>.</li>
+            <li><strong>Сучасне ракетобудування:</strong> розробка новітніх оборонних комплексів <em>«Нептун»</em> та
+              <em>«Вільха»</em>.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Автомобілебудування та електротранспорт</h3>
+          <p style="font-size: 14px;">Сучасне українське автомобілебудування трансформувалося за трьома ключовими
+            векторами:</p>
+          <ul class="styled-list" style="font-size: 13.5px;">
+            <li><strong>Великовузлове складання (SKD):</strong> гіганти на кшталт <em>ЗАЗ</em> (Запоріжжя) та
+              <em>КрАЗ</em> (Кременчук) перейшли від власних моделей до складання техніки брендів Німеччини, Південної
+              Кореї та США.</li>
+            <li><strong>Консолідація та диверсифікація:</strong> корпорація <em>«Богдан»</em> (заводи в Черкасах і
+              Луцьку) випускає широкий спектр техніки — від автобусів і тролейбусів до вантажівок.</li>
+            <li><strong>Екологічний міський транспорт:</strong> львівська корпорація <em>«Електрон»</em> виготовляє
+              сучасні електробуси та низькопідлогові трамваї; відроджується виробництво рейкового транспорту в Києві та
+              Дніпрі.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Електронна промисловість</h3>
+          <p style="font-size: 14px;">Галузь пройшла шлях від наукового новатора до переважно споживчого ринку:</p>
+          <ul class="styled-list" style="font-size: 13.5px;">
+            <li><strong>Історичний фундамент:</strong> у радянський період Україна була потужним центром кібернетики —
+              саме в Києві під керівництвом С. Лебедєва створили перший у континентальній Європі комп'ютер (МЕСМ).</li>
+            <li><strong>Сучасний стан:</strong> зсув у бік імпорту та дистрибуції іноземної техніки з Китаю, нових
+              індустріальних країн Азії та ЄС.</li>
+            <li><strong>Структура попиту:</strong> смартфони, смарт-годинники, телевізори, холодильники та дрібна
+              побутова техніка.</li>
+            <li><strong>Роль у світі:</strong> великий споживчий ринок та дистрибуційна ланка (окрім нішевого
+              виробництва автоелектроніки).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ДІАГРАМА 6: КАРТА-СХЕМА ІНДУСТРІАЛЬНИХ КЛАСТЕРІВ -->
+      <div class="figure-box">
+        <div class="figure-header">
+          <span class="figure-title">Рис. 6. Схематична карта ключових промислових, енергетичних та інноваційних вузлів
+            України</span>
+          <span class="figure-caption">Просторова організація господарського комплексу</span>
+        </div>
+        <svg class="svg-responsive" viewBox="0 0 920 310" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Карта-схема промислових вузлів України">
+          <rect x="0" y="0" width="920" height="310" rx="10" fill="#f8fafc" />
+
+          <!-- Стилізований контур території України -->
+          <path
+            d="M120,75 L230,52 L355,45 L465,32 L575,55 L695,88 L765,135 L735,195 L635,235 L545,250 L495,282 L430,275 L400,235 L315,245 L270,210 L175,205 L95,165 L80,115 Z"
+            fill="#eff6ff" stroke="#93c5fd" stroke-width="2.5" />
+          <!-- Дніпро (річка) -->
+          <path d="M395,46 Q415,105 460,138 T535,195 T470,252" fill="none" stroke="#3b82f6" stroke-width="3"
+            stroke-dasharray="5,3" />
+          <text x="485" y="135" fill="#2563eb" font-size="10.5" font-weight="700">р. Дніпро</text>
+
+          <!-- Вузол 1: Захід (Львів, Луцьк, Рівне, Хмельницький) -->
+          <circle cx="155" cy="122" r="10" fill="#059669" />
+          <rect x="24" y="65" width="185" height="44" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.5" />
+          <text x="34" y="83" fill="#065f46" font-weight="700" font-size="11.5">Львів — Луцьк (Захід)</text>
+          <text x="34" y="99" fill="#334155" font-size="10.5">Електробуси «Електрон», «Богдан»</text>
+
+          <!-- АЕС Заходу -->
+          <polygon points="235,88 244,104 226,104" fill="#1d4ed8" />
+          <text x="248" y="100" fill="#1e40af" font-size="10" font-weight="700">Рівненська та Хмельницька АЕС</text>
+
+          <!-- Вузол 2: Київ -->
+          <circle cx="395" cy="95" r="11" fill="#4338ca" />
+          <rect x="285" y="18" width="215" height="44" rx="6" fill="#ffffff" stroke="#4338ca" stroke-width="1.5" />
+          <text x="295" y="36" fill="#3730a3" font-weight="700" font-size="11.5">Київський столичний вузол</text>
+          <text x="295" y="52" fill="#334155" font-size="10.5">ДП «Антонов», ІТ-кластер, Трипільська ТЕС</text>
+
+          <!-- Вузол 3: Придніпров'я (Кривий Ріг, Дніпро, Запоріжжя, Нікополь) -->
+          <circle cx="525" cy="175" r="14" fill="#dc2626" />
+          <rect x="552" y="128" width="250" height="62" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.5" />
+          <text x="562" y="146" fill="#991b1b" font-weight="700" font-size="11.5">Придніпровський мегакластер</text>
+          <text x="562" y="162" fill="#334155" font-size="10.5">• Руди й метал: Кривий Ріг, Дніпро, Нікополь</text>
+          <text x="562" y="178" fill="#334155" font-size="10.5">• Космос/двигуни: «Південмаш», «Мотор Січ»</text>
+
+          <!-- АЕС Півдня -->
+          <polygon points="435,205 444,221 426,221" fill="#1d4ed8" />
+          <text x="315" y="220" fill="#1e40af" font-size="10" font-weight="700">Південноукраїнська АЕС</text>
+
+          <polygon points="545,212 554,228 536,228" fill="#1d4ed8" />
+          <text x="560" y="225" fill="#1e40af" font-size="10" font-weight="700">Запорізька АЕС</text>
+
+          <!-- Вузол 4: Приазов'я / Донбас -->
+          <circle cx="675" cy="195" r="10" fill="#d97706" />
+          <rect x="615" y="242" width="275" height="46" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="1.5" />
+          <text x="625" y="260" fill="#92400e" font-weight="700" font-size="11.5">Приазов'я та Донбас</text>
+          <text x="625" y="276" fill="#334155" font-size="10.5">Маріуполь (металургія), Ботієвська ВЕС, ТЕС</text>
+
+          <!-- Легенда -->
+          <rect x="24" y="242" width="380" height="46" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+          <circle cx="42" cy="257" r="6" fill="#dc2626" />
+          <text x="54" y="261" fill="#334155" font-size="10.5">Гірничо-металургійний та космічний центр</text>
+          <circle cx="42" cy="276" r="6" fill="#059669" />
+          <text x="54" y="280" fill="#334155" font-size="10.5">Машинобудування і транспорт</text>
+          <polygon points="255,252 261,262 249,262" fill="#1d4ed8" />
+          <text x="268" y="261" fill="#334155" font-size="10.5">Діючі АЕС</text>
+        </svg>
+      </div>
+
+      <!-- ДІАГРАМА 7: КРИВА ПОСМІШКИ (ГЛОБАЛЬНИЙ ЛАНЦЮГ ВАРТОСТІ) -->
+      <div class="figure-box">
+        <div class="figure-header">
+          <span class="figure-title">Рис. 7. Місце електронної промисловості України у глобальному ланцюгу доданої
+            вартості</span>
+          <span class="figure-caption">Аналітична модель «Крива посмішки» (Smile Curve)</span>
+        </div>
+        <svg class="svg-responsive" viewBox="0 0 920 215" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Глобальний ланцюг доданої вартості">
+          <rect x="0" y="0" width="920" height="215" rx="10" fill="#f8fafc" />
+
+          <!-- Осі -->
+          <line x1="65" y1="25" x2="65" y2="175" stroke="#94a3b8" stroke-width="1.5" />
+          <line x1="65" y1="175" x2="880" y2="175" stroke="#94a3b8" stroke-width="1.5" />
+          <text x="25" y="105" transform="rotate(-90 25 105)" text-anchor="middle" fill="#475569" font-size="11.5"
+            font-weight="700">Додана вартість ($)</text>
+
+          <!-- Крива посмішки -->
+          <path d="M95,42 Q260,155 470,155 T845,48" fill="none" stroke="#1d4ed8" stroke-width="4" />
+
+          <!-- Етап 1: R&D -->
+          <circle cx="115" cy="54" r="7" fill="#64748b" />
+          <rect x="82" y="68" width="165" height="44" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+          <text x="164" y="86" text-anchor="middle" fill="#0f172a" font-weight="700" font-size="11.5">1. R&amp;D,
+            дизайн, патенти</text>
+          <text x="164" y="102" text-anchor="middle" fill="#64748b" font-size="10.5">США, ЄС, Японія, Пд. Корея</text>
+
+          <!-- Етап 2: Виробництво та складання -->
+          <circle cx="470" cy="155" r="7" fill="#64748b" />
+          <rect x="370" y="96" width="200" height="44" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+          <text x="470" y="114" text-anchor="middle" fill="#0f172a" font-weight="700" font-size="11.5">2. Виробництво та
+            складання</text>
+          <text x="470" y="130" text-anchor="middle" fill="#64748b" font-size="10.5">Китай, НІК Азії (низька
+            маржа)</text>
+
+          <!-- Етап 3: Дистрибуція та споживання (Україна) -->
+          <circle cx="810" cy="64" r="9" fill="#d97706" />
+          <rect x="655" y="82" width="235" height="58" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" />
+          <text x="772" y="100" text-anchor="middle" fill="#92400e" font-weight="800" font-size="11.5">3. Дистрибуція та
+            ринок збуту</text>
+          <text x="772" y="116" text-anchor="middle" fill="#334155" font-size="10.5">Поточна роль України: імпорт
+            і</text>
+          <text x="772" y="131" text-anchor="middle" fill="#334155" font-size="10.5">споживання електроніки (смартфони,
+            ТВ)</text>
+
+          <text x="470" y="198" text-anchor="middle" fill="#475569" font-size="11.5" font-weight="600">Етапи створення
+            продукту у світовій електронній індустрії</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- РОЗДІЛ 7: ДОМАШНЄ ЗАВДАННЯ ТА ПРАКТИКУМ -->
+    <section id="sec-7" class="lecture-section">
+      <div class="section-header">
+        <span class="section-num">7</span>
+        <h2>Практикум та домашнє завдання (опрацювати § 29–31)</h2>
+      </div>
+
+      <div class="card" style="background: #f8fafc;">
+        <h3>Контрольні запитання та ключі для самоперевірки</h3>
+        <ol class="styled-list">
+          <li>
+            <strong>Поясніть причини низького показника ВВП на душу населення в Україні порівняно з іншими європейськими
+              державами.</strong><br>
+            <span style="font-size: 14px; color: var(--text-muted);"><em>Опора для відповіді:</em> сировинна орієнтація
+              експорту (низька додана вартість), вплив світової економічної кризи, втрата частини промислового
+              потенціалу та інвестицій через воєнно-геополітичні події з 2014 р., низька частка інноваційно активних
+              підприємств (~20% проти ~44% у ЄС).</span>
+          </li>
+          <li>
+            <strong>Проаналізуйте стан розвитку сільського господарства України та його основні економічні показники (за
+              матеріалами заняття та даними Мінагрополітики).</strong><br>
+            <span style="font-size: 14px; color: var(--text-muted);"><em>Опора для відповіді:</em> частка у ВВП — 14,4%;
+              1-ше місце в Європі за вартістю продукції; структура: рослинництво (69,3%) і тваринництво (30,7%); експорт
+              у 190 країн світу (35% валютної виручки); світове лідерство за експортом соняшникової олії (1-ше місце),
+              шроту (2-ге), кукурудзи, ячменю та ріпаку (4-те), пшениці та сої (7-ме).</span>
+          </li>
+          <li>
+            <strong>Які об'єкти енергетичної системи є основними постачальниками електроенергії і тепла в
+              Україні?</strong><br>
+            <span style="font-size: 14px; color: var(--text-muted);"><em>Опора для відповіді:</em> базову електроенергію
+              (53%) постачають 4 діючі АЕС (Запорізька, Південноукраїнська, Рівненська, Хмельницька); тепло і маневрову
+              генерацію (37,8%) — великі ТЕС Донбасу й Придніпров'я (Вуглегірська, Криворізька, Запорізька, Трипільська,
+              Зміївська, Бурштинська) та міські ТЕЦ; пікові навантаження покривають ГЕС і ГАЕС Дніпровського та
+              Дністровського каскадів (7,5%), доповнюються СЕС та ВЕС (1,7%).</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+
+</html>

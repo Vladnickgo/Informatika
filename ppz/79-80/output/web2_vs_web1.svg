@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="885.6pt" height="302.4pt" viewBox="0 0 885.6 302.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-26T11:47:44.097656</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 302.4 
+L 885.6 302.4 
+L 885.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 37.584 247.725 
+L 416.016 247.725 
+Q 425.52 247.725 425.52 238.0725 
+L 425.52 81.8775 
+Q 425.52 72.225 416.016 72.225 
+L 37.584 72.225 
+Q 28.08 72.225 28.08 81.8775 
+L 28.08 238.0725 
+Q 28.08 247.725 37.584 247.725 
+z
+" clip-path="url(#p3d2a7e83d0)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 469.584 247.725 
+L 848.016 247.725 
+Q 857.52 247.725 857.52 238.0725 
+L 857.52 81.8775 
+Q 857.52 72.225 848.016 72.225 
+L 469.584 72.225 
+Q 460.08 72.225 460.08 81.8775 
+L 460.08 238.0725 
+Q 460.08 247.725 469.584 247.725 
+z
+" clip-path="url(#p3d2a7e83d0)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="442.8" y="38.817891" transform="rotate(-0 442.8 38.817891)">Від Веб 1.0 до Веб 2.0: зміна ролі користувача</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(198.056602 129.072291)">Веб 1.0</text>
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(186.58793 145.728021)">«читання»</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(168.6 168.706156)">статичні сторінки,</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(139.175625 183.51125)">контент створює редактор,</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(152.054063 198.316344)">користувач лише читає</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #0071e3" transform="translate(630.056602 129.072291)">Веб 2.0</text>
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #0071e3" transform="translate(581.341641 145.728021)">«читання й письмо»</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(600.810937 168.568203)">динамічні сервіси,</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(554.53875 183.373297)">контент створюють користувачі,</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(602.07375 198.454297)">співпраця й обмін</text>
+   </g>
+   <g id="patch_4">
+    <path d="M 428.246578 159.975 
+Q 442.797655 159.975 455.112663 159.975 
+" style="fill: none; stroke: #0071e3; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 448.712663 156.775 
+L 455.112663 159.975 
+L 448.712663 163.175 
+z
+" style="fill: #0071e3; stroke: #0071e3; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p3d2a7e83d0">
+   <rect x="10.8" y="10.8" width="864" height="280.8"/>
+  </clipPath>
+ </defs>
+</svg>

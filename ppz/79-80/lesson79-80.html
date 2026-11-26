@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лекція 7. Огляд технологій Веб 2.0 | Прикладне програмне забезпечення</title>
+  <!-- Підключення шрифту Inter для чіткої академічної типографіки -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brandBlue: '#2563eb',
+            brandTeal: '#0d9488',
+            brandEmerald: '#059669',
+            brandPurple: '#7c3aed',
+            brandAmber: '#d97706',
+            brandCoral: '#dc2626',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Базові налаштування світлого стилю та читабельності */
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Стилі карток та візуальної глибини */
+    .edu-card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .edu-card:hover {
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.08);
+    }
+
+    .diagram-box {
+      background-color: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    /* ==========================================================================
+       ПРАВИЛА АДАПТАЦІЇ ПІД ДРУК (A4 PORTRAIT) БЕЗ РОЗРИВУ БЛОКІВ
+       ========================================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 14mm 15mm;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html, body {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 10.5pt !important;
+        line-height: 1.45 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Приховуємо навігаційну панель та інтерактивні кнопки під час друку */
+      .no-print {
+        display: none !important;
+      }
+
+      /* Прибираємо зовнішні відступи контейнера для максимального використання площі А4 */
+      main {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      /* Заборона розриву заголовків із наступним блоком */
+      h1, h2, h3, h4, .section-header {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+      }
+
+      /* СУВОРА ЗАБОРОНА РОЗРИВУ ВСІХ БЛОКІВ, КАРТОК, СХЕМ ТА ТАБЛИЦЬ */
+      .print-block,
+      .edu-card,
+      .diagram-box,
+      .term-card,
+      .feature-card,
+      .rule-card,
+      .question-card,
+      .case-box,
+      .callout-box,
+      .design-card,
+      table,
+      thead,
+      tr,
+      svg {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      /* Оптимізація тіней та відступів для чистого друку */
+      .edu-card, .diagram-box {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+        margin-bottom: 10pt !important;
+      }
+
+      .section-wrapper {
+        margin-top: 14pt !important;
+        margin-bottom: 14pt !important;
+      }
+
+      /* Компактна сітка для друку */
+      .print-grid-2 {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8pt !important;
+      }
+
+      .print-grid-3 {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 8pt !important;
+      }
+
+      /* Підказки до питань не розкриваються автоматично на папері, якщо не натиснуті */
+      .answer-hint.hidden {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <!-- ========================================================================
+       ВЕРХНЯ ПАНЕЛЬ НАВІГАЦІЇ ТА КЕРУВАННЯ ДРУКОМ (ХОВАЄТЬСЯ ПРИ ДРУЦІ)
+       ======================================================================== -->
+  <nav class="no-print sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-blue-600 text-white font-bold text-sm shadow-sm">
+          Л7
+        </span>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-blue-600">Прикладне програмне забезпечення</p>
+          <p class="text-sm font-bold text-slate-800 leading-tight">Технології Веб 2.0 та веб-журнали</p>
+        </div>
+      </div>
+
+      <!-- Швидкі переходи до розділів -->
+      <div class="hidden lg:flex items-center gap-1.5 text-xs font-medium text-slate-600">
+        <a href="#terms" class="px-2.5 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition">Поняття</a>
+        <a href="#sec-1" class="px-2.5 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition">1. Веб 2.0</a>
+        <a href="#sec-2" class="px-2.5 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition">2. Сервіси</a>
+        <a href="#sec-3" class="px-2.5 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition">3. Блоги</a>
+        <a href="#sec-4" class="px-2.5 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition">4. Створення</a>
+        <a href="#sec-5" class="px-2.5 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition">5. Параметри</a>
+        <a href="#sec-6" class="px-2.5 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition">6. Етика</a>
+        <a href="#control" class="px-2.5 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition">Питання</a>
+      </div>
+
+      <!-- Кнопка друку / збереження в PDF -->
+      <button onclick="window.print()" type="button"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-semibold shadow-sm transition cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+        </svg>
+        <span>Друкувати / Зберегти в PDF</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       ОСНОВНИЙ КОНТЕНТ КОНСПЕКТУ ЛЕКЦІЇ
+       ======================================================================== -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+
+    <!-- ======================================================================
+         ШАПКА ДОКУМЕНТА (МЕТАДАНІ, ТЕМА, МЕТА ТА ПЛАН ЛЕКЦІЇ)
+         ====================================================================== -->
+    <header class="edu-card print-block p-6 sm:p-8 border-t-4 border-t-blue-600">
+      <!-- Академічні бейджі -->
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+          📘 Дисципліна: Прикладне програмне забезпечення
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200">
+          🎓 Спеціальність: Вчитель початкової школи, вчитель інформатики початкової школи
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+          📑 Навчально-методичний конспект
+        </span>
+      </div>
+
+      <!-- Головний заголовок лекції -->
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-4">
+        ЛЕКЦІЯ 7. Огляд технологій Веб 2.0
+      </h1>
+
+      <!-- Блоки Теми та Мети -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-700 mb-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span>Тема заняття</span>
+          </div>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Огляд технологій Веб 2.0. Поняття веб-журналу й різновиди веб-журналів. Створення й оформлення веб-журналу, публікація повідомлень у веб-журналі та настроювання його параметрів.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Мета лекції (навчальна, розвивальна, виховна)</span>
+          </div>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Ознайомити з технологіями Веб 2.0 (соціальні мережі, блоги, вікі), поняттям веб-журналу (блогу), його видами, основами створення та ведення. Розвивати навички роботи з соціальними медіа, уміння створювати контент і налаштовувати параметри публікації. Виховувати культуру ведення блогу, відповідальність за оприлюднену інформацію та повагу до читачів.
+          </p>
+        </div>
+      </div>
+
+      <!-- План лекції (6 пунктів) -->
+      <div class="pt-4 border-t border-slate-200">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">План лекції (навігація за питаннями)</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 print-grid-3">
+          <a href="#sec-1" class="flex items-center gap-2.5 p-2.5 rounded-xl bg-blue-50/70 hover:bg-blue-100/80 border border-blue-200/80 transition">
+            <span class="w-6 h-6 rounded-lg bg-blue-600 text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
+            <span class="text-xs font-semibold text-slate-800">Поняття Веб 2.0 та його ключові ознаки</span>
+          </a>
+          <a href="#sec-2" class="flex items-center gap-2.5 p-2.5 rounded-xl bg-teal-50/70 hover:bg-teal-100/80 border border-teal-200/80 transition">
+            <span class="w-6 h-6 rounded-lg bg-teal-600 text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
+            <span class="text-xs font-semibold text-slate-800">Соціальні сервіси Веб 2.0: мережі, блоги, вікі, медіасховища</span>
+          </a>
+          <a href="#sec-3" class="flex items-center gap-2.5 p-2.5 rounded-xl bg-purple-50/70 hover:bg-purple-100/80 border border-purple-200/80 transition">
+            <span class="w-6 h-6 rounded-lg bg-purple-600 text-white text-xs font-bold flex items-center justify-center shrink-0">3</span>
+            <span class="text-xs font-semibold text-slate-800">Веб-журнал (блог): визначення та різновиди</span>
+          </a>
+          <a href="#sec-4" class="flex items-center gap-2.5 p-2.5 rounded-xl bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200/80 transition">
+            <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0">4</span>
+            <span class="text-xs font-semibold text-slate-800">Створення й оформлення веб-журналу</span>
+          </a>
+          <a href="#sec-5" class="flex items-center gap-2.5 p-2.5 rounded-xl bg-amber-50/70 hover:bg-amber-100/80 border border-amber-200/80 transition">
+            <span class="w-6 h-6 rounded-lg bg-amber-600 text-white text-xs font-bold flex items-center justify-center shrink-0">5</span>
+            <span class="text-xs font-semibold text-slate-800">Публікація повідомлень і налаштування параметрів</span>
+          </a>
+          <a href="#sec-6" class="flex items-center gap-2.5 p-2.5 rounded-xl bg-rose-50/70 hover:bg-rose-100/80 border border-rose-200/80 transition">
+            <span class="w-6 h-6 rounded-lg bg-rose-600 text-white text-xs font-bold flex items-center justify-center shrink-0">6</span>
+            <span class="text-xs font-semibold text-slate-800">Культура ведення блогу та відповідальність автора</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+         БЛОК «КЛЮЧОВІ ПОНЯТТЯ» (8 ТЕРМІНІВ З ПРИКЛАДАМИ ДЛЯ ПОЧАТКОВОЇ ШКОЛИ)
+         ====================================================================== -->
+    <section id="terms" class="section-wrapper space-y-4">
+      <div class="section-header flex items-center gap-3">
+        <span class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+        </span>
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Термінологічний словник: Ключові поняття теми</h2>
+          <p class="text-xs text-slate-500">Базові визначення та їх методична адаптація для уроків у 1–4 класах</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 print-grid-2">
+        <!-- Поняття 1 -->
+        <div class="edu-card term-card print-block p-4 border-l-4 border-l-blue-600">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="p-1.5 rounded-lg bg-blue-50 text-blue-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900 text-base">1. Веб 2.0</h3>
+          </div>
+          <p class="text-sm text-slate-700 mb-2.5">
+            <strong>Визначення:</strong> друге покоління веб-сервісів, де користувач є не лише читачем, а й автором контенту.
+          </p>
+          <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100 text-xs text-slate-700">
+            <span class="font-bold text-blue-700">🏫 Приклад у початковій школі:</span> учні 3 класу разом із вчителем наповнюють спільний онлайн-проєкт про природу рідного краю.
+          </div>
+        </div>
+
+        <!-- Поняття 2 -->
+        <div class="edu-card term-card print-block p-4 border-l-4 border-l-teal-600">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="p-1.5 rounded-lg bg-teal-50 text-teal-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900 text-base">2. Соціальні сервіси</h3>
+          </div>
+          <p class="text-sm text-slate-700 mb-2.5">
+            <strong>Визначення:</strong> мережі, блоги, вікі, закладки, медіасховища, що забезпечують обмін матеріалами та взаємодію.
+          </p>
+          <div class="p-2.5 rounded-lg bg-teal-50/70 border border-teal-100 text-xs text-slate-700">
+            <span class="font-bold text-teal-700">🏫 Приклад у початковій школі:</span> Google Фото для батьківського архіву шкільних свят, YouTube-канал класу для відеозвітів.
+          </div>
+        </div>
+
+        <!-- Поняття 3 -->
+        <div class="edu-card term-card print-block p-4 border-l-4 border-l-purple-600">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="p-1.5 rounded-lg bg-purple-50 text-purple-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900 text-base">3. Веб-журнал (блог)</h3>
+          </div>
+          <p class="text-sm text-slate-700 mb-2.5">
+            <strong>Визначення:</strong> сайт із регулярно оновлюваними дописами у зворотному хронологічному порядку (найновіше — вгорі).
+          </p>
+          <div class="p-2.5 rounded-lg bg-purple-50/70 border border-purple-100 text-xs text-slate-700">
+            <span class="font-bold text-purple-700">🏫 Приклад у початковій школі:</span> «Щоденник 2-Б класу», де найсвіжіше оголошення про екскурсію чи розклад завжди знаходиться вгорі.
+          </div>
+        </div>
+
+        <!-- Поняття 4 -->
+        <div class="edu-card term-card print-block p-4 border-l-4 border-l-emerald-600">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900 text-base">4. Допис (пост)</h3>
+          </div>
+          <p class="text-sm text-slate-700 mb-2.5">
+            <strong>Визначення:</strong> окрема публікація в блозі з текстом, зображеннями, відео та тегами.
+          </p>
+          <div class="p-2.5 rounded-lg bg-emerald-50/70 border border-emerald-100 text-xs text-slate-700">
+            <span class="font-bold text-emerald-700">🏫 Приклад у початковій школі:</span> пост «Досліджуємо осіннє листя на уроці ЯДС» із фотографіями дитячих гербаріїв та тематичними мітками.
+          </div>
+        </div>
+
+        <!-- Поняття 5 -->
+        <div class="edu-card term-card print-block p-4 border-l-4 border-l-amber-600">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="p-1.5 rounded-lg bg-amber-50 text-amber-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900 text-base">5. Шаблон (тема)</h3>
+          </div>
+          <p class="text-sm text-slate-700 mb-2.5">
+            <strong>Визначення:</strong> готовий набір налаштувань зовнішнього вигляду блогу (шрифти, кольори, розмітка блоків).
+          </p>
+          <div class="p-2.5 rounded-lg bg-amber-50/70 border border-amber-100 text-xs text-slate-700">
+            <span class="font-bold text-amber-700">🏫 Приклад у початковій школі:</span> світлий мінімалістичний шаблон із великим шрифтом для зручного читання батьками зі смартфонів.
+          </div>
+        </div>
+
+        <!-- Поняття 6 -->
+        <div class="edu-card term-card print-block p-4 border-l-4 border-l-indigo-600">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="p-1.5 rounded-lg bg-indigo-50 text-indigo-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900 text-base">6. Тег (мітка)</h3>
+          </div>
+          <p class="text-sm text-slate-700 mb-2.5">
+            <strong>Визначення:</strong> ключове слово або словосполучення для швидкого сортування та пошуку дописів.
+          </p>
+          <div class="p-2.5 rounded-lg bg-indigo-50/70 border border-indigo-100 text-xs text-slate-700">
+            <span class="font-bold text-indigo-700">🏫 Приклад у початковій школі:</span> натиснувши на тег <code class="bg-white px-1 rounded border">#інформатика_3клас</code>, учень бачить усі вправи лише з цього предмета.
+          </div>
+        </div>
+
+        <!-- Поняття 7 -->
+        <div class="edu-card term-card print-block p-4 border-l-4 border-l-cyan-600">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="p-1.5 rounded-lg bg-cyan-50 text-cyan-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900 text-base">7. RSS</h3>
+          </div>
+          <p class="text-sm text-slate-700 mb-2.5">
+            <strong>Визначення:</strong> формат автоматичного отримання сповіщень про нові дописи блогу без ручного оновлення сторінки.
+          </p>
+          <div class="p-2.5 rounded-lg bg-cyan-50/70 border border-cyan-100 text-xs text-slate-700">
+            <span class="font-bold text-cyan-700">🏫 Приклад у початковій школі:</span> батьки підписуються на оновлення блогу і миттєво дізнаються про нові публікації без щоденної перевірки сайту.
+          </div>
+        </div>
+
+        <!-- Поняття 8 -->
+        <div class="edu-card term-card print-block p-4 border-l-4 border-l-rose-600">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="p-1.5 rounded-lg bg-rose-50 text-rose-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900 text-base">8. Модерація коментарів</h3>
+          </div>
+          <p class="text-sm text-slate-700 mb-2.5">
+            <strong>Визначення:</strong> попередня перевірка повідомлень читачів адміністратором (учителем) перед їх публікацією.
+          </p>
+          <div class="p-2.5 rounded-lg bg-rose-50/70 border border-rose-100 text-xs text-slate-700">
+            <span class="font-bold text-rose-700">🏫 Приклад у початковій школі:</span> коментарі учнів під проєктом публікуються лише після схвалення вчителем для захисту від спаму й небажаного контенту.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 1. ПОНЯТТЯ ВЕБ 2.0 ТА ЙОГО КЛЮЧОВІ ОЗНАКИ
+         ====================================================================== -->
+    <section id="sec-1" class="section-wrapper space-y-5">
+      <div class="section-header flex items-center gap-3 pt-2">
+        <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shadow-sm">1</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Поняття Веб 2.0 та його ключові ознаки</h2>
+      </div>
+
+      <!-- Теоретичний текст + акцентована виноска -->
+      <div class="edu-card print-block p-5 sm:p-6 space-y-4">
+        <p class="text-slate-700">
+          Термін <strong>«Веб 2.0»</strong> з’явився на початку 2000-х років (його популяризував Тім О’Райлі) і позначає <strong>друге покоління веб-сервісів</strong>, у яких користувач стає не лише пасивним споживачем, а й активним творцем контенту. У епоху <em>Веб 1.0</em> (1990-ті роки) сторінки створювали професійні веб-редактори та програмісти, а звичайний відвідувач лише читав текст. У середовищі <em>Веб 2.0</em> будь-який користувач може публікувати тексти, фото, відео, коментувати й ділитися матеріалами. Для вчителя початкової школи це означає: клас може вести власний блог, а учень — долучатися до створення контенту під керівництвом дорослого.
+        </p>
+
+        <div class="callout-box p-4 rounded-xl bg-blue-50 border border-blue-200 flex items-start gap-3">
+          <span class="text-xl leading-none mt-0.5">💡</span>
+          <p class="text-sm text-blue-950 font-medium">
+            <strong>Методичний акцент:</strong> Технології Веб 2.0 не потребують знання програмування (HTML, CSS чи JavaScript). Учень 3–4 класу разом з учителем може створити блог класу за <strong>15–20 хвилин</strong> і вести його протягом усього навчального року.
+          </p>
+        </div>
+      </div>
+
+      <!-- SVG-ДІАГРАМА 1 (Рис. 1) -->
+      <figure class="diagram-box print-block">
+        <figcaption class="text-sm font-bold text-slate-800 mb-3 flex items-center justify-between">
+          <span>Рис. 1. Від Веб 1.0 до Веб 2.0: зміна ролі користувача в освітньому процесі</span>
+          <span class="text-xs font-normal text-slate-500">Схема порівняння поколінь Інтернету</span>
+        </figcaption>
+        <svg viewBox="0 0 900 330" width="100%" class="rounded-lg" role="img" aria-label="Схема переходу від Веб 1.0 до Веб 2.0">
+          <defs>
+            <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+            </marker>
+            <marker id="arrowGray" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+            </marker>
+            <marker id="arrowTealStart" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto">
+              <path d="M9,0 L9,6 L0,3 z" fill="#0d9488"/>
+            </marker>
+            <marker id="arrowTealEnd" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#0d9488"/>
+            </marker>
+          </defs>
+
+          <!-- Ліва зона: Веб 1.0 -->
+          <rect x="15" y="15" width="325" height="300" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+          <rect x="35" y="32" width="135" height="26" rx="13" fill="#e2e8f0"/>
+          <text x="102" y="49" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">ВЕБ 1.0 (1990-ті)</text>
+          <text x="35" y="84" font-size="17" font-weight="800" fill="#334155">Модель «Тільки читання»</text>
+
+          <!-- Блок редактора -->
+          <rect x="38" y="104" width="278" height="60" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+          <text x="177" y="129" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Веб-майстер / Програміст</text>
+          <text x="177" y="149" text-anchor="middle" font-size="11.5" fill="#64748b">Створює статичні HTML-сторінки</text>
+
+          <!-- Одностороння стрілка вниз -->
+          <line x1="177" y1="164" x2="177" y2="206" stroke="#64748b" stroke-width="2" marker-end="url(#arrowGray)"/>
+          <text x="188" y="190" font-size="11" font-weight="600" fill="#64748b">Односторонній потік</text>
+
+          <!-- Блок читача -->
+          <rect x="38" y="210" width="278" height="60" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+          <text x="177" y="235" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">Відвідувач (Учень / Учитель)</text>
+          <text x="177" y="255" text-anchor="middle" font-size="11.5" fill="#64748b">Пасивно переглядає готову інформацію</text>
+
+          <text x="38" y="296" font-size="11" fill="#64748b">✗ Немає коментарів і спільного редагування</text>
+
+          <!-- Центральний міст -->
+          <rect x="356" y="85" width="188" height="160" rx="16" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="450" y="116" text-anchor="middle" font-size="12" font-weight="800" fill="#1d4ed8">ЕВОЛЮЦІЯ МЕРЕЖІ</text>
+          <text x="450" y="135" text-anchor="middle" font-size="11.5" font-weight="600" fill="#2563eb">Початок 2000-х років</text>
+          <line x1="382" y1="162" x2="514" y2="162" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowBlue)"/>
+          <text x="450" y="192" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e40af">Хмарні сервіси +</text>
+          <text x="450" y="209" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e40af">Візуальні редактори</text>
+          <text x="450" y="226" text-anchor="middle" font-size="11" fill="#3b82f6">без знання коду</text>
+
+          <!-- Права зона: Веб 2.0 -->
+          <rect x="560" y="15" width="325" height="300" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+          <rect x="580" y="32" width="165" height="26" rx="13" fill="#2563eb"/>
+          <text x="662" y="49" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">ВЕБ 2.0 (СУЧАСНІСТЬ)</text>
+          <text x="580" y="84" font-size="17" font-weight="800" fill="#1e3a8a">Модель «Читання й письмо»</text>
+
+          <!-- Вчитель та Учні/Батьки -->
+          <rect x="580" y="102" width="136" height="58" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.3"/>
+          <text x="648" y="126" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e40af">Учитель-автор</text>
+          <text x="648" y="145" text-anchor="middle" font-size="11" fill="#475569">Створює й модерує</text>
+
+          <rect x="728" y="102" width="136" height="58" rx="10" fill="#ffffff" stroke="#0d9488" stroke-width="1.3"/>
+          <text x="796" y="126" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f766e">Учні та батьки</text>
+          <text x="796" y="145" text-anchor="middle" font-size="11" fill="#475569">Доповнюють, коментують</text>
+
+          <!-- Двосторонні стрілки -->
+          <line x1="648" y1="163" x2="648" y2="201" stroke="#0d9488" stroke-width="2" marker-start="url(#arrowTealStart)" marker-end="url(#arrowTealEnd)"/>
+          <line x1="796" y1="163" x2="796" y2="201" stroke="#0d9488" stroke-width="2" marker-start="url(#arrowTealStart)" marker-end="url(#arrowTealEnd)"/>
+
+          <!-- Хмарна платформа -->
+          <rect x="580" y="205" width="284" height="66" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="722" y="230" text-anchor="middle" font-size="13" font-weight="800" fill="#1e40af">Динамічна платформа Веб 2.0</text>
+          <text x="722" y="250" text-anchor="middle" font-size="11.5" fill="#334155">Блоги • Вікі • Медіасховища • Хмарні документи</text>
+
+          <text x="580" y="296" font-size="11.5" font-weight="600" fill="#1e40af">✓ Співпраця, діалог та миттєва публікація</text>
+        </svg>
+      </figure>
+
+      <!-- 6 ключових ознак Веб 2.0 (сітка 2x3) -->
+      <div class="space-y-3">
+        <h3 class="text-base font-bold text-slate-900">Шість ключових ознак Веб 2.0 у педагогічній практиці (1–4 класи):</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 print-grid-3">
+          <div class="edu-card feature-card print-block p-4">
+            <div class="flex items-center gap-2 text-blue-700 font-bold text-sm mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs">1</span>
+              <span>Користувацький контент</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-2">Матеріали створюють самі учасники освітнього процесу, а не сторонні розробники.</p>
+            <p class="text-xs bg-slate-50 p-2 rounded border border-slate-200 text-slate-700">
+              <strong>У 1–4 класах:</strong> публікація скан-копій дитячих малюнків, авторських казок та фото дослідів із природознавства.
+            </p>
+          </div>
+
+          <div class="edu-card feature-card print-block p-4">
+            <div class="flex items-center gap-2 text-teal-700 font-bold text-sm mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs">2</span>
+              <span>Колективна співпраця</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-2">Кілька користувачів можуть одночасно працювати над спільним документом чи проєктом.</p>
+            <p class="text-xs bg-slate-50 p-2 rounded border border-slate-200 text-slate-700">
+              <strong>У 1–4 класах:</strong> спільне створення класної електронної книжки загадок або словничка термінів.
+            </p>
+          </div>
+
+          <div class="edu-card feature-card print-block p-4">
+            <div class="flex items-center gap-2 text-purple-700 font-bold text-sm mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs">3</span>
+              <span>Простота публікації</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-2">Інтуїтивно зрозумілий візуальний редактор (WYSIWYG), схожий на звичний текстовий процесор.</p>
+            <p class="text-xs bg-slate-50 p-2 rounded border border-slate-200 text-slate-700">
+              <strong>У 1–4 класах:</strong> вчитель або четвертокласник додає текст і фото в кілька кліків без знання HTML/CSS.
+            </p>
+          </div>
+
+          <div class="edu-card feature-card print-block p-4">
+            <div class="flex items-center gap-2 text-emerald-700 font-bold text-sm mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs">4</span>
+              <span>Безкоштовні хмарні сервіси</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-2">Усі дані зберігаються на серверах у «хмарі», а робота відбувається прямо у веб-браузері.</p>
+            <p class="text-xs bg-slate-50 p-2 rounded border border-slate-200 text-slate-700">
+              <strong>У 1–4 класах:</strong> не потрібно встановлювати складні програми на шкільні комп’ютери чи планшети.
+            </p>
+          </div>
+
+          <div class="edu-card feature-card print-block p-4">
+            <div class="flex items-center gap-2 text-amber-700 font-bold text-sm mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs">5</span>
+              <span>Зворотний зв’язок (коментарі)</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-2">Можливість залишати відгуки, запитання та схвальні реакції під кожною публікацією.</p>
+            <p class="text-xs bg-slate-50 p-2 rounded border border-slate-200 text-slate-700">
+              <strong>У 1–4 класах:</strong> батьки й однокласники підтримують авторів проєктів теплими словами (після модерації вчителя).
+            </p>
+          </div>
+
+          <div class="edu-card feature-card print-block p-4">
+            <div class="flex items-center gap-2 text-indigo-700 font-bold text-sm mb-1.5">
+              <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs">6</span>
+              <span>Теги й гіперпосилання</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-2">Структурування матеріалів за ключовими словами та швидке поєднання різних ресурсів.</p>
+            <p class="text-xs bg-slate-50 p-2 rounded border border-slate-200 text-slate-700">
+              <strong>У 1–4 класах:</strong> швидкий пошук завдань за предметами та вбудовування інтерактивних вправ LearningApps.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Методичний кейс для вчителя інформатики -->
+      <div class="edu-card case-box print-block p-5 bg-gradient-to-r from-blue-50/70 to-indigo-50/50 border-blue-200">
+        <div class="flex items-center gap-2 text-blue-800 font-bold text-sm mb-2">
+          <span class="px-2 py-0.5 rounded bg-blue-600 text-white text-xs">МЕТОДИЧНИЙ КЕЙС</span>
+          <span>Міні-проєкт на уроці інформатики в 4 класі: «Створюємо веб-сторінку класу за 20 хвилин»</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs text-slate-700">
+          <div class="bg-white p-3 rounded-lg border border-blue-100">
+            <p class="font-bold text-blue-700 mb-1">Етап 1 (3 хв) • Вхід</p>
+            <p>Учитель відкриває платформу <strong>Blogger</strong> під шкільним обліковим записом Google на інтерактивній дошці.</p>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-blue-100">
+            <p class="font-bold text-blue-700 mb-1">Етап 2 (5 хв) • Назва</p>
+            <p>Учні колективно обирають назву (<em>«Дослідники 4-А»</em>) та світлий шаблон з великим шрифтом.</p>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-blue-100">
+            <p class="font-bold text-blue-700 mb-1">Етап 3 (8 хв) • Контент</p>
+            <p>У групах діти складають короткий текст про улюблений урок та обирають 1 ілюстрацію до допису.</p>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-blue-100">
+            <p class="font-bold text-blue-700 mb-1">Етап 4 (4 хв) • Перевірка</p>
+            <p>Клас натискає <em>«Попередній перегляд»</em>, перевіряє відсутність помилок і публікує перший допис.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 2. СОЦІАЛЬНІ СЕРВІСИ ВЕБ 2.0
+         ====================================================================== -->
+    <section id="sec-2" class="section-wrapper space-y-5">
+      <div class="section-header flex items-center gap-3 pt-2">
+        <span class="w-9 h-9 rounded-xl bg-teal-600 text-white font-bold flex items-center justify-center shadow-sm">2</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Соціальні сервіси Веб 2.0</h2>
+      </div>
+
+      <div class="edu-card print-block p-5 sm:p-6">
+        <p class="text-slate-700">
+          До <strong>соціальних сервісів Веб 2.0</strong> належать мережеві платформи, де користувачі взаємодіють, спільно створюють і обмінюються інформаційним контентом. У сучасній шкільній практиці найуживанішими є <strong>блоги</strong> (веб-журнали), <strong>вікі-сайти</strong> для спільного редагування текстів, <strong>медіасховища</strong> для зберігання фото й відео, <strong>хмарні документи</strong> та <strong>соціальні мережі</strong> для швидких оголошень батькам.
+        </p>
+      </div>
+
+      <!-- SVG-ДІАГРАМА 2: Екосистема соціальних сервісів -->
+      <figure class="diagram-box print-block">
+        <figcaption class="text-sm font-bold text-slate-800 mb-3 flex items-center justify-between">
+          <span>Екосистема соціальних сервісів Веб 2.0 в роботі вчителя початкових класів</span>
+          <span class="text-xs font-normal text-slate-500">Інтеграція цифрових інструментів</span>
+        </figcaption>
+        <svg viewBox="0 0 900 335" width="100%" role="img" aria-label="Екосистема соціальних сервісів Веб 2.0">
+          <!-- Сполучні лінії від центру до 5 вузлів -->
+          <line x1="360" y1="142" x2="275" y2="75" stroke="#93c5fd" stroke-width="2.5"/>
+          <line x1="540" y1="142" x2="625" y2="75" stroke="#c4b5fd" stroke-width="2.5"/>
+          <line x1="360" y1="198" x2="275" y2="262" stroke="#5eead4" stroke-width="2.5"/>
+          <line x1="450" y1="215" x2="450" y2="242" stroke="#6ee7b7" stroke-width="2.5"/>
+          <line x1="540" y1="198" x2="625" y2="262" stroke="#fcd34d" stroke-width="2.5"/>
+
+          <!-- Центральний вузол -->
+          <rect x="330" y="122" width="240" height="94" rx="20" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+          <text x="450" y="156" text-anchor="middle" font-size="14" font-weight="800" fill="#ffffff">ОСВІТНІЙ ПРОСТІР</text>
+          <text x="450" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#dbeafe">1–4 КЛАСІВ (Веб 2.0)</text>
+          <text x="450" y="197" text-anchor="middle" font-size="11" fill="#bfdbfe">Учитель • Учні • Батьки</text>
+
+          <!-- 1. Блоги -->
+          <rect x="25" y="18" width="255" height="94" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="42" y="43" font-size="13.5" font-weight="800" fill="#1d4ed8">1. Веб-журнали (Блоги)</text>
+          <text x="42" y="64" font-size="11.5" font-weight="600" fill="#334155">Приклади: Blogger, WordPress</text>
+          <text x="42" y="83" font-size="11" fill="#475569">Блог класу, щоденник проєкту,</text>
+          <text x="42" y="98" font-size="11" fill="#475569">завдання та новини тижня</text>
+
+          <!-- 2. Вікі-сайти -->
+          <rect x="620" y="18" width="255" height="94" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="637" y="43" font-size="13.5" font-weight="800" fill="#6d28d9">2. Вікі-сайти (Wiki)</text>
+          <text x="637" y="64" font-size="11.5" font-weight="600" fill="#334155">Приклади: Wikipedia, Wiki site</text>
+          <text x="637" y="83" font-size="11" fill="#475569">Спільне створення словника</text>
+          <text x="637" y="98" font-size="11" fill="#475569">термінів та енциклопедії класу</text>
+
+          <!-- 3. Медіасховища -->
+          <rect x="25" y="218" width="255" height="94" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.5"/>
+          <text x="42" y="243" font-size="13.5" font-weight="800" fill="#0f766e">3. Медіасховища</text>
+          <text x="42" y="264" font-size="11.5" font-weight="600" fill="#334155">Приклади: YouTube, Google Photos</text>
+          <text x="42" y="283" font-size="11" fill="#475569">Відеозвіт про екскурсію,</text>
+          <text x="42" y="298" font-size="11" fill="#475569">закритий фотоальбом свят класу</text>
+
+          <!-- 4. Хмарні документи -->
+          <rect x="318" y="242" width="264" height="78" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+          <text x="450" y="265" text-anchor="middle" font-size="13.5" font-weight="800" fill="#047857">4. Хмарні документи</text>
+          <text x="450" y="284" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Приклади: Google Docs, Презентації</text>
+          <text x="450" y="302" text-anchor="middle" font-size="11" fill="#475569">Колективна робота над текстом і казками</text>
+
+          <!-- 5. Соціальні мережі -->
+          <rect x="620" y="218" width="255" height="94" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+          <text x="637" y="243" font-size="13.5" font-weight="800" fill="#b45309">5. Соціальні мережі</text>
+          <text x="637" y="264" font-size="11.5" font-weight="600" fill="#334155">Приклади: Facebook, Instagram</text>
+          <text x="637" y="283" font-size="11" fill="#475569">Оперативні оголошення та</text>
+          <text x="637" y="298" font-size="11" fill="#475569">нагадування для батьків</text>
+        </svg>
+      </figure>
+
+      <!-- Структурована таблиця сервісів -->
+      <div class="edu-card print-block overflow-hidden">
+        <div class="px-5 py-3 bg-slate-100 border-b border-slate-200">
+          <h3 class="text-sm font-bold text-slate-800">Таблиця 1. Огляд соціальних сервісів Веб 2.0 та їх освітнє застосування</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-600">
+                <th class="py-3 px-4 font-bold">Сервіс</th>
+                <th class="py-3 px-4 font-bold">Приклади</th>
+                <th class="py-3 px-4 font-bold">Освітнє застосування</th>
+                <th class="py-3 px-4 font-bold">Конкретний приклад завдання для 1–4 класів</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-700">Блоги</td>
+                <td class="py-3 px-4 font-medium">Blogger, WordPress</td>
+                <td class="py-3 px-4">Блог класу, щоденник проєкту</td>
+                <td class="py-3 px-4 text-xs bg-blue-50/40">Щоденник спостережень за погодою та природою (ЯДС, 2 клас)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-purple-700">Вікі</td>
+                <td class="py-3 px-4 font-medium">Wikipedia, Wiki site</td>
+                <td class="py-3 px-4">Спільне створення словника термінів</td>
+                <td class="py-3 px-4 text-xs bg-purple-50/40">Класний «Словничок юного інформатика» (3–4 клас)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-teal-700">Медіасховища</td>
+                <td class="py-3 px-4 font-medium">YouTube, Google Photos</td>
+                <td class="py-3 px-4">Відеозвіт про екскурсію, фотоальбом</td>
+                <td class="py-3 px-4 text-xs bg-teal-50/40">Закритий фотоальбом «Свято Осені» для батьків (1 клас)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-emerald-700">Хмарні документи</td>
+                <td class="py-3 px-4 font-medium">Google Docs</td>
+                <td class="py-3 px-4">Спільна робота над текстом</td>
+                <td class="py-3 px-4 text-xs bg-emerald-50/40">Спільна збірка загадок та казок, написаних учнями (4 клас)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-amber-700">Соціальні мережі</td>
+                <td class="py-3 px-4 font-medium">Facebook, Instagram</td>
+                <td class="py-3 px-4">Оголошення для батьків</td>
+                <td class="py-3 px-4 text-xs bg-amber-50/40">Закрита батьківська спільнота для швидких нагадувань</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Порівняльний блок + SVG: Вікі-сайт vs Блог -->
+      <figure class="diagram-box print-block">
+        <figcaption class="text-sm font-bold text-slate-800 mb-3 flex items-center justify-between">
+          <span>Порівняльний розбір: Чим Вікі-сайт відрізняється від Блогу?</span>
+          <span class="text-xs font-normal text-slate-500">Ключова різниця в організації контенту</span>
+        </figcaption>
+        <svg viewBox="0 0 900 215" width="100%" role="img" aria-label="Порівняння структури блогу та вікі-сайту">
+          <!-- Лівий блок: Блог -->
+          <rect x="15" y="12" width="420" height="190" rx="14" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+          <text x="35" y="38" font-size="14" font-weight="800" fill="#1e40af">ВЕБ-ЖУРНАЛ (БЛОГ) — Стрічка дописів</text>
+
+          <rect x="35" y="52" width="380" height="42" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1"/>
+          <text x="48" y="70" font-size="11.5" font-weight="700" fill="#1d4ed8">26.11 • Новий допис: Екскурсія до парку</text>
+          <text x="48" y="86" font-size="10.5" fill="#64748b">Автор: Вчитель (текст фіксований у часі)</text>
+
+          <rect x="35" y="102" width="380" height="42" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="48" y="120" font-size="11.5" font-weight="700" fill="#334155">20.11 • Попередній допис: Вправи з інформатики</text>
+          <text x="48" y="136" font-size="10.5" fill="#64748b">Автор: Вчитель (розташований нижче за датою)</text>
+
+          <rect x="35" y="152" width="380" height="36" rx="8" fill="#dbeafe"/>
+          <text x="225" y="174" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a8a">💬 Читачі НЕ змінюють допис, а пишуть коментарі знизу</text>
+
+          <!-- Правий блок: Вікі -->
+          <rect x="465" y="12" width="420" height="190" rx="14" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+          <text x="485" y="38" font-size="14" font-weight="800" fill="#5b21b6">ВІКІ-САЙТ (WIKI) — Спільна сторінка</text>
+
+          <rect x="485" y="52" width="380" height="92" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.2"/>
+          <text x="498" y="72" font-size="12" font-weight="700" fill="#6d28d9">Єдина стаття: «Словничок юного інформатика»</text>
+          <text x="498" y="92" font-size="11" fill="#334155">• Алгоритм — додав учень Олексій (ред. 10:15)</text>
+          <text x="498" y="110" font-size="11" fill="#334155">• Браузер — доповнила учениця Софія (ред. 10:22)</text>
+          <text x="498" y="128" font-size="11" fill="#334155">• Комп'ютер — уточнив Вчитель (ред. 10:30)</text>
+
+          <rect x="485" y="152" width="380" height="36" rx="8" fill="#ede9fe"/>
+          <text x="675" y="174" text-anchor="middle" font-size="11.5" font-weight="600" fill="#4c1d95">✏️ Усі учасники спільно редагують сам текст статті</text>
+        </svg>
+      </figure>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 3. ВЕБ-ЖУРНАЛ (БЛОГ) ТА ЙОГО РІЗНОВИДИ
+         ====================================================================== -->
+    <section id="sec-3" class="section-wrapper space-y-5">
+      <div class="section-header flex items-center gap-3 pt-2">
+        <span class="w-9 h-9 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center shadow-sm">3</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Веб-журнал (блог) та його різновиди</h2>
+      </div>
+
+      <div class="edu-card print-block p-5 sm:p-6 space-y-4">
+        <p class="text-slate-700">
+          <strong>Веб-журнал (блог, від англ. <em>web log</em> — «мережевий журнал»)</strong> — це веб-сайт із регулярно оновлюваними дописами, розміщеними у <strong>зворотному хронологічному порядку</strong>: найновіша публікація завжди відображається вгорі сторінки. Автор блогу називається <em>блогером</em>, а читачі можуть залишати коментарі під дописами. Для початкової школи блог зручний тим, що поєднує новини класу, домашні та творчі завдання, фотозвіти й зворотний зв’язок в одному впорядкованому місці.
+        </p>
+
+        <p class="text-slate-700">
+          <strong>Класифікація блогів:</strong> за <em>змістом</em> розрізняють особистий щоденник, тематичний блог (присвячений одному предмету), блог учителя (новини й завдання класу), блог класу (спільні проєкти), мікроблог (короткі записи на кшталт X / Twitter). За <em>доступом</em> — публічний, для обраного кола читачів (за запрошенням) або приватний. За <em>форматом контенту</em> — текстовий, фотоблог, відеоблог (влог), подкаст.
+        </p>
+
+        <div class="callout-box p-4 rounded-xl bg-purple-50 border border-purple-200 flex items-start gap-3">
+          <span class="text-xl leading-none mt-0.5">👩‍🏫</span>
+          <p class="text-sm text-purple-950 font-medium">
+            <strong>Порада для початкової школи:</strong> найзручнішим форматом є <strong>блог учителя</strong> — педагог веде його самостійно, публікує завдання, пам’ятки й новини, а батьки отримують миттєві оновлення через <strong>RSS</strong> або <strong>email-розсилку</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- SVG-ДІАГРАМА 3 (Рис. 2): Класифікація блогів -->
+      <figure class="diagram-box print-block">
+        <figcaption class="text-sm font-bold text-slate-800 mb-3 flex items-center justify-between">
+          <span>Рис. 2. Різновиди веб-журналів (блогів) за змістом, доступом і форматом</span>
+          <span class="text-xs font-normal text-slate-500">Трьохвимірна класифікація</span>
+        </figcaption>
+        <svg viewBox="0 0 900 305" width="100%" role="img" aria-label="Різновиди веб-журналів">
+          <!-- Колонка 1: За змістом -->
+          <rect x="15" y="12" width="280" height="280" rx="14" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+          <rect x="30" y="26" width="250" height="30" rx="8" fill="#2563eb"/>
+          <text x="155" y="46" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">1. ЗА ЗМІСТОМ (5 видів)</text>
+
+          <rect x="30" y="66" width="250" height="38" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+          <text x="42" y="83" font-size="12" font-weight="700" fill="#1e40af">Особистий</text>
+          <text x="42" y="98" font-size="10.5" fill="#475569">Щоденник, роздуми й досвід автора</text>
+
+          <rect x="30" y="110" width="250" height="38" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+          <text x="42" y="127" font-size="12" font-weight="700" fill="#1e40af">Тематичний</text>
+          <text x="42" y="142" font-size="10.5" fill="#475569">Один предмет чи навичка (напр., ЯДС)</text>
+
+          <rect x="30" y="154" width="250" height="40" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="42" y="171" font-size="12" font-weight="800" fill="#1d4ed8">★ Блог учителя (Рекомендовано)</text>
+          <text x="42" y="187" font-size="10.5" font-weight="600" fill="#1e3a8a">Новини класу, завдання, поради батькам</text>
+
+          <rect x="30" y="200" width="250" height="38" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+          <text x="42" y="217" font-size="12" font-weight="700" fill="#1e40af">Блог класу</text>
+          <text x="42" y="232" font-size="10.5" fill="#475569">Спільні творчі й дослідницькі проєкти</text>
+
+          <rect x="30" y="244" width="250" height="38" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+          <text x="42" y="261" font-size="12" font-weight="700" fill="#1e40af">Мікроблог</text>
+          <text x="42" y="276" font-size="10.5" fill="#475569">Короткі оперативні нотатки (X / Twitter)</text>
+
+          <!-- Колонка 2: За доступом -->
+          <rect x="310" y="12" width="280" height="280" rx="14" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+          <rect x="325" y="26" width="250" height="30" rx="8" fill="#0d9488"/>
+          <text x="450" y="46" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">2. ЗА РІВНЕМ ДОСТУПУ</text>
+
+          <rect x="325" y="68" width="250" height="62" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+          <text x="338" y="88" font-size="12.5" font-weight="700" fill="#0f766e">🌐 Публічний (Відкритий)</text>
+          <text x="338" y="105" font-size="11" fill="#475569">Дописи бачать усі користувачі</text>
+          <text x="338" y="120" font-size="11" fill="#475569">Інтернету (підходить для методблогу)</text>
+
+          <rect x="325" y="140" width="250" height="72" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5"/>
+          <text x="338" y="160" font-size="12.5" font-weight="800" fill="#115e59">🔐 За запрошенням (Для класу)</text>
+          <text x="338" y="178" font-size="11" font-weight="600" fill="#134e4a">Доступ лише для батьків та учнів</text>
+          <text x="338" y="194" font-size="11" fill="#134e4a">конкретного класу за email-запрошенням</text>
+
+          <rect x="325" y="222" width="250" height="58" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+          <text x="338" y="242" font-size="12.5" font-weight="700" fill="#0f766e">🔒 Приватний (Закритий)</text>
+          <text x="338" y="259" font-size="11" fill="#475569">Особистий методичний архів чи</text>
+          <text x="338" y="273" font-size="11" fill="#475569">чернетка лише для самого вчителя</text>
+
+          <!-- Колонка 3: За форматом -->
+          <rect x="605" y="12" width="280" height="280" rx="14" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5"/>
+          <rect x="620" y="26" width="250" height="30" rx="8" fill="#7c3aed"/>
+          <text x="745" y="46" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">3. ЗА ФОРМАТОМ КОНТЕНТУ</text>
+
+          <rect x="620" y="68" width="250" height="48" rx="8" fill="#ffffff" stroke="#ddd6fe"/>
+          <text x="633" y="88" font-size="12.5" font-weight="700" fill="#5b21b6">📝 Текстовий блог</text>
+          <text x="633" y="105" font-size="11" fill="#475569">Статті, пам'ятки, алгоритми, завдання</text>
+
+          <rect x="620" y="124" width="250" height="48" rx="8" fill="#ffffff" stroke="#ddd6fe"/>
+          <text x="633" y="144" font-size="12.5" font-weight="700" fill="#5b21b6">📸 Фотоблог</text>
+          <text x="633" y="161" font-size="11" fill="#475569">Виставки дитячих робіт, фотозвіти свят</text>
+
+          <rect x="620" y="180" width="250" height="48" rx="8" fill="#ffffff" stroke="#ddd6fe"/>
+          <text x="633" y="200" font-size="12.5" font-weight="700" fill="#5b21b6">🎬 Відеоблог (Влог)</text>
+          <text x="633" y="217" font-size="11" fill="#475569">Відеопояснення тем, досліди, виступи</text>
+
+          <rect x="620" y="236" width="250" height="46" rx="8" fill="#ffffff" stroke="#ddd6fe"/>
+          <text x="633" y="255" font-size="12.5" font-weight="700" fill="#5b21b6">🎙️ Подкаст (Аудіоблог)</text>
+          <text x="633" y="271" font-size="11" fill="#475569">Аудіоказки, декламація віршів учнями</text>
+        </svg>
+      </figure>
+
+      <!-- SVG-ІЛЮСТРАЦІЯ 4: Анатомія сторінки освітнього блогу -->
+      <figure class="diagram-box print-block">
+        <figcaption class="text-sm font-bold text-slate-800 mb-3 flex items-center justify-between">
+          <span>Анатомія сторінки освітнього веб-журналу (розбір кожного структурного елемента)</span>
+          <span class="text-xs font-normal text-slate-500">Макет «Блог 3-А класу — Пізнайко»</span>
+        </figcaption>
+        <svg viewBox="0 0 900 425" width="100%" role="img" aria-label="Анатомія сторінки освітнього блогу">
+          <!-- Вікно браузера -->
+          <rect x="15" y="12" width="595" height="400" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+          <!-- Панель браузера -->
+          <path d="M15,24 a12,12 0 0,1 12,-12 h571 a12,12 0 0,1 12,12 v20 h-595 z" fill="#e2e8f0"/>
+          <circle cx="34" cy="28" r="5" fill="#ef4444"/>
+          <circle cx="50" cy="28" r="5" fill="#f59e0b"/>
+          <circle cx="66" cy="28" r="5" fill="#10b981"/>
+          <rect x="86" y="19" width="490" height="18" rx="9" fill="#ffffff"/>
+          <text x="102" y="31" font-size="10.5" fill="#475569">🔒 https://nash-3a-klas.blogspot.com</text>
+
+          <!-- [1] Шапка блогу -->
+          <rect x="28" y="52" width="568" height="56" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="58" cy="80" r="18" fill="#2563eb"/>
+          <text x="58" y="85" text-anchor="middle" font-size="12" font-weight="800" fill="#ffffff">3-А</text>
+          <text x="86" y="75" font-size="15" font-weight="800" fill="#1e3a8a">Блог 3-А класу «Пізнайко»</text>
+          <text x="86" y="94" font-size="11" fill="#3b82f6">Класний керівник: Іваненко О. П. • Новини, інтерактивні завдання, проєкти</text>
+          <circle cx="584" cy="64" r="11" fill="#2563eb"/>
+          <text x="584" y="68" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">1</text>
+
+          <!-- [2] Меню рубрик -->
+          <rect x="28" y="114" width="568" height="28" rx="6" fill="#1e40af"/>
+          <text x="42" y="132" font-size="11" font-weight="600" fill="#ffffff">Головна   |   Розклад   |   Інформатика   |   Я досліджую світ   |   Батькам</text>
+          <circle cx="584" cy="128" r="11" fill="#0d9488"/>
+          <text x="584" y="132" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">2</text>
+
+          <!-- [3] Стрічка дописів (рамка) -->
+          <rect x="28" y="150" width="376" height="218" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4 3"/>
+          <circle cx="392" cy="162" r="11" fill="#7c3aed"/>
+          <text x="392" y="166" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">3</text>
+
+          <!-- [4] Перший (найновіший) допис -->
+          <rect x="36" y="162" width="352" height="128" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="1.2"/>
+          <text x="46" y="178" font-size="10" font-weight="700" fill="#2563eb">📅 26 листопада 2026 р. (Найновіший допис — вгорі)</text>
+          <text x="46" y="196" font-size="12.5" font-weight="800" fill="#0f172a">Проєкт «Безпечний Інтернет» на уроці</text>
+          <rect x="46" y="204" width="84" height="52" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
+          <text x="88" y="233" text-anchor="middle" font-size="10" font-weight="700" fill="#1d4ed8">🖼️ Ілюстрація</text>
+          <text x="138" y="218" font-size="10.5" fill="#475569">Сьогодні учні 3-А класу створили</text>
+          <text x="138" y="233" font-size="10.5" fill="#475569">пам'ятку безпечної поведінки</text>
+          <text x="138" y="248" font-size="10.5" fill="#475569">в мережі Інтернет...</text>
+          <rect x="46" y="264" width="215" height="18" rx="4" fill="#f1f5f9"/>
+          <text x="52" y="276" font-size="10" font-weight="600" fill="#4f46e5">#інформатика  #3клас  #безпека</text>
+          <text x="315" y="276" font-size="10" font-weight="600" fill="#0d9488">💬 4 коментарі</text>
+          <circle cx="376" cy="272" r="11" fill="#059669"/>
+          <text x="376" y="276" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">4</text>
+
+          <!-- Другий (старіший) допис -->
+          <rect x="36" y="296" width="352" height="64" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+          <text x="46" y="312" font-size="10" fill="#64748b">📅 20 листопада 2026 р. (Попередній допис)</text>
+          <text x="46" y="329" font-size="12" font-weight="700" fill="#334155">Фотозвіт: Екскурсія до шкільної бібліотеки</text>
+          <text x="46" y="347" font-size="10" fill="#6366f1">#наш_клас  #читання   •   💬 7 коментарів</text>
+
+          <!-- [5] Бічна панель (Sidebar) -->
+          <rect x="412" y="150" width="184" height="218" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+          <circle cx="584" cy="162" r="11" fill="#d97706"/>
+          <text x="584" y="166" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">5</text>
+          <text x="422" y="172" font-size="11" font-weight="800" fill="#0f766e">БІЧНА ПАНЕЛЬ</text>
+          <rect x="422" y="180" width="164" height="22" rx="5" fill="#ffffff" stroke="#99f6e4"/>
+          <text x="428" y="194" font-size="10" fill="#64748b">🔍 Пошук по блогу...</text>
+          <text x="422" y="218" font-size="10.5" font-weight="700" fill="#0f766e">🏷️ Хмара тегів:</text>
+          <text x="422" y="234" font-size="10" fill="#334155">#інформатика #ЯДС</text>
+          <text x="422" y="248" font-size="10" fill="#334155">#батькам #проєкти</text>
+          <rect x="422" y="260" width="164" height="36" rx="6" fill="#ccfbf1"/>
+          <text x="428" y="275" font-size="10" font-weight="700" fill="#115e59">📡 Підписка на новини:</text>
+          <text x="428" y="289" font-size="10" fill="#134e4a">RSS-стрічка / Email</text>
+          <text x="422" y="314" font-size="10.5" font-weight="700" fill="#0f766e">📅 Архів дописів:</text>
+          <text x="422" y="329" font-size="10" fill="#475569">▸ Листопад 2026 (6)</text>
+          <text x="422" y="343" font-size="10" fill="#475569">▸ Жовтень 2026 (9)</text>
+
+          <!-- [6] Підвал (Footer) -->
+          <rect x="28" y="375" width="568" height="28" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+          <text x="42" y="393" font-size="10.5" fill="#475569">© 2026 Блог 3-А класу • Працює на Blogger • Правила безпечної поведінки</text>
+          <circle cx="584" cy="389" r="11" fill="#475569"/>
+          <text x="584" y="393" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">6</text>
+
+          <!-- Права панель пояснень (Легенда 1-6) -->
+          <rect x="624" y="12" width="262" height="400" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+          <text x="638" y="36" font-size="13" font-weight="800" fill="#0f172a">РОЗБІР ЕЛЕМЕНТІВ БЛОГУ:</text>
+
+          <!-- Пункт 1 -->
+          <circle cx="648" cy="62" r="10" fill="#2563eb"/>
+          <text x="648" y="66" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">1</text>
+          <text x="665" y="65" font-size="11.5" font-weight="700" fill="#1e3a8a">Шапка блогу (Header)</text>
+          <text x="638" y="81" font-size="10.5" fill="#475569">Назва, емблема класу, короткий опис.</text>
+
+          <!-- Пункт 2 -->
+          <circle cx="648" cy="112" r="10" fill="#0d9488"/>
+          <text x="648" y="116" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">2</text>
+          <text x="665" y="115" font-size="11.5" font-weight="700" fill="#0f766e">Меню рубрик (до 5 розділів)</text>
+          <text x="638" y="131" font-size="10.5" fill="#475569">Головні теми для швидкої навігації.</text>
+
+          <!-- Пункт 3 -->
+          <circle cx="648" cy="162" r="10" fill="#7c3aed"/>
+          <text x="648" y="166" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">3</text>
+          <text x="665" y="165" font-size="11.5" font-weight="700" fill="#5b21b6">Зворотна хронологія</text>
+          <text x="638" y="181" font-size="10.5" fill="#475569">Нові дописи завжди з'являються вгорі.</text>
+
+          <!-- Пункт 4 -->
+          <circle cx="648" cy="212" r="10" fill="#059669"/>
+          <text x="648" y="216" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">4</text>
+          <text x="665" y="215" font-size="11.5" font-weight="700" fill="#047857">Структура допису (Поста)</text>
+          <text x="638" y="231" font-size="10.5" fill="#475569">Дата, заголовок, фото, текст, теги, коментарі.</text>
+
+          <!-- Пункт 5 -->
+          <circle cx="648" cy="264" r="10" fill="#d97706"/>
+          <text x="648" y="268" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">5</text>
+          <text x="665" y="267" font-size="11.5" font-weight="700" fill="#b45309">Бічна панель (Sidebar)</text>
+          <text x="638" y="283" font-size="10.5" fill="#475569">Пошук, хмара тегів, підписка RSS/Email,</text>
+          <text x="638" y="297" font-size="10.5" fill="#475569">архів публікацій за місяцями.</text>
+
+          <!-- Пункт 6 -->
+          <circle cx="648" cy="330" r="10" fill="#475569"/>
+          <text x="648" y="334" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">6</text>
+          <text x="665" y="333" font-size="11.5" font-weight="700" fill="#334155">Підвал блогу (Footer)</text>
+          <text x="638" y="349" font-size="10.5" fill="#475569">Відомості про автора, пам'ятка безпеки,</text>
+          <text x="638" y="363" font-size="10.5" fill="#475569">посилання на шкільний сайт.</text>
+        </svg>
+      </figure>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 4. СТВОРЕННЯ Й ОФОРМЛЕННЯ ВЕБ-ЖУРНАЛУ
+         ====================================================================== -->
+    <section id="sec-4" class="section-wrapper space-y-5">
+      <div class="section-header flex items-center gap-3 pt-2">
+        <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white font-bold flex items-center justify-center shadow-sm">4</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Створення й оформлення веб-журналу</h2>
+      </div>
+
+      <div class="edu-card print-block p-5 sm:p-6">
+        <p class="text-slate-700">
+          Створення блогу складається з <strong>шести послідовних кроків</strong>. Найпопулярніші безкоштовні платформи для освіти — <strong>Blogger</strong> (зручний вхід через наявний обліковий запис Google) та <strong>WordPress.com</strong>. Обидві платформи не потребують знання програмування і дають змогу редагувати зовнішній вигляд блогу в кілька кліків. Оформлення блогу — це передусім <strong>шаблон (тема)</strong>. Обирайте світлий, стриманий шаблон із великим шрифтом: він зручний для читання на смартфонах, з яких більшість батьків переглядає шкільний блог. Додайте логотип класу, єдиний стиль заголовків і зрозумілі рубрики.
+        </p>
+      </div>
+
+      <!-- SVG-ДІАГРАМА 5 (Рис. 3): 6 етапів створення блогу -->
+      <figure class="diagram-box print-block">
+        <figcaption class="text-sm font-bold text-slate-800 mb-3 flex items-center justify-between">
+          <span>Рис. 3. Етапи створення веб-журналу (алгоритм дій учителя)</span>
+          <span class="text-xs font-normal text-slate-500">Послідовність 6 кроків</span>
+        </figcaption>
+        <svg viewBox="0 0 900 225" width="100%" role="img" aria-label="Етапи створення веб-журналу">
+          <defs>
+            <marker id="stepArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L7,3 z" fill="#64748b"/>
+            </marker>
+          </defs>
+
+          <!-- Крок 1 -->
+          <rect x="12" y="18" width="130" height="190" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <rect x="24" y="30" width="60" height="22" rx="6" fill="#2563eb"/>
+          <text x="54" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">КРОК 1</text>
+          <text x="24" y="75" font-size="13" font-weight="800" fill="#1e3a8a">Вибір</text>
+          <text x="24" y="92" font-size="13" font-weight="800" fill="#1e3a8a">платформи</text>
+          <text x="24" y="118" font-size="11" font-weight="600" fill="#334155">Blogger або</text>
+          <text x="24" y="133" font-size="11" font-weight="600" fill="#334155">WordPress.com</text>
+          <text x="24" y="160" font-size="10" fill="#475569">Безкоштовний</text>
+          <text x="24" y="173" font-size="10" fill="#475569">хмарний хостинг</text>
+
+          <line x1="144" y1="112" x2="158" y2="112" stroke="#64748b" stroke-width="2" marker-end="url(#stepArrow)"/>
+
+          <!-- Крок 2 -->
+          <rect x="162" y="18" width="130" height="190" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.5"/>
+          <rect x="174" y="30" width="60" height="22" rx="6" fill="#0d9488"/>
+          <text x="204" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">КРОК 2</text>
+          <text x="174" y="75" font-size="13" font-weight="800" fill="#115e59">Реєстрація</text>
+          <text x="174" y="92" font-size="13" font-weight="800" fill="#115e59">та вхід</text>
+          <text x="174" y="118" font-size="11" font-weight="600" fill="#334155">Обліковий запис</text>
+          <text x="174" y="133" font-size="11" font-weight="600" fill="#334155">Google учителя</text>
+          <text x="174" y="160" font-size="10" fill="#475569">Створення профілю</text>
+          <text x="174" y="173" font-size="10" fill="#475569">автора-педагога</text>
+
+          <line x1="294" y1="112" x2="308" y2="112" stroke="#64748b" stroke-width="2" marker-end="url(#stepArrow)"/>
+
+          <!-- Крок 3 -->
+          <rect x="312" y="18" width="130" height="190" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+          <rect x="324" y="30" width="60" height="22" rx="6" fill="#7c3aed"/>
+          <text x="354" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">КРОК 3</text>
+          <text x="324" y="75" font-size="13" font-weight="800" fill="#5b21b6">Вибір</text>
+          <text x="324" y="92" font-size="13" font-weight="800" fill="#5b21b6">шаблону</text>
+          <text x="324" y="118" font-size="11" font-weight="600" fill="#334155">Світла тема,</text>
+          <text x="324" y="133" font-size="11" font-weight="600" fill="#334155">2–3 кольори</text>
+          <text x="324" y="160" font-size="10" fill="#475569">Шрифт ≥ 14 pt,</text>
+          <text x="324" y="173" font-size="10" fill="#475569">адаптація під телефон</text>
+
+          <line x1="444" y1="112" x2="458" y2="112" stroke="#64748b" stroke-width="2" marker-end="url(#stepArrow)"/>
+
+          <!-- Крок 4 -->
+          <rect x="462" y="18" width="130" height="190" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+          <rect x="474" y="30" width="60" height="22" rx="6" fill="#d97706"/>
+          <text x="504" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">КРОК 4</text>
+          <text x="474" y="75" font-size="13" font-weight="800" fill="#92400e">Налашту-</text>
+          <text x="474" y="92" font-size="13" font-weight="800" fill="#92400e">вання</text>
+          <text x="474" y="118" font-size="11" font-weight="600" fill="#334155">Назва, адреса,</text>
+          <text x="474" y="133" font-size="11" font-weight="600" fill="#334155">приватність</text>
+          <text x="474" y="160" font-size="10" fill="#475569">Увімкнення модерації</text>
+          <text x="474" y="173" font-size="10" fill="#475569">коментарів</text>
+
+          <line x1="594" y1="112" x2="608" y2="112" stroke="#64748b" stroke-width="2" marker-end="url(#stepArrow)"/>
+
+          <!-- Крок 5 -->
+          <rect x="612" y="18" width="130" height="190" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+          <rect x="624" y="30" width="60" height="22" rx="6" fill="#059669"/>
+          <text x="654" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">КРОК 5</text>
+          <text x="624" y="75" font-size="13" font-weight="800" fill="#065f46">Перший</text>
+          <text x="624" y="92" font-size="13" font-weight="800" fill="#065f46">допис</text>
+          <text x="624" y="118" font-size="11" font-weight="600" fill="#334155">Привітання,</text>
+          <text x="624" y="133" font-size="11" font-weight="600" fill="#334155">зображення, тег</text>
+          <text x="624" y="160" font-size="10" fill="#475569">Створення посту-</text>
+          <text x="624" y="173" font-size="10" fill="#475569">знайомства з класом</text>
+
+          <line x1="744" y1="112" x2="758" y2="112" stroke="#64748b" stroke-width="2" marker-end="url(#stepArrow)"/>
+
+          <!-- Крок 6 -->
+          <rect x="762" y="18" width="126" height="190" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+          <rect x="774" y="30" width="60" height="22" rx="6" fill="#4f46e5"/>
+          <text x="804" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">КРОК 6</text>
+          <text x="774" y="75" font-size="13" font-weight="800" fill="#3730a3">Публікація</text>
+          <text x="774" y="92" font-size="13" font-weight="800" fill="#3730a3">допису</text>
+          <text x="774" y="118" font-size="11" font-weight="600" fill="#334155">Перевірка →</text>
+          <text x="774" y="133" font-size="11" font-weight="600" fill="#334155">Опублікувати</text>
+          <text x="774" y="160" font-size="10" fill="#475569">Поширення посилання</text>
+          <text x="774" y="173" font-size="10" fill="#475569">батькам класу</text>
+        </svg>
+      </figure>
+
+      <!-- 5 вимог до оформлення шкільного блогу з прикладами "Правильно / Небажано" -->
+      <div class="space-y-3">
+        <h3 class="text-base font-bold text-slate-900">П’ять вимог до професійного оформлення шкільного блогу:</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 print-grid-3">
+          <div class="edu-card design-card print-block p-4">
+            <h4 class="font-bold text-slate-900 text-sm mb-2">1. Назва блогу — коротка й упізнавана</h4>
+            <div class="space-y-1.5 text-xs">
+              <p class="p-2 rounded bg-emerald-50 text-emerald-900 border border-emerald-200">
+                <strong>✓ Правильно:</strong> Блог 2-В класу «Соняшник» (<code class="font-mono">nash_2v_klas</code>)
+              </p>
+              <p class="p-2 rounded bg-rose-50 text-rose-900 border border-rose-200">
+                <strong>✗ Небажано:</strong> Офіційна сторінка учнів 2-В класу ЗЗСО №15 міста... (занадто довго)
+              </p>
+            </div>
+          </div>
+
+          <div class="edu-card design-card print-block p-4">
+            <h4 class="font-bold text-slate-900 text-sm mb-2">2. Адреса — латиницею без пробілів</h4>
+            <div class="space-y-1.5 text-xs">
+              <p class="p-2 rounded bg-emerald-50 text-emerald-900 border border-emerald-200">
+                <strong>✓ Правильно:</strong> <code class="font-mono">nash-2v-klas.blogspot.com</code>
+              </p>
+              <p class="p-2 rounded bg-rose-50 text-rose-900 border border-rose-200">
+                <strong>✗ Небажано:</strong> <code class="font-mono">klas2026_abc123xyz.blogspot.com</code> (складно запам'ятати)
+              </p>
+            </div>
+          </div>
+
+          <div class="edu-card design-card print-block p-4">
+            <h4 class="font-bold text-slate-900 text-sm mb-2">3. Шаблон — світлий, шрифт ≥ 14 pt</h4>
+            <div class="space-y-1.5 text-xs">
+              <p class="p-2 rounded bg-emerald-50 text-emerald-900 border border-emerald-200">
+                <strong>✓ Правильно:</strong> білий або світло-кремовий фон, чіткий шрифт 14–16 pt для смартфонів.
+              </p>
+              <p class="p-2 rounded bg-rose-50 text-rose-900 border border-rose-200">
+                <strong>✗ Небажано:</strong> темний фон із дрібним рукописним шрифтом 10 pt.
+              </p>
+            </div>
+          </div>
+
+          <div class="edu-card design-card print-block p-4">
+            <h4 class="font-bold text-slate-900 text-sm mb-2">4. Меню — не більше 5 рубрик</h4>
+            <div class="space-y-1.5 text-xs">
+              <p class="p-2 rounded bg-emerald-50 text-emerald-900 border border-emerald-200">
+                <strong>✓ Правильно:</strong> Головна | Розклад | Інформатика | ЯДС | Батькам.
+              </p>
+              <p class="p-2 rounded bg-rose-50 text-rose-900 border border-rose-200">
+                <strong>✗ Небажано:</strong> 12–15 дрібних пунктів меню у два ряди, що плутають читача.
+              </p>
+            </div>
+          </div>
+
+          <div class="edu-card design-card print-block p-4 md:col-span-2 lg:col-span-2">
+            <h4 class="font-bold text-slate-900 text-sm mb-2">5. Кольори — 2–3 основні, без різнобарв’я</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <p class="p-2 rounded bg-emerald-50 text-emerald-900 border border-emerald-200">
+                <strong>✓ Правильно:</strong> один спокійний базовий колір (синій або бірюзовий) + 1 акцентний колір на світлому тлі. Не втомлює очі дітей і батьків.
+              </p>
+              <p class="p-2 rounded bg-rose-50 text-rose-900 border border-rose-200">
+                <strong>✗ Небажано:</strong> кожен абзац іншого яскравого кольору (червоний, кислотно-зелений, фіолетовий), миготлива анімація.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 5. ПУБЛІКАЦІЯ ПОВІДОМЛЕНЬ І НАЛАШТУВАННЯ ПАРАМЕТРІВ
+         ====================================================================== -->
+    <section id="sec-5" class="section-wrapper space-y-5">
+      <div class="section-header flex items-center gap-3 pt-2">
+        <span class="w-9 h-9 rounded-xl bg-amber-600 text-white font-bold flex items-center justify-center shadow-sm">5</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Публікація повідомлень і налаштування параметрів</h2>
+      </div>
+
+      <div class="edu-card print-block p-5 sm:p-6 space-y-4">
+        <p class="text-slate-700">
+          Публікація нового матеріалу відкривається кнопкою <strong>«Створити»</strong> (або <em>«Новий допис»</em>). Кожен допис містить заголовок, основне тіло тексту, зображення чи відео, теги (мітки) й налаштування доступу. Перед оприлюдненням обов’язково скористайтеся кнопкою <strong>«Попередній перегляд»</strong> — так ви побачите, як допис виглядатиме на екрані комп’ютера та смартфона читача, і вчасно виправите можливі помилки форматування.
+        </p>
+
+        <div class="callout-box p-4 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-3">
+          <span class="text-xl leading-none mt-0.5">🛡️</span>
+          <p class="text-sm text-amber-950 font-medium">
+            <strong>Важливе налаштування безпеки:</strong> Обов’язково увімкніть <strong>модерацію коментарів до публікації</strong>. Це надійно захищає шкільний блог від рекламного спаму чи небажаних повідомлень і дає вчителю змогу перевірити кожен коментар перед його появою на сторінці.
+          </p>
+        </div>
+      </div>
+
+      <!-- SVG-ІЛЮСТРАЦІЯ 6: Інтерфейс редактора нового допису -->
+      <figure class="diagram-box print-block">
+        <figcaption class="text-sm font-bold text-slate-800 mb-3 flex items-center justify-between">
+          <span>Інтерфейс редактора нового допису (розбір елементів керування Blogger / WordPress)</span>
+          <span class="text-xs font-normal text-slate-500">Візуальний конструктор публікації</span>
+        </figcaption>
+        <svg viewBox="0 0 900 385" width="100%" role="img" aria-label="Інтерфейс редактора нового допису">
+          <!-- Вікно редактора -->
+          <rect x="15" y="12" width="595" height="360" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+
+          <!-- Верхня панель редактора -->
+          <rect x="28" y="24" width="568" height="44" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+          <!-- [1] Заголовок -->
+          <rect x="36" y="31" width="318" height="30" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.3"/>
+          <text x="46" y="50" font-size="11.5" font-weight="600" fill="#1e293b">Заголовок: Підсумки тижня інформатики у 4-Б</text>
+          <circle cx="348" cy="31" r="10" fill="#2563eb"/>
+          <text x="348" y="35" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">1</text>
+
+          <!-- [6] Попередній перегляд -->
+          <rect x="364" y="31" width="118" height="30" rx="6" fill="#ffffff" stroke="#64748b"/>
+          <text x="423" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#334155">👁 Перегляд</text>
+          <circle cx="478" cy="31" r="10" fill="#0d9488"/>
+          <text x="478" y="35" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">6</text>
+
+          <!-- [7] Опублікувати -->
+          <rect x="490" y="31" width="98" height="30" rx="6" fill="#ea580c"/>
+          <text x="539" y="50" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">🚀 Опублікувати</text>
+          <circle cx="586" cy="31" r="10" fill="#dc2626"/>
+          <text x="586" y="35" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">7</text>
+
+          <!-- Панель форматування [2] та медіа [3] -->
+          <rect x="28" y="76" width="396" height="34" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+          <text x="38" y="97" font-size="12" font-weight="800" fill="#1e40af">B   I   U   S   |   ≡   •≡   1≡</text>
+          <circle cx="195" cy="78" r="10" fill="#7c3aed"/>
+          <text x="195" y="82" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">2</text>
+
+          <line x1="215" y1="81" x2="215" y2="105" stroke="#93c5fd" stroke-width="1.5"/>
+          <text x="225" y="97" font-size="11" font-weight="700" fill="#0f766e">🔗 Лінк   🖼️ Фото   ▶️ Відео</text>
+          <circle cx="412" cy="78" r="10" fill="#059669"/>
+          <text x="412" y="82" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">3</text>
+
+          <!-- [4] Робоче поле тексту -->
+          <rect x="28" y="118" width="396" height="240" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+          <text x="42" y="142" font-size="12" font-weight="700" fill="#0f172a">Вітаємо батьків та учнів 4-Б класу!</text>
+          <text x="42" y="162" font-size="11" fill="#475569">Сьогодні на уроці діти створили власні алгоритми</text>
+          <text x="42" y="178" font-size="11" fill="#475569">та навчилися додавати зображення до веб-сторінки.</text>
+          <rect x="42" y="192" width="368" height="106" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="4 3"/>
+          <text x="226" y="240" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">🖼️ Вставлене зображення або відео з YouTube</text>
+          <text x="226" y="258" text-anchor="middle" font-size="10.5" fill="#64748b">(Підпис: Робота учнів у комп'ютерному класі)</text>
+          <text x="42" y="322" font-size="11" fill="#2563eb" text-decoration="underline">Перейти до інтерактивної вікторини →</text>
+          <circle cx="412" cy="344" r="10" fill="#4f46e5"/>
+          <text x="412" y="348" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">4</text>
+
+          <!-- [5] Бічна панель параметрів допису -->
+          <rect x="434" y="76" width="162" height="282" rx="8" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.3"/>
+          <text x="444" y="96" font-size="11" font-weight="800" fill="#5b21b6">ПАРАМЕТРИ ДОПИСУ</text>
+          <circle cx="584" cy="88" r="10" fill="#d97706"/>
+          <text x="584" y="92" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">5</text>
+
+          <rect x="442" y="106" width="146" height="58" rx="6" fill="#ffffff" stroke="#ddd6fe"/>
+          <text x="448" y="122" font-size="10.5" font-weight="700" fill="#4c1d95">🏷️ Мітки (Теги):</text>
+          <text x="448" y="138" font-size="10" fill="#334155">#інформатика, #4клас,</text>
+          <text x="448" y="152" font-size="10" fill="#334155">#алгоритми</text>
+
+          <rect x="442" y="172" width="146" height="52" rx="6" fill="#ffffff" stroke="#ddd6fe"/>
+          <text x="448" y="188" font-size="10.5" font-weight="700" fill="#4c1d95">🕒 Дата публікації:</text>
+          <text x="448" y="204" font-size="10" fill="#334155">Автоматично (або</text>
+          <text x="448" y="216" font-size="10" fill="#334155">відкладений старт)</text>
+
+          <rect x="442" y="232" width="146" height="52" rx="6" fill="#ffffff" stroke="#ddd6fe"/>
+          <text x="448" y="248" font-size="10.5" font-weight="700" fill="#4c1d95">🔗 Постійне посилання:</text>
+          <text x="448" y="264" font-size="9.5" fill="#475569">.../2026/11/pidsumky-4b</text>
+
+          <rect x="442" y="292" width="146" height="56" rx="6" fill="#ffffff" stroke="#ddd6fe"/>
+          <text x="448" y="308" font-size="10.5" font-weight="700" fill="#4c1d95">💬 Коментарі читачів:</text>
+          <text x="448" y="324" font-size="10" fill="#059669" font-weight="600">✓ Дозволити (з модерацією)</text>
+
+          <!-- Права панель пояснень (1-7) -->
+          <rect x="624" y="12" width="262" height="360" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+          <text x="638" y="36" font-size="13" font-weight="800" fill="#0f172a">ЕЛЕМЕНТИ РЕДАКТОРА:</text>
+
+          <circle cx="646" cy="60" r="9.5" fill="#2563eb"/>
+          <text x="646" y="64" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">1</text>
+          <text x="662" y="64" font-size="11" font-weight="700" fill="#1e3a8a">Поле заголовка допису</text>
+
+          <circle cx="646" cy="96" r="9.5" fill="#7c3aed"/>
+          <text x="646" y="100" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">2</text>
+          <text x="662" y="100" font-size="11" font-weight="700" fill="#5b21b6">Форматування тексту</text>
+          <text x="638" y="114" font-size="10" fill="#475569">Жирний, курсив, списки, вирівнювання.</text>
+
+          <circle cx="646" cy="142" r="9.5" fill="#059669"/>
+          <text x="646" y="146" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">3</text>
+          <text x="662" y="146" font-size="11" font-weight="700" fill="#047857">Вставка медіа та лінків</text>
+          <text x="638" y="160" font-size="10" fill="#475569">Додавання фото, відео, гіперпосилань.</text>
+
+          <circle cx="646" cy="188" r="9.5" fill="#4f46e5"/>
+          <text x="646" y="192" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">4</text>
+          <text x="662" y="192" font-size="11" font-weight="700" fill="#3730a3">Робоче поле тексту</text>
+          <text x="638" y="206" font-size="10" fill="#475569">Основний зміст навчальної публікації.</text>
+
+          <circle cx="646" cy="234" r="9.5" fill="#d97706"/>
+          <text x="646" y="238" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">5</text>
+          <text x="662" y="238" font-size="11" font-weight="700" fill="#b45309">Бічні параметри допису</text>
+          <text x="638" y="252" font-size="10" fill="#475569">Теги (#мітки), дата виходу, URL-адреса.</text>
+
+          <circle cx="646" cy="280" r="9.5" fill="#0d9488"/>
+          <text x="646" y="284" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">6</text>
+          <text x="662" y="284" font-size="11" font-weight="700" fill="#0f766e">Попередній перегляд</text>
+          <text x="638" y="298" font-size="10" fill="#475569">Перевірка вигляду на ПК і смартфоні.</text>
+
+          <circle cx="646" cy="326" r="9.5" fill="#dc2626"/>
+          <text x="646" y="330" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">7</text>
+          <text x="662" y="330" font-size="11" font-weight="700" fill="#b91c1c">Кнопка «Опублікувати»</text>
+          <text x="638" y="344" font-size="10" fill="#475569">Оприлюднення допису для читачів.</text>
+        </svg>
+      </figure>
+
+      <!-- SVG-ДІАГРАМА 7 (Рис. 4): Основні параметри налаштування веб-журналу -->
+      <figure class="diagram-box print-block">
+        <figcaption class="text-sm font-bold text-slate-800 mb-3 flex items-center justify-between">
+          <span>Рис. 4. Основні параметри налаштування веб-журналу</span>
+          <span class="text-xs font-normal text-slate-500">6 ключових груп налаштувань адміністратора</span>
+        </figcaption>
+        <svg viewBox="0 0 900 235" width="100%" role="img" aria-label="Основні параметри налаштування веб-журналу">
+          <!-- Рядок 1 -->
+          <rect x="15" y="14" width="280" height="96" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="32" y="40" font-size="14" font-weight="800" fill="#1d4ed8">1. Назва й адреса</text>
+          <text x="32" y="61" font-size="11.5" font-weight="600" fill="#334155">Унікальна URL-адреса блогу</text>
+          <text x="32" y="80" font-size="11" fill="#475569">Латиницею без пробілів:</text>
+          <text x="32" y="95" font-size="11" font-weight="600" fill="#2563eb">nash-2v-klas.blogspot.com</text>
+
+          <rect x="310" y="14" width="280" height="96" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="327" y="40" font-size="14" font-weight="800" fill="#6d28d9">2. Дизайн і шаблон</text>
+          <text x="327" y="61" font-size="11.5" font-weight="600" fill="#334155">Тема, кольори та шрифти</text>
+          <text x="327" y="80" font-size="11" fill="#475569">Світла тема, 2–3 кольори,</text>
+          <text x="327" y="95" font-size="11" font-weight="600" fill="#6d28d9">шрифт не менше 14 pt</text>
+
+          <rect x="605" y="14" width="280" height="96" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+          <text x="622" y="40" font-size="14" font-weight="800" fill="#b45309">3. Приватність</text>
+          <text x="622" y="61" font-size="11.5" font-weight="600" fill="#334155">Хто бачить дописи блогу</text>
+          <text x="622" y="80" font-size="11" fill="#475569">Для закритого класу — режим</text>
+          <text x="622" y="95" font-size="11" font-weight="600" fill="#b45309">«Лише за запрошенням»</text>
+
+          <!-- Рядок 2 -->
+          <rect x="15" y="124" width="280" height="96" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+          <text x="32" y="150" font-size="14" font-weight="800" fill="#047857">4. Коментарі</text>
+          <text x="32" y="171" font-size="11.5" font-weight="600" fill="#334155">Модерація та права читачів</text>
+          <text x="32" y="190" font-size="11" fill="#475569">Обов'язкова перевірка вчителем</text>
+          <text x="32" y="205" font-size="11" font-weight="600" fill="#047857">перед публікацією на сайті</text>
+
+          <rect x="310" y="124" width="280" height="96" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="327" y="150" font-size="14" font-weight="800" fill="#b91c1c">5. Резервні копії</text>
+          <text x="327" y="171" font-size="11.5" font-weight="600" fill="#334155">Експорт дописів і налаштувань</text>
+          <text x="327" y="190" font-size="11" fill="#475569">Щомісячне збереження архіву</text>
+          <text x="327" y="205" font-size="11" font-weight="600" fill="#b91c1c">у форматі XML на диск</text>
+
+          <rect x="605" y="124" width="280" height="96" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.5"/>
+          <text x="622" y="150" font-size="14" font-weight="800" fill="#0f766e">6. Авторство</text>
+          <text x="622" y="171" font-size="11.5" font-weight="600" fill="#334155">Хто може публікувати дописи</text>
+          <text x="622" y="190" font-size="11" fill="#475569">Адміністратор — учитель;</text>
+          <text x="622" y="205" font-size="11" font-weight="600" fill="#0f766e">учні як автори — лише за потреби</text>
+        </svg>
+      </figure>
+
+      <!-- Повна таблиця налаштувань блогу -->
+      <div class="edu-card print-block overflow-hidden">
+        <div class="px-5 py-3 bg-slate-100 border-b border-slate-200">
+          <h3 class="text-sm font-bold text-slate-800">Таблиця 2. Довідник налаштування параметрів освітнього веб-журналу</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-600">
+                <th class="py-3 px-4 font-bold">Параметр</th>
+                <th class="py-3 px-4 font-bold">Що регулює</th>
+                <th class="py-3 px-4 font-bold">Порада для вчителя</th>
+                <th class="py-3 px-4 font-bold">Практична дія в меню</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-blue-700">Назва й адреса</td>
+                <td class="py-2.5 px-4">Заголовок блогу й унікальну адресу</td>
+                <td class="py-2.5 px-4">Адреса латиницею без пробілів</td>
+                <td class="py-2.5 px-4 text-xs text-slate-600">Налаштування → Основні → Назва / Адреса блогу</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-purple-700">Дизайн і шаблон</td>
+                <td class="py-2.5 px-4">Тему, кольори, шрифти</td>
+                <td class="py-2.5 px-4">Світлий шаблон, шрифт ≥ 14 pt</td>
+                <td class="py-2.5 px-4 text-xs text-slate-600">Тема → Налаштувати → Колір фону та розмір тексту</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-amber-700">Приватність</td>
+                <td class="py-2.5 px-4">Хто бачить блог — усі чи лише запрошені</td>
+                <td class="py-2.5 px-4">Для закритого класу — «лише за запрошенням»</td>
+                <td class="py-2.5 px-4 text-xs text-slate-600">Налаштування → Доступ читачів → Лише запрошені</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-emerald-700">Коментарі</td>
+                <td class="py-2.5 px-4">Хто може писати й чи потрібна модерація</td>
+                <td class="py-2.5 px-4">Увімкніть модерацію перед публікацією</td>
+                <td class="py-2.5 px-4 text-xs text-slate-600">Налаштування → Коментарі → Модерація: Завжди</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-rose-700">Резервні копії</td>
+                <td class="py-2.5 px-4">Експорт дописів і налаштувань</td>
+                <td class="py-2.5 px-4">Робіть копію щомісяця (експорт XML-файлу)</td>
+                <td class="py-2.5 px-4 text-xs text-slate-600">Налаштування → Керування блогом → Зберегти вміст</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-bold text-teal-700">Авторство</td>
+                <td class="py-2.5 px-4">Хто може публікувати дописи</td>
+                <td class="py-2.5 px-4">Додавайте учнів як авторів лише за потреби</td>
+                <td class="py-2.5 px-4 text-xs text-slate-600">Налаштування → Дозволи → Адміністратори й автори</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 6. КУЛЬТУРА ВЕДЕННЯ БЛОГУ ТА ВІДПОВІДАЛЬНІСТЬ АВТОРА
+         ====================================================================== -->
+    <section id="sec-6" class="section-wrapper space-y-5">
+      <div class="section-header flex items-center gap-3 pt-2">
+        <span class="w-9 h-9 rounded-xl bg-rose-600 text-white font-bold flex items-center justify-center shadow-sm">6</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Культура ведення блогу та відповідальність автора</h2>
+      </div>
+
+      <div class="edu-card print-block p-5 sm:p-6">
+        <p class="text-slate-700">
+          Оприлюднена в мережі Інтернет інформація залишається там надовго й може бути миттєво скопійована іншими користувачами. Тому вчитель як автор освітнього блогу має керуватися суворими правилами цифрової безпеки та педагогічної етики: <strong>поважати приватність</strong> (не публікувати фото дітей без письмової згоди батьків), <strong>перевіряти факти</strong>, <strong>зазначати джерела</strong>, не використовувати чужі матеріали без дозволу. Ввічливість у коментарях і відповідях — невід’ємна частина професійної культури педагога.
+        </p>
+      </div>
+
+      <!-- 5 правил цифрової етики та безпеки вчителя-блогера -->
+      <div class="space-y-3">
+        <h3 class="text-base font-bold text-slate-900">П’ять правил цифрової етики та безпеки вчителя-блогера:</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 print-grid-3">
+          <div class="edu-card rule-card print-block p-4 border-t-4 border-t-rose-600">
+            <div class="flex items-center gap-2 text-rose-700 font-bold text-sm mb-1.5">
+              <span>🔒 1. Захист персональних даних</span>
+            </div>
+            <p class="text-xs text-slate-700 mb-2">
+              <strong>Правило:</strong> Не публікуйте персональні дані дітей (домашні адреси, телефони, розклад гуртків, номери шкіл/класів на бейджах чи зошитах).
+            </p>
+            <p class="text-xs bg-rose-50/70 p-2 rounded text-slate-600">
+              <em>Методично:</em> підписуйте творчі роботи лише ім'ям дитини (наприклад, <em>«Малюнок Оленки, 2-А»</em>) без прізвища та адреси.
+            </p>
+          </div>
+
+          <div class="edu-card rule-card print-block p-4 border-t-4 border-t-amber-600">
+            <div class="flex items-center gap-2 text-amber-700 font-bold text-sm mb-1.5">
+              <span>📝 2. Письмова згода батьків</span>
+            </div>
+            <p class="text-xs text-slate-700 mb-2">
+              <strong>Правило:</strong> Для публікації фотографій і відео за участю дітей обов'язково отримайте письмову згоду батьків (законних представників).
+            </p>
+            <p class="text-xs bg-amber-50/70 p-2 rounded text-slate-600">
+              <em>Методично:</em> зберіть заяви-згоди на перших батьківських зборах у вересні; якщо згоди немає — фотографуйте лише творчі роботи або зі спини.
+            </p>
+          </div>
+
+          <div class="edu-card rule-card print-block p-4 border-t-4 border-t-blue-600">
+            <div class="flex items-center gap-2 text-blue-700 font-bold text-sm mb-1.5">
+              <span>🔗 3. Посилання на джерела</span>
+            </div>
+            <p class="text-xs text-slate-700 mb-2">
+              <strong>Правило:</strong> Завжди посилайтеся на джерела запозичених методичних матеріалів, віршів, завдань чи відеофрагментів.
+            </p>
+            <p class="text-xs bg-blue-50/70 p-2 rounded text-slate-600">
+              <em>Методично:</em> вказуйте автора ідеї або активне гіперпосилання на освітній портал, звідки взято вправу.
+            </p>
+          </div>
+
+          <div class="edu-card rule-card print-block p-4 border-t-4 border-t-purple-600">
+            <div class="flex items-center gap-2 text-purple-700 font-bold text-sm mb-1.5">
+              <span>©️ 4. Дотримання авторських прав</span>
+            </div>
+            <p class="text-xs text-slate-700 mb-2">
+              <strong>Правило:</strong> Дотримуйтеся авторських прав на зображення, кліпарти й музику, які додаєте до дописів чи відеозвітів.
+            </p>
+            <p class="text-xs bg-purple-50/70 p-2 rounded text-slate-600">
+              <em>Методично:</em> використовуйте власні світлини або безкоштовні фотобанки з відкритою ліцензією <strong>Creative Commons</strong> (Pixabay, Unsplash).
+            </p>
+          </div>
+
+          <div class="edu-card rule-card print-block p-4 border-t-4 border-t-emerald-600 md:col-span-2 lg:col-span-2">
+            <div class="flex items-center gap-2 text-emerald-700 font-bold text-sm mb-1.5">
+              <span>💬 5. Педагогічний етикет і тайм-менеджмент</span>
+            </div>
+            <p class="text-xs text-slate-700 mb-2">
+              <strong>Правило:</strong> Відповідайте на коментарі батьків та учнів доброзичливо, грамотно, по суті й у межах робочого часу.
+            </p>
+            <p class="text-xs bg-emerald-50/70 p-2 rounded text-slate-600">
+              <em>Методично:</em> зазначте в описі блогу години зворотного зв’язку (наприклад, <em>Пн–Пт з 08:30 до 17:00</em>) та уникайте публічного обговорення оцінок чи поведінки окремих учнів у коментарях.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Таблиця-тренажер педагогічних ситуацій -->
+      <div class="edu-card print-block overflow-hidden">
+        <div class="px-5 py-3 bg-slate-100 border-b border-slate-200">
+          <h3 class="text-sm font-bold text-slate-800">Таблиця 3. Практикум із кібербезпеки: «Безпечно ✓ vs Небезпечно ✗» у роботі вчителя</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-600">
+                <th class="py-3 px-4 font-bold w-1/4">Педагогічна ситуація</th>
+                <th class="py-3 px-4 font-bold text-rose-700 w-3/8">✗ Небезпечно (Помилка автора)</th>
+                <th class="py-3 px-4 font-bold text-emerald-700 w-3/8">✓ Безпечно (Правильне рішення)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-xs text-slate-700">
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">1. Публікація грамоти переможця олімпіади</td>
+                <td class="py-3 px-4 bg-rose-50/40">Викласти скан диплома, де чітко видно повне ПІБ дитини, домашню адресу, дату народження та номер школи.</td>
+                <td class="py-3 px-4 bg-emerald-50/40">Приховати (розмити) персональні дані або написати текстове привітання: <em>«Вітаємо Артема з І місцем у конкурсі з інформатики!»</em></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">2. Фотозвіт з екскурсії до музею (1–4 класи)</td>
+                <td class="py-3 px-4 bg-rose-50/40">Опублікувати у відкритому публічному блозі крупні портрети всіх учнів класу без згоди батьків, вказавши точний час повернення.</td>
+                <td class="py-3 px-4 bg-emerald-50/40">Опублікувати фото у закритому блозі <em>«лише за запрошенням»</em> після завершення екскурсії, залучивши лише дітей, батьки яких надали письмову згоду.</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">3. Оформлення допису ілюстрацією з Інтернету</td>
+                <td class="py-3 px-4 bg-rose-50/40">Завантажити першу-ліпшу картинку з пошуку Google із водяним знаком фотобанку та опублікувати без зазначення автора.</td>
+                <td class="py-3 px-4 bg-emerald-50/40">Обрати зображення з ліцензією Creative Commons (Pixabay, Wikimedia) або власний малюнок учня й вказати джерело під ілюстрацією.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ПІДСУМКОВИЙ БЛОК: КОНТРОЛЬНІ ПИТАННЯ ТА РЕКОМЕНДОВАНІ ДЖЕРЕЛА
+         ====================================================================== -->
+    <section id="control" class="section-wrapper space-y-6 pt-2">
+      <!-- Контрольні питання (12 питань у сітці 2 колонки) -->
+      <div class="space-y-3">
+        <div class="section-header flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-sm">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </span>
+            <div>
+              <h2 class="text-xl font-bold text-slate-900">Контрольні питання для самоперевірки</h2>
+              <p class="text-xs text-slate-500">Запитання для закріплення матеріалу та підготовки до семінарського заняття</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 print-grid-2">
+          <!-- Питання 1 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">1.</span> Що таке Веб 2.0 і чим він відрізняється від Веб 1.0?</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Веб 1.0 — модель «тільки читання» (статичні сторінки створює редактор). Веб 2.0 — «читання й письмо», де користувач сам створює й коментує контент.</p>
+          </div>
+
+          <!-- Питання 2 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">2.</span> Назвіть три ключові ознаки технологій Веб 2.0.</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Користувацький контент, колективна співпраця, простота публікації без програмування (а також зворотний зв'язок, теги, безкоштовні хмарні сервіси).</p>
+          </div>
+
+          <!-- Питання 3 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">3.</span> Які соціальні сервіси Веб 2.0 ви знаєте? Наведіть приклади.</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Блоги (Blogger, WordPress), вікі-сайти (Wikipedia), медіасховища (YouTube, Google Photos), хмарні документи (Google Docs), соцмережі (Facebook, Instagram).</p>
+          </div>
+
+          <!-- Питання 4 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">4.</span> Що таке вікі-сайт і в чому його відмінність від блогу?</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">У вікі-сайті всі учасники спільно редагують сам текст єдиної статті (словника), тоді як блог — це хронологічна стрічка авторських дописів із коментарями знизу.</p>
+          </div>
+
+          <!-- Питання 5 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">5.</span> Дайте визначення веб-журналу (блогу).</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Веб-журнал (блог) — це веб-сайт із регулярно оновлюваними дописами, розміщеними у зворотному хронологічному порядку (найновіше — вгорі).</p>
+          </div>
+
+          <!-- Питання 6 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">6.</span> Які різновиди веб-журналів виділяють за змістом?</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Особистий щоденник, тематичний блог, блог учителя, блог класу та мікроблог.</p>
+          </div>
+
+          <!-- Питання 7 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">7.</span> Які безкоштовні платформи для створення блогу ви знаєте?</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Blogger (вхід через обліковий запис Google) та WordPress.com.</p>
+          </div>
+
+          <!-- Питання 8 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">8.</span> Назвіть основні етапи створення веб-журналу.</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">1) Вибір платформи → 2) Реєстрація → 3) Вибір шаблону → 4) Налаштування (назва, адреса, приватність) → 5) Перший допис → 6) Публікація.</p>
+          </div>
+
+          <!-- Питання 9 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">9.</span> Що таке шаблон блогу і які його основні елементи?</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Шаблон (тема) — набір налаштувань дизайну блогу. Основні елементи сторінки: шапка, меню рубрик, стрічка дописів, бічна панель (Sidebar) і підвал (Footer).</p>
+          </div>
+
+          <!-- Питання 10 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">10.</span> Які параметри блогу слід налаштувати перед публікацією першого допису?</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Назву й адресу латиницею, дизайн і світлий шаблон, рівень приватності, попередню модерацію коментарів, авторство та резервне копіювання.</p>
+          </div>
+
+          <!-- Питання 11 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">11.</span> Для чого в блозі використовують теги й рубрики?</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Рубрики формують головне меню розділів (до 5 пунктів), а теги (мітки) сортують дописи за ключовими словами для швидкого тематичного пошуку.</p>
+          </div>
+
+          <!-- Питання 12 -->
+          <div class="edu-card question-card print-block p-3.5">
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-semibold text-slate-800"><span class="text-indigo-600 font-bold">12.</span> Яких правил безпеки та етикету слід дотримуватися під час ведення блогу?</p>
+              <button type="button" onclick="toggleHint(this)" class="no-print shrink-0 text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-medium cursor-pointer">Підказка</button>
+            </div>
+            <p class="answer-hint hidden mt-2 pt-2 border-t border-slate-100 text-xs text-slate-600">Не публікувати персональні дані дітей, брати письмову згоду батьків на фото, вказувати джерела, дотримуватися авторських прав, відповідати ввічливо в робочий час.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Рекомендовані джерела -->
+      <footer class="edu-card print-block p-5 bg-slate-50/80 border-slate-200">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+          <span>Рекомендовані джерела (бібліографічний список)</span>
+        </h3>
+        <ol class="list-decimal list-inside space-y-1.5 text-xs sm:text-sm text-slate-700">
+          <li>Потієнко В. О. Графічний дизайн : рівень стандарту (вибірковий модуль для 10–11 кл.). Харків : Ранок, 2020. 160 с.</li>
+          <li>Речич Н. В. Вебтехнології : рівень стандарту (вибірковий модуль для 10–11 кл.). Харків : Ранок, 2020. 160 с.</li>
+          <li>Офісні технології : навч. посіб. / Трофименко О. Г., Прокоп Ю. В., Логінова Н. І., Чанишев Р. І. Одеса : Фенікс, 2019. 207 с.</li>
+        </ol>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- Скрипт для інтерактивного перемикання підказок у контрольних питаннях -->
+  <script>
+    function toggleHint(button) {
+      try {
+        const card = button.closest('.question-card');
+        const hint = card.querySelector('.answer-hint');
+        if (!hint) return;
+        const isHidden = hint.classList.contains('hidden');
+        if (isHidden) {
+          hint.classList.remove('hidden');
+          button.textContent = 'Сховати';
+        } else {
+          hint.classList.add('hidden');
+          button.textContent = 'Підказка';
+        }
+      } catch (err) {
+        console.error('Помилка перемикання підказки:', err);
+      }
+    }
+  </script>
+</body>
+</html>
