@@ -1,0 +1,90 @@
+body{
+	display: flex;
+	justify-content: center;
+	background-color:darkslategrey;
+	}
+
+h1{
+	background-color: gray;
+	border:2px solid lightgrey;
+	border-radius: 10px;
+	margin-right: 15px;
+	margin-left: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	box-shadow: 0 0 10px white;
+}
+.mains{background-color: lavender;
+	text-align: center;
+	width: 800px;
+	box-shadow: 0 0 10px white;
+	border-radius: 10px;
+	padding-bottom: 15px;
+}
+.wrapper{
+	background-color: gray;
+	border:2px solid lightgrey;
+	border-radius: 10px;
+	margin-right: 15px;
+	margin-left: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	box-shadow: 0 0 10px white;
+
+}
+.task{
+	background-color: darkseagreen;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	box-shadow: 0 0 10px white;
+	font-size: 14pt;
+	margin: 15px;
+	border-radius: 10px;
+
+}
+.internal{
+	display:flex;
+	justify-content: space-around;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	box-shadow: 0 0 10px white;
+	font-size: 14pt;
+	margin: 15px;
+	border-radius: 10px;
+}
+
+.left{
+	width: 45%;
+	box-shadow: 0 0 10px white;
+	border-radius: 10px;
+}
+.right {
+	width: 45%;
+	box-shadow: 0 0 10px white;
+	border-radius: 10px;
+}
+img{
+	margin-top: 5px;
+}
+
+button{
+	width:120px;
+	height: 35px;
+	border-radius: 10px;
+	font-size: 12pt;
+	margin-left: 5px;
+	margin-right: 5px;  
+}
+button:hover{
+	box-shadow: 0 0 10px white;
+	border-radius: 5px;
+	background-color: lightskyblue;
+
+
+}
+#out{
+	padding-top: 15px;
+	padding-left: 25px;
+	text-align: left;
+	text-shadow: 0 0 10px white;
+}

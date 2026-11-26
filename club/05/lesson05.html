@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гурток інформатики · Заняття 5 · Створюємо просту форму</title>
+<style>
+  :root{
+    --ink:#0d233a;
+    --ink-soft:#34526f;
+    --blue:#2563eb;
+    --blue-deep:#1e40af;
+    --sky:#dbeafe;
+    --mint:#dcfce7;
+    --amber:#fef3c7;
+    --rose:#ffe4e6;
+    --violet:#ede9fe;
+    --line:#d3e3f3;
+    --card:#ffffff;
+    --bg1:#f2f7fd;
+    --bg2:#e6eefb;
+    --green:#16a34a;
+    --violet2:#7c3aed;
+    --rose2:#e11d48;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Roboto,system-ui,-apple-system,sans-serif;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 5% -10%, #dbeafe 0%, transparent 60%),
+      radial-gradient(1000px 500px at 100% 5%, #dcfce7 0%, transparent 55%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
+    color:var(--ink);
+    line-height:1.65;
+    padding:2rem 1.2rem 4rem;
+    min-height:100vh;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    background:linear-gradient(135deg,#ffffff 0%,#f0fdf4 100%);
+    border-radius:36px;
+    padding:2.6rem 2.4rem;
+    box-shadow:0 30px 60px -30px rgba(13,52,110,.35), 0 2px 0 #ffffff inset;
+    border:1px solid rgba(255,255,255,.9);
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1.25fr 1fr;
+    gap:2rem;
+    align-items:center;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:auto -80px -120px auto;
+    width:320px;height:320px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #bbf7d0, transparent 70%);
+    z-index:0;
+  }
+  .hero-text{position:relative;z-index:1;}
+  .kicker{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:var(--mint);color:#14532d;
+    font-weight:700;font-size:.82rem;letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:.45rem 1rem;border-radius:999px;
+    margin-bottom:1rem;
+  }
+  .kicker .lvl{
+    background:var(--green);color:#fff;
+    width:22px;height:22px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:.75rem;
+  }
+  .hero h1{
+    font-size:clamp(1.9rem, 4vw, 2.9rem);
+    line-height:1.15;
+    letter-spacing:-.02em;
+    color:var(--ink);
+    margin-bottom:.7rem;
+  }
+  .hero h1 span{
+    background:linear-gradient(90deg, var(--green), var(--blue));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{color:var(--ink-soft);font-size:1.08rem;max-width:52ch;}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem;
+  }
+  .meta-chip{
+    display:inline-flex;align-items:center;gap:.4rem;
+    background:#fff;border:1px solid var(--line);
+    padding:.35rem .85rem;border-radius:12px;
+    font-size:.85rem;font-weight:600;color:var(--ink-soft);
+  }
+  .meta-chip svg{width:16px;height:16px;}
+  .hero-svg{position:relative;z-index:1;display:flex;justify-content:center;}
+  .hero-svg svg{width:100%;max-width:340px;height:auto;
+    filter:drop-shadow(0 20px 30px rgba(22,163,74,.2));}
+
+  /* SECTION */
+  section{margin-top:3rem;}
+  .section-head{display:flex;align-items:center;gap:1rem;margin-bottom:.6rem;}
+  .section-icon{
+    width:56px;height:56px;flex-shrink:0;
+    border-radius:18px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#dcfce7,#eff6ff);
+    border:1px solid var(--line);
+    box-shadow:0 8px 18px -10px rgba(22,163,74,.35);
+  }
+  .section-icon svg{width:30px;height:30px;}
+  .section-head h2{
+    font-size:clamp(1.5rem,2.6vw,2rem);
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .section-sub{
+    color:var(--ink-soft);font-size:1.05rem;margin-bottom:1.4rem;
+    max-width:75ch;
+  }
+
+  /* AGENDA */
+  .agenda{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1rem;
+    margin-top:1.4rem;
+  }
+  .agenda-item{
+    position:relative;
+    background:#fff;
+    border-radius:20px;
+    padding:1.2rem 1.1rem 1.1rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 12px 26px -22px rgba(13,52,110,.4);
+  }
+  .agenda-item .time{
+    font-size:.78rem;font-weight:800;letter-spacing:.06em;
+    color:var(--green);text-transform:uppercase;
+    margin-bottom:.4rem;
+    display:flex;align-items:center;gap:.4rem;
+  }
+  .agenda-item .time .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--green);
+  }
+  .agenda-item b{color:var(--ink);display:block;font-size:1rem;margin-bottom:.2rem;}
+  .agenda-item p{color:var(--ink-soft);font-size:.88rem;}
+
+  /* ИНТЕРАКТИВНАЯ АКТУАЛИЗАЦИЯ (Дешифратор тегов) */
+  .warmup-box{
+    background:linear-gradient(135deg,#fffbeb,#fef3c7);
+    border:2px solid #fde68a;
+    border-radius:28px;
+    padding:2rem;
+    box-shadow:0 20px 45px -25px rgba(245,158,11,.35);
+  }
+  .warmup-top{
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:1rem;margin-bottom:1.2rem;
+  }
+  .score-pill{
+    background:#fff;border:2px solid #f59e0b;
+    padding:.45rem 1rem;border-radius:999px;
+    font-weight:800;color:#92400e;font-size:.95rem;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .match-board{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.5rem;
+    margin-top:1rem;
+  }
+  @media (max-width:768px){ .match-board{grid-template-columns:1fr;} }
+  .match-col h4{
+    font-size:.9rem;text-transform:uppercase;letter-spacing:.06em;
+    color:#92400e;margin-bottom:.8rem;
+  }
+  .match-btn{
+    width:100%;
+    text-align:left;
+    background:#fff;
+    border:2px solid #fcd34d;
+    border-radius:14px;
+    padding:.95rem 1.1rem;
+    margin-bottom:.7rem;
+    font-size:.98rem;
+    font-weight:600;
+    color:var(--ink);
+    cursor:pointer;
+    transition:all .18s ease;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .match-btn:hover:not(:disabled){
+    transform:translateY(-2px);
+    border-color:#f59e0b;
+    box-shadow:0 8px 18px -10px rgba(245,158,11,.5);
+  }
+  .match-btn.selected{
+    background:#dbeafe;border-color:#2563eb;color:#1e40af;
+    box-shadow:0 0 0 3px rgba(37,99,235,.2);
+  }
+  .match-btn.matched{
+    background:#dcfce7;border-color:#16a34a;color:#14532d;
+    cursor:default;opacity:.92;
+  }
+  .match-btn.wrong{
+    background:#ffe4e6;border-color:#e11d48;color:#9f1239;
+    animation:shake .35s ease;
+  }
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-6px);}
+    75%{transform:translateX(6px);}
+  }
+  .match-btn code{
+    background:#0b1a2b;color:#7dd3fc;
+    padding:.25rem .6rem;border-radius:8px;
+    font-family:"JetBrains Mono",monospace;font-size:.88rem;
+  }
+  .warmup-status{
+    margin-top:1rem;padding:1rem 1.2rem;
+    background:#fff;border-radius:14px;
+    font-weight:600;color:#92400e;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;
+  }
+  .btn-reset{
+    background:#f59e0b;color:#fff;border:0;
+    padding:.5rem 1rem;border-radius:10px;
+    font-weight:700;cursor:pointer;font-size:.88rem;
+  }
+  .btn-reset:hover{background:#d97706;}
+
+  /* GRIDS + TILES */
+  .grid-3{
+    display:grid;gap:1.2rem;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    margin-top:1.2rem;
+  }
+  .grid-2{
+    display:grid;gap:1.2rem;
+    grid-template-columns:1fr 1fr;margin-top:1.2rem;
+  }
+  @media (max-width:820px){ .grid-2{grid-template-columns:1fr;} }
+  .tile{
+    background:#fff;
+    border-radius:22px;
+    padding:1.4rem 1.3rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 12px 26px -22px rgba(13,52,110,.4);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .tile:hover{
+    transform:translateY(-4px);
+    border-color:#bbf7d0;
+    box-shadow:0 22px 40px -22px rgba(22,163,74,.25);
+  }
+  .tile .ico{width:44px;height:44px;margin-bottom:.7rem;}
+  .tile h4{font-size:1.1rem;margin-bottom:.35rem;color:var(--ink);}
+  .tile p{color:var(--ink-soft);font-size:.95rem;}
+  .tile code, p code, li code{
+    background:#eef3f8;padding:.12rem .5rem;border-radius:6px;
+    font-family:"JetBrains Mono","Fira Code",monospace;
+    font-size:.88em;color:#1e40af;
+  }
+
+  /* CALLOUTS */
+  .callout{
+    display:flex;gap:1rem;align-items:flex-start;
+    background:linear-gradient(135deg,#fffbeb,#fff7e0);
+    border:1px solid #fde68a;
+    border-left:6px solid #f59e0b;
+    border-radius:20px;
+    padding:1.2rem 1.4rem;
+    margin:1.4rem 0;
+  }
+  .callout svg{flex-shrink:0;width:30px;height:30px;margin-top:2px;}
+  .callout p{color:#5c4212;font-size:1rem;}
+  .callout.info{
+    background:linear-gradient(135deg,#eff6ff,#e0edff);
+    border-color:#bfdbfe;border-left-color:var(--blue);
+  }
+  .callout.info p{color:#1e3a8a;}
+  .callout.good{
+    background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+    border-color:#86efac;border-left-color:var(--green);
+  }
+  .callout.good p{color:#14532d;}
+
+  /* CODE */
+  .code{
+    background:#0b1a2b;
+    border-radius:22px;
+    overflow:hidden;
+    margin:1.2rem 0;
+    box-shadow:0 22px 44px -30px #0a1a2e, 0 0 0 1px #1c3a56 inset;
+  }
+  .code-bar{
+    display:flex;align-items:center;gap:.5rem;
+    padding:.75rem 1.1rem;
+    background:#0e2238;
+    border-bottom:1px solid #16324c;
+  }
+  .code-bar .d{width:11px;height:11px;border-radius:50%;}
+  .code-bar .d1{background:#ff5f57;}
+  .code-bar .d2{background:#febc2e;}
+  .code-bar .d3{background:#28c840;}
+  .code-bar .fname{
+    margin-left:.6rem;color:#7fa8c9;
+    font-family:"JetBrains Mono",monospace;font-size:.82rem;
+  }
+  pre{
+    padding:1.3rem 1.5rem;
+    color:#d4e6ff;
+    font-family:"JetBrains Mono","Fira Code",monospace;
+    font-size:.9rem;line-height:1.7;
+    overflow-x:auto;
+  }
+  .k{color:#7dd3fc;}
+  .a{color:#fbbf24;}
+  .v{color:#86efac;}
+  .cm{color:#64748b;font-style:italic;}
+  .p{color:#e2e8f0;}
+
+  /* LIVE EDITOR */
+  .editor-grid{
+    display:grid;gap:1.2rem;grid-template-columns:1fr 1fr;
+    margin-top:1.2rem;
+  }
+  @media (max-width:900px){ .editor-grid{grid-template-columns:1fr;} }
+  .editor-label{
+    font-size:.8rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:#14532d;
+    margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;
+  }
+  .editor-label .pin{width:8px;height:8px;border-radius:50%;background:var(--green);}
+  #liveCode{
+    width:100%;
+    min-height:430px;
+    padding:1.3rem 1.4rem;
+    background:#0b1a2b;color:#d4e6ff;
+    font-family:"JetBrains Mono","Fira Code",monospace;
+    font-size:.86rem;line-height:1.7;
+    border:0;border-radius:22px;resize:vertical;
+    box-shadow:0 22px 44px -30px #0a1a2e, 0 0 0 1px #1c3a56 inset;
+    outline:none;
+    tab-size:2;
+  }
+  #liveCode:focus{outline:2px solid var(--green);outline-offset:2px;}
+  .preview{
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:#fff;
+    box-shadow:0 18px 40px -30px rgba(13,52,110,.4);
+    height:100%;
+    min-height:430px;
+  }
+  .preview iframe{
+    width:100%;height:100%;min-height:430px;border:0;display:block;background:#fff;
+  }
+
+  /* DIAGRAM */
+  .diagram{
+    background:#fff;border-radius:26px;padding:1.6rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 18px 40px -30px rgba(13,52,110,.35);
+    margin-top:1.2rem;
+    display:flex;justify-content:center;
+    overflow-x:auto;
+  }
+  .diagram svg{max-width:100%;height:auto;}
+
+  /* TAG LIST */
+  .tag-list{
+    display:grid;gap:.7rem;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    margin-top:1.2rem;
+  }
+  .tag-item{
+    display:flex;align-items:flex-start;gap:.9rem;
+    background:#fff;border-radius:16px;
+    padding:.95rem 1rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 8px 18px -18px rgba(13,52,110,.5);
+  }
+  .tag-item .code-tag{
+    flex-shrink:0;
+    font-family:"JetBrains Mono",monospace;
+    font-size:.8rem;font-weight:700;
+    background:#0b1a2b;color:#86efac;
+    padding:.35rem .65rem;border-radius:8px;
+    white-space:nowrap;
+  }
+  .tag-item p{font-size:.9rem;color:var(--ink-soft);}
+
+  /* SIMPLE EXAMPLE SHOWCASE */
+  .simple-split{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:1.4rem;
+    align-items:stretch;margin-top:1.2rem;
+  }
+  @media (max-width:850px){ .simple-split{grid-template-columns:1fr;} }
+  .simple-result{
+    background:#fff;border-radius:22px;padding:1.6rem;
+    border:2px dashed #93c5fd;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .simple-result-label{
+    font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;
+    font-weight:800;color:var(--blue);margin-bottom:1rem;
+  }
+  .demo-form-clean label{
+    display:block;font-weight:700;font-size:.95rem;margin-bottom:.35rem;color:var(--ink);
+  }
+  .demo-form-clean input{
+    width:100%;padding:.65rem .9rem;border:2px solid #cbd5e1;border-radius:10px;
+    font-size:1rem;margin-bottom:1rem;
+  }
+  .demo-form-clean input:focus{outline:none;border-color:var(--blue);}
+  .demo-form-clean button{
+    background:var(--blue);color:#fff;border:0;padding:.7rem 1.3rem;
+    border-radius:10px;font-weight:700;font-size:.95rem;cursor:pointer;
+  }
+  .demo-form-clean button:hover{background:var(--blue-deep);}
+  .demo-toast{
+    margin-top:.8rem;padding:.6rem .9rem;border-radius:10px;
+    background:var(--mint);color:#14532d;font-weight:600;font-size:.9rem;
+    display:none;
+  }
+
+  /* QUIZ */
+  .quiz-grid{
+    display:grid;gap:1.1rem;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    margin-top:1.4rem;
+  }
+  .quiz{
+    background:#fff;border-radius:22px;padding:1.4rem 1.4rem 1.2rem;
+    border:1px solid #eaf1fa;
+    box-shadow:0 14px 30px -24px rgba(13,52,110,.5);
+    cursor:pointer;
+    transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .quiz::before{
+    content:"";
+    position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:linear-gradient(180deg,var(--green),var(--blue));
+    opacity:.9;
+  }
+  .quiz:hover{transform:translateY(-3px);border-color:#bbf7d0;box-shadow:0 22px 36px -24px rgba(22,163,74,.35);}
+  .quiz .q{
+    display:flex;gap:.7rem;align-items:flex-start;
+    font-weight:600;font-size:1.02rem;color:var(--ink);
+    margin-bottom:.6rem;
+  }
+  .quiz .q .badge{
+    flex-shrink:0;width:26px;height:26px;border-radius:50%;
+    background:var(--mint);color:#14532d;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.8rem;font-weight:800;
+  }
+  .quiz .hint{
+    font-size:.88rem;color:#94a3b8;
+    transition:opacity .2s;
+    display:flex;align-items:center;gap:.4rem;
+  }
+  .quiz .answer{
+    max-height:0;opacity:0;overflow:hidden;
+    transition:max-height .35s ease, opacity .3s ease, margin-top .3s ease, padding .3s ease;
+    color:#14532d;background:var(--mint);
+    border-radius:12px;padding:0 1rem;
+    font-size:.95rem;font-weight:600;
+  }
+  .quiz.open .answer{
+    max-height:180px;opacity:1;
+    padding:.7rem 1rem;margin-top:.7rem;
+  }
+  .quiz.open .hint{opacity:0;height:0;margin:0;}
+
+  /* REFLECTION (Інтерактивна рефлексія) */
+  .refl-box{
+    background:linear-gradient(135deg,#ede9fe,#f5f3ff);
+    border:2px solid #ddd6fe;
+    border-radius:28px;
+    padding:2rem;
+    box-shadow:0 20px 45px -28px rgba(124,58,237,.35);
+  }
+  .mood-row{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:1rem;margin:1.2rem 0 1.6rem;
+  }
+  .mood-card{
+    background:#fff;border:2px solid #e9d5ff;border-radius:18px;
+    padding:1.1rem;text-align:center;cursor:pointer;
+    transition:all .18s ease;
+  }
+  .mood-card:hover{transform:translateY(-3px);border-color:var(--violet2);}
+  .mood-card.active{
+    background:#7c3aed;color:#fff;border-color:#5b21b6;
+    box-shadow:0 12px 24px -12px rgba(124,58,237,.7);
+  }
+  .mood-card .emo{font-size:2rem;display:block;margin-bottom:.35rem;}
+  .mood-card b{display:block;font-size:.96rem;}
+  .mood-card small{font-size:.82rem;opacity:.85;}
+
+  .refl-form{
+    background:#fff;border-radius:20px;padding:1.5rem;
+    border:1px solid #e9d5ff;
+    display:grid;gap:1rem;
+  }
+  .refl-field label{
+    display:block;font-weight:700;color:#4c1d95;margin-bottom:.35rem;font-size:.95rem;
+  }
+  .refl-field input, .refl-field select{
+    width:100%;padding:.7rem .95rem;border:2px solid #e2e8f0;
+    border-radius:12px;font-size:.95rem;color:var(--ink);
+  }
+  .refl-field input:focus, .refl-field select:focus{
+    outline:none;border-color:var(--violet2);
+  }
+  .btn-refl{
+    background:linear-gradient(90deg,var(--violet2),var(--blue));
+    color:#fff;border:0;padding:.85rem 1.4rem;border-radius:12px;
+    font-weight:700;font-size:1rem;cursor:pointer;justify-self:start;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-refl:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(124,58,237,.7);}
+  .refl-summary{
+    display:none;margin-top:1rem;padding:1.2rem 1.4rem;
+    background:#f0fdf4;border:2px solid #86efac;border-radius:16px;
+    color:#14532d;
+  }
+
+  /* HOMEWORK */
+  .hw{
+    background:linear-gradient(135deg,#f0fdf4,#ecfdf5);
+    border:1px solid #86efac;
+    border-radius:26px;
+    padding:1.8rem 1.9rem;
+    margin-top:1.4rem;
+  }
+  .hw h3{
+    color:#14532d;font-size:1.25rem;margin-bottom:.8rem;
+    display:flex;align-items:center;gap:.6rem;
+  }
+  .hw h3 svg{width:26px;height:26px;}
+  .hw ol{padding-left:1.4rem;color:#14532d;}
+  .hw ol li{margin-bottom:.5rem;font-size:.98rem;}
+
+  footer{
+    margin-top:3.5rem;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:.92rem;
+    display:flex;align-items:center;justify-content:center;gap:.6rem;
+  }
+  footer svg{width:26px;height:26px;}
+
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr;padding:2rem 1.6rem;}
+    .hero-svg{order:-1;}
+    .hero-svg svg{max-width:220px;}
+    body{padding:1.2rem .8rem 3rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="hero-text">
+      <span class="kicker"><span class="lvl">5</span> Гурток інформатики · Заняття 5</span>
+      <h1>Створюємо <span>просту форму</span></h1>
+      <p>Досі наші сторінки лише «показували» інформацію. Сьогодні навчимо сайт <strong>слухати</strong> користувача: приймати ім'я, повідомлення та вибір варіантів через HTML-форми.</p>
+      <div class="hero-meta">
+        <span class="meta-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          60 хвилин
+        </span>
+        <span class="meta-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+          1 курс · Вчитель початкових класів
+        </span>
+        <span class="meta-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h10M7 14h6"/></svg>
+          Гра + живий редактор
+        </span>
+      </div>
+    </div>
+    <div class="hero-svg">
+      <!-- Велика SVG-ілюстрація форми -->
+      <svg viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fg1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#16a34a"/><stop offset="1" stop-color="#2563eb"/>
+          </linearGradient>
+          <linearGradient id="fg2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f0fdf4"/>
+          </linearGradient>
+          <filter id="fsh" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#16a34a" flood-opacity="0.22"/>
+          </filter>
+        </defs>
+        <!-- Картка форми -->
+        <rect x="55" y="32" width="290" height="276" rx="22" fill="url(#fg2)" stroke="#bbf7d0" stroke-width="2" filter="url(#fsh)"/>
+        <!-- Заголовок -->
+        <rect x="82" y="56" width="130" height="14" rx="7" fill="#14532d"/>
+        <!-- Поле 1 -->
+        <rect x="82" y="86" width="60" height="7" rx="3.5" fill="#64748b"/>
+        <rect x="82" y="98" width="236" height="34" rx="9" fill="#ffffff" stroke="#93c5fd" stroke-width="2"/>
+        <rect x="94" y="111" width="95" height="8" rx="4" fill="#cbd5e1"/>
+        <!-- Поле 2 -->
+        <rect x="82" y="146" width="80" height="7" rx="3.5" fill="#64748b"/>
+        <rect x="82" y="158" width="236" height="34" rx="9" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+        <rect x="94" y="171" width="130" height="8" rx="4" fill="#cbd5e1"/>
+        <!-- Чекбокс -->
+        <rect x="82" y="206" width="18" height="18" rx="5" fill="#16a34a"/>
+        <path d="M86 215l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="108" y="211" width="140" height="8" rx="4" fill="#94a3b8"/>
+        <!-- Кнопка відправки -->
+        <rect x="82" y="242" width="236" height="40" rx="12" fill="url(#fg1)"/>
+        <text x="200" y="267" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700">Надіслати</text>
+        <!-- Бейдж тегу -->
+        <g transform="translate(24,18)">
+          <rect width="68" height="26" rx="8" fill="#0b1a2b"/>
+          <text x="34" y="17" text-anchor="middle" fill="#86efac" font-family="monospace" font-size="11" font-weight="700">&lt;form&gt;</text>
+        </g>
+        <g transform="translate(302,286)">
+          <rect width="74" height="26" rx="8" fill="#0b1a2b"/>
+          <text x="37" y="17" text-anchor="middle" fill="#7dd3fc" font-family="monospace" font-size="11" font-weight="700">&lt;input&gt;</text>
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ============ 1. ІНТЕРАКТИВНА АКТУАЛІЗАЦІЯ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <h2>Актуалізація: гра «З'єднай пару»</h2>
+    </div>
+    <p class="section-sub">Перевіримо, як добре ви пам'ятаєте інструменти з попередніх 4 занять! Натисніть спочатку на <strong>код</strong> ліворуч, а потім — на його <strong>значення</strong> праворуч.</p>
+
+    <div class="warmup-box">
+      <div class="warmup-top">
+        <div>
+          <strong style="font-size:1.15rem;color:#92400e;">🎯 Знайди 5 правильних пар</strong>
+          <p style="font-size:.92rem;color:#78350f;margin-top:.2rem;">Ці теги й властивості знадобляться нам прямо сьогодні для оформлення форми.</p>
+        </div>
+        <div class="score-pill">
+          <span>Знайдено пар:</span>
+          <span id="matchScore">0 / 5</span>
+        </div>
+      </div>
+
+      <div class="match-board">
+        <div class="match-col" id="colLeft">
+          <h4>1. Обери фрагмент коду</h4>
+          <button class="match-btn" data-id="div"><code>&lt;div class="card"&gt;</code> <span>→</span></button>
+          <button class="match-btn" data-id="padding"><code>padding: 16px;</code> <span>→</span></button>
+          <button class="match-btn" data-id="radius"><code>border-radius: 12px;</code> <span>→</span></button>
+          <button class="match-btn" data-id="hover"><code>.btn:hover</code> <span>→</span></button>
+          <button class="match-btn" data-id="alt"><code>alt="Опис"</code> <span>→</span></button>
+        </div>
+        <div class="match-col" id="colRight">
+          <h4>2. Знайди його роль</h4>
+          <button class="match-btn" data-id="radius">Заокруглює кути елемента</button>
+          <button class="match-btn" data-id="alt">Текстова підказка для зображення</button>
+          <button class="match-btn" data-id="div">Контейнер-блок для групування елементів</button>
+          <button class="match-btn" data-id="hover">Стиль при наведенні курсора миші</button>
+          <button class="match-btn" data-id="padding">Внутрішній відступ від рамки до тексту</button>
+        </div>
+      </div>
+
+      <div class="warmup-status">
+        <span id="warmupMsg">💡 Натисніть на будь-який блок у лівому стовпчику, щоб почати.</span>
+        <button class="btn-reset" onclick="resetMatchGame()">Почати заново</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ПЛАН ЗАНЯТТЯ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <path d="M8 2v4M16 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01"/>
+        </svg>
+      </div>
+      <h2>План заняття (60 хвилин)</h2>
+    </div>
+    <p class="section-sub">Від найпростішого поля з однією кнопкою — до повноцінної анкети для учнів чи батьків.</p>
+
+    <div class="agenda">
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>0–7 хв</div>
+        <b>Актуалізація</b>
+        <p>Гра «З'єднай пару»: повторюємо блоки, відступи та псевдокласи.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>7–18 хв</div>
+        <b>Найпростіша форма</b>
+        <p>Розбираємо 3 головні теги: <code>&lt;form&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;button&gt;</code>.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>18–28 хв</div>
+        <b>Види полів</b>
+        <p>Текст, email, пароль, список вибору та багаторядкове поле.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>28–48 хв</div>
+        <b>Практика</b>
+        <p>Створюємо форму зворотного зв'язку для шкільного сайту.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>48–55 хв</div>
+        <b>Краса в CSS</b>
+        <p>Робимо поля зручними, додаємо підсвітку <code>:focus</code>.</p>
+      </div>
+      <div class="agenda-item">
+        <div class="time"><span class="dot"></span>55–60 хв</div>
+        <b>Квіз + рефлексія</b>
+        <p>Перевіряємо себе та заповнюємо інтерактивну картку підсумків.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. ПОЯСНЕННЯ НА НАЙПРОСТІШОМУ ПРИКЛАДІ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4z"/>
+        </svg>
+      </div>
+      <h2>Пояснення на найпростішому прикладі</h2>
+    </div>
+    <p class="section-sub">
+      Уявіть паперову анкету в школі: там є <strong>аркуш</strong> (сама анкета), <strong>підпис</strong> («Ваше ім'я»), <strong>рядок для запису</strong> і дія — <strong>віддати вчителю</strong>. У HTML форма влаштована точно так само і складається всього з 4 цеглинок!
+    </p>
+
+    <div class="simple-split">
+      <div>
+        <div class="code" style="margin:0;height:100%;">
+          <div class="code-bar">
+            <span class="d d1"></span><span class="d d2"></span><span class="d d3"></span>
+            <span class="fname">найпростіша форма (лише 6 рядків!)</span>
+          </div>
+<pre><span class="p">&lt;</span><span class="k">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="k">label</span><span class="p">&gt;</span>Як тебе звати?<span class="p">&lt;/</span><span class="k">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="k">input</span> <span class="a">type</span>=<span class="v">"text"</span> <span class="a">placeholder</span>=<span class="v">"Наприклад: Оленка"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="k">button</span> <span class="a">type</span>=<span class="v">"submit"</span><span class="p">&gt;</span>Привітатися<span class="p">&lt;/</span><span class="k">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="k">form</span><span class="p">&gt;</span></pre>
+        </div>
+      </div>
+
+      <div class="simple-result">
+        <div class="simple-result-label">👀 Ось як це працює наживо (спробуйте!):</div>
+        <form class="demo-form-clean" onsubmit="event.preventDefault(); showSimpleGreet();">
+          <label for="simpleNameInput">Як тебе звати?</label>
+          <input id="simpleNameInput" type="text" placeholder="Наприклад: Оленка" required>
+          <button type="submit">Привітатися</button>
+          <div id="simpleToast" class="demo-toast"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Розбір 4 елементів -->
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div class="tile">
+        <h4>1. <code>&lt;form&gt;…&lt;/form&gt;</code> — коробка-контейнер</h4>
+        <p>Як <code>&lt;div&gt;</code>, але розумніший: об'єднує всі поля в одну анкету, щоб браузер знав, які дані надсилати разом при натисканні кнопки.</p>
+      </div>
+      <div class="tile">
+        <h4>2. <code>&lt;label&gt;…&lt;/label&gt;</code> — підпис поля</h4>
+        <p>Пояснює людині, що саме треба ввести. Без підпису користувач бачить просто порожню рамку і не розуміє, писати туди ім'я чи телефон.</p>
+      </div>
+      <div class="tile">
+        <h4>3. <code>&lt;input&gt;</code> — поле для введення</h4>
+        <p>Одинарний тег (як <code>&lt;img&gt;</code>!). Атрибут <code>placeholder</code> показує сіру підказку всередині поля, яка зникає, коли починаєш друкувати.</p>
+      </div>
+      <div class="tile">
+        <h4>4. <code>&lt;button&gt;…&lt;/button&gt;</code> — кнопка дії</h4>
+        <p>Фінальна кнопка анкети. Атрибут <code>type="submit"</code> каже браузеру: «Усе заповнено, відправляємо форму!».</p>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/>
+      </svg>
+      <p><strong>Зверніть увагу на схожість із минулими уроками:</strong> тег <code>&lt;input&gt;</code> — одинарний, як <code>&lt;img&gt;</code> і <code>&lt;br&gt;</code>. А <code>&lt;form&gt;</code> — парний контейнер, як <code>&lt;div&gt;</code>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. РОЗШИРЮЄМО ІНСТРУМЕНТИ ФОРМИ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <path d="M8 9h8M8 13h8M8 17h5"/>
+        </svg>
+      </div>
+      <h2>Які бувають поля у формах?</h2>
+    </div>
+    <p class="section-sub">Змінюючи всього один атрибут <code>type="..."</code> у тезі <code>&lt;input&gt;</code> (або взявши два додаткові теги), ми можемо збирати будь-яку інформацію.</p>
+
+    <div class="tag-list">
+      <div class="tag-item">
+        <span class="code-tag">type="text"</span>
+        <p>Звичайний однорядковий текст: ім'я, прізвище, місто, клас.</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag">type="email"</span>
+        <p>Електронна пошта. Браузер сам перевірить, чи є символ <code>@</code>!</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag">type="number"</span>
+        <p>Лише числа (наприклад, вік учня або номер класу від 1 до 4).</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag">type="checkbox"</span>
+        <p>Прапорець-галочка: «Погоджуюсь» або вибір кількох гуртків одразу.</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag">type="radio"</span>
+        <p>Перемикач «тільки один варіант» (наприклад, зміна навчання: 1-ша чи 2-га).</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag">&lt;select&gt; + &lt;option&gt;</span>
+        <p>Випадаючий список. Працює як <code>&lt;ul&gt;</code> + <code>&lt;li&gt;</code>, тільки компактно ховається!</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag">&lt;textarea&gt;</span>
+        <p>Велике багаторядкове поле — для відгуку, питання чи твору.</p>
+      </div>
+      <div class="tag-item">
+        <span class="code-tag">required</span>
+        <p>Атрибут-охоронець: не дасть відправити форму, поки поле порожнє.</p>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+      <p><strong>Аналогія зі списками (Заняття 2):</strong> пам'ятаєте, що <code>&lt;ul&gt;</code> містить пункти <code>&lt;li&gt;</code>? Точно так само випадаючий список <code>&lt;select&gt;</code> містить варіанти вибору <code>&lt;option&gt;</code>!</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. ПРАКТИКА ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 17l-5-5 5-5M16 7l5 5-5 5"/>
+        </svg>
+      </div>
+      <h2>Практика: анкета запису на гурток</h2>
+    </div>
+    <p class="section-sub">Об'єднаємо все: картку <code>.card</code> із Заняття 4 + елементи форми + красивий CSS. Редагуйте код ліворуч і тестуйте живу форму праворуч!</p>
+
+    <div class="editor-grid">
+      <div>
+        <div class="editor-label"><span class="pin"></span>form.html — редагуйте код</div>
+        <textarea id="liveCode" spellcheck="false"><!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Запис на гурток</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #eff6ff;
+      padding: 24px;
+      color: #0d233a;
+    }
+
+    .form-card {
+      background: #ffffff;
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 28px;
+      border-radius: 20px;
+      border: 2px solid #dbeafe;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
+    }
+
+    h1 {
+      color: #2563eb;
+      font-size: 24px;
+      margin: 0 0 6px 0;
+      text-align: center;
+    }
+
+    .desc {
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+      margin: 0 0 20px 0;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #1e293b;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    /* Підсвітка поля, коли в нього клікнули */
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      background: #f8fafc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #15803d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-card">
+    <h1>🎨 Запис у творчий гурток</h1>
+    <p class="desc">Заповніть коротку анкету учасника</p>
+
+    <form onsubmit="alert('Дякуємо! Заявку прийнято 🎉'); return false;">
+      <label>Ім'я та прізвище учня:</label>
+      <input type="text" placeholder="Іван Коваленко" required>
+
+      <label>Email батьків:</label>
+      <input type="email" placeholder="mama@example.com" required>
+
+      <label>Оберіть напрямок:</label>
+      <select>
+        <option>Малювання та ліплення</option>
+        <option>Цікава інформатика</option>
+        <option>Театральна студія</option>
+      </select>
+
+      <label>Побажання або запитання:</label>
+      <textarea rows="3" placeholder="Напишіть сюди..."></textarea>
+
+      <button type="submit">Записатися на заняття</button>
+    </form>
+  </div>
+
+</body>
+</html></textarea>
+      </div>
+      <div>
+        <div class="editor-label"><span class="pin"></span>Живий результат</div>
+        <div class="preview"><iframe id="previewFrame"></iframe></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/>
+      </svg>
+      <p><strong>Спробуйте в редакторі:</strong> додайте перед кнопкою поле для вибору класу: <code>&lt;label&gt;Клас (1–4):&lt;/label&gt;</code> та <code>&lt;input type="number" min="1" max="4" placeholder="2"&gt;</code>. І зверніть увагу на <code>box-sizing: border-box;</code> — воно не дає полям вилазити за межі картки через <code>padding</code>!</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. ПЕРЕВІРТЕ СЕБЕ (КВІЗ) ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"/>
+          <circle cx="12" cy="17.5" r=".8" fill="#16a34a" stroke="none"/>
+        </svg>
+      </div>
+      <h2>Перевірте себе</h2>
+    </div>
+    <p class="section-sub">Натисніть на картку, щоб відкрити відповідь.</p>
+
+    <div class="quiz-grid">
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">1</span>Який тег обгортає всі елементи анкети в єдине ціле?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">Тег &lt;form&gt;…&lt;/form&gt;.</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">2</span>Чи потрібен закриваючий тег для &lt;input&gt;?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">Ні! &lt;input&gt; — одинарний тег, так само як &lt;img&gt; або &lt;br&gt;.</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">3</span>Що робить атрибут placeholder?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">Показує напівпрозору підказку всередині порожнього поля (приклад заповнення).</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">4</span>Чим відрізняються &lt;input type="text"&gt; і &lt;textarea&gt;?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">input — це один рядок (для імені), а textarea — велике багаторядкове поле (для коментаря).</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <span class="q"><span class="badge">5</span>Який атрибут забороняє відправляти порожнє поле?</span>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">Атрибут required (обов'язкове поле).</div>
+      </div>
+      <div class="quiz" tabindex="0">
+        <div class="q"><span class="badge">6</span>Як у CSS стилізувати поле в момент, коли користувач у нього клікнув?</div>
+        <div class="hint">↳ Натисніть, щоб побачити відповідь</div>
+        <div class="answer">За допомогою псевдокласу :focus (наприклад, input:focus { border-color: #2563eb; }).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. ПІДСУМКОВА РЕФЛЕКСІЯ ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/>
+        </svg>
+      </div>
+      <h2>Підсумкова рефлексія: заповни свою першу форму!</h2>
+    </div>
+    <p class="section-sub">Найкращий спосіб закріпити тему «Форми» — заповнити справжню інтерактивну форму про свої враження від заняття.</p>
+
+    <div class="refl-box">
+      <strong style="font-size:1.1rem;color:#4c1d95;">1. Оберіть свій настрій після заняття:</strong>
+      <div class="mood-row" id="moodRow">
+        <div class="mood-card" data-mood="🚀 Усе зрозуміло, хочу ще!">
+          <span class="emo">🚀</span>
+          <b>Супер!</b>
+          <small>Усе вийшло з першого разу</small>
+        </div>
+        <div class="mood-card" data-mood="🙂 Добре, але треба потренуватись">
+          <span class="emo">🙂</span>
+          <b>Добре</b>
+          <small>Зрозуміло, треба ще практика</small>
+        </div>
+        <div class="mood-card" data-mood="🤔 Були питання, але розібрались">
+          <span class="emo">🤔</span>
+          <b>Цікаво, але складно</b>
+          <small>Потрібна підказка викладача</small>
+        </div>
+      </div>
+
+      <form class="refl-form" onsubmit="event.preventDefault(); submitReflection();">
+        <div class="refl-field">
+          <label for="rName">2. Ваше ім'я:</label>
+          <input id="rName" type="text" placeholder="Наприклад: Олена" required>
+        </div>
+
+        <div class="refl-field">
+          <label for="rTag">3. Який тег чи прийом сподобався найбільше?</label>
+          <select id="rTag">
+            <option value="<input> з підказкою placeholder">&lt;input&gt; з підказкою placeholder</option>
+            <option value="Випадаючий список <select>">Випадаючий список &lt;select&gt;</option>
+            <option value="Ефект підсвітки поля :focus">Ефект підсвітки поля :focus</option>
+            <option value="Автоматична перевірка required / email">Автоматична перевірка required / email</option>
+          </select>
+        </div>
+
+        <div class="refl-field">
+          <label for="rIdea">4. Яку форму ви створите для свого майбутнього класу?</label>
+          <input id="rIdea" type="text" placeholder="Наприклад: анкета знайомства для батьків або вікторина для учнів" required>
+        </div>
+
+        <button type="submit" class="btn-refl">✨ Зберегти підсумок заняття</button>
+
+        <div id="reflSummary" class="refl-summary"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ ДОМАШНЄ ЗАВДАННЯ ============ -->
+  <section>
+    <div class="hw">
+      <h3>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4z"/>
+        </svg>
+        Домашнє завдання
+      </h3>
+      <ol>
+        <li>Створіть новий файл <code>anketa.html</code> (або додайте блок із формою внизу вашої візитівки з Заняття 4).</li>
+        <li>Додайте тег <code>&lt;form&gt;</code> і мінімум <strong>4 різних поля</strong>: ім'я (<code>text</code>), пошту (<code>email</code>), вибір варіанту (<code>select</code>) та повідомлення (<code>textarea</code>).</li>
+        <li>Зробіть принаймні два поля обов'язковими за допомогою атрибута <code>required</code>.</li>
+        <li>Оформіть поля в CSS: задайте <code>padding</code>, <code>border-radius</code>, <code>box-sizing: border-box;</code> та зміну кольору рамки при <code>:focus</code>.</li>
+        <li>Додайте красиву кнопку відправки з ефектом <code>:hover</code>.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#4b6f91" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 2"/>
+    </svg>
+    Гурток інформатики · Педагогічний коледж · Заняття 5 · Створюємо просту форму
+  </footer>
+
+</div>
+
+<script>
+  /* ---- 1. Інтерактивна актуалізація: гра "З'єднай пару" ---- */
+  let selectedLeft = null;
+  let matchedCount = 0;
+
+  const leftBtns = document.querySelectorAll('#colLeft .match-btn');
+  const rightBtns = document.querySelectorAll('#colRight .match-btn');
+  const scoreEl = document.getElementById('matchScore');
+  const msgEl = document.getElementById('warmupMsg');
+
+  leftBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('matched')) return;
+      leftBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedLeft = btn;
+      msgEl.textContent = '👉 Тепер оберіть правильне пояснення у правому стовпчику!';
+    });
+  });
+
+  rightBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('matched')) return;
+      if (!selectedLeft) {
+        msgEl.textContent = '⚠️ Спочатку натисніть на фрагмент коду ліворуч!';
+        return;
+      }
+
+      if (selectedLeft.dataset.id === btn.dataset.id) {
+        selectedLeft.classList.remove('selected');
+        selectedLeft.classList.add('matched');
+        btn.classList.add('matched');
+        selectedLeft = null;
+        matchedCount++;
+        scoreEl.textContent = matchedCount + ' / 5';
+
+        if (matchedCount === 5) {
+          msgEl.innerHTML = '🎉 <strong>Чудово! Усі 5 пар знайдено!</strong> Ви готові створювати форми.';
+        } else {
+          msgEl.textContent = '✅ Правильно! Обирайте наступний фрагмент ліворуч.';
+        }
+      } else {
+        btn.classList.add('wrong');
+        msgEl.textContent = '❌ Трохи не те — спробуйте інший варіант!';
+        setTimeout(() => btn.classList.remove('wrong'), 400);
+      }
+    });
+  });
+
+  function resetMatchGame() {
+    selectedLeft = null;
+    matchedCount = 0;
+    scoreEl.textContent = '0 / 5';
+    msgEl.textContent = '💡 Натисніть на будь-який блок у лівому стовпчику, щоб почати.';
+    leftBtns.forEach(b => b.classList.remove('selected', 'matched'));
+    rightBtns.forEach(b => b.classList.remove('matched', 'wrong'));
+  }
+
+  /* ---- 2. Найпростіший приклад форми ---- */
+  function showSimpleGreet() {
+    const name = document.getElementById('simpleNameInput').value.trim();
+    const toast = document.getElementById('simpleToast');
+    if (!name) return;
+    toast.style.display = 'block';
+    toast.textContent = '👋 Привіт, ' + name + '! Форма успішно прочитала твоє імʼя!';
+  }
+
+  /* ---- 3. Живий редактор ---- */
+  const codeEl = document.getElementById('liveCode');
+  const frame  = document.getElementById('previewFrame');
+
+  function render(){
+    const html = codeEl.value;
+    const doc = frame.contentDocument || frame.contentWindow.document;
+    doc.open();
+    doc.write(html);
+    doc.close();
+  }
+
+  render();
+
+  let debounce;
+  codeEl.addEventListener('input', () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(render, 200);
+  });
+
+  codeEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab'){
+      e.preventDefault();
+      const start = codeEl.selectionStart;
+      const end = codeEl.selectionEnd;
+      codeEl.value = codeEl.value.substring(0, start) + '  ' + codeEl.value.substring(end);
+      codeEl.selectionStart = codeEl.selectionEnd = start + 2;
+    }
+  });
+
+  /* ---- 4. Квіз ---- */
+  document.querySelectorAll('.quiz').forEach(card => {
+    const toggle = () => card.classList.toggle('open');
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+  });
+
+  /* ---- 5. Інтерактивна рефлексія ---- */
+  let chosenMood = '🚀 Усе зрозуміло, хочу ще!';
+  const moodCards = document.querySelectorAll('.mood-card');
+  moodCards[0].classList.add('active');
+
+  moodCards.forEach(card => {
+    card.addEventListener('click', () => {
+      moodCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      chosenMood = card.dataset.mood;
+    });
+  });
+
+  function submitReflection() {
+    const name = document.getElementById('rName').value.trim();
+    const tag  = document.getElementById('rTag').value;
+    const idea = document.getElementById('rIdea').value.trim();
+    const box  = document.getElementById('reflSummary');
+
+    box.style.display = 'block';
+    box.innerHTML =
+      '<strong>🎓 Картка рефлексії сформована!</strong><br>' +
+      '• <b>Учасник:</b> ' + name + '<br>' +
+      '• <b>Настрій:</b> ' + chosenMood + '<br>' +
+      '• <b>Фаворит заняття:</b> ' + tag + '<br>' +
+      '• <b>Ідея для класу:</b> «' + idea + '»';
+  }
+</script>
+</body>
+</html>
