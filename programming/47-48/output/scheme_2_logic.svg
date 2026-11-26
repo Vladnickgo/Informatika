@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="691.2pt" height="259.992pt" viewBox="0 0 691.2 259.992" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-25T22:22:05.969775</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 259.992 
+L 691.2 259.992 
+L 691.2 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 35.91 232.56 
+L 213.912 232.56 
+Q 225.072 232.56 225.072 221.472 
+L 225.072 64.0224 
+Q 225.072 52.9344 213.912 52.9344 
+L 35.91 52.9344 
+Q 24.75 52.9344 24.75 64.0224 
+L 24.75 221.472 
+Q 24.75 232.56 35.91 232.56 
+z
+" clip-path="url(#p8e853c3442)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 35.352 66.24 
+L 214.47 66.24 
+Q 217.26 66.24 217.26 63.468 
+L 217.26 63.468 
+Q 217.26 60.696 214.47 60.696 
+L 35.352 60.696 
+Q 32.562 60.696 32.562 63.468 
+L 32.562 63.468 
+Q 32.562 66.24 35.352 66.24 
+z
+" clip-path="url(#p8e853c3442)" style="fill: #0071e3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 256.32 232.56 
+L 434.322 232.56 
+Q 445.482 232.56 445.482 221.472 
+L 445.482 64.0224 
+Q 445.482 52.9344 434.322 52.9344 
+L 256.32 52.9344 
+Q 245.16 52.9344 245.16 64.0224 
+L 245.16 221.472 
+Q 245.16 232.56 256.32 232.56 
+z
+" clip-path="url(#p8e853c3442)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 255.762 66.24 
+L 434.88 66.24 
+Q 437.67 66.24 437.67 63.468 
+L 437.67 63.468 
+Q 437.67 60.696 434.88 60.696 
+L 255.762 60.696 
+Q 252.972 60.696 252.972 63.468 
+L 252.972 63.468 
+Q 252.972 66.24 255.762 66.24 
+z
+" clip-path="url(#p8e853c3442)" style="fill: #248a3d"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 476.73 232.56 
+L 654.732 232.56 
+Q 665.892 232.56 665.892 221.472 
+L 665.892 64.0224 
+Q 665.892 52.9344 654.732 52.9344 
+L 476.73 52.9344 
+Q 465.57 52.9344 465.57 64.0224 
+L 465.57 221.472 
+Q 465.57 232.56 476.73 232.56 
+z
+" clip-path="url(#p8e853c3442)" style="fill: #f5f5f7; stroke: #e5e5ea; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 476.172 66.24 
+L 655.29 66.24 
+Q 658.08 66.24 658.08 63.468 
+L 658.08 63.468 
+Q 658.08 60.696 655.29 60.696 
+L 476.172 60.696 
+Q 473.382 60.696 473.382 63.468 
+L 473.382 63.468 
+Q 473.382 66.24 476.172 66.24 
+z
+" clip-path="url(#p8e853c3442)" style="fill: #c4001d"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 14.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="345.6" y="37.81445" transform="rotate(-0 345.6 37.81445)">Логічні операції для побудови складних умов</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 12.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="124.911" y="90.3804" transform="rotate(-0 124.911 90.3804)">Операція «І» (AND)</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(66.666937 132.938156)">Істина, коли ОБИДВІ</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(67.136906 146.262741)">умови виконуються.</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(124.911 159.587325)"/>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(98.337094 172.911909)">Приклад:</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(74.341687 186.236494)">вік &gt; 6  І  вік &lt; 11</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 12.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="345.321" y="90.3804" transform="rotate(-0 345.321 90.3804)">Операція «АБО» (OR)</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(273.095156 132.938156)">Істина, коли виконується</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(286.115062 146.262741)">ХОЧА Б ОДНА умова.</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(345.321 159.587325)"/>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(318.747094 172.911909)">Приклад:</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(268.457906 186.236494)">день = Сб  АБО  день = Нд</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1d1d1f" x="565.731" y="90.3804" transform="rotate(-0 565.731 90.3804)">Операція «НЕ» (NOT)</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(495.903937 132.938156)">Змінює результат умови</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(516.353906 146.262741)">на протилежний.</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(565.731 159.587325)"/>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(539.157094 172.911909)">Приклад:</text>
+    <text style="font-size: 10.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #86868b" transform="translate(510.4215 186.236494)">НЕ (пароль = 1234)</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p8e853c3442">
+   <rect x="10.8" y="10.8" width="669.6" height="238.392"/>
+  </clipPath>
+ </defs>
+</svg>

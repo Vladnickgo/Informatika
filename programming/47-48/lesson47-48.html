@@ -1,0 +1,2595 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Практичне заняття №11 — Логічні вирази, математичні дії, дії з текстовими виразами (Scratch 3.0)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ==========================================================================
+       ЗМІННІ ДИЗАЙНУ ТА ФІРМОВА ПАЛІТРА SCRATCH 3.0 (АКЦЕНТ — ОПЕРАТОРИ)
+       ========================================================================== */
+    :root {
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F1F5F9;
+      --border-light: #E2E8F0;
+      --border-med: #CBD5E1;
+      --text-main: #1E293B;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+
+      /* Акценти теми та кольори категорій Scratch 3.0 */
+      --accent-green: #40BF4A;
+      --accent-green-dark: #2E8B57;
+      --sc-operators: #59C059;
+      --sc-operators-border: #389438;
+      --sc-operators-deep: #46A846;
+
+      --sc-motion: #4C97FF;
+      --sc-motion-border: #3373CC;
+      --sc-looks: #9966FF;
+      --sc-looks-border: #774DCB;
+      --sc-events: #FFBF00;
+      --sc-events-border: #CC9900;
+      --sc-control: #FFAB19;
+      --sc-control-border: #CF8B17;
+      --sc-sensing: #5CB1D6;
+      --sc-sensing-border: #2E8EB8;
+      --sc-variables: #FF8C1A;
+      --sc-variables-border: #DB6E00;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.07), 0 2px 4px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em;
+    }
+
+    /* ==========================================================================
+       ВЕРХНЯ ЗАКРІПЛЕНА ПАНЕЛЬ НАВІГАЦІЇ (.no-print)
+       ========================================================================== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 10px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .top-nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .nav-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 9px;
+      border-radius: 8px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-link:hover {
+      background: #ECFDF5;
+      color: var(--accent-green-dark);
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent-green-dark);
+      color: #FFFFFF;
+      border: 1.5px solid #236B43;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(46, 139, 87, 0.22);
+      transition: transform 0.12s, background 0.15s;
+    }
+
+    .btn-print:hover {
+      background: #236B43;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       ОСНОВНИЙ КОНТЕЙНЕР ТА ТИПОГРАФІКА
+       ========================================================================== */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 26px 20px 60px;
+    }
+
+    h1, h2, h3, h4, .section-header, .level-banner {
+      break-after: avoid;
+      page-break-after: avoid;
+      color: var(--text-main);
+    }
+
+    p {
+      margin-bottom: 11px;
+      color: var(--text-secondary);
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Шапка заняття */
+    .hero-header {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F0FDF4 100%);
+      border: 1px solid #BBF7D0;
+      border-top: 5px solid var(--accent-green);
+      border-radius: var(--radius-lg);
+      padding: 26px 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #DCFCE7;
+      color: #166534;
+      border: 1px solid #86EFAC;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 5px 13px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(1.42rem, 2.8vw, 1.95rem);
+      font-weight: 800;
+      line-height: 1.28;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+    }
+
+    /* Паспорт заняття */
+    .passport-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .span-2 {
+      grid-column: 1 / -1;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .passport-grid .card {
+      margin-bottom: 0;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      width: 27px;
+      height: 27px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.92rem;
+      flex-shrink: 0;
+    }
+
+    .clean-list {
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .clean-list li {
+      margin-bottom: 6px;
+    }
+
+    .clean-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Візуальна таймлайн-смужка на 45 хв */
+    .timeline-bar {
+      display: flex;
+      height: 30px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border-med);
+      margin: 12px 0 10px;
+    }
+
+    .tl-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 0.76rem;
+      font-weight: 800;
+      white-space: nowrap;
+      padding: 0 4px;
+    }
+
+    .tl-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.81rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .tl-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+
+    .swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Заголовки розділів */
+    .section-block {
+      margin-top: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    .section-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    h3 {
+      font-size: 1.06rem;
+      font-weight: 800;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    /* Виноски (Callouts) */
+    .callout {
+      border-radius: var(--radius-md);
+      padding: 15px 18px;
+      margin: 16px 0;
+      border-left: 4px solid var(--accent-green);
+      background: #F0FDF4;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .callout.blue { border-left-color: var(--sc-motion); background: #EFF6FF; }
+    .callout.amber { border-left-color: var(--sc-variables); background: #FFF7ED; }
+    .callout.purple { border-left-color: var(--sc-looks); background: #F5F3FF; }
+
+    .callout-title {
+      font-weight: 800;
+      font-size: 0.94rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .callout p, .callout li {
+      font-size: 0.91rem;
+      color: var(--text-secondary);
+    }
+
+    /* Сітки */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      margin: 14px 0;
+    }
+
+    .script-layout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ==========================================================================
+       ТАБЛИЦІ
+       ========================================================================== */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: var(--bg-subtle);
+    }
+
+    th {
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-main);
+      padding: 10px 13px;
+      border-bottom: 2px solid var(--border-light);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      padding: 10px 13px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+
+    tr {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #FAFCFF;
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #FFFFFF;
+    }
+
+    .step-badge.lvl1 { background: var(--accent-green-dark); }
+    .step-badge.lvl2 { background: var(--sc-motion); }
+    .step-badge.lvl3 { background: var(--sc-looks); }
+
+    /* Бейджі Істина / Хиба */
+    .bool-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .bool-true {
+      background: #DCFCE7;
+      color: #166534;
+      border: 1px solid #86EFAC;
+    }
+
+    .bool-false {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #FCA5A5;
+    }
+
+    /* ==========================================================================
+       АВТЕНТИЧНІ CSS-БЛОКИ SCRATCH 3.0 (УСІ ТИПИ: HAT, STACK, C-BLOCK, OVAL, HEX)
+       ========================================================================== */
+    .sb-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      user-select: none;
+      max-width: 100%;
+    }
+
+    .sb-block {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 6px 12px;
+      min-height: 34px;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.82rem;
+      line-height: 1.25;
+      border-radius: 6px;
+      border: 1.5px solid transparent;
+      margin-bottom: -1px;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.13);
+    }
+
+    /* Пазловий виступ знизу */
+    .sb-block.sb-notch::after {
+      content: "";
+      position: absolute;
+      left: 15px;
+      bottom: -5px;
+      width: 16px;
+      height: 5px;
+      background: inherit;
+      border-left: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-right: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      z-index: 2;
+    }
+
+    /* Виїмка зверху */
+    .sb-block.sb-cmd::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: -1.5px;
+      width: 16px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.28);
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Шапка події */
+    .sb-hat {
+      border-top-left-radius: 22px 13px;
+      border-top-right-radius: 22px 13px;
+      padding-top: 9px;
+      padding-bottom: 7px;
+    }
+
+    /* Кольори категорій */
+    .sb-events    { background-color: var(--sc-events);    border-color: var(--sc-events-border); text-shadow: 0 1px 1px rgba(125, 86, 0, 0.35); }
+    .sb-looks     { background-color: var(--sc-looks);     border-color: var(--sc-looks-border); }
+    .sb-control   { background-color: var(--sc-control);   border-color: var(--sc-control-border); }
+    .sb-sensing   { background-color: var(--sc-sensing);   border-color: var(--sc-sensing-border); }
+    .sb-operators { background-color: var(--sc-operators); border-color: var(--sc-operators-border); }
+    .sb-variables { background-color: var(--sc-variables); border-color: var(--sc-variables-border); }
+
+    /* Біле овальне поле введення */
+    .sb-input {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      min-height: 21px;
+      padding: 1px 8px;
+      background: #FFFFFF;
+      color: #0F172A;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      text-shadow: none;
+    }
+
+    /* Випадаючий список */
+    .sb-dropdown {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 1px 8px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-shadow: none;
+    }
+
+    .sb-dropdown::after {
+      content: "▾";
+      font-size: 0.7rem;
+      opacity: 0.9;
+    }
+
+    /* Овальний репортер (Оператори / Змінні / Датчики) */
+    .sb-oval {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 3px 10px;
+      min-height: 26px;
+      border-radius: 999px;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border: 1.5px solid rgba(0, 0, 0, 0.18);
+      box-shadow: inset 0 -1.5px 0 rgba(0, 0, 0, 0.12);
+      text-shadow: none;
+    }
+
+    .sb-oval.sb-operators { background-color: var(--sc-operators); border-color: var(--sc-operators-border); }
+    .sb-oval.sb-variables { background-color: var(--sc-variables); border-color: var(--sc-variables-border); }
+    .sb-oval.sb-sensing   { background-color: var(--sc-sensing);   border-color: var(--sc-sensing-border); }
+
+    /* Шестикутний логічний блок (Boolean) */
+    .sb-hex {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 13px;
+      min-height: 26px;
+      background-color: var(--sc-operators);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.79rem;
+      clip-path: polygon(9px 0%, calc(100% - 9px) 0%, 100% 50%, calc(100% - 9px) 100%, 9px 100%, 0% 50%);
+      text-shadow: none;
+      white-space: nowrap;
+    }
+
+    /* Вкладений шестикутник — контрастніший відтінок зеленого */
+    .sb-hex .sb-hex {
+      background-color: #3FA343;
+      padding: 2px 11px;
+      min-height: 22px;
+    }
+
+    /* C-блок керування (якщо ... то / якщо ... то ... інакше / повторити) */
+    .sb-c {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: stretch;
+      margin-bottom: -1px;
+    }
+
+    .sb-c-head {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 12px;
+      min-height: 34px;
+      background-color: var(--sc-control);
+      border: 1.5px solid var(--sc-control-border);
+      border-bottom: none;
+      border-radius: 6px 6px 6px 0;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .sb-c-body {
+      padding: 5px 0 5px 14px;
+      border-left: 14px solid var(--sc-control);
+      box-shadow: inset 1.5px 0 0 var(--sc-control-border);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .sb-c-mid {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 14px;
+      min-height: 26px;
+      background-color: var(--sc-control);
+      border-top: 1.5px solid var(--sc-control-border);
+      border-bottom: 1.5px solid var(--sc-control-border);
+      border-right: 1.5px solid var(--sc-control-border);
+      border-radius: 0 6px 6px 0;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.82rem;
+      min-width: 110px;
+    }
+
+    .sb-c-foot {
+      position: relative;
+      height: 20px;
+      min-width: 130px;
+      background-color: var(--sc-control);
+      border: 1.5px solid var(--sc-control-border);
+      border-top: none;
+      border-radius: 0 6px 6px 6px;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.13);
+    }
+
+    .sb-c-foot.sb-notch::after {
+      content: "";
+      position: absolute;
+      left: 15px;
+      bottom: -5px;
+      width: 16px;
+      height: 5px;
+      background: var(--sc-control);
+      border-left: 1.5px solid var(--sc-control-border);
+      border-right: 1.5px solid var(--sc-control-border);
+      border-bottom: 1.5px solid var(--sc-control-border);
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      z-index: 2;
+    }
+
+    .sb-flag {
+      color: #4CBF56;
+      font-size: 1rem;
+      line-height: 1;
+      filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+    }
+
+    /* ==========================================================================
+       ДІАГРАМИ ТА ІНТЕРАКТИВНІ СИМУЛЯТОРИ
+       ========================================================================== */
+    .diagram-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .diagram-caption {
+      font-size: 0.87rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .caption-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .caption-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .diagram-svg-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .diagram-svg-wrap svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Інтерактивні картки */
+    .sim-box {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      border: 1.5px solid #BBF7D0;
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow-sm);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .sim-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .sim-tag {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #DCFCE7;
+      color: #166534;
+      border: 1px solid #86EFAC;
+    }
+
+    .sim-controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 12px 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+
+    .sim-range {
+      flex: 1;
+      min-width: 180px;
+      accent-color: var(--accent-green-dark);
+      cursor: pointer;
+    }
+
+    .sim-num-input, .sim-text-input {
+      font-family: inherit;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--text-main);
+      padding: 7px 12px;
+      border: 1.5px solid var(--border-med);
+      border-radius: 8px;
+      background: #FFFFFF;
+      outline: none;
+    }
+
+    .sim-num-input {
+      width: 78px;
+      text-align: center;
+    }
+
+    .sim-text-input {
+      flex: 1;
+      min-width: 190px;
+    }
+
+    .sim-num-input:focus, .sim-text-input:focus {
+      border-color: var(--accent-green-dark);
+      box-shadow: 0 0 0 3px rgba(64, 191, 74, 0.16);
+    }
+
+    .cond-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .cond-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.83rem;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .cond-card.active {
+      border-color: var(--accent-green);
+      background: #F0FDF4;
+      box-shadow: 0 2px 8px rgba(64, 191, 74, 0.12);
+    }
+
+    .cond-card.active-err {
+      border-color: #EF4444;
+      background: #FEF2F2;
+    }
+
+    .sim-result-banner {
+      padding: 11px 15px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1E3A8A;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .str-out-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .str-out-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 11px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .str-out-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--accent-green-dark);
+      background: #F0FDF4;
+      padding: 5px 10px;
+      border-radius: 7px;
+      border: 1px solid #BBF7D0;
+    }
+
+    /* Пастка пробілу */
+    .trap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .trap-col {
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.87rem;
+    }
+
+    .trap-bad { background: #FEF2F2; border: 1px solid #FECACA; }
+    .trap-good { background: #ECFDF5; border: 1px solid #A7F3D0; }
+
+    /* Заголовки рівнів */
+    .level-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin: 22px 0 12px;
+    }
+
+    .level-banner.lvl1 { background: #ECFDF5; border: 1.5px solid #6EE7B7; }
+    .level-banner.lvl2 { background: #EFF6FF; border: 1.5px solid #93C5FD; }
+    .level-banner.lvl3 { background: #F5F3FF; border: 1.5px solid #C4B5FD; }
+
+    .level-title {
+      font-size: 1.07rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .level-points {
+      font-size: 0.81rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      color: #FFFFFF;
+    }
+
+    /* Пояснення до скриптів */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comment-item {
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-left: 3px solid var(--accent-green);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Шкала оцінювання */
+    .score-bar-wrap {
+      margin-top: 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 14px 16px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .score-bar {
+      display: flex;
+      height: 28px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border-med);
+      margin: 10px 0;
+    }
+
+    .score-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* Чеклист форми звітності */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.91rem;
+      color: var(--text-secondary);
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 10px 13px;
+    }
+
+    .chk-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--accent-green-dark);
+      border-radius: 5px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: #FFFFFF;
+    }
+
+    .page-footer {
+      margin-top: 34px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .print-only-note {
+      display: none;
+    }
+
+    /* ==========================================================================
+       АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ
+       ========================================================================== */
+    @media (max-width: 820px) {
+      .passport-grid,
+      .two-col,
+      .script-layout,
+      .cond-grid,
+      .str-out-grid,
+      .trap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 16px 12px 44px;
+      }
+
+      .hero-header {
+        padding: 18px 16px;
+      }
+    }
+
+    /* ==========================================================================
+       ПРОФЕСІЙНА ОПТИМІЗАЦІЯ ДЛЯ ДРУКУ (A4)
+       ========================================================================== */
+    @page {
+      size: A4 portrait;
+      margin: 12mm;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html {
+        font-size: 13px;
+      }
+
+      body {
+        background: #FFFFFF !important;
+        color: #1E293B !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .print-only-note {
+        display: block !important;
+        font-size: 0.82rem;
+        color: #475569;
+        margin-bottom: 8px;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .hero-header {
+        box-shadow: none !important;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+      }
+
+      .card, .diagram-box, .callout, .table-wrap, .score-bar-wrap,
+      .sim-box, .level-banner, table, tr, figure, .sb-stack, .comment-item {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        box-shadow: none !important;
+      }
+
+      h1, h2, h3, h4, .section-header, .level-banner {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+      }
+
+      .passport-grid,
+      .two-col,
+      .trap-grid,
+      .str-out-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .cond-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .script-layout {
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+      }
+
+      .section-block {
+        margin-top: 20px;
+      }
+
+      .table-wrap {
+        overflow: visible !important;
+      }
+
+      svg {
+        max-width: 100% !important;
+        height: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       ВЕРХНЯ ЗАКРІПЛЕНА ПАНЕЛЬ НАВІГАЦІЇ (.no-print)
+       ======================================================================== -->
+  <nav class="top-nav no-print" aria-label="Навігація по заняттю">
+    <div class="top-nav-inner">
+      <div class="nav-brand">
+        <span class="nav-brand-badge">П11</span>
+        <span>Scratch 3.0 • Оператори</span>
+      </div>
+      <div class="nav-links">
+        
+        <a href="#sec-1" class="nav-link">1. Огляд</a>
+        <a href="#sec-2" class="nav-link">2. Математика</a>
+        <a href="#sec-3" class="nav-link">3. Логіка</a>
+        <a href="#sec-4" class="nav-link">4. Рядки</a>
+        <a href="#sec-5" class="nav-link">5. Завдання</a>
+        
+      </div>
+      <button type="button" class="btn-print" onclick="window.print()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Друкувати / Зберегти як PDF
+      </button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ======================================================================
+         ШАПКА ТА ПАСПОРТ ЗАНЯТТЯ
+         ====================================================================== -->
+    <header id="passport" class="hero-header">
+      <div class="hero-badge">Основи програмування • ПРАКТИЧНЕ ЗАНЯТТЯ №11</div>
+      <h1 class="hero-title">Логічні вирази, математичні дії, дії з текстовими виразами</h1>
+      <p class="hero-sub">Навчально-методичний конспект, векторні схеми, інтерактивні симулятори та покроковий практикум для створення інтелектуальних програм у Scratch 3.0</p>
+    </header>
+
+    <section class="passport-grid" aria-label="Паспорт заняття">
+      <div class="card span-2">
+        <div class="card-title">
+          <span class="card-icon" style="background:#DCFCE7; color:#166534;">🎯</span>
+          Мета заняття
+        </div>
+        <p><strong>Навчальна:</strong> навчитися використовувати блоки математичних та логічних операцій, роботи з рядками у Scratch для створення складніших програм. <strong>Розвивальна:</strong> розвивати логіко-математичне мислення, вміння будувати складні умови для розгалужень і циклів; розвивати навички формалізації. <strong>Виховна:</strong> виховувати розуміння потужності інструментів програмування, здатних оперувати не лише графікою, а й даними.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#EFF6FF; color:#1D4ED8;">💻</span>
+          Обладнання та програмне забезпечення
+        </div>
+        <ol class="clean-list">
+          <li>Інструкційні картки.</li>
+          <li>Персональний комп'ютер або ноутбук із доступом до мережі Інтернет.</li>
+          <li>Середовище візуального програмування <strong>Scratch 3.0</strong> (<span class="mono"><a href="https://scratch.mit.edu/">scratch.mit.edu</a></span> або локальний додаток <strong>Scratch Desktop</strong>).</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#FFF7ED; color:#C2410C;">📚</span>
+          Рекомендована література
+        </div>
+        <ol class="clean-list">
+          <li>Єжова Л. Ф. Алгоритмізація і програмування процедур обробки інформації : навч.-метод. посібник. Київ : КНЕУ, 2019. 60 с.</li>
+          <li>Васильєв О. Алгоритми. Київ : Навчальна книга – Богдан, 2022. 424 с.</li>
+          <li>Васильєв О. Програмування мовою Java. Київ : Навчальна книга – Богдан, 2020. 696 с.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ХІД ЗАНЯТТЯ: ТАЙМЛАЙН-СМУЖКА + ТАБЛИЦЯ -->
+    <section class="card" aria-label="Хід заняття">
+      <div class="card-title">
+        <span class="card-icon" style="background:#F0FDF4; color:#2E8B57;">⏱️</span>
+        Хід заняття
+      </div>
+
+      <!--div class="timeline-bar" role="img" aria-label="Розподіл часу: 3 хв організація, 7 хв інструктаж, 27 хв практика, 8 хв підсумки">
+        <div class="tl-seg" style="width:6.67%; background:#64748B;">3 хв</div>
+        <div class="tl-seg" style="width:15.56%; background:#4C97FF;">7 хв</div>
+        <div class="tl-seg" style="width:60.00%; background:#40BF4A;">27 хв (7 + 10 + 10)</div>
+        <div class="tl-seg" style="width:17.77%; background:#FF8C1A;">8 хв</div>
+      </div-->
+
+      <!--div class="tl-legend">
+        <span><i class="swatch" style="background:#64748B;"></i>1. Організаційний (3 хв)</span>
+        <span><i class="swatch" style="background:#4C97FF;"></i>2. Інструктаж (7 хв)</span>
+        <span><i class="swatch" style="background:#40BF4A;"></i>3. Практична робота (27 хв)</span>
+        <span><i class="swatch" style="background:#FF8C1A;"></i>4. Підбиття підсумків (8 хв)</span>
+      </div-->
+
+      <!--div class="table-wrap" style="margin:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:24%;">Етап заняття</th>
+              <th style="width:61%;">Зміст діяльності</th>
+              <th style="width:15%; text-align:center;">Час</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Організаційний етап</strong></td>
+              <td>Перевірка готовності робочих місць, запуск Scratch 3.0, ознайомлення з темою та метою заняття.</td>
+              <td style="text-align:center; font-weight:700;">3 хв</td>
+            </tr>
+            <tr>
+              <td><strong>2. Теоретичний інструктаж</strong></td>
+              <td>Повторення категорії «Оператори»: форми блоків (овальні й шестикутні), приклади обчислень і логічних умов.</td>
+              <td style="text-align:center; font-weight:700;">7 хв</td>
+            </tr>
+            <tr>
+              <td><strong>3. Практична робота</strong></td>
+              <td>Послідовне виконання завдань репродуктивного (7 хв), продуктивного (10 хв) та творчого (10 хв) рівнів.</td>
+              <td style="text-align:center; font-weight:700; color:#2E8B57;">27 хв</td>
+            </tr>
+            <tr>
+              <td><strong>4. Підбиття підсумків</strong></td>
+              <td>Демонстрація створених проєктів, самоперевірка за критеріями оцінювання, збереження файлів та оформлення звіту.</td>
+              <td style="text-align:center; font-weight:700;">8 хв</td>
+            </tr>
+          </tbody>
+        </table>
+      </div-->
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 1. ОГЛЯД КАТЕГОРІЇ «ОПЕРАТОРИ» У SCRATCH 3.0
+         ====================================================================== -->
+    <section id="sec-1" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--accent-green-dark);">1</span>
+        <h2>Огляд категорії «Оператори» у Scratch 3.0</h2>
+      </div>
+
+      <div class="card">
+        <p>Усі блоки для обчислень, перевірки умов та обробки тексту зібрані в зеленій категорії <strong>«Оператори»</strong>. У Scratch 3.0 форма блока працює як візуальна підказка про тип даних, який він повертає:</p>
+        <ul class="clean-list" style="margin-top:8px;">
+          <li><strong>Овальні блоки (репортери)</strong> повертають <em>число або текст</em>. Вони вставляються у круглі/овальні слоти інших команд (наприклад, у блоки «говорити», «надати значення», «перемістити»).</li>
+          <li><strong>Шестикутні блоки (логічні / boolean)</strong> повертають логічне значення — <em>«істина» (так)</em> або <em>«хиба» (ні)</em>. Вони вставляються виключно у шестикутні слоти умовних конструкцій та циклів (<span class="mono">якщо ... то</span>, <span class="mono">чекати поки</span>, <span class="mono">повторити поки</span>).</li>
+        </ul>
+      </div>
+
+      <!-- РИС. 1: Чотири групи блоків + Форма блока = тип даних -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--accent-green);"></span>
+            Рис. 1. Чотири групи блоків у категорії «Оператори» та відповідність форми типу даних
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 880 268" width="880" height="268" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема чотирьох груп блоків категорії Оператори та відповідності форми блока типу даних">
+            <!-- Верхній кореневий вузол -->
+            <rect x="290" y="6" width="300" height="36" rx="18" fill="#59C059" stroke="#389438" stroke-width="2"/>
+            <text x="440" y="29" text-anchor="middle" font-family="Inter, sans-serif" font-size="13.5" font-weight="800" fill="#FFFFFF">Категорія «ОПЕРАТОРИ» (Scratch 3.0)</text>
+
+            <!-- Гілки до 4 карток -->
+            <path d="M 440 42 L 440 56 M 110 56 L 770 56 M 110 56 L 110 68 M 330 56 L 330 68 M 550 56 L 550 68 M 770 56 L 770 68" stroke="#94A3B8" stroke-width="1.8" fill="none"/>
+
+            <!-- Картка 1: Математичні -->
+            <rect x="10" y="68" width="200" height="114" rx="12" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1.8"/>
+            <rect x="10" y="68" width="200" height="8" rx="4" fill="#40BF4A"/>
+            <text x="110" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">1. Математичні</text>
+            <text x="110" y="116" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">Овальні (число):</text>
+            <text x="110" y="135" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#2E8B57">+  −  *  /</text>
+            <text x="110" y="154" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">випадкове, остача,</text>
+            <text x="110" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">округлити, модуль</text>
+
+            <!-- Картка 2: Порівняння -->
+            <rect x="230" y="68" width="200" height="114" rx="12" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.8"/>
+            <rect x="230" y="68" width="200" height="8" rx="4" fill="#4C97FF"/>
+            <text x="330" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">2. Порівняння</text>
+            <text x="330" y="116" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">Шестикутні (так/ні):</text>
+            <text x="330" y="135" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#1D4ED8">&gt;   &lt;   =</text>
+            <text x="330" y="154" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">перевірка рівності</text>
+            <text x="330" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">та нерівностей</text>
+
+            <!-- Картка 3: Логічні -->
+            <rect x="450" y="68" width="200" height="114" rx="12" fill="#FFFFFF" stroke="#C4B5FD" stroke-width="1.8"/>
+            <rect x="450" y="68" width="200" height="8" rx="4" fill="#9966FF"/>
+            <text x="550" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">3. Логічні</text>
+            <text x="550" y="116" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">Шестикутні (так/ні):</text>
+            <text x="550" y="135" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#6D28D9">І   •   АБО   •   НЕ</text>
+            <text x="550" y="154" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">об'єднання кількох</text>
+            <text x="550" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">умов в одну складну</text>
+
+            <!-- Картка 4: Текстові -->
+            <rect x="670" y="68" width="200" height="114" rx="12" fill="#FFFFFF" stroke="#FDBA74" stroke-width="1.8"/>
+            <rect x="670" y="68" width="200" height="8" rx="4" fill="#FF8C1A"/>
+            <text x="770" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B">4. Текстові (рядки)</text>
+            <text x="770" y="116" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">Овальні та шестикутні:</text>
+            <text x="770" y="135" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" font-weight="700" fill="#C2410C">з'єднати, літера №</text>
+            <text x="770" y="154" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">довжина рядка,</text>
+            <text x="770" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">містить підрядок?</text>
+
+            <!-- Нижня панель: Форма блока = тип даних -->
+            <rect x="10" y="198" width="860" height="62" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+            <text x="26" y="218" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" fill="#64748B">ПРАВИЛО ФОРМИ БЛОКА = ТИП ДАНИХ:</text>
+
+            <!-- Овал -->
+            <rect x="26" y="226" width="128" height="24" rx="12" fill="#59C059" stroke="#389438" stroke-width="1.5"/>
+            <text x="90" y="242" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">Овал (репортер)</text>
+            <text x="166" y="242" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#2E8B57">↔ Число або Текст</text>
+            <text x="308" y="242" font-family="Inter, sans-serif" font-size="10.5" fill="#64748B">(в овальні поля команд)</text>
+
+            <!-- Розділювач -->
+            <line x1="452" y1="210" x2="452" y2="250" stroke="#CBD5E1" stroke-width="1.5"/>
+
+            <!-- Шестикутник -->
+            <polygon points="478,226 598,226 608,238 598,250 478,250 468,238" fill="#59C059" stroke="#389438" stroke-width="1.5"/>
+            <text x="538" y="242" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">Шестикутник</text>
+            <text x="620" y="242" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#1D4ED8">↔ Істина / Хиба</text>
+            <text x="734" y="242" font-family="Inter, sans-serif" font-size="10.5" fill="#64748B">(у слоти умов)</text>
+          </svg>
+        </div>
+      </figure>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 2. МАТЕМАТИЧНІ ОПЕРАЦІЇ ТА ГЕНЕРАЦІЯ ВИПАДКОВИХ ЧИСЕЛ
+         ====================================================================== -->
+    <section id="sec-2" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-operators);">2</span>
+        <h2>Математичні операції та генерація випадкових чисел</h2>
+      </div>
+
+      <div class="card">
+        <p>Scratch підтримує базові арифметичні дії (<span class="mono">+</span>, <span class="mono">-</span>, <span class="mono">*</span>, <span class="mono">/</span>), обчислення остачі від ділення, округлення та математичні функції (модуль, квадратний корінь, тригонометрія). Для створення навчальних тренажерів і вікторин у початковій школі особливо корисний блок <strong>випадкове від 1 до 10</strong>, який під час кожного запуску генерує нове число у вказаному діапазоні.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:36%;">Блок Scratch 3.0</th>
+              <th style="width:39%;">Призначення</th>
+              <th style="width:25%;">Приклад результату</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sb-oval sb-operators"><span class="sb-input">12</span> + <span class="sb-input">8</span></span> &nbsp; <span class="sb-oval sb-operators"><span class="sb-input">12</span> − <span class="sb-input">8</span></span></td>
+              <td>Додавання та віднімання двох чисел або змінних.</td>
+              <td><strong class="mono">20</strong> та <strong class="mono">4</strong></td>
+            </tr>
+            <tr>
+              <td><span class="sb-oval sb-operators"><span class="sb-input">6</span> * <span class="sb-input">7</span></span> &nbsp; <span class="sb-oval sb-operators"><span class="sb-input">15</span> / <span class="sb-input">2</span></span></td>
+              <td>Множення та ділення (ділення повертає дробове число).</td>
+              <td><strong class="mono">42</strong> та <strong class="mono">7.5</strong></td>
+            </tr>
+            <tr>
+              <td><span class="sb-oval sb-operators">випадкове від <span class="sb-input">2</span> до <span class="sb-input">9</span></span></td>
+              <td>Генерує випадкове ціле число в межах діапазону (включно).</td>
+              <td>Наприклад, <strong class="mono">7</strong></td>
+            </tr>
+            <tr>
+              <td><span class="sb-oval sb-operators">остача від ділення <span class="sb-input">17</span> на <span class="sb-input">5</span></span></td>
+              <td>Повертає остачу від цілочисельного ділення (зручно для перевірки парності).</td>
+              <td><strong class="mono">2</strong> (бо 17 = 5·3 + 2)</td>
+            </tr>
+            <tr>
+              <td><span class="sb-oval sb-operators">округлити <span class="sb-input">4.6</span></span></td>
+              <td>Округлює дробове число до найближчого цілого за правилами математики.</td>
+              <td><strong class="mono">5</strong></td>
+            </tr>
+            <tr>
+              <td><span class="sb-oval sb-operators"><span class="sb-dropdown">корінь</span> від <span class="sb-input">25</span></span> / <span class="sb-oval sb-operators"><span class="sb-dropdown">модуль</span> від <span class="sb-input">-9</span></span></td>
+              <td>Обчислює квадратний корінь або абсолютне значення числа.</td>
+              <td><strong class="mono">5</strong> та <strong class="mono">9</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">🧮 Порядок виконання дій визначається вкладеністю блоків</div>
+        <p>У Scratch немає окремих блоків для математичних дужок. Порядок обчислень задається тим, <strong>який блок вставлено всередину іншого</strong>: спочатку завжди обчислюється внутрішній блок, а його результат передається зовнішньому.</p>
+      </div>
+
+      <!-- SVG-діаграма: Порядок обчислення вкладених блоків -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-operators);"></span>
+            Порядок обчислення вкладених блоків: порівняння (5 + 3) * 2 та 5 + (3 * 2)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 860 190" width="860" height="190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Порівняння порядку обчислення вкладених блоків (5+3)*2=16 та 5+(3*2)=11">
+            <!-- ЛІВА ЧАСТИНА: (5 + 3) * 2 = 16 -->
+            <rect x="8" y="8" width="408" height="174" rx="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.6"/>
+            <text x="212" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#166534">Варіант А: (5 + 3) * 2 = 16</text>
+
+            <!-- Зовнішній блок множення -->
+            <rect x="66" y="44" width="234" height="44" rx="22" fill="#59C059" stroke="#389438" stroke-width="1.8"/>
+            <!-- Внутрішній блок додавання -->
+            <rect x="76" y="51" width="128" height="30" rx="15" fill="#46A846" stroke="#2E7D32" stroke-width="1.5"/>
+            <rect x="86" y="56" width="32" height="20" rx="10" fill="#FFFFFF"/><text x="102" y="70" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#0F172A">5</text>
+            <text x="139" y="71" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF">+</text>
+            <rect x="160" y="56" width="32" height="20" rx="10" fill="#FFFFFF"/><text x="176" y="70" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#0F172A">3</text>
+            <text x="225" y="71" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF">*</text>
+            <rect x="248" y="56" width="36" height="20" rx="10" fill="#FFFFFF"/><text x="266" y="70" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#0F172A">2</text>
+
+            <!-- Стрілки кроків -->
+            <path d="M 140 84 L 140 108" stroke="#166534" stroke-width="2"/><polygon points="135,107 140,115 145,107" fill="#166534"/>
+            <rect x="24" y="118" width="182" height="50" rx="8" fill="#FFFFFF" stroke="#86EFAC"/>
+            <text x="115" y="137" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" fill="#166534">Крок 1 (внутрішній)</text>
+            <text x="115" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#1E293B">5 + 3 = 8</text>
+
+            <path d="M 210 143 L 226 143" stroke="#166534" stroke-width="2"/><polygon points="225,138 233,143 225,148" fill="#166534"/>
+
+            <rect x="235" y="118" width="166" height="50" rx="8" fill="#FFFFFF" stroke="#40BF4A" stroke-width="1.6"/>
+            <text x="318" y="137" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" fill="#166534">Крок 2 (зовнішній)</text>
+            <text x="318" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="800" fill="#2E8B57">8 * 2 = 16</text>
+
+            <!-- ПРАВА ЧАСТИНА: 5 + (3 * 2) = 11 -->
+            <rect x="444" y="8" width="408" height="174" rx="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.6"/>
+            <text x="648" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#1E40AF">Варіант Б: 5 + (3 * 2) = 11</text>
+
+            <!-- Зовнішній блок додавання -->
+            <rect x="502" y="44" width="234" height="44" rx="22" fill="#59C059" stroke="#389438" stroke-width="1.8"/>
+            <rect x="516" y="56" width="36" height="20" rx="10" fill="#FFFFFF"/><text x="534" y="70" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#0F172A">5</text>
+            <text x="574" y="71" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF">+</text>
+            <!-- Внутрішній блок множення -->
+            <rect x="596" y="51" width="128" height="30" rx="15" fill="#46A846" stroke="#2E7D32" stroke-width="1.5"/>
+            <rect x="606" y="56" width="32" height="20" rx="10" fill="#FFFFFF"/><text x="622" y="70" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#0F172A">3</text>
+            <text x="659" y="71" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF">*</text>
+            <rect x="680" y="56" width="32" height="20" rx="10" fill="#FFFFFF"/><text x="696" y="70" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#0F172A">2</text>
+
+            <!-- Стрілки кроків -->
+            <path d="M 660 84 L 660 108" stroke="#1E40AF" stroke-width="2"/><polygon points="655,107 660,115 665,107" fill="#1E40AF"/>
+            <rect x="460" y="118" width="182" height="50" rx="8" fill="#FFFFFF" stroke="#93C5FD"/>
+            <text x="551" y="137" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" fill="#1E40AF">Крок 1 (внутрішній)</text>
+            <text x="551" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#1E293B">3 * 2 = 6</text>
+
+            <path d="M 646 143 L 662 143" stroke="#1E40AF" stroke-width="2"/><polygon points="661,138 669,143 661,148" fill="#1E40AF"/>
+
+            <rect x="671" y="118" width="166" height="50" rx="8" fill="#FFFFFF" stroke="#4C97FF" stroke-width="1.6"/>
+            <text x="754" y="137" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" fill="#1E40AF">Крок 2 (зовнішній)</text>
+            <text x="754" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="800" fill="#1D4ED8">5 + 6 = 11</text>
+          </svg>
+        </div>
+      </figure>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 3. ОПЕРАЦІЇ ПОРІВНЯННЯ ТА ЛОГІЧНІ ВИРАЗИ
+         ====================================================================== -->
+    <section id="sec-3" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-motion);">3</span>
+        <h2>Операції порівняння та логічні вирази</h2>
+      </div>
+
+      <div class="card">
+        <p>Прості умови будуються за допомогою шестикутних блоків порівняння: <span class="sb-hex"><span class="sb-input">x</span> &gt; <span class="sb-input">50</span></span>, <span class="sb-hex"><span class="sb-input">x</span> &lt; <span class="sb-input">50</span></span> та <span class="sb-hex"><span class="sb-input">x</span> = <span class="sb-input">50</span></span>. Коли потрібно перевірити одночасно дві або більше ознак, застосовують логічні операції <strong>«І»</strong>, <strong>«АБО»</strong> та <strong>«НЕ»</strong>.</p>
+      </div>
+
+      <!-- РИС. 2: Логічні операції І, АБО, НЕ на числових променях 12-бальної шкали -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-motion);"></span>
+            Рис. 2. Логічні операції І, АБО, НЕ та візуалізація умов на числовому промені
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 880 232" width="880" height="232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Візуалізація логічних операцій І, АБО, НЕ на числових променях для 12-бальної шкали">
+            <!-- КАРТКА 1: І (AND) -->
+            <rect x="6" y="8" width="280" height="216" rx="12" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.8"/>
+            <rect x="6" y="8" width="280" height="8" rx="4" fill="#4C97FF"/>
+            <text x="146" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="13.5" font-weight="800" fill="#1E40AF">Операція «І» (AND)</text>
+            <text x="146" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">Істина, коли ОБИДВІ</text>
+            <text x="146" y="74" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">умови виконуються одночасно</text>
+
+            <!-- Числовий промінь для [10..12] -->
+            <line x1="26" y1="126" x2="266" y2="126" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+            <!-- Виділений відрізок 10..12 -->
+            <line x1="166" y1="126" x2="226" y2="126" stroke="#40BF4A" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="146" cy="126" r="4.5" fill="#FFFFFF" stroke="#64748B" stroke-width="2"/><text x="146" y="146" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#64748B">9</text>
+            <circle cx="166" cy="126" r="5" fill="#40BF4A"/><text x="166" y="114" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800" fill="#166534">10</text>
+            <circle cx="196" cy="126" r="5" fill="#40BF4A"/><text x="196" y="114" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800" fill="#166534">11</text>
+            <circle cx="226" cy="126" r="5" fill="#40BF4A"/><text x="226" y="114" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800" fill="#166534">12</text>
+            <circle cx="246" cy="126" r="4.5" fill="#FFFFFF" stroke="#64748B" stroke-width="2"/><text x="246" y="146" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#64748B">13</text>
+
+            <rect x="24" y="162" width="244" height="46" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
+            <text x="146" y="181" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#1E40AF">(оцінка &gt; 9) і (оцінка &lt; 13)</text>
+            <text x="146" y="199" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#166534">→ Високий рівень [10..12]</text>
+
+            <!-- КАРТКА 2: АБО (OR) -->
+            <rect x="300" y="8" width="280" height="216" rx="12" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1.8"/>
+            <rect x="300" y="8" width="280" height="8" rx="4" fill="#40BF4A"/>
+            <text x="440" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="13.5" font-weight="800" fill="#166534">Операція «АБО» (OR)</text>
+            <text x="440" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">Істина, коли виконується</text>
+            <text x="440" y="74" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">ХОЧА Б ОДНА з умов</text>
+
+            <!-- Два зовнішні промені (-inf..0] та [13..+inf) -->
+            <line x1="320" y1="126" x2="560" y2="126" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+            <line x1="320" y1="126" x2="375" y2="126" stroke="#EF4444" stroke-width="6" stroke-linecap="round"/>
+            <line x1="505" y1="126" x2="560" y2="126" stroke="#EF4444" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="375" cy="126" r="5" fill="#EF4444"/><text x="375" y="114" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800" fill="#B91C1C">≤ 0</text>
+            <circle cx="395" cy="126" r="4.5" fill="#FFFFFF" stroke="#64748B" stroke-width="2"/><text x="395" y="146" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#64748B">1</text>
+            <circle cx="485" cy="126" r="4.5" fill="#FFFFFF" stroke="#64748B" stroke-width="2"/><text x="485" y="146" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#64748B">12</text>
+            <circle cx="505" cy="126" r="5" fill="#EF4444"/><text x="505" y="114" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800" fill="#B91C1C">≥ 13</text>
+
+            <rect x="318" y="162" width="244" height="46" rx="8" fill="#FEF2F2" stroke="#FECACA"/>
+            <text x="440" y="181" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#991B1B">(оцінка &lt; 1) або (оцінка &gt; 12)</text>
+            <text x="440" y="199" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#B91C1C">→ Помилка діапазону</text>
+
+            <!-- КАРТКА 3: НЕ (NOT) -->
+            <rect x="594" y="8" width="280" height="216" rx="12" fill="#FFFFFF" stroke="#FDBA74" stroke-width="1.8"/>
+            <rect x="594" y="8" width="280" height="8" rx="4" fill="#FF8C1A"/>
+            <text x="734" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="13.5" font-weight="800" fill="#C2410C">Операція «НЕ» (NOT)</text>
+            <text x="734" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">Інвертує результат умови</text>
+            <text x="734" y="74" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#475569">на протилежний (Так ↔ Ні)</text>
+
+            <!-- Усе крім 0 -->
+            <line x1="614" y1="126" x2="726" y2="126" stroke="#FF8C1A" stroke-width="6" stroke-linecap="round"/>
+            <line x1="742" y1="126" x2="854" y2="126" stroke="#FF8C1A" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="734" cy="126" r="6" fill="#FFFFFF" stroke="#EF4444" stroke-width="2.5"/>
+            <text x="734" y="148" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800" fill="#DC2626">0 (викл.)</text>
+            <text x="665" y="114" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#C2410C">Усі &lt; 0</text>
+            <text x="803" y="114" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#C2410C">Усі &gt; 0</text>
+
+            <rect x="612" y="162" width="244" height="46" rx="8" fill="#FFF7ED" stroke="#FED7AA"/>
+            <text x="734" y="181" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#9A3412">не (відповідь = 0)</text>
+            <text x="734" y="199" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#C2410C">→ Усе, крім нуля</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- Компактна таблиця істинності -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:center;">Умова A</th>
+              <th style="text-align:center;">Умова B</th>
+              <th style="text-align:center;">A <strong>І</strong> B</th>
+              <th style="text-align:center;">A <strong>АБО</strong> B</th>
+              <th style="text-align:center;"><strong>НЕ</strong> A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-false">Хиба</span></td>
+              <td style="text-align:center;"><span class="bool-badge bool-true">Істина</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ІНТЕРАКТИВНИЙ МІНІ-СИМУЛЯТОР «ПЕРЕВІРКА УМОВИ ОЦІНКИ (1–12)» -->
+      <div class="sim-box" id="gradeSimBox">
+        <div class="sim-header">
+          <div class="card-title" style="margin:0;">
+            <span class="card-icon" style="background:#DCFCE7; color:#166534;">🎛️</span>
+            Інтерактивний міні-симулятор: «Перевірка умови оцінки (1–12)»
+          </div>
+          <span class="sim-tag no-print">Живий розрахунок</span>
+        </div>
+
+        <p class="print-only-note">Приклад роботи логічних умов для значення змінної <strong class="mono">оцінка = 11</strong> (інтерактивний перебір доступний у веб-версії):</p>
+
+        <div class="sim-controls no-print">
+          <label for="gradeRange" style="font-size:0.88rem; font-weight:700; color:var(--text-main);">Значення <span class="sb-oval sb-variables">оцінка</span> :</label>
+          <input type="range" id="gradeRange" class="sim-range" min="-2" max="15" value="11" />
+          <input type="number" id="gradeInput" class="sim-num-input" min="-2" max="15" value="11" aria-label="Числове значення оцінки" />
+        </div>
+
+        <div class="cond-grid">
+          <div class="cond-card" id="condErrCard">
+            <div style="font-weight:800; color:#991B1B; margin-bottom:5px;">1. Перевірка помилки (АБО)</div>
+            <div class="mono" style="font-size:0.79rem; margin-bottom:6px;">(оцінка &lt; 1) <strong>або</strong> (оцінка &gt; 12)</div>
+            <div id="condErrDetail" style="font-size:0.8rem;"></div>
+          </div>
+
+          <div class="cond-card active" id="condHighCard">
+            <div style="font-weight:800; color:#166534; margin-bottom:5px;">2. Високий рівень (І)</div>
+            <div class="mono" style="font-size:0.79rem; margin-bottom:6px;">(оцінка &gt; 9) <strong>і</strong> (оцінка &lt; 13)</div>
+            <div id="condHighDetail" style="font-size:0.8rem;"></div>
+          </div>
+
+          <div class="cond-card" id="condSuffCard">
+            <div style="font-weight:800; color:#1D4ED8; margin-bottom:5px;">3. Достатній рівень (І)</div>
+            <div class="mono" style="font-size:0.79rem; margin-bottom:6px;">(оцінка &gt; 6) <strong>і</strong> (оцінка &lt; 10)</div>
+            <div id="condSuffDetail" style="font-size:0.8rem;"></div>
+          </div>
+        </div>
+
+        <div class="sim-result-banner" id="gradeResultBanner">
+          <span>Результат спрайта: <strong>«Високий рівень!»</strong></span>
+          <span class="mono" id="gradeCurrentTag">оцінка = 11</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 4. ДІЇ З ТЕКСТОВИМИ ВИРАЗАМИ (РЯДКАМИ)
+         ====================================================================== -->
+    <section id="sec-4" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-variables);">4</span>
+        <h2>Дії з текстовими виразами (рядками)</h2>
+      </div>
+
+      <div class="card">
+        <p>Текстові операції дозволяють формувати зрозумілі речення для користувача та аналізувати введені відповіді. У Scratch нумерація символів у рядку завжди <strong>починається з 1</strong> (а не з 0, як у багатьох текстових мовах програмування).</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:40%;">Текстовий блок Scratch 3.0</th>
+              <th style="width:36%;">Що виконує</th>
+              <th style="width:24%;">Результат</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sb-oval sb-operators">з'єднати <span class="sb-input">Привіт, </span> <span class="sb-input">Оля</span></span></td>
+              <td>Склеює два текстові фрагменти (або текст і число) в один рядок.</td>
+              <td><strong class="mono">"Привіт, Оля"</strong></td>
+            </tr>
+            <tr>
+              <td><span class="sb-oval sb-operators">літера <span class="sb-input">1</span> у <span class="sb-input">ЯБЛУКО</span></span></td>
+              <td>Повертає символ рядка за його порядковим номером (індексом).</td>
+              <td><strong class="mono">"Я"</strong></td>
+            </tr>
+            <tr>
+              <td><span class="sb-oval sb-operators">довжина <span class="sb-input">ЯБЛУКО</span></span></td>
+              <td>Підраховує загальну кількість символів у рядку (включно з пробілами).</td>
+              <td><strong class="mono">6</strong></td>
+            </tr>
+            <tr>
+              <td><span class="sb-hex"><span class="sb-input">ЯБЛУКО</span> містить <span class="sb-input">У</span> ?</span></td>
+              <td>Перевіряє, чи входить підрядок у текст (шестикутний блок: Істина/Хиба).</td>
+              <td><span class="bool-badge bool-true">Істина</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Пастка пробілу -->
+      <div class="callout amber">
+        <div class="callout-title">⚠️ Пам'ятка: «Пастка пробілу» під час склеювання рядків</div>
+        <p>Блок <strong>з'єднати</strong> склеює два фрагменти впритул — він <em>не додає пробіл автоматично</em>. Завжди ставте пробіл у кінці першого текстового поля, якщо після нього йде число або інше слово:</p>
+        <div class="trap-grid">
+          <div class="trap-col trap-bad">
+            <strong style="color:#991B1B;">✕ Без пробілу (помилка оформлення):</strong>
+            <div style="margin:7px 0;"><span class="sb-oval sb-operators">з'єднати <span class="sb-input">Сума =</span> <span class="sb-input">15</span></span></div>
+            <div>Результат: <strong class="mono" style="color:#B91C1C;">"Сума =15"</strong></div>
+          </div>
+          <div class="trap-col trap-good">
+            <strong style="color:#065F46;">✓ Із пробілом у кінці першого поля:</strong>
+            <div style="margin:7px 0;"><span class="sb-oval sb-operators">з'єднати <span class="sb-input">Сума =␣</span> <span class="sb-input">15</span></span></div>
+            <div>Результат: <strong class="mono" style="color:#047857;">"Сума = 15"</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- РИС. 3: Індексація рядка «ЯБЛУКО» та текстові операції -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-variables);"></span>
+            Рис. 3. Основні операції над текстовими рядками у Scratch (приклад слова «ЯБЛУКО»)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 860 228" width="860" height="228" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Індексація літер слова ЯБЛУКО від 1 до 6 та схема текстових операцій">
+            <!-- Клітинки слова Я Б Л У К О -->
+            <g transform="translate(212, 12)">
+              <rect x="0" y="0" width="62" height="58" rx="10" fill="#EFF6FF" stroke="#4C97FF" stroke-width="2.2"/>
+              <text x="31" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#1E293B">Я</text>
+              <text x="31" y="76" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1D4ED8">індекс 1</text>
+
+              <rect x="74" y="0" width="62" height="58" rx="10" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.8"/>
+              <text x="105" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#1E293B">Б</text>
+              <text x="105" y="76" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748B">індекс 2</text>
+
+              <rect x="148" y="0" width="62" height="58" rx="10" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.8"/>
+              <text x="179" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#1E293B">Л</text>
+              <text x="179" y="76" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748B">індекс 3</text>
+
+              <rect x="222" y="0" width="62" height="58" rx="10" fill="#F5F3FF" stroke="#9966FF" stroke-width="2.2"/>
+              <text x="253" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#1E293B">У</text>
+              <text x="253" y="76" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#6D28D9">індекс 4</text>
+
+              <rect x="296" y="0" width="62" height="58" rx="10" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.8"/>
+              <text x="327" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#1E293B">К</text>
+              <text x="327" y="76" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748B">індекс 5</text>
+
+              <rect x="370" y="0" width="62" height="58" rx="10" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.8"/>
+              <text x="401" y="38" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="#1E293B">О</text>
+              <text x="401" y="76" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748B">індекс 6</text>
+            </g>
+
+            <!-- Стрілки від індексу 1 та 4 -->
+            <path d="M 243 96 L 145 124" stroke="#4C97FF" stroke-width="2" stroke-dasharray="4 3"/>
+            <path d="M 465 96 L 430 124" stroke="#9966FF" stroke-width="2" stroke-dasharray="4 3"/>
+
+            <!-- 3 нижні картки -->
+            <rect x="14" y="128" width="264" height="88" rx="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.6"/>
+            <text x="146" y="154" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#1E40AF">літера 1 у «ЯБЛУКО»</text>
+            <text x="146" y="177" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="800" fill="#0F172A">Результат: «Я»</text>
+            <text x="146" y="198" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">а літера 4 → «У» (відлік із 1)</text>
+
+            <rect x="298" y="128" width="264" height="88" rx="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.6"/>
+            <text x="430" y="154" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#166534">довжина «ЯБЛУКО»</text>
+            <text x="430" y="177" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="800" fill="#0F172A">Результат: 6</text>
+            <text x="430" y="198" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">загальна кількість символів</text>
+
+            <rect x="582" y="128" width="264" height="88" rx="12" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.6"/>
+            <text x="714" y="154" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" fill="#C2410C">з'єднати «Смачне » і «ЯБЛУКО»</text>
+            <text x="714" y="177" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="800" fill="#0F172A">«Смачне ЯБЛУКО»</text>
+            <text x="714" y="198" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" fill="#475569">склеювання рядків із пробілом</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- ІНТЕРАКТИВНА МІНІ-ПІСОЧНИЦЯ РЯДКІВ -->
+      <div class="sim-box">
+        <div class="sim-header">
+          <div class="card-title" style="margin:0;">
+            <span class="card-icon" style="background:#FFF7ED; color:#C2410C;">🔤</span>
+            Інтерактивна міні-пісочниця рядків
+          </div>
+          <span class="sim-tag no-print">Спробуйте своє ім'я</span>
+        </div>
+
+        <p class="print-only-note">Приклад обробки текстового рядка для значення змінної <strong class="mono">ім'я = "Олена"</strong>:</p>
+
+        <div class="sim-controls no-print">
+          <label for="strInput" style="font-size:0.88rem; font-weight:700; color:var(--text-main);">Введіть <span class="sb-oval sb-variables">ім'я</span> або слово:</label>
+          <input type="text" id="strInput" class="sim-text-input" value="Олена" maxlength="24" placeholder="Наприклад, Олена або Школа" />
+        </div>
+
+        <div class="str-out-grid">
+          <div class="str-out-card">
+            <div><span class="sb-oval sb-operators">з'єднати <span class="sb-input">Привіт, </span> <span class="sb-oval sb-variables">ім'я</span></span></div>
+            <div class="str-out-val" id="outJoin">"Привіт, Олена"</div>
+          </div>
+          <div class="str-out-card">
+            <div><span class="sb-oval sb-operators">довжина <span class="sb-oval sb-variables">ім'я</span></span></div>
+            <div class="str-out-val" id="outLen">5 (символів)</div>
+          </div>
+          <div class="str-out-card">
+            <div><span class="sb-oval sb-operators">літера <span class="sb-input">1</span> у <span class="sb-oval sb-variables">ім'я</span></span></div>
+            <div class="str-out-val" id="outFirst">"О"</div>
+          </div>
+          <div class="str-out-card">
+            <div><span class="sb-hex"><span class="sb-oval sb-variables">ім'я</span> містить <span class="sb-input">а</span> ?</span></div>
+            <div class="str-out-val" id="outContains">Істина (так)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 5. ПОКРОКОВИЙ АЛГОРИТМ ВИКОНАННЯ РІЗНОРІВНЕВИХ ЗАВДАНЬ
+         ====================================================================== -->
+    <section id="sec-5" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--sc-looks);">5</span>
+        <h2>Покроковий алгоритм виконання різнорівневих завдань</h2>
+      </div>
+
+      <!-- РИС. 4: Трирівнева структура практичної роботи №11 -->
+      <figure class="diagram-box">
+        <figcaption class="diagram-caption">
+          <span class="caption-left">
+            <span class="caption-dot" style="background: var(--sc-looks);"></span>
+            Рис. 4. Трирівнева структура практичної роботи №11 (27 хв • максимум 13 балів)
+          </span>
+        </figcaption>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 900 146" width="900" height="146" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Трирівнева структура практичної роботи №11: 4 + 5 + 3 + 1 = 13 балів">
+            <!-- Рівень 1 -->
+            <rect x="6" y="38" width="176" height="100" rx="12" fill="#ECFDF5" stroke="#40BF4A" stroke-width="1.8"/>
+            <text x="94" y="60" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#166534">Рівень 1 (7 хв)</text>
+            <text x="94" y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" font-weight="600" fill="#1E293B">«Калькулятор»</text>
+            <text x="94" y="94" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.8" fill="#475569">сума, добуток, текст</text>
+            <rect x="50" y="106" width="88" height="22" rx="11" fill="#2E8B57"/>
+            <text x="94" y="121" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">до 4 балів</text>
+
+            <path d="M 186 88 L 201 88" stroke="#64748B" stroke-width="2"/><polygon points="200,83 208,88 200,93" fill="#64748B"/>
+
+            <!-- Рівень 2 -->
+            <rect x="210" y="26" width="176" height="112" rx="12" fill="#EFF6FF" stroke="#4C97FF" stroke-width="1.8"/>
+            <text x="298" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#1E40AF">Рівень 2 (10 хв)</text>
+            <text x="298" y="69" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" font-weight="600" fill="#1E293B">«Оцінювання 1–12»</text>
+            <text x="298" y="86" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.8" fill="#475569">умови з «І» та «АБО»</text>
+            <rect x="254" y="106" width="88" height="22" rx="11" fill="#4C97FF"/>
+            <text x="298" y="121" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">до 5 балів</text>
+
+            <path d="M 390 82 L 405 82" stroke="#64748B" stroke-width="2"/><polygon points="404,77 412,82 404,87" fill="#64748B"/>
+
+            <!-- Рівень 3 -->
+            <rect x="414" y="14" width="182" height="124" rx="12" fill="#F5F3FF" stroke="#9966FF" stroke-width="1.8"/>
+            <text x="505" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#5B21B6">Рівень 3 (10 хв)</text>
+            <text x="505" y="60" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.8" font-weight="600" fill="#1E293B">«Розумний помічник»</text>
+            <text x="505" y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.8" fill="#475569">вікторина, цикл, текст</text>
+            <rect x="461" y="106" width="88" height="22" rx="11" fill="#9966FF"/>
+            <text x="505" y="121" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">до 3 балів</text>
+
+            <path d="M 600 76 L 614 76" stroke="#64748B" stroke-width="2"/><polygon points="613,71 621,76 613,81" fill="#64748B"/>
+
+            <!-- Культура -->
+            <rect x="623" y="28" width="128" height="110" rx="12" fill="#FFF7ED" stroke="#FF8C1A" stroke-width="1.8"/>
+            <text x="687" y="54" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#C2410C">Культура</text>
+            <text x="687" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">коду та звіту</text>
+            <rect x="650" y="106" width="74" height="22" rx="11" fill="#FF8C1A"/>
+            <text x="687" y="121" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">1 бал</text>
+
+            <text x="767" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#475569">=</text>
+
+            <!-- Разом -->
+            <rect x="782" y="12" width="112" height="126" rx="14" fill="#1E293B"/>
+            <text x="838" y="46" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#94A3B8">РАЗОМ</text>
+            <text x="838" y="90" text-anchor="middle" font-family="Inter, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">13</text>
+            <text x="838" y="116" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#4ADE80">балів</text>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- ================= РІВЕНЬ 1 ================= -->
+      <div class="level-banner lvl1">
+        <div class="level-title">Рівень 1 — репродуктивний: «Калькулятор»</div>
+        <span class="level-points" style="background: var(--accent-green-dark);"></span>
+      </div>
+      <p><strong>Мета рівня:</strong> навчитися поєднувати змінні, математичні блоки та склеювання тексту в одному алгоритмі «Калькулятор».</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:8%;">Крок</th>
+              <th style="width:43%;">Дія студента</th>
+              <th style="width:49%;">Блоки / параметри</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge lvl1">1</span></td>
+              <td>Створіть новий проєкт у Scratch та додайте у категорії «Змінні» дві змінні: <strong class="mono">a</strong> і <strong class="mono">b</strong>.</td>
+              <td>Створити змінні: <span class="sb-oval sb-variables">a</span> &nbsp; <span class="sb-oval sb-variables">b</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl1">2</span></td>
+              <td>Організуйте запит першого числа від користувача та збережіть відповідь у змінній <strong class="mono">a</strong>.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-notch sb-sensing">запитати <span class="sb-input">Введіть перше число:</span> і чекати</div>
+                  <div class="sb-block sb-cmd sb-variables">надати <span class="sb-dropdown">a</span> значення <span class="sb-oval sb-sensing">відповідь</span></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl1">3</span></td>
+              <td>Аналогічно запитайте друге число та збережіть його у змінній <strong class="mono">b</strong>.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-notch sb-sensing">запитати <span class="sb-input">Введіть друге число:</span> і чекати</div>
+                  <div class="sb-block sb-cmd sb-variables">надати <span class="sb-dropdown">b</span> значення <span class="sb-oval sb-sensing">відповідь</span></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl1">4</span></td>
+              <td>Виведіть результат додавання у вигляді повноцінного речення за допомогою блоку склеювання тексту.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-oval sb-operators">з'єднати <span class="sb-input">Сума = </span> <span class="sb-oval sb-operators"><span class="sb-oval sb-variables">a</span> + <span class="sb-oval sb-variables">b</span></span></span> <span class="sb-input">2</span> сек</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl1">5</span></td>
+              <td>Додайте ще один блок виведення для добутку чисел та збережіть проєкт під назвою <strong class="mono">PR11_Prizvyshche.sb3</strong>.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-oval sb-operators">з'єднати <span class="sb-input">Добуток = </span> <span class="sb-oval sb-operators"><span class="sb-oval sb-variables">a</span> * <span class="sb-oval sb-variables">b</span></span></span> <span class="sb-input">2</span> сек</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Розширений приклад Рівня 1 -->
+      <div class="card">
+        <div class="card-title">
+          <span class="card-icon" style="background:#DCFCE7; color:#166534;">🧩</span>
+          Готовий зібраний скрипт Рівня 1: «Калькулятор» (<span class="mono">PR11_Prizvyshche.sb3</span>)
+        </div>
+        <div class="script-layout">
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-sensing">запитати <span class="sb-input">Введіть перше число:</span> і чекати</div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">a</span> значення <span class="sb-oval sb-sensing">відповідь</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-sensing">запитати <span class="sb-input">Введіть друге число:</span> і чекати</div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">b</span> значення <span class="sb-oval sb-sensing">відповідь</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-looks">говорити <span class="sb-oval sb-operators">з'єднати <span class="sb-input">Сума = </span> <span class="sb-oval sb-operators"><span class="sb-oval sb-variables">a</span> + <span class="sb-oval sb-variables">b</span></span></span> <span class="sb-input">2</span> сек</div>
+              <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-oval sb-operators">з'єднати <span class="sb-input">Добуток = </span> <span class="sb-oval sb-operators"><span class="sb-oval sb-variables">a</span> * <span class="sb-oval sb-variables">b</span></span></span> <span class="sb-input">2</span> сек</div>
+            </div>
+          </div>
+
+          <div class="comment-list">
+            <div class="comment-item"><strong>Навіщо потрібні змінні <span class="mono">a</span> та <span class="mono">b</span>?</strong> Блок датчиків <span class="mono">відповідь</span> зберігає лише <em>останнє</em> введене значення. Якби ми не переписали перше число у змінну <span class="mono">a</span>, друге запитання стерло б його.</div>
+            <div class="comment-item"><strong>Вкладеність операторів:</strong> спочатку обчислюється <span class="mono">a + b</span> (або <span class="mono">a * b</span>), після чого числовий результат автоматично перетворюється на текст і склеюється з підписом <span class="mono">«Сума = »</span>.</div>
+            <div class="comment-item" style="border-left-color:var(--sc-variables);"><strong>Перевірка на прикладі:</strong> при введенні <span class="mono">a = 6</span> і <span class="mono">b = 4</span> спрайт послідовно скаже <em>«Сума = 10»</em>, а потім <em>«Добуток = 24»</em>.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= РІВЕНЬ 2 ================= -->
+      <div class="level-banner lvl2">
+        <div class="level-title">Рівень 2 — продуктивний: «Перевірка оцінки (1–12)»</div>
+        <span class="level-points" style="background: var(--sc-motion);"></span>
+      </div>
+      <p><strong>Мета рівня:</strong> реалізувати перевірку шкільної оцінки за 12-бальною шкалою з використанням складених логічних умов.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:8%;">Крок</th>
+              <th style="width:41%;">Дія студента</th>
+              <th style="width:51%;">Блоки / параметри</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-badge lvl2">1</span></td>
+              <td>Додайте нового спрайта (або окремий скрипт на клавішу Пропуск) та змінну <strong class="mono">оцінка</strong>.</td>
+              <td>
+                <div class="sb-stack">
+                  <div class="sb-block sb-hat sb-notch sb-events">коли клавішу <span class="sb-dropdown">пропуск</span> натиснуто</div>
+                  <div class="sb-block sb-cmd sb-notch sb-sensing">запитати <span class="sb-input">Введіть оцінку (1-12):</span> і чекати</div>
+                  <div class="sb-block sb-cmd sb-variables">надати <span class="sb-dropdown">оцінка</span> значення <span class="sb-oval sb-sensing">відповідь</span></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl2">2</span></td>
+              <td>Перевірте коректність діапазону: якщо число менше 1 <strong>АБО</strong> більше 12 — повідомте про помилку.</td>
+              <td>
+                <span class="sb-hex"><span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &lt; <span class="sb-input">1</span></span> або <span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &gt; <span class="sb-input">12</span></span></span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl2">3</span></td>
+              <td>Додайте перевірку високого рівня навчальних досягнень (10–12 включно) через логічне <strong>«І»</strong>.</td>
+              <td>
+                <span class="sb-hex"><span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &gt; <span class="sb-input">9</span></span> і <span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &lt; <span class="sb-input">13</span></span></span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl2">4</span></td>
+              <td>Додайте перевірку достатнього рівня (7–9 балів) та виведення відповідного коментаря.</td>
+              <td>
+                <span class="sb-hex"><span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &gt; <span class="sb-input">6</span></span> і <span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &lt; <span class="sb-input">10</span></span></span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="step-badge lvl2">5</span></td>
+              <td>Протестуйте скрипт на граничних значеннях: <strong class="mono">0, 1, 7, 10, 12, 15</strong> та оновіть збережений файл.</td>
+              <td><strong>Файл → Вивантажити на ваш комп'ютер</strong> (<span class="mono">PR11_Prizvyshche.sb3</span>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Розширений приклад Рівня 2: Готовий стек + Таблиця тестування граничних значень -->
+      <div class="two-col">
+        <div class="card" style="margin-bottom:0; border-top:4px solid var(--sc-motion);">
+          <div class="card-title">🧩 Готовий стек блоків Рівня 2</div>
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли клавішу <span class="sb-dropdown">пропуск</span> натиснуто</div>
+              <div class="sb-block sb-cmd sb-notch sb-sensing">запитати <span class="sb-input">Введіть оцінку (1-12):</span> і чекати</div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">оцінка</span> значення <span class="sb-oval sb-sensing">відповідь</span></div>
+
+              <!-- C-блок 1: Помилка -->
+              <div class="sb-c">
+                <div class="sb-c-head">якщо <span class="sb-hex"><span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &lt; <span class="sb-input">1</span></span> або <span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &gt; <span class="sb-input">12</span></span></span> то</div>
+                <div class="sb-c-body">
+                  <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-input">Некоректна оцінка!</span> <span class="sb-input">2</span> сек</div>
+                </div>
+                <div class="sb-c-foot sb-notch"></div>
+              </div>
+
+              <!-- C-блок 2: Високий рівень -->
+              <div class="sb-c">
+                <div class="sb-c-head">якщо <span class="sb-hex"><span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &gt; <span class="sb-input">9</span></span> і <span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &lt; <span class="sb-input">13</span></span></span> то</div>
+                <div class="sb-c-body">
+                  <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-input">Високий рівень!</span> <span class="sb-input">2</span> сек</div>
+                </div>
+                <div class="sb-c-foot sb-notch"></div>
+              </div>
+
+              <!-- C-блок 3: Достатній рівень -->
+              <div class="sb-c">
+                <div class="sb-c-head">якщо <span class="sb-hex"><span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &gt; <span class="sb-input">6</span></span> і <span class="sb-hex"><span class="sb-oval sb-variables">оцінка</span> &lt; <span class="sb-input">10</span></span></span> то</div>
+                <div class="sb-c-body">
+                  <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-input">Достатній рівень!</span> <span class="sb-input">2</span> сек</div>
+                </div>
+                <div class="sb-c-foot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:0; border-top:4px solid var(--accent-green);">
+          <div class="card-title">🧪 Тестування граничних значень</div>
+          <p style="font-size:0.85rem; margin-bottom:10px;">Перевірте скрипт на кожному із 6 контрольних тестів, щоб упевнитися у відсутності логічних помилок на межах діапазонів:</p>
+          <div class="table-wrap" style="margin:0;">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align:center;">Ввід</th>
+                  <th>Спрацювала умова</th>
+                  <th>Очікуваний результат</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:center;"><strong class="mono">0</strong></td>
+                  <td><span class="mono">оцінка &lt; 1</span> (АБО)</td>
+                  <td style="color:#B91C1C; font-weight:700;">Некоректна оцінка!</td>
+                </tr>
+                <tr>
+                  <td style="text-align:center;"><strong class="mono">1</strong></td>
+                  <td>Жодна з 3 (діапазон 1–6)</td>
+                  <td>Коректна (базовий / середній)</td>
+                </tr>
+                <tr>
+                  <td style="text-align:center;"><strong class="mono">7</strong></td>
+                  <td><span class="mono">&gt; 6 і &lt; 10</span></td>
+                  <td style="color:#1D4ED8; font-weight:700;">Достатній рівень!</td>
+                </tr>
+                <tr>
+                  <td style="text-align:center;"><strong class="mono">10</strong></td>
+                  <td><span class="mono">&gt; 9 і &lt; 13</span></td>
+                  <td style="color:#166534; font-weight:700;">Високий рівень!</td>
+                </tr>
+                <tr>
+                  <td style="text-align:center;"><strong class="mono">12</strong></td>
+                  <td><span class="mono">&gt; 9 і &lt; 13</span></td>
+                  <td style="color:#166534; font-weight:700;">Високий рівень!</td>
+                </tr>
+                <tr>
+                  <td style="text-align:center;"><strong class="mono">15</strong></td>
+                  <td><span class="mono">оцінка &gt; 12</span> (АБО)</td>
+                  <td style="color:#B91C1C; font-weight:700;">Некоректна оцінка!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= РІВЕНЬ 3 ================= -->
+      <div class="level-banner lvl3">
+        <div class="level-title">Рівень 3 — творчий: Мінітренажер «Розумний помічник»</div>
+        <span class="level-points" style="background: var(--sc-looks);"></span>
+      </div>
+      <p>Розробіть інтерактивний мінітренажер для учнів початкової школи <strong>«Розумний помічник»</strong>, який поєднує математичні обчислення, логічну перевірку та обробку текстових даних.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:27%;">Вимога до тренажера</th>
+              <th style="width:73%;">Конкретний зміст виконання</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Персоналізація (текст)</strong></td>
+              <td>На старті програма запитує ім'я учня, вітається через блок «з'єднати» та повідомляє кількість літер у його імені.</td>
+            </tr>
+            <tr>
+              <td><strong>Генерація завдання</strong></td>
+              <td>Програма створює два випадкових числа від 2 до 9 та пропонує учневі обчислити їхній добуток.</td>
+            </tr>
+            <tr>
+              <td><strong>Логічна перевірка</strong></td>
+              <td>Використовується розгалуження «якщо ... то ... інакше»: при правильній відповіді нараховується бал, при помилці — виводиться підказка з правильним результатом.</td>
+            </tr>
+            <tr>
+              <td><strong>Повторення</strong></td>
+              <td>Тренажер ставить щонайменше 3 приклади поспіль (цикл «повторити 3») і в кінці оголошує підсумковий рахунок.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- РОЗШИРЕНИЙ ПРИКЛАД РЕАЛІЗАЦІЇ РІВНЯ 3 -->
+      <div class="card" style="border-top:4px solid var(--sc-looks);">
+        <div class="card-title">
+          <span class="card-icon" style="background:#F5F3FF; color:#6D28D9;">🎓</span>
+          Повний приклад реалізації Рівня 3: тренажер «Розумний помічник»
+        </div>
+
+        <div class="script-layout">
+          <div style="overflow-x:auto; padding-bottom:6px;">
+            <div class="sb-stack">
+              <div class="sb-block sb-hat sb-notch sb-events">коли натиснуто <span class="sb-flag">⚑</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">бали</span> значення <span class="sb-input">0</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-sensing">запитати <span class="sb-input">Як тебе звати?</span> і чекати</div>
+              <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">ім'я</span> значення <span class="sb-oval sb-sensing">відповідь</span></div>
+              <div class="sb-block sb-cmd sb-notch sb-looks">говорити <span class="sb-oval sb-operators">з'єднати <span class="sb-input">Привіт, </span> <span class="sb-oval sb-variables">ім'я</span></span> <span class="sb-input">2</span> сек</div>
+              <div class="sb-block sb-cmd sb-notch sb-looks">говорити <span class="sb-oval sb-operators">з'єднати <span class="sb-input">Літер у твоєму імені: </span> <span class="sb-oval sb-operators">довжина <span class="sb-oval sb-variables">ім'я</span></span></span> <span class="sb-input">2</span> сек</div>
+
+              <!-- Цикл повторити 3 -->
+              <div class="sb-c">
+                <div class="sb-c-head">повторити <span class="sb-input">3</span></div>
+                <div class="sb-c-body">
+                  <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">a</span> значення <span class="sb-oval sb-operators">випадкове від <span class="sb-input">2</span> до <span class="sb-input">9</span></span></div>
+                  <div class="sb-block sb-cmd sb-notch sb-variables">надати <span class="sb-dropdown">b</span> значення <span class="sb-oval sb-operators">випадкове від <span class="sb-input">2</span> до <span class="sb-input">9</span></span></div>
+                  <div class="sb-block sb-cmd sb-notch sb-sensing">запитати <span class="sb-oval sb-operators">з'єднати <span class="sb-oval sb-operators">з'єднати <span class="sb-oval sb-variables">a</span> <span class="sb-input"> × </span></span> <span class="sb-oval sb-variables">b</span></span> і чекати</div>
+
+                  <!-- Якщо ... то ... інакше -->
+                  <div class="sb-c">
+                    <div class="sb-c-head">якщо <span class="sb-hex"><span class="sb-oval sb-sensing">відповідь</span> = <span class="sb-oval sb-operators"><span class="sb-oval sb-variables">a</span> * <span class="sb-oval sb-variables">b</span></span></span> то</div>
+                    <div class="sb-c-body">
+                      <div class="sb-block sb-cmd sb-notch sb-variables">змінити <span class="sb-dropdown">бали</span> на <span class="sb-input">1</span></div>
+                      <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-input">Молодець! Правильно!</span> <span class="sb-input">1.5</span> сек</div>
+                    </div>
+                    <div class="sb-c-mid">інакше</div>
+                    <div class="sb-c-body">
+                      <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-oval sb-operators">з'єднати <span class="sb-input">Підказка: це </span> <span class="sb-oval sb-operators"><span class="sb-oval sb-variables">a</span> * <span class="sb-oval sb-variables">b</span></span></span> <span class="sb-input">2</span> сек</div>
+                    </div>
+                    <div class="sb-c-foot"></div>
+                  </div>
+                </div>
+                <div class="sb-c-foot sb-notch"></div>
+              </div>
+
+              <div class="sb-block sb-cmd sb-looks">говорити <span class="sb-oval sb-operators">з'єднати <span class="sb-input">Твій рахунок: </span> <span class="sb-oval sb-variables">бали</span></span> <span class="sb-input">3</span> сек</div>
+            </div>
+          </div>
+
+          <!-- SVG-ілюстрація діалогу кота на сцені -->
+          <div>
+            <svg viewBox="0 0 340 270" width="340" height="270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ілюстрація діалогу кота-помічника на сцені Scratch">
+              <!-- Рамка сцени -->
+              <rect x="4" y="4" width="332" height="262" rx="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2"/>
+              <!-- Монітори змінних зверху -->
+              <rect x="14" y="14" width="94" height="24" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
+              <text x="22" y="30" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#334155">бали</text>
+              <rect x="74" y="17" width="29" height="18" rx="5" fill="#FF8C1A"/>
+              <text x="88.5" y="30" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="800" fill="#FFFFFF">3</text>
+
+              <rect x="116" y="14" width="114" height="24" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
+              <text x="124" y="30" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#334155">ім'я</text>
+              <rect x="164" y="17" width="60" height="18" rx="5" fill="#FF8C1A"/>
+              <text x="194" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF">Олена</text>
+
+              <!-- Хмаринка репліки -->
+              <rect x="96" y="54" width="224" height="68" rx="14" fill="#FFFFFF" stroke="#4C97FF" stroke-width="2"/>
+              <polygon points="122,122 108,136 138,122" fill="#FFFFFF" stroke="#4C97FF" stroke-width="2"/>
+              <line x1="120" y1="122" x2="138" y2="122" stroke="#FFFFFF" stroke-width="3"/>
+              <text x="208" y="77" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" fill="#1E40AF">Привіт, Олена! (5 літер)</text>
+              <text x="208" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" fill="#334155">Скільки буде 7 × 8 ?</text>
+              <text x="208" y="113" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#166534">✓ Молодець! Твій рахунок: 3</text>
+
+              <!-- Стилізований Рудий Кіт Scratch -->
+              <g transform="translate(86, 174)">
+                <!-- Вушка -->
+                <polygon points="-24,-18 -18,-38 -4,-24" fill="#FF9F1C" stroke="#C2410C" stroke-width="1.8"/>
+                <polygon points="24,-18 18,-38 4,-24" fill="#FF9F1C" stroke="#C2410C" stroke-width="1.8"/>
+                <!-- Голова -->
+                <ellipse cx="0" cy="-6" rx="28" ry="22" fill="#FF9F1C" stroke="#C2410C" stroke-width="1.8"/>
+                <!-- Мордочка -->
+                <ellipse cx="0" cy="2" rx="18" ry="11" fill="#FFFFFF"/>
+                <!-- Очі -->
+                <ellipse cx="-8" cy="-10" rx="4.5" ry="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.3"/>
+                <circle cx="-7" cy="-10" r="2" fill="#1E293B"/>
+                <ellipse cx="8" cy="-10" rx="4.5" ry="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.3"/>
+                <circle cx="9" cy="-10" r="2" fill="#1E293B"/>
+                <!-- Носик і усмішка -->
+                <polygon points="-3,-2 3,-2 0,2" fill="#1E293B"/>
+                <path d="M -6 5 Q 0 10 6 5" fill="none" stroke="#1E293B" stroke-width="1.6" stroke-linecap="round"/>
+              </g>
+
+              <!-- Поле введення відповіді внизу сцени -->
+              <rect x="18" y="218" width="304" height="34" rx="17" fill="#FFFFFF" stroke="#5CB1D6" stroke-width="2"/>
+              <text x="34" y="239" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#0F172A">56</text>
+              <circle cx="304" cy="235" r="12" fill="#4C97FF"/>
+              <path d="M 299 235 L 303 239 L 310 231" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:8px;">
+              <strong>Порада:</strong> обов'язково обнуляйте змінну <span class="mono">бали</span> на початку скрипта (<span class="mono">надати бали значення 0</span>), щоб при повторному запуску рахунок починався з нуля.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         РОЗДІЛ 6. КРИТЕРІЇ ОЦІНЮВАННЯ ТА ФОРМА ЗВІТНОСТІ
+         ====================================================================== -->
+    <section id="sec-6" class="section-block">
+      <div class="section-header">
+        <span class="section-num" style="background: var(--accent-green-dark);">6</span>
+        <h2>Критерії оцінювання та форма звітності</h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:27%;">Компонент оцінювання</th>
+              <th style="width:59%;">Показники якості виконання</th>
+              <th style="width:14%; text-align:center;">Макс. балів</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Рівень 1 (репродуктивний)</strong></td>
+              <td>Коректне введення двох чисел, обчислення суми й добутку, форматований вивід через блок «з'єднати».</td>
+              <td style="text-align:center; font-weight:800; color:#2E8B57;">4</td>
+            </tr>
+            <tr>
+              <td><strong>Рівень 2 (продуктивний)</strong></td>
+              <td>Правильна побудова складених умов із «І» та «АБО», коректна обробка граничних і помилкових значень.</td>
+              <td style="text-align:center; font-weight:800; color:#1D4ED8;">5</td>
+            </tr>
+            <tr>
+              <td><strong>Рівень 3 (творчий)</strong></td>
+              <td>Повноцінний мінітренажер із персоналізацією імені, випадковими прикладами, підрахунком балів та циклом.</td>
+              <td style="text-align:center; font-weight:800; color:#6D28D9;">3</td>
+            </tr>
+            <tr>
+              <td><strong>Культура коду та звітності</strong></td>
+              <td>Зрозумілі назви змінних, охайне розташування скриптів, своєчасне збереження <span class="mono">.sb3</span> та оформлення звіту.</td>
+              <td style="text-align:center; font-weight:800; color:#C2410C;">1</td>
+            </tr>
+            <tr style="background:#F0FDF4;">
+              <td><strong>Разом</strong></td>
+              <td><strong>Максимальна сума балів за практичне заняття</strong></td>
+              <td style="text-align:center; font-size:1.06rem; font-weight:800; color:#1E293B;">13</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Візуальна шкала розподілу 13 балів -->
+      <div class="score-bar-wrap">
+        <div style="font-size:0.86rem; font-weight:800; color:var(--text-main);">Візуальна шкала розподілу оцінки (13 балів = 100%)</div>
+        <div class="score-bar" role="img" aria-label="Шкала оцінювання: 4 бали Рівень 1, 5 балів Рівень 2, 3 бали Рівень 3, 1 бал Культура">
+          <div class="score-seg" style="width:30.77%; background:#40BF4A;">4 б. (31%)</div>
+          <div class="score-seg" style="width:38.46%; background:#4C97FF;">5 б. (38%)</div>
+          <div class="score-seg" style="width:23.08%; background:#9966FF;">3 б. (23%)</div>
+          <div class="score-seg" style="width:7.69%; background:#FF8C1A;">1 б.</div>
+        </div>
+        <div class="tl-legend" style="margin-bottom:0;">
+          <span><i class="swatch" style="background:#40BF4A;"></i>Рівень 1 (4 б.)</span>
+          <span><i class="swatch" style="background:#4C97FF;"></i>Рівень 2 (5 б.)</span>
+          <span><i class="swatch" style="background:#9966FF;"></i>Рівень 3 (3 б.)</span>
+          <span><i class="swatch" style="background:#FF8C1A;"></i>Культура коду та звітності (1 б.)</span>
+        </div>
+      </div>
+
+      <!-- Картка форми звітності -->
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">
+          <span class="card-icon" style="background:#DCFCE7; color:#166534;">📋</span>
+          Форма звітності (чеклист подання роботи викладачеві)
+        </div>
+        <ul class="checklist">
+          <li>
+            <span class="chk-box"></span>
+            <span><strong>Файл виконаного проєкту</strong> у форматі <strong class="mono">PR11_Prizvyshche.sb3</strong>.</span>
+          </li>
+          <li>
+            <span class="chk-box"></span>
+            <span><strong>Скриншоти зібраних скриптів</strong> для кожного з трьох рівнів та приклади роботи програми на сцені.</span>
+          </li>
+          <li>
+            <span class="chk-box"></span>
+            <span><strong>Короткий письмовий висновок</strong> (3–4 речення) про те, як поєднання математичних, логічних і текстових блоків дозволяє створювати навчальні тренажери для початкової школи.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Шаблон-підказка для висновку -->
+      <div class="callout purple">
+        <div class="callout-title">✍️ Підказка-шаблон структури письмового висновку (3–4 речення)</div>
+        <ol class="clean-list" style="margin-top:6px;">
+          <li><strong>Математичні блоки та випадкові числа</strong> дозволяють автоматично генерувати необмежену кількість унікальних завдань для тренування усного рахунку.</li>
+          <li><strong>Логічні умови («І», «АБО», «=»)</strong> забезпечують миттєву й об'єктивну перевірку відповіді учня, діагностику помилок та підрахунок балів.</li>
+          <li><strong>Текстові операції («з'єднати», «довжина»)</strong> роблять спілкування програми з дитиною доброзичливим і персоналізованим (звертання на ім'я, зрозумілі підказки).</li>
+          <li><strong>Комплексне поєднання цих інструментів</strong> перетворює Scratch 3.0 із простого графічного редактора на повноцінне середовище для створення інтерактивних освітніх тренажерів.</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <span>Практичне заняття №11 • Основи програмування • «Оператори» у Scratch 3.0</span>
+      <span>КЗ СОР "Путивльський педагогічний фаховий коледж імені С.В. Руднєва"</span>
+    </footer>
+  </main>
+
+  <!-- ========================================================================
+       ІНТЕРАКТИВНІ СКРИПТИ: СИМУЛЯТОР ОЦІНКИ (1–12) ТА ПІСОЧНИЦЯ РЯДКІВ
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ----------------------------------------------------------------------
+      // 1. ІНТЕРАКТИВНИЙ СИМУЛЯТОР «ПЕРЕВІРКА УМОВИ ОЦІНКИ (1–12)»
+      // ----------------------------------------------------------------------
+      const gradeRange = document.getElementById('gradeRange');
+      const gradeInput = document.getElementById('gradeInput');
+      const condErrCard = document.getElementById('condErrCard');
+      const condHighCard = document.getElementById('condHighCard');
+      const condSuffCard = document.getElementById('condSuffCard');
+      const condErrDetail = document.getElementById('condErrDetail');
+      const condHighDetail = document.getElementById('condHighDetail');
+      const condSuffDetail = document.getElementById('condSuffDetail');
+      const gradeResultBanner = document.getElementById('gradeResultBanner');
+
+      function badge(val) {
+        return val
+          ? '<span class="bool-badge bool-true">Істина</span>'
+          : '<span class="bool-badge bool-false">Хиба</span>';
+      }
+
+      function updateGradeSim(rawVal) {
+        let val = parseInt(rawVal, 10);
+        if (isNaN(val)) val = 11;
+        if (val < -2) val = -2;
+        if (val > 15) val = 15;
+
+        if (gradeRange) gradeRange.value = val;
+        if (gradeInput) gradeInput.value = val;
+
+        // Умова 1: (оцінка < 1) АБО (оцінка > 12)
+        const c1a = val < 1;
+        const c1b = val > 12;
+        const isErr = c1a || c1b;
+
+        // Умова 2: (оцінка > 9) І (оцінка < 13)
+        const c2a = val > 9;
+        const c2b = val < 13;
+        const isHigh = c2a && c2b;
+
+        // Умова 3: (оцінка > 6) І (оцінка < 10)
+        const c3a = val > 6;
+        const c3b = val < 10;
+        const isSuff = c3a && c3b;
+
+        if (condErrDetail) {
+          condErrDetail.innerHTML = `${val} &lt; 1 (${c1a ? 'Так' : 'Ні'}) АБО ${val} &gt; 12 (${c1b ? 'Так' : 'Ні'}) → ${badge(isErr)}`;
+        }
+        if (condHighDetail) {
+          condHighDetail.innerHTML = `${val} &gt; 9 (${c2a ? 'Так' : 'Ні'}) І ${val} &lt; 13 (${c2b ? 'Так' : 'Ні'}) → ${badge(isHigh)}`;
+        }
+        if (condSuffDetail) {
+          condSuffDetail.innerHTML = `${val} &gt; 6 (${c3a ? 'Так' : 'Ні'}) І ${val} &lt; 10 (${c3b ? 'Так' : 'Ні'}) → ${badge(isSuff)}`;
+        }
+
+        if (condErrCard) condErrCard.className = 'cond-card' + (isErr ? ' active-err' : '');
+        if (condHighCard) condHighCard.className = 'cond-card' + (isHigh ? ' active' : '');
+        if (condSuffCard) condSuffCard.className = 'cond-card' + (isSuff ? ' active' : '');
+
+        let msg = 'Початковий / Середній рівень (1–6 балів)';
+        let bg = '#F8FAFC';
+        let border = '#CBD5E1';
+        let color = '#334155';
+
+        if (isErr) {
+          msg = '«Некоректна оцінка!» (поза межами 1–12)';
+          bg = '#FEF2F2';
+          border = '#FCA5A5';
+          color = '#991B1B';
+        } else if (isHigh) {
+          msg = '«Високий рівень!»';
+          bg = '#F0FDF4';
+          border = '#86EFAC';
+          color = '#166534';
+        } else if (isSuff) {
+          msg = '«Достатній рівень!»';
+          bg = '#EFF6FF';
+          border = '#93C5FD';
+          color = '#1E40AF';
+        }
+
+        if (gradeResultBanner) {
+          gradeResultBanner.style.background = bg;
+          gradeResultBanner.style.borderColor = border;
+          gradeResultBanner.style.color = color;
+          gradeResultBanner.innerHTML = `<span>Результат спрайта: <strong>${msg}</strong></span><span class="mono">оцінка = ${val}</span>`;
+        }
+      }
+
+      if (gradeRange) {
+        gradeRange.addEventListener('input', (e) => updateGradeSim(e.target.value));
+      }
+      if (gradeInput) {
+        gradeInput.addEventListener('input', (e) => updateGradeSim(e.target.value));
+      }
+      updateGradeSim(11);
+
+      // ----------------------------------------------------------------------
+      // 2. ІНТЕРАКТИВНА МІНІ-ПІСОЧНИЦЯ РЯДКІВ
+      // ----------------------------------------------------------------------
+      const strInput = document.getElementById('strInput');
+      const outJoin = document.getElementById('outJoin');
+      const outLen = document.getElementById('outLen');
+      const outFirst = document.getElementById('outFirst');
+      const outContains = document.getElementById('outContains');
+
+      function updateStringSandbox(rawText) {
+        const text = typeof rawText === 'string' ? rawText : '';
+        const len = text.length;
+        const firstChar = len > 0 ? `"${text.charAt(0)}"` : '"" (порожній рядок)';
+        const hasA = text.toLowerCase().includes('а') || text.toLowerCase().includes('a');
+
+        if (outJoin) outJoin.textContent = `"Привіт, ${text}"`;
+        if (outLen) outLen.textContent = `${len} (символів)`;
+        if (outFirst) outFirst.textContent = firstChar;
+        if (outContains) {
+          outContains.textContent = hasA ? 'Істина (так)' : 'Хиба (ні)';
+          outContains.style.color = hasA ? '#166534' : '#991B1B';
+          outContains.style.background = hasA ? '#F0FDF4' : '#FEF2F2';
+          outContains.style.borderColor = hasA ? '#BBF7D0' : '#FECACA';
+        }
+      }
+
+      if (strInput) {
+        strInput.addEventListener('input', (e) => updateStringSandbox(e.target.value));
+        updateStringSandbox(strInput.value);
+      }
+    })();
+  </script>
+</body>
+</html>
